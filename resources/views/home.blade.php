@@ -56,7 +56,7 @@
       </div>
     </div>
   </div>
-  
+  <!--
   <section class="fullwidth_block margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
     <div class="container">
       <div class="row slick_carousel_slider">
@@ -68,7 +68,7 @@
 			<div class="col-md-12">
 				<div class="simple_slick_carousel_block utf_dots_nav"> 
 				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
-					<div class="utf_listing_item"> <img src="images/utf_listing_item-01.jpg" alt=""> <span class="tag"><i class="im im-icon-Chef-Hat"></i> Restaurant</span> <span class="featured_tag">Featured</span>
+					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-01.jpg') }}" alt=""> <span class="tag"><i class="im im-icon-Chef-Hat"></i> Restaurant</span> <span class="featured_tag">Featured</span>
 					  <span class="utf_open_now">Open Now</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
@@ -89,7 +89,7 @@
 				  </div>
 				  
 				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
-					<div class="utf_listing_item"> <img src="images/utf_listing_item-02.jpg" alt=""> <span class="tag"><i class="im im-icon-Electric-Guitar"></i> Events</span>
+					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-02.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Electric-Guitar"></i> Events</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
 							<span class="utf_meta_listing_price"><i class="fa fa-tag"></i> $45 - $70</span>							
@@ -108,7 +108,7 @@
 				  </div>
 				  
 				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
-					<div class="utf_listing_item"> <img src="images/utf_listing_item-03.jpg" alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> Hotels</span>
+					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-03.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> Hotels</span>
 					  <span class="utf_closed">Closed</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
@@ -128,7 +128,7 @@
 				  </div>
 				  
 				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
-					<div class="utf_listing_item"> <img src="images/utf_listing_item-04.jpg" alt=""> <span class="tag"><i class="im im-icon-Dumbbell"></i> Fitness</span>
+					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-04.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Dumbbell"></i> Fitness</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
 							<span class="utf_meta_listing_price"><i class="fa fa-tag"></i> $45 - $70</span>							
@@ -148,7 +148,7 @@
 				  </div>
 				  
 				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
-					<div class="utf_listing_item"> <img src="images/utf_listing_item-05.jpg" alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> Hotels</span> <span class="featured_tag">Featured</span>
+					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-05.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> Hotels</span> <span class="featured_tag">Featured</span>
 					  <span class="utf_closed">Closed</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
@@ -168,7 +168,7 @@
 				   </div>
 				  
 				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
-					<div class="utf_listing_item"> <img src="images/utf_listing_item-06.jpg" alt=""> <span class="tag"><i class="im im-icon-Chef-Hat"></i> Restaurant</span>
+					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-06.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Chef-Hat"></i> Restaurant</span>
 					  <span class="utf_open_now">Open Now</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
@@ -193,8 +193,8 @@
 	   </div>
     </div>
   </section>
-  
-  <a href="listings_grid_full_width.html" class="flip-banner parallax" data-background="images/slider-bg-02.jpg" data-color="#000" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">
+  -->
+  <a href="listings_grid_full_width.html" class="flip-banner parallax" data-background="{{  URL::asset('public/images/slider-bg-02.jpg')}}" data-color="#000" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">
 	  <div class="flip-banner-content">
 		<h2 class="flip-visible">Browse Listings Attractions List</h2>    
 	  </div>
@@ -214,7 +214,7 @@
           <div class="utf_testimonial_box">
             <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</div>
           </div>
-          <div class="utf_testimonial_author"> <img src="images/happy-client-01.jpg" alt="">
+          <div class="utf_testimonial_author"> <img src="{{  URL::asset('public/images/happy-client-01.jpg') }}"  alt="">
             <h4>Denwen Evil <span>Web Developer</span></h4>
           </div>
         </div>
@@ -222,7 +222,7 @@
           <div class="utf_testimonial_box">
             <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</div>
           </div>
-          <div class="utf_testimonial_author"> <img src="images/happy-client-02.jpg" alt="">
+          <div class="utf_testimonial_author"> <img src="{{  URL::asset('public/images/happy-client-02.jpg') }}"  alt="">
             <h4>Adam Alloriam <span>Web Developer</span></h4>
           </div>
         </div>
@@ -230,7 +230,7 @@
           <div class="utf_testimonial_box">
             <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</div>
           </div>
-          <div class="utf_testimonial_author"> <img src="images/happy-client-03.jpg" alt="">
+          <div class="utf_testimonial_author"> <img src="{{  URL::asset('public/images/happy-client-03.jpg') }}"  alt="">
             <h4>Illa Millia <span>Project Manager</span></h4>
           </div>
         </div>
@@ -238,7 +238,7 @@
           <div class="utf_testimonial_box">
             <div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</div>
           </div>
-          <div class="utf_testimonial_author"> <img src="images/happy-client-01.jpg" alt="">
+          <div class="utf_testimonial_author"> <img src="{{  URL::asset('public/images/happy-client-01.jpg') }}"  alt="">
             <h4>Denwen Evil <span>Web Developer</span></h4>
           </div>
         </div>
@@ -252,7 +252,7 @@
         <h3 class="headline_part centered margin-bottom-35 margin-top-70">Most Popular Cities/Towns <span>Discover best things to do restaurants, shopping, hotels, cafes and places<br>around the world by categories.</span></h3>
       </div>
       <div class="col-md-3"> 
-         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-01.jpg">
+         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="{{  URL::asset('public/images/popular-location-01.jpg')}}">
 			<div class="utf_img_content_box visible">
 			  <h4>Nightlife </h4>
 			  <span>18 Listings</span> 
@@ -260,7 +260,7 @@
          </a> 
 	  </div>
       <div class="col-md-3"> 
-         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-02.jpg">
+         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="{{  URL::asset('public/images/popular-location-02.jpg')}}">
 			<div class="utf_img_content_box visible">
 			  <h4>Shops</h4>
 			  <span>24 Listings</span> 
@@ -268,7 +268,7 @@
          </a> 
 	  </div>
       <div class="col-md-6"> 
-         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-03.jpg">
+         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="{{  URL::asset('public/images/popular-location-03.jpg')}}">
 			<div class="utf_img_content_box visible">
 			  <h4>Restaurant</h4>
 			  <span>17 Listings</span> 
@@ -276,7 +276,7 @@
          </a> 
 	  </div>
       <div class="col-md-6"> 
-         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-04.jpg">
+         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="{{  URL::asset('public/images/popular-location-04.jpg')}}">
 			<div class="utf_img_content_box visible">
 			  <h4>Outdoor Activities</h4>
 			  <span>12 Listings</span> 
@@ -284,7 +284,7 @@
          </a> 
 	  </div>
       <div class="col-md-3"> 
-         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-05.jpg">
+         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="{{  URL::asset('public/images/popular-location-05.jpg')}}">
 			<div class="utf_img_content_box visible">
 			  <h4>Hotels</h4>
 			  <span>14 Listings</span> 
@@ -292,7 +292,7 @@
          </a> 
 	  </div>
       <div class="col-md-3"> 
-         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-06.jpg">
+         <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="{{  URL::asset('public/images/popular-location-06.jpg')}}">
 			<div class="utf_img_content_box visible">
 			  <h4>New York</h4>
 			  <span>9 Listings</span> 
@@ -312,31 +312,34 @@
 			<div class="col-md-12">
 				<div class="companie-logo-slick-carousel utf_dots_nav margin-bottom-10">
 					<div class="item">
-						<img src="images/brand_logo_01.png" alt="">
+					<!--	<img src="{{  URL::asset('public/images/brand_logo_01.png') }}"  alt="">-->
 					</div>
 					<div class="item">
-						<img src="images/brand_logo_02.png" alt="">
+						<img src="{{  URL::asset('public/images/brand_logo_02.png') }}"  alt="">
 					</div>
 					<div class="item">
-						<img src="images/brand_logo_03.png" alt="">
+						<img src="{{  URL::asset('public/images/brand_logo_03.png') }}"  alt="">
 					</div>
 					<div class="item">
-						<img src="images/brand_logo_04.png" alt="">
+						<img src="{{  URL::asset('public/images/brand_logo_04.png') }}"  alt="">
 					</div>
 					<div class="item">
-						<img src="images/brand_logo_05.png" alt="">
+						<img src="{{  URL::asset('public/images/brand_logo_05.png') }}"  alt="">
 					</div>		
 					<div class="item">
-						<img src="images/brand_logo_06.png" alt="">
+						<img src="{{  URL::asset('public/images/brand_logo_06.png') }}"  alt="">
 					</div>	
 					<div class="item">
-						<img src="images/brand_logo_07.png" alt="">
+						<img src="{{  URL::asset('public/images/brand_logo_07.png') }}"  alt="">
 					</div>					
 				</div>
 			</div>
 		</div>
 	</div>
   </section>
+  <style>
+ /*.utf_carousel_item{max-width:300px;} */
+  </style>
   <!--
   <section class="utf_cta_area_item utf_cta_area2_block">
     <div class="container">
