@@ -9,7 +9,6 @@
 <div id="main_wrapper"> 
  @include('layouts.back.top')
    
-@include('layouts.back.menu')
  
 
  

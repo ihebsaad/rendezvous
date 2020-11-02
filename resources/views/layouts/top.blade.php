@@ -22,7 +22,7 @@
           <div class="clearfix"></div>
         </div>
         <div class="utf_right_side">
-          <div class="header_widget"> <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"><i class="fa fa-sign-in"></i> Sign In</a> <a href="dashboard_add_listing.html" class="button border with-icon"><i class="sl sl-icon-user"></i> Add Listing</a></div>
+          <div class="header_widget"> <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"><i class="fa fa-sign-in"></i> Sign In</a> <a href="./dashboard" class="button border with-icon"><i class="sl sl-icon-user"></i> Profil</a></div>
         </div>
         
         <div id="dialog_signin_part" class="zoom-anim-dialog mfp-hide">
@@ -37,8 +37,8 @@
             <div class="tab_container alt"> 
               <div class="tab_content" id="tab1" style="display:none;">
                 <form method="post" class="login">
-				  <a href="javascript:void(0);" class="social_bt facebook_btn"><i class="fa fa-facebook"></i>Login avec Facebook</a>
-				  <a href="javascript:void(0);" class="social_bt google_btn"><i class="fa fa-google-plus"></i>Login avec Google</a>	
+				<!--  <a href="javascript:void(0);" class="social_bt facebook_btn"><i class="fa fa-facebook"></i>Login avec Facebook</a>
+				  <a href="javascript:void(0);" class="social_bt google_btn"><i class="fa fa-google-plus"></i>Login avec Google</a>	-->
                   <p class="utf_row_form utf_form_wide_block">
                     <label for="username">
                       <input type="text" class="input-text" name="username" id="username" value="" placeholder="Pseudo" />

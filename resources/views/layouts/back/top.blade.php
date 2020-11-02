@@ -2,7 +2,7 @@
     <div id="header" class="not-sticky">
       <div class="container"> 
         <div class="utf_left_side"> 
-          <div id="logo"> <a href="index_1.html"><img src="images/logo.png" alt=""></a> <a href="index_1.html" class="dashboard-logo"><img src="images/logo2.png" alt=""></a> </div>
+          <div id="logo"> <a href="index_1.html"><img src="{{ URL::asset('public/images/logo.png')}}" alt=""></a> <a href="index_1.html" class="dashboard-logo"><img src="{{ URL::asset('public/images/logo2.png')}}" alt=""></a> </div>
           <div class="mmenu-trigger">
 			<button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
@@ -55,14 +55,14 @@
 				</div>
 			</div>
             <div class="utf_user_menu">
-              <div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Hi, John!</div>
+              <div class="utf_user_name"><span><img src="{{ URL::asset('public/images/dashboard-avatar.jpg')}}" alt=""></span>Bonjour, david!</div>
               <ul>
-                <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Dashboard</a></li>
-                <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-				<li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> My Listing</a></li>
+                <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Tableau de bord</a></li>
+                <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> Mon Profil</a></li>
+				<li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> Mon entreprise</a></li>
 				<li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-				<li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Booking</a></li>
-                <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+				<li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Réservations</a></li>
+                <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Déconnexion</a></li>
               </ul>
             </div>
           </div>
