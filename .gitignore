@@ -9,3 +9,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.idea/workspace.xml
+.idea/rendezvous.iml
+.idea/misc.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/modules.xml
