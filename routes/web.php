@@ -21,3 +21,6 @@ Auth::routes();
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+Route::get('/profile', 'UsersController@profile')->name('profile');
+Route::get('/listing', 'UsersController@listing')->name('listing');
