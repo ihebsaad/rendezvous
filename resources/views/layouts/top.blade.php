@@ -22,12 +22,18 @@
           <div class="clearfix"></div>
         </div>
         <div class="utf_right_side">
-          <div class="header_widget"> <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"><i class="fa fa-sign-in"></i> Connexion</a> <a href="./dashboard" class="button border with-icon"><i class="sl sl-icon-user"></i> Profil</a></div>
+          <div class="header_widget"> 
+		     @guest
+		  <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"><i class="fa fa-sign-in"></i> Connexion / Inscription</a>
+			@else
+		  <a href="./dashboard" class="button border with-icon"><i class="sl sl-icon-user"></i> Profil</a></div>
+	        @endguest
+
         </div>
         
         <div id="dialog_signin_part" class="zoom-anim-dialog mfp-hide">
           <div class="small_dialog_header">
-            <h3>Sign In</h3>
+            <h3>Connexion</h3>
           </div>
           <div class="utf_signin_form style_one">
             <ul class="utf_tabs_nav">

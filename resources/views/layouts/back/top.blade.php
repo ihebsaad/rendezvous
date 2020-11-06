@@ -54,15 +54,17 @@
 					</div>
 				</div>
 			</div>
+			 <?php     $user = auth()->user(); ?>
+
             <div class="utf_user_menu">
-              <div class="utf_user_name"><span><img src="{{ URL::asset('public/images/dashboard-avatar.jpg')}}" alt=""></span>Bonjour, david!</div>
+              <div class="utf_user_name"><span><img src="{{ URL::asset('public/images/dashboard-avatar.jpg')}}" alt=""></span>Bonjour, {{$user->username}}!</div>
               <ul>
-                <li><a href="dashboard.html"><i class="sl sl-icon-layers"></i> Tableau de bord</a></li>
-                <li><a href="dashboard_my_profile.html"><i class="sl sl-icon-user"></i> Mon Profil</a></li>
-				<li><a href="dashboard_my_listing.html"><i class="sl sl-icon-list"></i> Mon entreprise</a></li>
-				<li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-				<li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Réservations</a></li>
-                <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Déconnexion</a></li>
+                <li><a  href="{{ route('dashboard') }}"><i class="sl sl-icon-layers"></i> Tableau de bord</a></li>
+                <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon Profil</a></li>
+				<li><a  href="{{ route('listing', ['id'=>$user->id]) }}"><i class="sl sl-icon-list"></i> Mon entreprise</a></li>
+		<!--		<li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
+				<li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Réservations</a></li>-->
+                <li><a  href="{{ route('logout') }}"><i class="sl sl-icon-power"></i> Déconnexion</a></li>
               </ul>
             </div>
           </div>

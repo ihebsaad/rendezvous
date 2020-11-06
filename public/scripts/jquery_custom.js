@@ -664,13 +664,14 @@
         }
         if ($("table#utf_pricing_list_section").is('*')) {
             $('.add-pricing-list-item').on('click', function(e) {
-                e.preventDefault();
+				// here
+                 e.preventDefault();
                 newMenuItem();
             });
-            $(document).on("click", "#utf_pricing_list_section .delete", function(e) {
+       /*     $(document).on("click", "#utf_pricing_list_section .delete", function(e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
-            });
+            });*/
             $('.add-pricing-submenu').on('click', function(e) {
                 e.preventDefault();
                 var newElem = $('' + '<tr class="pricing-list-item pricing-submenu">' + '<td>' + '<div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>' + '<div class="fm-input"><input type="text" placeholder="Category Title" /></div>' + '<div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div>' + '</td>' + '</tr>');

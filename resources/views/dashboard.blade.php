@@ -3,12 +3,13 @@
  @section('content')
  
  
- 
+
  
  
   <!-- Dashboard -->
   <div id="dashboard"> 
 @include('layouts.back.menu')
+   
    
 	<div class="utf_dashboard_content"> 
 	<!--
