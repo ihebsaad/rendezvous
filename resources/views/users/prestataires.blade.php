@@ -4,88 +4,53 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
+  
 @include('layouts.back.menu')
  
 @section('content')
 
-  <?php 
-  use \App\Http\Controllers\CategoriesController;
-
-  ?>
  <div id="dashboard"> 
 @include('layouts.back.menu')
  
- 	<div class="utf_dashboard_content"> 
-        
-		<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> 
-
+ 	<div class="utf_dashboard_content "> 
+       
      <table class="table table-striped" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
             <th>ID</th>
             <th>Nom</th>
-            <th>Description</th>
-             <th  >Mère </th>
-           <th class="no-sort">Actions</th> 
+             <th>Inscription</th>
+          <!--  <th>Qualification</th>
+            <th class="no-sort">Statistiques</th>
+            <th >Statut</th>-->
+           <!-- <th class="no-sort">Actions</th>-->
         </tr>
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
-                <th>Description</th>
-                 <th> </th><th> </th> 
+                 <th>Inscription</th>
+            <!--    <th>Qualification</th>
+                <th class="no-sort">Statistiques</th>
+                <th>Statut</th>-->
+              <!--  <th> </th>-->
               </tr>
             </thead>
             <tbody>
-            @foreach($categories as $categorie)
+            @foreach($users as $user)
                 <tr> 
-                    <td>{{$categorie->id}}</td>
-                     <td> {{$categorie->nom  }} </td>
-                    <td>{{$categorie->description}}</td>
-                   <td><?php echo CategoriesController::champById('nom',$categorie->parent);?> </td>
-                  <td>  
-           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('CategoriesController@remove', $categorie->id)}}"><i class="fa fa-remove"></i></a>
-
-                      </td> 
+                    <td>{{$user->id}}</td>
+                     <td><a href="{{action('UsersController@profile', $user['id'])}}" >{{$user->name .' '.$user->lastname }}</a></td>
+                    <td><?php $createdat=  date('d/m/Y H:i', strtotime($user->created_at )); echo $createdat; ?></td>
+                <!--    <td>  @can('isAdmin')
+                       <a  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('UsersController@destroy', $user['id'])}}" class="btn btn-danger btn-sm btn-responsive " role="button" data-toggle="tooltip" data-tooltip="tooltip" data-placement="bottom" data-original-title="Supprimer" >
+                            <span class="fa fa-fw fa-trash-alt"></span> Supprimer
+                        </a> 
+                      @endcan</td>-->
                 </tr>
             @endforeach
             </tbody>
         </table>
  
- 
- 
- 
- 	        <div id="small-dialog" class=" zoom-anim-dialog mfp-hide">
-          <div class="small_dialog_header">
-            <h3>Ajouter une catégorie</h3>
-          </div>
-		 <div class="utf_signin_form style_one">
-			
-		 <div class="fm-input ">
-							  <input type="text" placeholder="nom *" id="nom">
-							</div>
-							<div class="fm-input  ">
-							  <input type="text"   placeholder="description"  id="description">
-							</div>
-
-						 <div class="fm-input  "> 
-							 <label>Catégorie mère</label>
-								<select type="text" value="" id="parent"  >
-							  <option></option>
-							  <?php foreach ($categories as $cat){ 
-							   echo '<option value="'.$cat->id.'">'.$cat->nom.'</option>';
-
-							    }?>
-							  </select>
-							</div>
-		 <a class="button" id="add" style="text-align:center">Ajouter</a>
-		 </div>		  
-		 </div>		
-		 
-		 
-  
-			 
-			
-			
 <!--
 <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/jquery.dataTables.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/dataTables.bootstrap.js') }}" ></script>
@@ -210,39 +175,6 @@
  
         });
 
-		
-		
-		   $('#add').click(function(){
-                 var nom = $('#nom').val();
-                var description = $('#description').val();
-                var parent = $('#parent').val();
-
-				if ((nom != '')  )
-                {
-                    var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url:"{{ route('categories.add') }}",
-                        method:"POST",
-                        data:{nom:nom,description:description,parent:parent , _token:_token},
-                        success:function(data){
- 
-					     categorie =parseInt(data);
-						 if(categorie>0)
-						{ 
- 						$( ".mfp-close" ).trigger( "click" );
-
- 	
- 						}
-						
-					    location.reload();
-  
-                        }
-                    });
-                }else{
-                    // alert('ERROR');
-                }
-            });
-			
     </script>
 	
  @endsection

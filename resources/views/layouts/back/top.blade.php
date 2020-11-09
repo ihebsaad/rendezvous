@@ -11,7 +11,7 @@
 			</button>
 		  </div>
           <nav id="navigation" class="style_one">
-            <ul id="responsive">
+          <!--  <ul id="responsive">
               <li><a href="#">Accueil</a>
  
               </li>			  
@@ -19,13 +19,13 @@
  
               </li>
                
-            </ul>
+            </ul>-->
           </nav>
           <div class="clearfix"></div>
         </div>
         <div class="utf_right_side"> 
           <div class="header_widget"> 
-			<div class="dashboard_header_button_item has-noti js-item-menu">
+		<!--	<div class="dashboard_header_button_item has-noti js-item-menu">
 				<i class="sl sl-icon-bell"></i>
 				<div class="dashboard_notifi_dropdown js-dropdown">
 					<div class="dashboard_notifi_title">
@@ -53,15 +53,21 @@
 						<a href="#">View All Notification</a>
 					</div>
 				</div>
-			</div>
-			 <?php     $user = auth()->user(); ?>
+			</div>-->
+ <?php     $user = auth()->user();
 
+ $User =\App\User::find($user->id);
+ $user_type =$User->user_type;
+ ?>
             <div class="utf_user_menu">
               <div class="utf_user_name"><span><img src="{{ URL::asset('public/images/dashboard-avatar.jpg')}}" alt=""></span>Bonjour, {{$user->username}}!</div>
               <ul>
                 <li><a  href="{{ route('dashboard') }}"><i class="sl sl-icon-layers"></i> Tableau de bord</a></li>
-                <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon Profil</a></li>
-				<li><a  href="{{ route('listing', ['id'=>$user->id]) }}"><i class="sl sl-icon-list"></i> Mon entreprise</a></li>
+				 <?php if($user_type=='admin' || $user_type=='client'  ){ ?> 
+                <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon profil</a></li>
+				 <?php } if($user_type=='admin' || $user_type=='prestataire'  ){ ?> 		  	
+				<li><a  href="{{ route('listing', ['id'=>$user->id]) }}"><i class="sl sl-icon-briefcase"></i> Mon entreprise</a></li>
+				<?php } ?>
 		<!--		<li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
 				<li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Réservations</a></li>-->
                 <li><a  href="{{ route('logout') }}"><i class="sl sl-icon-power"></i> Déconnexion</a></li>

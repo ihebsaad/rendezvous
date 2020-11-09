@@ -29,6 +29,7 @@ Route::get('/dashboard', function () {
 */
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
+Route::get('/perstataires', 'UsersController@perstataires')->name('perstataires');
 Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
 Route::post('/users/updating','UsersController@updating')->name('users.updating');
@@ -42,9 +43,10 @@ Route::get('/services/remove/{id}', 'ServicesController@remove');
 
 
 Route::get('/categories', array('as' => 'categories','uses' => 'CategoriesController@index'));
-Route::post('/categories/saving','CategoriesController@store')->name('categories.saving');
+Route::post('/categories/insert','CategoriesController@insert')->name('categories.insert');
 Route::post('/categories/add','CategoriesController@add')->name('categories.add');
 Route::get('/categories/add','CategoriesController@add')->name('categories.add');
 Route::post('/categories/updating','CategoriesController@updating')->name('categories.updating'); 
 Route::get('/categories/remove/{id}', 'CategoriesController@remove');
+Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser'); 
 

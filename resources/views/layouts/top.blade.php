@@ -104,6 +104,26 @@
                     @endif
                   </p>
                   <p class="utf_row_form utf_form_wide_block">
+                    <label for="name">
+                      <input type="text" class="input-text" name="name" id="name" value="" placeholder="Prénom" />
+                    </label>
+                    @if ($errors->has('name'))
+                      <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                    @endif
+                  </p>	
+                  <p class="utf_row_form utf_form_wide_block">
+                    <label for="lastname">
+                      <input type="text" class="input-text" name="lastname" id="lastname" value="" placeholder="Nom" />
+                    </label>
+                    @if ($errors->has('lastname'))
+                      <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                    @endif
+                  </p>					  
+                  <p class="utf_row_form utf_form_wide_block">
                     <label for="email2">
                       <input type="text" class="input-text" name="email" id="email2" value="" placeholder="Email" />
                     </label>
@@ -139,7 +159,7 @@
                     </p>
                     <div class="checkboxes  ">
                                 <div class="form-check" style=" "  onclick="document.getElementById('prestataire').checked = false;">
-                                    <input class="form-check-input" type="checkbox" name="user_type" id="client"  >
+                                    <input class="form-check-input" type="checkbox" name="user_type" id="client" value="client" >
 
                                     <label class="form-check-label" for="client">
                                         Client (vous cherchez des services)
@@ -148,7 +168,7 @@
                     </div>
 				 <div class="checkboxes  ">
                                 <div class="form-check" style=" "  onclick="document.getElementById('client').checked = false;">
-                                    <input class="form-check-input" type="checkbox" name="user_type" id="prestataire"  >
+                                    <input class="form-check-input" type="checkbox" name="user_type" id="prestataire" value="prestataire" >
 
                                     <label class="form-check-label" for="prestataire">
                                         Prestataire (vous voulez vendre des sevices)

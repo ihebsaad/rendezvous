@@ -68,7 +68,7 @@
               </div>
             </div>
             
-            <div class="add_utf_listing_section margin-top-45"> 
+     <!--       <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-picture"></i> Images</h3>
               </div>			  
@@ -86,9 +86,9 @@
 					<form action="file-upload" class="dropzone"></form>
 				  </div>
 				  https://www.webslesson.info/2018/07/dropzonejs-with-php-for-upload-file.html
-				  -->
+				  --> <!--
 			  </div>	  
-            </div> 
+            </div> -->
 			
             <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
@@ -208,7 +208,7 @@
 			
 			<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
-					<h3><i class="sl sl-icon-tag"></i> Ajouter un service</h3>
+					<h3><i class="sl sl-icon-tag"></i>Services</h3>
                 </div>              
 				<div class="row">
 				  <div class="col-md-12">
@@ -261,52 +261,79 @@
 		 </div>		  
 			
 			
-		<!--	<div class="add_utf_listing_section margin-top-45"> 
+			<div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
-                <h3><i class="sl sl-icon-docs"></i> Your Listing Feature</h3>
+                <h3><i class="sl sl-icon-docs"></i>Catégories</h3>
               </div>              
               <div class="checkboxes in-row amenities_checkbox">
                 <ul>
-					<li>
-						<input id="check-a1" type="checkbox" name="check">
-						<label for="check-a1">Accepts Credit Cards</label>
-					</li>
-					<li>
-						<input id="check-b1" type="checkbox" name="check">
-						<label for="check-b1">Smoking Allowed</label>
-					</li>
-					<li>
-						<input id="check-c1" type="checkbox" name="check">
-						<label for="check-c1">Bike Parking</label>
-					</li>
-					<li>
-						<input id="check-d1" type="checkbox" name="check">
-						<label for="check-d1">Hostels</label>
-					</li>
-					<li>
-						<input id="check-e1" type="checkbox" name="check">
-						<label for="check-e1">Wheelchair Accessible</label>
-					</li>
-					<li>
-						<input id="check-f1" type="checkbox" name="check">
-						<label for="check-f1">Wheelchair Internet</label>	
-					</li>
-					<li>
-						<input id="check-g1" type="checkbox" name="check">
-						<label for="check-g1">Wheelchair Accessible</label>
-					</li>
-					<li>
-						<input id="check-h1" type="checkbox" name="check" >
-						<label for="check-h1">Parking Street</label>
-					</li>
-					<li>
-						<input id="check-i1" type="checkbox" name="check" >
-						<label for="check-i1">Wireless Internet</label>
-					</li>					
+
+				
+				<?php foreach($categories as $categ)
+				{
+					$cats_user = $categories_user->toArray();
+					$idcat= $categ->id;
+					if( in_array($idcat,$cats_user) ){
+						$check='checked';
+					}else{
+					$check='';
+					}
+			 echo '	<li id="li-'.$categ->id.'" class="categories" >
+						<input id="cat-'.$categ->id.'" type="checkbox" name="check" '.$check.'   >
+						<label for="cat-'.$categ->id.'"   >'.$categ->nom.' </label>
+					</li>';					 
+					
+				}
+				
+				?>			
 				</ul>				
               </div>              
             </div>                        
-            -->
+            
+			
+		 <div class="add_utf_listing_section margin-top-45"> 
+              <div class="utf_add_listing_part_headline_part">
+                <h3><i class="sl sl-icon-docs"></i> Infos de contact</h3>
+              </div>  
+			
+				    <div class="row with-forms">
+	 
+					<div class="col-md-4">
+						<label>Tél</label>						
+						<input type="text" class="input-text" id="tel" placeholder="(123) 123-456" value="{{ $user->tel }}"  onchange="changing(this)">
+					</div>
+					<div class="col-md-4">
+						<label>Email</label>						
+						<input type="email" class="input-text" id="email" placeholder="test@example.com" value="{{ $user->email }}"  onchange="changing(this)">
+					</div>
+ 
+					<div class="col-md-4">
+						<label>Facebook</label>						
+						<input type="text" class="input-text" id="fb" placeholder="https://www.facebook.com" value="{{ $user->fb }}"  onchange="changing(this)">
+					</div>
+					<div class="col-md-4">
+						<label>Twitter</label>						
+						<input type="text" class="input-text"  id="twitter" placeholder="https://www.twitter.com" value="{{ $user->twitter }}"  onchange="changing(this)">
+					</div>										
+					<div class="col-md-4">
+						<label>Linkedin</label>
+						<input type="text" class="input-text" id="linkedin"  placeholder="https://www.linkedin.com" value="{{ $user->linkedin }}" onchange="changing(this)">					
+					</div>
+					<div class="col-md-4">
+						<label>Instagram</label>
+						<input type="text" class="input-text"  id="instagram" placeholder="http://instagram.com" value="{{ $user->instagram }}"  onchange="changing(this)">					
+					</div>
+					<div class="col-md-4">
+						<label>Skype</label>
+						<input type="text" class="input-text"  id="skype" placeholder="https://www.skype.com" value="{{ $user->skype }}"  onchange="changing(this)">					
+					</div>
+				  </div>	
+              
+			
+			</div>
+			
+			<br><br><br>
+			
 			<!--<a href="#" class="button preview">Enregistrer</a> </div>-->
         </div>
       <!--  <div class="col-md-12">
@@ -433,8 +460,52 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
             }
 
+ 			
+			 $('.categories').click(function(event ){
+ 						idelemt = (this).id;
+				cat= idelemt.slice(3);
+ 			///here
+ 	           var checked =document.getElementById('cat-'+cat).checked  ;
+  			   var user = $('#user').val();
+ 				 var _token = $('input[name="_token"]').val();
+					var loading=false;
+ 			
+			  
+				if( ! checked    ){
+                    $.ajax({
+                        url:"{{ route('categories.insert') }}",
+                        method:"POST",
+                        data:{user:user,categorie:cat, _token:_token},
+                        success:function(data){
+							changed=true;
+						}
+						
+                    });
+					loading=true;
+					}else{
+ 					  $.ajax({
+                        url:"{{ route('categories.removecatuser') }}",
+                        method:"POST",
+                        data:{user:user,categorie:cat, _token:_token},
+                        success:function(data){
+							changed=true;
+						}
+						
+                    });
+ 					 loading=true;
+
+					}
+					 	 if (loading) {
+                return ;
+              }
+				  //	
+
+
+			 });
+			 
+			 
 			
-			  $('#add').click(function(){
+			  $('#add').click(function( ){
                 var user = $('#user').val();
                 var nom = $('#nom').val();
                 var description = $('#description').val();
@@ -472,6 +543,27 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                 }
             });
 			
+			function insertcat(cat)
+			{
+				
+			///here
+ 		var checked =document.getElementById('cat-'+cat).checked  ;
+		 alert(checked);
+				  var user = $('#user').val();
+
+				  alert(user);
+				  alert(cat);
+				 var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('categories.insert') }}",
+                        method:"POST",
+                        data:{user:user,categorie:cat, _token:_token},
+                        success:function(data){
+							
+						}
+						
+                    });
+ 			}
 			
     </script>
 	

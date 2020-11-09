@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Service;
+use \App\Categorie;
 
 class UsersController extends Controller
 {
@@ -23,12 +24,38 @@ class UsersController extends Controller
 	
     public function index()
     {
-      		$users = User::get();
+       	 $cuser = auth()->user();
+		 
+		$User =\App\User::find($cuser->id);
+ 		$user_type=$User->user_type;
+
+		if(   $user_type=='admin' )
+        { 
+	   
+	   $users = User::where('user_type','client')->get();
 
 	  return view('users.index',  compact('users') );       
-
+		}
+		
 	}
  
+ 	
+    public function perstataires()
+    {   
+	    $cuser = auth()->user();
+ 
+		$user_type=$cuser->user_type;
+ 
+		if(   $user_type=='admin' )
+        { 
+	   
+	   $users = User::where('user_type','prestataire')->get();
+
+	  return view('users.prestataires',  compact('users') );       
+		}     
+
+	}
+	
    public function dashboard()
     {
       	 
@@ -46,7 +73,8 @@ class UsersController extends Controller
 		if(  $user_id == $id || $user_type=='admin' )
         {  	
 		$user = User::find($id);
-  
+       
+
 		return view('users.profile',  compact('user','id')); 
 		
 		}
@@ -61,11 +89,13 @@ class UsersController extends Controller
 		$user_id=$cuser->id;
 		
 		$services= Service::where('user',$user_id)->get() ;
- 	 if(  $user_id == $id || $user_type=='admin' )
+ 	    if(  $user_id == $id || $user_type=='admin' )
         {  	
 		$user = User::find($id);
-  
-		return view('users.listing',  compact('user','id','services')); 
+		$categories = Categorie::orderBy('nom', 'asc')->get();
+        $categories_user =  DB::table('categories_user')->where('user',$id)->pluck('categorie');
+
+		return view('users.listing',  compact('user','id','services','categories','categories_user')); 
 		
 		}
 		

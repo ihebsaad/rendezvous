@@ -11201,9 +11201,9 @@ input:checked+.slider:before {
 .pricing-list-item td .fm-close {
 	text-align: right;
 }
-.pricing-list-item td .fm-close a {
+.pricing-list-item td .fm-close a , .fm-close a   {
 	background: #ff2222;
-	padding: 0;
+	padding: 8px;
 	width: 32px;
 	height: 32px;
 	line-height: 30px;

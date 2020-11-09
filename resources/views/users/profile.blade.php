@@ -25,22 +25,28 @@
           <div class="utf_dashboard_list_box margin-top-0">
             <h4 class="gray"><i class="sl sl-icon-user"></i> Détails</h4>
             <div class="utf_dashboard_list_box-static"> 
-              <div class="edit-profile-photo"> <img src="images/user-avatar.jpg" alt="">
+          <?php if($user->user_type =='client'){ ?>				
+		   <div class="edit-profile-photo"> <img src="images/user-avatar.jpg" alt="">
                 <div class="change-photo-btn">
                   <div class="photoUpload"> <span><i class="fa fa-upload"></i> Télécharger une Photo</span>
                     <input type="file" class="upload" />
                   </div>
                 </div>
               </div>
+				<?php } ?>
 			    {{ csrf_field() }}
 
 			 <input type="hidden"    id="iduser"  value="{{$id}}" >
               <div class="my-profile">
 			    <div class="row with-forms">
 					<div class="col-md-4">
-						<label>Nom Complet</label>						
+						<label>Prénom</label>						
 						<input type="text" class="input-text" id="name"  placeholder="" value="{{ $user->name }}"  onchange="changing(this)">
 					</div>
+					<div class="col-md-4">
+						<label>Nom</label>						
+						<input type="text" class="input-text" id="lastname"  placeholder="" value="{{ $user->lastname }}"  onchange="changing(this)">
+					</div>					
 					<div class="col-md-4">
 						<label>Tél</label>						
 						<input type="text" class="input-text" id="tel" placeholder="(123) 123-456" value="{{ $user->tel }}"  onchange="changing(this)">
@@ -49,14 +55,20 @@
 						<label>Email</label>						
 						<input type="email" class="input-text" id="email" placeholder="test@example.com" value="{{ $user->email }}"  onchange="changing(this)">
 					</div>
+		<?php if($user->user_type =='client'){ ?>				
+				
 					<div class="col-md-12">
 						<label>Adresse</label>
 						<textarea name="adresse" id="adresse" cols="30" rows="3"  onchange="changing(this)">{{ $user->adresse }}</textarea>
 					</div>
+		<?php } ?>				
+			
 					<div class="col-md-12">
 						<label>Notes</label>
 						<textarea name="decription" id="adresse" cols="30" rows="3"  onchange="changing(this)">{{ $user->description }}</textarea>
 					</div>
+					
+	<?php if($user->user_type =='client'){ ?>				
 					<div class="col-md-4">
 						<label>Facebook</label>						
 						<input type="text" class="input-text" id="fb" placeholder="https://www.facebook.com" value="{{ $user->fb }}"  onchange="changing(this)">
@@ -77,6 +89,8 @@
 						<label>Skype</label>
 						<input type="text" class="input-text"  id="skype" placeholder="https://www.skype.com" value="{{ $user->skype }}"  onchange="changing(this)">					
 					</div>
+					
+	<?php }  ?>
 				  </div>	
               </div>
           <!--    <button class="button preview btn_center_item margin-top-15">Enregistrer</button>-->

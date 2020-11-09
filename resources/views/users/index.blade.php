@@ -1,35 +1,37 @@
 @extends('layouts.backlayout')
  
 
-@include('layouts.back.menu')
- 
-@section('content')
-
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
   
+@include('layouts.back.menu')
+ 
+@section('content')
+
  <div id="dashboard"> 
 @include('layouts.back.menu')
  
- 	<div class="utf_dashboard_content"> 
+ 	<div class="utf_dashboard_content "> 
        
      <table class="table table-striped" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
             <th>ID</th>
             <th>Nom</th>
-            <th>Qualification</th>
+             <th>Inscription</th>
+          <!--  <th>Qualification</th>
             <th class="no-sort">Statistiques</th>
-            <th >Statut</th>
+            <th >Statut</th>-->
            <!-- <th class="no-sort">Actions</th>-->
         </tr>
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
-                <th>Qualification</th>
+                 <th>Inscription</th>
+            <!--    <th>Qualification</th>
                 <th class="no-sort">Statistiques</th>
-                <th>Statut</th>
+                <th>Statut</th>-->
               <!--  <th> </th>-->
               </tr>
             </thead>
@@ -38,9 +40,9 @@
                 <tr> 
                     <td>{{$user->id}}</td>
                      <td><a href="{{action('UsersController@profile', $user['id'])}}" >{{$user->name .' '.$user->lastname }}</a></td>
-                    <td><?php  ?></td>
-				 <td> </td>
-                    <td> </td>
+                    <td><?php $createdat=  date('d/m/Y H:i', strtotime($user->created_at )); echo $createdat; ?></td>
+				 
+                
                <!--    <td>  @can('isAdmin')
                        <a  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('UsersController@destroy', $user['id'])}}" class="btn btn-danger btn-sm btn-responsive " role="button" data-toggle="tooltip" data-tooltip="tooltip" data-placement="bottom" data-original-title="Supprimer" >
                             <span class="fa fa-fw fa-trash-alt"></span> Supprimer

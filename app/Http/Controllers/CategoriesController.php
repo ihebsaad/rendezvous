@@ -36,7 +36,19 @@ class CategoriesController extends Controller
     }
 
 		
-	public function add(Request $request)
+	public function insert(Request $request)
+	{
+ 		
+	$categorie = $request->get('categorie');
+	$user = $request->get('user');
+ 
+  	    DB::table('categories_user')->insert(
+            ['categorie' => $categorie,
+                'user' => $user ]);
+
+ 	}
+ 
+  	public function add(Request $request)
 	{
  		 $categorie  = new Categorie([
                'nom' => $request->get('nom'),
@@ -51,8 +63,6 @@ class CategoriesController extends Controller
 
 
  	}
- 
-  
 
     public function updating(Request $request)
     {
@@ -75,6 +85,15 @@ class CategoriesController extends Controller
 
 	}
 	
+		
+     public function removecatuser(Request $request)
+    {
+	 $categorie = $request->get('categorie');
+	 $user = $request->get('user');
+	DB::table('categories_user')->where('categorie', $categorie)->where('user', $user)->delete();
+	//return back();
+
+	}
 	
     public static function ChampById($champ,$id)
     {
