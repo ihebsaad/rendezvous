@@ -14,7 +14,7 @@
  
  	<div class="utf_dashboard_content "> 
        
-     <table class="table table-striped" id="mytable" style="width:100%">
+     <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
             <th>ID</th>
@@ -90,7 +90,7 @@
 
             var table = $('#mytable').DataTable({
                 orderCellsTop: true,
-                dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
+                dom: 'Blfrtip',
                 responsive:true,
                 buttons: [
 

@@ -17,9 +17,9 @@
  
  	<div class="utf_dashboard_content"> 
         
-		<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> 
-
-     <table class="table table-striped" id="mytable" style="width:100%">
+	<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>
+ 
+     <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
             <th>ID</th>
@@ -50,8 +50,7 @@
             @endforeach
             </tbody>
         </table>
- 
- 
+  
  
  
  	        <div id="small-dialog" class=" zoom-anim-dialog mfp-hide">
@@ -123,8 +122,9 @@
 
             var table = $('#mytable').DataTable({
                 orderCellsTop: true,
-                dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
-                responsive:true,
+               // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
+                dom: 'Blfrtip',
+				responsive:true,
                 buttons: [
 
                     'csv', 'excel', 'pdf', 'print'

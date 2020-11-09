@@ -20,6 +20,10 @@
   {{ csrf_field() }}
 
 <style>
+table{
+	border:1px solid black;
+background-color:lightgrey;
+}
 .dataTables_length select  {
 	width:100px!important;
 	height:40px;
