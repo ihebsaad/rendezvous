@@ -117,7 +117,24 @@ class UsersController extends Controller
 
     }
 
+	public function ajoutimage(Request $request)
+	{
+		  $id= $request->get('user');
+	 //$temp_file = $_FILES['file']['tmp_name'];
 
+		 $name='';
+		if($request->file('file')!=null)
+		{$image=$request->file('file');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+ 
+          $image->move($path, $name);
+		}
+		  User::where('id', $id)->update(array('logo' => $name));
+
+		
+		
+	}
 
 	
   

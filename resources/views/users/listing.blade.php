@@ -68,27 +68,32 @@
               </div>
             </div>
             
-     <!--       <div class="add_utf_listing_section margin-top-45"> 
+       <!--     <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-picture"></i> Images</h3>
               </div>			  
               <div class="row with-forms">              
 				  <div class="utf_submit_section col-md-4">
 				    <h4>Logo</h4>
-					<form action="file-upload" class="dropzone"></form>
+					<form action="UsersController@ajoutimage" class="dropzone"  id="dropzoneFrom">
+					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+					</form>
+					<span id="submit-logo">Envoyer</span>
 				  </div>
 				  <div class="utf_submit_section col-md-4">
 					<h4>Coverture</h4>
 					<form action="file-upload" class="dropzone"></form>
+					<span id="submit-couverture">Envoyer</span>					
 				  </div>
-				 <!-- <div class="utf_submit_section col-md-4">
+				  <div class="utf_submit_section col-md-4">
 					<h4>Gallery Images</h4>
 					<form action="file-upload" class="dropzone"></form>
 				  </div>
-				  https://www.webslesson.info/2018/07/dropzonejs-with-php-for-upload-file.html
-				  --> <!--
+				<!--  https://www.webslesson.info/2018/07/dropzonejs-with-php-for-upload-file.html--><!--
+				    
 			  </div>	  
-            </div> -->
+            </div>  
+			-->
 			
             <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
@@ -565,6 +570,32 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                     });
  			}
 			
+			
+			
+			
+			
+ Dropzone.options.dropzoneFrom = {
+  autoProcessQueue: false,
+  acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
+  init: function(){
+   var submitButton = document.querySelector('#submit-logo');
+   myDropzone = this;
+   submitButton.addEventListener("click", function(){
+    myDropzone.processQueue();
+   });
+   this.on("complete", function(){
+    if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+    {
+     var _this = this;
+     _this.removeAllFiles();
+    }
+  //  list_image(); 
+	 alert('logo');
+   });
+  },
+ };
+ 
+ 
     </script>
 	
 	

@@ -33,6 +33,7 @@ Route::get('/perstataires', 'UsersController@perstataires')->name('perstataires'
 Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
 Route::post('/users/updating','UsersController@updating')->name('users.updating');
+Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage');
 
 
 Route::post('/services/saving','ServicesController@store')->name('services.saving');
