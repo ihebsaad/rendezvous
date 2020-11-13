@@ -5,7 +5,9 @@
    <!-- Dashboard -->
 <div id="dashboard"> 
 @include('layouts.back.menu')
- 
+ <style>
+ table{background-color:white;border:none!important;;width:100%!important;}
+ </style>
     <!-- Content -->
     <div class="utf_dashboard_content">       
     
@@ -68,36 +70,133 @@
               </div>
             </div>
             
-       <!--     <div class="add_utf_listing_section margin-top-45"> 
+           <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
-                <h3><i class="sl sl-icon-picture"></i> Images</h3>
+                <h3><i class="sl sl-icon-picture"></i> Images </h3>
               </div>			  
               <div class="row with-forms">              
 				  <div class="utf_submit_section col-md-4">
 				    <h4>Logo</h4>
-					<form action="UsersController@ajoutimage" class="dropzone"  id="dropzoneFrom">
+					<form action="{{ route('users.ajoutimage') }}" class="dropzone"  id="dropzoneFrom">
+					  {{ csrf_field() }}
 					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
 					</form>
-					<span id="submit-logo">Envoyer</span>
+					<!---<span id="submit-logo">Envoyer</span>-->
+					<?php if($user->logo!=''){  ?>
+					<img id='img-logo' src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" style="max-width:150px;margin:20px 20px 20px 20px">
+				<?php  } else { "<img id='img-logo' style='display:none' /> ";  } ?>
+				 </div>
+				  <div class="utf_submit_section col-md-4">
+					<h4>Couverture</h4>
+					<form  action="{{ route('users.ajoutcouv') }}" class="dropzone"   id="dropzoneFrom2">
+					 {{ csrf_field() }}
+					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+					</form>
+				<!--	<span id="submit-couverture">Envoyer</span>	-->		
+					 <?php if($user->couverture!=''){  ?>
+					<img id='img-couverture' src="<?php echo  URL::asset('storage/images/'.$user->couverture);?>" style="max-width:150px;margin:20px 20px 20px 20px">
+				 	<?php  } else { "<img id='img-couverture' style='display:none' /> ";  } ?>
+
 				  </div>
 				  <div class="utf_submit_section col-md-4">
-					<h4>Coverture</h4>
-					<form action="file-upload" class="dropzone"></form>
-					<span id="submit-couverture">Envoyer</span>					
+					<h4 id="images">Gallery Images</h4>
+					<form action="{{ route('users.ajoutimages') }}" class="dropzone">
+					 {{ csrf_field() }}
+					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+					</form>
 				  </div>
-				  <div class="utf_submit_section col-md-4">
-					<h4>Gallery Images</h4>
-					<form action="file-upload" class="dropzone"></form>
-				  </div>
-				<!--  https://www.webslesson.info/2018/07/dropzonejs-with-php-for-upload-file.html--><!--
+
+				  
+				<!--  https://www.webslesson.info/2018/07/dropzonejs-with-php-for-upload-file.html--> 
 				    
-			  </div>	  
-            </div>  
-			-->
+			  </div>
+			  <style>
+	.gallery img,#img-couverture,#img-logo{
+		max-width:300px;
+		max-height:180px;
+		
+	}
+			.gallery  figure img {
+	-webkit-filter: grayscale(0) blur(0);
+	filter: grayscale(0) blur(0);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.gallery figure:hover img {
+	-webkit-filter: grayscale(100%) blur(3px);
+	filter: grayscale(100%) blur(3px);
+}
+			  </style>
+			  
+			  <?php 
+		$images=  \App\Image::where('user',$user->id)->get();
+		if (count($images)>0)
+		{
+				echo "<h2> Galerie d'images</h2><span> cliquez sur l'image pour la supprimer</span>" ;
+				echo'<div class="row">';
 			
+			foreach($images as $img)
+			{ ?>
+				<div class="col-sm-4 gallery" style="padding:10px 10px 10px 10px"><a onclick="return confirm('Êtes-vous sûrs de vouloir supprimer cette image ?')"  href="{{action('UsersController@removeimage', [ 'id'=>$img->id,'user'=> $user->id  ])}}"title="supprimer" ><figure><img class="" src="<?php echo  URL::asset('storage/images/'.$img->thumb);?>"  /></figure></a></div>
+		<?php	
+			}
+			
+			echo '</div>';
+		 }
+			  ?>
+
+
+  
+	  </div>
+  
+       <div class="add_utf_listing_section margin-top-45"> 
+              <div class="utf_add_listing_part_headline_part">
+                <h3><i class="sl sl-icon-picture"></i> Images et Video</h3>
+              </div>			  
+              <div class="row with-forms">    
+			  
+			  	  <div class="row">
+			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
+					<h4 id="images">Video</h4>
+					<form action="{{ route('users.ajoutvideo') }}" class="dropzone" id="dropvideo">
+					 {{ csrf_field() }}
+					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+					</form>
+			 </div>
+				 <div class="col-md-5">
+	
+					<?php if($user->video!=''){?>
+					<video width="450" height="320" controls>
+					<source src="<?php echo  URL::asset('storage/images/'.$user->video);?>" type="video/mp4">
+					Votre navigateur ne supporte pas l'affichage de cette video.
+					</video>
+					<span class="bg-danger"><a onclick="return confirm('Êtes-vous sûrs de vouloir supprimer cette video ?')"  href="{{action('UsersController@removevideo', [  'user'=> $user->id  ])}}"title="supprimer"></a></span>
+					<?php } ?>
+			  </div>
+			  </div>
+			  <div class="row" style="margin-top:20px">
+
+			   <div class="  col-md-5" style="margin-right:20px;padding:50px 50px 50px 50px">
+			   Code d'intégration (youtube, vimeo ..)
+				<section><textarea  id="codevideo"  onchange="changing(this)">{{ $user->codevideo }} </textarea></section>
+					
+			   </div>
+			   <div class="  col-md-5">
+			   <?php if($user->video!=''){
+				
+				echo $user->codevideo ;
+					}  ?>
+
+			   </div>
+			   
+			   </div>
+			   
+			  </div>
+		</div>	  
+ 	
             <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
-                <h3><i class="sl sl-icon-list"></i> Titre & Description</h3>
+                <h3><i class="sl sl-icon-list"></i> Titre & Description de votre entreprise</h3>
               </div>              
 			  <div class="row with-forms">
 				  <div class="col-md-6">
@@ -218,7 +317,7 @@
 				<div class="row">
 				  <div class="col-md-12">
 					<table id="utf_pricing_list_section">
-					  <tbody class="ui-sortable">
+					  <tbody class="ui-sortable"  id="services">
 					  <?php foreach($services as $service){ ?>
 						<tr class="pricing-list-item pattern ui-sortable-handle">
 						  <td> 
@@ -232,7 +331,7 @@
 							  <input type="text"    data-unit="€"  value="<?php echo $service->prix;?>"   > 
 							</div>
 						 	<div class="fm-close">
-							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', $service->id)}}"><i class="fa fa-remove"></i></a>
+							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
 							</div>
 							</td>
 						</tr>
@@ -242,10 +341,44 @@
 					<a href="#small-dialog" class="button popup-with-zoom-anim">Ajouter</a> 
 					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
 				</div>                          
-            </div>					
+            </div>				
+
+
+
+		<div class="add_utf_listing_section margin-top-45"> 
+				<div class="utf_add_listing_part_headline_part">
+					<h3><i class="sl sl-icon-tag"></i>FAQ</h3>
+                </div>       
+						<?php $faqs= \App\Faq::where('user',$user->id)->get(); ?>
+				<div class="row">
+				  <div class="col-md-12">
+					<table id="utf_faq_list_section">
+					  <tbody class="ui-sortable"  id="services">
+					  <?php foreach($faqs as $faq){ ?>
+						<tr class="pricing-list-item pattern ui-sortable-handle">
+						  <td> 
+							<div class="fm-input pricing-name">
+							  <input type="text" value="<?php echo $faq->question;?>"   >
+							</div>
+							<div class="fm-input pricing-ingredients">
+							  <input type="text" value="<?php echo $faq->reponse;?>" >
+							</div>
+ 
+						 	<div class="fm-close">
+							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('FaqsController@remove', [ 'id'=>$faq->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
+							</div>
+							</td>
+						</tr>
+					  <?php } ?>
+					  </tbody>
+					</table>
+				 <a href="#small-dialog2" class="button popup-with-zoom-anim">Ajouter FAQ</a> 
+					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
+				</div>                          
+            </div>				
 			
-			
-	        <div id="small-dialog" class=" zoom-anim-dialog mfp-hide">
+
+	        <div id="small-dialog" class="small-dialog zoom-anim-dialog mfp-hide">
           <div class="small_dialog_header">
             <h3>Ajouter un service</h3>
           </div>
@@ -266,6 +399,27 @@
 		 </div>		  
 			
 			
+			
+			
+	  <div id="small-dialog2" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter FAQ </h3>
+          </div>
+		 <div class="utf_signin_form style_one">
+			
+		 <div class="fm-input ">
+		  <input type="text" placeholder="Question" id="question">
+		 </div>
+			 <div class="fm-input  ">
+			  <textarea   placeholder="Réponse"  id="reponse"></textarea>
+			 </div>
+	 
+							
+		 <a class="button" id="addfaq" style="text-align:center">Ajouter</a>
+		 </div>		  
+		 </div>	
+		 
+		 
 			<div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-docs"></i>Catégories</h3>
@@ -328,10 +482,10 @@
 						<label>Instagram</label>
 						<input type="text" class="input-text"  id="instagram" placeholder="http://instagram.com" value="{{ $user->instagram }}"  onchange="changing(this)">					
 					</div>
-					<div class="col-md-4">
+				<!--	<div class="col-md-4">
 						<label>Skype</label>
 						<input type="text" class="input-text"  id="skype" placeholder="https://www.skype.com" value="{{ $user->skype }}"  onchange="changing(this)">					
-					</div>
+					</div>-->
 				  </div>	
               
 			
@@ -548,6 +702,47 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                 }
             });
 			
+			
+		 $('#addfaq').click(function( ){
+                var user = $('#user').val();
+                var question = $('#question').val();
+                var reponse = $('#reponse').val();
+ 
+				if ((nom != '')  )
+                {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('faqs.add') }}",
+                        method:"POST",
+                        data:{user:user,question:question,reponse:reponse , _token:_token},
+                        success:function(data){
+
+                         //    alert(data);
+                         faq =parseInt(data);
+						 if(faq>0)
+						{
+							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+question+'"   ></div><div class="fm-input pricing-ingredients"><textarea >'+reponse+'</textarea></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="http://$_SERVER[HTTP_HOST]/services/remove/'+faq+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
+ 						            newElem.appendTo('table#utf_faq_list_section');
+
+					 	//$('#small-dialog').modal('hide');
+ 						$( ".mfp-close" ).trigger( "click" );
+
+						//$('#small-dialog').modal({show:true});
+	
+ 						}
+	   
+
+
+                        }
+                    });
+                }else{
+                    // alert('ERROR');
+                }
+            });
+			
+			
+			
+			
 			function insertcat(cat)
 			{
 				
@@ -573,29 +768,65 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 			
 			
 			
-			
+			 
  Dropzone.options.dropzoneFrom = {
-  autoProcessQueue: false,
+ // autoProcessQueue: false,
   acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
   init: function(){
-   var submitButton = document.querySelector('#submit-logo');
+  /* var submitButton = document.querySelector('#submit-logo');
    myDropzone = this;
    submitButton.addEventListener("click", function(){
     myDropzone.processQueue();
-   });
+   });*/
    this.on("complete", function(){
-    if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+  /*  if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
     {
      var _this = this;
      _this.removeAllFiles();
-    }
+    }*/
   //  list_image(); 
-	 alert('logo');
-   });
+	$('#img-logo').hide();
+
+ });
+  },
+ };
+  
+  Dropzone.options.dropzoneFrom2 = {
+ // autoProcessQueue: false,
+  acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
+  init: function(){
+ 
+   this.on("complete", function(){
+  /*  if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+    {
+     var _this = this;
+     _this.removeAllFiles();
+    }*/
+  //  list_image(); 
+	$('#img-couverture').hide();
+
+ });
   },
  };
  
  
+   Dropzone.options.dropvideo = {
+ // autoProcessQueue: false,
+  acceptedFiles:".mp4",
+  init: function(){
+ 
+   this.on("complete", function(){
+  /*  if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+    {
+     var _this = this;
+     _this.removeAllFiles();
+    }*/
+  //  list_image(); 
+	$('#img-couverture').hide();
+
+ });
+  },
+ };
     </script>
 	
 	

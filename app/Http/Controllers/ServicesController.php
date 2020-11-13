@@ -84,12 +84,12 @@ class ServicesController extends Controller
 
 
 	
-     public function remove($id)
+     public function remove($id,$user)
     {
   
 	 
 	DB::table('services')->where('id', $id)->delete();
-	return back();
+	return redirect (url('/listing/'.$user.'#services'));
 
 	}
 	

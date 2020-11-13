@@ -11,6 +11,7 @@ use Session;
 use \App\User;
 use \App\Service;
 use \App\Categorie;
+use \App\Image;
 
 class UsersController extends Controller
 {
@@ -60,6 +61,29 @@ class UsersController extends Controller
     {
       	 
 	  return view('dashboard' );       
+
+	}
+	   public function listings()
+    {
+      	 
+	  return view('listings' );       
+
+	}
+	
+	  public function home()
+    {
+      	 
+	  return view('home' );       
+
+	}
+	
+	
+	  public function viewlisting($id)
+    {
+  	
+		$user = User::find($id);
+		
+	  return view('viewlisting' ,  compact('user','id'));       
 
 	}
 	
@@ -132,10 +156,86 @@ class UsersController extends Controller
 		}
 		  User::where('id', $id)->update(array('logo' => $name));
 
+		 
+	}
+	
+		public function ajoutvideo(Request $request)
+	{
+		  $id= $request->get('user');
+	 //$temp_file = $_FILES['file']['tmp_name'];
+
+		 $name='';
+		if($request->file('file')!=null)
+		{$image=$request->file('file');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+ 
+          $image->move($path, $name);
+		}
+		  User::where('id', $id)->update(array('video' => $name));
+
+		 
+	}
+		public function ajoutcouv(Request $request)
+	{
+		  $id= $request->get('user');
+	 //$temp_file = $_FILES['file']['tmp_name'];
+
+		 $name='';
+		if($request->file('file')!=null)
+		{$image=$request->file('file');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+ 
+          $image->move($path, $name);
+		}
+		  User::where('id', $id)->update(array('couverture' => $name));
+ 	
+	}
+	
+
+		public function ajoutimages(Request $request)
+	{
+		  $id= $request->get('user');
+	 //$temp_file = $_FILES['file']['tmp_name'];
+
+		 $name='';
+		if($request->file('file')!=null)
+		{$image=$request->file('file');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+ 
+          $image->move($path, $name);
+		}
+ 
+		  	 $image  = new Image([
+              'user' => $request->get('user'),
+              'thumb' => $name,
+             ]);
+ 
+        $image->save();
 		
 		
 	}
-
 	
+	
+	
+		
+     public function removeimage($id,$user)
+    {
+   
+	DB::table('images')->where('id', $id)->delete();
+	return redirect (url('/listing/'.$user.'#images'));
+
+	}
+	
+	     public function removevideo($id,$user)
+    {
+   
+	  User::where('id', $id)->update(array('video' => ''));
+
+		  return redirect (url('/listing/'.$user.'#videos'));
+
+	}
   
  }

@@ -1,6 +1,9 @@
 @extends('layouts.frontlayout')
  
+
+ 
  @section('content')
+  @include('layouts.slider')
 
   <div class="container">
 	<div class="row">
@@ -56,7 +59,8 @@
       </div>
     </div>
   </div>
-  <!--
+ 
+ <!--------------------------listings  ---------->
   <section class="fullwidth_block margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
     <div class="container">
       <div class="row slick_carousel_slider">
@@ -66,8 +70,9 @@
 		
 		<div class="row">
 			<div class="col-md-12">
-				<div class="simple_slick_carousel_block utf_dots_nav"> 
-				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
+			<!--	<div class="simple_slick_carousel_block utf_dots_nav"> -->
+				<div class=" row utf_dots_nav"> 
+				  <div class="col-md-4 utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container ">
 					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-01.jpg') }}" alt=""> <span class="tag"><i class="im im-icon-Chef-Hat"></i> Restaurant</span> <span class="featured_tag">Featured</span>
 					  <span class="utf_open_now">Open Now</span>
 					  <div class="utf_listing_item_content">
@@ -88,7 +93,7 @@
 					</a> 
 				  </div>
 				  
-				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
+				  <div class="col-md-4 utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container ">
 					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-02.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Electric-Guitar"></i> Events</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
@@ -107,7 +112,7 @@
 					</a> 
 				  </div>
 				  
-				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
+				  <div class="col-md-4 utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container ">
 					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-03.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> Hotels</span>
 					  <span class="utf_closed">Closed</span>
 					  <div class="utf_listing_item_content">
@@ -127,7 +132,7 @@
 					</a> 
 				  </div>
 				  
-				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
+				  <div class="col-md-4 utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container ">
 					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-04.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Dumbbell"></i> Fitness</span>
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
@@ -147,7 +152,7 @@
 					</a> 
 				  </div>
 				  
-				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
+				  <div class="col-md-4 utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container ">
 					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-05.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Hotel"></i> Hotels</span> <span class="featured_tag">Featured</span>
 					  <span class="utf_closed">Closed</span>
 					  <div class="utf_listing_item_content">
@@ -167,7 +172,7 @@
 					</a> 
 				   </div>
 				  
-				  <div class="utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container compact">
+				  <div class="col-md-4 utf_carousel_item"> <a href="listings_single_page_1.html" class="utf_listing_item-container ">
 					<div class="utf_listing_item"> <img src="{{  URL::asset('public/images/utf_listing_item-06.jpg') }}"  alt=""> <span class="tag"><i class="im im-icon-Chef-Hat"></i> Restaurant</span>
 					  <span class="utf_open_now">Open Now</span>
 					  <div class="utf_listing_item_content">
@@ -193,7 +198,7 @@
 	   </div>
     </div>
   </section>
-  -->
+ 
   <a href="listings_grid_full_width.html" class="flip-banner parallax" data-background="{{  URL::asset('public/images/slider-bg-02.jpg')}}" data-color="#000" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">
 	  <div class="flip-banner-content">
 		<h2 class="flip-visible">Browse Listings Attractions List</h2>    

@@ -8,7 +8,7 @@
 <!-- Wrapper -->
 <div id="main_wrapper">
 
-@include('layouts.top')
+ @include('layouts.top')
   
    
  

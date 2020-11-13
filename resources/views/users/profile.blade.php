@@ -85,10 +85,10 @@
 						<label>Instagram</label>
 						<input type="text" class="input-text"  id="instagram" placeholder="http://instagram.com" value="{{ $user->instagram }}"  onchange="changing(this)">					
 					</div>
-					<div class="col-md-4">
+				<!--	<div class="col-md-4">
 						<label>Skype</label>
 						<input type="text" class="input-text"  id="skype" placeholder="https://www.skype.com" value="{{ $user->skype }}"  onchange="changing(this)">					
-					</div>
+					</div>-->
 					
 	<?php }  ?>
 				  </div>	
