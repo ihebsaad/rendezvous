@@ -41,7 +41,7 @@ class UsersController extends Controller
 	}
  
  	
-    public function perstataires()
+    public function prestatires()
     {   
 	    $cuser = auth()->user();
  
@@ -52,10 +52,27 @@ class UsersController extends Controller
 	   
 	   $users = User::where('user_type','prestataire')->get();
 
-	  return view('users.prestataires',  compact('users') );       
+	  return view('users.prestatires',  compact('users') );       
 		}     
 
 	}
+	
+	
+	    public function favoris()
+    {   
+ 
+ 	    $cuser = auth()->user();
+
+	    $idusers= DB::table('favoris')->where('client',$cuser->id)->pluck('prestataire');
+
+	   $users = User::whereIn('id',$idusers)->get();
+
+	  return view('users.prestataires',  compact('users') );       
+	    
+
+	}
+	
+	
 	
    public function dashboard()
     {
@@ -112,7 +129,8 @@ class UsersController extends Controller
 		$user_type=$cuser->user_type;
 		$user_id=$cuser->id;
 		
-		$services= Service::where('user',$user_id)->get() ;
+		 $services =\App\Service::where('user',$id)->get();
+		
  	    if(  $user_id == $id || $user_type=='admin' )
         {  	
 		$user = User::find($id);
@@ -229,13 +247,41 @@ class UsersController extends Controller
 
 	}
 	
-	     public function removevideo($id,$user)
+	     public function removevideo($id)
     {
    
 	  User::where('id', $id)->update(array('video' => ''));
 
-		  return redirect (url('/listing/'.$user.'#videos'));
+		  return redirect (url('/listing/'.$id.'#videos'));
 
 	}
+	
+	    public static function  ChampById($champ,$id)
+    {
+        $user = User::find($id);
+        if (isset($user[$champ])) {
+            return $user[$champ] ;
+        }else{return '';}
+
+    }
   
+  
+  
+     public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/users')->with('success', '  supprimé avec succès');
+    }
+
+	
+     public function remove($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/prestataires')->with('success', '  supprimé avec succès');
+    }
+	
  }

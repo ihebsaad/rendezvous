@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row slick_carousel_slider">
         <div class="col-md-12">
-          <h3 class="headline_part centered margin-bottom-45"> Most Visited Places <span>Explore the greates places in the city</span> </h3>
+          <h3 class="headline_part centered margin-bottom-45"> Nos Prestataires <span>Explorez nos prestataires et trouvez votre besoin</span> </h3>
         </div>
 		
 		<div class="row">

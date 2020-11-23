@@ -12661,10 +12661,10 @@ button.mfp-close, button.mfp-arrow {
 	-webkit-transform: translate(0, 0);
 	transform: translate(-50%, 0%);
 }
-#small-dialog .mfp-close, #dialog_signin_part, .mfp-close, .mfp-close:hover {
+#small-dialog .mfp-close, #dialog_signin_part, .mfp-close, .mfp-close:hover , .small-dialog .mfp-close{
 	color: #fff;
 }
-#dialog_signin_part .mfp-close, #small-dialog .mfp-close {
+#dialog_signin_part .mfp-close, #small-dialog .mfp-close ,.small-dialog .mfp-close {
 	color: #ff2222;
 	background-color:#fff;
 	border-radius: 30px;
@@ -12673,12 +12673,12 @@ button.mfp-close, button.mfp-arrow {
 	width: 34px;
 	height: 34px;
 }
-#dialog_signin_part .mfp-close:hover, #small-dialog .mfp-close:hover {
+#dialog_signin_part .mfp-close:hover, #small-dialog .mfp-close:hover,.small-dialog .mfp-close:hover {
 	color: #666;
 	transform: rotate(0);
 	background-color: #e4e4e4 !important;
 }
-#dialog_signin_part .mfp-close::after, #dialog_signin_part .mfp-close::before, #small-dialog .mfp-close::after, #small-dialog .mfp-close::before {
+#dialog_signin_part .mfp-close::after, #dialog_signin_part .mfp-close::before, #small-dialog .mfp-close::after, #small-dialog .mfp-close::before ,.small-dialog .mfp-close::after, .small-dialog .mfp-close::before {
 	top: 0px;
 	height: 9px;
 	font-size: 21px;
@@ -12796,14 +12796,16 @@ button.mfp-close, button.mfp-arrow {
 	box-shadow: 0 0 8px rgba(0,0,0,0.6);
 	background: black;
 }
-#small-dialog .utf_message_reply_block, #small-dialog .utf_message_reply_block button{
+#small-dialog .utf_message_reply_block, #small-dialog .utf_message_reply_block button ,
+.small-dialog .utf_message_reply_block, .small-dialog .utf_message_reply_block button{
 	text-align:center;
 	margin-right:0
 }
-#small-dialog .utf_message_reply_block button{
+#small-dialog .utf_message_reply_block button,
+.small-dialog .utf_message_reply_block button{
 	line-height:26px;
 }
-#dialog_signin_part, #small-dialog {
+#dialog_signin_part, #small-dialog, .small-dialog {
 	background: #ffffff;
 	padding:30px 20px;
 	padding-top: 0;
@@ -12817,7 +12819,7 @@ button.mfp-close, button.mfp-arrow {
 #dialog_signin_part {
 	max-width: 450px;
 }
-#dialog_signin_part span.line, #small-dialog span.line {
+#dialog_signin_part span.line, #small-dialog span.line, .small-dialog span.line {
 	padding-top: 0;
 }
 .my-mfp-zoom-in .zoom-anim-dialog {
@@ -16357,7 +16359,7 @@ a.utf_dashboard_nav_responsive i {
 	-webkit-columns: 1;
 	-moz-columns: 1;
 }
-#dialog_signin_part .mfp-close::after, #dialog_signin_part .mfp-close::before, #small-dialog .mfp-close::after, #small-dialog .mfp-close::before {
+#dialog_signin_part .mfp-close::after, #dialog_signin_part .mfp-close::before, #small-dialog .mfp-close::after, #small-dialog .mfp-close::before, .small-dialog .mfp-close::after, .small-dialog .mfp-close::before {
 	top: 3px;	
 }
 .slick-dots{
@@ -16425,12 +16427,12 @@ a.utf_dashboard_nav_responsive i {
 	left: -30px;
 	padding:20px;
 }
-#dialog_signin_part, #small-dialog {
+#dialog_signin_part, #small-dialog , .small-dialog {
 	background: #fff;
 	padding: 30px;
 	padding-top: 0;
 }
-#dialog_signin_part .mfp-close, #small-dialog .mfp-close {
+#dialog_signin_part .mfp-close, #small-dialog .mfp-close , .small-dialog .mfp-close {
 	top: 15px;
 	right: 20px;
 	width: 40px;
@@ -16502,7 +16504,7 @@ a.utf_dashboard_nav_responsive i {
 	padding-right: 80px;
 	line-height: 30Px;
 }
-#dialog_signin_part, #small-dialog {
+#dialog_signin_part, #small-dialog ,.small-dialog{
 	max-width: 90vw;
 }
 .listing-nav li a {

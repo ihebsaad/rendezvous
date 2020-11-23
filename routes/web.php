@@ -32,7 +32,7 @@ Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
-Route::get('/perstataires', 'UsersController@perstataires')->name('perstataires');
+Route::get('/prestatires', 'UsersController@prestatires')->name('prestatires');
 Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
 Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
@@ -43,10 +43,13 @@ Route::post('/users/ajoutimages','UsersController@ajoutimages')->name('users.ajo
 Route::post('/users/ajoutcouv','UsersController@ajoutcouv')->name('users.ajoutcouv');
 Route::get('/users/removeimage/{id}/{user}', 'UsersController@removeimage');
 Route::get('/users/removevideo/{id}', 'UsersController@removevideo');
+Route::get('/users/remove/{id}', 'UsersController@remove');
+Route::get('/users/destroy/{id}', 'UsersController@destroy');
 
 
 Route::post('/services/saving','ServicesController@store')->name('services.saving');
 Route::post('/services/add','ServicesController@add')->name('services.add');
+Route::post('/services/store','ServicesController@store')->name('services.store');
 Route::get('/services/add','ServicesController@add')->name('services.add');
 Route::post('/services/updating','ServicesController@updating')->name('services.updating'); 
 Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
@@ -58,6 +61,20 @@ Route::post('/faqs/add','FaqsController@add')->name('faqs.add');
 Route::get('/faqs/add','FaqsController@add')->name('faqs.add');
 Route::post('/faqs/updating','FaqsController@updating')->name('faqs.updating'); 
 Route::get('/faqs/remove/{id}/{user}', 'FaqsController@remove');
+
+Route::get('/reviews', array('as' => 'reviews','uses' => 'ReviewsController@index'));
+Route::post('/reviews/add','ReviewsController@add')->name('reviews.add');
+Route::post('/reviews/remove/{id}','ReviewsController@remove')->name('reviews.remove');
+Route::post('/reviews/addfavoris','ReviewsController@addfavoris')->name('reviews.addfavoris');
+Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris');
+Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris');
+Route::get('/favoris','UsersController@favoris')->name('favoris');
+
+
+
+Route::post('/reservations/add','ReservationsController@add')->name('reservations.add');
+Route::get('/reservations','ReservationsController@index')->name('reservations');
+Route::get('/reservations/remove/{id}','ReservationsController@remove');
 
 
 

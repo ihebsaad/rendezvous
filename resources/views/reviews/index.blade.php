@@ -4,61 +4,98 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
-  
 @include('layouts.back.menu')
  
 @section('content')
 
+  <?php 
+  use \App\Http\Controllers\ReviewsController;
+  use \App\Http\Controllers\UsersController;
+
+  ?>
  <div id="dashboard"> 
 @include('layouts.back.menu')
  
- 	<div class="utf_dashboard_content "> 
+ 	<div class="utf_dashboard_content"> 
+        
+<!--	<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
  
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
-            <th>Image</th>
-            <th>Titre</th>
-            <th>Nom</th>
-             <th>Inscription</th>
-            <th >Statut</th> 
-            <th class="no-sort">Actions</th> 
+             <th>Client</th>
+            <th>Avis</th>
+             <th  >Commentaire </th>
+			   <th>Notes </th>
+           <th class="no-sort">Actions</th> 
         </tr>
             <tr>
-                <th></th>
-                <th>Titre</th>
-                <th>Nom</th>
-                 <th>Inscription</th>
-                  <th>Statut</th> 
-               <th> </th> 
-              </tr>
+                 <th>Client</th>
+                <th>Avis</th>
+                <th>Commentaire</th>
+                 <th>Notes </th>
+				 <th></th>
+               </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
+            @foreach($reviews as $review)
                 <tr> 
-					<td>
-				<?php if( $user->logo!=''){?>
-				<img id='img-logo' src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" style="max-width:80px" />
-				<?php } else {?>
-				<img id='img-logo' src="<?php echo  URL::asset('storage/images/client-avatar1.png');?>" style="max-width:80px" />
+				<?php 
+				$stars='';
+				if($review->note ==1){$stars='<i class="sl sl-icon-star" ></i>';} 
+				if($review->note ==2){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
+				if($review->note ==3){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
+				if($review->note ==4){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
+				if($review->note ==5){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
 				
-				<?php }  ?>
+				?>
+                    <td><?php echo UsersController::ChampById('name',$review->client).' '.UsersController::ChampById('lastname',$review->client) ;?></td>
+                     <td> <?php echo $stars?> </td>
+                    <td>{{$review->commentaire}}</td>
+                   <td>Qualité : {{$review->note_qualite}} | Service : {{$review->note_service  }} | Prix : {{$review->note_prix  }} | Espace : {{$review->note_espace  }} | Emplacement : {{$review->note_emplacement  }}  </td>
+                  <td>  
+           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReviewsController@remove', $review->id)}}"><i class="fa fa-remove"></i></a>
 
-					</td>
-					<td>{{$user->titre }}</td>
-                     <td><a href="{{action('UsersController@profile', $user['id'])}}" >{{$user->name .' '.$user->lastname }}</a></td>
-                    <td><?php $createdat=  date('d/m/Y H:i', strtotime($user->created_at )); echo $createdat; ?></td>
-                 <td></td>
-				 <td>  @can('isAdmin')
-                       <a  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('UsersController@remove', $user['id'])}}" class="btn btn-danger btn-sm btn-responsive " role="button" data-toggle="tooltip" data-tooltip="tooltip" data-placement="bottom" data-original-title="Supprimer" >
-                            <span class="fa fa-fw fa-trash-alt"></span> Supprimer
-                        </a> 
-                      @endcan</td> 
+                      </td> 
                 </tr>
             @endforeach
             </tbody>
         </table>
+  
  
+ 
+ 	        <div id="small-dialog" class=" zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter une catégorie</h3>
+          </div>
+		 <div class="utf_signin_form style_one">
+			
+		 <div class="fm-input ">
+							  <input type="text" placeholder="nom *" id="nom">
+							</div>
+							<div class="fm-input  ">
+							  <input type="text"   placeholder="description"  id="description">
+							</div>
+
+						 <div class="fm-input  "> 
+							 <label>Catégorie mère</label>
+								<select type="text" value="" id="parent"  >
+							  <option></option>
+							  <?php foreach ($reviews as $cat){ 
+							   echo '<option value="'.$cat->id.'">'.$cat->nom.'</option>';
+
+							    }?>
+							  </select>
+							</div>
+		 <a class="button" id="add" style="text-align:center">Ajouter</a>
+		 </div>		  
+		 </div>		
+		 
+		 
+  
+			 
+			
+			
 <!--
 <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/jquery.dataTables.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/dataTables.bootstrap.js') }}" ></script>
@@ -76,7 +113,8 @@
     <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/vfs_fonts.js') }}" ></script>
 -->
 
- </div>
+</div>
+</div>
 
 
    
@@ -95,8 +133,9 @@
 
             var table = $('#mytable').DataTable({
                 orderCellsTop: true,
+               // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
                 dom: 'Blfrtip',
-                responsive:true,
+				responsive:true,
                 buttons: [
 
                     'csv', 'excel', 'pdf', 'print'
@@ -182,6 +221,39 @@
  
         });
 
+		
+		
+		   $('#add').click(function(){
+                 var nom = $('#nom').val();
+                var description = $('#description').val();
+                var parent = $('#parent').val();
+
+				if ((nom != '')  )
+                {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('reviews.add') }}",
+                        method:"POST",
+                        data:{nom:nom,description:description,parent:parent , _token:_token},
+                        success:function(data){
+ 
+					     review =parseInt(data);
+						 if(review>0)
+						{ 
+ 						$( ".mfp-close" ).trigger( "click" );
+
+ 	
+ 						}
+						
+					    location.reload();
+  
+                        }
+                    });
+                }else{
+                    // alert('ERROR');
+                }
+            });
+			
     </script>
 	
  @endsection

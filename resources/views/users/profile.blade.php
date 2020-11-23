@@ -26,12 +26,28 @@
             <h4 class="gray"><i class="sl sl-icon-user"></i> Détails</h4>
             <div class="utf_dashboard_list_box-static"> 
           <?php if($user->user_type =='client'){ ?>				
-		   <div class="edit-profile-photo"> <img src="images/user-avatar.jpg" alt="">
-                <div class="change-photo-btn">
+		   <div class="row"> 
+		   <div class="col-md-6 col-lg-6"> 
+		   <div class="edit-profile-photo "> 
+		   	<?php if($user->logo!=''){  ?>
+			 <img id='img-logo' src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" style="max-width:150px;margin:20px 20px 20px 20px" />
+				<?php  } else{?>
+		   <img src="<?php echo  URL::asset('storage/images/user-avatar.jpg');?>" alt="" /> 
+				<?php } ?>
+
+              </div>
+              </div>
+			  <div class="col-lg-6 col-md-6" >
+			  <div class=" ">
                   <div class="photoUpload"> <span><i class="fa fa-upload"></i> Télécharger une Photo</span>
-                    <input type="file" class="upload" />
-                  </div>
+					<form action="{{ route('users.ajoutimage') }}" class="dropzone"  id="dropzoneFrom">
+					  {{ csrf_field() }}
+					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+					</form>
+
+					</div>
                 </div>
+              </div>
               </div>
 				<?php } ?>
 			    {{ csrf_field() }}
@@ -92,6 +108,13 @@
 					
 	<?php }  ?>
 				  </div>	
+				  
+	 
+ 			  
+				  
+				  
+				  
+				  
               </div>
           <!--    <button class="button preview btn_center_item margin-top-15">Enregistrer</button>-->
             </div>
@@ -101,6 +124,20 @@
 		
       </div>
     </div>
+	
+	
+	<script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

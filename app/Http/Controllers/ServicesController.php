@@ -15,7 +15,11 @@ class ServicesController extends Controller
 {
 
 
- 
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	
   
   /*   public function addg (Request $request)
@@ -42,12 +46,25 @@ class ServicesController extends Controller
 		
 	public function add(Request $request)
 	{
+		 $name='';
+ 		 if($request->file('photo')!=null)
+		{$image=$request->file('photo');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+			$date=date('d-m-Y-H-i-s');
+		//$name=$name.'-service-'.$date ;
+		
+		
+         $image->move($path,  $name );
+		}
+		
 		$user=$request->get('user');
 		 $service  = new Service([
               'user' => $request->get('user'),
               'nom' => $request->get('nom'),
               'description' => $request->get('description'),
               'prix' => $request->get('prix'),
+              'thumb' => $name,
            ]);
  
         $service->save();
@@ -60,14 +77,27 @@ class ServicesController extends Controller
 	
 	public function store(Request $request)
 	{
+				$name='';
+		if($request->file('photo')!=null)
+		{$image=$request->file('photo');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+			$date=date('d-m-Y-H-i-s');
+		$name=$name.'-service-'.$date ;
+         $image->move($path,  $name );
+		}
+		             $user =  $request->get('user');
+
 		     $service  = new Service([
               'user' => $request->get('user'),
+              'nom' => $request->get('nom'),
               'description' => $request->get('description'),
               'prix' => $request->get('prix'),
+              'thumb' => $name,
            ]);
 
         $service->save();
-        //return redirect('/garanties')->with('success', ' ajouté  ');
+       return redirect('/listing/'.$user.'#services')->with('success', ' ajouté  ');
 
  	}
   
@@ -94,5 +124,14 @@ class ServicesController extends Controller
 	}
 	
 	
-  
+  	    public static function  ChampById($champ,$id)
+    {
+        $service = Service::find($id);
+        if (isset($service[$champ])) {
+            return $service[$champ] ;
+        }else{return '';}
+
+    }
+	
+	
  }

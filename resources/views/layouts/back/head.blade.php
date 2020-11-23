@@ -15,8 +15,8 @@
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&display=swap&subset=latin-ext,vietnamese" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
- <script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" ></script> 
- <link href="{{ URL::asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+<script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" ></script> 
+<!-- <link href="{{ URL::asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">-->
   {{ csrf_field() }}
 
 <style>

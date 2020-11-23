@@ -60,7 +60,7 @@
  $user_type =$User->user_type;
  ?>
             <div class="utf_user_menu">
-              <div class="utf_user_name"><span><img src="{{ URL::asset('public/images/dashboard-avatar.jpg')}}" alt=""></span>Bonjour, {{$user->username}}!</div>
+              <div class="utf_user_name"><span><img src="{{ URL::asset('public/images/avatar.png')}}" alt=""></span>Bonjour, {{$user->username}}!</div>
               <ul>
                 <li><a  href="{{ route('dashboard') }}"><i class="sl sl-icon-layers"></i> Tableau de bord</a></li>
 				 <?php if($user_type=='admin' || $user_type=='client'  ){ ?> 

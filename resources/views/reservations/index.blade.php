@@ -4,61 +4,64 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
-  
 @include('layouts.back.menu')
  
 @section('content')
 
+  <?php 
+  
+  use \App\Http\Controllers\ReservationsController;
+  use \App\Http\Controllers\UsersController;
+  use \App\Http\Controllers\ServicesController;
+
+          $User = auth()->user();
+
+  ?>
  <div id="dashboard"> 
 @include('layouts.back.menu')
  
- 	<div class="utf_dashboard_content "> 
+ 	<div class="utf_dashboard_content"> 
+        
+	<!--<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
  
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
-            <th>Image</th>
-            <th>Titre</th>
-            <th>Nom</th>
-             <th>Inscription</th>
-            <th >Statut</th> 
-            <th class="no-sort">Actions</th> 
+           <?php if($User->user_type!='client') {?>  <th>Client</th><?php }?>
+          <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
+            <th>Date</th>
+             <th  >Service</th>
+           <th class="no-sort">Actions</th> 
         </tr>
             <tr>
-                <th></th>
-                <th>Titre</th>
-                <th>Nom</th>
-                 <th>Inscription</th>
-                  <th>Statut</th> 
-               <th> </th> 
+   <?php if($User->user_type!='client') {?>  <th>Client</th><?php }?>
+ <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
+                  <th>Date</th>
+                 <th>Service</th>
+				 <th></th> 
               </tr>
-            </thead>
-            <tbody>
-            @foreach($users as $user)
+          </thead>
+          <tbody>
+            @foreach($reservations as $reservation)
                 <tr> 
-					<td>
-				<?php if( $user->logo!=''){?>
-				<img id='img-logo' src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" style="max-width:80px" />
-				<?php } else {?>
-				<img id='img-logo' src="<?php echo  URL::asset('storage/images/client-avatar1.png');?>" style="max-width:80px" />
-				
-				<?php }  ?>
+ <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client) ;?></td><?php }?>
+  <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
+                     <td>{{$reservation->date  }} {{$reservation->heure  }} </td>
+                    <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo ServicesController::ChampById('prix',$reservation->service); ?> €)<small></td>
+                   <td>  
+           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@remove', $reservation->id)}}"><i class="fa fa-remove"></i></a>
 
-					</td>
-					<td>{{$user->titre }}</td>
-                     <td><a href="{{action('UsersController@profile', $user['id'])}}" >{{$user->name .' '.$user->lastname }}</a></td>
-                    <td><?php $createdat=  date('d/m/Y H:i', strtotime($user->created_at )); echo $createdat; ?></td>
-                 <td></td>
-				 <td>  @can('isAdmin')
-                       <a  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('UsersController@remove', $user['id'])}}" class="btn btn-danger btn-sm btn-responsive " role="button" data-toggle="tooltip" data-tooltip="tooltip" data-placement="bottom" data-original-title="Supprimer" >
-                            <span class="fa fa-fw fa-trash-alt"></span> Supprimer
-                        </a> 
-                      @endcan</td> 
+                      </td> 
                 </tr>
             @endforeach
             </tbody>
         </table>
- 
+  
+  
+  
+			 
+			
+			
 <!--
 <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/jquery.dataTables.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/dataTables.bootstrap.js') }}" ></script>
@@ -76,7 +79,8 @@
     <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/vfs_fonts.js') }}" ></script>
 -->
 
- </div>
+</div>
+</div>
 
 
    
@@ -95,8 +99,9 @@
 
             var table = $('#mytable').DataTable({
                 orderCellsTop: true,
+               // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
                 dom: 'Blfrtip',
-                responsive:true,
+				responsive:true,
                 buttons: [
 
                     'csv', 'excel', 'pdf', 'print'
@@ -182,6 +187,39 @@
  
         });
 
+		
+		
+		   $('#add').click(function(){
+                 var nom = $('#nom').val();
+                var description = $('#description').val();
+                var parent = $('#parent').val();
+
+				if ((nom != '')  )
+                {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('reservations.add') }}",
+                        method:"POST",
+                        data:{nom:nom,description:description,parent:parent , _token:_token},
+                        success:function(data){
+ 
+					     reservation =parseInt(data);
+						 if(reservation>0)
+						{ 
+ 						$( ".mfp-close" ).trigger( "click" );
+
+ 	
+ 						}
+						
+					    location.reload();
+  
+                        }
+                    });
+                }else{
+                    // alert('ERROR');
+                }
+            });
+			
     </script>
 	
  @endsection

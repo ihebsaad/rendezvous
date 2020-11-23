@@ -17,37 +17,44 @@
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
-            <th>ID</th>
+            <th></th>
             <th>Nom</th>
              <th>Inscription</th>
           <!--  <th>Qualification</th>
             <th class="no-sort">Statistiques</th>
             <th >Statut</th>-->
-           <!-- <th class="no-sort">Actions</th>-->
+           <th class="no-sort">Actions</th> 
         </tr>
             <tr>
-                <th>ID</th>
+                <th></th>
                 <th>Nom</th>
                  <th>Inscription</th>
             <!--    <th>Qualification</th>
                 <th class="no-sort">Statistiques</th>
                 <th>Statut</th>-->
-              <!--  <th> </th>-->
+               <th> </th> 
               </tr>
             </thead>
             <tbody>
             @foreach($users as $user)
                 <tr> 
-                    <td>{{$user->id}}</td>
-                     <td><a href="{{action('UsersController@profile', $user['id'])}}" >{{$user->name .' '.$user->lastname }}</a></td>
+ 			 <td>
+				<?php if( $user->logo!=''){?>
+				<img id='img-logo' src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" style="max-width:80px" />
+				<?php } else {?>
+				<img id='img-logo' src="<?php echo  URL::asset('storage/images/client-avatar1.png');?>" style="max-width:80px" />
+				
+				<?php }  ?>
+
+					</td>
+                      <td><a href="{{action('UsersController@profile', $user['id'])}}" >{{$user->name .' '.$user->lastname }}</a></td>
                     <td><?php $createdat=  date('d/m/Y H:i', strtotime($user->created_at )); echo $createdat; ?></td>
-				 
-                
-               <!--    <td>  @can('isAdmin')
+				  
+                <td>  @can('isAdmin')
                        <a  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('UsersController@destroy', $user['id'])}}" class="btn btn-danger btn-sm btn-responsive " role="button" data-toggle="tooltip" data-tooltip="tooltip" data-placement="bottom" data-original-title="Supprimer" >
                             <span class="fa fa-fw fa-trash-alt"></span> Supprimer
                         </a> 
-                      @endcan</td>-->
+                      @endcan</td> 
                 </tr>
             @endforeach
             </tbody>
