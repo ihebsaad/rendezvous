@@ -109,7 +109,7 @@ class PaymentController extends Controller
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 		\Session::put('error', 'Paiement échouée');
-            return Redirect::route('/');
+            return Redirect::route('/pay');
 		}
 		$payment = Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
@@ -118,10 +118,10 @@ class PaymentController extends Controller
         $result = $payment->execute($execution, $this->_api_context);
 		if ($result->getState() == 'approved') {
 		\Session::put('success', 'Paiement avec succès');
-            return Redirect::route('/');
+            return Redirect::route('/pay');
 		}
 		\Session::put('error', 'Paiement échoué');
-        return Redirect::route('/');
+        return Redirect::route('/pay');
 	}
 	
 	
