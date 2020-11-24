@@ -87,3 +87,8 @@ Route::post('/categories/updating','CategoriesController@updating')->name('categ
 Route::get('/categories/remove/{id}', 'CategoriesController@remove');
 Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser'); 
 
+
+Route::get('/pay','PaymentController@pay')->name('pay');
+Route::post('/paypal','PaymentController@payWithpaypal')->name('paypal');
+Route::get('/status','PaymentController@getPaymentStatus')->name('status');
+

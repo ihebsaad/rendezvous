@@ -84,7 +84,7 @@
 						<textarea name="decription" id="adresse" cols="30" rows="3"  onchange="changing(this)">{{ $user->description }}</textarea>
 					</div>
 					
-	<?php if($user->user_type =='client'){ ?>				
+	<?php /* if($user->user_type =='client'){ ?>				
 					<div class="col-md-4">
 						<label>Facebook</label>						
 						<input type="text" class="input-text" id="fb" placeholder="https://www.facebook.com" value="{{ $user->fb }}"  onchange="changing(this)">
@@ -106,7 +106,7 @@
 						<input type="text" class="input-text"  id="skype" placeholder="https://www.skype.com" value="{{ $user->skype }}"  onchange="changing(this)">					
 					</div>-->
 					
-	<?php }  ?>
+	<?php } */ ?>
 				  </div>	
 				  
 	 
