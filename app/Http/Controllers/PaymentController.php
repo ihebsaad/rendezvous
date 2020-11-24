@@ -76,11 +76,15 @@ class PaymentController extends Controller
 		$payment->create($this->_api_context);
 		} catch (\PayPal\Exception\PPConnectionException $ex) {
 		if (\Config::get('app.debug')) {
-		\Session::put('error', 'Session expirée');
-                return Redirect::route('pay');
+	//	\Session::put('error', 'Session expirée');
+     //           return Redirect::route('pay');
+				return redirect('/pay')->with('error', ' Session expirée  ');
+
 		} else {
-		\Session::put('error', 'erreur survenue');
-                return Redirect::route('pay');
+		// \Session::put('error', 'erreur survenue');
+        //        return Redirect::route('pay');
+			 return redirect('/pay')->with('error', ' erreur survenue  ');
+
 		}
 		}
 		foreach ($payment->getLinks() as $link) {
@@ -95,8 +99,10 @@ class PaymentController extends Controller
 		/** redirect to paypal **/
             return Redirect::away($redirect_url);
 		}
-		\Session::put('error', 'Erreur survenue');
-        return Redirect::route('pay');
+	//	\Session::put('error', 'Erreur survenue');
+    //    return Redirect::route('pay');
+	 return redirect('/pay')->with('error', ' erreur survenue  ');
+
 	}
  
  
@@ -108,8 +114,10 @@ class PaymentController extends Controller
 		/** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-		\Session::put('error', 'Paiement échouée');
-            return Redirect::route('/pay');
+		//\Session::put('error', 'Paiement échouée');
+       //     return Redirect::route('/pay');
+	     return redirect('/pay')->with('error', ' Paiement échouée  ');
+
 		}
 		$payment = Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
@@ -117,11 +125,15 @@ class PaymentController extends Controller
 		/**Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
 		if ($result->getState() == 'approved') {
-		\Session::put('success', 'Paiement avec succès');
-            return Redirect::route('/pay');
+		//\Session::put('success', 'Paiement avec succès');
+        //    return Redirect::route('/pay');
+		  return redirect('/pay/')->with('success', ' Paiement avec succès  ');
+
 		}
 		\Session::put('error', 'Paiement échoué');
-        return Redirect::route('/pay');
+      //  return Redirect::route('/pay');
+	    return redirect('/pay/')->with('error', ' Paiement échoué  ');
+
 	}
 	
 	
