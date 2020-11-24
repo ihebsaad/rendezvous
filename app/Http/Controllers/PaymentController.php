@@ -114,7 +114,7 @@ class PaymentController extends Controller
 		/** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-		//\Session::put('error', 'Paiement échouée');
+		 \Session::put('error', 'Paiement échouée');
        //     return Redirect::route('/pay');
 	     return redirect('/pay')->with('error', ' Paiement échouée  ');
 
@@ -125,7 +125,7 @@ class PaymentController extends Controller
 		/**Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
 		if ($result->getState() == 'approved') {
-		//\Session::put('success', 'Paiement avec succès');
+		 \Session::put('success', 'Paiement avec succès');
         //    return Redirect::route('/pay');
 		  return redirect('/pay/')->with('success', ' Paiement avec succès  ');
 
