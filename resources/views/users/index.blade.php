@@ -85,7 +85,7 @@
     <style>.searchfield{width:100px;}</style>
 <script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" type="text/javascript"></script> 
 
-<br><script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
+<br><script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
     <script type="text/javascript">
         $(document).ready(function() {
 

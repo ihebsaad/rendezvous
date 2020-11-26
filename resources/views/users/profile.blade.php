@@ -99,7 +99,7 @@
 					</div>
 					<div class="col-md-4">
 						<label>Instagram</label>
-						<input type="text" class="input-text"  id="instagram" placeholder="http://instagram.com" value="{{ $user->instagram }}"  onchange="changing(this)">					
+						<input type="text" class="input-text"  id="instagram" placeholder="https://instagram.com" value="{{ $user->instagram }}"  onchange="changing(this)">					
 					</div>
 				<!--	<div class="col-md-4">
 						<label>Skype</label>
