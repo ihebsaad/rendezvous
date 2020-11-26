@@ -141,7 +141,7 @@ class PaymentController extends Controller
 		$payment->create($this->_api_context);
 		} catch (\PayPal\Exception\PayPalConnectionException $ex) {
 		if (\Config::get('app.debug')) {
-	//	\Session::put('error', 'Session expirée');
+	 	\Session::put('error', 'Session expirée');
      //           return Redirect::route('pay');
 				return redirect('/reservations')->with('error', ' Session expirée  ');
 
