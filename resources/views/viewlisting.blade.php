@@ -855,7 +855,7 @@
  </script>
  
 <!-- Maps --> 
-<script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> 
+<script src="://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> 
 <script  src="{{ URL::asset('public/scripts/infobox.min.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/markerclusterer.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/maps.js')}}"   ></script> 

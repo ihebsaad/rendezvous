@@ -711,7 +711,7 @@ function geocodeAddress(geocoder, resultsMap) {
 					</div>
 					<div class="col-md-4">
 						<label>Instagram</label>
-						<input type="text" class="input-text"  id="instagram" placeholder="http://instagram.com" value="{{ $user->instagram }}"  onchange="changing(this)">					
+						<input type="text" class="input-text"  id="instagram" placeholder="https://instagram.com" value="{{ $user->instagram }}"  onchange="changing(this)">					
 					</div>
 				<!--	<div class="col-md-4">
 						<label>Skype</label>
@@ -863,7 +863,7 @@ function geocodeAddress(geocoder, resultsMap) {
  
  
 <!-- Maps --> 
-<!-- <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>   -->
+<!-- <script src="https://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>   -->
 <!--<script src="{{  URL::asset('public/scripts/infobox.min.js') }}"></script> -->
 <script src="{{  URL::asset('public/scripts/markerclusterer.js') }}"></script> 
 <!--<script src="{{  URL::asset('public/scripts/maps.js') }}"></script>-->
@@ -1043,7 +1043,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                          service =parseInt(data);
 						 if(service>0)
 						{
-							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+nom+'"   ></div><div class="fm-input pricing-ingredients"><input type="text" value="'+description+'" ></div><div class="fm-input pricing-price"><i class="data-unit">€</i><input type="text"    data-unit="€"  value="'+prix+'"   ></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="http://$_SERVER[HTTP_HOST]/services/remove/'+service+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
+							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+nom+'"   ></div><div class="fm-input pricing-ingredients"><input type="text" value="'+description+'" ></div><div class="fm-input pricing-price"><i class="data-unit">€</i><input type="text"    data-unit="€"  value="'+prix+'"   ></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="https://$_SERVER[HTTP_HOST]/services/remove/'+service+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
  						            newElem.appendTo('table#utf_pricing_list_section');
 
 					 	//$('#small-dialog').modal('hide');
@@ -1081,7 +1081,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                          faq =parseInt(data);
 						 if(faq>0)
 						{
-							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+question+'"   ></div><div class="fm-input pricing-ingredients"><textarea >'+reponse+'</textarea></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="http://$_SERVER[HTTP_HOST]/services/remove/'+faq+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
+							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+question+'"   ></div><div class="fm-input pricing-ingredients"><textarea >'+reponse+'</textarea></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="https://$_SERVER[HTTP_HOST]/services/remove/'+faq+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
  						            newElem.appendTo('table#utf_faq_list_section');
 
 					 	//$('#small-dialog').modal('hide');
