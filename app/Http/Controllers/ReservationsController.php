@@ -25,9 +25,16 @@ class ReservationsController extends Controller
     {
 		
 		  $cuser = auth()->user();
- 
+		if($cuser->user_type=='prestataire' ){
         $reservations = Reservation::where('prestataire',$cuser->id)->get();
-
+		}
+		if($cuser->user_type=='client' ){
+        $reservations = Reservation::where('client',$cuser->id)->get();
+		}
+		
+		if($cuser->user_type=='admin' ){
+        $reservations = Reservation::get();
+		}		
         return view('reservations.index', compact('reservations'));
 
 
