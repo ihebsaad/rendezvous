@@ -130,10 +130,13 @@ class PaymentController extends Controller
             ->setItemList($item_list)
             ->setDescription($desc);
 		$redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('statusres',['reservation'=>$reservation])) /** Specify return URL **/
-            ->setCancelUrl(URL::route('statusres',['reservation'=>$reservation]));
-		$payment = new Payment();
-        $payment->setIntent('Sale')
+     //   $redirect_urls->setReturnUrl(URL::route('statusres',['reservation'=>$reservation])) /** Specify return URL **/
+      //      ->setCancelUrl(URL::route('statusres',['reservation'=>$reservation]));
+			$redirect_urls->setReturnUrl(URL::route('status')) /** Specify return URL **/
+            ->setCancelUrl(URL::route('status'));
+	
+			$payment = new Payment();
+			$payment->setIntent('Sale')
             ->setPayer($payer)
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
