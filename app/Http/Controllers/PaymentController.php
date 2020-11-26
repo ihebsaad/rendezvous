@@ -1,4 +1,4 @@
-<?php
+Ôªø<?php
 
 namespace App\Http\Controllers;
 
@@ -77,9 +77,9 @@ class PaymentController extends Controller
 		$payment->create($this->_api_context);
 		} catch (\PayPal\Exception\PPConnectionException $ex) {
 		if (\Config::get('app.debug')) {
-	//	\Session::put('error', 'Session expirÈe');
+	//	\Session::put('error', 'Session expir√©e');
      //           return Redirect::route('pay');
-				return redirect('/pay')->with('error', ' Session expirÈe  ');
+				return redirect('/pay')->with('error', ' Session expir√©e  ');
 
 		} else {
 		// \Session::put('error', 'erreur survenue');
@@ -142,9 +142,9 @@ class PaymentController extends Controller
 		$payment->create($this->_api_context);
 		} catch (\PayPal\Exception\PayPalConnectionException $ex) {
 		if (\Config::get('app.debug')) {
-	//	\Session::put('error', 'Session expirÈe');
+	//	\Session::put('error', 'Session expir√©e');
      //           return Redirect::route('pay');
-				return redirect('/reservations')->with('error', ' Session expirÈe  ');
+				return redirect('/reservations')->with('error', ' Session expir√©e  ');
 
 		} else {
 		// \Session::put('error', 'erreur survenue');
@@ -181,9 +181,9 @@ class PaymentController extends Controller
 		/** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-		 \Session::put('error', 'Paiement ÈchouÈe');
+		 \Session::put('error', 'Paiement √©chou√©e');
        //     return Redirect::route('/pay');
-	     return redirect('/pay')->with('error', ' Paiement ÈchouÈe  ');
+	     return redirect('/pay')->with('error', ' Paiement √©chou√©e  ');
 
 		}
 		$payment = Payment::get($payment_id, $this->_api_context);
@@ -192,14 +192,14 @@ class PaymentController extends Controller
 		/**Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
 		if ($result->getState() == 'approved') {
-		 \Session::put('success', 'Paiement avec succËs');
+		 \Session::put('success', 'Paiement avec succ√®s');
         //    return Redirect::route('/pay');
-		  return redirect('/pay/')->with('success', ' Paiement avec succËs  ');
+		  return redirect('/pay/')->with('success', ' Paiement avec succ√®s  ');
 
 		}
-		\Session::put('error', 'Paiement ÈchouÈ');
+		\Session::put('error', 'Paiement √©chou√©');
       //  return Redirect::route('/pay');
-	    return redirect('/pay/')->with('error', ' Paiement ÈchouÈ  ');
+	    return redirect('/pay/')->with('error', ' Paiement √©chou√©  ');
 
 	}
 	
@@ -213,9 +213,9 @@ class PaymentController extends Controller
 		/** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-		 \Session::put('error', 'Paiement ÈchouÈe');
+		 \Session::put('error', 'Paiement √©chou√©e');
        //     return Redirect::route('/pay');
-	     return redirect('/reservations')->with('error', ' Paiement ÈchouÈe  ');
+	     return redirect('/reservations')->with('error', ' Paiement √©chou√©e  ');
 
 		}
 		$payment = Payment::get($payment_id, $this->_api_context);
@@ -224,17 +224,17 @@ class PaymentController extends Controller
 		/**Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
 		if ($result->getState() == 'approved') {
-		 \Session::put('success', 'Paiement avec succËs');
+		 \Session::put('success', 'Paiement avec succ√®s');
         //    return Redirect::route('/pay');
 		
-		// changement statut rÈservation
+		// changement statut r√©servation
 		Reservation::where('id',$reservation)->update(array('paiement' => 1));
-		  return redirect('/reservations/')->with('success', ' Paiement avec succËs  ');
+		  return redirect('/reservations/')->with('success', ' Paiement avec succ√®s  ');
 
 		}
-		\Session::put('error', 'Paiement ÈchouÈ');
+		\Session::put('error', 'Paiement √©chou√©');
       //  return Redirect::route('/pay');
-	    return redirect('/reservations/')->with('error', ' Paiement ÈchouÈ  ');
+	    return redirect('/reservations/')->with('error', ' Paiement √©chou√©  ');
 
 	}
 	

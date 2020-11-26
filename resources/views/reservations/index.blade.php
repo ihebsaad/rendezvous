@@ -71,10 +71,10 @@
 			<?php } ?> 
 			</td>
 
-			  <td>  
+		<!--	  <td>  
            <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@remove', $reservation->id)}}"><i class="fa fa-remove"></i></a>
 
-                      </td> 
+                      </td> -->
                 </tr>
             @endforeach
             </tbody>
