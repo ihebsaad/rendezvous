@@ -56,9 +56,9 @@
 				  <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
 				{{ csrf_field() }}
 				
- 				<input class="form-control " name="reservation" type="hidden" value="<?php $reservation->id ; ?>"  >       
- 				<input class="form-control " name="montant" type="hidden" value="<?php $montant ; ?>"  >       
- 				<input class="form-control " name="description" type="hidden" value="<?php $description ; ?>"  >       
+ 				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >       
+ 				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
+ 				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >       
 				<button class="button ">Payer</button> 
 				</form>
 			<?php }else{
