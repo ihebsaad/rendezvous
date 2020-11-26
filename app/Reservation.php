@@ -9,6 +9,6 @@ class Reservation extends Authenticatable
  
    
     protected $fillable = [
-   'client', 'prestataire' ,'date','heure','rappel','statut','remarques','service','enfants','adultes'      ];
+   'client', 'prestataire' ,'date','heure','rappel','statut','remarques','service','enfants','adultes' ,'paiement'      ];
  
 }

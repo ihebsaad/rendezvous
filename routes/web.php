@@ -91,5 +91,8 @@ Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->
 Route::post('/pay','PaymentController@pay')->name('pay');
 Route::get('/pay','PaymentController@pay')->name('pay');
 Route::post('/paypal','PaymentController@payWithpaypal')->name('paypal');
+Route::post('/payreservation','PaymentController@payreservation')->name('payreservation');
 Route::get('/status','PaymentController@getPaymentStatus')->name('status');
+Route::get('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
+//Route::post('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 

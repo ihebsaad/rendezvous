@@ -43,12 +43,35 @@
           </thead>
           <tbody>
             @foreach($reservations as $reservation)
+			<?php $montant=ServicesController::ChampById('prix',$reservation->service);?>
+			<?php $description=ServicesController::ChampById('nom',$reservation->service);?>
                 <tr> 
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client) ;?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      <td>{{$reservation->date  }} {{$reservation->heure  }} </td>
-                    <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo ServicesController::ChampById('prix',$reservation->service); ?> €)<small></td>
-                   <td>  
+                    <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
+            <?php if($User->user_type ='client' ) {?>   
+            <?php if( $reservation->paiement==0) {?>   
+			<td>
+				  <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
+				{{ csrf_field() }}
+				
+ 				<input class="form-control " name="service" type="hidden" value="<?php $service ; ?>"  >       
+ 				<input class="form-control " name="montant" type="hidden" value="<?php $montant ; ?>"  >       
+ 				<input class="form-control " name="description" type="hidden" value="<?php $description ; ?>"  >       
+				<button class="button ">Payer</button> 
+				</form>
+			<?php }else{
+				if( $reservation->paiement==1) {
+					echo '<span class="success">  Payé   </span>';
+				}
+			} ?> 
+			
+			
+			<?php } ?> 
+			</td>
+
+			  <td>  
            <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@remove', $reservation->id)}}"><i class="fa fa-remove"></i></a>
 
                       </td> 

@@ -1,9 +1,10 @@
  @extends('layouts.frontlayout')
  
+ <!--  https://medium.com/justlaravel/how-to-integrate-paypal-payment-gateway-in-laravel-695063599449   -->
+ 
  @section('content')
  <div class="container">
  <div style="max-width:600px"> 
- 
         @if ($errors->any())
              <div class="alert alert-danger">
                  <ul>
