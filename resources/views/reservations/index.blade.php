@@ -50,9 +50,10 @@
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      <td>{{$reservation->date  }} {{$reservation->heure  }} </td>
                     <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
-            <?php if($User->user_type ='client' ) {?>   
-            <?php if( $reservation->paiement==0) {?>   
+     
 			<td>
+			   <?php if($User->user_type ='client' ) {?>   
+            <?php if( $reservation->paiement==0) {?> 
 				  <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
 				{{ csrf_field() }}
 				
