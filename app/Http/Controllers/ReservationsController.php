@@ -146,13 +146,17 @@ class ReservationsController extends Controller
 	public function sendMail($to,$sujet,$contenu){
 
 		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
-        $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
-        $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+        $swiftTransport->setUsername('ihebs009@gmail.com'); //adresse email
+       // $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+        $swiftTransport->setPassword('isaad2014'); // mot de passe email
+       // $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);
-		$from=\Config::get('mail.from.address') ;
-		$fromname=\Config::get('mail.from.name') ;
+		$from='ihebs009@gmail.com' ;
+		//$from=\Config::get('mail.from.address') ;
+		$fromname='Prenez un Rendez vous' ;
+		//$fromname=\Config::get('mail.from.name') ;
 		Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
          $message
                  ->to($to)
