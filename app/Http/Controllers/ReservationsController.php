@@ -39,7 +39,7 @@ class ReservationsController extends Controller
         $reservations = Reservation::get();
 		}	
 
-		$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
+		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
         return view('reservations.index', compact('reservations'));
 
 
@@ -152,7 +152,7 @@ class ReservationsController extends Controller
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);
 		$from=\Config::get('mail.from.address') ;
-		$fromname=\Config::get('mail.username') ;
+		$fromname=\Config::get('mail.from.name') ;
 		
 		Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
          $message
