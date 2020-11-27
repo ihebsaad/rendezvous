@@ -152,9 +152,8 @@ class ReservationsController extends Controller
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);
 		$from=\Config::get('mail.from.address') ;
-		$fromname=\Config::get('mail.from.name') ;
+		$fromname=\Config::get('mail.username') ;
 		
-		dd( \Config::get('mail.username'). ' '.\Config::get('mail.password').'  '. \Config::get('mail.from.address').'  '.\Config::get('mail.from.name'));
 		Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
          $message
                  ->to($to)
