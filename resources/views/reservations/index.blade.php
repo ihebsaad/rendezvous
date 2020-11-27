@@ -63,11 +63,12 @@ background-color:#a0d468;
 		<?php  if($reservation->statut==0){$statut='<span class="warning" style="font-weight:blod;padding:10px 20px 10px 20px;background-color:#000000">En attente</span>';}  ?>
 			<?php  if($reservation->statut==1){$statut='<span class="success" style="font-weight:blod;padding:10px 20px 10px 20px;background-color:#a0d468">Validée</span>';}  ?>
 			<?php  if($reservation->statut==2){$statut='<span class="danger" style="font-weight:blod;padding:10px 20px 10px 20px;background-color:red">Annulée</span>';}  ?>
-			<?php echo $statut;  
+			<?php 
 			
 				if( $reservation->paiement==1) {
-					echo '<br><span class="success">  Payée   </span>';
+					$statut.= '  <span class="success">  Payée   </span>';
 				}
+				echo $statut;  
 	?>
 	</td> 
 		 
