@@ -35,6 +35,36 @@
   }
   ?>
       
+	  
+	  		<?php 
+	    $reviews= \App\Review::where('prestataire',$user->id)->get();
+        $countrev= count($reviews);
+
+		  $moy=$moy_qualite=$moy_service=$moy_prix=$moy_emplacement=$moy_espace=0;
+		$total=0; $total_qualite=$total_service=$total_prix=$total_emplacement=$total_espace=0;
+		if($countrev>0){
+		
+		foreach( $reviews as $review)
+		{
+			$total=$total+($review->note);
+			$total_qualite=$total_qualite+($review->note_qualite);
+			$total_service=$total_service+($review->note_service);
+			$total_prix=$total_prix+($review->note_prix);
+			$total_espace=$total_espace+($review->note_espace);
+			$total_emplacement=$total_emplacement+($review->note_emplacement);
+			 
+		}
+		
+		$moy=$total/$countrev; 
+		$moy_qualite=$total_qualite/$countrev; 
+		$moy_service=$total_service/$countrev; 
+		$moy_prix=$total_prix/$countrev; 
+		$moy_espace=$total_espace/$countrev; 
+		$moy_emplacement=$total_emplacement/$countrev; 
+		}
+		?>
+		
+		
   <div class="container">
     <div class="row utf_sticky_main_wrapper">
       <div class="col-lg-8 col-md-8">
@@ -46,9 +76,11 @@
 		   </h2>
              <span> <a href="#utf_listing_location" class="listing-address"> <i class="sl sl-icon-location"></i> {{$user->ville}}</a> </span>			
 			<span class="call_now"><i class="sl sl-icon-phone"></i> {{$user->tel}}</span>
-            <div class="utf_star_rating_section" data-rating="4.5">
-              <div class="utf_counter_star_rating">(4.5) / (14 Reviews)</div>
+         <?php if(  $countrev  >0 ){?> 
+		 <div class="utf_star_rating_section" data-rating="<?php echo $moy; ?>">
+              <div class="utf_counter_star_rating">(<?php echo $moy; ?>) / (<?php echo $countrev; ?> Avis)</div>
             </div>
+			<?php } ?>
 		 <h2>	<?php	$categories_user = \DB::table('categories_user')->where('user',$user->id)->get();
 					$services =\App\Service::where('user',$user->id)->get();
 					foreach($categories_user as $cat){   $categorie =\App\Categorie::find( $cat->categorie);  
@@ -152,36 +184,10 @@
           <h3 class="utf_listing_headline_part margin-top-60 margin-bottom-40">Emplacement</h3>
           <div id="utf_single_listing_map_block">
             <div id="utf_single_listingmap" data-latitude="{{$user->latitude}}" data-longitude="{{$user->longitude}}" data-map-icon="im im-icon-Marker"></div>
-            <a href="#" id="utf_street_view_btn">Street View</a> 
+            <a href="#" id="utf_street_view_btn">vue sur la rue</a> 
 		  </div>
         </div>
-		<?php 
-		$reviews= \App\Review::where('prestataire',$user->id)->get();
-		$countrev= count($reviews);
-		 $moy=$moy_qualite=$moy_service=$moy_prix=$moy_emplacement=$moy_espace=0;
-		$total=0; $total_qualite=$total_service=$total_prix=$total_emplacement=$total_espace=0;
-		if($countrev>0){
-		
-		foreach( $reviews as $review)
-		{
-			$total=$total+($review->note);
-			$total_qualite=$total_qualite+($review->note_qualite);
-			$total_service=$total_service+($review->note_service);
-			$total_prix=$total_prix+($review->note_prix);
-			$total_espace=$total_espace+($review->note_espace);
-			$total_emplacement=$total_emplacement+($review->note_emplacement);
-			 
-		}
-		
-		$moy=$total/$countrev; 
-		$moy_qualite=$total_qualite/$countrev; 
-		$moy_service=$total_service/$countrev; 
-		$moy_prix=$total_prix/$countrev; 
-		$moy_espace=$total_espace/$countrev; 
-		$moy_emplacement=$total_emplacement/$countrev; 
-		}
-		?>
-		
+
         <div id="utf_listing_reviews" class="utf_listing_section" >
           <h3 class="utf_listing_headline_part margin-top-75 margin-bottom-20">Avis <span>(<?php echo $countrev;?>)</span></h3>
           <div class="clearfix"></div>
@@ -338,7 +344,7 @@
               </div>
             </div>-->
           </div>
- 		  <input type="hidden" id="client" name="client" value="<?php echo $User->id;?>" >
+ 		<?php if (isset($User)){?>  <input type="hidden" id="client" name="client" value="<?php echo $User->id;?>" ><?php } ?>
             <fieldset>
               <div class="row">
             <!--    <div class="col-md-4">
@@ -382,7 +388,7 @@
       </style>
       <!-- Sidebar -->
       <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
-	<?php if( $user->id== $User->id) {?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }?>
+	<?php if( isset($User) && $user->id== $User->id) {?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }?>
 
       <?php if($user->statut==1){?>  <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-check"></i> Disponible</div><?php  } else{ ?>
      <div class="unavailable-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-close"></i> Non Disponible</div>
@@ -452,14 +458,22 @@
 			 </div>
 		  </div>		  
 		  </div>	
-          <a class="utf_progress_button button fullwidth_block margin-top-5" style="color:white" id="reserver">Réserver</a>
-		  <?php if($User->user_type=='client'){  ?>  
+       <?php if (isset($User)){?> 
+	   <a class="utf_progress_button button fullwidth_block margin-top-5" style="color:white" id="reserver">Réserver</a>
+		
+			<?php if($User->user_type=='client'){  ?>  
 			<?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
-		<button id="addfavoris" class="like-button add_to_wishlist"><span class="like-icon"></span><div id="mesfavoris">Ajouter aux favoris</div></button>
+			<button id="addfavoris" class="like-button add_to_wishlist"><span class="like-icon"></span><div id="mesfavoris">Ajouter aux favoris</div></button>
 			<?php }else{?>
-		 <button id="addfavoris" class="like-button add_to_wishlist liked"><span class="like-icon liked"></span><div id="mesfavoris">Retirer de favoris</div></button>
+			<button id="addfavoris" class="like-button add_to_wishlist liked"><span class="like-icon liked"></span><div id="mesfavoris">Retirer de favoris</div></button>
 			<?php } ?>
-						<?php } ?>
+			 <?php } ?>
+		 <?php }else{  ?>
+		 
+		 <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a>
+	 
+			 
+	<?php	 } ?>
 			
           <div class="clearfix"></div>
         </div>
@@ -803,6 +817,7 @@
 	</section>
   
  -->
+ <?php if (isset($User)){?> 
  <script>
  			
 			$('#addfavoris').click(function( ){
@@ -853,7 +868,7 @@
             });
 			
  </script>
- 
+ <?php }?> 
 <!-- Maps --> 
 <script src="://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> 
 <script  src="{{ URL::asset('public/scripts/infobox.min.js')}}"   ></script> 

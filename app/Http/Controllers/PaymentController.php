@@ -228,6 +228,10 @@ class PaymentController extends Controller
 		
 		// changement statut réservation
 		Reservation::where('id',$reservation)->update(array('paiement' => 1));
+		// Email au client
+		
+		// email à l'admin
+		
 		  return redirect('/reservations/')->with('success', ' Paiement avec succès  ');
 
 		}

@@ -11,6 +11,9 @@ use Session;
 use \App\User;
 use \App\Reservation;
 
+ use Swift_Mailer;
+ use Mail;
+
 class ReservationsController extends Controller
 {
 
@@ -34,7 +37,9 @@ class ReservationsController extends Controller
 		
 		if($cuser->user_type=='admin' ){
         $reservations = Reservation::get();
-		}		
+		}	
+
+		$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
         return view('reservations.index', compact('reservations'));
 
 
@@ -58,6 +63,11 @@ class ReservationsController extends Controller
             ]);
  
         $reservation->save();
+		
+		// Email admin
+		
+		// mail Client
+		
     return $reservation->id;
 		 
 
@@ -78,7 +88,7 @@ class ReservationsController extends Controller
 
     public function updating(Request $request)
     {
-        $id= $request->get('user');
+        $id= $request->get('reservation');
         $champ= strval($request->get('champ'));
         $val= strval($request->get('val'));
     
@@ -107,4 +117,54 @@ class ReservationsController extends Controller
     }
 	
   
+  
+      public function valider($id)
+    {
+     
+          Reservation::where('id', $id)->update(array('statut' => 1 ));
+		  
+		  // envoi email validation
+		  
+       return redirect('/reservations')->with('success', 'Réservation Validée  ');
+
+    }
+
+	  
+      public function annuler($id)
+    {
+ 		
+        Reservation::where('id', $id)->update(array('statut' => 2 ));
+		
+	  // envoi email annulation
+
+       return redirect('/reservations')->with('success', 'Réservation Anunulée  ');
+
+    }
+	
+	
+	
+	public function sendMail($to,$sujet,$contenu){
+
+		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
+        $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+        $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+        $swiftMailer = new Swift_Mailer($swiftTransport);
+		Mail::setSwiftMailer($swiftMailer);
+		$from=\Config::get('mail.from.address') ;
+		$fromname=\Config::get('mail.from.name') ;
+		Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
+         $message
+                 ->to($to)
+                    ->subject($sujet)
+                       ->setBody($contenu, 'text/html')
+                    ->setFrom([$from => $fromname]);         
+
+			});
+	  
+	}
+	
+	
+	
+	
  }

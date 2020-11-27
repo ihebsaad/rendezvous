@@ -13,7 +13,7 @@
 		<div class="row">
 			<div class="col-md-12">
  				<div class=" row utf_dots_nav"> 
-				
+				 <?php  $User= auth()->user();  ?>
 				<?php
 				$listings=\App\User::where('user_type','prestataire')->get();
  
@@ -22,10 +22,25 @@
                     $categories_user = \DB::table('categories_user')->where('user',$listing->id)->get();
 					$services =\App\Service::where('user',$listing->id)->get();
 					
-			//	 echo json_encode($categories_user);
-				
+  $reviews= \App\Review::where('prestataire',$listing->id)->get();
+        $countrev= count($reviews);
+
+		  $moy=$moy_qualite=$moy_service=$moy_prix=$moy_emplacement=$moy_espace=0;
+		$total=0;  
+		if($countrev>0){
+		
+		foreach( $reviews as $review)
+		{
+			$total=$total+($review->note);
+	  
+		}
+		
+		$moy=$total/$countrev; 
+		}		
 				?>
-				  <div class="col-md-4 utf_carousel_item" style="min-width:400px"> <a href="{{route('viewlisting',['id'=> $listing->id] )}}" class="utf_listing_item-container ">
+				  <div class="col-md-4 utf_carousel_item" style="min-width:400px">
+				  <div class="utf_listing_item-container ">
+					<a  href="{{route('viewlisting',['id'=> $listing->id] )}}">
 					<div class="utf_listing_item"> <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="" style="max-width:450px">
 				<?php $top=15; $i=0;?>
 				<?php foreach($categories_user as $cat){ 
@@ -52,12 +67,28 @@
 						<span><i class="sl sl-icon-phone"></i> {{$listing->tel}}</span>											
 					  </div>					  
 					</div>
-					<div class="utf_star_rating_section" data-rating="4.5">
-						<div class="utf_counter_star_rating">(4.5)</div>
+					</a>
+				<?php if ($countrev >0){?> 	
+				<div class="utf_star_rating_section" data-rating="<?php echo $moy;?>"> 
+						<div class="utf_counter_star_rating"><?php echo $moy;?></div>
+						<?php }else{ ?>
+					<div class="utf_star_rating_section" style="height:55px" > 		
+							
+						<?php } ?>
 						<!--<span class="utf_view_count"><i class="fa fa-eye"></i> 822+</span>-->
-						<span class="like-icon"></span>
+					<?php if (isset($User)){?> 	
+
+			<?php if($User->user_type=='client'){  ?>  
+			<?php $countf= DB::table('favoris')->where('prestataire',$listing->id)->where('client',$User->id)->count(); if($countf==0) {?>	
+			 <span id="fav-<?php echo $listing->id;?>" onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon"></span>  
+			<?php }else{?>
+			 <span id="fav-<?php echo $listing->id;?>"  onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon liked"></span>   
+			<?php } ?>
+			 <?php } ?>
+			 
+					<?php }?>
 					</div>
-					</a> 
+					</div> 
 				  </div>
 		 <?php }  //foreach $listings  ?>
 				  
@@ -169,5 +200,32 @@
     </div>
   </section>
  
+  <?php if (isset($User)){?> 
+ <script>
+ 			
+			function addfavoris(prestataire){
+                
+					    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('reviews.addfavoris') }}",
+                        method:"POST",
+                        data:{prestataire:prestataire,client:<?php echo $User->id;?>  , _token:_token},
+                        success:function(data){
+ 
+				     if(parseInt(data)==0) { 
+					 $(this).addClass('liked');
+					 }
+					 else{
+					  $(this).removeClass('liked');
+					 }
+ 
+                        }
+                    });
+               
+            } 
+	  
+			
+ </script>
+ <?php }?> 
  
   @endsection('content')

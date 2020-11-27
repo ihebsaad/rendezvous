@@ -34,12 +34,23 @@ body{background-color:lightgrey;}
                                 @endif
 								
                   </p>
-                  <div class="utf_row_form utf_form_wide_block form_forgot_part"> <span class="lost_password fl_left"> 
+                  <div class="utf_row_form utf_form_wide_block form_forgot_part"> 
+				  	    <span class="lost_password  fl_left "> 
+				    <a style="color:white" class="btn btn-link" href="{{ route('register') }}">
+                      Nouveau? Inscription ici
+                     </a>
+					 </span>
+				  </div>
+                  <div class="utf_row_form utf_form_wide_block form_forgot_part"> 
+				   
+				   <span class="lost_password fl_left"> 
+				
 				  @if (Route::has('password.request'))
                                     <a style="color:white" class="btn btn-link" href="{{ route('password.request') }}">
                                         Mot de passe oublié?
                                     </a>
-                    @endif </span>
+                    @endif 
+					</span>
                     <div class="checkboxes fl_right">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

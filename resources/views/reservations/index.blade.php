@@ -7,7 +7,14 @@
 @include('layouts.back.menu')
  
 @section('content')
-
+<style>
+.success{
+	 padding:10px 20px 10px 20px;
+}
+.button-success{
+background-color:#a0d468;	
+}
+</style>
   <?php 
   
   use \App\Http\Controllers\ReservationsController;
@@ -31,6 +38,7 @@
           <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
             <th>Date</th>
              <th  >Service</th>
+             <th  >Statut</th>
            <th class="no-sort">Actions</th> 
         </tr>
             <tr>
@@ -38,6 +46,7 @@
  <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
                   <th>Date</th>
                  <th>Service</th>
+				 <th>Statut</th> 
 				 <th></th> 
               </tr>
           </thead>
@@ -50,9 +59,20 @@
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      <td>{{$reservation->date  }} {{$reservation->heure  }} </td>
                     <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
-     
+ 	<td>
+		<?php  if($reservation->statut==0){$statut='<b style="color:#000000">En attente</b>';}  ?>
+			<?php  if($reservation->statut==1){$statut='<b style="color:#a0d468">Validée</b>';}  ?>
+			<?php  if($reservation->statut==2){$statut='<b style="color:red">Annulée</b>';}  ?>
+			<?php echo $statut;  
+			
+				if( $reservation->paiement==1) {
+					echo '<br><span class="success">  Payée   </span>';
+				}
+	?>
+	</td> 
+		 
 			<td>
-			   <?php if($User->user_type ='client' ) {?>   
+			   <?php if($User->user_type =='client' ) {?>   
             <?php if( $reservation->paiement==0) {?> 
 				  <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
 				{{ csrf_field() }}
@@ -64,12 +84,20 @@
 				</form>
 			<?php }else{
 				if( $reservation->paiement==1) {
-					echo '<span class="success">  Payé   </span>';
+					echo '<span class="success">  Payée   </span>';
 				}
 			} ?> 
-			
-			
+		
 			<?php } ?> 
+		   <?php if($User->user_type =='prestataire' ) {   
+
+		  if($reservation->statut==0){	?> 
+		  <a  class="button button-success"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@valider', $reservation->id)}}"><i class="fa fa-check"></i>  Valider</a>
+			 <a  class="button button-danger"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@annuler', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler</a>
+
+						      <?php } ?> 
+			 <?php } ?> 
+
 			</td>
 
 		<!--	  <td>  
