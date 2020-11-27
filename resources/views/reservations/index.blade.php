@@ -9,10 +9,12 @@
 @section('content')
 <style>
 .success{
-	 padding:10px 20px 10px 20px;
-}
+ 
 .button-success{
 background-color:#a0d468;	
+}
+.statut{
+	color:black;font-weight:blod;padding:10px 20px 10px 20px;margin-top:8px;
 }
 </style>
   <?php 
@@ -60,13 +62,13 @@ background-color:#a0d468;
                      <td>{{$reservation->date  }} {{$reservation->heure  }} </td>
                     <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
  	<td>
-		<?php  if($reservation->statut==0){$statut='<span class="warning" style="font-weight:blod;padding:10px 20px 10px 20px;background-color:#000000">En attente</span>';}  ?>
-			<?php  if($reservation->statut==1){$statut='<span class="success" style="font-weight:blod;padding:10px 20px 10px 20px;background-color:#a0d468">Validée</span>';}  ?>
-			<?php  if($reservation->statut==2){$statut='<span class="danger" style="font-weight:blod;padding:10px 20px 10px 20px;background-color:red">Annulée</span>';}  ?>
+		<?php  if($reservation->statut==0){$statut='<span class="warning statut" style="background-color:#000000">En attente</span>';}  ?>
+			<?php  if($reservation->statut==1){$statut='<span class="success statut" style=" background-color:#a0d468">Validée</span>';}  ?>
+			<?php  if($reservation->statut==2){$statut='<span class="danger statut" style=" background-color:red">Annulée</span>';}  ?>
 			<?php 
 			
 				if( $reservation->paiement==1) {
-					$statut.= '  <span class="success">  Payée   </span>';
+					$statut.= '  <span class="success statut">  Payée   </span>';
 				}
 				echo $statut;  
 	?>
