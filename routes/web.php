@@ -71,14 +71,12 @@ Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('r
 Route::get('/favoris','UsersController@favoris')->name('favoris');
 
 
-
 Route::post('/reservations/add','ReservationsController@add')->name('reservations.add');
 Route::get('/reservations','ReservationsController@index')->name('reservations');
 Route::get('/reservations/remove/{id}','ReservationsController@remove');
 Route::get('/reservations/valider/{id}','ReservationsController@valider');
 Route::get('/reservations/annuler/{id}','ReservationsController@annuler');
-
-
+Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage');
 
 
 Route::get('/categories', array('as' => 'categories','uses' => 'CategoriesController@index'));

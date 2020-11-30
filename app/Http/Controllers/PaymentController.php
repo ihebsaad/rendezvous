@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Reservation;
+use \App\Payment;
+use \App\Alerte;
  
 class PaymentController extends Controller
 {
@@ -228,9 +230,50 @@ class PaymentController extends Controller
 		
 		// changement statut réservation
 		Reservation::where('id',$reservation)->update(array('paiement' => 1));
-		// Email au client
 		
-		// email à l'admin
+		
+		 // Email
+		$Reservation = \App\Reservation::where('id' ,$reservation)->get();
+		$client = $Reservation->client;
+		$prestataire = $Reservation->prestataire;
+		$serviceid = $Reservation->service;
+		
+		$service = \App\Service::where('id' ,$serviceid)->get();
+		
+		// Email au client
+		$message='';
+		$message.='Réservation payée avec succès ';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
+		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+		
+	    $this->sendMail(trim($client->email),'Réservation payée',$message)	;
+    	
+		//enregistrement alerte
+    	$alerte = new Alerte([
+             'user' => $client->id,
+			 'titre'=>'Réservation payée',						 
+             'details' => $message,
+         ]);	
+		 $alerte->save();
+ 
+		// Email au prestataire
+		$message='';
+		$message.='Réservation payée';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
+		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+		
+	    $this->sendMail(trim($prestataire->email),'Réservation payée',$message)	;
+    	//enregistrement alerte
+		$alerte = new Alerte([
+             'user' => $prestataire->id,
+			 'titre'=>'Réservation payée',						 
+             'details' => $message,
+         ]);	
+		 $alerte->save();		
 		
 		  return redirect('/reservations/')->with('success', ' Paiement avec succès  ');
 
@@ -240,6 +283,36 @@ class PaymentController extends Controller
 	    return redirect('/reservations/')->with('error', ' Paiement échoué  ');
 
 	}
+	
+	
+	
+	public function sendMail($to,$sujet,$contenu){
+
+		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
+        $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+        $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+        $swiftMailer = new Swift_Mailer($swiftTransport);
+		Mail::setSwiftMailer($swiftMailer);
+		$from=\Config::get('mail.from.address') ;
+		$fromname=\Config::get('mail.from.name') ;
+		
+		Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
+         $message
+                 ->to($to)
+                    ->subject($sujet)
+                       ->setBody($contenu, 'text/html')
+                    ->setFrom([$from => $fromname]);         
+
+			});
+	  
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

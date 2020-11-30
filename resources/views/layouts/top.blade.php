@@ -49,10 +49,10 @@
 				<!--  <a href="javascript:void(0);" class="social_bt facebook_btn"><i class="fa fa-facebook"></i>Login avec Facebook</a>
 				  <a href="javascript:void(0);" class="social_bt google_btn"><i class="fa fa-google-plus"></i>Login avec Google</a>	-->
                   <p class="utf_row_form utf_form_wide_block">
-                       <input   id="email" type="email" class="input-text form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus  placeholder="Email">
- 					            @if ($errors->has('email'))
+                       <input   id="email" type="text" class="input-text form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus  placeholder="Email">
+			            @if ($errors->has('email')  || $errors->has('username') )
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('email') }} {{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                   </p>

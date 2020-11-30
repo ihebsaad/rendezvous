@@ -568,23 +568,35 @@
         </div>
 		-->
 		<div class="utf_box_widget opening-hours margin-top-35">
-          <h3><i class="sl sl-icon-envelope-open"></i> Contacter</h3>
+          <h3><i class="sl sl-icon-envelope-open"></i> Contacter le prestataire</h3>
           <form id="contactform">
+		      {{ csrf_field() }}    
+
+			<input name="to" type="hidden"  value="{{$user->to}}" id="to">                
             <div class="row">              
               <div class="col-md-12">                
-                  <input name="name" type="text" placeholder="Nom" required="">                
+                  <input name="emetteur" type="text" placeholder="Nom" required   id="emetteur">                
               </div>
+			  </div>            
+              <div class="row">              
               <div class="col-md-12">                
-                  <input name="email" type="email" placeholder="Email" required="">                
-              </div>          
+                  <input name="email" type="email" placeholder="Email"   id="email" >                
+              </div> 
+              </div>
+			  
+			  <div class="row">              
 			  <div class="col-md-12">                
-                  <input name="phone" type="text" placeholder="Tel" required="">                
-              </div>		
+                  <input name="tel" type="text" placeholder="Tel"    id="tel">                
+              </div>
+              </div>
+			  
+			   <div class="row">              
 			  <div class="col-md-12">
-				  <textarea name="comments" cols="40" rows="2" id="message" placeholder="Votre Message" required=""></textarea>
+				  <textarea name="message" cols="40" rows="2" id="contenu" style="display:block" placeholder="Votre Message"   ></textarea>
 			  </div>
-            </div>            
-            <input type="submit" class="submit button" id="submit" value="Envoyer Message">
+			  </div>
+			 <br>
+            <button type="button" class="submit button" id="sendmail" value="Envoyer Message" onclick="alert()"  style="" >Envoyer le message</button>
           </form>
         </div>
 	 
@@ -866,6 +878,29 @@
                     });
                
             });
+			
+			
+		 function sendmail( ) {
+ 		             var _token = $('input[name="_token"]').val();
+ 
+                    var emetteur = $('#emetteur').val();
+                    var email = $('#email').val();
+                    var tel = $('#tel').val();
+                    var contenu = $('#contenu').val();
+  					alert(emetteur+' '+email+' '+tel+' '+contenu);
+                    $.ajax({
+                        url:"{{ route('reservations.sendmessage') }}",
+                        method:"POST",
+                        data:{prestataire:<?php echo $user->id;?>,emetteur:emetteur , email:email, contenu:contenu, tel:tel , _token:_token},
+                        success:function(data){
+ 
+							alert('envoyé');
+							document.getElementById("contactform").reset();
+
+                        }
+                    });
+		
+		} 
 			
  </script>
  <?php }?> 

@@ -46,8 +46,8 @@ div.dataTables_wrapper div.dataTables_length ,  {
     color: white;
     margin: 10px;
 	}
-/*	.paginate_button a :hover{color:white!important;}
-	 
+ 	.paginate_button   :hover{color:white!important;}
+/*	 
   .sorting   :after , .sorting_asc :after  ,  .sorting_desc :after , .sorting_asc_disabled :after  ,.sorting_desc_disabled :after {content:''!important;}
 	
 table.dataTable thead .sorting { background: url('/Content/images/sort_both.png') no-repeat center right; }
