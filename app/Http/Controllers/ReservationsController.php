@@ -51,7 +51,7 @@ class ReservationsController extends Controller
 		
 	public function add(Request $request)
 	{
-		$user=$request->get('user');
+ 		$user=$request->get('user');
 		 $reservation  = new Reservation([
               'client' => $request->get('client'),
               'prestataire' => $request->get('prestataire'),
@@ -66,14 +66,14 @@ class ReservationsController extends Controller
  
         $reservation->save();
 		
-		$client = \App\User::where('id' ,$request->get('client'))->get();
-		$prestataire = \App\User::where('id' ,$request->get('prestataire'))->get();
-		$service = \App\Service::where('id' ,$request->get('service'))->get();
+		$client = \App\User::find($request->get('client'));
+		$prestataire = \App\User::find($request->get('prestataire'));
+		$service = \App\Service::find($request->get('service'));
 		
 		// Email prestataire
 		$message='';
-		$message.='Vous avez une nouvelle réservation <br>Veillez la confirmer dans votre Tableau de bord.';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
+		$message.='Vous avez une nouvelle réservation.<br>Veillez la confirmer dans votre tableau de bord.<br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$request->get('date').'Heure : '.$request->get('heure').'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
@@ -89,8 +89,8 @@ class ReservationsController extends Controller
 		 
 		// Email Client
 		$message='';
-		$message.='Votre réservation est enregsitrée avec succès. Veillez attendre la confirmation du prestatire.<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
+		$message.='Votre réservation est enregsitrée avec succès.<br>Veillez attendre la confirmation du prestatire.<br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$request->get('date').'Heure : '.$request->get('heure').'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';

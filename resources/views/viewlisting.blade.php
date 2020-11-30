@@ -128,12 +128,16 @@
         
         <div id="utf_listing_amenities" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Services</h3>
+          <!--<ul class="utf_listing_features checkboxes margin-top-0">-->
           <ul class="utf_listing_features checkboxes margin-top-0">
 		  <?php foreach ($services as $service)
 		  {
 		    echo '<li>  ';
-			 if($service->thumb!=''){ echo '<img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="max-width:100px"  />  '; }
-			echo $service->nom.'  -  <small><b>'.$service->prix.' €</b></small>' ;  ?>
+			 
+			echo $service->nom.'  -  <small><b>'.$service->prix.' €</b></small>' ;
+			if($service->thumb!=''){ echo '<br><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="max-width:100px;margin-bottom:15px;"  /> '; }
+			?>
+			
            <!-- <li>Air Conditioned</li>-->
 	 <?php } ?>      
           </ul>
@@ -421,7 +425,7 @@
 			<label>Heure:</label>
 			</div>
 			 <div class="col-lg-6  ">
-				<input style="margin-left:15px;min-width:180px" type="time"    id="heure"	>
+				<input style="margin-left:15px;min-width:180px" type="time"  required  id="heure"	>
 		     </div>
 		   </div>
           </div>
@@ -454,6 +458,7 @@
 			 <option value="30">Avant 30 minutes</option>
 			 <option value="60">Avant une heure</option>
 			 <option value="120">Deux heures</option>
+			 <option value="1440">Un jour</option>
 			 </select>
 			 </div>
 		  </div>		  

@@ -62,7 +62,7 @@ background-color:#a0d468;
                      <td>{{$reservation->date  }} {{$reservation->heure  }} </td>
                     <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
  	<td>
-		<?php  if($reservation->statut==0){$statut='<span class="warning statut" style="color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;background-color:#000000">En attente</span>';}  ?>
+		<?php  if($reservation->statut==0){$statut='<span class="warning statut" style="color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;color:#000000">En attente</span>';}  ?>
 			<?php  if($reservation->statut==1){$statut='<span class="success statut" style="color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px background-color:#a0d468">Validée</span>';}  ?>
 			<?php  if($reservation->statut==2){$statut='<span class="danger statut" style="	color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;background-color:red">Annulée</span>';}  ?>
 			<?php 
