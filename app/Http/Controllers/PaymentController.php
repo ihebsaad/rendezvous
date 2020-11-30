@@ -252,6 +252,7 @@ class PaymentController extends Controller
 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
+		dd(trim($client->email).'+'.trim($prestataire->prestataire));
 	    $this->sendMail(trim($client->email),'Réservation payée',$message)	;
     	
 		//enregistrement alerte
