@@ -83,7 +83,7 @@ background-color:#a0d468;
  				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >       
  				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >       
-				<button class="button ">Payer</button> 
+		<?php	if( $reservation->statut <2) { ?> 	<button class="button ">Payer</button> <?php  } ?> 
 				</form>
 			<?php }else{
 				if( $reservation->paiement==1) {

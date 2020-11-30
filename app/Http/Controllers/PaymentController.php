@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Reservation;
-use \App\Payment;
 use \App\Alerte;
  
 class PaymentController extends Controller
@@ -187,7 +186,7 @@ class PaymentController extends Controller
 	     return redirect('/pay')->with('error', ' Paiement échouée  ');
 
 		}
-		$payment = Payment::get($payment_id, $this->_api_context);
+		$payment = \App\Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
         $execution->setPayerId(Input::get('PayerID'));
 		/**Execute the payment **/
@@ -219,7 +218,7 @@ class PaymentController extends Controller
 	     return redirect('/reservations')->with('error', ' Paiement échouée  ');
 
 		}
-		$payment = Payment::get($payment_id, $this->_api_context);
+		$payment = \App\Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
         $execution->setPayerId(Input::get('PayerID'));
 		/**Execute the payment **/
