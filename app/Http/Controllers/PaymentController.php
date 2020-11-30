@@ -233,8 +233,9 @@ class PaymentController extends Controller
 		
 		 // Email
 		$Reservation = \App\Reservation::find( $reservation);
-		$client = $Reservation->client;
-		$prestataire = $Reservation->prestataire;
+		
+ 		$client =  \App\Reservation::find($Reservation->client);
+		$prestataire =  \App\Reservation::find($Reservation->prestataire);
 		$serviceid = $Reservation->service;
 		
 		$service = \App\Service::find( $serviceid) ;
