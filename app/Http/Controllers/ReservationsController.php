@@ -159,6 +159,7 @@ class ReservationsController extends Controller
      
           Reservation::where('id', $id)->update(array('statut' => 1 ));
 		  $reservation = \App\Reservation::find($id);
+		  $service = \App\Service::find($reservation->service);
 		  $client = \App\User::find( $reservation->client );
 
 		// Email prestataire
@@ -189,7 +190,8 @@ class ReservationsController extends Controller
 		
 	  // envoi email annulation
 		$reservation = \App\Reservation::find($id) ;
-		  $client = \App\User::find( $reservation->client );
+	    $service = \App\Service::find($reservation->service);
+        $client = \App\User::find( $reservation->client );
 
 		// Email prestataire
 		$message='';
