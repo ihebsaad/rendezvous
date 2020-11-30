@@ -186,7 +186,7 @@ class PaymentController extends Controller
 	     return redirect('/pay')->with('error', ' Paiement échouée  ');
 
 		}
-		$payment = \App\Payment::get($payment_id, $this->_api_context);
+		$payment = Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
         $execution->setPayerId(Input::get('PayerID'));
 		/**Execute the payment **/
@@ -218,7 +218,7 @@ class PaymentController extends Controller
 	     return redirect('/reservations')->with('error', ' Paiement échouée  ');
 
 		}
-		$payment = \App\Payment::get($payment_id, $this->_api_context);
+		$payment = Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
         $execution->setPayerId(Input::get('PayerID'));
 		/**Execute the payment **/

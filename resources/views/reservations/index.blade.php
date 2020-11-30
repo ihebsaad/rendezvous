@@ -85,11 +85,7 @@ background-color:#a0d468;
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >       
 		<?php	if( $reservation->statut <2) { ?> 	<button class="button ">Payer</button> <?php  } ?> 
 				</form>
-			<?php }else{
-				if( $reservation->paiement==1) {
-					echo '<span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;" class="success">  Payée   </span>';
-				}
-			} ?> 
+			<?php } ?> 
 		
 			<?php } ?> 
 		   <?php if($User->user_type =='prestataire' ) {   
