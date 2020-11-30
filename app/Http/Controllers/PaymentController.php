@@ -26,6 +26,10 @@ use Session;
 use \App\User;
 use \App\Reservation;
 use \App\Alerte;
+
+ 
+ use Swift_Mailer;
+ use Mail;
  
 class PaymentController extends Controller
 {
@@ -275,7 +279,7 @@ class PaymentController extends Controller
          ]);	
 		 $alerte->save();		
 		
-		  return redirect('/reservations/')->with('success', ' Paiement avec succès  ');
+		  return redirect('/reservations/')->with('success', ' Paiement effectué avec succès  ');
 
 		}
 		\Session::put('error', 'Paiement échoué');
