@@ -158,12 +158,12 @@ class ReservationsController extends Controller
     {
      
           Reservation::where('id', $id)->update(array('statut' => 1 ));
-		  $reservation = \App\User::where('id' ,$id)->get();
-		  $client = \App\User::where('id' ,$reservation->client )->get();
+		  $reservation = \App\Reservation::find($id);
+		  $client = \App\User::find( $reservation->client );
 
 		// Email prestataire
 		$message='';
-		$message.='Vtre rendez vous est confirmé par le prestataire.<br>';
+		$message.='Votre rendez vous est confirmé par le prestataire.<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
 		$message.='<b>Date :</b> '.$request->get('date').'Heure : '.$request->get('heure').'<br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
@@ -188,8 +188,8 @@ class ReservationsController extends Controller
         Reservation::where('id', $id)->update(array('statut' => 2 ));
 		
 	  // envoi email annulation
-		$reservation = \App\User::where('id' ,$id)->get();
-		  $client = \App\User::where('id' ,$reservation->client )->get();
+		$reservation = \App\Reservation::find($id) ;
+		  $client = \App\User::find( $reservation->client );
 
 		// Email prestataire
 		$message='';

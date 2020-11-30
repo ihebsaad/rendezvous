@@ -233,12 +233,12 @@ class PaymentController extends Controller
 		
 		
 		 // Email
-		$Reservation = \App\Reservation::where('id' ,$reservation)->get();
+		$Reservation = \App\Reservation::find( $reservation);
 		$client = $Reservation->client;
 		$prestataire = $Reservation->prestataire;
 		$serviceid = $Reservation->service;
 		
-		$service = \App\Service::where('id' ,$serviceid)->get();
+		$service = \App\Service::find( $serviceid) ;
 		
 		// Email au client
 		$message='';
