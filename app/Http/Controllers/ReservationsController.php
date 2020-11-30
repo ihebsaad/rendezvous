@@ -29,7 +29,7 @@ class ReservationsController extends Controller
     public function index()
     {
 		
-		  $cuser = auth()->user();
+		$cuser = auth()->user();
 		if($cuser->user_type=='prestataire' ){
         $reservations = Reservation::where('prestataire',$cuser->id)->get();
 		}
@@ -74,7 +74,7 @@ class ReservationsController extends Controller
 		$message='';
 		$message.='Vous avez une nouvelle réservation.<br>Veillez la confirmer dans votre tableau de bord.<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-		$message.='<b>Date :</b> '.$request->get('date').'Heure : '.$request->get('heure').'<br>';
+		$message.='<b>Date :</b> '.$request->get('date').' - <b>Heure :</b> '.$request->get('heure').'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
@@ -91,7 +91,7 @@ class ReservationsController extends Controller
 		$message='';
 		$message.='Votre réservation est enregsitrée avec succès.<br>Veillez attendre la confirmation du prestatire.<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-		$message.='<b>Date :</b> '.$request->get('date').'Heure : '.$request->get('heure').'<br>';
+		$message.='<b>Date :</b> '.$request->get('date').'<b>Heure :</b> '.$request->get('heure').'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 		
@@ -165,8 +165,8 @@ class ReservationsController extends Controller
 		// Email prestataire
 		$message='';
 		$message.='Votre rendez vous est confirmé par le prestataire.<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
-		$message.='<b>Date :</b> '.$reservation->date .' - Heure : '.$reservation->heure.'<br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>Date :</b> '.$reservation->date .' - <b>Heure :</b> '.$reservation->heure.'<br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
 	    $this->sendMail(trim($client->email),'Réservation validée',$message)	;
@@ -195,9 +195,9 @@ class ReservationsController extends Controller
 
 		// Email prestataire
 		$message='';
-		$message.='Vtre rendez vous est annulée par le prestataire.<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
-		$message.='<b>Date :</b> '.$reservation->date.' - Heure : '.$reservation->heure .'<br>';
+		$message.='Votre rendez vous est annulée par le prestataire.<br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>Date :</b> '.$reservation->date.' - <b>Heure :</b> '.$reservation->heure .'<br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
 	    $this->sendMail(trim($client->email),'Réservation annulée',$message)	;

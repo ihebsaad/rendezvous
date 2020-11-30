@@ -38,7 +38,7 @@ background-color:#a0d468;
         <tr id="headtable">
            <?php if($User->user_type!='client') {?>  <th>Client</th><?php }?>
           <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
-            <th>Date</th>
+            <th style="width:10%">Date</th>
              <th  >Service</th>
              <th  >Statut</th>
            <th class="no-sort">Actions</th> 
@@ -46,7 +46,7 @@ background-color:#a0d468;
             <tr>
    <?php if($User->user_type!='client') {?>  <th>Client</th><?php }?>
  <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
-                  <th>Date</th>
+                  <th style="width:10%">Date</th>
                  <th>Service</th>
 				 <th>Statut</th> 
 				 <th></th> 
@@ -59,16 +59,16 @@ background-color:#a0d468;
                 <tr> 
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client) ;?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
-                     <td>{{$reservation->date  }} {{$reservation->heure  }} </td>
+                     <td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>
                     <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
  	<td>
-		<?php  if($reservation->statut==0){$statut='<span class="warning statut" style="color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;color:#000000">En attente</span>';}  ?>
-			<?php  if($reservation->statut==1){$statut='<span class="success statut" style="color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px background-color:#a0d468">Validée</span>';}  ?>
-			<?php  if($reservation->statut==2){$statut='<span class="danger statut" style="	color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;background-color:red">Annulée</span>';}  ?>
+		<?php  if($reservation->statut==0){$statut='<span class="warning statut" style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;color:#000000">En attente</span>';}  ?>
+			<?php  if($reservation->statut==1){$statut='<span class="success statut" style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px background-color:#a0d468">Validée</span>';}  ?>
+			<?php  if($reservation->statut==2){$statut='<span class="danger statut" style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;background-color:red">Annulée</span>';}  ?>
 			<?php 
 			
 				if( $reservation->paiement==1) {
-					$statut.= '  <span class="success statut">  Payée   </span>';
+					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important; " class="success statut">  Payée   </span>';
 				}
 				echo $statut;  
 	?>
@@ -87,7 +87,7 @@ background-color:#a0d468;
 				</form>
 			<?php }else{
 				if( $reservation->paiement==1) {
-					echo '<span class="success">  Payée   </span>';
+					echo '<span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;" class="success">  Payée   </span>';
 				}
 			} ?> 
 		
@@ -95,8 +95,8 @@ background-color:#a0d468;
 		   <?php if($User->user_type =='prestataire' ) {   
 
 		  if($reservation->statut==0){	?> 
-		  <a  class="button button-success"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@valider', $reservation->id)}}"><i class="fa fa-check"></i>  Valider</a>
-			 <a  class="button button-danger"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@annuler', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler</a>
+		  <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservation->id)}}"><i class="fa fa-check"></i>  Valider</a>
+			 <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler</a>
 
 						      <?php } ?> 
 			 <?php } ?> 
