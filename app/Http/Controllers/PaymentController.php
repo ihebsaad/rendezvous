@@ -238,8 +238,8 @@ class PaymentController extends Controller
 		 // Email
 		$Reservation = \App\Reservation::find( $reservation);
 		
- 		$client =  \App\Reservation::find($Reservation->client);
-		$prestataire =  \App\Reservation::find($Reservation->prestataire);
+ 		$client =  \App\User::find($Reservation->client);
+		$prestataire =  \App\User::find($Reservation->prestataire);
 		$serviceid = $Reservation->service;
 		
 		$service = \App\Service::find( $serviceid) ;
@@ -252,8 +252,7 @@ class PaymentController extends Controller
 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
-		dd( ($client).'+'. ($prestataire));
-	    $this->sendMail(trim($client->email),'Réservation payée',$message)	;
+ 	    $this->sendMail(trim($client->email),'Réservation payée',$message)	;
     	
 		//enregistrement alerte
     	$alerte = new Alerte([
