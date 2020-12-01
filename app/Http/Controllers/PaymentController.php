@@ -246,10 +246,10 @@ class PaymentController extends Controller
 		
 		// Email au client
 		$message='';
-		$message.='Réservation payée avec succès ';
+		$message.='Réservation payée avec succès <br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
-		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br>';
+		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
  	    $this->sendMail(trim($client->email),'Réservation payée',$message)	;
@@ -264,10 +264,10 @@ class PaymentController extends Controller
  
 		// Email au prestataire
 		$message='';
-		$message.='Réservation payée';
+		$message.='Réservation payée<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
-		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br>';
+		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
 	    $this->sendMail(trim($prestataire->email),'Réservation payée',$message)	;
@@ -279,6 +279,18 @@ class PaymentController extends Controller
          ]);	
 		 $alerte->save();		
 		
+		// enregistrement payment dans la base
+		$paiement  =  new \App\Payment([
+             'payer_id' => Input::get('PayerID'),
+			 'payment_id'=>$payment_id,						 
+             'user' => $client->id,
+             'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
+             'beneficiaire_id' => $prestataire->id ,
+             'details' => 'paiement  de réservation pour : '.$prestataire->name. ' '.$prestataire->lastname,
+         ]);	
+		 
+		 $alerte->save();
+		 
 		  return redirect('/reservations/')->with('success', ' Paiement effectué avec succès  ');
 
 		}

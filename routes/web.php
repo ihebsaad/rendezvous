@@ -97,3 +97,9 @@ Route::get('/status','PaymentController@getPaymentStatus')->name('status');
 Route::get('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 Route::post('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 
+
+
+Route::get('/alertes','AlertesController@index')->name('alertes');
+Route::get('/alertes/remove/{id}', 'AlertesController@remove');
+
+

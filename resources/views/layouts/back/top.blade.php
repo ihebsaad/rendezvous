@@ -1,4 +1,6 @@
- <header id="header_part" class="fixed fullwidth_block dashboard"> 
+<?php
+ $user = auth()->user();
+?> <header id="header_part" class="fixed fullwidth_block dashboard"> 
     <div id="header" class="not-sticky">
       <div class="container"> 
         <div class="utf_left_side"> 
@@ -25,13 +27,13 @@
         </div>
         <div class="utf_right_side"> 
           <div class="header_widget"> 
-		<!--	<div class="dashboard_header_button_item has-noti js-item-menu">
+		 	<div class="dashboard_header_button_item has-noti js-item-menu">
 				<i class="sl sl-icon-bell"></i>
 				<div class="dashboard_notifi_dropdown js-dropdown">
-					<div class="dashboard_notifi_title">
-						<p>Vous avez 2 Notifications</p>
+					<div class="dashboard_notifi_title" style="padding:10px 10px 10px 10px">
+						<center><b>Dernières Notifications</b></center>
 					</div>
-					<div class="dashboard_notifi_item">
+					<!-- <div class="dashboard_notifi_item" >
 						<div class="bg-c1 red">
 							<i class="fa fa-check"></i>
 						</div>
@@ -39,22 +41,27 @@
 							<p>Your Listing <b>Burger House (MG Road)</b> Has Been Approved!</p>
 							<span class="date">2 hours ago</span>
 						</div>
-					</div>
-					<div class="dashboard_notifi_item">
+					</div> -->
+					<?php
+					 $alertes = \App\Alerte::where('user',$user->id)->orderBy('id','desc')->limit(3)->get();
+
+					foreach($alertes as $alerte) { ?>
+					<div class="dashboard_notifi_item"  style="min-width:350px">
 						<div class="bg-c1 green">
 							<i class="fa fa-envelope"></i>
 						</div>
 						<div class="content">
-							<p>You Have 7 Unread Messages</p>
-							<span class="date">5 hours ago</span>
+							<p><?php echo $alerte->titre ;?></p>
+							<span class="date"><small><?php echo   date('d/m/Y H:i', strtotime($alerte->created_at ))  ;?></small></span>
 						</div>
 					</div>
+					<?php }?>
 					<div class="dashboard_notify_bottom text-center pad-tb-20">
-						<a href="#">View All Notification</a>
+						<a href="{{route('alertes')}}">Voir toutes les Notification</a>
 					</div>
 				</div>
-			</div>-->
- <?php     $user = auth()->user();
+			</div> 
+ <?php    
 
  $User =\App\User::find($user->id);
  $user_type =$User->user_type;
