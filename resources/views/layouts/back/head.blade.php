@@ -9,6 +9,13 @@
 <link rel="shortcut icon" href="{{ asset('public/img/favicon.ico') }}"  >
 <!-- Style CSS -->
 <link rel="stylesheet" href="{{ URL::asset('public/css/stylesheet.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_1.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_2.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_3.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_4.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_5.css')}}">
+
 <link rel="stylesheet" href="{{ URL::asset('public/css/mmenu.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('public/css/perfect-scrollbar.css')}}">
 <link rel="stylesheet"  id="colors" href="{{ URL::asset('public/css/style.css')}}">

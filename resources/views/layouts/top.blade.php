@@ -15,7 +15,7 @@
             <ul id="responsive">
               <li><a href="{{route('home')}}">Accueil</a></li>
               <li><a href="#">A propos</a></li>
-              <li><a href="{{route('listings')}}">Prestataires</a></li>
+              <li><a href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
               <li><a href="#">Contact</a>             
             </ul>
           </nav>

@@ -117,10 +117,14 @@ class ServicesController extends Controller
      public function remove($id,$user)
     {
   
-	 
-	DB::table('services')->where('id', $id)->delete();
+	$res= \App\Reservation::where('service', $id)->count();
+	
+	if($res==0)
+	{DB::table('services')->where('id', $id)->delete();
 	return redirect (url('/listing/'.$user.'#services'));
-
+	}else{
+       return redirect('/listing/'.$user.'#services')->with('error', ' Service rélié aux réservations  ');
+	}
 	}
 	
 	

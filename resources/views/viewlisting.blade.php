@@ -453,9 +453,10 @@
 			 </div>
 		  </div>
 		  <div class="row with-forms">
-		  	 <div class="col-lg-4" style="padding-left:20px">Rappel SMS:</div><div class="col-lg-8">
-			 <select class="utf_chosen_select_single" id="rappel" style="min-width:300px!important" >
-			 <option value="30">Avant 30 minutes</option>
+		  	 <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div>
+			 <div  class="row" style="padding-left:40px;padding-top:5px" >
+			 <select class=" " id="rappel" style="max-width:400px!important" >
+			 <option value="30">Avant 30 mins</option>
 			 <option value="60">Avant une heure</option>
 			 <option value="120">Deux heures</option>
 			 <option value="1440">Un jour</option>

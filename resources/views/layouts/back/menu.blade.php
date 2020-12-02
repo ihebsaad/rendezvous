@@ -29,7 +29,7 @@
 		  <li class="<?php if ($view_name == 'users-listing'){echo 'active';} ?>  "><a href="{{ route('listing', ['id'=>$user->id]) }}"><i class="sl sl-icon-briefcase"></i> Mon Entreprise </a></li>       
 		  <li class="<?php if ($view_name == 'notes-index'){echo 'active';} ?>  "><a href="{{ route('reviews')}}"><i class="sl sl-icon-star"></i> Avis </a></li>       
  <?php } ?>	
-          <li class="<?php if ($view_name == 'paiements-index'){echo 'active';} ?>  "><a href="#"><i class="sl sl-icon-wallet"></i> Paiements </a></li>       
+          <li class="<?php if ($view_name == 'payments-index'){echo 'active';} ?>  "><a href="{{ route('payments')}}"><i class="sl sl-icon-wallet"></i> Paiements </a></li>       
 
   <li><a  href="{{ route('logout') }}" ><i class="sl sl-icon-power"></i> Déconnexion</a></li>
 		  

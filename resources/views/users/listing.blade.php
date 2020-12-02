@@ -124,7 +124,7 @@
 				  <div id="utf_listing_location" class="col-md-12 utf_listing_section">
 					  <div id="utf_single_listing_map_block">
 						<div id="utf_single_listingmap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}" data-map-icon="im im-icon-Marker"></div>
-						<a href="#" id="utf_street_view_btn">Street View</a> 
+						<a href="#" id="utf_street_view_btn">Vue de rue</a> 
 					  </div>
 				  </div>
                 </div>
@@ -290,7 +290,7 @@ function geocodeAddress(geocoder, resultsMap) {
               <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-picture"></i> Images </h3>
               </div>			  
-              <div class="row with-forms">              
+              <div class="row with-forms">  
 				  <div class="utf_submit_section col-md-4">
 				    <h4>Logo</h4>
 					<form action="{{ route('users.ajoutimage') }}" class="dropzone"  id="dropzoneFrom">
@@ -380,13 +380,15 @@ function geocodeAddress(geocoder, resultsMap) {
   
        <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
-                <h3><i class="sl sl-icon-film"></i> Video</h3>
+                <h3><i class="sl sl-icon-film"></i> Vidéo - Télécharger une vidéo ou copier un code de vidéo depuis youtube ..</h3>
               </div>			  
               <div class="row with-forms">    
 			  
 			  	  <div class="row">
 			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
-					<h4 id="images">Video</h4>
+					<h4 id="images">Télécharger une vidéo en format mp4</h4>
+					<div class="row" >	<a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>	</div>	  
+
 					<form action="{{ route('users.ajoutvideo') }}" class="dropzone" id="dropvideo">
 					 {{ csrf_field() }}
 					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
@@ -406,7 +408,7 @@ function geocodeAddress(geocoder, resultsMap) {
 			  <div class="row" style="margin-top:20px">
 
 			   <div class="  col-md-5" style="margin-right:20px;padding:50px 50px 50px 50px">
-			   Code d'intégration (youtube, vimeo ..)
+			   Coller le Code d'intégration depuis youtube, vimeo ..
 				<section><textarea  id="codevideo"  onchange="changing(this)" >{{ $user->codevideo }}</textarea></section>
 					
 			   </div>
@@ -429,7 +431,7 @@ function geocodeAddress(geocoder, resultsMap) {
               </div>              
 			  <div class="row with-forms">
 				  <div class="col-md-6">
-					<h5>Titre</h5>
+					<h5>nom de l'entreprise</h5>
 					<input type="text" placeholder="Titre" id="titre" onchange="changing(this)" value="{{ $user->titre }}">
 				  </div>
 				  <div class="col-md-6">
@@ -437,12 +439,12 @@ function geocodeAddress(geocoder, resultsMap) {
 					<input type="text" placeholder="Responsable Commercial"  id="responsable" onchange="changing(this)" value="{{ $user->responsable }}" >
 				  </div>				  
 				  <div class="col-md-12">
-					<h5>Description</h5>
+					<h5>Description des activités de l'entreprise</h5>
 					<textarea name="description" cols="40" rows="3" id="description" placeholder="Description..." spellcheck="true"  onchange="changing(this)" > {{ $user->description }} </textarea>
 				  </div>
 				  <div class="col-md-12">
 					<h5>Mots clés</h5>
-					<textarea name="keywords" cols="40" rows="3" id="keywords" placeholder="Mots clés..." spellcheck="true"  onchange="changing(this)" >{{ $user->keywords }}</textarea>
+					<textarea name="keywords" cols="40" rows="3" id="keywords" placeholder="Insérez des mots clés, séparées par des virgules" spellcheck="true"  onchange="changing(this)" >{{ $user->keywords }}</textarea>
 				  </div>
 			  </div>                
             </div>
