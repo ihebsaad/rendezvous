@@ -46,6 +46,10 @@ Route::get('/users/removevideo/{id}', 'UsersController@removevideo');
 Route::get('/users/remove/{id}', 'UsersController@remove');
 Route::get('/users/destroy/{id}', 'UsersController@destroy');
 
+Route::post('/users/parametring','UsersController@parametring')->name('users.parametring');
+Route::get('/parametres','UsersController@parametres')->name('parametres');
+Route::post('/users/ajoutlogo','UsersController@ajoutlogo')->name('users.ajoutlogo');
+Route::post('/users/ajoutvideoslider','UsersController@ajoutvideoslider')->name('users.ajoutvideoslider');
 
 Route::post('/services/saving','ServicesController@store')->name('services.saving');
 Route::post('/services/add','ServicesController@add')->name('services.add');

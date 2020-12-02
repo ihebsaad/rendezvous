@@ -40,6 +40,25 @@ class UsersController extends Controller
 		
 	}
  
+ 
+     public function parametres()
+    {
+ 		  $cuser = auth()->user();
+
+		$User =\App\User::find($cuser->id);
+ 		$user_type=$User->user_type;
+
+		if(   $user_type=='admin' )
+        { 
+	    
+	  return view('parametres' );       
+		}else{
+			
+			//return back();
+		}
+		
+	}
+	
  	
     public function prestatires()
     {   
@@ -143,6 +162,18 @@ class UsersController extends Controller
 		
 	}
 	
+	
+	    public function parametring(Request $request)
+    {
+        $champ= $request->get('champ');
+          $val= $request->get('val');
+ 
+ 	DB::table('parametres')->where('id', 1)->update(array($champ => $val));
+
+ 
+    }
+	
+	
 
     public function updating(Request $request)
     {
@@ -176,8 +207,40 @@ class UsersController extends Controller
 
 		 
 	}
+		public function ajoutlogo(Request $request)
+	{
+ 	 //$temp_file = $_FILES['file']['tmp_name'];
+
+		 $name='';
+		if($request->file('file')!=null)
+		{$image=$request->file('file');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+ 
+          $image->move($path, $name);
+		}
+		  DB::table('parametres')->where('id', 1)->update(array('logo' => $name));
+
+		 
+	}
 	
-		public function ajoutvideo(Request $request)
+		public function ajoutvideoslider(Request $request)
+	{
+ 	 //$temp_file = $_FILES['file']['tmp_name'];
+
+		 $name='';
+		if($request->file('file')!=null)
+		{$image=$request->file('file');
+		 $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+ 
+          $image->move($path, $name);
+		}
+		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
+  
+	}
+	
+			public function ajoutvideo(Request $request)
 	{
 		  $id= $request->get('user');
 	 //$temp_file = $_FILES['file']['tmp_name'];
@@ -191,9 +254,9 @@ class UsersController extends Controller
           $image->move($path, $name);
 		}
 		  User::where('id', $id)->update(array('video' => $name));
-
-		 
+  
 	}
+	
 		public function ajoutcouv(Request $request)
 	{
 		  $id= $request->get('user');
