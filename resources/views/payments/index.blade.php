@@ -60,7 +60,7 @@
                      <td> <?php echo $payment->beneficiaire ;?> </td>
                      <td> <?php echo $payment->details;?><br> ID paiement :<?php echo $payment->payment_id; ?><br> Payer ID :<?php echo $payment->payer_id;?></td>
                     <td>  
-           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('PaymentsController@remove', $payment->id)}}"><i class="fa fa-remove"></i></a>
+           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('PaymentController@remove', $payment->id)}}"><i class="fa fa-remove"></i></a>
 
                       </td> 
                 </tr>
