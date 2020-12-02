@@ -20,6 +20,23 @@
           </div>
         </div>
       </div>-->
+	  
+<!-- Session errors -->
+ @if ($errors->any())
+             <div class="alert alert-danger">
+                 <ul>
+                     @foreach ($errors->all() as $error)
+                         <li>{{ $error }}</li>
+                     @endforeach
+                 </ul>
+             </div><br />
+ @endif
+ @if (!empty( Session::get('success') ))
+   <div class="alert alert-success">
+        {{ Session::get('success') }}
+        </div>
+ @endif	  
+	  
       <div class="row"> 
         <div class="col-lg-12 col-md-12">
           <div class="utf_dashboard_list_box margin-top-0">

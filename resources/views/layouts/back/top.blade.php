@@ -57,7 +57,7 @@
 					</div>
 					<?php }?>
 					<div class="dashboard_notify_bottom text-center pad-tb-20">
-						<a href="{{route('alertes')}}">Voir toutes les Notification</a>
+						<a href="{{route('alertes')}}">Voir toutes les notifications</a>
 					</div>
 				</div>
 			</div> 

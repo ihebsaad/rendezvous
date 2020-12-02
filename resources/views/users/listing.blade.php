@@ -56,7 +56,22 @@
  </style>
 
     <!-- Content -->
-    <div class="utf_dashboard_content">       
+    <div class="utf_dashboard_content">  
+<!-- Session errors -->
+ @if ($errors->any())
+             <div class="alert alert-danger">
+                 <ul>
+                     @foreach ($errors->all() as $error)
+                         <li>{{ $error }}</li>
+                     @endforeach
+                 </ul>
+             </div><br />
+ @endif
+ @if (!empty( Session::get('success') ))
+   <div class="alert alert-success">
+        {{ Session::get('success') }}
+        </div>
+ @endif	
     	  <a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> 
 
       <div class="row">

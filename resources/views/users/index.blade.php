@@ -13,7 +13,21 @@
 @include('layouts.back.menu')
  
  	<div class="utf_dashboard_content "> 
-       
+ <!-- Session errors -->
+ @if ($errors->any())
+             <div class="alert alert-danger">
+                 <ul>
+                     @foreach ($errors->all() as $error)
+                         <li>{{ $error }}</li>
+                     @endforeach
+                 </ul>
+             </div><br />
+ @endif
+ @if (!empty( Session::get('success') ))
+   <div class="alert alert-success">
+        {{ Session::get('success') }}
+        </div>
+ @endif      
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
