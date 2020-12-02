@@ -54,6 +54,7 @@
  <style>
  table{background-color:white;border:none!important;;width:100%!important;}
  </style>
+
     <!-- Content -->
     <div class="utf_dashboard_content">       
     	  <a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> 
@@ -61,11 +62,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div id="utf_add_listing_part">             
-	 
-			
-        
+	   
                {{ csrf_field() }}
-
 			 <input type="hidden"    id="user"  value="{{$id}}" >
 
             <div class="add_utf_listing_section margin-top-45"> 
@@ -266,7 +264,7 @@ function geocodeAddress(geocoder, resultsMap) {
               center: geolocation,
               radius: position.coords.accuracy,
             });
-           autocomplete.setBounds(circle.getBounds());
+        //   autocomplete.setBounds(circle.getBounds());
           });
         }
       }
@@ -303,7 +301,7 @@ function geocodeAddress(geocoder, resultsMap) {
 				  </div>
 				  <div class="utf_submit_section col-md-4">
 					<h4 id="images">Gallery Images</h4>
-					<form action="{{ route('users.ajoutimages') }}" class="dropzone">
+					<form action="{{ route('users.ajoutimages') }}" class="dropzone"   id="dropzoneFrom3">
 					 {{ csrf_field() }}
 					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
 					</form>
@@ -802,8 +800,8 @@ function geocodeAddress(geocoder, resultsMap) {
                the locations relevant to your app. For more information, see
          https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
     
-
-    <table id="address" style="visibility:hiddent" >
+-->
+    <table id="address" style="visibility:hidden" >
       <tr>
         <td class="label">Street address</td>
         <td class="slimField">
@@ -839,8 +837,7 @@ function geocodeAddress(geocoder, resultsMap) {
           <input class="field" id="country" disabled="true" />
         </td>
       </tr>
-    </table>			
-			 -->
+    </table> 
 		<!--	
 			</div>
 			</div> -->
@@ -860,8 +857,16 @@ function geocodeAddress(geocoder, resultsMap) {
 </div>  
   
   <script src="{{  URL::asset('public/scripts/perfect-scrollbar.min.js') }}" ></script>
- 
- 
+<!-- <link rel="stylesheet"   href="{{ URL::asset('public/css/bootstrap.css')}}">
+<link rel="stylesheet"   href="{{ URL::asset('public/css/bootstrap-grid.css')}}">-->
+
+<!--	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+	<link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+   <script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
+ <!--  <script  src="{{ URL::asset('public/js/notify.js')}}"></script>-->
+
+
 <!-- Maps --> 
 <!-- <script src="https://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>   -->
 <!--<script src="{{  URL::asset('public/scripts/infobox.min.js') }}"></script> -->
@@ -947,9 +952,6 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
 
    <script>
-
-          
-		  
             function changing(elm) {
                 var champ = elm.id;
 
@@ -969,8 +971,22 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                         $('#' + champ).animate({
                             opacity: '1',
                         });
-
-                    }
+						 
+				 	 $.notify({
+ 					message: 'Modifié avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
+				  
+                     }
+					
                 });
 
             }
@@ -993,6 +1009,19 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                         data:{user:user,categorie:cat, _token:_token},
                         success:function(data){
 							changed=true;
+							
+					 $.notify({
+ 					message: 'Catégorie ajoutée avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
 						}
 						
                     });
@@ -1004,6 +1033,19 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                         data:{user:user,categorie:cat, _token:_token},
                         success:function(data){
 							changed=true;
+					
+					$.notify({
+ 					message: 'Catégorie supprimée avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});		
 						}
 						
                     });
@@ -1049,6 +1091,18 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 					 	//$('#small-dialog').modal('hide');
  						$( ".mfp-close" ).trigger( "click" );
 
+										 	 $.notify({
+ 					message: 'Service ajouté avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
 						//$('#small-dialog').modal({show:true});
 	
  						}
@@ -1084,11 +1138,21 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+question+'"   ></div><div class="fm-input pricing-ingredients"><textarea >'+reponse+'</textarea></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="https://$_SERVER[HTTP_HOST]/services/remove/'+faq+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
  						            newElem.appendTo('table#utf_faq_list_section');
 
-					 	//$('#small-dialog').modal('hide');
- 						$( ".mfp-close" ).trigger( "click" );
+  						$( ".mfp-close" ).trigger( "click" );
 
-						//$('#small-dialog').modal({show:true});
-	
+ 					 	 $.notify({
+ 					message: 'Ajouté avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
+					
  						}
 	   
 
@@ -1119,7 +1183,20 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                         method:"POST",
                         data:{user:user,categorie:cat, _token:_token},
                         success:function(data){
-							
+						
+				 	 $.notify({
+ 					message: 'Catégorie ajoutée avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
+					
 						}
 						
                     });
@@ -1146,7 +1223,19 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
     }*/
   //  list_image(); 
 	$('#img-logo').hide();
-
+				 	 $.notify({
+ 					message: 'Modifié avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
+					
  });
   },
  };
@@ -1164,11 +1253,46 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
     }*/
   //  list_image(); 
 	$('#img-couverture').hide();
-
+				 	 $.notify({
+ 					message: 'Modifié avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
  });
   },
  };
  
+ 
+   Dropzone.options.dropzoneFrom3 = {
+ // autoProcessQueue: false,
+  acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
+  init: function(){
+ 
+   this.on("complete", function(){
+ 
+  //  list_image(); 
+ 				 	 $.notify({
+ 					message: 'Ajoutée(s) avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
+ });
+  },
+ };
  
    Dropzone.options.dropvideo = {
  // autoProcessQueue: false,
@@ -1184,10 +1308,22 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
   //  list_image(); 
 	$('#img-couverture').hide();
 
+					 	 $.notify({
+ 					message: 'Modifié avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	
  });
   },
  };
     </script>
 	
- 
+
 @endsection  

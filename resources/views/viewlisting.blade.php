@@ -577,7 +577,7 @@
           <form id="contactform">
 		      {{ csrf_field() }}    
 
-			<input name="to" type="hidden"  value="{{$user->to}}" id="to">                
+			<input name="to" type="hidden"  value="{{$user->email}}" id="to">                
             <div class="row">              
               <div class="col-md-12">                
                   <input name="emetteur" type="text" placeholder="Nom" required   id="emetteur">                
@@ -601,7 +601,7 @@
 			  </div>
 			  </div>
 			 <br>
-            <button type="button" class="submit button" id="sendmail" value="Envoyer Message" onclick="alert()"  style="" >Envoyer le message</button>
+            <button type="button" class="submit button" id="sendmail" value="Envoyer Message" onclick=""  style="" >Envoyer le message</button>
           </form>
         </div>
 	 
@@ -885,27 +885,41 @@
             });
 			
 			
-		 function sendmail( ) {
+	 			$('#sendmail').click(function( ){
  		             var _token = $('input[name="_token"]').val();
  
                     var emetteur = $('#emetteur').val();
                     var email = $('#email').val();
                     var tel = $('#tel').val();
                     var contenu = $('#contenu').val();
-  					alert(emetteur+' '+email+' '+tel+' '+contenu);
+                    var to = $('#to').val();
+                  /*  var tel = document.getElementById('tel').value;
+                    var email = document.getElementById('email').value;
+                    var emetteur = document.getElementById('emetteur').value;
+                    var contenu = document.getElementById('contenu').value;*/
+  					alert(emetteur+' '+email+' '+tel+' '+contenu+' '+to);
                     $.ajax({
                         url:"{{ route('reservations.sendmessage') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,emetteur:emetteur , email:email, contenu:contenu, tel:tel , _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,emetteur:emetteur , email:email, contenu:contenu, tel:tel ,to:to, _token:_token},
                         success:function(data){
  
-							alert('envoyé');
-							document.getElementById("contactform").reset();
+					$.notify({
+					// options
+					message: 'Envoyé avec succès' 
+					},{
+					// settings
+					type: 'success',
+					delay: 3000,
+					timer: 1000,					
+					});	
+					
+					document.getElementById("contactform").reset();
 
                         }
                     });
 		
-		} 
+                    });
 			
  </script>
  <?php }?> 
@@ -917,7 +931,8 @@
 <script  src="{{ URL::asset('public/scripts/quantityButtons.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/moment.min.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/daterangepicker.js')}}"   ></script> 
- 
+<script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
+
 
 <script>
 $(function() {

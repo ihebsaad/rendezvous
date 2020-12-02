@@ -233,7 +233,7 @@ class ReservationsController extends Controller
 			
 		  $this->sendMail(trim($to),'Nouveau Message',$Message)	;
 		  $alerte = new Alerte([
-             'user' => $prestatire->id,
+             'user' => $prestataire,
 			 'titre'=>'Message envoyé',			 
              'details' => $Message,
          ]);	

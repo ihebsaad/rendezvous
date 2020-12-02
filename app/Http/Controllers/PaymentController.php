@@ -34,6 +34,38 @@ use \App\Alerte;
 class PaymentController extends Controller
 {
 
+	public function index()
+    {
+		
+		
+			
+		$cuser = auth()->user();
+		
+		
+		if($cuser->user_type=='admin' ){
+        $payments = \App\Payment::orderBy('id','desc')->get();
+		}else{
+
+		
+	$payments = DB::table('payments')
+        //   ->where('name', '=', 'John')
+           ->where(function ($query) use($cuser) {
+               $query->where('user', $cuser->id)
+                     ->orWhere('beneficiaire', $cuser->id);
+           })
+           ->orderBy('id','desc')->get();
+		   
+		}
+		
+
+		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
+        return view('payments.index', compact('payments'));
+
+		
+		
+	}
+	
+	
 	public function __construct()
     {
 	/** PayPal api context **/
@@ -247,7 +279,7 @@ class PaymentController extends Controller
 		// Email au client
 		$message='';
 		$message.='Réservation payée avec succès <br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
@@ -265,7 +297,7 @@ class PaymentController extends Controller
 		// Email au prestataire
 		$message='';
 		$message.='Réservation payée<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' )  <br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
@@ -289,7 +321,7 @@ class PaymentController extends Controller
              'details' => 'paiement  de réservation pour : '.$prestataire->name. ' '.$prestataire->lastname,
          ]);	
 		 
-		 $alerte->save();
+		 $paiement->save();
 		 
 		  return redirect('/reservations/')->with('success', ' Paiement effectué avec succès  ');
 

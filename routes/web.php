@@ -103,3 +103,5 @@ Route::get('/alertes','AlertesController@index')->name('alertes');
 Route::get('/alertes/remove/{id}', 'AlertesController@remove');
 
 
+Route::get('/payments','PaymentController@index')->name('payments');
+Route::get('/payments/remove/{id}', 'PaymentController@remove');
