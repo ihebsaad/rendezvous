@@ -8,6 +8,6 @@ class Payment extends Authenticatable
 {
    
     protected $fillable = [
-   'user', 'details'      ];
+   'user', 'details' ,'beneficiaire','beneficiaire_id','payment_id','payer_id'     ];
  
 }
