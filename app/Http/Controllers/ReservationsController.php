@@ -215,6 +215,38 @@ class ReservationsController extends Controller
     }
 	
 	
+	
+	
+			public function contactmessage(Request $request){
+			
+		  $nom= $request->get('nom');
+		  $prenom= $request->get('prenom');
+		  $sujet= $request->get('sujet');
+		  $message= $request->get('contenu');
+ 		  $to= $request->get('to');
+		  $email= $request->get('email');
+ 
+		  $Message='';
+		  $Message.='Nouveau message du site :  <br><br>';
+		  $Message.='<b>Prénom :</b> '. $prenom .' <b>Nom :</b>'.$nom.'<br>';
+		  $Message.='<b>Email :</b> '. $email  .'<br>';
+		  $Message.='<b>Message :</b> '.$message.'<br><br>';
+		  $Message.='<a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+
+			
+		  $this->sendMail(trim($to),$sujet,$Message)	;
+		  $alerte = new Alerte([
+             'user' => 1,
+			 'titre'=>'Message envoyé depuis Contact',			 
+             'details' => $Message,
+         ]);	
+		 $alerte->save();
+		 
+		 
+		}
+	
+	
+	
 		public function sendmessage(Request $request){
 			
 		  $prestataire= $request->get('prestataire');

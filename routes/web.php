@@ -33,6 +33,11 @@ Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@da
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
 Route::get('/prestatires', 'UsersController@prestatires')->name('prestatires');
+Route::get('/pricing', 'UsersController@pricing')->name('pricing');
+Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
+Route::get('/contact', 'UsersController@contact')->name('contact');
+Route::get('/apropos', 'UsersController@apropos')->name('apropos');
+
 Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
 Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
@@ -81,6 +86,7 @@ Route::get('/reservations/remove/{id}','ReservationsController@remove');
 Route::get('/reservations/valider/{id}','ReservationsController@valider');
 Route::get('/reservations/annuler/{id}','ReservationsController@annuler');
 Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage');
+Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage');
 
 
 Route::get('/categories', array('as' => 'categories','uses' => 'CategoriesController@index'));

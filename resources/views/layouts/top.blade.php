@@ -11,12 +11,15 @@
 				</span>
 			</button>
 		  </div>
+		  <style>
+		  #navigation.style_one ul li a.active{font-weight:bold!important;}
+		  </style>
           <nav id="navigation" class="style_one">
             <ul id="responsive">
-              <li><a href="{{route('home')}}">Accueil</a></li>
-              <li><a href="#">A propos</a></li>
-              <li><a href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
-              <li><a href="#">Contact</a>             
+              <li><a class="<?php if ($view_name == 'home'){echo 'active';} ?>" href="{{route('home')}}">Accueil</a></li>
+              <li><a class="<?php if ($view_name == 'apropos'){echo 'active';} ?> " href="{{route('apropos')}}">A propos</a></li>
+              <li><a class="<?php if ($view_name == 'listings'){echo 'active';} ?>" href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
+              <li><a class="<?php if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contact')}}" >Contact</a>             
             </ul>
           </nav>
           <div class="clearfix"></div>
@@ -37,8 +40,8 @@
           </div>
           <div class="utf_signin_form style_one">
             <ul class="utf_tabs_nav">
-              <li class=""><a href="#tab1">Connexion</a></li>
-              <li><a href="#tab2">Inscription</a></li>
+              <li class=""><a href="#tab1" id="litab1">Connexion</a></li>
+              <li><a href="#tab2" id="litab2" >Inscription</a></li>
             </ul>
             <div class="tab_container alt"> 
               <div class="tab_content" id="tab1" style="display:none;">

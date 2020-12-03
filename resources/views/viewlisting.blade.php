@@ -878,8 +878,7 @@
                         data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date:date ,service:service, adultes:adultes, enfants:enfants, heure:heure, rappel:rappel   , _token:_token},
                         success:function(data){
  
-							alert('ajouter');
- 
+  
                         }
                     });
                
@@ -898,8 +897,7 @@
                     var email = document.getElementById('email').value;
                     var emetteur = document.getElementById('emetteur').value;
                     var contenu = document.getElementById('contenu').value;*/
-  					alert(emetteur+' '+email+' '+tel+' '+contenu+' '+to);
-                    $.ajax({
+                     $.ajax({
                         url:"{{ route('reservations.sendmessage') }}",
                         method:"POST",
                         data:{prestataire:<?php echo $user->id;?>,emetteur:emetteur , email:email, contenu:contenu, tel:tel ,to:to, _token:_token},

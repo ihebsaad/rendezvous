@@ -195,7 +195,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
   </div>
   
   
-  
+  <!--
    <br><br>
   <div class="row">
        <div class="form-group ">
@@ -210,7 +210,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  <div class="row">
 	   <button  class="button"  onclick=" ;updating('contact'); "   ><b><i class="sl sl-icon--save"></i> Enregistrer</b></button>
    </div>
-
+-->
 
 					</div>	
 					

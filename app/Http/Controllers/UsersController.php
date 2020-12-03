@@ -113,7 +113,34 @@ class UsersController extends Controller
 
 	}
 	
+	   public function pricing()
+    {
+      	 
+	  return view('pricing' );       
+
+	}
 	
+	   public function abonnements()
+    {
+      	 
+	  return view('abonnements' );       
+
+	}
+	
+	  public function apropos()
+    {
+      	 
+	  return view('apropos' );       
+
+	}
+	
+	  public function contact()
+    {
+      	 
+	  return view('contact' );       
+
+	}
+	 
 	  public function viewlisting($id)
     {
   	
