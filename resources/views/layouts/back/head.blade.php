@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_3.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_4.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_5.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('public/css/colors_version/stylesheet_6.css')}}">
 
 <link rel="stylesheet" href="{{ URL::asset('public/css/mmenu.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('public/css/perfect-scrollbar.css')}}">
