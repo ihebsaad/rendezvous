@@ -39,7 +39,7 @@ class LoginController extends Controller
         $this->username = $this->findUsername();
     }
 	
-	  protected function authenticated(Request $request, $user)
+	/*  protected function authenticated(Request $request )
     {
 		$user = auth()->user();
         $iduser = $user->id;
@@ -58,7 +58,7 @@ class LoginController extends Controller
         }
 		
 	}
-	
+	*/
 	
     public function findUsername()
     {
