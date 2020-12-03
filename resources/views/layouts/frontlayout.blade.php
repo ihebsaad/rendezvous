@@ -10,7 +10,14 @@
 
  @include('layouts.top')
   
+  <?php 
+   if ($view_name == 'pricing'){
+  Session::put('url', '/pricing'); 
+   }else{
+  Session::put('url', ''); 
    
+   }  ?>
+
  
        @if ($errors->any())
              <div class="alert alert-danger">

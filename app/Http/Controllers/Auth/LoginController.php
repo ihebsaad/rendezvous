@@ -25,8 +25,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
-    protected $username  ;
+     protected $redirectTo = '/dashboard';
+     protected $username  ;
 
     /**
      * Create a new controller instance.
@@ -38,6 +38,26 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->username = $this->findUsername();
     }
+	
+	  protected function authenticated(Request $request, $user)
+    {
+		$user = auth()->user();
+        $iduser = $user->id;
+        $type = $user->user_type;
+		
+		if ($type == 'prestataire') {
+				if($user->expire==''){
+				return redirect('/pricing');
+				}else{
+				 return redirect('/dashboard');
+				}
+			 
+			 
+        } else {
+            return redirect('/dashboard');
+        }
+		
+	}
 	
 	
     public function findUsername()
@@ -58,5 +78,7 @@ class LoginController extends Controller
         request()->merge([$field => request()->email]);
         return $field;
     }
+	
+	 
 	
 }

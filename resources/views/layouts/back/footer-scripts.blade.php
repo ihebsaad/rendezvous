@@ -8,9 +8,9 @@
 <script src="{{  URL::asset('public/scripts/jquery-ui.min.js') }}" ></script> 
 <script src="{{  URL::asset('public/scripts/mmenu.js') }}" ></script>
 <script src="{{  URL::asset('public/scripts/tooltips.min.js') }}" ></script> 
-<script src="{{  URL::asset('public/scripts/color_switcher.js') }}" ></script>
+<!--<script src="{{  URL::asset('public/scripts/color_switcher.js') }}" ></script>-->
 <script src="{{  URL::asset('public/scripts/jquery_custom.js') }}" ></script>
- <script>
+<!-- <script>
 (function($) {
 try {
 	var jscr1 = $('.js-scrollbar');
@@ -23,7 +23,7 @@ try {
     }
 })(jQuery);
 </script> 
-<!-- Style Switcher-->
+<!-- Style Switcher 
 <div id="color_switcher_preview">
   <h2>Changer de couleur <a href="#"><i class="fa fa-gear fa-spin (alias)"></i></a></h2>	
 	<div>
@@ -36,6 +36,6 @@ try {
 			<li><a href="#" class="stylesheet_5"></a></li>			
 		</ul>
 	</div>		
-</div>  
+</div> --> 
 </body>
 </html>

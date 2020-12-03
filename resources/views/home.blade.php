@@ -99,7 +99,7 @@
 				
 				}
 				?>
-					<?php if ($listing->featured ==1) {;?><span style=" " class="featured_tag pull-left">Featured</span><?php } ?>
+					<!--<?php if ($listing->featured ==1) {;?><span style=" " class="featured_tag pull-left">Featured</span><?php } ?>-->
 					 <!-- <span class="utf_open_now">Open Now</span>-->
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							

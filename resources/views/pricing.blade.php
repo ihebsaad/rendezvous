@@ -29,7 +29,10 @@
                   <li>Rappels SMS</li>
                   <li>Commission de <u><?php echo $parametres->commission_abonnement1;?>%</u> sur les services réservés</li>
                  </ul>
-                <a class="button border" href="#"><i class="sl sl-icon-basket"></i> Acheter</a> 
+               @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
+			@else
+				
+				@endguest
 			  </div>
             </div>
             
@@ -46,8 +49,11 @@
                   <li><b style="color:green">Entreprise Mise en Avant</b></li>
                   <li>Commission de <b style="color:green"><u><?php echo $parametres->commission_abonnement2;?></u>%</b> sur les services réservés</li>
                  </ul>
-                <a class="button border" href="#"><i class="sl sl-icon-basket"></i> Acheter</a> 
-			  </div>
+                @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
+			 @else
+				 
+				@endguest
+			 </div>
             </div>
              
 			
@@ -64,8 +70,10 @@
                   <li><b style="color:green">Entreprise Mise en Avant<b></li>
                   <li><i class="sl sl-icon-check"></i> <b style="color:green"><u>Pas de commission</u></b> sur les services réservés</li>
                  </ul>
-                <a class="button" href="#"><i class="sl sl-icon-basket"></i> Acheter</a> 
-			  </div>
+              @guest  <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
+			 @else
+				@endguest
+			 </div>
             </div>
           </div>        
       </div>      

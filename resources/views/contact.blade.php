@@ -17,7 +17,7 @@
           <form id="contactform">
 		  {{ csrf_field() }}    
 
-			<!--<input name="to" type="hidden"  value="ihebsaad@gmail.com" id="to"> -->               
+			<input name="to" type="hidden"  value="ihebsaad@gmail.com" id="to">                
  
             <div class="row">
               <div class="col-md-6">  
