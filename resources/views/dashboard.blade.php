@@ -25,7 +25,7 @@
 			$countpay=count($payments);
 			$countres=count($reservations);
 			$countreviews= \App\Review::where('client',$cuser->id)->count();
-			$countfavoris= \App\Favoris::where('client',$cuser->id)->count();
+			$countfavoris= DB::table('favoris')->where('client',$cuser->id)->count();
 
 		}
 		if($user_type=='prestataire')
@@ -44,7 +44,7 @@
 			$countservices = \App\Service::where('user',$cuser->id)->count();
 			$countcategories =	DB::table('categories_user')->where('user',$cuser->id)->count();
 		    $countreviews= \App\Review::where('prestataire',$cuser->id)->count();
-			$countfavoris= \App\Favoris::where('prestataire',$cuser->id)->count();
+			$countfavoris= DB::table('favoris')->where('prestataire',$cuser->id)->count();
 
 		}		
 		if( $user_type=='admin' )
