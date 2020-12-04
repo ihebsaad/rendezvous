@@ -25,6 +25,7 @@
 			$countpay=count($payments);
 			$countres=count($reservations);
 			$countreviews= \App\Review::where('client',$cuser->id)->count();
+			$countfavoris= \App\Favoris::where('client',$cuser->id)->count();
 
 		}
 		if($user_type=='prestataire')
@@ -43,6 +44,7 @@
 			$countservices = \App\Service::where('user',$cuser->id)->count();
 			$countcategories =	DB::table('categories_user')->where('user',$cuser->id)->count();
 		    $countreviews= \App\Review::where('prestataire',$cuser->id)->count();
+			$countfavoris= \App\Favoris::where('prestataire',$cuser->id)->count();
 
 		}		
 		if( $user_type=='admin' )
@@ -115,6 +117,19 @@
           </div>
         </div>
 		<?php } ?>
+	 <?php	if($user_type=='client' || $user_type=='prestataire'   )
+		{ ?>
+		 <div class="col-lg-2 col-md-6">
+          <div class="utf_dashboard_stat color-5">
+            <div class="utf_dashboard_stat_content">
+              <h4><?php echo $countfavoris;?></h4>
+              <span><?php if($user_type=='client'){echo 'Mes Favoris'; }else{ echo 'Ajouté en Favoris';  } ?></span>
+			</div>
+            <div class="utf_dashboard_stat_icon"><i class="sl sl-icon-tag"></i></div>
+          </div>
+        </div>
+		
+		<?php }?>
         <div class="col-lg-2 col-md-6">
           <div class="utf_dashboard_stat color-6">
             <div class="utf_dashboard_stat_content">
