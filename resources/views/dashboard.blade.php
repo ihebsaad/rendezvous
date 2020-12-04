@@ -123,9 +123,9 @@
           <div class="utf_dashboard_stat color-5">
             <div class="utf_dashboard_stat_content">
               <h4><?php echo $countfavoris;?></h4>
-              <span><?php if($user_type=='client'){echo 'Mes Favoris'; }else{ echo 'Ajouté en Favoris';  } ?></span>
+              <span><?php if($user_type=='client'){echo 'Favoris'; }else{ echo 'Ajouté en Favoris';  } ?></span>
 			</div>
-            <div class="utf_dashboard_stat_icon"><i class="sl sl-icon-tag"></i></div>
+            <div class="utf_dashboard_stat_icon"><i class="sl sl-icon-heart"></i></div>
           </div>
         </div>
 		
