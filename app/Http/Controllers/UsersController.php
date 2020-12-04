@@ -12,7 +12,9 @@ use \App\User;
 use \App\Service;
 use \App\Categorie;
 use \App\Image;
-
+use \App\Reservation;
+use \App\Alerte;
+ 
 class UsersController extends Controller
 {
 
@@ -95,10 +97,11 @@ class UsersController extends Controller
 	
    public function dashboard()
     {
-      	 
-	  return view('dashboard' );       
-
+	  	
+	  return view('dashboard' );   
+		   
 	}
+	
 	   public function listings()
     {
       	 

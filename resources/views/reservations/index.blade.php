@@ -41,9 +41,10 @@ background-color:#a0d468;
              </div><br />
  @endif
  @if (!empty( Session::get('success') ))
-   <div class="alert alert-success">
-        {{ Session::get('success') }}
-        </div>
+              <div class="notification success closeable margin-bottom-30">
+            <p>{{ Session::get('success') }}</p>
+            <a class="close" href="#"></a> 
+		  </div>
  @endif
  
 	<!--<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
@@ -77,9 +78,9 @@ background-color:#a0d468;
                      <td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>
                     <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
  	<td>
-		<?php  if($reservation->statut==0){$statut='<span class="warning statut" style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;color:#000000">En attente</span>';}  ?>
-			<?php  if($reservation->statut==1){$statut='<span class="success statut" style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px background-color:#a0d468">Validée</span>';}  ?>
-			<?php  if($reservation->statut==2){$statut='<span class="danger statut" style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;margin-top:8px;background-color:red">Annulée</span>';}  ?>
+		<?php  if($reservation->statut==0){$statut='<span class="badge badge-pill badge-danger" >En attente</span>';}  ?>
+			<?php  if($reservation->statut==1){$statut='<span class="badge badge-pill badge-primary  " >Validée</span>';}  ?>
+			<?php  if($reservation->statut==2){$statut='<span class="badge badge-pill badge-canceled ">Annulée</span>';}  ?>
 			<?php 
 			
 				if( $reservation->paiement==1) {

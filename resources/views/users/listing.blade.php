@@ -68,9 +68,10 @@
              </div><br />
  @endif
  @if (!empty( Session::get('success') ))
-   <div class="alert alert-success">
-        {{ Session::get('success') }}
-        </div>
+              <div class="notification success closeable margin-bottom-30">
+            <p>{{ Session::get('success') }}</p>
+            <a class="close" href="#"></a> 
+		  </div>
  @endif	
     	  <a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> 
 

@@ -1,9 +1,8 @@
 @extends('layouts.frontlayout')
  
  @section('content')
+  <?php  $User= auth()->user();
  
- <?php
-
  $parametres=DB::table('parametres')->where('id', 1)->first();
 
  ?>
@@ -31,7 +30,12 @@
                  </ul>
                @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
 			@else
-				
+				<form class="  " method="POST" id="payment-form"    action="{{ route('paypal') }}" >
+				{{ csrf_field() }}
+ 				<input   name="user" type="hidden"  value="<?php echo $User->id;?>">     
+ 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
+				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
+				</form>
 				@endguest
 			  </div>
             </div>
@@ -51,16 +55,20 @@
                  </ul>
                 @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
 			 @else
-				 
+			 <form class="  " method="POST" id="payment-form"    action="{{ route('paypal') }}" >
+				{{ csrf_field() }}
+ 				<input   name="user" type="hidden"  value="<?php echo $User->id;?>">     
+ 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
+				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
+				</form>
 				@endguest
 			 </div>
             </div>
-             
-			
+              
             <div class="plan featured col-md-4 col-sm-6 col-xs-12">
               <div class="utf_price_plan">
                 <h3><?php echo $parametres->abonnement3;?></h3>
-                <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>/Par Année</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
+                <span class="value"><?php echo $parametres->cout_abonnement2;?>€<span>/Par Année</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
 			  </div>
               <div class="utf_price_plan_features">
                 <ul>
@@ -72,6 +80,13 @@
                  </ul>
               @guest  <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
 			 @else
+				<form class="  " method="POST" id="payment-form"    action="{{ route('paypal') }}" >
+				{{ csrf_field() }}
+ 				<input   name="annuel" type="hidden"  value="1">     
+ 				<input   name="user" type="hidden"  value="<?php echo $User->id;?>">     
+ 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
+				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
+				</form>				 
 				@endguest
 			 </div>
             </div>

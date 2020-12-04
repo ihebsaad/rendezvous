@@ -24,9 +24,7 @@
              </div><br />
  @endif
  @if (!empty( Session::get('success') ))
-   <div class="alert alert-success">
-        {{ Session::get('success') }}
-        </div>
+   <div class="notification success closeable margin-bottom-30">
  @endif      
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>

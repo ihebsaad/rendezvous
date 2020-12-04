@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -39,14 +40,14 @@ class LoginController extends Controller
         $this->username = $this->findUsername();
     }
 	
-	/*  protected function authenticated(Request $request )
+    protected function authenticated(Request $request )
     {
 		$user = auth()->user();
         $iduser = $user->id;
         $type = $user->user_type;
 		
 		if ($type == 'prestataire') {
-				if($user->expire==''){
+				if($user->expire=='' /***/ ){
 				return redirect('/pricing');
 				}else{
 				 return redirect('/dashboard');
@@ -58,7 +59,7 @@ class LoginController extends Controller
         }
 		
 	}
-	*/
+	 
 	
     public function findUsername()
     {

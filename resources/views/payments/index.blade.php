@@ -28,9 +28,10 @@
              </div><br />
  @endif
  @if (!empty( Session::get('success') ))
-   <div class="alert alert-success">
-        {{ Session::get('success') }}
-        </div>
+            <div class="notification success closeable margin-bottom-30">
+            <p>{{ Session::get('success') }}</p>
+            <a class="close" href="#"></a> 
+		  </div>
  @endif
  
 <!--	<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
@@ -56,7 +57,7 @@
             @foreach($payments as $payment)
                 <tr> 
 					<td><?php echo   date('d/m/Y H:i', strtotime($payment->created_at ))  ;?></td>
-                     <td> <?php echo UsersController::ChampById('name',$payment->user).' '.UsersController::ChampById('name',$payment->user)  ;?> </td>
+                     <td> <?php echo UsersController::ChampById('name',$payment->user).' '.UsersController::ChampById('lastname',$payment->user)  ;?> </td>
                      <td> <?php echo $payment->beneficiaire ;?> </td>
                      <td> <?php echo $payment->details;?><br> <b>ID paiement :</b> <?php echo $payment->payment_id; ?><br> <b>ID Payer : </b><?php echo $payment->payer_id;?></td>
                     <td>  
