@@ -196,7 +196,8 @@
 				 }
 			 else{
 				 $statut='<span class="badge badge-pill badge-primary ">Payée</span>';
-			 }
+			 } 
+			 echo $statut;
 				?>					
 					
 					
