@@ -20,7 +20,7 @@
 		if($user_type=='client')
 		{
 			$reservations= \App\Reservation::where('client',$cuser->id)->orderBy('id','desc')->limit(10)->get();
-			$payments= \App\Payment::where('par',$cuser->id)->orderBy('id','desc')->limit(10)->get(); 
+			$payments= \App\Payment::where('user',$cuser->id)->orderBy('id','desc')->limit(10)->get(); 
 			$alertes= \App\Alerte::where('user',$cuser->id)->limit(8)->get();
 			$countpay=count($payments);
 			$countres=count($reservations);
@@ -169,7 +169,6 @@
 					<th>Créée le</th>
 					<th>Client</th>
 					<th>Prestatire</th>
-					<th>Détails</th>
 					<th>Statut</th>
 					<th>Paiement</th>
  				  </tr>
@@ -181,7 +180,6 @@
 					<td> <?php   echo   date('d/m/Y H:i', strtotime($reservation->created_at ))  ;?></td>
 					<td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client);?></td>
 					<td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire);?></td>
-					<td>détails</td>
  					<td>				 
 			 <?php $statut='';
 					if($reservation->statut==0){$statut='<span class="badge badge-pill badge-danger" >En Attente</span>';}  ?>
