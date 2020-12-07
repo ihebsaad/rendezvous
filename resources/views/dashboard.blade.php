@@ -108,7 +108,7 @@
 		<?php	if($user_type=='admin' || $user_type=='prestataire' )
 		{ ?>
 		<div class="col-lg-2 col-md-6">
-          <div class="utf_dashboard_stat color-5">
+          <div class="utf_dashboard_stat color-2">
             <div class="utf_dashboard_stat_content">
               <h4><?php echo $countcategories;?></h4>
               <span>Catégories</span>
@@ -120,7 +120,7 @@
 	 <?php	if($user_type=='client' || $user_type=='prestataire'   )
 		{ ?>
 		 <div class="col-lg-2 col-md-6">
-          <div class="utf_dashboard_stat color-5">
+          <div class="utf_dashboard_stat color-2">
             <div class="utf_dashboard_stat_content">
               <h4><?php echo $countfavoris;?></h4>
               <span><?php if($user_type=='client'){echo 'Favoris'; }else{ echo 'Ajouté en Favoris';  } ?></span>

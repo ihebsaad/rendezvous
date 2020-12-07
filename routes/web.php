@@ -97,6 +97,10 @@ Route::post('/categories/updating','CategoriesController@updating')->name('categ
 Route::get('/categories/remove/{id}', 'CategoriesController@remove');
 Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser'); 
 
+Route::post('/payabn','PaymentController@payabn')->name('payabn');
+Route::get('/payabn','PaymentController@payabn')->name('payabn');
+Route::get('/status','PaymentController@getPaymentStatusAbn')->name('statusabn');
+
 
 Route::post('/pay','PaymentController@pay')->name('pay');
 Route::get('/pay','PaymentController@pay')->name('pay');
@@ -106,6 +110,10 @@ Route::get('/payreservation','PaymentController@payreservation')->name('payreser
 Route::get('/status','PaymentController@getPaymentStatus')->name('status');
 Route::get('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 Route::post('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
+
+
+Route::get('/abonnements','AbonnementsController@index')->name('abonnements');
+Route::get('/abonnements/remove/{id}', 'AbonnementsController@remove');
 
 
 
