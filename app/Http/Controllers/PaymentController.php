@@ -36,9 +36,12 @@ class PaymentController extends Controller
 
 	public function index()
     { 
-		$cuser = auth()->user();
-		$User= \App\User::find($cuser->id);
-		if($User->user_type=='admin' ){
+		 $cuser = auth()->user();
+		 
+		$User =\App\User::find($cuser->id);
+ 		$user_type=$User->user_type;
+		
+		if($user_type=='admin' ){
         $payments = \App\Payment::orderBy('id','desc')->get();
 		}else{
  
