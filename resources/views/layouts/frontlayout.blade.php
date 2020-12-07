@@ -29,8 +29,8 @@
              </div><br />
          @endif
 
-    @if ( ($request->session()->flash( ))!==null)
-            <div class="notification success closeable margin-bottom-30">
+    @if (!empty( Session::get('success') ))
+           <div class="notification success closeable margin-bottom-30">
             <p>{{ Session::get('success') }}</p>
             <a class="close" href="#"></a> 
 		  </div>
@@ -45,4 +45,4 @@
 @include('layouts.footer-scripts')
 </body>
 </html>
-
+<?php Session::flush(); ?>
