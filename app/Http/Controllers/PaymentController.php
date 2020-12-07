@@ -458,7 +458,7 @@ class PaymentController extends Controller
 		 }
 		 
 		 // abonnement fait et non expiré
-		  if($dateE> $today){
+		  if($expiration> $today){
 			 // expiration + abonnement
 
 			 $datee=$prestataire->expire->addDays(31);
