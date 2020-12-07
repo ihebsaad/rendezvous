@@ -36,6 +36,7 @@ class PaymentController extends Controller
 
 	public function index()
     { 
+ 
 		 $cuser = auth()->user();
 		 
 		$User =\App\User::find($cuser->id);
@@ -63,7 +64,6 @@ class PaymentController extends Controller
 	
 	public function __construct()
     {
-	  $this->middleware('auth');
 
 	/** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
