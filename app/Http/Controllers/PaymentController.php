@@ -497,7 +497,7 @@ class PaymentController extends Controller
     	
 		//enregistrement alerte
     	$alerte = new Alerte([
-             'user' => $user->id,
+             'user' => $user,
 			 'titre'=>'Abonnement payé',						 
              'details' => $message,
          ]);	
