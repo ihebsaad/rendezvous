@@ -45,4 +45,9 @@
 @include('layouts.footer-scripts')
 </body>
 </html>
-<?php Session::flush(); ?>
+ @guest
+ 
+  @else
+	  <?php Session::flush(); ?>
+   @endguest
+
