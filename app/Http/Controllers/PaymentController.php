@@ -434,9 +434,7 @@ class PaymentController extends Controller
 		 $today = (new \DateTime())->format($format);
 
 		 $expiration= $prestataire->expire;
-		 if($expiration!='')
-		 { $expiration = ($expiration )->format($format);}
-
+		 
 		 
 		 // aucun abonnement fait
 		 if($expiration==''){
@@ -495,7 +493,7 @@ class PaymentController extends Controller
 		$message='Bonjour,<br>';
 		$message.='Votre abonnement est payé avec succès <br>';
 		$message.='Abonnement : '.$abonnement.'<br>';
-		$message.="La date d'expiration de votre abonnement est :". date('d/m/Y H:i', strtotime($datee))." <br>";
+		$message.="La date d'expiration de votre abonnement est : ". date('d/m/Y H:i', strtotime($datee))." <br>";
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
  	    $this->sendMail(trim($prestataire->email),'Abonnement payé',$message)	;
