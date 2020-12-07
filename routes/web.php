@@ -99,7 +99,7 @@ Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->
 
 Route::post('/payabn','PaymentController@payabn')->name('payabn');
 Route::get('/payabn','PaymentController@payabn')->name('payabn');
-Route::get('/status','PaymentController@getPaymentStatusAbn')->name('statusabn');
+Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
 
 
 Route::post('/pay','PaymentController@pay')->name('pay');
