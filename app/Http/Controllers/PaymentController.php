@@ -489,8 +489,8 @@ class PaymentController extends Controller
 		// Email au prestataire
 		$message='Bonjour,<br>';
 		$message.='Votre abonnement est payé avec succès <br>';
-		$message.='Abonnement : '.$abonnement;
-		$message.="La date d'expiration de votre abonnement est :".$datee." <br>";
+		$message.='Abonnement : '.$abonnement.'<br>';
+		$message.="La date d'expiration de votre abonnement est :". date('d/m/Y H:i', strtotime($datee))." <br>";
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
  	    $this->sendMail(trim($prestataire->email),'Abonnement payé',$message)	;
