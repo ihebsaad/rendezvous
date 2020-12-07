@@ -81,8 +81,21 @@
                     $categories_user = \DB::table('categories_user')->where('user',$listing->id)->get();
 					$services =\App\Service::where('user',$listing->id)->get();
 					
-			//	 echo json_encode($categories_user);
-				
+  $reviews= \App\Review::where('prestataire',$listing->id)->get();
+        $countrev= count($reviews);
+
+		  $moy=$moy_qualite=$moy_service=$moy_prix=$moy_emplacement=$moy_espace=0;
+		$total=0;  
+		if($countrev>0){
+		
+		foreach( $reviews as $review)
+		{
+			$total=$total+($review->note);
+	  
+		}
+		
+		$moy=$total/$countrev; 
+		}				
 				?>
 				  <div class="col-md-4 utf_carousel_item" style="min-width:400px"> <a href="{{route('viewlisting',['id'=> $listing->id] )}}" class="utf_listing_item-container ">
 					<div class="utf_listing_item"> <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="" style="max-width:450px">
@@ -111,8 +124,8 @@
 						<span><i class="sl sl-icon-phone"></i> {{$listing->tel}}</span>											
 					  </div>					  
 					</div>
-					<div class="utf_star_rating_section" data-rating="4.5">
-						<div class="utf_counter_star_rating">(4.5)</div>
+					<div class="utf_star_rating_section" data-rating="<?php echo $moy;?>">
+						<div class="utf_counter_star_rating">(<?php echo $moy;?>)</div>
 						<!--<span class="utf_view_count"><i class="fa fa-eye"></i> 822+</span>-->
 						<span class="like-icon"></span>
 					</div>

@@ -522,7 +522,7 @@ class PaymentController extends Controller
 		$paiement  =  new \App\Payment([
              'payer_id' => Input::get('PayerID'),
 			 'payment_id'=>$payment_id,						 
-             'user' => $client->id,
+             'user' => $user,
              'beneficiaire' => 'prenezunrendezvous.com',
              'beneficiaire_id' => 1 ,
              'details' => 'paiement  de l\'abonnement : '.$abonnement,
