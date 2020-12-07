@@ -18,4 +18,5 @@
 @include('layouts.back.footer-scripts')
 </body>
 </html>
+<?php Session::flush(); ?>
 

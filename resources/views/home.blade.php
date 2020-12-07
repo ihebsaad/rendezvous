@@ -72,7 +72,7 @@
 		<div class="row">
 			<div class="col-md-12">
  				<div class=" row utf_dots_nav"> 
-				
+				 <?php  $User= auth()->user();  ?>
 				<?php
 				$listings=\App\User::where('user_type','prestataire')->get();
  
@@ -95,9 +95,11 @@
 		}
 		
 		$moy=$total/$countrev; 
-		}				
+		}		
 				?>
-				  <div class="col-md-4 utf_carousel_item" style="min-width:400px"> <a href="{{route('viewlisting',['id'=> $listing->id] )}}" class="utf_listing_item-container ">
+				  <div class="col-md-4 utf_carousel_item" style="min-width:400px">
+				  <div class="utf_listing_item-container ">
+					<a  href="{{route('viewlisting',['id'=> $listing->id] )}}">
 					<div class="utf_listing_item"> <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="" style="max-width:450px">
 				<?php $top=15; $i=0;?>
 				<?php foreach($categories_user as $cat){ 
@@ -112,7 +114,7 @@
 				
 				}
 				?>
-					<!--<?php if ($listing->featured ==1) {;?><span style=" " class="featured_tag pull-left">Featured</span><?php } ?>-->
+					<!-- <?php //if ($listing->featured ==1) {;?><span style=" " class="featured_tag pull-left">Featured</span><?php // } ?>-->
 					 <!-- <span class="utf_open_now">Open Now</span>-->
 					  <div class="utf_listing_item_content">
 					    <div class="utf_listing_prige_block">							
@@ -124,19 +126,36 @@
 						<span><i class="sl sl-icon-phone"></i> {{$listing->tel}}</span>											
 					  </div>					  
 					</div>
-					<div class="utf_star_rating_section" data-rating="<?php echo $moy;?>">
-						<div class="utf_counter_star_rating">(<?php echo $moy;?>)</div>
+					</a>
+				<?php if ($countrev >0){?> 	
+				<div class="utf_star_rating_section" data-rating="<?php echo $moy;?>"> 
+						<div class="utf_counter_star_rating"><?php echo $moy;?></div>
+						<?php }else{ ?>
+					<div class="utf_star_rating_section" style="height:55px" > 		
+							
+						<?php } ?>
 						<!--<span class="utf_view_count"><i class="fa fa-eye"></i> 822+</span>-->
-						<span class="like-icon"></span>
+					<?php if (isset($User)){?> 	
+
+			<?php if($User->user_type=='client'){  ?>  
+			<?php $countf= DB::table('favoris')->where('prestataire',$listing->id)->where('client',$User->id)->count(); if($countf==0) {?>	
+			 <span id="fav-<?php echo $listing->id;?>" onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon"></span>  
+			<?php }else{?>
+			 <span id="fav-<?php echo $listing->id;?>"  onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon liked"></span>   
+			<?php } ?>
+			 <?php } ?>
+			 
+					<?php }?>
 					</div>
-					</a> 
+					</div> 
 				  </div>
 		 <?php }  //foreach $listings  ?>
 				  
-				   
+				  
 				</div>
 			  </div>
 		  </div>
+	   </div>
 	   </div>
     </div>
   </section>
