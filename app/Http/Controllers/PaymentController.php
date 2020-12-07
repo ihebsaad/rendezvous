@@ -63,6 +63,8 @@ class PaymentController extends Controller
 	
 	public function __construct()
     {
+	  $this->middleware('auth');
+
 	/** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential(
