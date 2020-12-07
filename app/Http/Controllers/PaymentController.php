@@ -533,7 +533,7 @@ class PaymentController extends Controller
 		 // ajout abonnement
 		 		$abonnement  =  new \App\Abonnement([
  			 'abonnement'=>$abn,						 
-             'user' => $client->id,
+             'user' => $user,
               'details' =>  $abonnement,
               'expire' =>  $datee,
          ]);	
