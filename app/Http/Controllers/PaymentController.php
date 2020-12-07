@@ -429,7 +429,8 @@ class PaymentController extends Controller
 		 $today = (new \DateTime())->format($format);
 
 		 $expiration= $prestataire->expire;
-		  $dateE = ($expiration )->format('Y-m-d H:i:s');
+		 if($expiration!='')
+		 { $expiration = ($expiration )->format('Y-m-d H:i:s');}
 
 		 
 		 // aucun abonnement fait
@@ -439,9 +440,10 @@ class PaymentController extends Controller
 		else{
 			$datee = (new \DateTime())->modify('+366 days')->format($format);
 		}
-	
+	  
+		 }else{
 			 
-		 }
+
 		 
 		 // abonnement fait expiré
 		  if($expiration< $today){
@@ -459,6 +461,8 @@ class PaymentController extends Controller
 			 $datee=$prestataire->expire->addDays(31);
 			 $prestataire->expire->addDays(31);
 		     $prestataire->save();
+		 }
+		 			 
 		 }
 		 
       //  $date1 = (new \DateTime())->format('Y-m-d H:i:s');
