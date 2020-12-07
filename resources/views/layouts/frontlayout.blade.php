@@ -44,10 +44,4 @@
 @include('layouts.footer')
 @include('layouts.footer-scripts')
 </body>
-</html>
- @guest
- 
-  @else
-	  <?php Session::flush(); ?>
-   @endguest
-
+</html> 
