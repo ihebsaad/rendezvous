@@ -11,6 +11,12 @@
   <?php 
    use \App\Http\Controllers\UsersController;
 
+   $cuser = auth()->user();
+		 
+		$User =\App\User::find($cuser->id);
+ 		$user_type=$User->user_type;
+		
+		
   ?>
  <div id="dashboard"> 
 @include('layouts.back.menu')
@@ -37,28 +43,31 @@
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
-		      <th  >Date </th>
-             <th>Prestataire</th>
-             <th>Type</th>
+		      <th >Date </th>
+  <?php     if($user_type=='admin' ){  ?> 
+			<th>Prestataire</th> <?php } ?>
+             <th>Expiration</th>
             <th>Détails</th>
       <th class="no-sort">Actions</th> 
         </tr>
             <tr>
                 <th>Date</th>
-                <th>Prestataire</th>
-                <th>Type</th>
+        <?php     if($user_type=='admin' ){  ?> 
+		<th>Prestataire</th>   <?php } ?>
+                <th>Expiration</th>
                 <th>Détails</th>
- 				 <th></th>
-               </tr>
+                </tr>
             </thead>
             <tbody>
             @foreach($abonnements as $abonnement)
                 <tr> 
 					<td><?php echo   date('d/m/Y H:i', strtotime($abonnement->created_at ))  ;?></td>
-                     <td> <?php echo UsersController::ChampById('name',$abonnement->user).' '.UsersController::ChampById('lastname',$abonnement->user) ;?> </td>
-                     <td> <?php echo $abonnement->abonnement;?> </td>
+  <?php if($user_type=='admin' ){  ?>
+					<td> <?php echo UsersController::ChampById('name',$abonnement->user).' '.UsersController::ChampById('lastname',$abonnement->user) ;?> </td>
+                   <?php } ?>
+				   <td> <?php echo date('d/m/Y H:i', strtotime($abonnement->expire ))  ;?> </td>
                      <td> <?php echo $abonnement->details;?> </td>
-                    <td>  
+                     <td>  
            <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('AbonnementsController@remove', $abonnement->id)}}"><i class="fa fa-remove"></i></a>
 
                       </td> 
