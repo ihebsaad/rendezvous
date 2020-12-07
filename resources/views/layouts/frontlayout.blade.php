@@ -29,8 +29,8 @@
              </div><br />
          @endif
 
-    @if (!empty( Session::get('success') ))
-           <div class="notification success closeable margin-bottom-30">
+    @if (isset($request->session()->flash( )))
+            <div class="notification success closeable margin-bottom-30">
             <p>{{ Session::get('success') }}</p>
             <a class="close" href="#"></a> 
 		  </div>
