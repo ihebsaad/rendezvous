@@ -435,7 +435,7 @@ class PaymentController extends Controller
 
 		 $expiration= $prestataire->expire;
 		 if($expiration!='')
-		 { $expiration = ($expiration )->format('Y-m-d H:i:s');}
+		 { $expiration = ($expiration )->format($format);}
 
 		 
 		 // aucun abonnement fait

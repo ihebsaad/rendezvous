@@ -56,6 +56,7 @@
 		<th>Prestataire</th>   <?php } ?>
                 <th>Expiration</th>
                 <th>Détails</th>
+                <th> </th>
                 </tr>
             </thead>
             <tbody>
