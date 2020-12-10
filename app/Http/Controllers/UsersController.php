@@ -62,7 +62,7 @@ class UsersController extends Controller
 	}
 	
  	
-    public function prestatires()
+    public function prestataires()
     {   
 	    $cuser = auth()->user();
  
@@ -73,7 +73,7 @@ class UsersController extends Controller
 	   
 	   $users = User::where('user_type','prestataire')->get();
 
-	  return view('users.prestatires',  compact('users') );       
+	  return view('users.prestataires',  compact('users') );       
 		}     
 
 	}

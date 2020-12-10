@@ -462,7 +462,12 @@ class PaymentController extends Controller
 			 // expiration + abonnement
 
 			// $datee=$prestataire->expire->addDays(31);
-			 $prestataire->expire->addDays(31);
+			/// $prestataire->expire->addDays(31);
+		 $datee = ($expiration)->format($format);
+
+		 $datee = (new \DateTime())->modify('+366 days')->format($format);
+
+						
 		     $prestataire->save();
 		 }
 		 			 

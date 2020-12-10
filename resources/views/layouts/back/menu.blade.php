@@ -15,9 +15,9 @@
 		   
  <?php if($user_type=='admin'){ ?> 
  <li class="<?php if ($view_name == 'users-index'){echo 'active';} ?> "><a href="{{ route('users') }}"><i class="sl sl-icon-people"></i> Clients </a></li>       
-          <li class="<?php if ($view_name == 'users-prestatires'){echo 'active';} ?>  "><a href="{{ route('prestatires') }}"><i class="sl sl-icon-briefcase"></i> Prestataires </a></li> 
+          <li class="<?php if ($view_name == 'users-prestatires'){echo 'active';} ?>  "><a href="{{ route('prestataires') }}"><i class="sl sl-icon-briefcase"></i> Prestataires </a></li> 
 		  <li class="<?php if ($view_name == 'categories-index'){echo 'active';} ?>  "><a href="{{ route('categories') }}"><i class="sl sl-icon-tag"></i> Catégories </a></li>       
-		  <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="#"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li>  
+		  <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('abonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li>  
 		 <li class="<?php if ($view_name == 'parametres'){echo 'active';} ?>  "><a href="{{ route('parametres') }}"><i class="sl sl-icon-equalizer"></i> Paramètres </a></li>       
 
  <?php } ?>	

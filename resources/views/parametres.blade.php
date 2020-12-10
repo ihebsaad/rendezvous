@@ -166,7 +166,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 			 <div class="row with-forms">
 	 	
 	 
-	 
+	 <label>Contenu de la page "A Propos"</label><br>
     <div class="row">
        <div class="form-group ">
            <label for="contenu">  </label>
@@ -181,12 +181,12 @@ $commission_abonnement3= $parametres->commission_abonnement3;
    </div>
    <br><br>
    
-   
+   <label>Contenu de "A Propos" dans le Footer</label><br>
 	    <div class="row">
        <div class="form-group ">
                     <label for="contenu"></label>
                     <div class="editor" >
-                        <textarea style="min-height: 380px;"  id="apropos_footer" type="text"  class="textarea tex-com" placeholder="Contenu Footer de la page Accueil" name="apropos_footer" required  ><?php echo $apropos_footer; ?></textarea>
+                        <textarea style="min-height: 380px;"  id="apropos_footer" type="text"  class="textarea tex-com" placeholder="Contenu A propos du Footer" name="apropos_footer" required  ><?php echo $apropos_footer; ?></textarea>
                     </div>
          </div>
     </div>

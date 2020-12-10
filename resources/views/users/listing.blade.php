@@ -627,16 +627,16 @@ function geocodeAddress(geocoder, resultsMap) {
 		 				  <input type="hidden" name="user" value="{{$user->id}}"  >
 
 			 <div class="fm-input ">
-				  <input type="file" name="photo" id="photo"  >
+				  <input type="file" name="photo" id="photo" required >
 			 </div>
 		 <div class="fm-input ">
-							  <input type="text" placeholder="nom de service" id="nom"  name="nom">
+							  <input type="text" placeholder="nom de service*" id="nom"  name="nom" required >
 							</div>
 							<div class="fm-input  ">
 							  <input type="text"   placeholder="description de service"  id="description"  name="description">
 							</div>
 							<div class="fm-input  "> 
-							  <input type="text"      placeholder="prix de service" name="prix" id="prix"> 
+							  <input type="text"      placeholder="prix de service*" name="prix" id="prix" required> 
 							</div>
 					  <input type="submit" id="add" style="text-align:center;color:white;" value="Ajouter"></input>
 

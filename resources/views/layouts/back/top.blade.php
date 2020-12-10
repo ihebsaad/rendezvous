@@ -4,7 +4,7 @@
     <div id="header" class="not-sticky">
       <div class="container"> 
         <div class="utf_left_side"> 
-          <div id="logo"> <a href="index_1.html"><img src="{{ URL::asset('public/images/logo.png')}}" alt=""></a> <a href="index_1.html" class="dashboard-logo"><img src="{{ URL::asset('public/images/logo2.png')}}" alt=""></a> </div>
+          <div id="logo"> <a href="{{ route('home') }}"><img src="{{ URL::asset('public/images/logo.png')}}" alt=""></a> <a href="{{ route('home') }}" class="dashboard-logo"><img src="{{ URL::asset('public/images/logo2.png')}}" alt=""></a> </div>
           <div class="mmenu-trigger">
 			<button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
@@ -13,15 +13,15 @@
 			</button>
 		  </div>
           <nav id="navigation" class="style_one">
-          <!--  <ul id="responsive">
-              <li><a href="#">Accueil</a>
+             <ul id="responsive">
+             <!-- <li><a href="#">Accueil</a>
  
-              </li>			  
-              <li><a href="#">Prestataires</a>
+              </li>	-->		  
+              <li><a href="{{route('listings')}}">Prestataires</a>
  
               </li>
                
-            </ul>-->
+            </ul> 
           </nav>
           <div class="clearfix"></div>
         </div>

@@ -92,7 +92,7 @@ class ReservationsController extends Controller
 		$message.='Votre réservation est enregsitrée avec succès.<br>Veillez attendre la confirmation du prestatire.<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$request->get('date').'<b>Heure :</b> '.$request->get('heure').'<br>';
-		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
+  		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 		
 	    $this->sendMail(trim($client->email),'Nouvelle Réservation',$message)	;
@@ -104,8 +104,9 @@ class ReservationsController extends Controller
 		 $alerte->save();
 		 
 		 
-    return $reservation->id;
-		 
+   // return $reservation->id;
+		return redirect ('/reservations');
+	 
 
  	}
 	
@@ -161,12 +162,14 @@ class ReservationsController extends Controller
 		  $reservation = \App\Reservation::find($id);
 		  $service = \App\Service::find($reservation->service);
 		  $client = \App\User::find( $reservation->client );
+		  $prestataire = \App\User::find( $reservation->prestataire );
 
 		// Email prestataire
 		$message='';
 		$message.='Votre rendez vous est confirmé par le prestataire.<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$reservation->date .' - <b>Heure :</b> '.$reservation->heure.'<br><br>';
+		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
 	    $this->sendMail(trim($client->email),'Réservation validée',$message)	;
@@ -192,13 +195,15 @@ class ReservationsController extends Controller
 		$reservation = \App\Reservation::find($id) ;
 	    $service = \App\Service::find($reservation->service);
         $client = \App\User::find( $reservation->client );
+        $prestataire = \App\User::find( $reservation->prestataire );
 
 		// Email prestataire
 		$message='';
 		$message.='Votre rendez vous est annulée par le prestataire.<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$reservation->date.' - <b>Heure :</b> '.$reservation->heure .'<br><br>';
- 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+ 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';		
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
 	    $this->sendMail(trim($client->email),'Réservation annulée',$message)	;
 		

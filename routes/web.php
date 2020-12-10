@@ -32,7 +32,7 @@ Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
-Route::get('/prestatires', 'UsersController@prestatires')->name('prestatires');
+Route::get('/prestataires', 'UsersController@prestataires')->name('prestataires');
 Route::get('/pricing', 'UsersController@pricing')->name('pricing');
 Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
 Route::get('/contact', 'UsersController@contact')->name('contact');

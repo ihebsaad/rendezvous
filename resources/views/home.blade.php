@@ -4,7 +4,7 @@
  
  @section('content')
   @include('layouts.slider')
-
+ <!--
   <div class="container">
 	<div class="row">
       <div class="col-md-12">
@@ -59,7 +59,7 @@
       </div>
     </div>
   </div>
- 
+ -->
   
   <!--------------------------listings  ---------->
   <section class="fullwidth_block margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
@@ -159,12 +159,12 @@
 	   </div>
     </div>
   </section>
-  <a href="listings_grid_full_width.html" class="flip-banner parallax" data-background="{{  URL::asset('public/images/slider-bg-02.jpg')}}" data-color="#000" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">
+   <!-- <a href="listings_grid_full_width.html" class="flip-banner parallax" data-background="{{  URL::asset('public/images/slider-bg-02.jpg')}}" data-color="#000" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">
 	  <div class="flip-banner-content">
 		<h2 class="flip-visible">Browse Listings Attractions List</h2>    
 	  </div>
   </a>
-  
+
   <section class="utf_testimonial_part fullwidth_block padding-top-75 padding-bottom-75"> 
     <div class="container">
       <div class="row">
@@ -210,7 +210,8 @@
       </div>
     </div>
   </section>   
-  
+  -->
+  <!--
   <div class="container padding-bottom-70">
     <div class="row">
       <div class="col-md-12">
@@ -267,7 +268,8 @@
 	  <div class="col-md-12 centered_content"> <a href="#" class="button border margin-top-20">View More Categories</a> </div>
     </div>
   </div>
-  
+  -->
+   <!--
   <section class="fullwidth_block margin-bottom-0 padding-top-30 padding-bottom-65" data-background-color="linear-gradient(to bottom, #f9f9f9 0%, rgba(255, 255, 255, 1))">
 	<div class="container">
 		<div class="row">
@@ -277,8 +279,7 @@
 			<div class="col-md-12">
 				<div class="companie-logo-slick-carousel utf_dots_nav margin-bottom-10">
 					<div class="item">
-					<!--	<img src="{{  URL::asset('public/images/brand_logo_01.png') }}"  alt="">-->
-					</div>
+ 					</div>
 					<div class="item">
 						<img src="{{  URL::asset('public/images/brand_logo_02.png') }}"  alt="">
 					</div>
@@ -302,6 +303,7 @@
 		</div>
 	</div>
   </section>
+  -->
   <style>
  /*.utf_carousel_item{max-width:300px;} */
   </style>
