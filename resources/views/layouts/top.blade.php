@@ -3,7 +3,7 @@
     <div id="header">
       <div class="container"> 
         <div class="utf_left_side"> 
-          <div id="logo"> <a href="index_1.html"><img src="{{  URL::asset('public/images/logo.png') }}" alt=""></a> </div>
+          <div id="logo"> <a href="{{route('home')}}"><img style="max-height:55px" src="{{  URL::asset('public/images/logo.png') }}" alt=""></a> </div>
           <div class="mmenu-trigger">
 			<button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
