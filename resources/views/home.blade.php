@@ -103,13 +103,16 @@
 					<div class="utf_listing_item"> <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="" style="max-width:450px">
 				<?php $top=15; $i=0;?>
 				<?php foreach($categories_user as $cat){ 
-				$categorie =\App\Categorie::find( $cat->categorie);  
+				$categorie =\App\Categorie::find( $cat->categorie); 
+				
+				if($categorie !=null){
 				if($i<5){
 				if($categorie->parent==null){ 	
 			    $i++;	?>
 				<span class="tag" style="top:<?php echo $top;?>px!important"><?php echo  $categorie->nom; ?></span>   
 				<?php $top=$top+30; 
 				} 
+				}
 				}
 				
 				}
