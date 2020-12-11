@@ -509,7 +509,7 @@
           <h3><i class="sl sl-icon-folder-alt"></i> Catégories</h3>
           <ul class="utf_listing_detail_sidebar">
 		<?php  foreach($categories_user as $cat){   $categorie =\App\Categorie::find( $cat->categorie);  
- 					echo '   <li><i class="fa fa-angle-double-right"></i> '.$categorie->nom .'</li>'; 
+ 				if(isset($categorie)){	echo '   <li><i class="fa fa-angle-double-right"></i> '.$categorie->nom .'</li>'; }
 					}
 					?>
                      </ul>
