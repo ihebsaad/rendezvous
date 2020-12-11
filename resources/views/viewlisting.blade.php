@@ -84,7 +84,7 @@
 		 <h2>	<?php	$categories_user = \DB::table('categories_user')->where('user',$user->id)->get();
 					$services =\App\Service::where('user',$user->id)->get();
 					foreach($categories_user as $cat){   $categorie =\App\Categorie::find( $cat->categorie);  
-				if($categorie->parent==null){ 	echo ' <span class="listing-tag">'.$categorie->nom.'</span>';}
+			if(isset($categorie)){	if($categorie->parent==null){ 	echo ' <span class="listing-tag">'.$categorie->nom.'</span>';}  }
 
 					}
 		   $countadded= DB::table('favoris')->where('prestataire',$user->id)->count(); 
