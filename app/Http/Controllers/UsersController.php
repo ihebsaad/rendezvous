@@ -93,6 +93,12 @@ class UsersController extends Controller
 
 	}
 	
+		   public function faqs()
+    {
+      	 
+	  return view('faqs' );       
+
+	}
 	
 	
    public function dashboard()

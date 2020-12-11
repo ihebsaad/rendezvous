@@ -37,6 +37,7 @@ Route::get('/pricing', 'UsersController@pricing')->name('pricing');
 Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
 Route::get('/contact', 'UsersController@contact')->name('contact');
 Route::get('/apropos', 'UsersController@apropos')->name('apropos');
+Route::get('/faqs', 'UsersController@faqs')->name('faqs');
 
 Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
