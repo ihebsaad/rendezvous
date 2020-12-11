@@ -19,6 +19,7 @@
               <li><a class="<?php if ($view_name == 'home'){echo 'active';} ?>" href="{{route('home')}}">Accueil</a></li>
               <li><a class="<?php if ($view_name == 'apropos'){echo 'active';} ?> " href="{{route('apropos')}}">A propos</a></li>
               <li><a class="<?php if ($view_name == 'listings'){echo 'active';} ?>" href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
+              <li><a class="<?php if ($view_name == 'faqs'){echo 'active';} ?>" href="{{route('faqs')}}">FAQs </a></li>
               <li><a class="<?php if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contact')}}" >Contact</a>             
             </ul>
           </nav>
