@@ -80,7 +80,7 @@
                   <li>Réservations des services</li>	
                   <li>Rappels SMS</li>				  
                   <li><b style="color:green">Entreprise Mise en Avant<b></li>
-                  <li><i class="sl sl-icon-check"></i> <b style="color:green">Commission de <u> <?php echo $parametres->commission_abonnement3;?></u></b> sur les services réservés</li>
+                  <li><i class="sl sl-icon-check"></i> <b style="color:green">Commission de <u> <?php echo $parametres->commission_abonnement3;?></u>%</b> sur les services réservés</li>
                 </ul>
               @guest  <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
 			 @else
