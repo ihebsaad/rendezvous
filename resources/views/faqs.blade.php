@@ -18,13 +18,13 @@
 		<br>
 		<br>
   <div class="parallax" data-background="images/slider-bg-02.jpg"> 
-    <div class="utf_text_content white-font">
+    <div class="utf_text_content white-font" style="background-color:#006ed2">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
             <h2>QUESTION RÉPONSE POUR LES PRESTATAIRES DE SERVICES</h2>
-
-Comment gérer les rendez-vous venant de la plateforme ?</b><br>
+<br>
+<b>Comment gérer les rendez-vous venant de la plateforme ?</b><br>
 Rien de plus simple !  Les rendez-vous sont directement intégrés à votre agenda en ligne. Vous pouvez alors les traiter comme les autres rendez-vous de votre agenda. Bon à savoir : tous les rendez-vous sont payés à l’avance sur la plateforme.  
 
 <br><b>Y-a-t-il un engagement ?</b><br>
