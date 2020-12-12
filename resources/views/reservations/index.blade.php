@@ -70,7 +70,7 @@ background-color:#a0d468;
           </thead>
           <tbody>
             @foreach($reservations as $reservation)
-			<?php $montant=ServicesController::ChampById('prix',$reservation->service); $montant=$montant+1;?>
+			<?php $montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
 			<?php $description=ServicesController::ChampById('nom',$reservation->service);?>
                 <tr> 
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client) ;?></td><?php }?>
