@@ -27,13 +27,13 @@
 Comment gérer les rendez-vous venant de la plateforme ?</b><br>
 Rien de plus simple !  Les rendez-vous sont directement intégrés à votre agenda en ligne. Vous pouvez alors les traiter comme les autres rendez-vous de votre agenda. Bon à savoir : tous les rendez-vous sont payés à l’avance sur la plateforme.  
 
-<b>Y-a-t-il un engagement ?</b><br>
+<br><b>Y-a-t-il un engagement ?</b><br>
 
 Nos offres mensuelles sont disponibles avec et sans engagement de durée. Sachez qu'en prenant un abonnement annuel, cela vous reviendra largement moins cher que les abonnements mensuels qui sont proposés.
 <br>
 
 
-<b>Existe-t-il un tarif spécial ?</b><br>
+<br><b>Existe-t-il un tarif spécial ?</b><br>
 Oui en choisissant l’engagement annuel. Une sacrée économie !
 <br>
 <br>
@@ -44,7 +44,7 @@ Oui en choisissant l’engagement annuel. Une sacrée économie !
 
  
 
-<b>Comment prendre un rendez-vous sur le site ?</b><br>
+<br><b>Comment prendre un rendez-vous sur le site ?</b><br>
 
 
 
@@ -52,7 +52,7 @@ C'est très simple : vous choisissez votre prestataire de services près de chez
 <br>
 
 
-<b>Comment payer la prestation sur le site ? </b><br>
+<br><b>Comment payer la prestation sur le site ? </b><br>
 
 
 
@@ -60,7 +60,7 @@ C'est très simple : une fois que vous avez choisi votre prestation de service, 
 <br>
 
 
-<b>Est ce que je vais recevoir un rappel de mon rendez-vous ?</b><br>
+<br><b>Est ce que je vais recevoir un rappel de mon rendez-vous ?</b><br>
 
 
 
@@ -68,7 +68,7 @@ Oui une fois choisi votre jour et horaire de prestation vous avez la possibilit�
 <br>
 
 
-<b>Est ce que le prestataire doit valider mon rendez-vous pour chaque rendez-vous ?</b><br>
+<br><b>Est ce que le prestataire doit valider mon rendez-vous pour chaque rendez-vous ?</b><br>
 
 
 

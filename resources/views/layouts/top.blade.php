@@ -1,9 +1,12 @@
-  
+  <?php
+ $parametres=DB::table('parametres')->where('id', 1)->first();
+$plogo= $parametres->logo;
+?>
 <header id="header_part"> 
     <div id="header">
       <div class="container"> 
         <div class="utf_left_side"> 
-          <div id="logo"> <a href="{{route('home')}}"><img style="max-height:55px" src="{{  URL::asset('public/images/logo.png') }}" alt=""></a> </div>
+          <div id="logo"> <a href="{{route('home')}}"><img style="max-height:55px"    src="<?php echo  URL::asset('storage/images/'.$plogo);?>" alt=""></a> </div>
           <div class="mmenu-trigger">
 			<button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
@@ -17,7 +20,7 @@
           <nav id="navigation" class="style_one">
             <ul id="responsive">
               <li><a class="<?php if ($view_name == 'home'){echo 'active';} ?>" href="{{route('home')}}">Accueil</a></li>
-              <li><a class="<?php if ($view_name == 'apropos'){echo 'active';} ?> " href="{{route('apropos')}}">A propos</a></li>
+           <!--   <li><a class="<?php if ($view_name == 'apropos'){echo 'active';} ?> " href="{{route('apropos')}}">A propos</a></li>-->
               <li><a class="<?php if ($view_name == 'listings'){echo 'active';} ?>" href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
               <li><a class="<?php if ($view_name == 'faqs'){echo 'active';} ?>" href="{{route('faqs')}}">FAQs </a></li>
               <li><a class="<?php if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contact')}}" >Contact</a>             

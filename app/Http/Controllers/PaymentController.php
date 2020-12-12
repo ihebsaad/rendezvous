@@ -27,6 +27,8 @@ use \App\User;
 use \App\Reservation;
 use \App\Alerte;
 
+use Carbon\Carbon;
+
  
  use Swift_Mailer;
  use Mail;
@@ -333,6 +335,8 @@ class PaymentController extends Controller
 		
 		// changement statut réservation
 		Reservation::where('id',$reservation)->update(array('paiement' => 1));
+		// ajout commission ici
+		
 		
 		
 		 // Email
@@ -463,19 +467,24 @@ class PaymentController extends Controller
 
 			// $datee=$prestataire->expire->addDays(31);
 			/// $prestataire->expire->addDays(31);
-		 $datee = ($expiration)->format($format);
+		/* $datee = ($expiration)->format($format);
 
 		 $datee = (new \DateTime())->modify('+366 days')->format($format);
-
-						
-		     $prestataire->save();
+*/
+		 $newdate = Carbon::createFromFormat('Y-m-d H:i:s', $prestataire->expire);
+		 if($abn!=3){$daysToAdd = 31;}
+		else{$daysToAdd = 365;}
+		 
+		 $newdate = $newdate->addDays($daysToAdd);
+		 $datee =  $newdate;
+ 
 		 }
 		 			 
 		 }
 		 
       //  $date1 = (new \DateTime())->format('Y-m-d H:i:s');
 
-        $dtc = (new \DateTime())->modify('+31 days')->format($format);
+       // $dtc = (new \DateTime())->modify('+31 days')->format($format);
 
 		  
 		User::where('id',$user)->update(array('expire' => $datee,'abonnement'=>$abn));

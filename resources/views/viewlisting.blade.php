@@ -68,7 +68,7 @@
   <div class="container">
     <div class="row utf_sticky_main_wrapper">
       <div class="col-lg-8 col-md-8">
-        <div id="titlebar" class="utf_listing_titlebar">
+	          <div id="titlebar" class="utf_listing_titlebar">
           <div class="utf_listing_titlebar_title">
            <h2>{{$user->titre}} 
 			  <input type="hidden" id="user" value="{{$user->id}}" >
@@ -125,6 +125,105 @@
 			<a href="{{$user->youtube}}" class="youtube-link"><i class="fa fa-youtube-play"></i> Youtube</a>
 		  </div>-->		  
         </div>
+	  </div>
+	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
+	  
+	  <?php if( isset($User) && $user->id== $User->id) {?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }?>
+
+      <?php if($user->statut==1){?>  <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réserréservations"> <i class="sl sl-icon-check"></i> Disponible</div><?php  } else{ ?>
+     <div class="unavailable-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-close"></i> Non Disponible</div>
+      <?php } ?>
+	  <div class="utf_box_widget booking_widget_box">
+          <h3><i class="fa fa-calendar"></i> Réserver un service
+			<!--<div class="price">
+				<span>220$<small>person</small></span>				
+			</div>-->
+		  </h3>
+		  <div class="row with-forms margin-top-0">
+			<div class="col-lg-12 col-md-12">
+				<select class="utf_chosen_select_single" id="service" placeholder="Sélectionner"  >
+				<option></option>
+					<?php 
+					foreach($services as $service){
+						echo '<option value="'.$service->id.'">'.$service->nom.'</option>';
+					}
+					?>
+				</select>
+			</div>
+		  </div>		  
+          <div class="row with-forms margin-top-0">
+            <div class="col-lg-12 col-md-12 select_date_box">
+              <input type="text" id="date-picker" placeholder="Date"  >
+			  <i class="fa fa-calendar"></i>
+            </div> 
+		   <div class="row with-forms margin-top-0">
+			<div class="col-lg-3  " style="padding-left:20px;padding-top:10px">
+			<label>Heure:</label>
+			</div>
+			 <div class="col-lg-6  ">
+				<input style="margin-left:15px;min-width:180px" type="time"  required  id="heure"	>
+		     </div>
+		   </div>
+          </div>
+		  <div class="row with-forms">
+			<div class="col-lg-12">
+				<div class="panel-dropdown">
+					<a href="javascript:void(0)">Personnes <span class="qtyTotal" name="qtyTotal">1</span></a>
+					<div class="panel-dropdown-content">
+						<div class="qtyButtons">
+							<div class="qtyTitle">Adultes</div>
+							<input type="text" name="qtyInput" id="adultes" value="1">
+						</div>
+						<div class="qtyButtons">
+							<div class="qtyTitle">Enfants</div>
+							<input type="text" name="qtyInput" id="enfants" value="0">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		  <div class="row with-forms">
+		  	 <div class="col-lg-11" style="padding-left:20px">
+		  <textarea name="remarques" cols="40" rows="2" id="remarques" placeholder="si vous avez des remarques" ></textarea>
+
+			 </div>
+		  </div>
+		  <div class="row with-forms">
+		  	 <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div>
+			 <div  class="row" style="padding-left:40px;padding-top:5px" >
+			 <select class=" " id="rappel" style="max-width:400px!important" >
+			 <option value="30">Avant 30 mins</option>
+			 <option value="60">Avant une heure</option>
+			 <option value="120">Deux heures</option>
+			 <option value="1440">Un jour</option>
+			 </select>
+			 </div>
+		  </div>		  
+		  </div>	
+       <?php if (isset($User)){?> 
+	   <a class="utf_progress_button button fullwidth_block margin-top-5" style="color:white" id="reserver">Réserver</a>
+		
+			<?php if($User->user_type=='client'){  ?>  
+			<?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
+			<button id="addfavoris" class="like-button add_to_wishlist"><span class="like-icon"></span><div id="mesfavoris">Ajouter aux favoris</div></button>
+			<?php }else{?>
+			<button id="addfavoris" class="like-button add_to_wishlist liked"><span class="like-icon liked"></span><div id="mesfavoris">Retirer de favoris</div></button>
+			<?php } ?>
+			 <?php } ?>
+		 <?php }else{  ?>
+		 
+		 <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a>
+	 
+			 
+	<?php	 } ?>
+			
+          <div class="clearfix"></div>
+        </div>
+
+	  
+	  </div>
+      <div class="col-lg-8 col-md-8">
+
         
         <div id="utf_listing_amenities" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Services</h3>
@@ -199,12 +298,15 @@
   <div class="reviews-container">
 			<div class="row">
 				<div class="col-lg-3">
-					<div id="review_summary">
+					<div id="review_summary" style="background-color:#0054a6">
 						<strong><?php echo $moy;?></strong>
 						<em>Note Moyenne</em>
 						<small>Sur <?php echo $countrev;?> Avis</small>
 				</div>
  				</div>
+				<style>
+				.progress-bar{background-color:#0054a6!important;}
+				</style>
 				<div class="col-lg-9">
 					<div class="row">
 						<div class="col-lg-2 review_progres_title"><small><strong>Qualité</strong></small></div>
@@ -392,98 +494,7 @@
       </style>
       <!-- Sidebar -->
       <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
-	<?php if( isset($User) && $user->id== $User->id) {?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }?>
-
-      <?php if($user->statut==1){?>  <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-check"></i> Disponible</div><?php  } else{ ?>
-     <div class="unavailable-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-close"></i> Non Disponible</div>
-      <?php } ?>
-	  <div class="utf_box_widget booking_widget_box">
-          <h3><i class="fa fa-calendar"></i> Réserver un service
-			<!--<div class="price">
-				<span>220$<small>person</small></span>				
-			</div>-->
-		  </h3>
-		  <div class="row with-forms margin-top-0">
-			<div class="col-lg-12 col-md-12">
-				<select class="utf_chosen_select_single" id="service" placeholder="Sélectionner"  >
-				<option></option>
-					<?php 
-					foreach($services as $service){
-						echo '<option value="'.$service->id.'">'.$service->nom.'</option>';
-					}
-					?>
-				</select>
-			</div>
-		  </div>		  
-          <div class="row with-forms margin-top-0">
-            <div class="col-lg-12 col-md-12 select_date_box">
-              <input type="text" id="date-picker" placeholder="Date"  >
-			  <i class="fa fa-calendar"></i>
-            </div> 
-		   <div class="row with-forms margin-top-0">
-			<div class="col-lg-3  " style="padding-left:20px;padding-top:10px">
-			<label>Heure:</label>
-			</div>
-			 <div class="col-lg-6  ">
-				<input style="margin-left:15px;min-width:180px" type="time"  required  id="heure"	>
-		     </div>
-		   </div>
-          </div>
-		  <div class="row with-forms">
-			<div class="col-lg-12">
-				<div class="panel-dropdown">
-					<a href="javascript:void(0)">Personnes <span class="qtyTotal" name="qtyTotal">1</span></a>
-					<div class="panel-dropdown-content">
-						<div class="qtyButtons">
-							<div class="qtyTitle">Adultes</div>
-							<input type="text" name="qtyInput" id="adultes" value="1">
-						</div>
-						<div class="qtyButtons">
-							<div class="qtyTitle">Enfants</div>
-							<input type="text" name="qtyInput" id="enfants" value="0">
-						</div>
-					</div>
-				</div>
-			</div>
 			
-		  <div class="row with-forms">
-		  	 <div class="col-lg-11" style="padding-left:20px">
-		  <textarea name="remarques" cols="40" rows="2" id="remarques" placeholder="si vous avez des remarques" ></textarea>
-
-			 </div>
-		  </div>
-		  <div class="row with-forms">
-		  	 <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div>
-			 <div  class="row" style="padding-left:40px;padding-top:5px" >
-			 <select class=" " id="rappel" style="max-width:400px!important" >
-			 <option value="30">Avant 30 mins</option>
-			 <option value="60">Avant une heure</option>
-			 <option value="120">Deux heures</option>
-			 <option value="1440">Un jour</option>
-			 </select>
-			 </div>
-		  </div>		  
-		  </div>	
-       <?php if (isset($User)){?> 
-	   <a class="utf_progress_button button fullwidth_block margin-top-5" style="color:white" id="reserver">Réserver</a>
-		
-			<?php if($User->user_type=='client'){  ?>  
-			<?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
-			<button id="addfavoris" class="like-button add_to_wishlist"><span class="like-icon"></span><div id="mesfavoris">Ajouter aux favoris</div></button>
-			<?php }else{?>
-			<button id="addfavoris" class="like-button add_to_wishlist liked"><span class="like-icon liked"></span><div id="mesfavoris">Retirer de favoris</div></button>
-			<?php } ?>
-			 <?php } ?>
-		 <?php }else{  ?>
-		 
-		 <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a>
-	 
-			 
-	<?php	 } ?>
-			
-          <div class="clearfix"></div>
-        </div>
-		
 		
         <div class="utf_box_widget margin-top-35">
           <h3><i class="sl sl-icon-phone"></i> Contact Info</h3>
@@ -878,7 +889,7 @@
                         data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date:date ,service:service, adultes:adultes, enfants:enfants, heure:heure, rappel:rappel   , _token:_token},
                         success:function(data){
  
-  
+						location.href= "{{ route('reservations') }}";
                         }
                     });
                

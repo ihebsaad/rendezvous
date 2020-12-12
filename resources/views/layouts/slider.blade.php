@@ -1,4 +1,7 @@
-
+<?php
+ $parametres=DB::table('parametres')->where('id', 1)->first();
+$pvideo= $parametres->video;
+?>
 
   <div class="search_container_block overlay_dark_part">
     <div class="main_inner_search_block">
@@ -74,7 +77,7 @@
     
     <div class="utf_video_container">
       <video loop autoplay muted>
-        <source src="{{  URL::asset('public/images/search_bg_video.mp4') }}" type="video/mp4">
+        <source   src="<?php echo  URL::asset('storage/images/'.$pvideo);?>" type="video/mp4">
       </video>
     </div>
   </div>
