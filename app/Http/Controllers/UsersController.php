@@ -271,7 +271,8 @@ class UsersController extends Controller
                  $path = storage_path()."/images/";
  
           //$image->move($path, $name);
-            $request->file('file')->store($path.$name);
+            //$request->file('file')->store($path.$name);
+            Storage::put($name, $image, $path);     
 		}
 		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
   
