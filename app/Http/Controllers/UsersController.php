@@ -264,19 +264,14 @@ class UsersController extends Controller
 	{
  	 //$temp_file = $_FILES['file']['tmp_name'];
 
-		 /*$name='';
+		 $name='';
 		if($request->file('file')!=null)
 		{$image=$request->file('file');
 		 $name =  $image->getClientOriginalName();
                  $path = storage_path()."/images/";
  
           //$image->move($path, $name);
-		}*/
-		$image = $request->file('file');
-		$destinationPathImg = storage_path()."/images/";
-
-		if (!$image->move($destinationPathImg, $image->getClientOriginalName())) {
-		    return 'Error saving the file.';
+                 \File::copy($path.$name);
 		}
 		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
   
