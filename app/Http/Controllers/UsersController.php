@@ -264,7 +264,7 @@ class UsersController extends Controller
 	{
  	 //$temp_file = $_FILES['file']['tmp_name'];
 
-		 $name='';
+	/*	 $name='';
 		if($request->file('file')!=null)
 		{$image=$request->file('file');
 		 $name =  $image->getClientOriginalName();
@@ -272,7 +272,14 @@ class UsersController extends Controller
  
           $image->move($path, $name); 
 		}
-		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
+		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));*/
+
+		// Set upload destination path and generate file name
+        $destinationPath = storage_path()."/images/";
+        $fileName = rand(11111, 99999) . '.' . $request->file('file')->getClientOriginalExtension();
+
+        // Move the uploaded file
+        $request->file('file')->move($destinationPath, $fileName);
   
 	}
 	
