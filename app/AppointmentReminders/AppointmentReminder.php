@@ -44,10 +44,12 @@ echo $service->sid  ;
         $this->sendingNumber = $twilioConfig['twilio_number'];*/
 		
 		$sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
-		$token  = "d20e7772f4a0715de3fbb408235a6e5b";
-        $this->sendingNumber = '(659) 234-3197';
-
-        $this->twilioClient = new Client($accountSid, $authToken);
+		$token  = "f89e4b42aedc3306e4f13996885d9f0c";
+        //$this->sendingNumber = '(659) 234-3197';
+        $this->sendingNumber = '+1659204745';
+        //(659) 204-7451   //   +16592047451
+        //$this->twilioClient = new Client($accountSid, $authToken);
+        $this->twilioClient = new Client($sid, $token);
     }
 
     /**
@@ -92,6 +94,25 @@ echo $service->sid  ;
      */
     private function _sendMessage($number, $content)
     {
+        $this->twilioClient->messages->create(
+            $number,
+            array(
+                "from" => $this->sendingNumber,
+                "body" => $content
+            )
+        );
+    }
+
+    public function envoiesms($number, $content)
+    {
+        $sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
+        $token  = "f89e4b42aedc3306e4f13996885d9f0c";
+        //$this->sendingNumber = '(659) 234-3197';
+        $this->sendingNumber = '+1659204745';
+        //(659) 204-7451   //   +16592047451
+        //$this->twilioClient = new Client($accountSid, $authToken);
+        $this->twilioClient = new Client($sid, $token);
+
         $this->twilioClient->messages->create(
             $number,
             array(

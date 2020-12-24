@@ -271,6 +271,10 @@ class UsersController extends Controller
                  $path = storage_path()."/images/";
  
           $image->move($path, $name); 
+
+          // test end sms
+          $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder();
+       		$appointmentReminder->envoiesms("+21654076876","testing rendezvous");
 		}
 		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
   
