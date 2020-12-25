@@ -4,7 +4,7 @@ namespace App;
 
  use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Review extends Authenticatable
+class Favorite extends Authenticatable
 {
  
    
