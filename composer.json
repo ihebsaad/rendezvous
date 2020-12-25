@@ -16,7 +16,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "paypal/rest-api-sdk-php": "^1.14",
-         "twilio/sdk": "^6.15"
+         "twilio/sdk": "^6.15",
          "laravelcollective/html": "6.1",
         "nesbot/carbon": "2.43.0"
       },
