@@ -262,6 +262,10 @@ class UsersController extends Controller
 	
 		public function ajoutvideoslider(Request $request)
 	{
+ 	 // test end sms
+          $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder();
+       		$appointmentReminder->envoiesms("+21654076876","testing rendezvous");
+
  	 //$temp_file = $_FILES['file']['tmp_name'];
 
 		 $name='';
@@ -272,9 +276,7 @@ class UsersController extends Controller
  
           $image->move($path, $name); 
 
-          // test end sms
-          $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder();
-       		$appointmentReminder->envoiesms("+21654076876","testing rendezvous");
+          
 		}
 		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
   
