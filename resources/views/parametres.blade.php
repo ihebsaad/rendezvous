@@ -131,10 +131,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
               </div>			  
               <div class="row with-forms">    
 			  				  <div class="row" >	<a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>	
-			  				  	<form action="{{ route('users.sendsms') }}" id="sendsmsFrom">
-								  {{ csrf_field() }}
 								  <button onclick='asendsms();'>SEND SMS</button>
-			 					</form>
 
 			  				  </div>	  
 
