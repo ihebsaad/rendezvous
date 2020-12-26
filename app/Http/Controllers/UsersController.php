@@ -264,19 +264,7 @@ class UsersController extends Controller
 	
 		public function ajoutvideoslider(Request $request)
 	{
- 	 // test send sms
-      $sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
-      $token  = "dda3e46929618cd01ef5144360b645c0";
-      $twilio_number = "+16592047451";
-      $client = new Client($sid, $token);
-		$client->messages->create(
-		    // Where to send a text message (your cell phone?)
-		    '+21654076876',
-		    array(
-		        'from' => $twilio_number,
-		        'body' => 'test de prendez un rendez vous!'
-		    )
-		);
+ 	 
 
  	 //$temp_file = $_FILES['file']['tmp_name'];
 
@@ -399,6 +387,23 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect('/prestataires')->with('success', '  supprimé avec succès');
+    }
+
+    public function sendsms()
+    {
+    	// test send sms
+      $sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
+      $token  = "dda3e46929618cd01ef5144360b645c0";
+      $twilio_number = "+16592047451";
+      $client = new Client($sid, $token);
+		$client->messages->create(
+		    // Where to send a text message (your cell phone?)
+		    '+21654076876',
+		    array(
+		        'from' => $twilio_number,
+		        'body' => 'test de prendez un rendez vous!'
+		    )
+		);
     }
 	
  }

@@ -56,7 +56,7 @@ Route::post('/users/parametring','UsersController@parametring')->name('users.par
 Route::get('/parametres','UsersController@parametres')->name('parametres');
 Route::post('/users/ajoutlogo','UsersController@ajoutlogo')->name('users.ajoutlogo');
 Route::post('/users/ajoutvideoslider','UsersController@ajoutvideoslider')->name('users.ajoutvideoslider');
-
+Route::post('/users/sendsms','UsersController@sendsms')->name('users.sendsms');
 Route::post('/services/saving','ServicesController@store')->name('services.saving');
 Route::post('/services/add','ServicesController@add')->name('services.add');
 Route::post('/services/store','ServicesController@store')->name('services.store');

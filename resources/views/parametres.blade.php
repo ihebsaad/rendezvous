@@ -130,7 +130,13 @@ $commission_abonnement3= $parametres->commission_abonnement3;
                 <h3><i class="sl sl-icon-film"></i> Logo et Video</h3>
               </div>			  
               <div class="row with-forms">    
-			  				  <div class="row" >	<a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>	</div>	  
+			  				  <div class="row" >	<a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>	
+			  				  	<form action="{{ route('users.sendsms') }}" id="sendsmsFrom">
+								  {{ csrf_field() }}
+								  <button onclick='asendsms();'>SEND SMS</button>
+			 					</form>
+
+			  				  </div>	  
 
 			  	  <div class="row">
 				  
@@ -261,6 +267,22 @@ $commission_abonnement3= $parametres->commission_abonnement3;
        
     }
 
+ function asendsms() {
+ 	var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "{{ route('users.sendsms') }}",
+            method: "POST",
+            data: {_token: _token},
+            success: function (data) {
+				 	swal({
+                        type: 'success',
+                        title: 'SMS ...',
+                        text: 'SMS envoyé avec succès'
+ 					//	icon: "success",
+                    }); 
+            }
+        });
+ }
 	
 	   function updating(elm) {
  		 var val =document.getElementById(elm).value;
