@@ -396,14 +396,23 @@ class UsersController extends Controller
       $token  = "dda3e46929618cd01ef5144360b645c0";
       $twilio_number = "+16592047451";
       $client = new Client($sid, $token);
-		$client->messages->create(
+		/*$client->messages->create(
 		    // Where to send a text message (your cell phone?)
 		    '+21654076876',
 		    array(
 		        'from' => $twilio_number,
 		        'body' => 'test de prendez un rendez vous!'
 		    )
-		);
+		);*/
+		// creation service
+$service = $client->verify->v2->services
+                              ->create("Verification Tel");
+
+$serviceid= $service->sid ;
+	
+$verification = $client->verify->v2->services($serviceid)
+                                   ->verifications
+                                   ->create('+21654076876', "sms");
     }
 	
  }
