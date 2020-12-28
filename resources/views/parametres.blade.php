@@ -149,10 +149,10 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
 					<h4 id="images">Télécharger une vidéo en format mp4</h4>
 
-					<form action="{{ route('users.ajoutvideoslider') }}" enctype="multipart/form-data" method="POST" class="dropzone" id="dropvideo" >
-					 {{ csrf_field() }}
-					 <div id="myAwesomeDropzone" class="dropzone"></div>
- 					</form>
+					<form action="{{ route('users.ajoutvideoslider') }}" enctype="multipart/form-data" method="post" class="dropzone" id="dropvideo" >
+					@csrf
+<!-- 					 <div id="myAwesomeDropzone" class="dropzone"></div>
+ --> 					</form>
 			 </div>
 
 			  </div>
@@ -349,10 +349,10 @@ $commission_abonnement3= $parametres->commission_abonnement3;
   },
  };*/
 
-  Dropzone.options.myAwesomeDropzone = {
+  /*Dropzone.options.myAwesomeDropzone = {
                 url: "{{ route('users.ajoutvideoslider') }}",
                 method: 'POST',
-                autoProcessQueue: false,
+                autoProcessQueue: true,
                 uploadMultiple: true,
                 parallelUploads: 3,
                 maxFiles: 3,
@@ -367,11 +367,11 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 
                 init: function () {
                     var myDropzone = this;
-                   /* $('#submit_form').on("click", function (e) {
+                  $('#submit_form').on("click", function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         myDropzone.processQueue();      
-                    });*/
+                    });
 
 
 
@@ -380,7 +380,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
                             //title = $(this).find('input[name="title"]').val();
                             _token=$(this).find('input[name="_token"]').val();
                             alert( _token);
-                            formData.append('title', _token);
+                            formData.append('_token', _token);
                         });
                     });
                     this.on("success", function(file, response) {
@@ -405,7 +405,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
                     });
                 },
 
-            };
+            };*/
 </script>
 
 
