@@ -405,8 +405,16 @@ class UsersController extends Controller
 		    '+21654076876',
 		    array(
 		        'from' => $twilio_number,
-		        'body' => '
-		        Bonjour, 
+		        'body' => 'Bonjour, 
+		        test du site: prenezunrendezvous.com !'
+		    )
+		);
+		$client->messages->create(
+		    // Where to send a text message (your cell phone?)
+		    '+21621346336',
+		    array(
+		        'from' => $twilio_number,
+		        'body' => 'Bonjour, 
 		        test du site: prenezunrendezvous.com !'
 		    )
 		);
