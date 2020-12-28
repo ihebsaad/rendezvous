@@ -393,10 +393,10 @@ class UsersController extends Controller
     {
     	// test send sms
       //$sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
-    	$sid    = "ACab5fd65ebea9e541539641aa9ddc2db6";
+    	$sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
     	
       //$token  = "dda3e46929618cd01ef5144360b645c0";
-    	$token  = "2f0307223b3519daad64199f8cef1780";
+    	$token  = "18a7353a979530bc94be966ac176711c";
       
       $twilio_number = "+16592047451";
       $client = new Client($sid, $token);
