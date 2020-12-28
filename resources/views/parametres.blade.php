@@ -379,6 +379,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
                         $('#dropvideo').each(function() {
                             //title = $(this).find('input[name="title"]').val();
                             _token=$(this).find('input[name="_token"]').val();
+                            alert( _token);
                             formData.append('title', _token);
                         });
                     });
