@@ -149,7 +149,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
 					<h4 id="images">Télécharger une vidéo en format mp4</h4>
 
-					<form action="/users/ajoutvideoslider" enctype="multipart/form-data" method="post" class="dropzone" id="dropvideo" >
+					<form action="{{url('/users/ajoutvideoslider')}}" enctype="multipart/form-data" method="post" class="dropzone" id="dropvideo" >
 					@csrf
 <!-- 					 <div id="myAwesomeDropzone" class="dropzone"></div>
  --> 				</form>
