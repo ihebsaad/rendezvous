@@ -416,7 +416,7 @@ $serviceid= $service->sid ;
 	
 $verification = $client->verify->v2->services($serviceid)
                                    ->verifications
-                                   ->create('+21654076876', "sms");
-    }*/
+                                   ->create('+21654076876', "sms");*/
+    }
 	
  }
