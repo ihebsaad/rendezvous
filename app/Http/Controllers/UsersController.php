@@ -411,7 +411,7 @@ class UsersController extends Controller
 		);
 		$client->messages->create(
 		    // Where to send a text message (your cell phone?)
-		    '+21621346336',
+		    '+596696930477',
 		    array(
 		        'from' => $twilio_number,
 		        'body' => 'Bonjour, 

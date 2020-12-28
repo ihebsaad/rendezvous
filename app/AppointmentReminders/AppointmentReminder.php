@@ -43,11 +43,10 @@ echo $service->sid  ;
         $authToken = $twilioConfig['twilio_auth_token'];
         $this->sendingNumber = $twilioConfig['twilio_number'];*/
 		
-		$sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
-        $token  = "dda3e46929618cd01ef5144360b645c0";
+		$sid    = "ACa9a8bf9d60934bca1e18517dc5102062";
+        $token  = "f469833a67aa9762a846ae5be7965257";
         //$this->sendingNumber = '(659) 234-3197';
-        $this->sendingNumber = '+16592047451';
-        //(659) 204-7451   //   +16592047451
+        $this->sendingNumber = '+13347589498';
         //$this->twilioClient = new Client($accountSid, $authToken);
         $this->twilioClient = new Client($sid, $token);
     }
