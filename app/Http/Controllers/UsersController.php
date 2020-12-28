@@ -405,7 +405,9 @@ class UsersController extends Controller
 		    '+21654076876',
 		    array(
 		        'from' => $twilio_number,
-		        'body' => '\n\n Bonjour, \n\n test du site: prenezunrendezvous.com !'
+		        'body' => '
+		        Bonjour, 
+		        test du site: prenezunrendezvous.com !'
 		    )
 		);
 		// creation service
