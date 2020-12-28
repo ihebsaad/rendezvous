@@ -13,6 +13,7 @@
           "laravel/dusk": "^5.11",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "symfony/translation-contracts": "^1.1.6",
         "paypal/rest-api-sdk-php": "^1.14",
          "twilio/sdk": "^6.15"
        },
@@ -51,7 +52,7 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
+	"prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -64,4 +65,5 @@
             "@php artisan key:generate --ansi"
         ]
     }
+	
 }

@@ -149,8 +149,9 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
 					<h4 id="images">Télécharger une vidéo en format mp4</h4>
 
-					<form action="{{ route('users.ajoutvideoslider') }}" class="dropzone" id="dropvideo" >
+					<form action="{{ route('users.ajoutvideoslider') }}" enctype="multipart/form-data" method="POST" class="dropzone" id="dropvideo" >
 					 {{ csrf_field() }}
+					 <div id="myAwesomeDropzone" class="dropzone"></div>
  					</form>
 			 </div>
 
@@ -329,7 +330,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  };
  
  
-   Dropzone.options.dropvideo = {
+  /* Dropzone.options.dropvideo = {
  // autoProcessQueue: false,
   acceptedFiles:".mp4",
   init: function(){
@@ -346,8 +347,68 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  
  });
   },
- };
+ };*/
+
+  Dropzone.options.myAwesomeDropzone = {
+                url: "{{ route('users.ajoutvideoslider') }}",
+                method: 'POST',
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 3,
+                maxFiles: 3,
+                addRemoveLinks: true,
+                thumbnailMethod: 'crop',
+                resizeWidth: 500,
+                resizeHeight: 500,
+                resizeQuality: 0.3,
+                acceptedFiles: ".mp4",
+                dictDefaultMessage: "Mettre votre vidéo ici!",
+
+
+                init: function () {
+                    var myDropzone = this;
+                   /* $('#submit_form').on("click", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();      
+                    });*/
+
+
+
+                    this.on("sending", function(file, xhr, formData){
+                        $('#dropvideo').each(function() {
+                            //title = $(this).find('input[name="title"]').val();
+                            _token=$(this).find('input[name="_token"]').val();
+                            formData.append('title', _token);
+                        });
+                    });
+                    this.on("success", function(file, response) {
+                    	swal({
+                        type: 'success',
+                        title: 'Terminé ...',
+                        text: 'téléversement terminé avec succès'
+ 					//	icon: "success",
+                    }); 
+
+                    });
+                    this.on("completemultiple", function(files) {
+                        // Here goes what you want to do when the upload is done
+                        // Redirect, reload , load content ......
+                        swal({
+                        type: 'success',
+                        title: 'Terminé ...',
+                        text: 'téléversement terminé avec succès'
+ 					//	icon: "success",
+                    }); 
+
+                    });
+                },
+
+            };
 </script>
+
+
+
 
 
 @endsection
