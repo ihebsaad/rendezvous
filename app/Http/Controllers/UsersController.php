@@ -393,23 +393,23 @@ class UsersController extends Controller
     {
     	// test send sms
       //$sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
-    	$sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
+    	$sid    = "ACa9a8bf9d60934bca1e18517dc5102062";
     	
       //$token  = "dda3e46929618cd01ef5144360b645c0";
-    	$token  = "18a7353a979530bc94be966ac176711c";
+    	$token  = "6822f9ab13d5ddb4cfce902b7c474101";
       
-      $twilio_number = "+16592047451";
+      $twilio_number = "+13347589498";
       $client = new Client($sid, $token);
-		/*$client->messages->create(
+		$client->messages->create(
 		    // Where to send a text message (your cell phone?)
 		    '+21654076876',
 		    array(
 		        'from' => $twilio_number,
 		        'body' => 'test de prendez un rendez vous!'
 		    )
-		);*/
+		);
 		// creation service
-$service = $client->verify->v2->services
+/*$service = $client->verify->v2->services
                               ->create("Verification Tel");
 
 $serviceid= $service->sid ;
@@ -417,6 +417,6 @@ $serviceid= $service->sid ;
 $verification = $client->verify->v2->services($serviceid)
                                    ->verifications
                                    ->create('+21654076876', "sms");
-    }
+    }*/
 	
  }
