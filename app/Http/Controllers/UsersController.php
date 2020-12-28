@@ -279,6 +279,8 @@ class UsersController extends Controller
           
 		}
 		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
+
+		  return 'ok';
   
 	}
 	
