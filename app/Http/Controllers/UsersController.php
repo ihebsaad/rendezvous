@@ -398,7 +398,8 @@ class UsersController extends Controller
     	$sid    = "ACa9a8bf9d60934bca1e18517dc5102062";
     	
       //$token  = "dda3e46929618cd01ef5144360b645c0";
-    	$token  = "f469833a67aa9762a846ae5be7965257";
+    	//$token  = "f469833a67aa9762a846ae5be7965257";
+    	$token  = "46d6b812a47ebd9099511b70f04c1e69";
       
       $twilio_number = "+13347589498";
       $client = new Client($sid, $token);
