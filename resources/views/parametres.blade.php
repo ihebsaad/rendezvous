@@ -234,8 +234,8 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  
   
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+<!-- <script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
+ --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
 
 <script>
@@ -416,7 +416,7 @@ $.ajaxSetup({
     }
 });
 Dropzone.autoDiscover = false;
-var acceptedFileTypes = "image/*,video/*"; //dropzone requires this param be a comma separated list
+var acceptedFileTypes = "video/*"; //dropzone requires this param be a comma separated list
 // imageDataArray variable to set value in crud form
 var imageDataArray = new Array;
 // fileList variable to store current files index and name
@@ -428,7 +428,7 @@ $(function(){
         paramName : "file",
         uploadMultiple :false,
         acceptedFiles : "image/*,video/*,audio/*",
-        addRemoveLinks: true,
+        addRemoveLinks: false,
         forceFallback: false,
         maxFilesize: 256, // Set the maximum file size to 256 MB
         parallelUploads: 100,
