@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('reminders:send')->everyMinute()-> appendOutputTo ('/my/logs/laravel_output.log');
+        $schedule->command('reminders:send')->everyMinute();
     }
 
     /**
