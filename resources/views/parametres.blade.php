@@ -149,7 +149,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
 					<h4 id="images">Télécharger une vidéo en format mp4</h4>
 
-					<form action="" enctype="multipart/form-data" method="post" class="dropzone" id="dropvideo" >
+					<form action="{{ route('users.ajoutvideoslider')}}" enctype="multipart/form-data" method="post" class="dropzone" id="dropvideo" >
 					@csrf
 <!-- 					 <div id="myAwesomeDropzone" class="dropzone"></div>
  --> 				</form>
@@ -234,9 +234,9 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  
   
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- <script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
- --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+ <script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
+ <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> -->
 
 <script>
 
@@ -311,9 +311,13 @@ $commission_abonnement3= $parametres->commission_abonnement3;
     }
 	
 	
-	
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 			 
- /*Dropzone.options.dropzoneFrom = {
+ Dropzone.options.dropzoneFrom = {
  // autoProcessQueue: false,
   acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
   init: function(){
@@ -329,10 +333,10 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 					
  });
   },
- };*/
+ };
  
  
-  /* Dropzone.options.dropvideo = {
+   Dropzone.options.dropvideo = {
  // autoProcessQueue: false,
   acceptedFiles:".mp4",
   init: function(){
@@ -349,7 +353,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  
  });
   },
- };*/
+ };
 
   /*Dropzone.options.myAwesomeDropzone = {
                 url: "{{ route('users.ajoutvideoslider') }}",
@@ -410,12 +414,8 @@ $commission_abonnement3= $parametres->commission_abonnement3;
             };*/
 </script>
 <script>
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-Dropzone.autoDiscover = false;
+
+/*Dropzone.autoDiscover = false;
 var acceptedFileTypes = "video/*"; //dropzone requires this param be a comma separated list
 // imageDataArray variable to set value in crud form
 var imageDataArray = new Array;
@@ -444,7 +444,7 @@ $(function(){
         i += 1;
         $('#item_images').val(imageDataArray);
     });
-    /*uploader.on("removedfile", function(file) {
+    uploader.on("removedfile", function(file) {
         var rmvFile = "";
         for (var f = 0; f < fileList.length; f++) {
             if (fileList[f].fileName == file.name) {
@@ -464,8 +464,8 @@ $(function(){
             }
         }
         
-    });*/
-});
+    });
+});*/
 </script>
 
 
