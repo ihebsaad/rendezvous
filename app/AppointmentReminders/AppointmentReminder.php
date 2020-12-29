@@ -15,7 +15,7 @@ class AppointmentReminder
      */
     public function __construct()
     {
-        $this->appointments = \App\Appointment::appointmentsDue()->get();
+      //hs  $this->appointments = \App\Appointment::appointmentsDue()->get();
 
 		/**
 		
@@ -58,11 +58,12 @@ echo $service->sid  ;
      */
     public function sendReminders()
     {
-        $this->appointments->each(
+        /*hs $this->appointments->each(
             function ($appointment) {
                 $this->_remindAbout($appointment);
             }
-        );
+        );*/
+        $this->_remindAbout();
     }
 
     /**
@@ -72,15 +73,21 @@ echo $service->sid  ;
      *
      * @return void
      */
-    private function _remindAbout($appointment)
+    //hs private function _remindAbout($appointment)
+    private function _remindAbout()
     {
-        $recipientName = $appointment->name;
+        /*hs $recipientName = $appointment->name;
         $time = Carbon::parse($appointment->when, 'UTC')
               ->subMinutes($appointment->timezoneOffset)
               ->format('g:i a');
 
         $message = "Hello $recipientName, this is a reminder that you have an appointment at $time!";
-        $this->_sendMessage($appointment->phoneNumber, $message);
+        $this->_sendMessage($appointment->phoneNumber, $message);*/
+        $recipientName = "Haythem SAHLIA";
+        $time = "10:30 AM";
+
+        $message = "Hello $recipientName, this is a reminder that you have an appointment at $time!";
+        $this->_sendMessage("+21654076876", $message);
     }
 
     /**
@@ -102,22 +109,5 @@ echo $service->sid  ;
         );
     }
 
-    public function envoiesms($number, $content)
-    {
-        $sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
-        $token  = "dda3e46929618cd01ef5144360b645c0";
-        //$this->sendingNumber = '(659) 234-3197';
-        $this->sendingNumber = '+16592047451';
-        //(659) 204-7451   //   +16592047451
-        //$this->twilioClient = new Client($accountSid, $authToken);
-        $this->twilioClient = new Client($sid, $token);
 
-        $this->twilioClient->messages->create(
-            $number,
-            array(
-                "from" => $this->sendingNumber,
-                "body" => $content
-            )
-        );
-    }
 }
