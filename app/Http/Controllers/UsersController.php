@@ -258,7 +258,7 @@ class UsersController extends Controller
  
           $image->move($path, $name);
 		}
-		 // DB::table('parametres')->where('id', 1)->update(array('logo' => $name));
+		 DB::table('parametres')->where('id', 1)->update(array('logo' => $name));
 
 		 
 	}
@@ -279,9 +279,9 @@ class UsersController extends Controller
 
           
 		}
-		  //DB::table('parametres')->where('id', 1)->update(array('video' => $name));
+		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
 
-		  return 'ok';
+		 // return 'ok';
 
 		 /* $_IMAGE = $request->file('file');
         $filename = time().$_IMAGE->getClientOriginalName();

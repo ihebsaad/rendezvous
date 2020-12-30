@@ -339,7 +339,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  
    Dropzone.options.dropvideo = {
  // autoProcessQueue: false,
-  acceptedFiles:".mp4,.png,.jpg,.gif,.bmp,.jpeg",
+  acceptedFiles:".mp4",
   method: 'POST',
   init: function(){
  
