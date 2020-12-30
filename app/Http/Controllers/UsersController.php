@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\PostRequest;
+//use Illuminate\Http\PostRequest;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -263,7 +263,7 @@ class UsersController extends Controller
 		 
 	}
 	
-		public function ajoutvideoslider(PostRequest $request)
+		public function ajoutvideoslider(Request $request)
 	{
  	 
 
