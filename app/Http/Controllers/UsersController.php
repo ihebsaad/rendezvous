@@ -268,7 +268,7 @@ class UsersController extends Controller
 
  	 //$temp_file = $_FILES['file']['tmp_name'];
 
-		 /*$name='';
+		 $name='';
 		if($request->file('file')!=null)
 		{$image=$request->file('file');
 		 $name =  $image->getClientOriginalName();
@@ -278,16 +278,16 @@ class UsersController extends Controller
 
           
 		}
-		  DB::table('parametres')->where('id', 1)->update(array('video' => $name));
+		  //DB::table('parametres')->where('id', 1)->update(array('video' => $name));
 
-		  return 'ok';*/
+		  return 'ok';
 
-		  $_IMAGE = $request->file('file');
+		 /* $_IMAGE = $request->file('file');
         $filename = time().$_IMAGE->getClientOriginalName();
         $uploadPath = 'public/images/';
         $_IMAGE->move($uploadPath,$filename);
 
-        echo json_encode($filename);
+        echo json_encode($filename);*/
   
 	}
 	
