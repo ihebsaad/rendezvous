@@ -140,7 +140,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 				 <div class="utf_submit_section col-md-4">
 
 				    <h4>Logo</h4>
-					<form action="{{ route('users.ajoutlogo') }}" class="dropzone"  id="dropzoneFrom">
+					<form action="{{ route('users.ajoutlogo') }}" method="post" class="dropzone"  id="dropzoneFrom">
 					  {{ csrf_field() }}
  					</form>
  					 
@@ -149,7 +149,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
 					<h4 id="images">Télécharger une vidéo en format mp4</h4>
 
-					<form action="{{ route('users.ajoutvideoslider')}}" enctype="multipart/form-data" method="post" class="dropzone" id="dropvideo" >
+					<form action="{{ route('users.ajoutvideoslider')}}" method="post" enctype="multipart/form-data"  class="dropzone" id="dropvideo" >
 					@csrf
 <!-- 					 <div id="myAwesomeDropzone" class="dropzone"></div>
  --> 				</form>
@@ -320,6 +320,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  Dropzone.options.dropzoneFrom = {
  // autoProcessQueue: false,
   acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
+  method: 'POST',
   init: function(){
  
    this.on("complete", function(){
@@ -339,6 +340,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
    Dropzone.options.dropvideo = {
  // autoProcessQueue: false,
   acceptedFiles:".mp4,.png,.jpg,.gif,.bmp,.jpeg",
+  method: 'POST',
   init: function(){
  
    this.on("complete", function(){
