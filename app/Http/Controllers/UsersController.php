@@ -257,7 +257,7 @@ class UsersController extends Controller
  
           $image->move($path, $name);
 		}
-		  DB::table('parametres')->where('id', 1)->update(array('logo' => $name));
+		 // DB::table('parametres')->where('id', 1)->update(array('logo' => $name));
 
 		 
 	}
