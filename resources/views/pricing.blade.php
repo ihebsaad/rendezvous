@@ -72,11 +72,11 @@
             <div class="plan featured col-md-4 col-sm-6 col-xs-12">
               <div class="utf_price_plan">
                 <h3><?php echo $parametres->abonnement3;?></h3>
-                <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>/Par Année</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
+                <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
 			  </div>
               <div class="utf_price_plan_features">
                 <ul>
-                  <li>Entreprise publiée pour <b style="color:green"><u>12 mois</u></b></li>
+                  <li>Entreprise publiée pour <b style="color:green"><u>30 jours</u></b></li>
                   <li>Réservations des services</li>	
                   <li>Rappels SMS</li>				  
                   <li><b style="color:green">Entreprise Mise en Avant<b></li>

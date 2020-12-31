@@ -1,3 +1,31 @@
 ADMIN: esolutions/123456
 CLIENT: client/123456
 PRESTATAIRE: prestataire/123456
+
+
+100 premiers inscrit
+gratuit pour 6 mois
+pas commision avant 6 mois
+lundi prochain vas commencer a prospecter
+
+"comment ça marche" avant prestataires
+teste slider:
+decouvrez et prenez avec les meilleurs prestataires de service
+changer textes eng en fr
+
+image 100 premiers inscriptions
+
+section comment ca marche
+
+changer page FAQ comme:
+
+email prix twilio
+
+inscription gratuite pour 100 
+
+contact num david
+
+nouvelle cliente
+
+timeline dario
+

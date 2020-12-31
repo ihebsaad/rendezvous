@@ -5,6 +5,7 @@ namespace App\AppointmentReminders;
 use Illuminate\Log;
 use Carbon\Carbon;
 use Twilio\Rest\Client;
+use \App\Http\Controllers\ReservationsController;
 
 class AppointmentReminder
 {
@@ -15,6 +16,9 @@ class AppointmentReminder
      */
     public function __construct()
     {
+      // lister les rendez vous d'aujourdhui
+       $this->resvdujour = ReservationsController::reservationsdujour();
+
       //hs  $this->appointments = \App\Appointment::appointmentsDue()->get();
 
 		/**
@@ -45,7 +49,7 @@ echo $service->sid  ;
 		
 		$sid    = "ACa9a8bf9d60934bca1e18517dc5102062";
         //$token  = "f469833a67aa9762a846ae5be7965257";
-        $token  = "46d6b812a47ebd9099511b70f04c1e69";
+        $token  = "3409113fcc8da3389f5421622268dc2e";
         //$this->sendingNumber = '(659) 234-3197';
         $this->sendingNumber = '+13347589498';
         //$this->twilioClient = new Client($accountSid, $authToken);
@@ -64,7 +68,10 @@ echo $service->sid  ;
                 $this->_remindAbout($appointment);
             }
         );*/
-        $this->_remindAbout();
+        foreach ($this->resvdujour as $resv) {
+            $this->_remindAbout($resv->id);
+        }
+        
     }
 
     /**
@@ -75,7 +82,7 @@ echo $service->sid  ;
      * @return void
      */
     //hs private function _remindAbout($appointment)
-    private function _remindAbout()
+    private function _remindAbout($idreservation)
     {
         /*hs $recipientName = $appointment->name;
         $time = Carbon::parse($appointment->when, 'UTC')
@@ -87,7 +94,7 @@ echo $service->sid  ;
         $recipientName = "Haythem SAHLIA";
         $time = "10:30 AM";
 
-        $message = "Hello $recipientName, this is a reminder that you have an appointment at $time!";
+        $message = "Hello $recipientName, this is a reminder about reservation # $idreservation .";
         $this->_sendMessage("+21654076876", $message);
     }
 

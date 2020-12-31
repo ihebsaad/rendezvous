@@ -46,6 +46,17 @@ class ReservationsController extends Controller
 
 
     }
+
+    public function reservationsdujour()
+    {
+		
+       $today=date('d/m/Y');
+    	
+        $reservations = Reservation::where('date',$today)->get();
+        return $reservations;
+
+
+    }
   
 
 		
