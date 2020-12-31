@@ -52,7 +52,7 @@ class ReservationsController extends Controller
 		
        $today=date('d/m/Y');
     	
-        $reservations = Reservation::where('id',7)->get();
+        $reservations = Reservation::where('date',$today)->get();
         return $reservations;
 
 
