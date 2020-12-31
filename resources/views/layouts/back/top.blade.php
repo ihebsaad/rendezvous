@@ -1,10 +1,12 @@
 <?php
  $user = auth()->user();
+ $parametres=DB::table('parametres')->where('id', 1)->first();
+$plogo= $parametres->logo;
 ?> <header id="header_part" class="fixed fullwidth_block dashboard"> 
     <div id="header" class="not-sticky">
       <div class="container"> 
         <div class="utf_left_side"> 
-          <div id="logo"> <a href="{{ route('home') }}"><img src="{{ URL::asset('public/images/logo.png')}}" alt=""></a> <a href="{{ route('home') }}" class="dashboard-logo"><img src="{{ URL::asset('public/images/logo2.png')}}" alt=""></a> </div>
+          <div id="logo">  <a href="{{ route('home') }}" class="dashboard-logo"><img src="<?php echo  URL::asset('storage/images/'.$plogo);?>" style="background-color:white" alt=""></a> </div>
           <div class="mmenu-trigger">
 			<button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
