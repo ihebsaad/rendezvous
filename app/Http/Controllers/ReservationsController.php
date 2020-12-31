@@ -47,7 +47,7 @@ class ReservationsController extends Controller
 
     }
 
-    public function reservationsdujour()
+    public static function reservationsdujour()
     {
 		
        $today=date('d/m/Y');
