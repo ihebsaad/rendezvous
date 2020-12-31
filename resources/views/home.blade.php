@@ -4,6 +4,71 @@
  
  @section('content')
   @include('layouts.slider')
+<style>
+  section.pricing {
+  /*background: #007bff;*/
+  background: #f9f9f9;
+  /*background: linear-gradient(to right, #0062E6, #33AEFF);*/
+}
+
+.pricing .card {
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.pricing hr {
+  margin: 1.5rem 0;
+}
+
+.pricing .card-title {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+}
+
+.pricing .card-price {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.pricing .card-price .period {
+  font-size: 0.8rem;
+}
+
+.pricing ul li {
+  margin-bottom: 1rem;
+}
+
+.pricing .text-muted {
+  opacity: 0.7;
+}
+
+.pricing .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+/* Hover Effects on Card */
+
+@media (min-width: 992px) {
+  .pricing .card:hover {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+  }
+  .pricing .card:hover .btn {
+    opacity: 1;
+  }
+}
+</style>
  <!--
   <div class="container">
 	<div class="row">
@@ -60,8 +125,136 @@
     </div>
   </div>
  -->
+
+ 
+ <!-- <section class="fullwidth_block margin-top-65 "  data-background-color="#f9f9f9">
+ <div class="parallax" data-background="public/images/inscription_gratuite_pendant_6_mois.png"> 
+    <div class="utf_text_content white-font">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <h2 style="font-family:'Lucida Handwriting',cursive">Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
+            <p style="font-size:150%;font-family:'Lucida Handwriting',cursive"> Pour les 100 premiers prestataires de services </p>
+            
+			</div>
+        </div>
+      </div>
+    </div>   
+  </div> 
+</section> -->
+<br><br><br><br><br><br>
+<div class="parallax" data-background="public/images/ins-pres-un-mois.jpg" style="background-image: url(&quot;public/images/ins-pres-un-mois.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;"><div class="parallax-overlay"></div> 
+    <div class="utf_text_content white-font">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <h2 style="font-family:'Lucida Handwriting',cursive">Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
+            <p style="font-size:150%;font-family:'Lucida Handwriting',cursive"> Pour les 100 premiers prestataires de services </p>
+            <a href="#dialog_signin_part" style="background-color:#006ED2"class="button margin-top-25">Commencez !</a> </div>
+        </div>
+      </div>
+    </div>   
+  </div>
+ <!--  <section class="fullwidth_block margin-top-65 padding-top-75 padding-bottom-70"  data-background-color="#f9f9f9">
+    <div class="container" style ="background-image: url('public/images/nscription_gratuite_pendant_6_mois.png');">
+      <div class="row slick_carousel_slider">
+        <div class="col-md-12">
+          <h3 class="headline_part centered margin-bottom-45">Nos Prestataires <span>Explorez nos prestataires et trouvez votre besoin</span> </h3>
+        </div>
+
+        </div>
+        </div>
+  </section> -->
   
-  <!--------------------------listings  ---------->
+<br><br>
+<div class="row">
+  <div class="col-md-12">
+          <h2 class="headline_part centered margin-bottom-20">Comment ça marche<span></span></h2>
+  </div>
+</div>
+<br>
+<section class="pricing py-5">
+  <div class="container">
+    <div class="row">
+      <!-- Free Tier -->
+      <div class="col-md-3">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+          	<br>
+            <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
+            <center><span  style="color:#006ED2" ><i class="fa  fa-search fa-5x"></i></span></center>
+            <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
+            <br>
+            <br>
+            <center><p style="font-size:180%;">
+               Recherchez une prestation de service parmi nos différentes catégories populaires
+            </p></center>
+            <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <br>
+            <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
+            <center><span  style="color:#006ED2"><i class="fa fa-check fa-5x"></i></span></center>
+            <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
+            <br>
+            <br>
+            <center><p style="font-size:180%;">
+               Comparez les avis et les notes des professionels près de chez vous  
+            </p><br>
+            <br>    </center>
+            <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
+         
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <br>
+            <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
+            <center><span style="color:#006ED2" ><i class="fa fa-calendar fa-5x"></i></span></center>
+            <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
+            <br>
+            <br>
+            <center><p style="font-size:180%;">
+               Sélectionnez les professionnels avec qui vous souhaitez prendre rendez-vous
+            </p></center> <br>
+            <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
+         </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <br>
+            <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
+            <center><span  style="color:#006ED2"><i class="fa icon-material-outline-credit-card fa-5x"></i></span></center>
+            <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
+            <br>
+            <br>
+            <center><p style="font-size:180%;">
+               Payez la prestation de service en ligne avec toute sécurité
+            </p></center>
+            <center><p style="font-size:150%; color:grey">
+               Payez soit par carte bleu ou via paypal
+            </p></center>
+            <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
+          </div>
+        </div>
+      </div>
+
+
+   </div>
+      </div>
+ </section>
+  <!--------------------------listings  ----------)------------------------------------------------------->
   <section class="fullwidth_block margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
     <div class="container">
       <div class="row slick_carousel_slider">
