@@ -46,10 +46,10 @@
 			<h3><i class="sl sl-icon-map"></i> Infos de contact</h3>
 			<div class="utf_sidebar_textbox">
 			  <ul class="utf_contact_detail">
-				<li><strong>Tél: </strong> <span>+ 001 245 0154</span></li>
+				<li><strong>Tél: </strong> <span>+596 696 93 04 77</span></li>
 				<li><strong>Site Web: </strong> <span><a href="#">www.prenezunrendezvous.com</a></span></li>
 				<li><strong>E-Mail: </strong> <span><a href="mailto:contact@prenezunrendezvous.com">contact@prenezunrendezvous.com</a></span></li>
-				<li><strong>Adresse: </strong> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</span></li>
+				<!-- <li><strong>Adresse: </strong> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</span></li> -->
 			  </ul>
 			</div>	
 		</div>
