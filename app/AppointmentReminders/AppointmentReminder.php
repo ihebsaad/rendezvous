@@ -68,8 +68,30 @@ echo $service->sid  ;
                 $this->_remindAbout($appointment);
             }
         );*/
+        // temps courant du Martinique
+        date_default_timezone_set('America/Martinique');
+        $currenttime = date('H:i');
         foreach ($this->resvdujour as $resv) {
-            $this->_remindAbout($resv->id);
+            // calcule temps max du rappel
+            if ($resv->heure === "30") {
+                $maxTRappel = date("H:i", strtotime('-30 minutes', $resv->heure));
+            }
+            elseif ($resv->heure === "60") {
+                $maxTRappel = date("H:i", strtotime('-60 minutes', $resv->heure));
+            }
+            elseif ($resv->heure === "120") {
+                $maxTRappel = date("H:i", strtotime('-120 minutes', $resv->heure));
+            }
+            elseif ($resv->heure === "1440") {
+                $maxTRappel = $resv->heure;
+            }
+            // verifier si c'est le temps du rappel (>= temps rappel) et le rappel non envoyé
+            if ((strtotime($currenttime) >= strtotime($maxTRappel)) && ($resv->rappel_statut == 0))
+            {    
+                //envoyer rappel SMS
+                $this->_remindAbout($resv->id,$currenttime);
+                ReservationsController::changestatutrappel();
+            }
         }
         
     }
@@ -82,7 +104,7 @@ echo $service->sid  ;
      * @return void
      */
     //hs private function _remindAbout($appointment)
-    private function _remindAbout($idreservation)
+    private function _remindAbout($idreservation,$curtime)
     {
         /*hs $recipientName = $appointment->name;
         $time = Carbon::parse($appointment->when, 'UTC')
@@ -92,10 +114,12 @@ echo $service->sid  ;
         $message = "Hello $recipientName, this is a reminder that you have an appointment at $time!";
         $this->_sendMessage($appointment->phoneNumber, $message);*/
         $recipientName = "Haythem SAHLIA";
-        $time = "10:30 AM";
 
-        $message = "Hello $recipientName, this is a reminder about reservation # $idreservation .";
+        $message = "Hello $recipientName, now we are $curtime ,this is a reminder about reservation # $idreservation .";
         $this->_sendMessage("+21654076876", $message);
+
+        // changer le statut du rappel de la reservation
+
     }
 
     /**

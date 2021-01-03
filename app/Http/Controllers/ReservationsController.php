@@ -50,12 +50,26 @@ class ReservationsController extends Controller
     public static function reservationsdujour()
     {
 		
-       $today=date('d/m/Y');
-    	
-        $reservations = Reservation::where('date',$today)->get();
+        $today=date('d/m/Y');
+        $TomorrowD = new DateTime('tomorrow');
+    	//$TomorrowD->format('d/m/Y')
+        // reservations du ce jour ou de demain avec un rappel avant un jour
+        //$reservations = Reservation::where('date',$today)->get();
+        $reservations = DB::table('reservations')
+            ->where('date', '=', $today)
+            ->orWhere(function ($query) {
+                $query->where('date', '=', $TomorrowD->format('d/m/Y'))
+                      ->where('rappel', '=', '1440');
+            })
+            ->get();
+
         return $reservations;
 
 
+    }
+    public static function changestatutrappel($id)
+    {
+    	Reservation::where('id', $id)->update(array('rappel_statut' => 1 ));
     }
   
 
