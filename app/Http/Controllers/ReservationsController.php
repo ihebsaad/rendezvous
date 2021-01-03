@@ -59,7 +59,7 @@ class ReservationsController extends Controller
         //$reservations = Reservation::where('date',$today)->get();
         $reservations = DB::table('reservations')
             ->where('date', '=', $today)
-            ->orWhere(function ($query) {
+            ->orWhere(function ($query) use($FTomorrowD){
                 $query->where('date', '=', $FTomorrowD)
                       ->where('rappel', '=', '1440');
             })
