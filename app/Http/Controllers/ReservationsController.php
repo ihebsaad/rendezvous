@@ -16,6 +16,8 @@ use \App\Alerte;
  use Swift_Mailer;
  use Mail;
 
+ use DateTime;
+
 class ReservationsController extends Controller
 {
 
@@ -51,7 +53,7 @@ class ReservationsController extends Controller
     {
 		
         $today=date('d/m/Y');
-        $TomorrowD = new DateTime('tomorrow');
+        $TomorrowD = new \DateTime('tomorrow');
     	//$TomorrowD->format('d/m/Y')
         // reservations du ce jour ou de demain avec un rappel avant un jour
         //$reservations = Reservation::where('date',$today)->get();
