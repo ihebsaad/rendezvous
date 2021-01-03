@@ -53,14 +53,14 @@ class ReservationsController extends Controller
     {
 		
         $today=date('d/m/Y');
-        $TomorrowD = new \DateTime('tomorrow');
-    	//$TomorrowD->format('d/m/Y')
+        $TomorrowD = new DateTime('tomorrow');
+		$FTomorrowD = $TomorrowD->format('d/m/Y');
         // reservations du ce jour ou de demain avec un rappel avant un jour
         //$reservations = Reservation::where('date',$today)->get();
         $reservations = DB::table('reservations')
             ->where('date', '=', $today)
             ->orWhere(function ($query) {
-                $query->where('date', '=', $TomorrowD->format('d/m/Y'))
+                $query->where('date', '=', $FTomorrowD)
                       ->where('rappel', '=', '1440');
             })
             ->get();
