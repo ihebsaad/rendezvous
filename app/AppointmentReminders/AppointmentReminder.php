@@ -72,17 +72,18 @@ echo $service->sid  ;
         date_default_timezone_set('America/Martinique');
         $currenttime = date('H:i');
         foreach ($this->resvdujour as $resv) {
+            // initiation de maxTRappel 
             // calcule temps max du rappel
-            if ($resv->heure === "30") {
+            if ($resv->rappel === "30") {
                 $maxTRappel = date("H:i", strtotime('-30 minutes', $resv->heure));
             }
-            elseif ($resv->heure === "60") {
+            elseif ($resv->rappel === "60") {
                 $maxTRappel = date("H:i", strtotime('-60 minutes', $resv->heure));
             }
-            elseif ($resv->heure === "120") {
+            elseif ($resv->rappel === "120") {
                 $maxTRappel = date("H:i", strtotime('-120 minutes', $resv->heure));
             }
-            elseif ($resv->heure === "1440") {
+            elseif ($resv->rappel === "1440") {
                 $maxTRappel = $resv->heure;
             }
             // verifier si c'est le temps du rappel (>= temps rappel) et le rappel non envoyé
