@@ -75,13 +75,13 @@ echo $service->sid  ;
             // initiation de maxTRappel 
             // calcule temps max du rappel
             if ($resv->rappel === "30") {
-                $maxTRappel = date("H:i", strtotime('-30 minutes', $resv->heure));
+                $maxTRappel = date("H:i", strtotime('-30 minutes', strtotime($resv->heure)));
             }
             elseif ($resv->rappel === "60") {
-                $maxTRappel = date("H:i", strtotime('-60 minutes', $resv->heure));
+                $maxTRappel = date("H:i", strtotime('-60 minutes', strtotime($resv->heure)));
             }
             elseif ($resv->rappel === "120") {
-                $maxTRappel = date("H:i", strtotime('-120 minutes', $resv->heure));
+                $maxTRappel = date("H:i", strtotime('-120 minutes', strtotime($resv->heure)));
             }
             elseif ($resv->rappel === "1440") {
                 $maxTRappel = $resv->heure;
