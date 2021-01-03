@@ -84,14 +84,14 @@ echo $service->sid  ;
                 $maxTRappel = date("H:i", strtotime('-120 minutes', strtotime($resv->heure)));
             }
             elseif ($resv->rappel === "1440") {
-                $maxTRappel = $resv->heure;
+                $maxTRappel = date("H:i",strtotime($resv->heure));
             }
             // verifier si c'est le temps du rappel (>= temps rappel) et le rappel non envoyé
             if ((strtotime($currenttime) >= strtotime($maxTRappel)) && ($resv->rappel_statut == 0))
             {    
                 //envoyer rappel SMS
                 $this->_remindAbout($resv->id,$currenttime);
-                ReservationsController::changestatutrappel();
+                ReservationsController::changestatutrappel($resv->id);
             }
         }
         
