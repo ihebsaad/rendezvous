@@ -10,7 +10,7 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2>Découvrez et prenez avec les meilleurs prestataires de service</h2>
+            <h2>Prenez rendez-vous avec les meilleurs prestataires de services</h2>
             <!-- <h4>Find great places to stay, eat, shop, or visit the city</h4> -->
             <div class="main_input_search_part">
               <div class="main_input_search_part_item">

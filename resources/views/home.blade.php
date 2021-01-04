@@ -148,9 +148,14 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
-            <h2 style="font-family:'Lucida Handwriting',cursive">Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
-            <p style="font-size:150%;font-family:'Lucida Handwriting',cursive"> Pour les 100 premiers prestataires de services </p>
-            <a href="#dialog_signin_part" style="background-color:#006ED2"class="button margin-top-25">Commencez !</a> </div>
+            <!-- <h2 style="font-family:'Lucida Handwriting',cursive">Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
+            <p style="font-size:150%;font-family:'Lucida Handwriting',cursive"> Pour les 100 premiers prestataires de services </p> -->
+
+            <h2 >Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
+            <p style="font-size:150%;"> Pour les 100 premiers prestataires de services </p>
+           <!--  <a href="#dialog_signin_part" style="background-color:#006ED2"class="button margin-top-25">Commencez !</a> -->
+           <br>
+            <a href="#dialog_signin_part" style="background-color:#006ED2 ; color:white" class="button border sign-in popup-with-zoom-anim">Commencez !</a> </div>
         </div>
       </div>
     </div>   
