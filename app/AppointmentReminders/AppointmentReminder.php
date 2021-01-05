@@ -114,9 +114,17 @@ echo $service->sid  ;
 
         $message = "Hello $recipientName, this is a reminder that you have an appointment at $time!";
         $this->_sendMessage($appointment->phoneNumber, $message);*/
+        $inforeservation = ReservationsController::inforeservation($idreservation);
+        $temp = $inforeservation["rappel"];
+        $PrestId = $inforeservation["prestataire"];
+        $ServId = $inforeservation["service"];
         $recipientName = "Haythem SAHLIA";
 
-        $message = "Hello $recipientName, now we are $curtime ,this is a reminder about reservation # $idreservation .";
+        /*$message = "Hello $recipientName, now we are $curtime ,this is a reminder about reservation # $idreservation .";*/
+        $message = "Bonjour vous avez rendez vous avec le prestataire de services # $PrestId dans 
+        $temp temps. Pour la prestation # $ServId .
+
+        Merci d'être à l'heure à votre rdv.";
         $this->_sendMessage("+21654076876", $message);
 
         // changer le statut du rappel de la reservation

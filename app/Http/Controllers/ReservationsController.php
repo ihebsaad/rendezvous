@@ -74,7 +74,11 @@ class ReservationsController extends Controller
     	Reservation::where('id', $id)->update(array('rappel_statut' => 1 ));
     }
   
-
+    public static function inforeservation($id)
+    {
+    	$inforeserv=Reservation::find($id);
+    	return $inforeserv;
+    }
 		
 	public function add(Request $request)
 	{
