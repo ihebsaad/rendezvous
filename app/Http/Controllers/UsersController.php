@@ -44,7 +44,12 @@ class UsersController extends Controller
 		}
 		
 	}
- 
+ 	
+ 	public static function infouser($id)
+    {
+    	$infouser=\App\User::find($id);
+    	return $infouser;
+    }
  
      public function parametres()
     {

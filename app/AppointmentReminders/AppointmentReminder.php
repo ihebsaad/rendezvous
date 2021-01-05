@@ -6,6 +6,8 @@ use Illuminate\Log;
 use Carbon\Carbon;
 use Twilio\Rest\Client;
 use \App\Http\Controllers\ReservationsController;
+use \App\Http\Controllers\UsersController;
+use \App\Http\Controllers\ServicesController;
 
 class AppointmentReminder
 {
@@ -91,6 +93,7 @@ echo $service->sid  ;
             {    
                 //envoyer rappel SMS
                 $this->_remindAbout($resv->id,$currenttime);
+                // changer statut rappel
                 ReservationsController::changestatutrappel($resv->id);
             }
         }
@@ -116,18 +119,46 @@ echo $service->sid  ;
         $this->_sendMessage($appointment->phoneNumber, $message);*/
         $inforeservation = ReservationsController::inforeservation($idreservation);
         $temp = $inforeservation["rappel"];
+
+        $CltId = $inforeservation["client"];
         $PrestId = $inforeservation["prestataire"];
         $ServId = $inforeservation["service"];
-        $recipientName = "Haythem SAHLIA";
+        
+        // info client
+        $infoclient = UsersController::infouser($CltId);
+        $numtel = $infoclient['tel'];
+        $cltname = $infoclient['name']." ".$infoclient['lastname'];
+        // info prestataire
+        $infoprest = UsersController::infouser($PrestId);
+        $titreprest = $infoprest['titre'];
+        // info prestation
+        $infoserv = ServicesController::infoservice($ServId);
+        $titreserv = $infoserv['nom'];
+        
+        if (! is_null($numtel))
+        {
+            // message à afficher pour temps
+            $msgtemp="";
+                if ($temp === "30") {
+                    $msgtemp = "dans 30 minutes";
+                }
+                elseif ($temp === "60") {
+                    $maxTRappel = "dans une heure";
+                }
+                elseif ($temp === "120") {
+                    $maxTRappel = "dans deux heures";
+                }
+                elseif ($temp === "1440") {
+                    $maxTRappel = "demain à ".$inforeservation['heure'];
+                }
 
         /*$message = "Hello $recipientName, now we are $curtime ,this is a reminder about reservation # $idreservation .";*/
-        $message = "Bonjour vous avez rendez vous avec le prestataire de services # $PrestId dans 
-        $temp temps. Pour la prestation # $ServId .
+$message = "Bonjour $cltname, vous avez rendez vous avec le prestataire de services $titreprest $temp. Pour la prestation $titreserv.
 
-        Merci d'être à l'heure à votre rdv.";
-        $this->_sendMessage("+21654076876", $message);
+Merci d'être à l'heure à votre rdv.";
+        $this->_sendMessage($numtel, $message);
 
-        // changer le statut du rappel de la reservation
+        }
 
     }
 

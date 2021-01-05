@@ -41,7 +41,11 @@ class ServicesController extends Controller
 	
 	}
 	*/
-	
+	public static function infoservice($id)
+    {
+    	$infoservice=Service::find($id);
+    	return $infoservice;
+    }
 
 		
 	public function add(Request $request)
