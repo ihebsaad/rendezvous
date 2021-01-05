@@ -142,8 +142,13 @@
     </div>   
   </div> 
 </section> -->
-<br><br><br><br><br><br>
-<div class="parallax" data-background="public/images/ins-pres-un-mois.jpg" style="background-image: url(&quot;public/images/ins-pres-un-mois.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;"><div class="parallax-overlay"></div> 
+<!-- <br><br><br><br><br><br> -->
+<div class="row" >
+<div class="col-lg-12 col-sm-12">
+<img src="public/images/clavier.png" alt="" style="width:100%; height:300px; z-index:-9; top:-10px; ">
+</div>
+</div>
+<div class="parallax" data-background="public/images/fille2.png" style="background-image: url(&quot;public/images/ins-pres-un-mois.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;"><div class="parallax-overlay"></div> 
     <div class="utf_text_content white-font">
       <div class="container">
         <div class="row">
@@ -151,11 +156,17 @@
             <!-- <h2 style="font-family:'Lucida Handwriting',cursive">Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
             <p style="font-size:150%;font-family:'Lucida Handwriting',cursive"> Pour les 100 premiers prestataires de services </p> -->
 
-            <h2 >Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
-            <p style="font-size:150%;"> Pour les 100 premiers prestataires de services </p>
+            <!-- <h2 >Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
+            <p style="font-size:150%;"> Pour les 100 premiers prestataires de services </p> -->
+            <h2 >Offre de lancement <br> Inscrivez-vous et testez gratuitement notre site pendant 15 jours.
+            <br></h2>
+            <p style="font-size:150%;">  </p>
+           
+
            <!--  <a href="#dialog_signin_part" style="background-color:#006ED2"class="button margin-top-25">Commencez !</a> -->
            <br>
-            <a href="#dialog_signin_part" style="background-color:#006ED2 ; color:white" class="button border sign-in popup-with-zoom-anim">Commencez !</a> </div>
+           
+             @guest<a href="#dialog_signin_part" style="background-color:#006ED2 ; color:white" class="button border sign-in popup-with-zoom-anim"  onclick="$('#litab2').trigger('click');">Commencez !</a> @endguest</div>
         </div>
       </div>
     </div>   

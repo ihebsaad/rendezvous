@@ -90,8 +90,8 @@ figcaption {
 <ol></p>
 
 <p style="font-weight: bold; color:black ; padding:10px">Qui est derrière ce projet :</p>
-	    <center><figure>
-		  <img src="public/images/david.jpg" alt="Trulli" style="width:100%">
+	    <center><figure style="width:65%; height:65%;">
+		  <img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais" style="width:100%;">
 		  <figcaption> Mr MAXIME David Martiniquais</figcaption>
 		</figure></center>
 	 
