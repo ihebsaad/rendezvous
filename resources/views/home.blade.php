@@ -145,7 +145,7 @@
 <!-- <br><br><br><br><br><br> -->
 <div class="row" >
 <div class="col-lg-12 col-sm-12">
-<img src="public/images/clavier.png" alt="" style="width:100%; height:300px; z-index:-9; top:-10px; ">
+<img src="public/images/clavier.png" alt="" style="width:100%; height:375px; z-index:-9; top:-10px; ">
 </div>
 </div>
 <div class="parallax" data-background="public/images/fille2.png" style="background-image: url(&quot;public/images/ins-pres-un-mois.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;"><div class="parallax-overlay"></div> 
