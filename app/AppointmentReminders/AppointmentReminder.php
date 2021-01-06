@@ -88,8 +88,8 @@ echo $service->sid  ;
             elseif ($resv->rappel === "1440") {
                 $maxTRappel = date("H:i",strtotime($resv->heure));
             }
-            // verifier si c'est le temps du rappel (>= temps rappel) et le rappel non envoyé
-            if ((strtotime($currenttime) >= strtotime($maxTRappel)) && ($resv->rappel_statut == 0))
+            // verifier si c'est le temps du rappel (>= temps rappel) et le rappel non envoyé et la réservation est payée
+            if ((strtotime($currenttime) >= strtotime($maxTRappel)) && ($resv->rappel_statut == 0) && ($resv->paiement == 1))
             {    
                 //envoyer rappel SMS
                 $this->_remindAbout($resv->id,$currenttime);

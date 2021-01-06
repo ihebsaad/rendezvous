@@ -34,10 +34,15 @@ reunion david 1 hr
 ----------------------------------------
 0.5 najda verification bug
 1 SEO dario : timline and keywords report update /azmi call/ dario email
-0.5 team comm
+1 team comm
 1 prepare sms demo
-
+1.30 demo david
 --------------------------------------
+0.5 comm team
+1 najda telephony
+0.5 reponse codeur
+---------------------------------------
+
 essai 15 jours pour tous le monde / pas 100 premier
 
 
@@ -46,18 +51,25 @@ fidelité (verifier email)
 ionos server support infection
 
 SEO azmi
-chn5dem m3ah 3al optimisation
-site mta3na bech y5dem 3al audit wken 5lat debut de semaine jaya na3mlou reunion
-b3ath RIB yheb yo5los fel partie loula
+ab3th facture
+ysa3dikch ken kol chhar tb3thilna facture
+wken theb avance 9balha mich mochkil
 
+------azmi: envoie facture / chaque fin du mois
 --APPEL --- ------------------------
 DEVIS DAVID (expliquer plus carte fidelite) / 
-si possible payer le reliquat 292 avant 15
+
+*Payer le reliquat 292 fin mois ou debut fevrier 
+(s'il y aura la possibilité il va payer avant)
 
 
 ---SMS pour test
-* envoie sms seulement pour les reservations payés?
-* fuseau horaire sera Martinique?
+* envoie sms seulement pour les reservations payés? payé
+* fuseau horaire sera Martinique? non (martinique/gouadeloupe/france/guane francaise)
+ajouter pays pour info prestataire
+
+cd /var/www/vhosts/localhost.localdomain/httpdocs/rendezvous && php artisan schedule:run >> /dev/null 2>&1
++596696930477
 
 Bonjour vous avez rendez vous avec le prestataire de services........ dans x temps. Pour la prestation ......
 Merci d'être à l'heure à votre rdv.
@@ -67,6 +79,9 @@ changes texte / token et num david
 ---verifier ce point paypal pour devis
 GOLD payer reservation sur 4 fois (sous paypal)
 BUSINESS payer 50 % reservation
+
+--lors qu paiement paypal::: jhon doe test store s'affiche
+
 
 https://www.paypal.com/fr/webapps/mpp/4x
 https://www.paypal.com/fr/business/platforms-and-marketplaces
