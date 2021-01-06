@@ -12,16 +12,18 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
           <div class="col-md-12">
             <h2>Prenez rendez-vous avec les meilleurs prestataires de services</h2>
             <!-- <h4>Find great places to stay, eat, shop, or visit the city</h4> -->
+            <form action="{{route('search.prestataires')}}" method="post">
+              @csrf
             <div class="main_input_search_part">
               <div class="main_input_search_part_item">
-                <input type="text" placeholder="Que cherchez-vous ?" value=""/>
+                <input type="text" id="prest_tag" name="prest_tag" placeholder="Que cherchez-vous ?" value=""/>
               </div>
               <div class="main_input_search_part_item location">
-                <input type="text" placeholder="Rechercher un emplacement..." value=""/>
+                <input type="text" id="prest_emplacement" name="prest_emplacement" placeholder="Rechercher un emplacement..." value=""/>
                 <a href="#"><i class="sl sl-icon-location"></i></a> 
 			  </div>
               <div class="main_input_search_part_item intro-search-field">
-                <select data-placeholder="Toutes les catégories" class="selectpicker default" title="Toutes les catégories" data-live-search="true" data-selected-text-format="count" data-size="7">
+                <select id="toutes_categories" data-placeholder="Toutes les catégories" class="selectpicker default" title="Toutes les catégories" name="toutes_categories" data-live-search="true" data-selected-text-format="count" data-size="7">
                   @foreach($toutes_categories as $tc)
                   <option val="{{$tc->id}}">{{$tc->nom}}</option>
                   @endforeach
@@ -32,8 +34,10 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                   <option>Events</option> -->
                 </select>
               </div>
-              <button class="button" onclick="window.location.">Rechercher</button>
+              <button  class="button" >Rechercher</button>
+              <!-- <button id="search_prest_slider" class="button" onclick="window.location.">Rechercher</button> -->
             </div>
+             </form>
             <div class="main_popular_categories">
 			  <h3>Ou parcourir les catégories populaires</h3>		
               <ul class="main_popular_categories_list">
@@ -88,4 +92,36 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
       </video>
     </div>
   </div>
+  <script>
+   $(document).on("click","#search_prest_slider",function() {
+
+     prest_tag=$("#prest_tag").val();
+     prest_emplacement=$("#prest_emplacement").val();
+     Toutes_les_categories=$("#toutes_categories").val();
+     //alert(prest_tag+" "+prest_emplacement+" "+Toutes_les_categories);       
+         
+          var _token = $('input[name="_token"]').val();
+
+                           
+                $.ajax({
+                   url : "{{ route('search.prestataires')}}",
+                   type : 'post',
+                   //dataType : 'html', // On désire recevoir du HTML
+                  data:{prest_tag:prest_tag, prest_emplacement: prest_emplacement,Toutes_les_categories:Toutes_les_categories, _token:_token},
+                   success : function(data){ // code_html contient le HTML renvoyé
+                       //alert (data);
+                       if(data)
+                       {
+                           alert(data); 
+
+                          
+                         
+                       }
+                   }
+                });
+            
+
+   });
+
+  </script>
   

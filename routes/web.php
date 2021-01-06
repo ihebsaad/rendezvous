@@ -124,3 +124,5 @@ Route::get('/alertes/remove/{id}', 'AlertesController@remove');
 
 Route::get('/payments','PaymentController@index')->name('payments');
 Route::get('/payments/remove/{id}', 'PaymentController@remove');
+
+Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
