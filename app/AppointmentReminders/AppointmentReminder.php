@@ -143,17 +143,20 @@ echo $service->sid  ;
                     $msgtemp = "dans 30 minutes";
                 }
                 elseif ($temp === "60") {
-                    $maxTRappel = "dans une heure";
+                    $msgtemp = "dans une heure";
                 }
                 elseif ($temp === "120") {
-                    $maxTRappel = "dans deux heures";
+                    $msgtemp = "dans deux heures";
                 }
-                elseif ($temp === "1440") {
-                    $maxTRappel = "demain à ".$inforeservation['heure'];
+                // condition avant un jour
+                if ($temp === "1440") {
+                    $msgtemp = "demain à ".$inforeservation['heure'];
                 }
+                // changer compte twilio officiel
+                // ajouter condition reservation payé
 
         /*$message = "Hello $recipientName, now we are $curtime ,this is a reminder about reservation # $idreservation .";*/
-$message = "Bonjour $cltname, vous avez rendez vous avec le prestataire de services $titreprest $temp. Pour la prestation $titreserv.
+$message = "Bonjour $cltname, vous avez rendez vous avec le prestataire de services $titreprest $msgtemp. Pour la prestation: $titreserv.
 
 Merci d'être à l'heure à votre rdv.";
         $this->_sendMessage($numtel, $message);

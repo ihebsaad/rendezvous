@@ -22,7 +22,7 @@ inscription gratuite pour 100
 nouvelle cliente
 -------------------------------------
 david: pricing tiwilio / devis ntaches / recommendation /inscription gratuite pour 100 
-nouvel proj: learn flutter / check new doc
+
 timeline dario
 vamos
 -----------------------------------
@@ -35,6 +35,7 @@ reunion david 1 hr
 0.5 najda verification bug
 1 SEO dario : timline and keywords report update /azmi call/ dario email
 0.5 team comm
+1 prepare sms demo
 
 --------------------------------------
 essai 15 jours pour tous le monde / pas 100 premier
@@ -49,9 +50,20 @@ chn5dem m3ah 3al optimisation
 site mta3na bech y5dem 3al audit wken 5lat debut de semaine jaya na3mlou reunion
 b3ath RIB yheb yo5los fel partie loula
 
+--APPEL --- ------------------------
 DEVIS DAVID (expliquer plus carte fidelite) / 
 si possible payer le reliquat 292 avant 15
+
+
 ---SMS pour test
+* envoie sms seulement pour les reservations payés?
+* fuseau horaire sera Martinique?
+
+Bonjour vous avez rendez vous avec le prestataire de services........ dans x temps. Pour la prestation ......
+Merci d'être à l'heure à votre rdv.
+
+changes texte / token et num david
+
 ---verifier ce point paypal pour devis
 GOLD payer reservation sur 4 fois (sous paypal)
 BUSINESS payer 50 % reservation
