@@ -39,23 +39,31 @@ reunion david 1 hr
 1.30 demo david
 --------------------------------------
 0.5 comm team
-1 najda telephony
+2 najda telephony
 0.5 reponse codeur
+1 IONOS security audit
 ---------------------------------------
 
-essai 15 jours pour tous le monde / pas 100 premier
+------------ionos server support infection
+I checked it seems they are attempting to use the server to mine crypto
+Cryptocurrency, like bitcoin or something of that nature.
+
+I would recommend turning off the server for the duration of dealing with this, our company can only advise on the best course of action, I would recommend changing all passwords associated with this server, and blocking any connections that are not needed for your use. Our security team can be contacted via phone and email, their information is:
+1 877 206 4253
+security-team@ionos.com
+And their hours are:
+9am - 5pm M-F
+Their CA phone number is:
+1 877 206 4253
+Same as US based one.
+
+
+--essai 15 jours pour tous le monde / pas 100 premier
 
 
 fidelité (verifier email)
 
-ionos server support infection
 
-SEO azmi
-ab3th facture
-ysa3dikch ken kol chhar tb3thilna facture
-wken theb avance 9balha mich mochkil
-
-------azmi: envoie facture / chaque fin du mois
 --APPEL --- ------------------------
 DEVIS DAVID (expliquer plus carte fidelite) / 
 
@@ -71,10 +79,13 @@ ajouter pays pour info prestataire
 cd /var/www/vhosts/localhost.localdomain/httpdocs/rendezvous && php artisan schedule:run >> /dev/null 2>&1
 +596696930477
 
-Bonjour vous avez rendez vous avec le prestataire de services........ dans x temps. Pour la prestation ......
-Merci d'être à l'heure à votre rdv.
+-----nouveau compte twilio------------------
 
-changes texte / token et num david
+Identifiant : trouvezunprestataire@gmail.com
+Mot de passe : Davemarco97232!
+
+--------------------------------------------
+
 
 ---verifier ce point paypal pour devis
 GOLD payer reservation sur 4 fois (sous paypal)
@@ -88,11 +99,6 @@ https://www.paypal.com/fr/business/platforms-and-marketplaces
 https://www.paypal.com/fr/business/accelerate-growth
 https://www.paypal.com/fr/business/buy-now-pay-later?utm_medium=paypal&utm_source=paypalweb&utm_campaign=bizpage
 
-Pour te connecter à mon compte twilo
-Identifiant : trouvezunprestataire@gmail.com
-Mot de passe : Davemarco97232!
-
-J'ai activé le compte pour que tu puisse faire le nécessaire
 
 
 
