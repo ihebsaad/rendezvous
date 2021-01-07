@@ -972,6 +972,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
 
    <script>
+   	$(document).ready(function() {
             function changing(elm) {
                 var champ = elm.id;
 
@@ -1343,6 +1344,8 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
  });
   },
  };
+
+});
     </script>
 	
 
