@@ -16,33 +16,38 @@
       </div>
       <div class="row">        
       <div class="utf_pricing_container_block margin-top-30 margin-bottom-30"> 
-      <!-- plan 1 - start -->  
+
+        <!-- plan 3 - start -->             
       <div class="plan featured col-md-4 col-sm-6 col-xs-12">
         <div class="utf_price_plan">
-          <h3> <?php echo $parametres->abonnement1;?></h3>
-          <span class="value"><?php echo $parametres->cout_abonnement1;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
-			  </div>
+          <h3><?php echo $parametres->abonnement3;?></h3>
+          <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
+        </div>
+        
               <div class="utf_price_plan_features">
                 <ul>
-                  <li>Entreprise publiée pour <u>30 jours</u></li>
-                  <li>Réservations des services</li>
-                  <li>Rappels SMS</li>
-                  <li>Commission de <u><?php echo $parametres->commission_abonnement1;?>%</u> sur les services réservés</li>
-                 </ul>
-               @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
-			@else
-				<form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
-				{{ csrf_field() }}
- 				<input   name="description" type="hidden"  value="<?php echo $parametres->abonnement1;?>">     				
- 				<input   name="abonnement" type="hidden"  value="1">     				
- 				<input   name="user" type="hidden"  value="<?php echo $User->id;?>">     
- 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
-				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
-				</form>
-				@endguest
-			  </div>
+                  <li>Entreprise publiée pour <b style="color:green"><u>30 jours</u></b></li>
+                  <li>Réservations des services</li>  
+                  <li>Rappels SMS</li>          
+                  <li><b style="color:green">Entreprise Mise en Avant</b></li>
+                  <li><i class="sl sl-icon-check"></i> <b style="color:green">Commission de <u> <?php echo $parametres->commission_abonnement3;?></u>%</b> sur les services réservés</li>
+                </ul>
+              @guest  <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
+       @else
+        <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
+        {{ csrf_field() }}
+        <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
+        <input   name="abonnement" type="hidden"  value="3">     
+        <input   name="user" type="hidden"  value="<?php echo $User->id;?>">     
+        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
+        <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
+        </form>        
+        @endguest
+       </div>
       </div>
-      <!-- plan 1 - end -->  
+ <!-- plan 3 - end -->  
+
+      
       <!-- plan 2 - start -->        
       <div class="plan featured col-md-4 col-sm-6 col-xs-12 active">
         <div class="utf_price_plan">
@@ -71,34 +76,35 @@
 			 </div>
       </div>
  <!-- plan 2 - end -->  
- <!-- plan 3 - start -->             
+ <!-- plan 1 - start -->  
       <div class="plan featured col-md-4 col-sm-6 col-xs-12">
-        <div class="utf_price_plan">
-          <h3><?php echo $parametres->abonnement3;?></h3>
-          <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
-			  </div>
+       <div class="utf_price_plan">
+          <h3> <?php echo $parametres->abonnement1;?></h3>
+          <span class="value"><?php echo $parametres->cout_abonnement1;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
+        </div>
+        
               <div class="utf_price_plan_features">
                 <ul>
-                  <li>Entreprise publiée pour <b style="color:green"><u>30 jours</u></b></li>
-                  <li>Réservations des services</li>	
-                  <li>Rappels SMS</li>				  
-                  <li><b style="color:green">Entreprise Mise en Avant<b></li>
-                  <li><i class="sl sl-icon-check"></i> <b style="color:green">Commission de <u> <?php echo $parametres->commission_abonnement3;?></u>%</b> sur les services réservés</li>
-                </ul>
-              @guest  <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
-			 @else
-				<form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
-				{{ csrf_field() }}
- 				<input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
- 				<input   name="abonnement" type="hidden"  value="3">     
- 				<input   name="user" type="hidden"  value="<?php echo $User->id;?>">     
- 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
-				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
-				</form>				 
-				@endguest
-			 </div>
+                  <li>Entreprise publiée pour <u>30 jours</u></li>
+                  <li>Réservations des services</li>
+                  <li>Rappels SMS</li>
+                  <li>Commission de <u><?php echo $parametres->commission_abonnement1;?>%</u> sur les services réservés</li>
+                 </ul>
+                 @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
+      @else
+        <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
+        {{ csrf_field() }}
+        <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement1;?>">            
+        <input   name="abonnement" type="hidden"  value="1">            
+        <input   name="user" type="hidden"  value="<?php echo $User->id;?>">     
+        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
+        <button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
+        </form>
+        @endguest
+        </div>
       </div>
- <!-- plan 3 - end -->  
+      <!-- plan 1 - end -->  
+ 
           </div>        
       </div> 
     </div>    
