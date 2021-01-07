@@ -15,11 +15,12 @@
         </div>
       </div>
       <div class="row">        
-          <div class="utf_pricing_container_block margin-top-30 margin-bottom-30"> 
-            <div class="plan featured col-md-4 col-sm-6 col-xs-12">
-              <div class="utf_price_plan">
-                <h3> <?php echo $parametres->abonnement1;?></h3>
-                <span class="value"><?php echo $parametres->cout_abonnement1;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
+      <div class="utf_pricing_container_block margin-top-30 margin-bottom-30"> 
+      <!-- plan 1 - start -->  
+      <div class="plan featured col-md-4 col-sm-6 col-xs-12">
+        <div class="utf_price_plan">
+          <h3> <?php echo $parametres->abonnement1;?></h3>
+          <span class="value"><?php echo $parametres->cout_abonnement1;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
 			  </div>
               <div class="utf_price_plan_features">
                 <ul>
@@ -40,12 +41,13 @@
 				</form>
 				@endguest
 			  </div>
-            </div>
-            
-            <div class="plan featured col-md-4 col-sm-6 col-xs-12 active">
-              <div class="utf_price_plan">
-                <h3><?php echo $parametres->abonnement2;?></h3>
-                <span class="value"><?php echo $parametres->cout_abonnement2;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
+      </div>
+      <!-- plan 1 - end -->  
+      <!-- plan 2 - start -->        
+      <div class="plan featured col-md-4 col-sm-6 col-xs-12 active">
+        <div class="utf_price_plan">
+          <h3><?php echo $parametres->abonnement2;?></h3>
+          <span class="value"><?php echo $parametres->cout_abonnement2;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
 			  </div>
               <div class="utf_price_plan_features">
                 <ul>
@@ -67,12 +69,13 @@
 				</form>
 				@endguest
 			 </div>
-            </div>
-              
-            <div class="plan featured col-md-4 col-sm-6 col-xs-12">
-              <div class="utf_price_plan">
-                <h3><?php echo $parametres->abonnement3;?></h3>
-                <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
+      </div>
+ <!-- plan 2 - end -->  
+ <!-- plan 3 - start -->             
+      <div class="plan featured col-md-4 col-sm-6 col-xs-12">
+        <div class="utf_price_plan">
+          <h3><?php echo $parametres->abonnement3;?></h3>
+          <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>/Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
 			  </div>
               <div class="utf_price_plan_features">
                 <ul>
@@ -94,9 +97,10 @@
 				</form>				 
 				@endguest
 			 </div>
-            </div>
+      </div>
+ <!-- plan 3 - end -->  
           </div>        
-      </div>      
+      </div> 
     </div>    
   </section>
   

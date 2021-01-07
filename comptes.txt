@@ -3,21 +3,10 @@ CLIENT: client/123456
 PRESTATAIRE: prestataire/123456
 
 
-100 premiers inscrit
-gratuit pour 6 mois
-pas commision avant 6 mois
-lundi prochain vas commencer a prospecter
 
-"comment ça marche" avant prestataires
-teste slider:
-decouvrez et prenez avec les meilleurs prestataires de service
 changer textes eng en fr
 
-image 100 premiers inscriptions
 
-email prix twilio
-
-inscription gratuite pour 100 
 
 nouvelle cliente
 -------------------------------------
@@ -42,6 +31,7 @@ reunion david 1 hr
 2 najda telephony
 0.5 reponse codeur
 1 IONOS security audit
+rendezvous
 ---------------------------------------
 
 ------------ionos server support infection
@@ -99,7 +89,11 @@ https://www.paypal.com/fr/business/platforms-and-marketplaces
 https://www.paypal.com/fr/business/accelerate-growth
 https://www.paypal.com/fr/business/buy-now-pay-later?utm_medium=paypal&utm_source=paypalweb&utm_campaign=bizpage
 
-
+++DEVIS DAVID: verifier nvl fonctions 
+++DAVID: page pricing / page acceuil (categories, ..)/ compte twilio
+++ CMHA: fonts
+++ behaviour company: security  tasks
+-- ask about ionos security call
 
 
 
