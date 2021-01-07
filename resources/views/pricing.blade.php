@@ -90,7 +90,8 @@
                   <li>Rappels SMS</li>
                   <li>Commission de <u><?php echo $parametres->commission_abonnement1;?>%</u> sur les services réservés</li>
                  </ul>
-                 @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
+                 <br>
+               @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
       @else
         <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
         {{ csrf_field() }}
