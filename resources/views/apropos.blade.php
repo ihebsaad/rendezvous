@@ -39,25 +39,15 @@ figcaption {
   text-align: center;
 }
 .divimg {
-	/*background-color: #f1f1f1;
-    background-position: center;
-    background-repeat: no-repeat;*/
     background-color: #f1f1f1;
   border-left: .75rem solid #44d4f4;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
-/*.divimg:before {
-    position: absolute;
-    content: '';
-    bottom: 0px;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    background: url(public/images/footer-bg.png) no-repeat;
-    background-size: cover;
-}*/
+#main_wrapper .container p {
+	text-align: justify;
+  text-justify: inter-word;
+}
 </style>
  
  <?php
