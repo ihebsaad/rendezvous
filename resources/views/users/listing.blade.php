@@ -881,7 +881,9 @@ function geocodeAddress(geocoder, resultsMap) {
 <!--	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
 	<link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" rel="stylesheet">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-   <script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
+<!--    <script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
+ -->   <script src="../public/js/bootstrap-notify.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js" integrity="sha512-vCgNjt5lPWUyLz/tC5GbiUanXtLX1tlPXVFaX5KAQrUHjwPcCwwPOLn34YBFqws7a7+62h7FRvQ1T0i/yFqANA==" crossorigin="anonymous"></script> -->
  <!--  <script  src="{{ URL::asset('public/js/notify.js')}}"></script>-->
 
 
