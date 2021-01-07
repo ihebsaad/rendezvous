@@ -6,8 +6,9 @@ $plogo= $parametres->logo;
     <div id="header" class="not-sticky">
       <div class="container"> 
         <div class="utf_left_side"> 
-          <div id="logo">  <a href="{{ route('home') }}" class="dashboard-logo"><img src="<?php echo  URL::asset('storage/images/'.$plogo);?>" style="background-color:white" alt=""></a> </div>
-          <div class="mmenu-trigger">
+          <!-- <div id="logo">  <a href="{{ route('home') }}" class="dashboard-logo"><img src="<?php //echo  URL::asset('storage/images/'.$plogo);?>" style="background-color:white" alt=""></a> </div> -->
+          <div id="logo"> <a href="{{route('home')}}" class="dashboard-logo" style="display:block"><img style="max-height:55px; background-color:white;"    src="<?php echo  URL::asset('storage/images/'.$plogo);?>" alt=""></a> </div>
+           <div class="mmenu-trigger" style="visibility: hidden;">
 			<button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
 					<span class="utf_inner_section"></span>

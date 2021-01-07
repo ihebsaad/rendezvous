@@ -7,14 +7,29 @@ $plogo= $parametres->logo;
       <div class="container"> 
         <div class="utf_left_side"> 
           <div id="logo"> <a href="{{route('home')}}"><img style="max-height:55px"    src="<?php echo  URL::asset('storage/images/'.$plogo);?>" alt=""></a> </div>
-          <div class="mmenu-trigger">
-			<button class="hamburger utfbutton_collapse" type="button">
+              <div class="mmenu-trigger" style="visibility: hidden;">
+		 <button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
 					<span class="utf_inner_section"></span>
 				</span>
-			</button>
-		  </div>
+			</button> 
+		  </div>  
+      <!-- <div class="kbs-replace-menu">
+        <br>
+        <br>
+        <br>
+      </div> -->
+
 		  <style>
+
+      @media only screen and (max-width: 1024px)
+      .kbs-replace-menu {
+        display: inline-block !important;
+        height: 48px;
+        width: 48px;
+        margin: 0 0 20px;
+       }
+
 		  #navigation.style_one ul li a.active{font-weight:bold!important;}
 		  </style>
           <nav id="navigation" class="style_one">
