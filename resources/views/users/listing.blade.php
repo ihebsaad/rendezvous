@@ -1013,17 +1013,28 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
             }
 
  			
-			 $('.categories').click(function(event ){
+			// $('.categories').click(function(event ){
+				$(document).on('change', '.categories', function() {
  						idelemt = (this).id;
 				cat= idelemt.slice(3);
  			///here
  	           var checked =document.getElementById('cat-'+cat).checked  ;
+ 	          // var checked =$(this).prop("checked");
   			   var user = $('#user').val();
  				 var _token = $('input[name="_token"]').val();
 					var loading=false;
- 			
-			  
-				if( ! checked    ){
+					if($(this).prop("checked") == true){
+ 			  checked=true;
+ 			}
+ 			else{
+
+ 				if($(this).prop("checked") == false){
+ 			           checked=false;
+ 			       }
+
+ 			    }
+			 // alert(checked);
+				if( checked ){
                     $.ajax({
                         url:"{{ route('categories.insert') }}",
                         method:"POST",
