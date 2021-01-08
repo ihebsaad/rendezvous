@@ -144,6 +144,16 @@ $plogo= $parametres->logo;
                                         <strong>{{ $errors->first('lastname') }}</strong>
                                     </span>
                     @endif
+                  </p>
+                  <p class="utf_row_form utf_form_wide_block">
+                    <label for="phone">
+                      <input type="phone" class="input-text" name="phone" id="phone" value="" placeholder="Mobile pour recevoir des sms de réservation" />
+                    </label>
+                    @if ($errors->has('phone'))
+                      <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                    @endif
                   </p>					  
                   <p class="utf_row_form utf_form_wide_block">
                     <label for="email2">

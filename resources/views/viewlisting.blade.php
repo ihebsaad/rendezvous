@@ -142,7 +142,7 @@
 		  <div class="row with-forms margin-top-0">
 			<div class="col-lg-12 col-md-12">
 				<select class="utf_chosen_select_single" id="service" placeholder="Sélectionner"  >
-				<option></option>
+				<option>Veuillez sélectionner un service </option>
 					<?php 
 					foreach($services as $service){
 						echo '<option value="'.$service->id.'">'.$service->nom.'</option>';
@@ -243,6 +243,27 @@
               	 <?php } ?>      
           </ul>
         </div>
+        <style>
+        video {
+        width: 100%;
+        height: auto;
+        }
+
+           .video-responsive { 
+			overflow:hidden; 
+			padding-bottom:56.25%; 
+			position:relative; 
+			height:0;
+			}
+
+			.video-responsive iframe {
+			left:0; 
+			top:0; 
+			height:100%;
+			width:100%;
+			position:absolute;
+			}
+       </style>
 		  <?php if($user->video != '' )
 		  {   ?> 
 	            <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Vidéo</h3>
@@ -255,9 +276,11 @@
 	  		  <?php if($user->codevideo != '' )
 		  {   ?>   
 	  <section>
-		<div id="utf_listing_video" class="utf_listing_section" style="max-width:400px">
+		<div id="utf_listing_video" class="utf_listing_section" style="max-width:700px">
           <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Vidéo</h3>
+          <div class="video-responsive">
  		  <?php echo $user->codevideo ;?>
+ 		  </div>
          </div>
 	  <?php } ?>      
 		</section>
