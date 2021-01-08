@@ -147,7 +147,7 @@ $plogo= $parametres->logo;
                   </p>
                   <p class="utf_row_form utf_form_wide_block">
                     <label for="phone">
-                      <input type="phone" class="input-text" name="phone" id="phone" value="" placeholder="Mobile pour recevoir des sms de réservation" />
+                      <input type="phone" class="input-text" name="phone" id="phone" value="" placeholder="Num mobile (pour les rappels SMS de vos réservations)" />
                     </label>
                     @if ($errors->has('phone'))
                       <span class="invalid-feedback" role="alert">
