@@ -223,6 +223,8 @@
 	  
 	  </div>
       <div class="col-lg-8 col-md-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 
         
         <div id="utf_listing_amenities" class="utf_listing_section">
@@ -234,11 +236,11 @@
 		    echo '<li>  ';
 			 
 			echo $service->nom.'  -  <small><b>'.$service->prix.' €</b></small>' ;
-			if($service->thumb!=''){ echo '<br><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="max-width:100px;margin-bottom:15px;"  /> '; }
-			?>
+			if($service->thumb!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="max-width:100px;margin-bottom:15px;"  /> </a>'; }?>
 			
            <!-- <li>Air Conditioned</li>-->
-	 <?php } ?>      
+
+              	 <?php } ?>      
           </ul>
         </div>
 		  <?php if($user->video != '' )
