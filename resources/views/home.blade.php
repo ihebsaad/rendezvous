@@ -159,7 +159,7 @@
             <!-- <h2 >Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
             <p style="font-size:150%;"> Pour les 100 premiers prestataires de services </p> -->
             <h2>Prestataire de services profitez de notre offre de lancement</h2>
-            <h4>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</h4>
+            <h3>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</h3>
             <p style="font-size:150%;">  </p>
            
 
@@ -202,7 +202,7 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:180%;">
+            <center><p style="font-size:130%;">
                Recherchez une prestation de service parmi nos différentes catégories populaires
             </p></center>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
@@ -219,7 +219,7 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:180%;">
+            <center><p style="font-size:130%;padding-bottom: 50px">
                Comparez les avis et les notes des professionels près de chez vous  
             </p><br>
             <br>    </center>
@@ -238,7 +238,7 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:180%;">
+            <center><p style="font-size:130%;padding-bottom: 25px">
                Sélectionnez les professionnels avec qui vous souhaitez prendre rendez-vous
             </p></center> <br>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
@@ -255,10 +255,10 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:180%;">
+            <center><p style="font-size:130%;padding-bottom: 23px">
                Payez la prestation de service en ligne avec toute sécurité
             </p></center>
-            <center><p style="font-size:150%; color:grey">
+            <center><p style="color:grey">
                Payez soit par carte bleu ou via paypal
             </p></center>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
