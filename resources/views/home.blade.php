@@ -148,7 +148,7 @@
 <img src="public/images/clavier.png" alt="" style="width:100%; height:375px; z-index:-9; top:-10px; ">
 </div>
 </div>-->
-<div class="parallax margin-top-65 padding-top-75 " data-background="public/images/fille2.png" style="background-image: url(&quot;public/images/ins-pres-un-mois.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;"><div class="parallax-overlay"></div> 
+<div class="parallax margin-top-65" data-background="public/images/inscription_coiffure.jpg" style="background-image: url(&quot;public/images/inscription_coiffure.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;"><div class="parallax-overlay"></div> 
     <div class="utf_text_content white-font">
       <div class="container">
         <div class="row">
@@ -158,15 +158,15 @@
 
             <!-- <h2 >Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
             <p style="font-size:150%;"> Pour les 100 premiers prestataires de services </p> -->
-            <h2 >Offre de lancement <br> Inscrivez-vous et testez gratuitement notre site pendant 15 jours.
-            <br></h2>
+            <h2>Prestataire de services profitez de notre offre de lancement</h2>
+            <h5>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</h5>
             <p style="font-size:150%;">  </p>
            
 
            <!--  <a href="#dialog_signin_part" style="background-color:#006ED2"class="button margin-top-25">Commencez !</a> -->
            <br>
            
-             @guest<a href="#dialog_signin_part" style="background-color:#006ED2 ; color:white" class="button border sign-in popup-with-zoom-anim"  onclick="$('#litab2').trigger('click');">Commencez !</a> @endguest</div>
+             @guest<a href="#dialog_signin_part" style="background-color:#006ED2 ; color:white" class="button border sign-in popup-with-zoom-anim"  onclick="$('#litab2').trigger('click');">Je profite maintenant !</a> @endguest</div>
         </div>
       </div>
     </div>   

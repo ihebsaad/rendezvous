@@ -12,7 +12,7 @@ nouvelle cliente
 -------------------------------------
 david: pricing tiwilio / devis ntaches / recommendation /inscription gratuite pour 100 
 
-timeline dario
+improve speed dario
 vamos
 -----------------------------------
 comm team / zoom 1
@@ -126,7 +126,7 @@ qui inclues qlq conditions de la page exemple du twilio)
 aprés la fin de période d'essai, obliger à choisir son abonnement (bloquer tous dans son compte)
 sa page prestataire doit etre cacher (afficher seulement pour lui).
 
-BUG: changement du texte footer a partit de parametre
+BUG: changement du texte footer a partir de parametre
 
 page contact: email si cree sinn creer et envoie comment acceder (transfert to gmail david)
 
@@ -147,47 +147,8 @@ les liens tel et email dans page prest: ajoute tel: et emailto:
 
 
 
-Le prestataire qui paiera 27€/mois (basique) aura droit comme fonctionnalité :
--Réservations en ligne illimitées 24/7
--Rappels sms illimités  
--Acompte de 30%  lors de la prise de rdv pour les services.
--Carte de fidélité virtuel  (5 séance acheté et la 6ème prestation aura une réduction que le prestataire de service aura choisi et ce sera une réduction en %) 
--Service client accessible 6J/7
-
-
-Le prestataire qui paiera 47€/mois (business) aura droit comme fonctionnalité :
--Réservations en ligne illimitées 24/7
--Rappels sms illimités  
--Entreprise mise en avant  dans la recherche
--Acompte de 50% lors de la prise de rdv pour les services.
--Carte de fidélité virtuel (9 séances acheté le 10eme prestation aura une réduction que le prestataire de service aura choisi et ce sera une réduction en %) 
--Paiement en plusieurs fois à partir de 200€
--Tableau de statistiques des ventes.
--codes promo  
--Service client accessible 6J/7
-
-
-Le prestataire qui paiera 67€/mois (prestige & VIP ) aura droit comme fonctionnalité :
--Réservations en ligne illimitées 24/7
--Rappels sms en illimités
--Entreprise mise en avant dans la recherche 
--Acompte de 60% lors de la prise de rdv pour les services.
--Carte de fidélité virtuel (9 séances acheté le 10eme prestation aura une réduction que le prestataire de service aura choisi et ce sera une réduction en %)
--Paiement en plusieurs fois à partir de 200€
--Tableau de statistiques des ventes.
--codes promo
--Boutique de vente de produits physique et numérique
-numérique: Bons cadeaux personnalisables
-vente de Forfaits et cures
--Possibilitée de demander l'ajout ou la modification d'une fonctionnalité exclusivement pour vous
--Choisir les jours et les heures d'indisponibilité dans votre calendrier
--Obtienne un Qr code qui va ramener à votre page
--Système de gestion des heures creuses "happy hours"
--Synchronisation du calendrier du site avec votre google agenda 
--Possibilité d'offrir des services supplémentaires
--Agenda flexible
-- Service récurrent
--Service client accessible 7J/7
-
 -to houcam : email about accesibility
 - inkspired: compression images
+
+- fuseau horaire sera Martinique? non (martinique/gouadeloupe/france/guane francaise)
+ajouter pays pour info prestataire
