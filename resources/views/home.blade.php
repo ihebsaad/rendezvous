@@ -202,7 +202,7 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;">
+            <center><p style="font-size:130%;padding-bottom: 50px">
                Recherchez une prestation de service parmi nos différentes catégories populaires
             </p></center>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
@@ -219,7 +219,7 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;padding-bottom: 50px">
+            <center><p style="font-size:130%;padding-bottom: 25px">
                Comparez les avis et les notes des professionels près de chez vous  
             </p><br>
             <br>    </center>
@@ -238,7 +238,7 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;padding-bottom: 25px">
+            <center><p style="font-size:130%;padding-bottom: 23px">
                Sélectionnez les professionnels avec qui vous souhaitez prendre rendez-vous
             </p></center> <br>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
@@ -255,7 +255,7 @@
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;padding-bottom: 23px">
+            <center><p style="font-size:130%;">
                Payez la prestation de service en ligne avec toute sécurité
             </p></center>
             <center><p style="color:grey">
