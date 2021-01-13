@@ -81,7 +81,7 @@ Mot de passe : Davemarco97232!
 GOLD payer reservation sur 4 fois (sous paypal)
 BUSINESS payer 50 % reservation
 
---lors qu paiement paypal::: jhon doe test store s'affiche
+--lors qu paiement paypal::: changer le compte de david --jhon doe test store s'affiche
 
 
 https://www.paypal.com/fr/webapps/mpp/4x
@@ -91,11 +91,103 @@ https://www.paypal.com/fr/business/buy-now-pay-later?utm_medium=paypal&utm_sourc
 
 ++DEVIS DAVID: verifier nvl fonctions 
 ++DAVID: page pricing / page acceuil (categories, ..)/ compte twilio
-++ CMHA: fonts
+++ CMHA: fonts - improve design
 ++ behaviour company: security  tasks
 -- ask about ionos security call
+--- rappel about cmha images email
+
+
+annuel: *12 puis 10% remise
+remise personnalisable
+
+
+
+** paypal / sms / inscription gratuite / page acceuil / google map
 
 
 
 
+**lors de l'envoie de sms, on verifie si 
+toute la reservation est payée ou un acompte est payée? les 2
+ 
 
+** lorsque le client paye un acompte, quand il paye le reste? 
+(c'est a partir du plateform ou sur place?)
+payer le reste en ligne ou sur place (le client choisi)
+
+--rappel de confirmation par SMS avant 24hr ou 48hr ou 72hr (configuration chez le prestataire)
+
+** faisons nous les statistiques sans TVA et 
+suivi données comptable dans un premier lieux
+
+** page mentions legales (on crée une page des conditions d'utilisation 
+qui inclues qlq conditions de la page exemple du twilio)
+
+aprés la fin de période d'essai, obliger à choisir son abonnement (bloquer tous dans son compte)
+sa page prestataire doit etre cacher (afficher seulement pour lui).
+
+BUG: changement du texte footer a partit de parametre
+
+page contact: email si cree sinn creer et envoie comment acceder (transfert to gmail david)
+
+
+adresse prestataire n'est pas la mm acceuil et page prestataire
+
+les liens tel et email dans page prest: ajoute tel: et emailto:
+
+
+-/-/email to azmi: you will receive your payment by the end of this week / update about dario and our website
+-/-/ CMHA achecker / arial font / no img / improve design
+
+
+-/-/ abonnements et acceuil / devis david
+8) Permettre aux prestataire d'offrir des services supplémentaires pour un tarif supplémentaire
+
+/-/-/ new wordpress
+
+
+
+Le prestataire qui paiera 27€/mois (basique) aura droit comme fonctionnalité :
+-Réservations en ligne illimitées 24/7
+-Rappels sms illimités  
+-Acompte de 30%  lors de la prise de rdv pour les services.
+-Carte de fidélité virtuel  (5 séance acheté et la 6ème prestation aura une réduction que le prestataire de service aura choisi et ce sera une réduction en %) 
+-Service client accessible 6J/7
+
+
+Le prestataire qui paiera 47€/mois (business) aura droit comme fonctionnalité :
+-Réservations en ligne illimitées 24/7
+-Rappels sms illimités  
+-Entreprise mise en avant  dans la recherche
+-Acompte de 50% lors de la prise de rdv pour les services.
+-Carte de fidélité virtuel (9 séances acheté le 10eme prestation aura une réduction que le prestataire de service aura choisi et ce sera une réduction en %) 
+-Paiement en plusieurs fois à partir de 200€
+-Tableau de statistiques des ventes.
+-codes promo  
+-Service client accessible 6J/7
+
+
+Le prestataire qui paiera 67€/mois (prestige & VIP ) aura droit comme fonctionnalité :
+-Réservations en ligne illimitées 24/7
+-Rappels sms en illimités
+-Entreprise mise en avant dans la recherche 
+-Acompte de 60% lors de la prise de rdv pour les services.
+-Carte de fidélité virtuel (9 séances acheté le 10eme prestation aura une réduction que le prestataire de service aura choisi et ce sera une réduction en %)
+-Paiement en plusieurs fois à partir de 200€
+-Tableau de statistiques des ventes.
+-codes promo
+-Boutique de vente de produits physique et numérique
+numérique: Bons cadeaux personnalisables
+vente de Forfaits et cures
+-Possibilitée de demander l'ajout ou la modification d'une fonctionnalité exclusivement pour vous
+-Choisir les jours et les heures d'indisponibilité dans votre calendrier
+-Obtienne un Qr code qui va ramener à votre page
+-Système de gestion des heures creuses "happy hours"
+-Synchronisation du calendrier du site avec votre google agenda 
+-Possibilité d'offrir des services supplémentaires
+-Agenda flexible
+- Service récurrent
+-Service client accessible 7J/7
+
+-to houcam : email about accesibility
+- inkspired: compression images
