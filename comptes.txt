@@ -57,9 +57,6 @@ fidelité (verifier email)
 --APPEL --- ------------------------
 DEVIS DAVID (expliquer plus carte fidelite) / 
 
-*Payer le reliquat 292 fin mois ou debut fevrier 
-(s'il y aura la possibilité il va payer avant)
-
 
 ---SMS pour test
 * envoie sms seulement pour les reservations payés? payé
@@ -84,19 +81,13 @@ BUSINESS payer 50 % reservation
 --lors qu paiement paypal::: changer le compte de david --jhon doe test store s'affiche
 
 
-https://www.paypal.com/fr/webapps/mpp/4x
-https://www.paypal.com/fr/business/platforms-and-marketplaces
-https://www.paypal.com/fr/business/accelerate-growth
-https://www.paypal.com/fr/business/buy-now-pay-later?utm_medium=paypal&utm_source=paypalweb&utm_campaign=bizpage
-
 ++DEVIS DAVID: verifier nvl fonctions 
 ++DAVID: page pricing / page acceuil (categories, ..)/ compte twilio
 ++ CMHA: fonts - improve design
 ++ behaviour company: security  tasks
 -- ask about ionos security call
---- rappel about cmha images email
 
-
+++ abonnement::checkbox
 annuel: *12 puis 10% remise
 remise personnalisable
 
@@ -128,8 +119,8 @@ sa page prestataire doit etre cacher (afficher seulement pour lui).
 
 BUG: changement du texte footer a partir de parametre
 
-page contact: email si cree sinn creer et envoie comment acceder (transfert to gmail david)
-
+***** page contact: verifier formulaire
+Maxime2021*
 
 adresse prestataire n'est pas la mm acceuil et page prestataire
 
@@ -150,5 +141,5 @@ les liens tel et email dans page prest: ajoute tel: et emailto:
 -to houcam : email about accesibility
 - inkspired: compression images
 
-- fuseau horaire sera Martinique? non (martinique/gouadeloupe/france/guane francaise)
+-ajout dans devis--> page des conditions d'utilisation / fuseau horaire sera Martinique? non (martinique/gouadeloupe/france/guane francaise)
 ajouter pays pour info prestataire

@@ -107,7 +107,13 @@ class UsersController extends Controller
 	  return view('faqs' );       
 
 	}
-	
+
+ public function ConditionsUtilisation()
+    {
+      	 
+	  return view('conditions_utilisation' );       
+
+	}	
 	
    public function dashboard()
     {

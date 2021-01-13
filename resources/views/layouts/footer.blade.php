@@ -12,6 +12,7 @@
           <ul class="social_footer_link">
             <li><a href="{{route('home')}}">Accueil</a></li>
             <li><a href="{{route('apropos')}}">A Propos</a></li>
+            <li><a href="{{route('ConditionsUtilisation')}}">Conditions d'utilisation</a></li>
             <li><a href="{{route('contact')}}">Contact</a></li>
           <!--  <li><a href="#">Favoris</a></li>-->
           </ul>
