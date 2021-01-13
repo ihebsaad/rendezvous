@@ -159,7 +159,7 @@
             <!-- <h2 >Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
             <p style="font-size:150%;"> Pour les 100 premiers prestataires de services </p> -->
             <h2>Prestataire de services profitez de notre offre de lancement</h2>
-            <h5>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</h5>
+            <h4>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</h4>
             <p style="font-size:150%;">  </p>
            
 
