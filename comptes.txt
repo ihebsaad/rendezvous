@@ -7,11 +7,6 @@ PRESTATAIRE: prestataire/123456
 changer textes eng en fr
 
 
-
-nouvelle cliente
--------------------------------------
-david: pricing tiwilio / devis ntaches / recommendation /inscription gratuite pour 100 
-
 improve speed dario
 vamos
 -----------------------------------
@@ -47,15 +42,6 @@ Their CA phone number is:
 1 877 206 4253
 Same as US based one.
 
-
---essai 15 jours pour tous le monde / pas 100 premier
-
-
-fidelité (verifier email)
-
-
---APPEL --- ------------------------
-DEVIS DAVID (expliquer plus carte fidelite) / 
 
 
 ---SMS pour test
@@ -93,11 +79,6 @@ remise personnalisable
 
 
 
-** paypal / sms / inscription gratuite / page acceuil / google map
-
-
-
-
 **lors de l'envoie de sms, on verifie si 
 toute la reservation est payée ou un acompte est payée? les 2
  
@@ -111,13 +92,11 @@ payer le reste en ligne ou sur place (le client choisi)
 ** faisons nous les statistiques sans TVA et 
 suivi données comptable dans un premier lieux
 
-** page mentions legales (on crée une page des conditions d'utilisation 
-qui inclues qlq conditions de la page exemple du twilio)
 
 aprés la fin de période d'essai, obliger à choisir son abonnement (bloquer tous dans son compte)
 sa page prestataire doit etre cacher (afficher seulement pour lui).
 
-BUG: changement du texte footer a partir de parametre
+KBS BUG: changement du texte footer a partir de parametre
 
 ***** page contact: verifier formulaire
 Maxime2021*
@@ -131,15 +110,28 @@ les liens tel et email dans page prest: ajoute tel: et emailto:
 -/-/ CMHA achecker / arial font / no img / improve design
 
 
--/-/ abonnements et acceuil / devis david
-8) Permettre aux prestataire d'offrir des services supplémentaires pour un tarif supplémentaire
-
-/-/-/ new wordpress
 
 
+URL from title (SLUG)
+https://laraveleasytutorials.blogspot.com/2017/11/how-to-create-unique-slug-or-unique-url.html
+https://medium.com/@bigbharatjain/how-to-create-non-breaking-seo-friendly-urls-in-laravel-42daccdc5f85
 
--to houcam : email about accesibility
-- inkspired: compression images
+behavior compagny: finish friday
+devis david
+email /whatsapp
 
--ajout dans devis--> page des conditions d'utilisation / fuseau horaire sera Martinique? non (martinique/gouadeloupe/france/guane francaise)
-ajouter pays pour info prestataire
+IONOS server infrastructure (security / use one server or use another provider)
+
+--envoie proposal
+verification omcc/server
+inkspired: compression images/scripts..
+david devis et zoom
+avancé david
+zainab security
+-- azmi : update to alexa & call esolutions
+
+** paypal / sms / inscription gratuite / page acceuil / google map
+
+
+
+

@@ -130,7 +130,7 @@
 	  
 	  <?php if( isset($User) && $user->id== $User->id) {?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }?>
 
-      <?php if($user->statut==1){?>  <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réserréservations"> <i class="sl sl-icon-check"></i> Disponible</div><?php  } else{ ?>
+      <?php if($user->statut==1){?>  <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-check"></i> Disponible</div><?php  } else{ ?>
      <div class="unavailable-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-close"></i> Non Disponible</div>
       <?php } ?>
 	  <div class="utf_box_widget booking_widget_box">
