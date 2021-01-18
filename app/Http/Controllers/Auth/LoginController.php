@@ -47,13 +47,36 @@ class LoginController extends Controller
         $type = $user->user_type;
 		
 		if ($type == 'prestataire') {
-				if($user->expire=='' /***/ ){
-				return redirect('/pricing');
+
+        $format = "Y-m-d H:i:s";
+        $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
+        $date_15j=\DateTime::createFromFormat($format, $date_15j);
+        $date_inscription= $user->date_inscription;
+        $date_inscription=\DateTime::createFromFormat($format, $date_inscription);
+        /*$date_inscription=$date_inscription->format('Y-m-d');
+        $date_15j=$date_15j->format('Y-m-d');*/
+        $nbjours = $date_inscription->diff($date_15j);
+        $nbjours =intval($nbjours->format('%R%a'));
+        $date_exp='';
+        if($user->expire)
+        {
+          $date_exp=\DateTime::createFromFormat($format,$user->expire);
+        }
+        
+        if($nbjours<=15 && $user->expire=='')
+        { // periode essai
+              return view('users.periode_essai', compact('nbjours')); 
+        }
+        else
+        {
+      		if($user->expire=='' || ($user->expire &&  $date_exp < $date_15j  )){
+				//return redirect('/pricing');
+                return view('users.payement_non_regle', compact('user'));
 				}else{
 				 return redirect('/dashboard');
 				}
 			 
-			 
+		}	 
         } else {
             return redirect('/dashboard');
         }

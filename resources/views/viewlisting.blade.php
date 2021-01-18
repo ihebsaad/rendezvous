@@ -128,7 +128,21 @@
 	  </div>
 	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
 	  
-	  <?php if( isset($User) && $user->id== $User->id) {?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }?>
+	  <?php if( isset($User) && $user->id== $User->id) {   $format = "Y-m-d H:i:s";
+        $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
+        $date_15j=\DateTime::createFromFormat($format, $date_15j);
+        $date_inscription= $user->date_inscription;
+        $date_inscription=\DateTime::createFromFormat($format, $date_inscription);
+        /*$date_inscription=$date_inscription->format('Y-m-d');
+        $date_15j=$date_15j->format('Y-m-d');*/
+        $date_exp='';
+        if($user->expire)
+        {
+        	$date_exp=\DateTime::createFromFormat($format,$user->expire);
+        }
+        $nbjours = $date_inscription->diff($date_15j);
+        $nbjours =intval($nbjours->format('%R%a')); if ( $nbjours<=15 || ($nbjours> 15 && $user->expire && $date_exp >= $date_15j))
+				{ ?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }}?>
 
       <?php if($user->statut==1){?>  <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-check"></i> Disponible</div><?php  } else{ ?>
      <div class="unavailable-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-close"></i> Non Disponible</div>

@@ -64,12 +64,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $format = "Y-m-d H:i:s";
+        $date_inscription = (new \DateTime())->format('Y-m-d H:i:s');
         return User::create([
             'username' => $data['username'],
             'name' => $data['name'],
             'lastname' => $data['lastname'],
             'phone' => $data['phone'],
             'email' => $data['email'],
+            'date_inscription' => $date_inscription,
             'user_type' => $data['user_type'],
             'password' => Hash::make($data['password']),
         ]);
