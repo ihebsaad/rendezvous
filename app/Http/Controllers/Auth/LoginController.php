@@ -77,7 +77,7 @@ class LoginController extends Controller
 				}
 			 
 		}	 
-        } else {
+        } else {// admin ou client
             return redirect('/dashboard');
         }
 		

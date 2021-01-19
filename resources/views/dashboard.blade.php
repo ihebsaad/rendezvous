@@ -62,7 +62,28 @@
  			$countreviews= \App\Review::count();
 		}	 
   ?> 
+   <?php 
+	  if( $user_type=='prestataire' )
+        {  $format = "Y-m-d H:i:s";
+        $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
+        $date_15j=\DateTime::createFromFormat($format, $date_15j);
+        $date_inscription= $cuser->date_inscription;
+        $date_inscription=\DateTime::createFromFormat($format, $date_inscription);
+        /*$date_inscription=$date_inscription->format('Y-m-d');
+        $date_15j=$date_15j->format('Y-m-d');*/
+        $nbjours = $date_inscription->diff($date_15j);
+        $nbjours =intval($nbjours->format('%R%a')); 
+        if($nbjours<=15 && $cuser->expire=='')
+        {?>
       <div class="row"> 
+      	<div class="col-md-12">
+          <div class="notification error closeable margin-bottom-30">
+            <p>Vous êtes en mode d'essai de 15 jours. <?php if(isset($nbjours)){$nb=15-$nbjours; if($nb>1){ echo 'Il vous reste '.$nb.' jours pour essayer notre plateforme'; }else {if($nb==1){echo 'Il vous reste '.$nb.' seul jour pour essayer notre plateforme';}else{echo 'Aujourd\'hui est le dernier jour d\'essai pour essayer notre plateforme';}}} ?>            	
+            </p>
+            <a class="close"></a> 
+		  </div>
+        </div>
+        <?php }} ?>
 	  <?php 
 	  if( $user_type=='admin' )
         { ?>
