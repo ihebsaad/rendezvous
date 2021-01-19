@@ -123,7 +123,7 @@ email /whatsapp
 IONOS server infrastructure (security / use one server or use another provider)
 
 --envoie proposal
-verification omcc/server
+--verification omcc/server
 inkspired: compression images/scripts..
 david devis et zoom
 avancé david
@@ -131,6 +131,25 @@ zainab security
 -- azmi : update to alexa & call esolutions
 
 ** paypal / sms / inscription gratuite / page acceuil / google map
+
+reunion david:
+-devis
+-param paypal
+-les remarques
+
+-- excel devis
+
+- agrandir image inscription dans acceuil
+
+
+--prestataires dans acceuil
+-- page prestataire:-images slider cv pas / - images services plus grand / - image logo plus grand / 
+
+-- inscription: numero siren / siret pour prestataire -- client ou prestataire au premier lieu / a la fin accepteer condition
+
+-- retirer categories du slider acceuil
+
+
 
 
 
