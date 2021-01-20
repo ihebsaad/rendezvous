@@ -76,7 +76,7 @@ figcaption {
       <div class="row margin-bottom-50 margin-top-85">
 	  <div class="col-md-12"> 
 			
-			<center> <h2 style="color:red;" >Vous n'êtes pas autorisé à accéder à votre compte car votre abonnement ou votre periode d'essai a été expiré .</h2></center><center> <h2 style="color:red;" > Pour le moment, Vous pouvez uniquement consulter votre page de prestation. Vous pouvez toutefois cliquer sur le bouton s'abonner pour renouveler votre abonnement.</h2></center>
+			<center> <h2 style="color:red;" >Vous n'êtes pas autorisé à accéder à votre compte car votre abonnement ou votre période d'essai a été expiré .</h2></center><center> <h2 style="color:red;" > Pour le moment, Vous pouvez uniquement consulter votre page de prestation. Vous pouvez toutefois cliquer sur le bouton s'abonner pour renouveler votre abonnement.</h2></center>
 			 
 	  </div>
 	  </div>

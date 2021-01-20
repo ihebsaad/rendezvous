@@ -75,7 +75,7 @@ figcaption {
    <div class="container">
       <div class="row margin-bottom-50 margin-top-100">
 	  <div class="col-md-12"> 
-			<center><h2 style="color:red;" >Vous êtes dans une periode d'essai de 15 jours</h2></center>
+			<center><h2 style="color:red;" >Vous êtes dans une période d'essai de 15 jours</h2></center>
 
 			<center> <h2 style="color:red;" > <?php if(isset($nbjours)){$nb=15-$nbjours; if($nb>1){ echo 'Il vous reste '.$nb.' jours pour essayer notre plateforme'; }else {if($nb==1){echo 'Il vous reste '.$nb.' seul jour pour essayer notre plateforme';}else{echo 'Aujourd\'hui est le dernier jour d\'essai pour essayer notre plateforme';}}} ?></h2></center>
 			 
