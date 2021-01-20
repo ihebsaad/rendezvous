@@ -972,8 +972,8 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
 
    <script>
-   	$(document).ready(function() {
-            function changing(elm) {
+
+   	function changing(elm) {
                 var champ = elm.id;
 
                 var val = document.getElementById(champ).value;
@@ -1011,6 +1011,8 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                 });
 
             }
+   	$(document).ready(function() {
+            
 
  			
 			// $('.categories').click(function(event ){

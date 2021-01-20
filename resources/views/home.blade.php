@@ -284,9 +284,24 @@
 				 <?php  $User= auth()->user();  ?>
 				<?php
 				$listings=\App\User::where('user_type','prestataire')->get();
- 
+         $format = "Y-m-d H:i:s";
+            $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
+            $date_15j=\DateTime::createFromFormat($format, $date_15j);
+          
 				foreach ($listings as $listing)
 				{
+          $date_inscription=  $listing->date_inscription;
+            $date_inscription=\DateTime::createFromFormat($format, $date_inscription);            
+            $nbjours = $date_inscription->diff($date_15j);
+            $nbjours =intval($nbjours->format('%R%a'));
+             $date_exp='';
+            if($listing->expire)
+            {
+              $date_exp=\DateTime::createFromFormat($format,$listing->expire);
+            }
+        
+        if ( $nbjours<=15 || ($nbjours> 15 && $listing->expire &&  $date_exp >= $date_15j))
+        {
                     $categories_user = \DB::table('categories_user')->where('user',$listing->id)->get();
 					$services =\App\Service::where('user',$listing->id)->get();
 					
@@ -361,7 +376,7 @@
 					</div>
 					</div> 
 				  </div>
-		 <?php }  //foreach $listings  ?>
+		 <?php }}  //foreach $listings  ?>
 				  
 				  
 				</div>
