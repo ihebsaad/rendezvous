@@ -321,7 +321,7 @@
 		$moy=$total/$countrev; 
 		}		
 				?>
-				  <div class="col-md-4 utf_carousel_item" style="min-width:400px">
+				  <div class="col-md-4 utf_carousel_item" style="min-width:350px">
 				  <div class="utf_listing_item-container ">
 					<a  href="{{route('viewlisting',['id'=> $listing->id] )}}">
 					<div class="utf_listing_item"> <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="" style="max-width:450px">
