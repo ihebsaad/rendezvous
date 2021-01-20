@@ -72,11 +72,15 @@ figcaption {
       </div>
     </div>   
   </div>-->
+  <?php 
+ $parametres=DB::table('parametres')->where('id', 1)->first();
+
+ $apropos=$parametres->apropos;?>
 <div class="container">
 	<div class="row divimg margin-bottom-40 margin-top-50">
 	  <div class="col-md-12"> 
 			<h4 class="headline_part margin-top-0 margin-bottom-15">Prenezunrendezvous.com</h4>
-			<p><b>Prenezunrendezvous.com</b> est un annuaire qui référence des prestataires de services qui travaillent sur rendez-vous. Cet annuaire permet aux particuliers de prendre rendez-vous avec des prestataires de services prêt de chez eux en quelques clics.</p>
+			<p><?php echo $apropos;?></p>
 	  </div>
 	</div>
 	<div class="row margin-bottom-50 margin-top-30">

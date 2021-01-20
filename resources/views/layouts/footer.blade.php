@@ -1,7 +1,7 @@
 <?php 
  $parametres=DB::table('parametres')->where('id', 1)->first();
 
- $apropos=$parametres->apropos;?> 
+ $apropos=$parametres->apropos_footer;?> 
  <!-- Footer -->
   <div id="footer" class="footer_sticky_part" style="padding-top:40px;"> 
     <div class="container">
