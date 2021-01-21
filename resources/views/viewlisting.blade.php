@@ -14,7 +14,9 @@
   <div id="utf_listing_gallery_part" class="utf_listing_section">
     <div class="utf_listing_slider utf_gallery_container margin-bottom-0"> 
 	<?php foreach($images as $image){?>
-		<a href="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" data-background-image="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" class="item utf_gallery"></a> 
+		<a href="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  class="item utf_gallery">
+			<img  height="400" width="950" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"
+     alt=""></a> 
     <?php } ?>
 	</div>
   </div>  
