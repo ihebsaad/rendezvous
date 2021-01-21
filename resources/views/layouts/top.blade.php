@@ -7,7 +7,7 @@ $plogo= $parametres->logo;
       <div class="container"> 
         <div class="utf_left_side"> 
           <div id="logo"> <a href="{{route('home')}}"><img style="max-height:55px"    src="<?php echo  URL::asset('storage/images/'.$plogo);?>" alt=""></a> </div>
-              <div class="mmenu-trigger" style="visibility: hidden;">
+              <div class="mmenu-trigger" style="visibility: visible;">
 		 <button class="hamburger utfbutton_collapse" type="button">
 				<span class="utf_inner_button_box">
 					<span class="utf_inner_section"></span>
