@@ -252,7 +252,7 @@
 		    echo '<li>  ';
 			 
 			echo $service->nom.'  -  <small><b>'.$service->prix.' €</b></small>' ;
-			if($service->thumb!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="max-width:100px;margin-bottom:15px;"  /> </a>'; }?>
+			if($service->thumb!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="max-width:140px;max-height:100px; margin-bottom:15px;"  /> </a>'; }?>
 			
            <!-- <li>Air Conditioned</li>-->
 
