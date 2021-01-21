@@ -148,8 +148,8 @@
 <img src="public/images/clavier.png" alt="" style="width:100%; height:375px; z-index:-9; top:-10px; ">
 </div>
 </div>-->
-<div class="parallax margin-top-65" data-background="public/images/inscription_coiffure.jpg" style="background-image: url(&quot;public/images/inscription_coiffure.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;"><div class="parallax-overlay"></div> 
-    <div class="utf_text_content white-font">
+<div class="parallax margin-top-65" data-background="public/images/inscription_coiffure.jpg" style="background-image: url(&quot;public/images/inscription_coiffure.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;" style="height: 580px;"><div class="parallax-overlay"></div> 
+    <div class="utf_text_content white-font" style="padding:200px 0px; height: 580px;">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
