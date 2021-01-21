@@ -539,11 +539,12 @@
 		
         <div class="utf_box_widget margin-top-35">
           <h3><i class="sl sl-icon-phone"></i> Contact Info</h3>
-          <div class="utf_hosted_by_user_title"> <a href="#" class="utf_hosted_by_avatar_listing"><img src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" alt=""></a>
-            <h4><a href="#">{{$user->responsable}}</a><span> </span>
+          <div class="utf_hosted_by_user_title"> <a href="#" class="utf_hosted_by_avatar_listing"><img src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" alt="" style="width:105px; height:105px"></a>
+           <h4 style="margin: 15px 10px 10px;"><a href="#">{{$user->responsable}}</a><span> </span>
               <span><i class="sl sl-icon-location"></i> {{$user->ville}}</span>
             </h4>
-          </div>
+           <br>
+           </div>
 		  <ul class="utf_social_icon rounded margin-top-10">
             <li><a class="facebook" href="{{$user->fb}}" target="_blank" ><i class="icon-facebook"></i></a></li>
             <li><a class="twitter" href="{{$user->twitter}}" target="_blank" ><i class="icon-twitter"></i></a></li>
