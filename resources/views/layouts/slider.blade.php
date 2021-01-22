@@ -39,16 +39,16 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
             </div>
              </form>
             <div class="main_popular_categories">
-			  <h3>Ou parcourir les catégories populaires</h3>		
+			 <!--  <h3>Ou parcourir les catégories populaires</h3>		 -->
               <ul class="main_popular_categories_list">
-            @foreach($meres_categories as $tc)    
+           {{--@foreach($meres_categories as $tc)    
 				<li style="height: 120 %;"> <a style="height: 120 %;" href="#">
                   <div class="utf_box" style="height: 120 %;"> <i class="im im-icon-Chef-Hat" aria-hidden="true"></i>
                     <p style="font-size: 13.5px">{{$tc->nom}}</p>					
                   </div>
                   </a> 
 				</li>
-         @endforeach
+         @endforeach--}}
                 <!-- <li> <a href="#">
                   <div class="utf_box"> <i class="im im-icon-Dumbbell" aria-hidden="true"></i>
                     <p>Fitness</p>
