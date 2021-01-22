@@ -76,7 +76,7 @@
 			  <input type="hidden" id="user" value="{{$user->id}}" >
 
 		   </h2>
-             <span> <a href="#utf_listing_location" class="listing-address"> <i class="sl sl-icon-location"></i> {{$user->ville}}</a> </span>			
+             <span> <a href="#utf_listing_location" class="listing-address"> <i class="sl sl-icon-location"></i> {{$user->adresse}}</a> </span>			
 			<span class="call_now"><i class="sl sl-icon-phone"></i> {{$user->tel}}</span>
          <?php if(  $countrev  >0 ){?> 
 		 <div class="utf_star_rating_section" data-rating="<?php echo $moy; ?>">
@@ -208,10 +208,10 @@
 		  	 <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div>
 			 <div  class="row" style="padding-left:40px;padding-top:5px" >
 			 <select class=" " id="rappel" style="max-width:400px!important" >
-			 <option value="30">Avant 30 mins</option>
-			 <option value="60">Avant une heure</option>
+			  <option value="60">Avant une heure</option>
 			 <option value="120">Deux heures</option>
 			 <option value="1440">Un jour</option>
+			 <option value="2880">Avant 2 jours</option>
 			 </select>
 			 </div>
 		  </div>		  
