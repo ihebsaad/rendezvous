@@ -3,7 +3,7 @@
 
  $apropos=$parametres->apropos_footer;?> 
  <!-- Footer -->
-  <div id="footer" class="footer_sticky_part" style="padding-top:120px;padding-bottom: 170px;"> 
+  <div id="footer" class="footer_sticky_part" style="padding-top:120px;padding-bottom: 70px;margin-bottom: 0px"> 
     <div class="container">
       <div class="row">
  
@@ -36,7 +36,7 @@
       
       <div class="row">
         <div class="col-md-12">
-          <div class="footer_copyright_part">Copyright © 2021 Tous droits réservés - par eSolutions </div>
+          <div class="footer_copyright_part"><br>Copyright © 2021 Tous droits réservés - par eSolutions </div>
         </div>
       </div>
     </div>
