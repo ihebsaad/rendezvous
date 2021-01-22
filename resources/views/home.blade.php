@@ -149,8 +149,8 @@
 </div>
 </div>-->
 <div class="parallax margin-top-65" data-background="public/images/inscription_coiffure.jpg" style="background-image: url(&quot;public/images/inscription_coiffure.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;" style="height: 580px;"><div class="parallax-overlay"></div> 
-    <div class="utf_text_content white-font" style="padding:200px 0px; height: 580px;">
-      <div class="container">
+    <div class="utf_text_content white-font" style="padding:120px 0px; height: 580px;">
+      <div class="container" style="top: 0px;">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
             <!-- <h2 style="font-family:'Lucida Handwriting',cursive">Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>

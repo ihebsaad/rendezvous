@@ -4,13 +4,19 @@ $pvideo= $parametres->video;
 $toutes_categories=DB::table('categories')->get();
 $meres_categories=DB::table('categories')->whereNull('parent')->get();
 ?>
+<style>
+@media (max-width: 639px)
+.search_container_block {
 
+    height: 900px ! important;
+}
+</style>
   <div class="search_container_block overlay_dark_part">
     <div class="main_inner_search_block" style="top:43%">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2 style="top: -100px;">Prenez rendez-vous avec les meilleurs prestataires de services</h2>
+            <h2>Prenez rendez-vous avec les meilleurs prestataires de services</h2>
             <br>
             <!-- <h4>Find great places to stay, eat, shop, or visit the city</h4> -->
             <form action="{{route('search.prestataires')}}" method="post">
