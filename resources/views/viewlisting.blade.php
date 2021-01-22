@@ -976,7 +976,9 @@
  </script>
  <?php }?> 
 <!-- Maps --> 
-<script src="https://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> 
+<!-- https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&libraries=places&callback=initialize -->
+<!-- <script src="https://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&sensor=false&amp;language=en"></script>
 <script  src="{{ URL::asset('public/scripts/infobox.min.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/markerclusterer.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/maps.js')}}"   ></script> 
