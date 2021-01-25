@@ -1049,4 +1049,12 @@ $("body").mouseup(function() {
 	if (!mouse_is_inside) close_panel_dropdown();
 });
 </script>
+
+<script>
+$( document ).ready(function() {
+  var x = document.getElementsByClassName("slick-list draggable");
+  x.style.padding = "0px 0%";
+  
+});
+</script>
   @endsection('content')
