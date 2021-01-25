@@ -4,24 +4,67 @@
  <?php  $User= auth()->user();
 
  ?>
-
+<link rel="stylesheet" type="text/css" href="../public/css/slider_carre/demo.css" />
+    <link rel="stylesheet" href="../public/css/slider_carre/style.css">
   <?php 
   $images = \App\Image::where('user',$user->id)->get();
   $nbimages =count($images );
   if( $nbimages>0){
 ?>	  
-	  <div class="clearfix"></div>
+	  <!-- <div class="clearfix"></div>
   <div id="utf_listing_gallery_part" class="utf_listing_section">
-    <div class="utf_listing_slider utf_gallery_container margin-bottom-0"> 
-	<!-- <?php foreach($images as $image){?>
+    <div class="utf_listing_slider utf_gallery_container margin-bottom-0">  -->
+	<!-- <?php //foreach($images as $image){?>
 		<a href="<?php //echo  URL::asset('storage/images/'.$image->thumb);?>"  class="item utf_gallery">
 			<img  height="400" width="950" src="<?php //echo  URL::asset('storage/images/'.$image->thumb);?>"
      alt=""></a> 
-    <?php } ?> -->
-	</div>
-  </div>
-
-
+    <?php //} ?> -->
+	<!-- </div>
+  </div> -->
+<div class="clearfix"></div>
+<section>
+    <div class="rt-container">
+          <div class="col-rt-12">
+              <div class='demo-container'>
+                  <div class='carousel'>
+                    <input checked='checked' class='carousel__activator' id='carousel-slide-activator-1' name='carousel' type='radio'>
+                    <input class='carousel__activator' id='carousel-slide-activator-2' name='carousel' type='radio'>
+                    <input class='carousel__activator' id='carousel-slide-activator-3' name='carousel' type='radio'>
+                    <div class='carousel__controls'>
+                      <label class='carousel__control carousel__control--forward' for='carousel-slide-activator-2'>
+                        >
+                      </label>
+                    </div>
+                    <div class='carousel__controls'>
+                      <label class='carousel__control carousel__control--backward' for='carousel-slide-activator-1'>
+                        <
+                      </label>
+                      <label class='carousel__control carousel__control--forward' for='carousel-slide-activator-3'>
+                        >
+                      </label>
+                    </div>
+                    <div class='carousel__controls'>
+                      <label class='carousel__control carousel__control--backward' for='carousel-slide-activator-2'>
+                       <
+                      </label>
+                    </div>
+                    <div class='carousel__screen'>
+                      <div class='carousel__track'>
+                      	<?php foreach($images as $image){?>
+                        <div class='carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3'>
+                          <div class='demo-content'>
+    <img  src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" alt="">
+                          </div>
+                        </div>
+                         <?php } ?>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+		</div>
+    </div>
+</section>
+     
 <?php	  
   }else{
 	  
