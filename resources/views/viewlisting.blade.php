@@ -13,9 +13,15 @@
 	  <div class="clearfix"></div>
   <div id="utf_listing_gallery_part" class="utf_listing_section">
     <div class="utf_listing_slider utf_gallery_container margin-bottom-0"> 
-	
+	{{--<?php foreach($images as $image){?>
+		<a href="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  class="item utf_gallery">
+			<img  height="400" width="950" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"
+     alt=""></a> 
+    <?php } ?>--}}
 	</div>
-  </div>  
+  </div>
+
+    
 <?php	  
   }else{
 	  
@@ -204,10 +210,12 @@
 		  	 <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div>
 			 <div  class="row" style="padding-left:40px;padding-top:5px" >
 			 <select class=" " id="rappel" style="max-width:400px!important" >
-			  <option value="60">Avant une heure</option>
-			 <option value="120">Deux heures</option>
-			 <option value="1440">Un jour</option>
-			 <option value="2880">Avant 2 jours</option>
+			  <option value="60">1h avant le RDV </option>
+              <option value="120">2h avant le RDV</option>
+			 <option value="180">3h avant le RDV</option>
+			 <option value="1440">1 jour avant le RDV</option>
+			 <option value="2880">2 jours avant le RDV</option>
+			 <option value="7200">5 jours avant le RDV</option>
 			 </select>
 			 </div>
 		  </div>		  
