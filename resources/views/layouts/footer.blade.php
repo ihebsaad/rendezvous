@@ -3,7 +3,7 @@
 
  $apropos=$parametres->apropos_footer;?> 
  <!-- Footer -->
-  <div id="footer" class="footer_sticky_part" style="margin-top:350px;padding-bottom: 10px;margin-bottom: 0px"> 
+  <div id="footer" class="footer_sticky_part" style="margin-top:230px;padding-bottom: 0px;margin-bottom: 0px"> 
     <div class="container">
       <div class="row">
  
