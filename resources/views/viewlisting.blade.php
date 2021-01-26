@@ -32,7 +32,7 @@
                     <div class="carousel-item <?php if($i==1){ echo 'active' ; }?>">
                         <div class="col-lg-4 col-md-6 ">
                         	
-                      <img class="img-fluid" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>">
+                      <img  style="max-width: 100%;max-height:100%;" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>">
                         </div>
                     </div>
                     <?php } ?>
