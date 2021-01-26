@@ -32,7 +32,7 @@
                     <div class="carousel-item <?php if($i==1){ echo 'active' ; }?>">
                         <div class="col-lg-4 col-md-6 ">
                  <a href="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" data-lightbox="photos"> 
-                      <img  style="width: 100%; height:275px !important;" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>">
+                      <img  style="width: 100%; height:280px !important;" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>">
                       </a>
                         </div>
                     </div>
