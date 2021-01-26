@@ -21,49 +21,7 @@
     <?php //} ?> -->
 	<!-- </div>
   </div> -->
-<div class="clearfix"></div>
-<br>
 
-    <div class="rt-container">
-          <div class="col-rt-12">
-              <div class='demo-container'>
-                  <div class='carousel'>
-                    <input checked='checked' class='carousel__activator' id='carousel-slide-activator-1' name='carousel' type='radio'>
-                    <input class='carousel__activator' id='carousel-slide-activator-2' name='carousel' type='radio'>
-                    <input class='carousel__activator' id='carousel-slide-activator-3' name='carousel' type='radio'>
-                    <div class='carousel__controls'>
-                      <label class='carousel__control carousel__control--forward' for='carousel-slide-activator-2'>
-                        >
-                      </label>
-                    </div>
-                    <div class='carousel__controls'>
-                      <label class='carousel__control carousel__control--backward' for='carousel-slide-activator-1'>
-                        <
-                      </label>
-                      <label class='carousel__control carousel__control--forward' for='carousel-slide-activator-3'>
-                        >
-                      </label>
-                    </div>
-                    <div class='carousel__controls'>
-                      <label class='carousel__control carousel__control--backward' for='carousel-slide-activator-2'>
-                       <
-                      </label>
-                    </div>
-                    <div class='carousel__screen'>
-                      <div class='carousel__track'>
-                      	<?php foreach($images as $image){?>
-                        <div class='carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3'>
-                          <div class='demo-content'>
-    <img  height="400" width="600" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" alt="">
-                          </div>
-                        </div>
-                         <?php } ?>
-                     </div>
-                    </div>
-                  </div>
-                </div>
-		</div>
-    </div>
 
      
 <?php	  
