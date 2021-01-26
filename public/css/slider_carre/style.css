@@ -230,36 +230,43 @@
   text-transform: uppercase;
   border-radius: 3px;
   font-size: 56px;
-  height: 250px;
+  height: 200px;
   width: 100%;
 }
 
 .carousel__item:nth-child(1) .demo-content {
-  background-color: #216485;
+  /*background-color: #216485;*/
+  background-color: #ffffff;
 }
 
 .carousel__item:nth-child(2) .demo-content {
-  background-color: #3692b6;
+  /*background-color: #3692b6;*/
+  background-color: #ffffff;
 }
 
 .carousel__item:nth-child(3) .demo-content {
-  background-color: #6fccc9;
+  /*background-color: #6fccc9;*/
+  background-color: #ffffff;
 }
 
 .carousel__item:nth-child(4) .demo-content {
-  background-color: #a6e3cf;
+  /*background-color: #a6e3cf;*/
+  background-color: #ffffff;
 }
 
 .carousel__item:nth-child(5) .demo-content {
-  background-color: #aff0be;
+  /*background-color: #aff0be;*/
+  background-color: #ffffff;
 }
 
 .carousel__item:nth-child(6) .demo-content {
-  background-color: #527059;
+ /* background-color: #527059;*/
+ background-color: #ffffff;
 }
 
 .carousel__item:nth-child(7) .demo-content {
-  background-color: #243127;
+  /*background-color: #243127;*/
+  background-color: #ffffff;
 }
 
 @media screen and (max-width: 1023px) {

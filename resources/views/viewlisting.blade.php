@@ -22,7 +22,8 @@
 	<!-- </div>
   </div> -->
 <div class="clearfix"></div>
-<section>
+<br>
+
     <div class="rt-container">
           <div class="col-rt-12">
               <div class='demo-container'>
@@ -53,7 +54,7 @@
                       	<?php foreach($images as $image){?>
                         <div class='carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3'>
                           <div class='demo-content'>
-    <img  src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" alt="">
+    <img  height="400" width="600" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" alt="">
                           </div>
                         </div>
                          <?php } ?>
@@ -63,7 +64,7 @@
                 </div>
 		</div>
     </div>
-</section>
+
      
 <?php	  
   }else{
