@@ -32,7 +32,7 @@
                     <div class="carousel-item <?php if($i==1){ echo 'active' ; }?>">
                         <div class="col-lg-4 col-md-6 ">
                         	
-                      <img  style="max-width: 100%;max-height:100%;" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>">
+                      <img  style="width: 100%; height:100%;" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>">
                         </div>
                     </div>
                     <?php } ?>
