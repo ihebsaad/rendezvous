@@ -4,8 +4,10 @@
  <?php  $User= auth()->user();
 
  ?>
-<link rel="stylesheet" type="text/css" href="../public/css/slider_carre/demo.css" />
-    <link rel="stylesheet" href="../public/css/slider_carre/style.css">
+<link rel="stylesheet" type="text/css" href="../public/css/slider_carre/carousel.css" />
+
+
+    
   <?php 
   $images = \App\Image::where('user',$user->id)->get();
   $nbimages =count($images );
@@ -21,6 +23,30 @@
     <?php //} ?> -->
 	<!-- </div>
   </div> -->
+
+  <div class="row mx-auto my-auto">
+            <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+                <div class="carousel-inner w-100" role="listbox">
+                    
+                   <?php $i=0; foreach($images as $image){ $i++;?>
+                    <div class="carousel-item <?php if($i==1){ echo 'active' ; }?>">
+                        <div class="col-lg-4 col-md-6 ">
+                        	
+                      <img class="img-fluid" src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>">
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+                <a class="carousel-control-prev bg-dark w-auto" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next bg-dark w-auto" href="#myCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
 
 
      
@@ -1055,7 +1081,10 @@ $("body").mouseup(function() {
 	if (!mouse_is_inside) close_panel_dropdown();
 });
 </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="{{  URL::asset('public/css/slider_carre/carousel.js') }}" type="text/javascript"></script> 
 <script>
 /*$( document ).ready(function() {
   var x = document.getElementsByClassName("slick-list draggable");
