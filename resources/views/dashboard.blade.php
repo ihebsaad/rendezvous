@@ -7,7 +7,9 @@
    use \App\Http\Controllers\UsersController;
 
   ?>
- 
+ <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
  
   <!-- Dashboard -->
   <div id="dashboard"> 
@@ -83,7 +85,9 @@
             <a class="close"></a> 
 		  </div>
         </div>
+        </div>
         <?php }} ?>
+        <div class="row"> 
 	  <?php 
 	  if( $user_type=='admin' )
         { ?>
@@ -163,7 +167,7 @@
       </div>
 	  
  	  
-      <div class="row"> 
+      <div class="row" > 
         <div class="col-lg-6 col-md-12">
           <div class="utf_dashboard_list_box with-icons margin-top-20">
             <h4>Dernières Notifications</h4>
@@ -195,11 +199,17 @@
             </ul>
           </div>
         </div>
-		<div class="col-lg-12 col-md-12 mb-4">
+        </div>
+        <br>
+
+			
+        <div class="row" >
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 		  <div class="utf_dashboard_list_box table-responsive recent_booking">
 			<h4>Dernières Réservations</h4>
 			<div class="dashboard-list-box table-responsive invoices with-icons">
-			  <table class="table table-hover">
+				<div style="overflow: auto;">
+			  <table class="table table-responsive table-striped table-hover" >
 				<thead>
 				  <tr>
 					<th>Créée le</th>
@@ -240,9 +250,12 @@
 		 <?php } ?> 
 				</tbody>
 			  </table>
+			  </div>
 			</div>
 		  </div>
 		</div>
+		</div>
+		<div class="row">
         <div class="col-md-12">
           <div class="footer_copyright_part">Copyright © 2021 Tous droits réservés.</div>
         </div>
@@ -264,4 +277,107 @@ try {
     }
 })(jQuery);
 </script>
+ <style>.searchfield{width:100px;}</style>
+<script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" type="text/javascript"></script> 
+
+<script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+
+            $('#mytable thead tr:eq(1) th').each( function () {
+                var title = $('#mytable thead tr:eq(0) th').eq( $(this).index() ).text();
+                $(this).html( '<input class="searchfield" type="text"   />' );
+            } );
+
+            var table = $('#mytable').DataTable({
+                orderCellsTop: true,
+               // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
+                dom: 'Blfrtip',
+				responsive:true,
+                buttons: [
+
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                "columnDefs": [ {
+                    "targets": 'no-sort',
+                    "orderable": false,
+                } ]
+                ,
+                "language":
+                    {
+                        "decimal":        "",
+                        "emptyTable":     "Pas de données",
+                        "info":           "affichage de  _START_ à _END_ de _TOTAL_ entrées",
+                        "infoEmpty":      "affichage 0 à 0 de 0 entrées",
+                        "infoFiltered":   "(Filtrer de _MAX_ total d`entrées)",
+                        "infoPostFix":    "",
+                        "thousands":      ",",
+                        "lengthMenu":     "affichage de _MENU_ entrées",
+                        "loadingRecords": "chargement...",
+                        "processing":     "chargement ...",
+                        "search":         "Recherche:",
+                        "zeroRecords":    "Pas de résultats",
+                        "paginate": {
+                            "first":      "Premier",
+                            "last":       "Dernier",
+                            "next":       "Suivant",
+                            "previous":   "Précédent"
+                        },
+                        "aria": {
+                            "sortAscending":  ": activer pour un tri ascendant",
+                            "sortDescending": ": activer pour un tri descendant"
+                        }
+                    }
+
+            });
+
+            // Restore state
+       /*     var state = table.state.loaded();
+            if ( state ) {
+                table.columns().eq( 0 ).each( function ( colIdx ) {
+                    var colSearch = state.columns[colIdx].search;
+
+                    if ( colSearch.search ) {
+                        $( '#mytable thead tr:eq(1) th:eq(' + index + ') input', table.column( colIdx ).footer() ).val( colSearch.search );
+
+                    }
+                } );
+
+                table.draw();
+            }
+
+*/
+
+            function delay(callback, ms) {
+                var timer = 0;
+                return function() {
+                    var context = this, args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        callback.apply(context, args);
+                    }, ms || 0);
+                };
+            }
+// Apply the search
+            table.columns().every(function (index) {
+                $('#mytable thead tr:eq(1) th:eq(' + index + ') input').on('keyup change', function () {
+                    table.column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+
+
+                });
+
+                $('#mytable thead tr:eq(1) th:eq(' + index + ') input').keyup(delay(function (e) {
+                    console.log('Time elapsed!', this.value);
+                    $(this).blur();
+
+                }, 2000));
+            });
+
+
+ 
+        });
+        </script>
  @endsection('content')
