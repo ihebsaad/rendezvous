@@ -70,13 +70,26 @@ background-color:#a0d468;
           </thead>
           <tbody>
             @foreach($reservations as $reservation)
-			<?php $montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
-			<?php $description=ServicesController::ChampById('nom',$reservation->service);?>
+         <?php   
+       /*  $service_name='';
+         $service_prix=0;
+
+            foreach ($reservation->services_reserves as $s ) {
+              $service=\App\Service::find($s);
+              $service_name.=$service->nom.", ";
+              $service_prix+= floatval($service->prix);
+            }*/
+
+
+
+           ?>
+			<?php  $montant=$reservation->montant_tot; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
+			<?php $description=$reservation->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservation->service);?>
                 <tr> 
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client) ;?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      <td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>
-                    <td><?php echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php echo $montant; ?> €)<small></td>
+                    <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> €)<small></td>
  	<td>
 		<?php  if($reservation->statut==0){$statut='<span class="badge badge-pill badge-danger" >En attente</span>';}  ?>
 			<?php  if($reservation->statut==1){$statut='<span class="badge badge-pill badge-primary  " >Validée</span>';}  ?>

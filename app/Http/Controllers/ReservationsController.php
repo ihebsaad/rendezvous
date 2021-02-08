@@ -82,28 +82,44 @@ class ReservationsController extends Controller
 		
 	public function add(Request $request)
 	{
+		//return ($request->all());
  		$user=$request->get('user');
-		 $reservation  = new Reservation([
+		 /*$reservation  = new Reservation([
               'client' => $request->get('client'),
               'prestataire' => $request->get('prestataire'),
-              'service' => $request->get('service'),
+              'services_reserves' => $request->get('service'),
               'date' => $request->get('date'),
               'heure' => $request->get('heure'),
               'adultes' => $request->get('adultes'),
               'enfants' => $request->get('enfants'),
               'remarques' => $request->get('remarques'),
               'rappel' => $request->get('rappel'),
-            ]);
- 
+            ]);*/
+         $reservation  = new Reservation($request->all());
         $reservation->save();
 		
 		$client = \App\User::find($request->get('client'));
 		$prestataire = \App\User::find($request->get('prestataire'));
+        $ser=$request->get('services_reserves');
+        $service_name='';
+        $service_prix=1;
+        //return($service_prix);
+		if(isset($ser))
+		{
+            foreach ($ser as $s ) {
+            	$service=\App\Service::find($s);
+            	$service_name.=$service->nom.", ";
+            	$service_prix+= floatval($service->prix);
+            }
+
+		}
+         $reservation->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix));
+		return($service_prix); 
 		$service = \App\Service::find($request->get('service'));
 		
 		// Email prestataire
 		$message='';
-		$message.='Vous avez une nouvelle réservation.<br>Veillez la confirmer dans votre tableau de bord.<br>';
+	$message.='Vous avez une nouvelle réservation.<br>Veuillez la confirmer dans votre tableau de bord.<br>';
 		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
 		$message.='<b>Date :</b> '.$request->get('date').' - <b>Heure :</b> '.$request->get('heure').'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
@@ -126,7 +142,7 @@ class ReservationsController extends Controller
   		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 		
-	    $this->sendMail(trim($client->email),'Nouvelle Réservation',$message)	;
+	    //$this->sendMail(trim($client->email),'Nouvelle Réservation',$message)	;
 		$alerte = new Alerte([
              'user' => $client->id,
 			 'titre'=>'Nouvelle Réservation',						 

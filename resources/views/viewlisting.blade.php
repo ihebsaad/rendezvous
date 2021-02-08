@@ -181,14 +181,15 @@
      <div class="unavailable-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-close"></i> Non Disponible</div>
       <?php } ?>
 	  <div class="utf_box_widget booking_widget_box">
-          <h3><i class="fa fa-calendar"></i> Réserver un service
+	      <h3><i class="fa fa-calendar"></i> Réserver un service 
 			<!--<div class="price">
 				<span>220$<small>person</small></span>				
 			</div>-->
 		  </h3>
+		  <h5>(Vous pouvez réserver plusieurs services) </h5>
 		  <div class="row with-forms margin-top-0">
 			<div class="col-lg-12 col-md-12">
-				<select class="utf_chosen_select_single" id="service" placeholder="Sélectionner"  >
+				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple >
 				<option>Veuillez sélectionner un service </option>
 					<?php 
 					foreach($services as $service){
@@ -957,14 +958,14 @@
                     var heure = $('#heure').val();
                     var service = $('#service').val();
                     var rappel = $('#rappel').val();
-					
+					//alert(JSON.stringify(service));
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date:date ,service:service, adultes:adultes, enfants:enfants, heure:heure, rappel:rappel   , _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date:date ,services_reserves:service, adultes:adultes, enfants:enfants, heure:heure, rappel:rappel   , _token:_token},
                         success:function(data){
- 
-						location.href= "{{ route('reservations') }}";
+                        alert(JSON.stringify(data));
+						//location.href= "{{ route('reservations') }}";
                         }
                     });
                
