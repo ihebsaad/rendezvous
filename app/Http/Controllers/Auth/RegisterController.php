@@ -64,6 +64,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+       // dd($data);
+        $typeabonn="type1";
+        if(isset($data['typeabonn']))
+        {
+         if( $data['typeabonn'])
+         {
+         $typeabonn=$data['typeabonn'];
+         }
+         
+       }
+      
+      // dd($typeabonn);
         $format = "Y-m-d H:i:s";
         $date_inscription = (new \DateTime())->format('Y-m-d H:i:s');
         return User::create([
@@ -73,6 +85,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'email' => $data['email'],
             'date_inscription' => $date_inscription,
+            'type_abonn_essai' =>  $typeabonn,
             'user_type' => $data['user_type'],
             'password' => Hash::make($data['password']),
         ]);

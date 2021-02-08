@@ -152,6 +152,64 @@ $plogo= $parametres->logo;
               <div class="tab_content" id="tab2" style="display:none;">
                 <form name="inscription" method="post" class="register"  action="{{ route('register') }}" onsubmit="return validateForm()" >
                   @csrf
+                   <p class="utf_row_form utf_form_wide_block">
+                   <center> <b style="color:black">Vous êtes ?</b></center>
+                    </p>
+                    <div class="checkboxes  ">
+                                <div class="form-check" style=" "  onclick="document.getElementById('prestataire').checked = false; cacherblocktypeabonn();">
+                                    <input class="form-check-input" type="checkbox" name="user_type" id="client" value="client" >
+
+                                    <label class="form-check-label" for="client">
+                                        Client (vous cherchez des services)
+                                    </label>
+                                </div>
+                    </div>
+                    <div class="checkboxes  ">
+                                <div class="form-check" style=" "  onclick="document.getElementById('client').checked = false; afficheblocktypeabonn();">
+                                    <input class="form-check-input" type="checkbox" name="user_type" id="prestataire" value="prestataire" >
+
+                                    <label class="form-check-label" for="prestataire">
+                                        Prestataire (vous voulez vendre des services)
+                                    </label>
+                                </div>
+                                <p id="erro8" style="color: red;"></p>
+                    </div>
+                    <div  id="essai_abonn">
+                    <?php  $parametres=DB::table('parametres')->where('id', 1)->first(); ?>
+
+                      <p class="utf_row_form utf_form_wide_block">
+                   <center> <b style="color:black">Vous pouvez choisir un type d'abonnement à tester : </b></center>
+                    </p>
+                    <div class="checkboxes  ">
+                                <div class="form-check" style=" "  onclick="document.getElementById('type2').checked = false; document.getElementById('type3').checked = false;">
+                                    <input class="form-check-input" type="checkbox" name="typeabonn" id="type1" value="type1" >
+
+                                    <label class="form-check-label" for="type1">
+                                        <?php echo $parametres->abonnement1;?> &nbsp;<?php echo $parametres->cout_abonnement1;?>&nbsp;€/Mois
+                                    </label>
+                                </div>
+                    </div>
+                    <div class="checkboxes  ">
+                                <div class="form-check" style=" "  onclick="document.getElementById('type1').checked = false; document.getElementById('type3').checked = false;">
+                                    <input class="form-check-input" type="checkbox" name="typeabonn" id="type2" value="type2" >
+
+                                    <label class="form-check-label" for="type2">
+                                        <?php echo $parametres->abonnement2;?> &nbsp; <?php echo $parametres->cout_abonnement2;;?>&nbsp;€/Mois
+                                    </label>
+                                </div>
+                                <p id="erro8" style="color: red;"></p>
+                    </div>
+                    <div class="checkboxes  ">
+                                <div class="form-check" style=" "  onclick="document.getElementById('type1').checked = false; document.getElementById('type2').checked = false; ">
+                                    <input class="form-check-input" type="checkbox" name="typeabonn" id="type3" value="type3" >
+
+                                    <label class="form-check-label" for="type3">
+                                         <?php echo $parametres->abonnement3;?> &nbsp;<?php echo $parametres->cout_abonnement3;?>&nbsp;€/Mois
+                                    </label>
+                                </div>
+                                <p id="erro9" style="color: red;"></p>
+                    </div>
+                    </div>   <!-- fin type essai abonnement -->
                   <p class="utf_row_form utf_form_wide_block">
                     <label for="username2">
                       <input type="text" class="input-text" name="username" id="username2" value="" placeholder="Nom d'utilisateur" />
@@ -230,28 +288,7 @@ $plogo= $parametres->logo;
                     @endif
                   </p>
 
-                  <p class="utf_row_form utf_form_wide_block">
-                   <center> <b style="color:black">Vous êtes ?</b></center>
-                    </p>
-                    <div class="checkboxes  ">
-                                <div class="form-check" style=" "  onclick="document.getElementById('prestataire').checked = false;">
-                                    <input class="form-check-input" type="checkbox" name="user_type" id="client" value="client" >
-
-                                    <label class="form-check-label" for="client">
-                                        Client (vous cherchez des services)
-                                    </label>
-                                </div>
-                    </div>
-				 <div class="checkboxes  ">
-                                <div class="form-check" style=" "  onclick="document.getElementById('client').checked = false;">
-                                    <input class="form-check-input" type="checkbox" name="user_type" id="prestataire" value="prestataire" >
-
-                                    <label class="form-check-label" for="prestataire">
-                                        Prestataire (vous voulez vendre des services)
-                                    </label>
-                                </div>
-                                <p id="erro8" style="color: red;"></p>
-                    </div>
+                 
                   <input type="submit" class="button border fw margin-top-10" name="register" value="Inscription" />
                 </form>
 
@@ -274,6 +311,8 @@ function validateForm() {
   var password_confirmation = document.forms["inscription"]["password_confirmation"].value;
   var username = document.forms["inscription"]["username"].value;
   var atLeastOneIsChecked = $('input[name="user_type"]:checked').length;
+ // var atLeastOneIsChecked2 = $('input[name="typeabonn"]:checked').attr("id");
+  //alert(atLeastOneIsChecked2);
   var  text;
   if (username == "") {
     document.getElementById("erro1").innerHTML =" Vous devez remplir le champ Nom d'utilisateur";
@@ -315,11 +354,40 @@ function validateForm() {
 
   if (atLeastOneIsChecked == 0) {
     document.getElementById("erro8").innerHTML =" Vous devez choisir un type d'utilisateur (client ou prestataire)";
+   
+
     return false;
   }
- 
+  /*if(document.getElementById('prestataire').checked==true)
+    {
+      if (atLeastOneIsChecked2 == 0) {
+
+       document.getElementById("erro9").innerHTML =" Vous devez choisir un type d'abonnement à tester";
+         return false;
+       }
+
+    }*/
         
   
+}
+
+$( document ).ready(function() {
+
+ $("#essai_abonn").hide();
+ document.getElementById('type1').checked = true;
+ document.getElementById('client').checked = true;
+
+});
+
+function afficheblocktypeabonn()
+{
+   $("#essai_abonn").show("slow");
+
+}
+function cacherblocktypeabonn()
+{
+   $("#essai_abonn").hide("slow");
+
 }
 </script>
   
