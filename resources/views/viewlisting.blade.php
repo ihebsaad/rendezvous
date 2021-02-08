@@ -964,8 +964,8 @@
                         method:"POST",
                         data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date:date ,services_reserves:service, adultes:adultes, enfants:enfants, heure:heure, rappel:rappel   , _token:_token},
                         success:function(data){
-                        alert(JSON.stringify(data));
-						//location.href= "{{ route('reservations') }}";
+                        //alert(JSON.stringify(data));
+						location.href= "{{ route('reservations') }}";
                         }
                     });
                
