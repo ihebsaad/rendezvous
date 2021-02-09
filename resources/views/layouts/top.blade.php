@@ -185,7 +185,7 @@ $plogo= $parametres->logo;
                                     <input class="form-check-input" type="checkbox" name="typeabonn" id="type1" value="type1" >
 
                                     <label class="form-check-label" for="type1">
-                                        <?php echo $parametres->abonnement1;?> &nbsp;<?php echo $parametres->cout_abonnement1;?>&nbsp;€/Mois
+                                        <?php echo $parametres->abonnement1;?> &nbsp;<?php echo $parametres->cout_abonnement1;?>&nbsp;€&nbsp;TTC / Mois
                                     </label>
                                 </div>
                     </div>
@@ -194,7 +194,7 @@ $plogo= $parametres->logo;
                                     <input class="form-check-input" type="checkbox" name="typeabonn" id="type2" value="type2" >
 
                                     <label class="form-check-label" for="type2">
-                                        <?php echo $parametres->abonnement2;?> &nbsp; <?php echo $parametres->cout_abonnement2;;?>&nbsp;€/Mois
+                                        <?php echo $parametres->abonnement2;?> &nbsp; <?php echo $parametres->cout_abonnement2;;?>&nbsp;€&nbsp;TTC / Mois
                                     </label>
                                 </div>
                                 <p id="erro8" style="color: red;"></p>
@@ -204,7 +204,7 @@ $plogo= $parametres->logo;
                                     <input class="form-check-input" type="checkbox" name="typeabonn" id="type3" value="type3" >
 
                                     <label class="form-check-label" for="type3">
-                                         <?php echo $parametres->abonnement3;?> &nbsp;<?php echo $parametres->cout_abonnement3;?>&nbsp;€/Mois
+                                         <?php echo $parametres->abonnement3;?> &nbsp;<?php echo $parametres->cout_abonnement3;?>&nbsp;€&nbsp;TTC / Mois
                                     </label>
                                 </div>
                                 <p id="erro9" style="color: red;"></p>
