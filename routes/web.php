@@ -42,7 +42,8 @@ Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->
 
 Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
-Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
+//Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
+Route::get('/{slug}/{id}', 'UsersController@viewlisting');
 Route::post('/users/updating','UsersController@updating')->name('users.updating');
 Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage');
 Route::post('/users/ajoutvideo','UsersController@ajoutvideo')->name('users.ajoutvideo');

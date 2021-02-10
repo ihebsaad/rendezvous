@@ -164,7 +164,7 @@ class UsersController extends Controller
 
 	}
 	 
-	  public function viewlisting($id)
+	  public function viewlisting($slug,$id)
     {
   	
 		$user = User::find($id);
