@@ -73,7 +73,8 @@
             <a class="close" href="#"></a> 
 		  </div>
  @endif	
-    	  <a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> 
+    	  {{--<a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> --}}
+    	 <a href="{{$user->generate_slug()}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a>
 
       <div class="row">
         <div class="col-lg-12">
