@@ -323,7 +323,8 @@
 				?>
 				  <div class="col-md-4 utf_carousel_item" style="min-width:350px">
 				  <div class="utf_listing_item-container ">
-					<a  href="{{route('viewlisting',['id'=> $listing->id] )}}">
+					{{--<a  href="{{route('viewlisting',['id'=> $listing->id] )}}">--}}
+            <a  href="{{$listing->generate_slug()}}">
 					<div class="utf_listing_item"> <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="" style="max-width:450px">
 				<?php $top=15; $i=0;?>
 				<?php foreach($categories_user as $cat){ 

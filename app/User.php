@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -15,8 +17,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table="users";
     protected $fillable = [
-        'username', 'expire','abonnement','logo','couverture','video', 'email', 'password', 'name' ,'lastname','phone','user_type','date_inscription', 'lundi_o',	'lundi_f',	'mardi_o',	'mardi_f',	'mercredi_o',	'mercredi_f',	'jeudi_o' , 'jeudi_f' , 'vendredi_o' ,	'vendredi_f' ,	'samedi_o' ,	'samedi_f' ,	'dimanche_o' ,	'dimanche_f' , 'type_abonn_essai' 
+        'username', 'expire','abonnement','logo','couverture','video', 'email', 'password', 'name' ,'lastname','phone','user_type','date_inscription', 'lundi_o',	'lundi_f',	'mardi_o',	'mardi_f',	'mercredi_o',	'mercredi_f',	'jeudi_o' , 'jeudi_f' , 'vendredi_o' ,	'vendredi_f' ,	'samedi_o' ,	'samedi_f' ,	'dimanche_o' ,	'dimanche_f' , 'type_abonn_essai','titre','qr_code' 
     ];
 
     /**
@@ -36,4 +39,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function generate_slug()
+    {
+       //return url("/prestataire/{$this->id}-".Str::slug($this->titre,'-'));
+        return url("/".Str::slug($this->titre,'-')."/{$this->id}");
+
+       // return $this->titre;
+    }
 }
