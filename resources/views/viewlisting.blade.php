@@ -190,7 +190,7 @@
 		  <div class="row with-forms margin-top-0">
 			<div class="col-lg-12 col-md-12">
 				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple >
-				<option>Veuillez sélectionner un service </option>
+				<option> </option>
 					<?php 
 					foreach($services as $service){
 						echo '<option value="'.$service->id.'">'.$service->nom.'</option>';
@@ -1030,7 +1030,31 @@ $(function() {
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
+
 	locale: {
+		"daysOfWeek": [
+            "Dim",
+            "Lun",
+            "Mar",
+            "Mer",
+            "Jeu",
+            "Ven",
+            "Sam"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
       format: 'DD/MM/YYYY'
     } ,
      minDate: today,
@@ -1087,10 +1111,12 @@ $("body").mouseup(function() {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="{{  URL::asset('public/css/slider_carre/carousel.js') }}" type="text/javascript"></script> 
 <script>
-/*$( document ).ready(function() {
-  var x = document.getElementsByClassName("slick-list draggable");
-  x.style.padding = "0px 0%";
-  
-});*/
+$( document ).ready(function() {
+  //var x = document.getElementsByClassName("slick-list draggable");
+  //x.style.padding = "0px 0%";
+
+  //$('input[]').value='kkk';
+
+});
 </script>
   @endsection('content')
