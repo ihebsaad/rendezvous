@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 //use Illuminate\Http\PostRequest;
 use DB;
+use QrCode;
+use URL;
+
 use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
@@ -15,6 +18,8 @@ use \App\Categorie;
 use \App\Image;
 use \App\Reservation;
 use \App\Alerte;
+use Illuminate\Support\Str;
+
 
 use Twilio\Rest\Client;
  
@@ -227,7 +232,7 @@ class UsersController extends Controller
 
     public function updating(Request $request)
     {
-        $id= $request->get('user');
+        $id= trim($request->get('user'));
         $champ= strval($request->get('champ'));
         if($champ=='password'){
             $val= bcrypt(trim($request->get('val')));
@@ -236,7 +241,33 @@ class UsersController extends Controller
             $val= $request->get('val');
 
         }
+
+        // mise à jour qr code
+        if($champ=='titre')
+        {
+           $valkbs= trim($request->get('val'));
+           if($valkbs)
+           {
+           	 $nouv_slug=Str::slug($valkbs,'-');
+             $nouv_qrcode=$nouv_slug.'-'.$id.'.png';
+             $ancien_qrcode=User::where('id',$id)->first()->qr_code;
+             $ancien_qrcode=storage_path().'/qrcodes/'.$ancien_qrcode;
+             if(file_exists($ancien_qrcode))
+                {
+                 unlink($ancien_qrcode) ;
+             	}
+               $baseurl=URL::to('/');
+
+              QrCode::size(200)->format('png')->generate($baseurl.'/'.$nouv_slug.'/'.$id,storage_path().'/qrcodes/'.$nouv_qrcode);
+
+              User::where('id', $id)->update(array("qr_code"=> $nouv_qrcode));
+              
+
+           }
+
+        } // fin mise à jour qr code
           User::where('id', $id)->update(array($champ => $val));
+       
 
     }
 

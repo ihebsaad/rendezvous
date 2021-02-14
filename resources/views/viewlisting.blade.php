@@ -100,7 +100,7 @@
 		
   <div class="container">
     <div class="row utf_sticky_main_wrapper">
-      <div class="col-lg-8 col-md-8">
+      <div class="col-lg-5 col-md-5">
 	          <div id="titlebar" class="utf_listing_titlebar">
           <div class="utf_listing_titlebar_title">
            <h2>{{$user->titre}} 
@@ -158,6 +158,12 @@
 			<a href="{{$user->youtube}}" class="youtube-link"><i class="fa fa-youtube-play"></i> Youtube</a>
 		  </div>-->		  
         </div>
+	  </div>
+       <div class="col-lg-3 col-md-3  margin-top-75 ">
+       	<?php $url1=  URL::asset('storage\qrcodes'); 
+       	$urlqrcode = $url1."/".$User->qr_code;  ?>
+        <center><img src="{{$urlqrcode}}" alt="" width="200" height="200"></center>
+
 	  </div>
 	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
 	  
