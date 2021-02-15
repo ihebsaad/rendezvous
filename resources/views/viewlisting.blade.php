@@ -100,7 +100,7 @@
 		
   <div class="container">
     <div class="row utf_sticky_main_wrapper">
-      <div class="col-lg-5 col-md-5">
+      <div class="col-lg-6 col-md-6">
 	          <div id="titlebar" class="utf_listing_titlebar">
           <div class="utf_listing_titlebar_title">
            <h2>{{$user->titre}} 
@@ -159,7 +159,7 @@
 		  </div>-->		  
         </div>
 	  </div>
-       <div class="col-lg-3 col-md-3  margin-top-75 ">
+       <div class="col-lg-2 col-md-2  margin-top-75 ">
        	<?php $url1=  URL::asset('storage\qrcodes'); 
        	$urlqrcode = $url1."/".$user->qr_code;  ?>
         <center><img src="{{$urlqrcode}}" alt="" width="100" height="100"></center>
