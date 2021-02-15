@@ -100,9 +100,11 @@
 		
   <div class="container">
     <div class="row utf_sticky_main_wrapper">
-      <div class="col-lg-6 col-md-6">
-	          <div id="titlebar" class="utf_listing_titlebar">
-          <div class="utf_listing_titlebar_title">
+      <div class="col-lg-8 col-md-8 padding-right-25">
+	      <div id="titlebar" class="utf_listing_titlebar">
+	     
+          <div class="row utf_listing_titlebar_title">
+          	<div class="col-lg-9 col-md-9">
            <h2>{{$user->titre}} 
 			  <input type="hidden" id="user" value="{{$user->id}}" >
 
@@ -140,6 +142,14 @@
 			</ul>
 		  </div>-->
           </div>
+          
+          <div class="col-lg-3 col-md-3 ">
+       	<?php $url1=  URL::asset('storage\qrcodes'); 
+       	$urlqrcode = $url1."/".$user->qr_code;  ?>
+        <center><img src="{{$urlqrcode}}" alt="" width="130" height="130"></center>
+
+	  </div>
+	  </div>
         </div>
         <div id="utf_listing_overview" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> Description</h3>
@@ -159,12 +169,7 @@
 		  </div>-->		  
         </div>
 	  </div>
-       <div class="col-lg-2 col-md-2  margin-top-75 ">
-       	<?php $url1=  URL::asset('storage\qrcodes'); 
-       	$urlqrcode = $url1."/".$user->qr_code;  ?>
-        <center><img src="{{$urlqrcode}}" alt="" width="100" height="100"></center>
-
-	  </div>
+      
 	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
 	  
 	  <?php if( isset($User) && $user->id== $User->id) {   $format = "Y-m-d H:i:s";
