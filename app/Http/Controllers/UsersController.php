@@ -250,7 +250,11 @@ class UsersController extends Controller
            {
            	 $nouv_slug=Str::slug($valkbs,'-');
              $nouv_qrcode=$nouv_slug.'-'.$id.'.png';
-             $ancien_qrcode=User::where('id',$id)->first()->qr_code;
+            // $ancien_qrcode=User::where('id',$id)->first()->qr_code;
+             $ancien_qrcode=User::where('id',$id)->first()->titre;
+             $ancien_qrcode=Str::slug($ancien_qrcode,'-');
+             $ancien_qrcode=$ancien_qrcode.'-'.$id.'.png';
+
              $ancien_qrcode=storage_path().'/qrcodes/'.$ancien_qrcode;
              if(file_exists($ancien_qrcode))
                 {
@@ -260,8 +264,7 @@ class UsersController extends Controller
 
               QrCode::size(200)->format('png')->generate($baseurl.'/'.$nouv_slug.'/'.$id,storage_path().'/qrcodes/'.$nouv_qrcode);
 
-              User::where('id', $id)->update(array("qr_code"=> $nouv_qrcode));
-              
+              User::where('id', $id)->update(array("qr_code"=> $nouv_qrcode));            
 
            }
 
