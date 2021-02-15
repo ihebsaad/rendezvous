@@ -162,7 +162,7 @@
        <div class="col-lg-3 col-md-3  margin-top-75 ">
        	<?php $url1=  URL::asset('storage\qrcodes'); 
        	$urlqrcode = $url1."/".$user->qr_code;  ?>
-        <center><img src="{{$urlqrcode}}" alt="" width="200" height="200"></center>
+        <center><img src="{{$urlqrcode}}" alt="" width="100" height="100"></center>
 
 	  </div>
 	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
