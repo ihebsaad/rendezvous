@@ -161,7 +161,7 @@
 	  </div>
        <div class="col-lg-3 col-md-3  margin-top-75 ">
        	<?php $url1=  URL::asset('storage\qrcodes'); 
-       	$urlqrcode = $url1."/".$User->qr_code;  ?>
+       	$urlqrcode = $url1."/".$user->qr_code;  ?>
         <center><img src="{{$urlqrcode}}" alt="" width="200" height="200"></center>
 
 	  </div>
