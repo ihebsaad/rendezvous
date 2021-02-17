@@ -654,7 +654,7 @@ function geocodeAddress(geocoder, resultsMap) {
 							</div>
 							<div class="fm-input  "> 
 								<label>Durée de service*</label>
-							  <input type="time"      placeholder="durée de service*" name="duree" id="duree" required> 
+							  <input type="time"   value="01:00"   placeholder="durée de service*" name="duree" id="duree" required> 
 							  <br>
 							</div>
 					  <input type="submit" id="add" style="text-align:center;color:white;" value="Ajouter"></input>
@@ -1139,7 +1139,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                          service =parseInt(data);
 						 if(service>0)
 						{
-							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+nom+'"   ></div><div class="fm-input pricing-ingredients"><input type="text" value="'+description+'" ></div><div class="fm-input pricing-price"><i class="data-unit">€</i><input type="text"    data-unit="€"  value="'+prix+'"   ></div><div class="fm-input "><input type="time"  value="'+duree+'"   ></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="https://$_SERVER[HTTP_HOST]/services/remove/'+service+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
+							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <label>Nom :</label><input type="text" value="'+nom+'"   ></div><div class="fm-input pricing-ingredients"><label>Description :</label><input type="text" value="'+description+'" ></div><div class="fm-input "><label>Durée :</label><input type="time"  value="'+duree+'"   ></div><div class="fm-input pricing-price"><label>Prix :</label><i class="data-unit">€</i><input type="text"    data-unit="€"  value="'+prix+'"   ></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="https://$_SERVER[HTTP_HOST]/services/remove/'+service+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
  						            newElem.appendTo('table#utf_pricing_list_section');
 
 					 	//$('#small-dialog').modal('hide');
