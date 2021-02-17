@@ -131,8 +131,16 @@ echo $service->sid  ;
         $infoprest = UsersController::infouser($PrestId);
         $titreprest = $infoprest['titre'];
         // info prestation
-        $infoserv = ServicesController::infoservice($ServId);
-        $titreserv = $infoserv['nom'];
+        if (strpos($inforeservation["nom_serv_res"], ',') !== FALSE)
+        {
+          $titrprest ="les prestations";
+        }
+        else {
+          $titrprest ="la prestation";
+        }
+        $infprests = $inforeservation["nom_serv_res"];
+        /*$infoserv = ServicesController::infoservice($ServId);
+        $titreserv = $infoserv['nom'];*/
         
         if (! is_null($numtel))
         {
@@ -155,7 +163,7 @@ echo $service->sid  ;
                 // ajouter condition reservation payé
 
         /*$message = "Hello $recipientName, now we are $curtime ,this is a reminder about reservation # $idreservation .";*/
-$message = "Bonjour $cltname, vous avez rendez vous avec le prestataire de services $titreprest $msgtemp. Pour la prestation: $titreserv.
+$message = "Bonjour $cltname, vous avez rendez vous avec le prestataire de services $titreprest $msgtemp. Pour $titrprest: $infprests.
 
 Merci d'être à l'heure à votre rdv.";
         /*
