@@ -551,6 +551,8 @@ function geocodeAddress(geocoder, resultsMap) {
 				  <div class="col-md-12">
 					<table id="utf_pricing_list_section">
 					  <tbody class="ui-sortable"  id="services">
+					 
+					  
 					  <?php
  
 					  foreach($services as $service){
@@ -561,14 +563,25 @@ function geocodeAddress(geocoder, resultsMap) {
 							<?php if($service->thumb!=''){?>  <img src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"  style="max-width:100px"  /><?php }?>
 							</div>
 							<div class="fm-input pricing-name">
+								<label>Nom :</label>
 							  <input type="text" value="<?php echo $service->nom;?>"   >
 							</div>
+
 							<div class="fm-input pricing-ingredients">
+								<label>Description :</label>
 							  <input type="text" value="<?php echo $service->description;?>" >
 							</div>
-							<div class="fm-input pricing-price"><i class="data-unit">€</i>
+							<div class="fm-input ">
+								<label>Durée :</label>
+							  <input type="time"  value="<?php echo $service->duree;?>"   > 
+							</div>
+							<div class="fm-input pricing-price">
+								<label>Prix :</label>
+								<i class="data-unit">€</i>
 							  <input type="text"    data-unit="€"  value="<?php echo $service->prix;?>"   > 
 							</div>
+
+							
 						 	<div class="fm-close">
 							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
 							</div>
@@ -638,6 +651,11 @@ function geocodeAddress(geocoder, resultsMap) {
 							</div>
 							<div class="fm-input  "> 
 							  <input type="text"      placeholder="prix de service*" name="prix" id="prix" required> 
+							</div>
+							<div class="fm-input  "> 
+								<label>Durée de service*</label>
+							  <input type="time"      placeholder="durée de service*" name="duree" id="duree" required> 
+							  <br>
 							</div>
 					  <input type="submit" id="add" style="text-align:center;color:white;" value="Ajouter"></input>
 
@@ -1102,6 +1120,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                 var nom = $('#nom').val();
                 var description = $('#description').val();
                 var prix = $('#prix').val();
+                var duree = $('#duree').val();
                 var photo = $('#photo').val();
 
 				if ((nom != '')  )
@@ -1120,7 +1139,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                          service =parseInt(data);
 						 if(service>0)
 						{
-							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+nom+'"   ></div><div class="fm-input pricing-ingredients"><input type="text" value="'+description+'" ></div><div class="fm-input pricing-price"><i class="data-unit">€</i><input type="text"    data-unit="€"  value="'+prix+'"   ></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="https://$_SERVER[HTTP_HOST]/services/remove/'+service+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
+							newElem=$('<tr class="pricing-list-item pattern ui-sortable-handle"><td><div class="fm-input pricing-name"> <input type="text" value="'+nom+'"   ></div><div class="fm-input pricing-ingredients"><input type="text" value="'+description+'" ></div><div class="fm-input pricing-price"><i class="data-unit">€</i><input type="text"    data-unit="€"  value="'+prix+'"   ></div><div class="fm-input "><input type="time"  value="'+duree+'"   ></div><div class="fm-close"><a  class="delete fm-close"  onclick="return confirm(`Êtes-vous sûrs ?`)"  href="https://$_SERVER[HTTP_HOST]/services/remove/'+service+'"><i class="fa fa-remove"></i></a></div></td></tr>');	 
  						            newElem.appendTo('table#utf_pricing_list_section');
 
 					 	//$('#small-dialog').modal('hide');

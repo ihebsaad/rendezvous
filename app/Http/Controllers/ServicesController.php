@@ -97,6 +97,7 @@ class ServicesController extends Controller
               'nom' => $request->get('nom'),
               'description' => $request->get('description'),
               'prix' => $request->get('prix'),
+              'duree' => $request->get('duree'),
               'thumb' => $name,
            ]);
 
