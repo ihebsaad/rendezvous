@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        SMSFactor\Laravel\SMSFactorServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -224,6 +225,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
          'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+         'SMSFactor' => SMSFactor\Laravel\Facade\Account::class,
+        'SMSFactor' => SMSFactor\Laravel\Facade\Campaign::class,
+        'SMSFactor' => SMSFactor\Laravel\Facade\ContactList::class,
+        'SMSFactor' => SMSFactor\Laravel\Facade\Message::class,
+        'SMSFactor' => SMSFactor\Laravel\Facade\Webhook::class,
+        'SMSFactor' => SMSFactor\Laravel\Facade\Token::class,
 
     ],
 
