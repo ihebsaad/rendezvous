@@ -447,42 +447,34 @@ class UsersController extends Controller
     public function sendsms()
     {
     	// test send sms
-      //$sid    = "AC3d7083cec682b78152d5e320cc6b80a2";
-    	$sid    = "ACa9a8bf9d60934bca1e18517dc5102062";
-    	
-      //$token  = "dda3e46929618cd01ef5144360b645c0";
-    	//$token  = "f469833a67aa9762a846ae5be7965257";
+    	/*$sid    = "ACa9a8bf9d60934bca1e18517dc5102062";
     	$token  = "2b5518ac73d42b7ff70703cd524302ae";
       
       $twilio_number = "+13347589498";
       $client = new Client($sid, $token);
 		$client->messages->create(
-		    // Where to send a text message (your cell phone?)
 		    '+21654076876',
 		    array(
 		        'from' => $twilio_number,
 		        'body' => 'Bonjour, 
 		        test du site: prenezunrendezvous.com !'
 		    )
-		);
-		$client->messages->create(
-		    // Where to send a text message (your cell phone?)
+		);*/
+		/*$client->messages->create(
 		    '+596696930477',
 		    array(
 		        'from' => $twilio_number,
 		        'body' => 'Bonjour, 
 		        test du site: prenezunrendezvous.com !'
 		    )
-		);
-		// creation service
-/*$service = $client->verify->v2->services
-                              ->create("Verification Tel");
-
-$serviceid= $service->sid ;
-	
-$verification = $client->verify->v2->services($serviceid)
-                                   ->verifications
-                                   ->create('+21654076876', "sms");*/
+		);*/
+		$account = app('SMSFactor\Message');
+		$response = $account->send([
+			'to' => '+21654076876',
+			'text' => 'Bonjour, 
+		        test du site: prenezunrendezvous.com !'
+		]);
+		print_r($response->getJson());
     }
 	
  }

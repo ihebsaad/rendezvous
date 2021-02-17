@@ -48,14 +48,12 @@ echo $service->sid  ;
         $accountSid = $twilioConfig['twilio_account_sid'];
         $authToken = $twilioConfig['twilio_auth_token'];
         $this->sendingNumber = $twilioConfig['twilio_number'];*/
-		
-		$sid    = "ACe12debd2169cd76d0ebf9bcb76a74519";
-        //$token  = "f469833a67aa9762a846ae5be7965257";
+    /*    
+		// WORKING SOLUTION WITH TWILIO
+		    $sid    = "ACe12debd2169cd76d0ebf9bcb76a74519";
         $token  = "1fe8926262ee2473378d1ce61fe09c26";
-        //$this->sendingNumber = '(659) 234-3197';
         $this->sendingNumber = '+13347589498';
-        //$this->twilioClient = new Client($accountSid, $authToken);
-        $this->twilioClient = new Client($sid, $token);
+        $this->twilioClient = new Client($sid, $token);*/
     }
 
     /**
@@ -159,7 +157,15 @@ echo $service->sid  ;
 $message = "Bonjour $cltname, vous avez rendez vous avec le prestataire de services $titreprest $msgtemp. Pour la prestation: $titreserv.
 
 Merci d'être à l'heure à votre rdv.";
+        /*
+        // TWILIO WORKING SOLUTION
         $this->_sendMessage($numtel, $message);
+        */
+        $account = app('SMSFactor\Message');
+        $response = $account->send([
+          'to' => $numtel,
+          'text' => $message
+        ]);
 
         }
 
