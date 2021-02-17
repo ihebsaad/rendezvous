@@ -8,6 +8,7 @@ use Twilio\Rest\Client;
 use \App\Http\Controllers\ReservationsController;
 use \App\Http\Controllers\UsersController;
 use \App\Http\Controllers\ServicesController;
+use Message;
 
 class AppointmentReminder
 {
@@ -161,8 +162,7 @@ Merci d'être à l'heure à votre rdv.";
         // TWILIO WORKING SOLUTION
         $this->_sendMessage($numtel, $message);
         */
-        $account = app('App\SMSFactor\Message');
-        $response = $account->send([
+        $response = Message::send([
           'to' => $numtel,
           'text' => $message
         ]);
