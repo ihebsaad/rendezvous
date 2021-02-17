@@ -161,8 +161,7 @@ Merci d'être à l'heure à votre rdv.";
         // TWILIO WORKING SOLUTION
         $this->_sendMessage($numtel, $message);
         */
-        $account = app('SMSFactor\Message');
-        $response = $account->send([
+        $response = Message::send([
           'to' => $numtel,
           'text' => $message
         ]);
