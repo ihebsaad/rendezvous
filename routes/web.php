@@ -36,19 +36,19 @@ Route::get('/contact', 'UsersController@contact')->name('contact');
 Route::get('/apropos', 'UsersController@apropos')->name('apropos');
 Route::get('/faqs', 'UsersController@faqs')->name('faqs');
 Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->name('ConditionsUtilisation');
+Route::get('/{slug}/{id}', 'UsersController@viewlisting');
 
+Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 
 
 Route::group(['middleware' => 'auth'], function(){
 
 	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
-	Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
 
 	Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 	Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
 	//Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
-	Route::get('/{slug}/{id}', 'UsersController@viewlisting');
 	Route::post('/users/updating','UsersController@updating')->name('users.updating');
 	Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage');
 	Route::post('/users/ajoutvideo','UsersController@ajoutvideo')->name('users.ajoutvideo');
