@@ -36,7 +36,6 @@ Route::get('/contact', 'UsersController@contact')->name('contact');
 Route::get('/apropos', 'UsersController@apropos')->name('apropos');
 Route::get('/faqs', 'UsersController@faqs')->name('faqs');
 Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->name('ConditionsUtilisation');
-Route::get('/{slug}/{id}', 'UsersController@viewlisting');
 
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 
@@ -134,3 +133,4 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
 });
 
+Route::get('/{slug}/{id}', 'UsersController@viewlisting');
