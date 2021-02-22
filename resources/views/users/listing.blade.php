@@ -573,25 +573,25 @@ function geocodeAddress(geocoder, resultsMap) {
 							</div>
 							<div class="fm-input " style="max-width: 190px">
 								<label>Nbr services simultanés :</label>
-							  <input type="number"  value="<?php echo $service->nbrService;?>"  >
+							  <input type="number" onchange="changeService(this)" id="b<?php echo $service->id;?>" name="nbrService" value="<?php echo $service->nbrService;?>"  >
 							</div>
 							<div class="fm-input pricing-name" >
 								<label>Nom :</label>
-							  <input type="text" value="<?php echo $service->nom;?>"   >
+							  <input type="text" onchange="changeService(this)" id="i<?php echo $service->id;?>" name="nom" value="<?php echo $service->nom;?>"   >
 							</div>
 
 							<div class="fm-input pricing-ingredients">
 								<label>Description :</label>
-							  <input type="text" value="<?php echo $service->description;?>" >
+							  <input type="text" onchange="changeService(this)" id="u<?php echo $service->id;?>" name="description" value="<?php echo $service->description;?>" >
 							</div>
 							<div class="fm-input ">
 								<label>Durée :</label>
-							  <input type="time"  value="<?php echo $service->duree;?>"   > 
+							  <input type="time" onchange="changeService(this)" id="z<?php echo $service->id;?>" name="duree" value="<?php echo $service->duree;?>"   > 
 							</div>
 							<div class="fm-input pricing-price">
 								<label>Prix :</label>
 								<i class="data-unit">€</i>
-							  <input type="text"    data-unit="€"  value="<?php echo $service->prix;?>"   > 
+							  <input type="text"   onchange="changeService(this)" id="y<?php echo $service->id;?>" name="prix"  data-unit="€"  value="<?php echo $service->prix;?>"   > 
 							</div>
 							
 
@@ -599,19 +599,19 @@ function geocodeAddress(geocoder, resultsMap) {
 						 	<div class="fm-close">
 							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
 							</div>
-							
+
 							</td>
 							<td > 
 								
 							
 							<div class="fm-input " style="display: none;" id="f<?php echo $service->id;?>">
 								<label>Nbr de fois :</label>
-							  <input type="number"  value="<?php echo $service->Nfois;?>"   > 
+							  <input type="number" onchange="changeService(this)" id="q<?php echo $service->id;?>" name="Nfois" value="<?php echo $service->Nfois;?>"   > 
 							</div>
 							<div class="fm-input " style="display: none;" id="h<?php echo $service->id;?>">
-							  <label for="fre">Fréquence :</label>
+							  <label for="frequence">Fréquence :</label>
 
-								<select name="fre" id="fre" >
+								<select  onchange="changeService(this)" id="x<?php echo $service->id;?>" name="frequence">
 									<option  hidden><?php echo $service->frequence;?></option>
 								  <option >Journalière</option>
 								  <option >Hebdomadaire</option>
@@ -620,15 +620,15 @@ function geocodeAddress(geocoder, resultsMap) {
 							</div>
 							<div class="fm-input  " style="display: none;" id="p<?php echo $service->id;?>">
 								<?php if($service->frequence=='Journalière'){?>
-								<label>Période (N° jours) :</label>
+								<label id="labelperiode2">Période (N° jours) :</label>
 								<?php }?>
 								<?php if($service->frequence=='Hebdomadaire'){?>
-								<label>Période (N° semaine) :</label>
+								<label id="labelperiode2">Période (N° semaine) :</label>
 								<?php }?>
 								<?php if($service->frequence=='Mensuelle'){?>
-								<label>Période (N° mois) :</label>
+								<label id="labelperiode2">Période (N° mois) :</label>
 								<?php }?>
-							  <input type="number" value="<?php echo $service->periode;?>" >
+							  <input type="number"  onchange="changeService(this)" id="w<?php echo $service->id;?>" name="periode" value="<?php echo $service->periode;?>" >
 							</div>
 							
 							</td>
@@ -1073,6 +1073,43 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
 
    <script>
+   	function changeService(a){
+   		//alert("ok");
+   		var valchange = $(a).val();
+   		var idchange = ($(a).attr('id')).substring(1);
+   		var namechange = $(a).attr('name');
+   		if (namechange=="frequence") {
+   			alert("oui");
+   			if (valchange=="Journalière") {
+   				alert("oui");
+    		document.getElementById("labelperiode2").innerHTML = "Période (N° de jours) : ";
+    		//document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
+    	}
+    	else if (valchange=="Hebdomadaire") {
+    		document.getElementById("labelperiode2").innerHTML = "Période (N° de semaines) : ";
+    	
+
+    	}
+    	else if (valchange=="Mensuelle") {
+    		document.getElementById("labelperiode2").innerHTML = "Période (N° de mois) : ";
+    	
+
+    	}
+
+   		}
+   		//alert(namechange);
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.modif') }}",
+                        method:"POST",
+						data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                        success:function(data){
+                        	
+                        }
+                    });
+
+
+			 };
    	function openReccurent(idwd){
 // alert(idwd);
    var x = document.getElementById("f"+idwd);
@@ -1119,6 +1156,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
     	}
     }
+    
    	function changing(elm) {
                 var champ = elm.id;
 
@@ -1241,7 +1279,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 			 });
 			 
 			 
-			
+	/*		
 			  $('#add').click(function( ){
                 var user = $('#user').val();
                 var nom = $('#nom').val();
@@ -1295,7 +1333,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
                 }else{
                     // alert('ERROR');
                 }
-            });
+            });*/
 			
 			
 		 $('#addfaq').click(function( ){

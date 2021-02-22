@@ -116,6 +116,15 @@ class ServicesController extends Controller
        return redirect('/listing/'.$user.'#services')->with('success', ' ajouté  ');
 
  	}
+ 	public function modif(Request $request)
+    {
+        $id= $request->get('idchange');
+        $champ= strval($request->get('namechange'));
+        $val= strval($request->get('valchange'));
+    
+          Service::where('id', $id)->update(array($champ => $val));
+
+    }
   
 
     public function updating(Request $request)

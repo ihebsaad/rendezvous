@@ -67,7 +67,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/add','ServicesController@add')->name('services.add');
 	Route::post('/services/store','ServicesController@store')->name('services.store');
 	Route::get('/services/add','ServicesController@add')->name('services.add');
-	Route::post('/services/updating','ServicesController@updating')->name('services.updating'); 
+	Route::post('/services/updating','ServicesController@updating')->name('services.updating');
+	Route::post('/services/modif','ServicesController@modif')->name('services.modif'); 
+ 
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
 
 
