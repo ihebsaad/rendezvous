@@ -9,6 +9,6 @@ class Service extends Authenticatable
  
    
     protected $fillable = [
-   'user', 'nom', 'description', 'prix' ,'duree','thumb'   ];
+   'user', 'nom', 'description', 'prix' ,'duree','thumb' ,'recurrent','Nfois','frequence','periode','nbrService'  ];
  
 }

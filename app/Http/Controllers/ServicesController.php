@@ -81,7 +81,10 @@ class ServicesController extends Controller
 	
 	public function store(Request $request)
 	{
+		//dd( $request);
+		
 				$name='';
+				$rec='off';
 		if($request->file('photo')!=null)
 		{$image=$request->file('photo');
 		 $name =  $image->getClientOriginalName();
@@ -91,13 +94,21 @@ class ServicesController extends Controller
          $image->move($path,  $name );
 		}
 		             $user =  $request->get('user');
-
+		       if ($request->get('toggleswitch')=='on') {
+		     		$rec=$request->get('toggleswitch');
+		     	}
 		     $service  = new Service([
+
               'user' => $request->get('user'),
               'nom' => $request->get('nom'),
               'description' => $request->get('description'),
               'prix' => $request->get('prix'),
               'duree' => $request->get('duree'),
+              'Nfois' => $request->get('Nfois'),
+              'frequence' => $request->get('mySelect'),
+              'periode' => $request->get('periode'),
+              'nbrService' => $request->get('nbrService'),
+              'recurrent' => $rec,
               'thumb' => $name,
            ]);
 
