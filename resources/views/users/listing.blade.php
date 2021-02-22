@@ -599,15 +599,16 @@ function geocodeAddress(geocoder, resultsMap) {
 						 	<div class="fm-close">
 							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
 							</div>
+							
 							</td>
-							<td> 
+							<td > 
 								
-							<div style="display: none;" id="<?php echo $service->id;?>">
-							<div class="fm-input ">
+							
+							<div class="fm-input " style="display: none;" id="f<?php echo $service->id;?>">
 								<label>Nbr de fois :</label>
 							  <input type="number"  value="<?php echo $service->Nfois;?>"   > 
 							</div>
-							<div class="fm-input ">
+							<div class="fm-input " style="display: none;" id="h<?php echo $service->id;?>">
 							  <label for="fre">Fréquence :</label>
 
 								<select name="fre" id="fre" >
@@ -617,7 +618,7 @@ function geocodeAddress(geocoder, resultsMap) {
 								  <option >Mensuelle</option>
 								</select> 
 							</div>
-							<div class="fm-input  ">
+							<div class="fm-input  " style="display: none;" id="p<?php echo $service->id;?>">
 								<?php if($service->frequence=='Journalière'){?>
 								<label>Période (N° jours) :</label>
 								<?php }?>
@@ -629,10 +630,11 @@ function geocodeAddress(geocoder, resultsMap) {
 								<?php }?>
 							  <input type="number" value="<?php echo $service->periode;?>" >
 							</div>
-							</div>
 							
 							</td>
+							
 						</tr>
+
 					  <?php } ?>
 					  </tbody>
 					</table>
@@ -1073,11 +1075,17 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
    <script>
    	function openReccurent(idwd){
 // alert(idwd);
-   var x = document.getElementById(idwd);
+   var x = document.getElementById("f"+idwd);
+   var y = document.getElementById("h"+idwd);
+   var z = document.getElementById("p"+idwd);
   if (x.style.display === "none") {
     x.style.display = "block";
+    y.style.display = "block";
+    z.style.display = "block";
   } else {
     x.style.display = "none";
+    y.style.display = "none";
+    z.style.display = "none";
   }
    	};
     var input = document.getElementById('toggleswitch');
