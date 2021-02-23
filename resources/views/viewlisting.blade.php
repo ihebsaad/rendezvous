@@ -4,9 +4,13 @@
  <?php  $User= auth()->user();
 
  ?>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../public/css/slider_carre/carousel.css" />
+<link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
+ <link rel="stylesheet" type="text/css" href="{{ asset('public/datetimepicker/css/bootstrap-datetimepicker.min.css') }}" />
 
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
     
   <?php 
   $images = \App\Image::where('user',$user->id)->get();
@@ -193,11 +197,16 @@
       <?php } ?>
 	  <div class="utf_box_widget booking_widget_box">
 	      <h3><i class="fa fa-calendar"></i> Réserver un service 
+
+	      <center> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendrier_prestataire">
+           Voir calendrier du prestataire
+          </button> </center>
 			<!--<div class="price">
 				<span>220$<small>person</small></span>				
 			</div>-->
 		  </h3>
 		  <h5>(Vous pouvez réserver plusieurs services) </h5>
+
 		  <div class="row with-forms margin-top-0">
 			<div class="col-lg-12 col-md-12">
 				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple >
@@ -211,7 +220,11 @@
 			</div>
 		  </div>		  
           <div class="row with-forms margin-top-0">
-            <div class="col-lg-12 col-md-12 select_date_box">
+          <div class="col-lg-12 col-md-12 select_date_box">
+          <label>Date de rendez vous:</label>
+          <input type="text" value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
+           </div>
+            <!-- <div class="col-lg-12 col-md-12 select_date_box">
               <input type="text" id="date-picker" placeholder="Date"  >
 			  <i class="fa fa-calendar"></i>
             </div> 
@@ -222,7 +235,7 @@
 			 <div class="col-lg-6  ">
 				<input style="margin-left:15px;min-width:180px" type="time"  required  id="heure"	>
 		     </div>
-		   </div>
+		   </div> -->
           </div>
 		  <div class="row with-forms">
 			<div class="col-lg-12">
@@ -767,6 +780,31 @@
       </div>
     </div>
   </div>
+
+  <!-- The Modal -->
+  <div class="modal fade" id="calendrier_prestataire">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Calendrier du prestataire</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="height:90%; width: 100%;" >
+         <div id="calpres"> </div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
   <!--
   <section class="fullwidth_block padding-top-20 padding-bottom-50">
     <div class="container">
@@ -1070,11 +1108,11 @@ $(function() {
     } ,
      minDate: today,
 
-	/*	isInvalidDate: function(date) {
-		var disabled_start = moment('09/02/2018', 'MM/DD/YYYY');
-		var disabled_end = moment('09/06/2018', 'MM/DD/YYYY');
+		isInvalidDate: function(date) {
+		var disabled_start = moment('15/02/2021', 'MM/DD/YYYY');
+		var disabled_end = moment('17/02/2021', 'MM/DD/YYYY');
 		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
-		}*/
+		}
 	});
 });
 
@@ -1121,6 +1159,7 @@ $("body").mouseup(function() {
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="{{  URL::asset('public/css/slider_carre/carousel.js') }}" type="text/javascript"></script> 
+
 <script>
 $( document ).ready(function() {
   //var x = document.getElementsByClassName("slick-list draggable");
@@ -1129,5 +1168,120 @@ $( document ).ready(function() {
   //$('input[]').value='kkk';
 
 });
+</script>
+
+<script src="{{  URL::asset('public/fullcalendar/main.min.js') }}"></script>
+<script src="{{  URL::asset('public/fullcalendar/locales/fr.js') }}"></script>
+<script src="{{  URL::asset('public/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{  URL::asset('public/datetimepicker/js/locales/bootstrap-datetimepicker.fr.js') }}"></script>
+
+	<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var initialLocaleCode = 'fr';
+    var localeSelectorEl = document.getElementById('locale-selector');
+    var calendarEl = document.getElementById('calpres');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'monthGridYear,dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+      },
+      
+      locale: initialLocaleCode,
+      buttonIcons: false, // show the prev/next text
+      weekNumbers: true,
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'All Day Event',
+          start: '2020-09-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2020-09-07',
+          end: '2020-09-10'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-09-09T16:00:00'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-09-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2020-09-11',
+          end: '2020-09-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-09-12T10:30:00',
+          end: '2020-09-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2020-09-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-09-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2020-09-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2020-09-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2020-09-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2020-09-28'
+        }
+      ]
+    });
+
+   // calendar.render();
+     $('#calendrier_prestataire').on('shown.bs.modal', function () {
+    calendar.render();
+});
+    
+  
+  });
+
+  var disabledtimes_mapping = ["02/19/2021:8", "02/19/2021:9", "02/19/2021:10"];
+
+   function formatDate(datestr)
+   {
+    var date = new Date(datestr);
+    var day = date.getDate(); day = day>9?day:"0"+day;
+    var month = date.getMonth()+1; month = month>9?month:"0"+month;
+    return month+"/"+day+"/"+date.getFullYear();
+   }
+
+  $("#datetimepicker").datetimepicker({
+     
+     language:'fr',
+     onRenderHour:function(date){
+     if(disabledtimes_mapping.indexOf(formatDate(date)+":"+date.getUTCHours())>-1)
+      {
+        return ['disabled'];
+      }
+    }
+     
+});
+  
 </script>
   @endsection('content')

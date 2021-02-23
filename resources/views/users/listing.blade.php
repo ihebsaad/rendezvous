@@ -1,6 +1,90 @@
 @extends('layouts.backlayout')
  
  @section('content')
+
+
+ <style>
+
+
+/* The Modal (background) */
+.modalkbs {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  padding-top: 150px; /* Location of the box */
+  padding-left: 200px;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+@media only screen and (max-width: 600px) {
+  .modalkbs {
+    padding-left: 0px;
+  }
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+</style>
+
+
 <style>
 
 .small-dialog{
@@ -48,6 +132,8 @@
 	height: 34px;
 }
 </style>
+<link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
+
    <!-- Dashboard -->
 <div id="dashboard"> 
 @include('layouts.back.menu')
@@ -542,6 +628,74 @@ function geocodeAddress(geocoder, resultsMap) {
                 </div>
               </div>                            
             </div>
+
+           
+
+             <!-- deb  heures indisponibilité  v2 -->
+
+      <div class="add_utf_listing_section margin-top-45"> 
+				<div class="utf_add_listing_part_headline_part">
+					<h3><i class="sl sl-icon-basket-loaded"></i>Heures d'indisponibilité</h3>
+                </div>              
+				<div class="row">
+				  <div class="col-md-12 col-sm-4">
+				  	<h4>(T: Titre descriptif de la période d'indisponibilité ; D: Date de début de la période ; F: date de fin de la période)</h4>
+					<table id="utf_pricing_list_section">
+					  <tbody class="ui-sortable"  id="indispo">
+					 	<br>
+					<?php use App\Calendrier;  $periodes_indisp=Calendrier::where('prest_id',$user->id)->get();
+					  foreach($periodes_indisp as $pi){
+ 					  ?>
+ 					  	<tr class="pricing-list-item pattern ui-sortable-handle">
+						  <td> 
+							
+							<div class="fm-input pricing-name">
+							  T:<input type="text" value="<?php echo $pi->titre;?>"   >
+							</div>
+							
+							<div class="fm-input pricing-ingredients" style="min-width:30%;">
+							  D:<input type="text" value="<?php echo $pi->date_debut;?>" >
+							</div>
+							<div class="fm-input pricing-price" style="max-width:30%;" ><i class="data-unit"></i>
+							  F:<input type="text" data-unit=""  value="<?php echo $pi->date_fin;?> " > 
+							</div>
+						 	<div class="fm-close">
+							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('CalendrierController@remove', [ 'id'=>$pi->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
+							</div>
+							
+							</td>
+						</tr>
+						
+					  <?php } ?>
+					  </tbody>
+					</table>
+					<br>
+						<center>
+					<a href="#indisp-dialog" class="button popup-with-zoom-anim">Ajouter</a> </center>
+					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
+				</div>                          
+            </div>
+
+
+             <!-- fin  heures indisponibilité  v2 -->
+
+             <!-- deb  heures indisponibilité  v3 -->
+              <div class="add_utf_listing_section margin-top-45"> 
+				<div class="utf_add_listing_part_headline_part">
+					<h3><i class="sl sl-icon-basket-loaded"></i>Heures d'indisponibilité - Rendez vous confirmés - Heures ouverture et fermeture </h3>
+                </div>              
+				<div class="row">
+				  <div class="col-md-12 ">
+				  	<h4>Calendrier :</h4>
+					<br>
+						
+                      <div id='calendar'></div>
+				</div>
+				</div>                          
+            </div>
+
+             <!-- fin  heures indisponibilité  v3 -->
+
 			
 			<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -638,7 +792,9 @@ function geocodeAddress(geocoder, resultsMap) {
 					  <?php } ?>
 					  </tbody>
 					</table>
-					<a href="#small-dialog" class="button popup-with-zoom-anim">Ajouter</a> 
+					<br>
+	               <center>
+					<a href="#small-dialog" class="button popup-with-zoom-anim">Ajouter</a> </center>
 					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
 				</div>                          
             </div>				
@@ -675,8 +831,87 @@ function geocodeAddress(geocoder, resultsMap) {
 				 <a href="#small-dialog2" class="button popup-with-zoom-anim">Ajouter FAQ</a> 
 					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
 				</div>                          
-            </div>				
-			
+            </div>	
+
+
+           <!--  modal pour ajouter une indisponibilté -->
+
+       <div id="indisp-dialog" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter une période d'indisponibilité</h3>
+          </div>
+		  <form  method="post" enctype="multipart/form-data"   action="{{ route('periodes_indisp.store') }}"  >
+		  {{ csrf_field() }}
+		  
+		   <div class="utf_signin_form style_one">
+		 	 <input type="hidden" name="user" value="{{$user->id}}"  >
+              <label>Titre descriptif *: </label>
+			  <div class="fm-input">
+			  <input type="text" placeholder="Titre descriptif" id="tdesc"  name="tdesc" required >
+			</div>
+             <label>Date de début *: </label>
+			<div class="fm-input">
+			  <input type="datetime-local" placeholder="Début période indisponibilité *"  id="dpindisp"  name="dpindisp" required>
+			</div>
+            <br>
+			<label>Date de fin *: </label>
+			<div class="fm-input"> 
+			  <input type="datetime-local" placeholder="Fin période indisponibilité *" name="fpindisp" id="fpindisp" required> 
+			</div>
+			<br>
+	         <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+
+			</form>				
+		 </div>		  
+		 </div>		  
+			 
+		<!-- fin modal pour ajouter une indisponibilté -->	
+
+		 <!--  modal pour ajouter une eve -->
+
+		 {{--<div id="calendardialog" class="modalkbs">
+
+			   <div class="modal-content">
+			    <div class="modal-header">
+			      <span class="close">&times;</span>
+			      <h2>ajouter</h2>
+			    </div>
+			    <div class="modal-body">
+			     <form  method="post" enctype="multipart/form-data"   action="{{ route('services.store') }}"  >
+				  {{ csrf_field() }}
+				 	 <input type="hidden" name="user" value="{{$user->id}}"  >
+		              <label>Titre descriptif *: </label>
+					  <div class="fm-input">
+					  <input type="text" placeholder="Titre descriptif" id="tdesc"  name="tdesc" required >
+					</div>
+		             <label>Date de début *: </label>
+					<div class="fm-input">
+					  <input type="datetime-local" placeholder="Début période indisponibilité *"  id="dpindisp"  name="dpindisp" required>
+					</div>
+		            <br>
+					<label>Date de fin *: </label>
+					<div class="fm-input"> 
+					  <input type="datetime-local" placeholder="Fin période indisponibilité *" name="fpindisp" id="fpindisp" required> 
+					</div>
+					<br>
+			         <center><input type="submit" id="add" style="text-align:center;color:white;" value="Ajouter"></input></center>
+			    </form>	
+			    </div>
+			    <div class="modal-footer">
+			      <h3>Modal Footer</h3>
+			    </div>
+			  </div>
+
+          </div>--}}
+
+	
+		
+
+
+
+       		  
+			 
+		<!-- fin modal pour ajouter une eveé -->	
 
 	        <div id="small-dialog" class="small-dialog zoom-anim-dialog mfp-hide">
           <div class="small_dialog_header">
@@ -1545,6 +1780,126 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
 });
     </script>
-	
+	<script src="{{  URL::asset('public/fullcalendar/main.min.js') }}"></script>
+	<script src="{{  URL::asset('public/fullcalendar/locales/fr.js') }}"></script>
+
+	<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var initialLocaleCode = 'fr';
+    var localeSelectorEl = document.getElementById('locale-selector');
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+      },
+      
+      locale: initialLocaleCode,
+      buttonIcons: false, // show the prev/next text
+      weekNumbers: true,
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      selectable:true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      dateClick: function (info) {
+      	var mod = document.getElementById("calendardialog");
+      	//alert(mod);
+      	 mod.style.display = "block";
+      	
+      },
+        eventClick: function(info) {
+
+          if (info.event.start) {
+           alert(convert(info.event.start));
+            }
+       },
+      events: [
+        {
+          title: 'All Day Event',
+          start: '2021-02-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2020-09-07',
+          end: '2020-09-10'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-09-09T16:00:00'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-09-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2020-09-11',
+          end: '2020-09-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-09-12T10:30:00',
+          end: '2020-09-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2020-09-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-09-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2020-09-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2020-09-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2020-09-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2020-09-28'
+        }
+      ]
+    });
+
+    calendar.render();
+    
+    // build the locale selector's options
+   
+
+   
+
+  });
+
+</script>
+
+<script>
+var modal = document.getElementById("calendardialog");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 
 @endsection  

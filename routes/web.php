@@ -29,6 +29,9 @@ Route::get('/dashboard', function () {
 });
 */
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
+Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
+Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
+Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
 Route::get('/prestataires', 'UsersController@prestataires')->name('prestataires');
 Route::get('/pricing', 'UsersController@pricing')->name('pricing');
 Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
@@ -72,6 +75,8 @@ Route::group(['middleware' => 'auth'], function(){
  
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
 
+Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
+Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove');
 
 
 	Route::post('/faqs/saving','FaqsController@store')->name('faqs.saving');
@@ -115,6 +120,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/pay','PaymentController@pay')->name('pay');
 	Route::post('/paypal','PaymentController@payWithpaypal')->name('paypal');
 	Route::get('/payreservation','PaymentController@payreservation')->name('payreservation');
+Route::post('/payreservation','PaymentController@payreservation')->name('payreservation');
+
 	Route::get('/status','PaymentController@getPaymentStatus')->name('status');
 	Route::get('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 	Route::post('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
@@ -132,7 +139,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/payments','PaymentController@index')->name('payments');
 	Route::get('/payments/remove/{id}', 'PaymentController@remove');
 
-	Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
 });
 
 Route::get('/{slug}/{id}', 'UsersController@viewlisting');
+Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');

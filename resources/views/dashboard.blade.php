@@ -205,10 +205,8 @@
 			
         <div class="row" >
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-		  <div class="utf_dashboard_list_box table-responsive recent_booking">
 			<h4>Dernières Réservations</h4>
-			<div class="dashboard-list-box table-responsive invoices with-icons">
-				<div style="overflow: auto;">
+				<div style="overflow-x: auto !important;">
 			  <table class="table table-responsive table-striped table-hover" >
 				<thead>
 				  <tr>
@@ -250,8 +248,7 @@
 		 <?php } ?> 
 				</tbody>
 			  </table>
-			  </div>
-			</div>
+			 
 		  </div>
 		</div>
 		</div>
