@@ -9,7 +9,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
-use \App\Calendrier;
+use \App\Indisponibilite;
 use \App\Service;
 
 class CalendrierController extends Controller
@@ -61,7 +61,7 @@ class CalendrierController extends Controller
 				
 		   $user =  $request->get('user');
 
-		     $periode_disp = new Calendrier([
+		     $periode_disp = new Indisponibilite([
               'prest_id' => $request->get('user'),
               'titre' => $request->get('tdesc'),
               'date_debut' => $request->get('dpindisp'),

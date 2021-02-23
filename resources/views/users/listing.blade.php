@@ -643,7 +643,7 @@ function geocodeAddress(geocoder, resultsMap) {
 					<table id="utf_pricing_list_section">
 					  <tbody class="ui-sortable"  id="indispo">
 					 	<br>
-					<?php use App\Calendrier;  $periodes_indisp=Calendrier::where('prest_id',$user->id)->get();
+					<?php use App\Indisponibilite;  $periodes_indisp=Indisponibilite::where('prest_id',$user->id)->get();
 					  foreach($periodes_indisp as $pi){
  					  ?>
  					  	<tr class="pricing-list-item pattern ui-sortable-handle">
