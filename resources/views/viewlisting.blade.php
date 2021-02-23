@@ -222,7 +222,7 @@
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
           <label>Date de rendez vous:</label>
-          <input type="text" value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
+          <input type="text" value="" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
            </div>
             <!-- <div class="col-lg-12 col-md-12 select_date_box">
               <input type="text" id="date-picker" placeholder="Date"  >
@@ -1003,15 +1003,16 @@
                     var remarques = $('#remarques').val();
                     var adultes = $('#adultes').val();
                     var enfants = $('#enfants').val();
-                    var date = $('#date-picker').val();
-                    var heure = $('#heure').val();
+                   // var date = $('#date-picker').val();
+                   // var heure = $('#heure').val();
+                    var datereservation= $('#datetimepicker').val();
                     var service = $('#service').val();
                     var rappel = $('#rappel').val();
 					//alert(JSON.stringify(service));
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date:date ,services_reserves:service, adultes:adultes, enfants:enfants, heure:heure, rappel:rappel   , _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:datereservation ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel   , _token:_token},
                         success:function(data){
                         //alert(JSON.stringify(data));
 						location.href= "{{ route('reservations') }}";
