@@ -4,14 +4,21 @@
  <?php  $User= auth()->user();
 
  ?>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+ 
+
 <link rel="stylesheet" type="text/css" href="../public/css/slider_carre/carousel.css" />
-<link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
+
  <link rel="stylesheet" type="text/css" href="{{ asset('public/datetimepicker/css/bootstrap-datetimepicker.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
-    
+<style>
+.datetimepicker {
+font-size: 15px;
+}
+   </style> 
   <?php 
   $images = \App\Image::where('user',$user->id)->get();
   $nbimages =count($images );
@@ -198,8 +205,8 @@
 	  <div class="utf_box_widget booking_widget_box">
 	      <h3><i class="fa fa-calendar"></i> Réserver un service 
 
-	      <center> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendrier_prestataire">
-           Voir calendrier du prestataire
+	      <center> <button type="button" id="kbs" class="btn btn-primary" style="font-size: 12px; width: 180px;" data-toggle="modal" data-target="#calendrier_prestataire">
+           <b>Voir calendrier du prestataire</b>
           </button> </center>
 			<!--<div class="price">
 				<span>220$<small>person</small></span>				
@@ -222,7 +229,7 @@
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
           <label>Date de rendez vous:</label>
-          <input type="text" value="" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">
+          <input type="text" value="" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" style="font-size: 15px;"">
            </div>
             <!-- <div class="col-lg-12 col-md-12 select_date_box">
               <input type="text" id="date-picker" placeholder="Date"  >
@@ -256,14 +263,14 @@
 			
 		  <div class="row with-forms">
 		  	 <div class="col-lg-11" style="padding-left:20px">
-		  <textarea name="remarques" cols="40" rows="2" id="remarques" placeholder="si vous avez des remarques" ></textarea>
+		  <textarea style="font-size: 15px;" name="remarques" cols="40" rows="2" id="remarques" placeholder="si vous avez des remarques" ></textarea>
 
 			 </div>
 		  </div>
 		  <div class="row with-forms">
 		  	 <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div>
 			 <div  class="row" style="padding-left:40px;padding-top:5px" >
-			 <select class=" " id="rappel" style="max-width:400px!important" >
+			 <select class=" " id="rappel" style="min-width:280px; max-width:400px!important ; font-size: 15px;" >
 			  <option value="60">1h avant le RDV </option>
               <option value="120">2h avant le RDV</option>
 			 <option value="180">3h avant le RDV</option>
@@ -782,24 +789,31 @@
   </div>
 
   <!-- The Modal -->
-  <div class="modal fade" id="calendrier_prestataire">
-    <div class="modal-dialog modal-xl">
+  <div class="modal fade" id="calendrier_prestataire"  >
+    <div class="modal-dialog modal-xl" >
       <div class="modal-content">
       
         <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Calendrier du prestataire</h4>
+        <div class="modal-header"  style="background-color: lightgrey;">
+          <h4 class="modal-title" style="font-size: 17px;" >Calendrier du prestataire</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body" style="height:90%; width: 100%;" >
-         <div id="calpres"> </div>
+        <div class="modal-body" style="border:solid ; border-color:lightgrey; ;" >
+        	<style scoped>
+            @media (min-width: 768px) {
+                .calpresk { 
+                  font-size: 15px;
+                }
+            }
+           </style>
+         <div id="calpres" class="calpresk"> </div>
         </div>
         
         <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <div class="modal-footer"  style="background-color: lightgrey;">
+          <button type="button"  style="font-size: 14px;"  class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         </div>
         
       </div>
@@ -1261,6 +1275,10 @@ $( document ).ready(function() {
     
   
   });
+
+  $("#kbs").click(function(){
+    $("#calendrier_prestataire").modal({backdrop: false});
+});
 
   var disabledtimes_mapping = ["02/19/2021:8", "02/19/2021:9", "02/19/2021:10"];
 
