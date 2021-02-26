@@ -216,7 +216,7 @@ font-size: 15px;
 
 		  <div class="row with-forms margin-top-0">
 			<div class="col-lg-12 col-md-12">
-				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple >
+				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple style="font-weight:15px; " >
 				<option> </option>
 					<?php 
 					foreach($services as $service){
@@ -229,7 +229,7 @@ font-size: 15px;
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
           <label>Date de rendez vous:</label>
-          <input type="text" value="" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" style="font-size: 15px;"">
+          <input type="text" value="" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" style="font-size: 15px;" readonly>
            </div>
             <!-- <div class="col-lg-12 col-md-12 select_date_box">
               <input type="text" id="date-picker" placeholder="Date"  >
@@ -800,7 +800,7 @@ font-size: 15px;
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body" style="border:solid ; border-color:lightgrey; ;" >
+        <div class="modal-body" style="border:solid ; border-color:lightgrey;" >
         	<style scoped>
             @media (min-width: 768px) {
                 .calpresk { 
