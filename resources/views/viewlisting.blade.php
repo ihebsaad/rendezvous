@@ -232,7 +232,7 @@ font-size: 15px;
         <input type="text" value=""   name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" class="input-append date" style="font-size: 15px;" readonly>                
            <span class="add-on"><i class="icon-th"></i></span>
 
-           
+
           <!--  <div class="input-append date" id="datetimepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
            <input size="16" type="text" value="26-02-2021" readonly>
            <span class="add-on"><i class="icon-th"></i></span>
@@ -1210,9 +1210,9 @@ $("body").mouseup(function() {
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      businessHours: <?php echo \App\Http\Controllers\calendrierController::ouverture_fermeture_horaire($user->id); ?>,
+      businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire($user->id); ?>,
       
-      events:<?php echo \App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
+      events:<?php echo \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
     });
 
    // calendar.render();

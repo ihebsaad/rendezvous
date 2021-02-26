@@ -1816,9 +1816,9 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
            alert(info.event.start);
             }
        },
-       businessHours: <?php echo \App\Http\Controllers\calendrierController::ouverture_fermeture_horaire($user->id); ?>,
+       businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire($user->id); ?>,
       
-      events:<?php echo \App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
+      events:<?php echo \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
     });
 
     calendar.render();
