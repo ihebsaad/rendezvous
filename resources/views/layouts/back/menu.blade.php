@@ -24,6 +24,8 @@
 
  <?php if( $user_type=='client'  ){ ?> 
 		  <li class="<?php if ($view_name == 'reviews-index'){echo 'active';} ?>  "><a href="{{ route('favoris')}}"><i class="sl sl-icon-heart"></i> Mes Favoris </a></li>
+		 	<li class="<?php if ($view_name == 'carteFidelite-index'){echo 'active';} ?>  "><a href="{{ route('carteFidelite')}}"><i class="sl sl-icon-present"></i> Carte de fidélité </a></li>
+
  <?php } ?>	
  <?php if( $user_type=='prestataire'  ){ ?> 		  
 		  <li class="<?php if ($view_name == 'users-listing'){echo 'active';} ?>  "><a href="{{ route('listing', ['id'=>$user->id]) }}"><i class="sl sl-icon-briefcase"></i> Mon Entreprise </a></li>       

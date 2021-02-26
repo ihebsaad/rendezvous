@@ -129,7 +129,9 @@ Route::post('/payreservation','PaymentController@payreservation')->name('payrese
 
 	Route::get('/abonnements','AbonnementsController@index')->name('abonnements');
 	Route::get('/abonnements/remove/{id}', 'AbonnementsController@remove');
+	
 
+	Route::get('/carteFidelite','carteFideliteController@index')->name('carteFidelite');
 
 
 	Route::get('/alertes','AlertesController@index')->name('alertes');

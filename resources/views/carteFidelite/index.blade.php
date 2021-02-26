@@ -53,21 +53,23 @@
                     <table id="utf_pricing_list_section">
                       <tbody class="ui-sortable"  id="services">
                             <tr class="pricing-list-item pattern ui-sortable-handle">
+
+                             @foreach ($carteF as $carteF)
                                 <td>
                                     <div class="fm-input ">
-                                    <img src="public/ok.jpg" style="max-width:150px">
+                                      <img  style="max-width:150px!important;" src="<?php echo  URL::asset('storage/images/'.$carteF->couverture);?>">
                                 </div>
                                 <div class="fm-input ">
                                     <label><b>Nom de prestataire :</b></label>
                                     
-                                    <h3>Restaurant Italien</h3>
+                                    <h3>{{$carteF->titre}}</h3>
 
                                 </div>
                                 <div class="fm-input ">
                                     <label><b>Réduction :</b></label>
                                     
                                     
-                                    <h3>50%</h3>
+                                    <h3>{{$carteF->reduction}}%</h3>
 
                                 </div>
                                 <div class="fm-input ">
@@ -75,9 +77,20 @@
                                     <table>
                                         <tbody>
                                             <tr >
-                                                <td  ><input type="checkbox" checked disabled  > <input type="checkbox" checked disabled><input type="checkbox" ><input type="checkbox" ><input type="checkbox" ></td>
-                                                <td ><input type="checkbox" ><input type="checkbox" ><input type="checkbox" ><input type="checkbox" ><input type="checkbox" ></td>
-                                                
+                                                <td  ><input type="checkbox" <?php if ($carteF->nbr_reservation>=1) { echo 'checked'; } ?>  disabled  >
+                                                 <input type="checkbox" <?php if ($carteF->nbr_reservation>=2) { echo 'checked'; } ?>  disabled>
+                                                 <input type="checkbox" <?php if ($carteF->nbr_reservation>=3) { echo 'checked'; } ?>  disabled>
+                                                 <input type="checkbox" <?php if ($carteF->nbr_reservation>=4) { echo 'checked'; } ?>  disabled>
+                                                 <input type="checkbox" <?php if ($carteF->nbr_reservation>=5) { echo 'checked'; } ?>  disabled>
+                                               </td>
+                                                <td >
+                                                  <input type="checkbox" <?php if ($carteF->nbr_reservation>=6) { echo 'checked'; } ?> disabled>
+                                                  <input type="checkbox" <?php if ($carteF->nbr_reservation>=7) { echo 'checked'; } ?> disabled>
+                                                  <input type="checkbox" <?php if ($carteF->nbr_reservation>=8) { echo 'checked'; } ?> disabled>
+                                                  <input type="checkbox" <?php if ($carteF->nbr_reservation>=9) { echo 'checked'; } ?> disabled>
+                                                  <input type="checkbox" <?php if ($carteF->nbr_reservation>=10) { echo 'checked'; } ?> disabled>
+                                                </td>
+                                                 
                                             </tr>
                                             
                                         </tbody>
@@ -88,14 +101,12 @@
                                     <label> <b>Bénéficier par la carte fidélité  :</b></label>
                                     
                                     
-                                    <h3>5 fois</h3>
+                                    <h3>{{$carteF->nbr_fois}} fois</h3>
 
                                 </div>
-
-
-                            
                            
                                 </td>
+                                @endforeach
                             </tr>
                         </tbody>
                     </table>
