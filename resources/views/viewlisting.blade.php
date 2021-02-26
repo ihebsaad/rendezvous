@@ -229,7 +229,15 @@ font-size: 15px;
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
           <label>Date de rendez vous:</label>
-          <input type="text" value="" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" style="font-size: 15px;" readonly>
+        <input type="text" value=""   name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" class="input-append date" style="font-size: 15px;" readonly>                
+           <span class="add-on"><i class="icon-th"></i></span>
+
+           
+          <!--  <div class="input-append date" id="datetimepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+           <input size="16" type="text" value="26-02-2021" readonly>
+           <span class="add-on"><i class="icon-th"></i></span>
+           </div> -->
+        
            </div>
             <!-- <div class="col-lg-12 col-md-12 select_date_box">
               <input type="text" id="date-picker" placeholder="Date"  >
@@ -1175,15 +1183,7 @@ $("body").mouseup(function() {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="{{  URL::asset('public/css/slider_carre/carousel.js') }}" type="text/javascript"></script> 
 
-<script>
-$( document ).ready(function() {
-  //var x = document.getElementsByClassName("slick-list draggable");
-  //x.style.padding = "0px 0%";
 
-  //$('input[]').value='kkk';
-
-});
-</script>
 
 <script src="{{  URL::asset('public/fullcalendar/main.min.js') }}"></script>
 <script src="{{  URL::asset('public/fullcalendar/locales/fr.js') }}"></script>
@@ -1210,62 +1210,9 @@ $( document ).ready(function() {
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2020-09-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-09-11',
-          end: '2020-09-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T10:30:00',
-          end: '2020-09-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-09-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-09-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-09-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-09-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-09-28'
-        }
-      ]
+      businessHours: <?php echo \App\Http\Controllers\calendrierController::ouverture_fermeture_horaire($user->id); ?>,
+      
+      events:<?php echo \App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
     });
 
    // calendar.render();
@@ -1280,6 +1227,8 @@ $( document ).ready(function() {
     $("#calendrier_prestataire").modal({backdrop: false});
 });
 
+  
+
   var disabledtimes_mapping = ["02/19/2021:8", "02/19/2021:9", "02/19/2021:10"];
 
    function formatDate(datestr)
@@ -1292,6 +1241,10 @@ $( document ).ready(function() {
 
   $("#datetimepicker").datetimepicker({
      
+       format: "dd MM yyyy - hh:ii",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left",
      language:'fr',
      onRenderHour:function(date){
      if(disabledtimes_mapping.indexOf(formatDate(date)+":"+date.getUTCHours())>-1)
@@ -1301,6 +1254,9 @@ $( document ).ready(function() {
     }
      
 });
+
+
+  
   
 </script>
   @endsection('content')

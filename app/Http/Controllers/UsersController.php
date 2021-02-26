@@ -18,6 +18,8 @@ use \App\Categorie;
 use \App\Image;
 use \App\Reservation;
 use \App\Alerte;
+use \App\Calendrier;
+
 use Illuminate\Support\Str;
 
 
@@ -270,6 +272,63 @@ class UsersController extends Controller
 
         } // fin mise à jour qr code
           User::where('id', $id)->update(array($champ => $val));
+       /* $cal='';
+        $a='';
+        if(trim($champ)=='lundi_o' || trim($champ)=='lundi_f' )
+        {
+        	$cal=Calendrier::where('prest_id', $id)->where('type_indisp','like','%of%')->where('sous_type_indisp','like','%lundi%')->first();
+        	if($cal)
+        	{
+        		if(trim($champ)=='lundi_o')
+        		{
+                   $cal->update(array("start"=>trim($champ))); 
+        		}
+        		if(trim($champ)=='lundi_f')
+        		{
+        		  $cal->update(array("end"=>trim($champ))); 
+        		}
+
+        	}
+        	else
+        	{
+        		$usr_of=User::where('id',$id)->first(['lundi_o','lundi_f']);
+
+        		if(trim($champ)=='lundi_o')
+        		{
+                   $a= new Calendrier([
+			             'prest_id' => $id,
+			             'title'=> 'Horaire travail',
+						 'start'=>trim($champ),						 
+			             'end' => $usr_of->lundi_f,
+			             'allDay' => 0,
+			             'color' => 'red' ,
+			             'textColor' => 'white',
+			             'type_indisp'=>'of',
+			             'sous_type_indisp'=>'lundi'
+			         ]);
+			         $a->save();	
+					  
+        		}
+        		if(trim($champ)=='lundi_f')
+        		{
+        	     $a= new Calendrier([
+			             'prest_id' => $id,
+			             'title'=> 'Horaire travail',
+						 'start'=>$usr_of->lundi_o,					 
+			             'end' => trim($champ),
+			             'allDay' => 0,
+			             'color' => 'red',
+			             'textColor' => 'white',
+			             'type_indisp'=>'of',
+			             'sous_type_indisp'=>'lundi'
+			         ]);
+			         $a->save(); 
+        		}
+
+        	}
+
+        }*/
+         
        
 
     }

@@ -1813,65 +1813,12 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
         eventClick: function(info) {
 
           if (info.event.start) {
-           alert(convert(info.event.start));
+           alert(info.event.start);
             }
        },
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2021-02-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-09-11',
-          end: '2020-09-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T10:30:00',
-          end: '2020-09-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-09-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-09-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-09-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-09-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-09-28'
-        }
-      ]
+       businessHours: <?php echo \App\Http\Controllers\calendrierController::ouverture_fermeture_horaire($user->id); ?>,
+      
+      events:<?php echo \App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
     });
 
     calendar.render();
@@ -1890,9 +1837,9 @@ var modal = document.getElementById("calendardialog");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+/*span.onclick = function() {
   modal.style.display = "none";
-}
+}*/
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -1900,6 +1847,24 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+	$(document).ready(function() {
+var obj={
+         "startTime":'',
+          "endTime": '',
+          "daysOfWeek": ['1', '2', '3' ]
+       };
+
+       //alert(JSON.stringify(obj));
+   });
 </script>
+<?php
+$myArr = array('title'=>"John", 'start'=>"Mary", 'v'=>"Peter", 'b'=>"Sally");
+
+$myJSON = json_encode($myArr);
+
+//dd(\App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id));
+
+//dd($myJSON);
+?>
 
 @endsection  

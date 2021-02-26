@@ -77,6 +77,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
 Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove');
+Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 
 
 	Route::post('/faqs/saving','FaqsController@store')->name('faqs.saving');

@@ -21,9 +21,77 @@ class CalendrierController extends Controller
         $this->middleware('auth');
     }
 
-	
-	
+  public static function indisponibilte_rendezvous_horaire($id)
+  {
 
+    $user_indisp=Indisponibilite::where('prest_id',$id)->get(['titre', 'date_debut','date_fin' ]);
+    $res=array();
+   foreach ($user_indisp as $ui) {
+    $debut=$ui->date_debut;
+    $fin=$ui->date_fin;
+   str_replace(" ","T",$debut); 
+   str_replace(" ","T",$fin);     
+   $res[]=array('title'=>$ui->titre,'start'=>$debut, 'end'=> $fin, 'color' => 'red');
+   }
+
+   return json_encode($res);
+    
+  }
+	
+	public static function ouverture_fermeture_horaire($id)
+  {
+     $usr_fer_ouv=User::where('id',$id)->first(['lundi_o',  'lundi_f',  'mardi_o',  'mardi_f',  'mercredi_o', 'mercredi_f', 'jeudi_o' , 'jeudi_f' , 'vendredi_o' ,  'vendredi_f' ,  'samedi_o' ,  'samedi_f' ,'dimanche_o' ,  'dimanche_f']);
+     $i=0;
+       
+     $res=array();
+     if($usr_fer_ouv->lundi_o && $usr_fer_ouv->lundi_f )
+     {
+     $res[$i]=array('startTime'=>$usr_fer_ouv->lundi_o,'endTime'=>$usr_fer_ouv->lundi_f, 'daysOfWeek'=>['1']);
+     $i++;
+     }
+
+
+    if($usr_fer_ouv->mardi_o && $usr_fer_ouv->mardi_f )
+     {
+     $res[$i]=array('startTime'=>$usr_fer_ouv->mardi_o,'endTime'=>$usr_fer_ouv->mardi_f, 'daysOfWeek'=>['2']);
+      $i++;
+     }
+
+
+     if($usr_fer_ouv->mercredi_o && $usr_fer_ouv->mercredi_f )
+     {
+     $res[$i]=array('startTime'=>$usr_fer_ouv->mercredi_o,'endTime'=>$usr_fer_ouv->mercredi_f, 'daysOfWeek'=>['3']);
+     $i++;
+      }
+
+    if($usr_fer_ouv->jeudi_o && $usr_fer_ouv->jeudi_f )
+     {
+     $res[$i]=array('startTime'=>$usr_fer_ouv->jeudi_o,'endTime'=>$usr_fer_ouv->jeudi_f, 'daysOfWeek'=>['4']);
+      $i++;
+     }
+
+     if($usr_fer_ouv->vendredi_o && $usr_fer_ouv->vendredi_f )
+     {
+     $res[$i]=array('startTime'=>$usr_fer_ouv->vendredi_o,'endTime'=>$usr_fer_ouv->vendredi_f, 'daysOfWeek'=>['5']);
+     $i++;
+     }
+     if($usr_fer_ouv->samedi_o && $usr_fer_ouv->samedi_f )
+     {
+     $res[$i]=array('startTime'=>$usr_fer_ouv->samedi_o,'endTime'=>$usr_fer_ouv->samedi_f, 'daysOfWeek'=>['6']);
+     $i++;
+     }
+
+     if($usr_fer_ouv->dimanche_o && $usr_fer_ouv->dimanche_f )
+     {
+     $res[$i]=array('startTime'=>$usr_fer_ouv->dimanche_o,'endTime'=>$usr_fer_ouv->dimanche_f, 'daysOfWeek'=>['7']);
+     $i++;
+      }
+
+
+
+     return json_encode($res);
+
+  }
 		
 	public function add(Request $request)
 	{
