@@ -332,7 +332,29 @@ class PaymentController extends Controller
 		if ($result->getState() == 'approved') {
 		 \Session::put('success', 'Paiement avec succès');
         //    return Redirect::route('/pay');
-		
+
+		 // ajouter +1 au carte fidelite --------------------------------------------------------------
+		$idclient=Reservation::find($reservation)->value('client');
+    	$idprestataire=Reservation::find($reservation)->value('prestataire');
+    	$test=Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->exists();
+    	if ($test=='true') {
+    		$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation') +1;
+    		Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_reservation' => $val));
+    		
+    	}else{
+    		//dd('ok');
+    		$nexCarte = new Cartefidelite([
+              'id_client' => 14,
+              'id_prest' => 15,
+              'nbr_reservation' => 1,
+              'nbr_fois' => 0
+              
+           ]);
+
+        $nexCarte->save();
+
+    	}
+    	//-----------------------------------------------------------------------------------------------------
 		// changement statut réservation
 		Reservation::where('id',$reservation)->update(array('paiement' => 1));
 		// ajout commission ici
