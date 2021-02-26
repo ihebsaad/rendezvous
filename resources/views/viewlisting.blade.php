@@ -216,11 +216,11 @@ font-size: 15px;
 
 		  <div class="row with-forms margin-top-0">
 			<div class="col-lg-12 col-md-12">
-				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple style="font-weight:15px; " >
+				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple style="font-weight: 17px !important; " >
 				<option> </option>
 					<?php 
 					foreach($services as $service){
-						echo '<option value="'.$service->id.'">'.$service->nom.'</option>';
+						echo '<option  style="font-weight: 17px;" value="'.$service->id.'">'.$service->nom.'</option>';
 					}
 					?>
 				</select>
@@ -1201,7 +1201,7 @@ $( document ).ready(function() {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'monthGridYear,dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay' //listMonth
       },
       
       locale: initialLocaleCode,
