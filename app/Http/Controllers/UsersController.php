@@ -19,7 +19,7 @@ use \App\Image;
 use \App\Reservation;
 use \App\Alerte;
 use \App\Calendrier;
-use \App\Cartefidelite;
+use \App\Cartefidelite; 
 
 
 use Illuminate\Support\Str;
