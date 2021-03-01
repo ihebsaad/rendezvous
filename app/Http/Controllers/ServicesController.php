@@ -151,6 +151,16 @@ class ServicesController extends Controller
        return redirect('/listing/'.$user.'#services')->with('error', ' Service rélié aux réservations  ');
 	}
 	}
+	public function reductionUpdate(Request $request)
+
+    {
+    	$cuser = auth()->user();
+        $val= $request->get('valchange');
+    	//dd($val);
+        User::where('id', $cuser->id)->update(array("reduction" => $val));
+  
+	
+	}
 	
 	
   	    public static function  ChampById($champ,$id)

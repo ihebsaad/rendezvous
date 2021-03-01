@@ -798,7 +798,24 @@ function geocodeAddress(geocoder, resultsMap) {
 					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
 				</div>                          
             </div>				
-
+<div class="add_utf_listing_section margin-top-45"> 
+				<div class="utf_add_listing_part_headline_part">
+					<h3><i class="sl sl-icon-present"></i>Carte de fidélité </h3>
+                </div>       
+				<div class="row">
+				  <div class="col-md-12" >
+				  	<h2><i class="sl sl-icon-star"></i><b> La réduction s'applique à la 10ème reservation.</b></h2>
+				  	<br>
+				  </div>
+				  <div class="col-md-2">
+				  	<label>Pourcentage de réduction :</label>
+				  	<div >
+					<i class="data-unit" >%</i>
+					<input data-unit="%"  type="number" value="{{ $user->reduction }}" onchange="changeReduction(this)" id="reductionId">
+					</div>
+				</div>
+				</div>                          
+            </div>	
 
 
 		<div class="add_utf_listing_section margin-top-45"> 
@@ -1308,13 +1325,27 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
 
    <script>
+   	function changeReduction(x){
+   		var valchange = $(x).val();
+   		//alert(valchange);
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.reduction') }}",
+                        method:"POST",
+						data:{valchange:valchange, _token:_token},
+                        success:function(data){
+                        	//alert("ok");
+                        }
+                    });
+
+   	}
    	function changeService(a){
    		//alert("ok");
    		var valchange = $(a).val();
    		var idchange = ($(a).attr('id')).substring(1);
    		var namechange = $(a).attr('name');
    		if (namechange=="frequence") {
-   			alert("oui");
+   			//alert("oui");
    			if (valchange=="Journalière") {
    				alert("oui");
     		document.getElementById("labelperiode2").innerHTML = "Période (N° de jours) : ";

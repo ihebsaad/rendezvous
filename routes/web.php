@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/services/add','ServicesController@add')->name('services.add');
 	Route::post('/services/updating','ServicesController@updating')->name('services.updating');
 	Route::post('/services/modif','ServicesController@modif')->name('services.modif'); 
+	Route::post('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction');
+
  
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
 
