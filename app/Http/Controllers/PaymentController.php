@@ -338,7 +338,17 @@ class PaymentController extends Controller
     	$idprestataire=Reservation::find($reservation)->value('prestataire');
     	$test=Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->exists();
     	if ($test=='true') {
-    		$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation') +1;
+
+    		$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation');
+    		if ($val==9) {
+
+    			$val =0;
+    			$nbr_fois = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_fois') +1;
+    			Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_fois' => $nbr_fois));
+    		}else {
+    			$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation') +1;
+
+    		}
     		Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_reservation' => $val));
     		
     	}else{

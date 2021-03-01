@@ -19,6 +19,8 @@ use \App\Image;
 use \App\Reservation;
 use \App\Alerte;
 use \App\Calendrier;
+use \App\Cartefidelite;
+
 
 use Illuminate\Support\Str;
 
@@ -173,10 +175,22 @@ class UsersController extends Controller
 	 
 	  public function viewlisting($slug,$id)
     {
-  	
+  		$reduction=0;
 		$user = User::find($id);
+		 if (Auth::guest())
+            return view('viewlisting' ,  compact('user','id','reduction'));
+        $cuser = auth()->user();
+  		//dd($cuser->id);
+  		$test=Cartefidelite::where('id_client',$cuser->id)->where('id_prest',$id)->exists();
+		if ($test=='true') {
+			$nbrRes=Cartefidelite::where('id_client',$cuser->id)->where('id_prest',$id)->value('nbr_reservation');
+			if ($nbrRes==9) {
+				$reduction=User::where('id',$id)->value('reduction');
+			}
+			}
+        return view('viewlisting' ,  compact('user','id','reduction'));
 		
-	  return view('viewlisting' ,  compact('user','id'));       
+	         
 
 	}
 	

@@ -212,6 +212,9 @@ font-size: 15px;
 				<span>220$<small>person</small></span>				
 			</div>-->
 		  </h3>
+		  <?php if($reduction != 0){  ?> 
+		  <h3 style="color: red"><i class="sl sl-icon-present"></i> Félicitation!<br> Vous bénéficierez pour la prochaine réservation d'une réduction de {{$reduction}}%</h3>
+		  <?php } ?>
 		  <h5>(Vous pouvez réserver plusieurs services) </h5>
 
 		  <div class="row with-forms margin-top-0">

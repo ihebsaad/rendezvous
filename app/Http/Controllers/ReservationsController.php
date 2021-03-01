@@ -12,6 +12,8 @@ use \App\User;
 use \App\Reservation;
 use \App\Payment;
 use \App\Alerte;
+use \App\Cartefidelite;
+
  
  use Swift_Mailer;
  use Mail;
@@ -82,7 +84,8 @@ class ReservationsController extends Controller
 		
 	public function add(Request $request)
 	{
-		//return ($request->all());
+		//return ($request->get('prestataire'));
+		
  		$user=$request->get('user');
 		 /*$reservation  = new Reservation([
               'client' => $request->get('client'),
@@ -97,7 +100,18 @@ class ReservationsController extends Controller
             ]);*/
          $reservation  = new Reservation($request->all());
         $reservation->save();
-		
+		$test=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->exists();
+		if ($test=='true') {
+			$nbrRes=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->value('nbr_reservation');
+			$reduc=User::where('id',$request->get('prestataire'))->value('reduction');
+			if ($nbrRes==9) {
+				
+				$reservation->update(array('reduction'=>"Carte de fidélité : ".$reduc."%"));
+				$reservation->update(array('reductionVal'=>$reduc));
+
+
+			}
+			}
 		$client = \App\User::find($request->get('client'));
 		$prestataire = \App\User::find($request->get('prestataire'));
         $ser=$request->get('services_reserves');

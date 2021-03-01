@@ -56,6 +56,7 @@ background-color:#a0d468;
           <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
             <th style="width:10%">Date</th>
              <th  >Service</th>
+             <th>Réduction</th>
              <th  >Statut</th>
            <th class="no-sort">Actions</th> 
         </tr>
@@ -64,6 +65,7 @@ background-color:#a0d468;
  <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
                   <th style="width:10%">Date</th>
                  <th>Service</th>
+                 <th>Réduction</th>
 				 <th>Statut</th> 
 				 <th></th> 
               </tr>
@@ -91,6 +93,7 @@ background-color:#a0d468;
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
                     <td style="width:10%">{{$reservation->date_reservation  }} </td>
                     <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> €)<small></td>
+                      <td>{{$reservation->reduction  }}</td>
  	<td>
 		<?php  if($reservation->statut==0){$statut='<span class="badge badge-pill badge-danger" >En attente</span>';}  ?>
 			<?php  if($reservation->statut==1){$statut='<span class="badge badge-pill badge-primary  " >Validée</span>';}  ?>
@@ -110,7 +113,8 @@ background-color:#a0d468;
 				  <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
 				{{ csrf_field() }}
 				
- 				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >       
+ 				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+        <?php if( $reservation->reductionVal!=0) {$montant = $montant -(($montant * $reservation->reductionVal ) /100 );}?>        
  				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >       
 		<?php	if( $reservation->statut <2) { ?> 	<button class="button ">Payer</button> <?php  } ?> 
