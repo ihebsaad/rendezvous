@@ -1241,7 +1241,7 @@ $("body").mouseup(function() {
 
   $("#datetimepicker").datetimepicker({
      
-       format: "dd MM yyyy - hh:ii",
+       format: "yyyy-mm-dd hh:ii",
         autoclose: true,
         todayBtn: true,
         pickerPosition: "bottom-left",
