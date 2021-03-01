@@ -1028,13 +1028,22 @@ font-size: 15px;
                    // var date = $('#date-picker').val();
                    // var heure = $('#heure').val();
                     var datereservation= $('#datetimepicker').val();
+                    var dateStr = moment(datereservation, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+                    //alert(dateStr);
+                    /*var newdate = datereservation.substring(0, 10);
+                    var newtime = datereservation.substring(9, 6);
+                    alert(newdate);
+alert(newtime);
+var newdate = newdate.split("-").reverse().join("-");
+var dateres = newdate + newtime ;
+alert(dateres);*/
                     var service = $('#service').val();
                     var rappel = $('#rappel').val();
 					//alert(JSON.stringify(service));
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:datereservation ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel   , _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel   , _token:_token},
                         success:function(data){
                         //alert(JSON.stringify(data));
 						location.href= "{{ route('reservations') }}";
@@ -1241,7 +1250,7 @@ $("body").mouseup(function() {
 
   $("#datetimepicker").datetimepicker({
      
-       format: "yyyy-mm-dd hh:ii",
+       format: "dd-mm-yyyy hh:ii",
         autoclose: true,
         todayBtn: true,
         pickerPosition: "bottom-left",
