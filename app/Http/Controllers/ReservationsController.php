@@ -54,16 +54,31 @@ class ReservationsController extends Controller
     public static function reservationsdujour()
     {
 		
-        $today=date('d/m/Y');
+        $today=date('Y-m-d');
         $TomorrowD = new DateTime('tomorrow');
-		$FTomorrowD = $TomorrowD->format('d/m/Y');
+		$FTomorrowD = $TomorrowD->format('Y-m-d');
+		$aftertwodays = date('Y-m-d', strtotime($today. ' + 2 days'));
+		$afterfivedays = date('Y-m-d', strtotime($today. ' + 5 days'));
         // reservations du ce jour ou de demain avec un rappel avant un jour
         //$reservations = Reservation::where('date',$today)->get();
         $reservations = DB::table('reservations')
-            ->where('date', '=', $today)
+            ->whereDate('date_reservation', '=', $today)
+            ->where(function ($querry) {
+            	$querry->where('rappel', '=', '60')
+	            ->orWhere('rappel', '=', '120')
+	            ->orWhere('rappel', '=', '180');
+			})
             ->orWhere(function ($query) use($FTomorrowD){
-                $query->where('date', '=', $FTomorrowD)
+                $query->whereDate('date_reservation', '=', $FTomorrowD)
                       ->where('rappel', '=', '1440');
+            })
+            ->orWhere(function ($queery) use($aftertwodays){
+                $queery->whereDate('date_reservation', '=', $aftertwodays)
+                      ->where('rappel', '=', '2880');
+            })
+            ->orWhere(function ($quuery) use($afterfivedays){
+                $quuery->whereDate('date_reservation', '=', $afterfivedays)
+                      ->where('rappel', '=', '7200');
             })
             ->get();
 

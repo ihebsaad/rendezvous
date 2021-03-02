@@ -202,7 +202,20 @@ background-color:lightgrey;
                     <h5>Ville</h5>                    
  					<input type="text" class="input-text" name="ville" id="ville" placeholder=""      value="{{ $user->ville }}"  onchange="changing(this)">
                  
-                 </div>                  
+                 </div>                   
+                  <div class="col-md-12">
+	                  <h5>Fuseau horaire</h5> 
+	                  <div class="row with-forms">
+	                  	<div class="col-md-6">
+							  <select  name="fhoraire" id="fhoraire" title="Selectionnez votre fuseau horaire" onchange="changing(this);location.reload();">
+								<option value="America/Martinique" default <?php if($user->fhoraire=='America/Martinique'){echo 'selected="selected"';}?> >Martinique</option>
+								<option value="America/Guadeloupe"  <?php if($user->fhoraire=='America/Guadeloupe'){echo 'selected="selected"';}?> >Guadeloupe</option>
+								<option value="Europe/Paris"  <?php if($user->fhoraire=='Europe/Paris'){echo 'selected="selected"';}?> >France</option>
+								<option value="America/Cayenne"  <?php if($user->fhoraire=='America/Cayenne'){echo 'selected="selected"';}?> >Guyane française</option>	
+							  </select>
+						</div>
+	                  </div>
+                  </div>                 
                   <div class="col-md-12">
                   <h5>Map</h5>                    
 				  <div class="row with-forms">

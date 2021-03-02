@@ -1304,5 +1304,7 @@ var day = days[ chc.getDay() ];
 var month = months[ chc.getMonth() ];
 //alert(chc.getDay());
 </script>
-<?php //echo \App\Http\Controllers\CalendrierController::test(); ?>
+
+<?php //echo \App\Http\Controllers\ReservationsController::reservationsdujour(); ?>
+
   @endsection('content')

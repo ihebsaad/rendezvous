@@ -64,38 +64,55 @@ echo $service->sid  ;
      */
     public function sendReminders()
     {
-        /*hs $this->appointments->each(
-            function ($appointment) {
-                $this->_remindAbout($appointment);
-            }
-        );*/
-        // temps courant du Martinique
-        date_default_timezone_set('America/Martinique');
-        $currenttime = date('H:i');
+        //$ttt ="";
+        
         foreach ($this->resvdujour as $resv) {
+
+            // verifier fuseau horaire
+          $infoprest = UsersController::infouser($resv->prestataire);
+          $fhoraire = $infoprest['fhoraire'];
+          date_default_timezone_set($fhoraire);
+
+          $currenttime = date('H:i');
+          // extraction et conversion du time date_reservation
+          /*$date1=$resv->date_reservation;
+          $format = 'Y-m-d H:i';
+          $dateresv = DateTime::createFromFormat($format, $date1);
+          $heureresv= $dateresv->format('H:i');*/
+          $heureresv = Carbon::createFromFormat('Y-m-d H:i:s', $resv->date_reservation)->format('H:i');
             // initiation de maxTRappel 
             // calcule temps max du rappel
-            if ($resv->rappel === "30") {
-                $maxTRappel = date("H:i", strtotime('-30 minutes', strtotime($resv->heure)));
-            }
-            elseif ($resv->rappel === "60") {
-                $maxTRappel = date("H:i", strtotime('-60 minutes', strtotime($resv->heure)));
+            if ($resv->rappel === "60") {
+                //$maxTRappel = date("H:i", strtotime('-30 minutes', "$heureresv"));
+                $maxTRappel = Carbon::parse($heureresv)->subMinutes(60)->format('H:i');
             }
             elseif ($resv->rappel === "120") {
-                $maxTRappel = date("H:i", strtotime('-120 minutes', strtotime($resv->heure)));
+                //$maxTRappel = date("H:i", strtotime('-60 minutes', "$heureresv"));
+                $maxTRappel = Carbon::parse($heureresv)->subMinutes(120)->format('H:i');
             }
-            elseif ($resv->rappel === "1440") {
-                $maxTRappel = date("H:i",strtotime($resv->heure));
+            elseif ($resv->rappel === "180") {
+                //$maxTRappel = date("H:i", strtotime('-120 minutes', "$heureresv"));
+                $maxTRappel = Carbon::parse($heureresv)->subMinutes(180)->format('H:i');
+            }
+            elseif ($resv->rappel === "1440") ||  ($resv->rappel === "2880") || ($resv->rappel === "7200") {
+                $maxTRappel = $heureresv;
             }
             // verifier si c'est le temps du rappel (>= temps rappel) et le rappel non envoyé et la réservation est payée
             if ((strtotime($currenttime) >= strtotime($maxTRappel)) && ($resv->rappel_statut == 0) && ($resv->paiement == 1))
             {    
                 //envoyer rappel SMS
-                $this->_remindAbout($resv->id,$currenttime);
+                $this->_remindAbout($resv->id,$currenttime,$heureresv);
                 // changer statut rappel
                 ReservationsController::changestatutrappel($resv->id);
             }
+            
+            //$ttt = $ttt .$currenttime. " / " . $resv->id . "  --  ";
         }
+
+        /*$response = Message::send([
+          'to' => '21622956876',
+          'text' => $ttt
+        ]);*/
         
     }
 
@@ -107,7 +124,7 @@ echo $service->sid  ;
      * @return void
      */
     //hs private function _remindAbout($appointment)
-    private function _remindAbout($idreservation,$curtime)
+    private function _remindAbout($idreservation,$curtime,$heureresv)
     {
         /*hs $recipientName = $appointment->name;
         $time = Carbon::parse($appointment->when, 'UTC')
@@ -134,11 +151,12 @@ echo $service->sid  ;
         if (strpos($inforeservation["nom_serv_res"], ',') !== FALSE)
         {
           $titrprest ="les prestations";
+          $infprests = rtrim($inforeservation['nom_serv_res'], ", ");
         }
         else {
           $titrprest ="la prestation";
+          $infprests = $inforeservation["nom_serv_res"];
         }
-        $infprests = $inforeservation["nom_serv_res"];
         /*$infoserv = ServicesController::infoservice($ServId);
         $titreserv = $infoserv['nom'];*/
         
@@ -146,18 +164,26 @@ echo $service->sid  ;
         {
             // message à afficher pour temps
             $msgtemp="";
-                if ($temp === "30") {
-                    $msgtemp = "dans 30 minutes";
-                }
-                elseif ($temp === "60") {
+                if ($temp === "60") {
                     $msgtemp = "dans une heure";
                 }
                 elseif ($temp === "120") {
                     $msgtemp = "dans deux heures";
                 }
+                elseif ($temp === "180") {
+                    $msgtemp = "dans trois heures";
+                }
                 // condition avant un jour
                 if ($temp === "1440") {
-                    $msgtemp = "demain à ".$inforeservation['heure'];
+                    $msgtemp = "demain à ".$heureresv;
+                }
+                // condition avant deux jours
+                if ($temp === "2880") {
+                    $msgtemp = "dans deux jours à ".$heureresv;
+                }
+                // condition avant cinq jours
+                if ($temp === "7200") {
+                    $msgtemp = "dans cinq jours à ".$heureresv;
                 }
                 // changer compte twilio officiel
                 // ajouter condition reservation payé
