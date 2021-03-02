@@ -94,7 +94,7 @@ echo $service->sid  ;
                 //$maxTRappel = date("H:i", strtotime('-120 minutes', "$heureresv"));
                 $maxTRappel = Carbon::parse($heureresv)->subMinutes(180)->format('H:i');
             }
-            elseif ($resv->rappel === "1440") ||  ($resv->rappel === "2880") || ($resv->rappel === "7200") {
+            elseif (($resv->rappel === "1440") ||  ($resv->rappel === "2880") || ($resv->rappel === "7200")) {
                 $maxTRappel = $heureresv;
             }
             // verifier si c'est le temps du rappel (>= temps rappel) et le rappel non envoyé et la réservation est payée
