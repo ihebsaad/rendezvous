@@ -1898,7 +1898,7 @@ $myArr = array('title'=>"John", 'start'=>"Mary", 'v'=>"Peter", 'b'=>"Sally");
 
 $myJSON = json_encode($myArr);
 
-dd(\App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id));
+//dd(\App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id));
 
 //dd($myJSON);
 ?>
