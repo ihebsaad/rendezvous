@@ -1,7 +1,12 @@
 @extends('layouts.backlayout')
  
  @section('content')
+<style>
+.fc .fc-non-business {
+background-color:lightgrey;
+}
 
+</style>
 
  <style>
 
@@ -1832,7 +1837,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
       navLinks: true, // can click day/week names to navigate views
-      editable: true,
+      editable: false,
       selectable:true,
       dayMaxEvents: true, // allow "more" link when too many events
       dateClick: function (info) {
@@ -1893,7 +1898,7 @@ $myArr = array('title'=>"John", 'start'=>"Mary", 'v'=>"Peter", 'b'=>"Sally");
 
 $myJSON = json_encode($myArr);
 
-//dd(\App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id));
+dd(\App\Http\Controllers\calendrierController::indisponibilte_rendezvous_horaire($user->id));
 
 //dd($myJSON);
 ?>

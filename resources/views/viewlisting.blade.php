@@ -15,6 +15,11 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
 <style>
+.fc .fc-non-business {
+background-color:lightgrey;
+}
+</style>
+<style>
 .datetimepicker { 
 font-size: 15px;
 }
@@ -232,16 +237,22 @@ font-size: 15px;
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
           <label>Date de rendez vous:</label>
-        <input type="text" value=""   name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" class="input-append date" style="font-size: 15px;" readonly>                
+        <input type="text" value=""  class="dtpks" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" class="input-append date" style="font-size: 15px;" readonly>                
            <span class="add-on"><i class="icon-th"></i></span>
+         </div>
 
+         <!--  <div class="col-lg-12 col-md-12 select_date_box">
+          <label>Date de rendez vous:</label>
+        <input type="text" value=""  class="dtpks" name="datereservation1" id="datetimepicker1" data-date-format="yyyy-mm-dd hh:ii" class="input-append date" style="font-size: 15px;" readonly>                
+           <span class="add-on"><i class="icon-th"></i></span>
+         </div> -->
 
           <!--  <div class="input-append date" id="datetimepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
            <input size="16" type="text" value="26-02-2021" readonly>
            <span class="add-on"><i class="icon-th"></i></span>
            </div> -->
         
-           </div>
+          
             <!-- <div class="col-lg-12 col-md-12 select_date_box">
               <input type="text" id="date-picker" placeholder="Date"  >
 			  <i class="fa fa-calendar"></i>
@@ -274,12 +285,13 @@ font-size: 15px;
 			
 		  <div class="row with-forms">
 		  	 <div class="col-lg-11" style="padding-left:20px">
-		  <textarea style="font-size: 15px;" name="remarques" cols="40" rows="2" id="remarques" placeholder="si vous avez des remarques" ></textarea>
+		  <textarea style="font-size: 16px;" name="remarques" cols="40" rows="2" id="remarques" placeholder="si vous avez des remarques" ></textarea>
 
 			 </div>
 		  </div>
 		  <div class="row with-forms">
-		  	 <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div>
+		  	<label style="padding-left:35px">Rappel de mon rendez vous par SMS</label>
+		  	<!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
 			 <div  class="row" style="padding-left:40px;padding-top:5px" >
 			 <select class=" " id="rappel" style="min-width:280px; max-width:400px!important ; font-size: 15px;" >
 			  <option value="60">1h avant le RDV </option>
@@ -585,7 +597,7 @@ font-size: 15px;
               </div>
               <div>
                 <label>Commentaire:</label>
-                <textarea cols="40" placeholder="Votre Commentaire..." rows="3" name="commentaire" id="commentaire" required></textarea>
+                <textarea cols="40" placeholder="Votre Commentaire..." rows="3" name="commentaire" id="commentaire" style="font-size: 15px;" required></textarea>
               </div>
             </fieldset><br>
             <input disabled class="button" id="sendavis" type="submit" value="Envoyer"></input>
@@ -727,7 +739,7 @@ font-size: 15px;
 			  
 			   <div class="row">              
 			  <div class="col-md-12">
-				  <textarea name="message" cols="40" rows="2" id="contenu" style="display:block" placeholder="Votre Message"   ></textarea>
+				  <textarea name="message" cols="40" rows="2" id="contenu" style="display:block;font-size: 15px;" placeholder="Votre Message"   ></textarea>
 			  </div>
 			  </div>
 			 <br>
@@ -1023,7 +1035,10 @@ font-size: 15px;
 	 
 	 			$('#reserver').click(function( ){
                 
-			 
+			      /*  var inputs = $(".dtpks");
+			        for(var i = 0; i < inputs.length; i++){
+                     alert($(inputs[i]).val());
+                    }*/
                     var _token = $('input[name="_token"]').val();
                     var remarques = $('#remarques').val();
                     var adultes = $('#adultes').val();
@@ -1032,14 +1047,7 @@ font-size: 15px;
                    // var heure = $('#heure').val();
                     var datereservation= $('#datetimepicker').val();
                     var dateStr = moment(datereservation, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
-                    //alert(dateStr);
-                    /*var newdate = datereservation.substring(0, 10);
-                    var newtime = datereservation.substring(9, 6);
-                    alert(newdate);
-alert(newtime);
-var newdate = newdate.split("-").reverse().join("-");
-var dateres = newdate + newtime ;
-alert(dateres);*/
+
                     var service = $('#service').val();
                     var rappel = $('#rappel').val();
 					//alert(JSON.stringify(service));
@@ -1220,7 +1228,7 @@ $("body").mouseup(function() {
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
       navLinks: true, // can click day/week names to navigate views
-      editable: true,
+      editable: false,
       dayMaxEvents: true, // allow "more" link when too many events
       businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire($user->id); ?>,
       
@@ -1251,24 +1259,50 @@ $("body").mouseup(function() {
     return month+"/"+day+"/"+date.getFullYear();
    }
 
-  $("#datetimepicker").datetimepicker({
+   $(document).on('click','.dtpks', function(e){
+
+    $(e.target).datetimepicker('show');
+
+   });
+        
+
+
+  $(".dtpks").datetimepicker({
      
+
        format: "dd-mm-yyyy hh:ii",
+
+      // format: "dd MM yyyy - hh:ii",
+      
         autoclose: true,
         todayBtn: true,
         pickerPosition: "bottom-left",
+        daysOfWeekDisabled:'0,1', // tous les jours du calendrier jours fermeture
+
      language:'fr',
      onRenderHour:function(date){
      if(disabledtimes_mapping.indexOf(formatDate(date)+":"+date.getUTCHours())>-1)
       {
         return ['disabled'];
       }
+
+     // if(arra)
     }
      
 });
 
+var chc=new Date();
 
-  
-  
+ch=chc.getFullYear()+'-'+(chc.getMonth()+1)+'-'+chc.getDate();
+//alert(ch);
+$('.dtpks').datetimepicker('setStartDate', ch);
+
+var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+var day = days[ chc.getDay() ];
+var month = months[ chc.getMonth() ];
+//alert(chc.getDay());
 </script>
+<?php //echo \App\Http\Controllers\CalendrierController::test(); ?>
   @endsection('content')

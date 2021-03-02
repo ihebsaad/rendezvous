@@ -11,15 +11,64 @@ use Session;
 use \App\User;
 use \App\Indisponibilite;
 use \App\Service;
+use \App\Reservation;
 
 class CalendrierController extends Controller
 {
+
+  // composant pour desactivation datetimepicker
+  public $tab_jours_fermeture_semaine=array();
+  public $tab_heures_indisp=array();
+  public $tab_jours_indisp=array();
+
+  //
 
 
      public function __construct()
     {
         $this->middleware('auth');
     }
+
+  
+
+   public static function test()
+  {
+    $id=5;
+     $idservicessimples=Service::where('recurrent','like','off')->pluck('id')->toArray();
+
+     for($i=0;$i<count($idservicessimples);$i++)
+     {
+       $idservicessimples[$i]=strval($idservicessimples[$i]);
+
+     }
+  /* $servicessimples=Reservation::where('prestataire',$id)->whereIn('services_reserves',$idservicessimples)
+   ->where('statut',1)->get();*/
+   $servicessimples=Reservation::where('prestataire',$id)->when($idservicessimples , function($query) use ($idservicessimples) {
+    $query->where(function ($query) use ($idservicessimples) {
+        foreach($idservicessimples as $position) {
+            $query->orWhereJsonContains('services_reserves',$position);
+        }
+    });
+     })->get();
+
+   foreach ( $servicessimples as $ss ) {
+    $debut=$ss->date_reservation;
+     foreach ($ss->services_reserves as $sr) {
+       $ser=Service::where('id',$sr)->first(["duree"]);
+       $pos1 = stripos($ser->duree,":");
+       $pos2 = strripos($ser->duree,":");
+        // bcd
+       $hour=substr($ser->duree, 0, 2);
+       $minutes=substr($ser->duree,3,2);
+      //date('Y-m-d H:i',strtotime('+1 hour +20 minutes',strtotime($start)));
+       dd($hour.' '.$minutes);
+     }
+     }
+
+   //dd( $servicessimples);
+  
+  }
+
 
   public static function indisponibilte_rendezvous_horaire($id)
   {
@@ -33,6 +82,46 @@ class CalendrierController extends Controller
    str_replace(" ","T",$fin);     
    $res[]=array('title'=>$ui->titre,'start'=>$debut, 'end'=> $fin, 'color' => 'red');
    }
+
+   // calculate the start and the end of simple service réservation
+
+   $idservicessimples=Service::where('recurrent','like','off')->where("NbrService",1)->pluck('id')->toArray();
+   for($i=0;$i<count($idservicessimples);$i++)
+     {
+       $idservicessimples[$i]=strval($idservicessimples[$i]);
+
+     }
+   /*$servicessimples=Reservation::where('prestataire',$id)->whereIn('services_reserves',$idservicessimples)
+   ->where('statut',1)->get();*/
+    $servicessimples=Reservation::where('prestataire',$id)->when($idservicessimples , function($query) use ($idservicessimples) {
+    $query->where(function ($query) use ($idservicessimples) {
+        foreach($idservicessimples as $position) {
+            $query->orWhereJsonContains('services_reserves',$position);
+        }
+    });
+     })->get();
+   //dd(array_values($idservicessimples));
+    //$debut=$ss->date_reservation;
+   foreach ( $servicessimples as $ss ) {
+    $debut=$ss->date_reservation;
+     foreach ($ss->services_reserves as $sr) {
+       $ser=Service::where('id',$sr)->first(["nom","duree"]);
+       //$pos1 = stripos($ser->duree,":");
+      // $pos2 = strripos($ser->duree,":");
+        // bcd
+      $hour=substr($ser->duree, 0, 2);
+      $minutes=substr($ser->duree,3,2);
+      $fin=date('Y-m-d H:i',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+
+     $res[]=array('title'=>$ser->nom,'start'=>$debut, 'end'=> $fin, 'color' => 'black');
+
+     //dd($debut.' '.$fin);
+     }
+     }
+  // $idservicesreccurent=Service::where('recurrent','like','on')->pluck('id')->toArray();*/
+   //dd(array_values($idservicesreccurent));
+  // dd($res);
+   
 
    return json_encode($res);
     
