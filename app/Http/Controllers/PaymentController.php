@@ -149,6 +149,7 @@ class PaymentController extends Controller
 		$montant=$request->get('montant');
 		$desc=$request->get('description');
 		$reservation=$request->get('reservation');
+		//dd($reservation);
 		$payer = new Payer();
         $payer->setPaymentMethod('paypal');
 		$item_1 = new Item();
@@ -314,6 +315,7 @@ class PaymentController extends Controller
 	 public function getPaymentStatusRes(Request $request)
     {
 			$reservation=$request->get('reservation');
+			//dd($reservation);
 	
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
@@ -335,11 +337,13 @@ class PaymentController extends Controller
         //    return Redirect::route('/pay');
 
 		 // ajouter +1 au carte fidelite --------------------------------------------------------------
-		$idclient=Reservation::find($reservation)->value('client');
-    	$idprestataire=Reservation::find($reservation)->value('prestataire');
+		 //dd($reservation);
+		$idclient=Reservation::where('id',$reservation)->value('client');
+		//dd($idclient);
+    	$idprestataire=Reservation::where('id',$reservation)->value('prestataire');
     	$test=Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->exists();
     	if ($test=='true') {
-
+		//dd('okkkokokoko');
     		$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation');
     		if ($val==9) {
 
@@ -347,22 +351,24 @@ class PaymentController extends Controller
     			$nbr_fois = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_fois') +1;
     			Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_fois' => $nbr_fois));
     		}else {
+    			//dd('ok');
     			$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation') +1;
+    			//dd($val);
 
     		}
     		Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_reservation' => $val));
     		
     	}else{
     		//dd('ok');
-    		$nexCarte = new Cartefidelite([
-              'id_client' => 14,
-              'id_prest' => 15,
+    		$newCarte = new Cartefidelite([
+              'id_client' => $idclient,
+              'id_prest' => $idprestataire,
               'nbr_reservation' => 1,
               'nbr_fois' => 0
               
            ]);
 
-        $nexCarte->save();
+        $newCarte->save();
 
     	}
     	//-----------------------------------------------------------------------------------------------------
