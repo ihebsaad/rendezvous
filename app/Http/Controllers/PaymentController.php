@@ -28,6 +28,7 @@ use \App\Reservation;
 use \App\Alerte;
 
 use Carbon\Carbon;
+use \App\Cartefidelite;
 
  
  use Swift_Mailer;
