@@ -1365,7 +1365,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
    		if (namechange=="frequence") {
    			//alert("oui");
    			if (valchange=="Journalière") {
-   				alert("oui");
+   				//alert("oui");
     		document.getElementById("labelperiode2").innerHTML = "Période (N° de jours) : ";
     		//document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
     	}

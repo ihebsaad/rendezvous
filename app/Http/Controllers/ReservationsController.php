@@ -35,10 +35,10 @@ class ReservationsController extends Controller
 		
 		$cuser = auth()->user();
 		if($cuser->user_type=='prestataire' ){
-        $reservations = Reservation::where('prestataire',$cuser->id)->get();
+        $reservations = Reservation::where('prestataire',$cuser->id)->where('id_recc',null)->get();
 		}
 		if($cuser->user_type=='client' ){
-        $reservations = Reservation::where('client',$cuser->id)->get();
+        $reservations = Reservation::where('client',$cuser->id)->where('id_recc',null)->get();
 		}
 		
 		if($cuser->user_type=='admin' ){
@@ -96,6 +96,137 @@ class ReservationsController extends Controller
     	$inforeserv=Reservation::find($id);
     	return $inforeserv;
     }
+    public function addServiceRecurrent(Request $request)
+	{
+		
+
+
+		$periode =  $request->get('periode');
+		$reservation  = new Reservation([
+              'client' => $request->get('client'),
+              'prestataire' => $request->get('prestataire'),
+              'services_reserves' => [$request->get('services_reserves')],
+              'date_reservation' =>$request->date_reservation[0],
+              'remarques' => $request->get('remarques'),
+              'rappel' => $request->get('rappel'),
+              'recurrent' => 1,
+            ]);
+		$reservation->save();
+		$id_recc = $reservation->id ;
+		for ($i=1; $i < $request->get('nbrService') ; $i++) { 
+			
+			$reservation  = new Reservation([
+              'client' => $request->get('client'),
+              'prestataire' => $request->get('prestataire'),
+              'services_reserves' => [$request->get('services_reserves')],
+              'date_reservation' =>$request->date_reservation[$i],
+              'remarques' => $request->get('remarques'),
+              'rappel' => $request->get('rappel'),
+              'id_recc' => $id_recc ,
+              'recurrent' => 1,
+            ]);
+		$reservation->save();
+		}
+		if ($request->get('frq')=="Journalière") {
+			$frq = 1 ;
+
+		}
+		else if ($request->get('frq')=="Hebdomadaire") {
+			$frq = 7 ;
+		}
+		else if ($request->get('frq')=="Mensuelle") {
+			$frq = 28 ;
+		}
+		
+		for ($t=1; $t < $request->get('periode') ; $t++) { 
+			$days = ' + '.$frq*$t.' days' ;
+			for ($i=0; $i < $request->get('nbrService') ; $i++) { 
+			
+			$reservation  = new Reservation([
+              'client' => $request->get('client'),
+              'prestataire' => $request->get('prestataire'),
+              'services_reserves' => [$request->get('services_reserves')],
+              'date_reservation' =>date('Y-m-d h:i', strtotime($request->date_reservation[$i]. $days)),
+              'remarques' => $request->get('remarques'),
+              'rappel' => $request->get('rappel'),
+              'id_recc' => $id_recc ,
+              'recurrent' => 1,
+            ]);
+			$reservation->save();
+			
+		}
+		}
+		//return $request->get('services_reserves');
+		$test=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->exists();
+		if ($test=='true') {
+			$nbrRes=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->value('nbr_reservation');
+			$reduc=User::where('id',$request->get('prestataire'))->value('reduction');
+			if ($nbrRes==9) {
+				
+				$reservation->update(array('reduction'=>"Carte de fidélité : ".$reduc."%"));
+				$reservation->update(array('reductionVal'=>$reduc));
+
+
+			}
+			}
+		$client = \App\User::find($request->get('client'));
+		$prestataire = \App\User::find($request->get('prestataire'));
+        $ser=[$request->get('services_reserves')];
+        $service_name='';
+        $service_prix=1;
+        //return($service_prix);
+		if(isset($ser))
+		{
+            foreach ($ser as $s ) {
+            	$service=\App\Service::find($s);
+            	$service_name.=$service->nom.", ";
+            	$service_prix+= floatval($service->prix);
+            }
+
+		}
+		Reservation::where('id', $id_recc)->orwhere('id_recc', $id_recc)->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix));
+
+		return($service_prix); 
+		$service = \App\Service::find($request->get('services_reserves'));
+		
+		// Email prestataire
+		$message='';
+	$message.='Vous avez une nouvelle réservation.<br>Veuillez la confirmer dans votre tableau de bord.<br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>Date :</b> '.$request->get('date').' - <b>Heure :</b> '.$request->get('heure').'<br>';
+		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+		
+	    $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)	;
+		
+		$alerte = new Alerte([
+             'user' => $prestataire->id,
+			 'titre'=>'Nouvelle Réservation',
+             'details' => $message,
+         ]);	
+		 $alerte->save();
+		 
+		// Email Client
+		$message='';
+		$message.='Votre réservation est enregsitrée avec succès.<br>Veillez attendre la confirmation du prestatire.<br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>Date :</b> '.$request->get('date').'<b>Heure :</b> '.$request->get('heure').'<br>';
+  		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+		
+	    //$this->sendMail(trim($client->email),'Nouvelle Réservation',$message)	;
+		$alerte = new Alerte([
+             'user' => $client->id,
+			 'titre'=>'Nouvelle Réservation',						 
+             'details' => $message,
+         ]);	
+		 $alerte->save();
+		 
+		 
+   // return $reservation->id;
+		return redirect ('/reservations');
+	 
+	}
 		
 	public function add(Request $request)
 	{

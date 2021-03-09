@@ -1,4 +1,4 @@
-﻿@extends('layouts.frontlayout')
+@extends('layouts.frontlayout')
  
  @section('content')
  <?php  $User= auth()->user();
@@ -133,7 +133,8 @@ font-size: 15px;
             </div>
 			<?php } ?>
 		 <h2>	<?php	$categories_user = \DB::table('categories_user')->where('user',$user->id)->get();
-					$services =\App\Service::where('user',$user->id)->get();
+					$services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
+					$servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get();
 					foreach($categories_user as $cat){   $categorie =\App\Categorie::find( $cat->categorie);  
 			if(isset($categorie)){	if($categorie->parent==null){ 	echo ' <span class="listing-tag">'.$categorie->nom.'</span>';}  }
 
@@ -220,6 +221,27 @@ font-size: 15px;
 		  <?php if($reduction != 0){  ?> 
 		  <h3 style="color: red"><i class="sl sl-icon-present"></i> Félicitation!<br> Vous bénéficierez pour la prochaine réservation d'une réduction de {{$reduction}}%</h3>
 		  <?php } ?>
+		  <!----------------------------------- Nav tabs --------------------------------------------->
+		  <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
+		  	# code...
+		  echo
+		  '<h5>veuillez sélectionner "Service à abonnement", si vous désirez réserver un service récurrent</h5>
+		  
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" style="font-size: 140%" href="#home"><strong>Service simple</strong></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" style="font-size: 140%" href="#menu1"><strong>Service à abonnement</strong></a>
+    </li>
+    
+  </ul>
+<!-- Tab panes -->
+  <div class="tab-content">
+  	<div id="home" class="container tab-pane active"><br>';
+  	} ?>
+		  <!------------------------------------------------------ Simple------------------------------------------------>
+    <?php  if (sizeof($services) != 0) { ?>
 		  <h5>(Vous pouvez réserver plusieurs services) </h5>
 
 		  <div class="row with-forms margin-top-0">
@@ -237,7 +259,7 @@ font-size: 15px;
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
           <label>Date de rendez vous:</label>
-        <input type="text" value=""  class="dtpks" name="datereservation" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" class="input-append date" style="font-size: 15px;" readonly>                
+        <input type="text" value=""  class="dtpks" name="datereservation" data-date-format="yyyy-mm-dd hh:ii" class="input-append date " id="datetimepicker" style="font-size: 15px;" readonly>                
            <span class="add-on"><i class="icon-th"></i></span>
          </div>
 
@@ -322,9 +344,88 @@ font-size: 15px;
 	<?php	 } ?>
 			
           <div class="clearfix"></div>
-        </div>
+        <?php	 } ?>  
+          <!------------------------------------------------------ /Simple------------------------------------------------>
+         		  <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {?>
 
-	  
+          	</div>
+          <div id="menu1" class="container tab-pane fade"><br>
+          <?php } ?>
+          	 <?php  if (sizeof($servicesreccurent) != 0) { ?>
+      <div class="row with-forms margin-top-0 " style="font-size: 150%">
+			<div class="col-lg-12">
+				<label for="cars">Service à abonnement:</label>
+
+<select id="servicereccurent" onchange="SelectServiceRec(this)">
+	<option value="" selected disabled><strong>selectionner un service</strong></option>
+	<?php foreach($servicesreccurent as $SR){?>
+  <option value="{{$SR->id}}" ndate="{{$SR->Nfois}}" frq = "{{$SR->frequence}}" periode="{{$SR->periode}}"><strong>{{$SR->nom}}</strong></option>
+
+  <?php } ?>
+  
+</select>
+<input type="number" name="nbrServiceRec" id="nbrServiceRec" hidden>
+
+			</div></div>
+			<div class="row with-forms margin-top-0">
+          <div class="col-lg-12 col-md-12 select_date_box">
+          	<h5 style="color: red" id="msgRec">
+</h5>
+          
+      <div id="dateRec">
+      <!-- 	<label>Date de rendez vous:</label>
+        <input type="text" value=""  class="dtpks" name="datereservation" placeholder="date 1"  class="input-append date " style="font-size: 15px;" readonly> 
+                   -->    
+               </div>
+           <span class="add-on"><i class="icon-th"></i></span>
+         </div></div>
+         <div class="row with-forms">
+		  	 <div class="col-lg-11" style="padding-left:20px">
+		  <textarea style="font-size: 16px;" name="remarques2" cols="40" rows="2" id="remarques2" placeholder="si vous avez des remarques" ></textarea>
+
+			 </div>
+		  </div>
+		  <div class="row with-forms">
+		  	<label style="padding-left:35px">Rappel de mon rendez vous par SMS</label>
+		  	<!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
+			 <div  class="row" style="padding-left:40px;padding-top:5px" >
+			 <select class=" " id="rappel2" style="min-width:280px; max-width:300px!important ; font-size: 15px;" >
+			  <option value="60">1h avant le RDV </option>
+              <option value="120">2h avant le RDV</option>
+			 <option value="180">3h avant le RDV</option>
+			 <option value="1440">1 jour avant le RDV</option>
+			 <option value="2880">2 jours avant le RDV</option>
+			 <option value="7200">5 jours avant le RDV</option>
+			 </select>
+			 </div>
+		  </div>
+		  <?php if (isset($User)){?> 
+	   <a class="utf_progress_button button fullwidth_block margin-top-5" style="color:white" id="reserver2">Réserver</a>
+		
+			<?php if($User->user_type=="client"){  ?>  
+			<?php $countf= DB::table("favoris")->where("prestataire",$user->id)->where("client",$User->id)->count(); if($countf==0) {?>	
+			<button id="addfavoris" class="like-button add_to_wishlist"><span class="like-icon"></span><div id="mesfavoris">Ajouter aux favoris</div></button>
+			<?php }else{?>
+			<button id="addfavoris" class="like-button add_to_wishlist liked"><span class="like-icon liked"></span><div id="mesfavoris">Retirer de favoris</div></button>
+			<?php } ?>
+			 <?php } ?>
+		 <?php }else{  ?>
+		 
+		 <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a>
+	 
+			 
+	<?php	 } ?>
+			
+          <div class="clearfix"></div>
+ 
+     <?php } ?>
+    <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {?>
+  </div>
+    </div>
+
+	  	 <?php } ?>	  
+	  	 </div></div>
+
 	  </div>
       <div class="col-lg-8 col-md-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
@@ -1008,7 +1109,43 @@ font-size: 15px;
 	</section>
   
  -->
- <?php if (isset($User)){?> 
+ <script type="text/javascript">
+ 	
+ 	function SelectServiceRec(a){
+ 		periode=a.options[a.selectedIndex].getAttribute('periode');
+ 		nbr=a.options[a.selectedIndex].getAttribute('ndate');
+ 		frq=a.options[a.selectedIndex].getAttribute('frq');
+ 		if (frq=="Journalière") {
+   				//alert("oui");
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Journalière (sur "+periode+" jours) vous devez choisir "+nbr+" dates par jour.";
+    		//document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
+    	}
+    	else if (frq=="Hebdomadaire") {
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Hebdomadaire (sur "+periode+" semaines) vous devez choisir "+nbr+" dates par semaine.";
+    	
+
+    	}
+    	else if (frq=="Mensuelle") {
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Mensuelle (sur "+periode+" mois) vous devez choisir "+nbr+" dates par mois.";
+    	
+
+    	}
+ 		//alert(frq);
+    	
+    	document.getElementById("nbrServiceRec").value = nbr;
+    	var y = '<label>Date de rendez vous:</label>';
+    	
+    	for (var i = 0; i < nbr; i++) {
+    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks input-append date " style="font-size: 15px;" readonly>'
+
+
+    	}
+    	document.getElementById("dateRec").innerHTML = y;
+    	
+    }
+ </script>
+
+ <?php if (isset($User)){ ?> 
  <script>
  			
 			$('#addfavoris').click(function( ){
@@ -1046,8 +1183,9 @@ font-size: 15px;
                    // var date = $('#date-picker').val();
                    // var heure = $('#heure').val();
                     var datereservation= $('#datetimepicker').val();
+                    //alert(datereservation);
                     var dateStr = moment(datereservation, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
-
+                    //alert(dateStr);
                     var service = $('#service').val();
                     var rappel = $('#rappel').val();
 					//alert(JSON.stringify(service));
@@ -1058,6 +1196,47 @@ font-size: 15px;
                         success:function(data){
                         //alert(JSON.stringify(data));
 						location.href= "{{ route('reservations') }}";
+                        }
+                    });
+               
+            });
+	 			$('#reserver2').click(function( ){
+	 				var e = document.getElementById("servicereccurent");
+					var periode = e.options[e.selectedIndex].getAttribute('periode');
+					 var frq=e.options[e.selectedIndex].getAttribute('frq');
+
+
+	 				//alert(periode);
+ 	
+
+	 			var _token = $('input[name="_token"]').val();	
+                var nbrService = document.getElementById("nbrServiceRec").value ;
+                var date_reservation = [] ;
+
+			      for (var i = 0; i < nbrService; i++) {
+			      	var d= $('#datetimepickerRec'+((i+1).toString())).val();
+			      	 //alert(d);
+			      	 d =moment(d ,'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+			      	 //alert(d);
+			      	date_reservation.push(d);
+			      	
+			      }
+			      //alert(date_reservation);
+                    
+                    var remarques = $('#remarques2').val();
+               
+
+                    var service = $('#servicereccurent').val();
+                    var rappel = $('#rappel2').val();
+					//alert(JSON.stringify(service));
+					//alert(service);
+                    $.ajax({
+                        url:"{{ route('reservations.add2') }}",
+                        method:"POST",
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,  rappel:rappel   , _token:_token},
+                        success:function(data){
+                        alert(JSON.stringify(data));
+						//location.href= "{{ route('reservations') }}";
                         }
                     });
                
@@ -1115,6 +1294,7 @@ font-size: 15px;
 
 
 <script>
+	
 $(function() {
 	var nowDate = new Date();
 	var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);

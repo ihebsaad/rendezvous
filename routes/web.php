@@ -98,6 +98,8 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 
 
 	Route::post('/reservations/add','ReservationsController@add')->name('reservations.add');
+		Route::post('/reservations/add2','ReservationsController@addServiceRecurrent')->name('reservations.add2');
+
 	Route::get('/reservations','ReservationsController@index')->name('reservations');
 	Route::get('/reservations/remove/{id}','ReservationsController@remove');
 	Route::get('/reservations/valider/{id}','ReservationsController@valider');

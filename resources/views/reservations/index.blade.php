@@ -92,7 +92,9 @@ background-color:#a0d468;
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
                     <td style="width:10%">{{$reservation->date_reservation  }} </td>
-                    <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> €)<small></td>
+                    <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> € <?php if ($reservation->recurrent==1) {
+                      echo ", <b>abonnement</b>" ;
+                    } ?>)<small></td>
                       <td>{{$reservation->reduction  }}</td>
  	<td>
 		<?php  if($reservation->statut==0){$statut='<span class="badge badge-pill badge-danger" >En attente</span>';}  ?>
