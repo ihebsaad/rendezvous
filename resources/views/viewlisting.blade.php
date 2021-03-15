@@ -1,4 +1,4 @@
-@extends('layouts.frontlayout')
+﻿@extends('layouts.frontlayout')
  
  @section('content')
  <?php  $User= auth()->user();
@@ -1136,11 +1136,12 @@ font-size: 15px;
     	var y = '<label>Date de rendez vous:</label>';
     	
     	for (var i = 0; i < nbr; i++) {
-    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks input-append date " style="font-size: 15px;" readonly>'
+    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
 
 
     	}
-    	document.getElementById("dateRec").innerHTML = y;
+        document.getElementById("dateRec").innerHTML = y;
+    	//$("#dateRec").append(y);
     	
     }
  </script>
@@ -1462,12 +1463,14 @@ $("body").mouseup(function() {
    $(document).on('click','.dtpks', function(e){
 
     $(e.target).datetimepicker('show');
+    //kapend =$(e.target);
 
    });
         
-
-
-  $(".dtpks").datetimepicker({
+ $(document).on("focus", ".dtpks", function(){
+  
+  
+   $(this).datetimepicker({
      
        format: "dd-mm-yyyy h:ii",
 
@@ -1529,7 +1532,7 @@ $("body").mouseup(function() {
 var chc=new Date();
 ch=chc.getFullYear()+'-'+(chc.getMonth()+1)+'-'+chc.getDate();
 //alert(ch);
-$('.dtpks').datetimepicker('setStartDate', ch);
+$(this).datetimepicker('setStartDate', ch);
 
 //var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 //var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1538,6 +1541,9 @@ $('.dtpks').datetimepicker('setStartDate', ch);
 //var month = months[ chc.getMonth() ];
 //alert(chc.getDay());
 });
+ });
+ 
+  
 
 </script>
 
