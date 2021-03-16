@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours');
 	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove');
 
-
+       
 
  
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');

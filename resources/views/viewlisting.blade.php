@@ -1,4 +1,4 @@
-@extends('layouts.frontlayout')
+﻿@extends('layouts.frontlayout')
  
  @section('content')
  <?php  $User= auth()->user();
@@ -1499,7 +1499,7 @@ font-size: 15px;
     	var y = '<label>Date de rendez vous:</label>';
     	
     	for (var i = 0; i < nbr; i++) {
-    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks input-append date " style="font-size: 15px;" readonly>'
+    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
 
 
     	}
@@ -1512,6 +1512,9 @@ font-size: 15px;
 		document.getElementById('totalReservationRec').value = total;
 		//alert(remiseCarte);
 	}
+
+        document.getElementById("dateRec").innerHTML = y;
+    	//$("#dateRec").append(y);
     	
     }
  </script>
@@ -1798,64 +1801,129 @@ $("body").mouseup(function() {
     $("#calendrier_prestataire").modal({backdrop: false});
 });
 
-  
+  $( document ).ready(function() {
 
-  var disabledtimes_mapping = ["02/19/2021:8", "02/19/2021:9", "02/19/2021:10"];
+  var disabledtimes_mapping = ["03/03/2021_22","03/04/2021_8", "03/04/2021_9", "03/04/2021_10"];
+  var heures_fermeture_semaine = <?php echo \App\Http\Controllers\CalendrierController::get_tab_heures_fermeture_semaine($user->id); ?> ;
+  var heures_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController::get_tab_heures_indisp_rendezvous($user->id); ?> ;
+  var jours_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController:: get_tab_jours_indisp_rendezvous($user->id); ?> ;
 
+  function get_Num_day(datestr)
+  {
+  	var datek = new Date(datestr);
+  	var dayk = datek.getDay();
+  	//alert(dayk);
+  	 return  dayk;
+  }
    function formatDate(datestr)
    {
     var date = new Date(datestr);
     var day = date.getDate(); day = day>9?day:"0"+day;
+    //alert(day);
     var month = date.getMonth()+1; month = month>9?month:"0"+month;
     return month+"/"+day+"/"+date.getFullYear();
+   }
+    function formatDate2(datestr)
+   {
+    var date = new Date(datestr);
+    var day = date.getDate(); day = day>9?day:"0"+day;
+    //alert(day);
+    var month = date.getMonth()+1; month = month>9?month:"0"+month;
+    return  date.getFullYear()+"-"+month+"-"+day;
+
    }
 
    $(document).on('click','.dtpks', function(e){
 
     $(e.target).datetimepicker('show');
+    //kapend =$(e.target);
 
    });
         
-
-
-  $(".dtpks").datetimepicker({
+ $(document).on("focus", ".dtpks", function(){
+  
+  
+   $(this).datetimepicker({
      
+       format: "dd-mm-yyyy h:ii",
 
-       format: "dd-mm-yyyy hh:ii",
-
-      // format: "dd MM yyyy - hh:ii",
+      //format: "dd MM yyyy - hh:ii",
       
         autoclose: true,
         todayBtn: true,
         pickerPosition: "bottom-left",
-        daysOfWeekDisabled:'0,1', // tous les jours du calendrier jours fermeture
-
+        daysOfWeekDisabled:<?php echo \App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id); ?>,// tous les jours du calendrier jours fermeture
+        
      language:'fr',
-     onRenderHour:function(date){
-     if(disabledtimes_mapping.indexOf(formatDate(date)+":"+date.getUTCHours())>-1)
+     onRenderHour:function(datekb){
+     	//alert(String(formatDate(datekb))+":23");
+     	//console.log(datekb.getUTCHours());
+     	//console.log(datekb.getDay());
+     	// get_Num_day(date);
+     	//var  kkk=formatDate(datekb);
+     	//console.log(kkk);
+     	//console.log(disabledtimes_mapping.indexOf(kkk+"_22"));
+      if (datekb.getUTCHours() === 23  )
+      {
+      	/*if(disabledtimes_mapping[0]=="03/03/2021_23")
+      	{
+      		alert(String(formatDate(datekb))+":23");
+      	}*/
+      	//console.log("avant diabled");
+      	//console.log("kkk "+kkk);
+      	 //console.log(disabledtimes_mapping.indexOf(formatDate(datekb)+':23'));
+      	// if(disabledtimes_mapping.indexOf(kkk+"_22")>-1){
+      	 	// console.log("diabled");
+      	 	 return ['disabled'];
+         
+      	 //}
+      }
+              
+     //if(disabledtimes_mapping.indexOf(formatDate(datekb)+"_"+String(datekb.getUTCHours()))>-1)
+      //{
+      	//alert(formatDate(datekb)+":"+String(datekb.getUTCHours()));
+        // return ['disabled'];
+     // }
+      if((heures_fermeture_semaine.indexOf(datekb.getDay()+":"+(parseInt(datekb.getUTCHours())))>-1) ||
+         (heures_indisp_rendezvous.indexOf(formatDate2(datekb)+":"+(parseInt(datekb.getUTCHours())))>-1))
       {
         return ['disabled'];
       }
 
      // if(arra)
-    }
+    },
+
+     onRenderDay: function(date) {
+           if(jours_indisp_rendezvous.indexOf(formatDate2(date))>-1)
+           {
+             return ['disabled'];
+           }
+        }
      
 });
 
 var chc=new Date();
-
 ch=chc.getFullYear()+'-'+(chc.getMonth()+1)+'-'+chc.getDate();
 //alert(ch);
-$('.dtpks').datetimepicker('setStartDate', ch);
+$(this).datetimepicker('setStartDate', ch);
 
-var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+//var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+//var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-var day = days[ chc.getDay() ];
-var month = months[ chc.getMonth() ];
+//var day = days[ chc.getDay() ];
+//var month = months[ chc.getMonth() ];
 //alert(chc.getDay());
+});
+ });
+ 
+  
+
 </script>
 
+
 <?php //echo \App\Http\Controllers\ReservationsController::reservationsdujour(); ?>
+
+
+<?php //dd( \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id)); ?>
 
   @endsection('content')
