@@ -74,6 +74,15 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/modif','ServicesController@modif')->name('services.modif'); 
 	Route::post('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction');
 
+		Route::post('/services/CodePromo','ServicesController@codepromo')->name('services.CodePromo');
+	Route::post('/services/reduction_CodePromo','ServicesController@CodePromoUpdate')->name('services.reduction_CodePromo');
+	Route::get('/services/remove_CodePromo/{k}','ServicesController@CodePromoRemove');
+	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck');
+	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours');
+	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove');
+
+
+
  
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
 
@@ -106,6 +115,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::get('/reservations/annuler/{id}','ReservationsController@annuler');
 	Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage');
 	Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage');
+
 
 
 	Route::get('/categories', array('as' => 'categories','uses' => 'CategoriesController@index'));

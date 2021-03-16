@@ -19,7 +19,9 @@ use \App\Image;
 use \App\Reservation;
 use \App\Alerte;
 use \App\Calendrier;
-use \App\Cartefidelite; 
+use \App\Cartefidelite;
+use \App\Codepromo;
+use \App\Happyhour;   
 
 
 use Illuminate\Support\Str;
@@ -177,6 +179,7 @@ class UsersController extends Controller
     {
   		$reduction=0;
 		$user = User::find($id);
+		$happyhours = Happyhour::where('id_user',$id)->get();
 		 if (Auth::guest())
             return view('viewlisting' ,  compact('user','id','reduction'));
         $cuser = auth()->user();
@@ -188,7 +191,7 @@ class UsersController extends Controller
 				$reduction=User::where('id',$id)->value('reduction');
 			}
 			}
-        return view('viewlisting' ,  compact('user','id','reduction'));
+        return view('viewlisting' ,  compact('user','id','reduction','happyhours'));
 		
 	         
 
@@ -227,7 +230,12 @@ class UsersController extends Controller
 		$categories = Categorie::orderBy('nom', 'asc')->get();
         $categories_user =  DB::table('categories_user')->where('user',$id)->pluck('categorie');
 
-		return view('users.listing',  compact('user','id','services','categories','categories_user')); 
+
+
+        $serviceWithCode = Codepromo::where('user_id',$user_id)->get();
+        $happyhours = Happyhour::where('id_user',$user_id)->get();
+
+		return view('users.listing',  compact('user','id','services','categories','categories_user','serviceWithCode','happyhours')); 
 		
 		}
 		

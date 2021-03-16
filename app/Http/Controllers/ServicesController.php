@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Service;
+use \App\Codepromo;
+use \App\Happyhour;
 
 class ServicesController extends Controller
 {
@@ -170,6 +172,81 @@ class ServicesController extends Controller
             return $service[$champ] ;
         }else{return '';}
 
+    }
+    public function codepromo(Request $request){
+      //dd($request);
+     
+      $promo = new Codepromo([
+             'id_service' => $request->get('myServices'),
+             'user_id' => $request->get('user'),
+       'reduction'=>$request->get('redu'),       
+             'code' => $request->get('code'),
+         ]);  
+     $promo->save();
+     
+     return back() ;
+    }
+    public function CodePromoUpdate(Request $request){
+      //dd($request);
+      $id = $request->get('id');
+   
+        $val= $request->get('valchange');
+      //dd($val);
+        Codepromo::where('id', $id)->update(array("reduction" => $val));
+     
+     
+    }
+    public function CodePromoRemove($k)
+    {
+      DB::table('codepromos')->where('id', $k)->delete();
+      
+     
+     return back();
+    }
+    public function CodePromoCheck(Request $request)
+    {
+       $serviceId = 0;
+        $reduction = 0 ;
+        $Remise = 0 ;
+        $serviceNom ="" ;
+       $code = Codepromo::where('code',$request->get('valCode'))->first();
+
+        if($code==null)
+        {
+             $CodePromostate = 0;
+        }
+        else
+        {
+            $CodePromostate = 1;
+            $serviceId = $code->id_service ;
+            $service = Service::where('id',$serviceId)->first();
+            $serviceNom = $service->nom ;
+            $reduction = $code->reduction ;
+            $Remise=($service->prix * $reduction) /100 ;
+        }
+      return [$CodePromostate,$serviceId,$reduction,$serviceNom,$Remise];
+    
+    }
+    public function HappyHoursAdd(Request $request){
+      //dd($request);
+     
+      $happyhours = new Happyhour([
+             'reduction' => $request->get('reduction'),
+             'dateDebut' => $request->get('date_debut'),
+       'dateFin'=>$request->get('date_fin'),       
+             'places' => $request->get('places'),
+             'id_user' => $request->get('id_user'),
+         ]);  
+     $happyhours->save();
+     
+     return back() ;
+    }
+    public function HappyHoursRemove($k)
+    {
+      DB::table('happyhours')->where('id', $k)->delete();
+      
+     
+     return back();
     }
 	
 	

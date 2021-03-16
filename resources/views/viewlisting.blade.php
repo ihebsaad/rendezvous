@@ -113,7 +113,7 @@ font-size: 15px;
 		}
 		?>
 		
-		
+	
   <div class="container">
     <div class="row utf_sticky_main_wrapper">
       <div class="col-lg-8 col-md-8 padding-right-25">
@@ -169,6 +169,33 @@ font-size: 15px;
 	  </div>
         </div>
         <div id="utf_listing_overview" class="utf_listing_section">
+          <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> <i class="sl sl-icon-present"></i> Happy hours</h3>
+          <div style="max-height: 120px; overflow-y: auto;">
+		<table class="table" style="font-size: 150%; "  >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Réduction</th>
+      <th scope="col">Places</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php $x=0; foreach($happyhours as $happyhour){ $x=$x+1 ; ?>
+    <tr>
+      <th scope="row">{{$x}}</th>
+      <td>{{$happyhour->reduction}}%</td>
+      <td>{{$happyhour->places}}</td>
+      <td width="50%"><b>De</b> {{$happyhour->dateDebut}} <b>à</b> {{$happyhour->dateFin}}</td>
+      <td><a  class="delete fm-close"  href=""><i class="fa fa-remove"></i></a></td>
+    </tr>
+  <?php } ?>
+   
+  </tbody>
+</table></div>
+			  
+        </div>
+        <div id="utf_listing_overview" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> Description</h3>
           <p>{{$user->description}}
 		  </p>
@@ -218,6 +245,7 @@ font-size: 15px;
 				<span>220$<small>person</small></span>				
 			</div>-->
 		  </h3>
+		  <input type="number" value="{{$reduction}}" name="" hidden id="catrefideliteVal">
 		  <?php if($reduction != 0){  ?> 
 		  <h3 style="color: red"><i class="sl sl-icon-present"></i> Félicitation!<br> Vous bénéficierez pour la prochaine réservation d'une réduction de {{$reduction}}%</h3>
 		  <?php } ?>
@@ -246,11 +274,11 @@ font-size: 15px;
 
 		  <div class="row with-forms margin-top-0">
 			<div class="col-lg-12 col-md-12">
-				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner"  multiple style="font-weight: 17px !important; " >
+				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner" onchange="selectservice()"  multiple style="font-weight: 17px !important; " >
 				<option> </option>
 					<?php 
 					foreach($services as $service){
-						echo '<option  style="font-weight: 17px;" value="'.$service->id.'">'.$service->nom.'</option>';
+						echo '<option  style="font-weight: 17px;" value="'.$service->id.'" prix="'.$service->prix.'">'.$service->nom.'</option>';
 					}
 					?>
 				</select>
@@ -311,11 +339,12 @@ font-size: 15px;
 
 			 </div>
 		  </div>
-		  <div class="row with-forms">
-		  	<label style="padding-left:35px">Rappel de mon rendez vous par SMS</label>
+
+		  <div class="col-lg-12 col-md-12 ">
+		  	<label >Rappel de mon rendez vous par SMS</label>
 		  	<!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
-			 <div  class="row" style="padding-left:40px;padding-top:5px" >
-			 <select class=" " id="rappel" style="min-width:280px; max-width:400px!important ; font-size: 15px;" >
+			 <div  >
+			 <select class=" " id="rappel"  style="font-size: 150%">
 			  <option value="60">1h avant le RDV </option>
               <option value="120">2h avant le RDV</option>
 			 <option value="180">3h avant le RDV</option>
@@ -324,8 +353,94 @@ font-size: 15px;
 			 <option value="7200">5 jours avant le RDV</option>
 			 </select>
 			 </div>
-		  </div>		  
-		  </div>	
+		  </div>
+
+		  </div>
+		  	<div class="col-lg-12 col-md-12 ">
+		  		<label>Code promo :</label>
+		  		<div class="input-group input-group-lg" >
+				    <input class="form-control " type="text" id="mycodepromo">
+				    <span class="input-group-btn ">
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" >valide</button>
+				    </span>
+				</div>
+          
+         </div>
+         <br>
+   
+
+         <div class="col-lg-12 col-md-12 ">
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <input type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+                            </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 " >
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
+                                <input type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+    <div class="input-group-append">
+    	<button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+ 
+  </div>
+
+
+                            </div>
+                              <div id="divremise" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
+                              	  <table class="table" id="tabRemise">
+    <thead>
+      <tr>
+        <th>Remise</th>
+        <th>service</th>
+        <th>Reduction</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <?php if($reduction != 0){  ?>
+      <tr>
+
+        <td>carte fidelite ({{$reduction }} %)</td>
+        <td>total</td>
+        <td id="remiseCarte">0€</td>
+      </tr>
+  <?php } ?>
+
+      <tr>
+        <td>happy hours (30%)</td>
+        <td>total</td>
+        <td>16€</td>
+      </tr>
+      <tr>
+        <td>code promo (15%)</td>
+        <td>pizza</td>
+        <td>10€</td>
+      </tr>
+    </tbody>
+  </table>
+                              </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 ">
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
+                                <input type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+
+                            </div><br>
+                        </div>
+
+
        <?php if (isset($User)){?> 
 	   <a class="utf_progress_button button fullwidth_block margin-top-5" style="color:white" id="reserver">Réserver</a>
 		
@@ -359,7 +474,7 @@ font-size: 15px;
 <select id="servicereccurent" onchange="SelectServiceRec(this)">
 	<option value="" selected disabled><strong>selectionner un service</strong></option>
 	<?php foreach($servicesreccurent as $SR){?>
-  <option value="{{$SR->id}}" ndate="{{$SR->Nfois}}" frq = "{{$SR->frequence}}" periode="{{$SR->periode}}"><strong>{{$SR->nom}}</strong></option>
+  <option value="{{$SR->id}}" ndate="{{$SR->Nfois}}" frq = "{{$SR->frequence}}" periode="{{$SR->periode}}" prixRec="{{$SR->prix}}"><strong>{{$SR->nom}}</strong></option>
 
   <?php } ?>
   
@@ -385,11 +500,11 @@ font-size: 15px;
 
 			 </div>
 		  </div>
-		  <div class="row with-forms">
-		  	<label style="padding-left:35px">Rappel de mon rendez vous par SMS</label>
+		   <div class="col-lg-12 col-md-12 ">
+		  	<label >Rappel de mon rendez vous par SMS</label>
 		  	<!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
-			 <div  class="row" style="padding-left:40px;padding-top:5px" >
-			 <select class=" " id="rappel2" style="min-width:280px; max-width:300px!important ; font-size: 15px;" >
+			 <div  >
+			 <select class=" " id="rappel"  style="font-size: 150%">
 			  <option value="60">1h avant le RDV </option>
               <option value="120">2h avant le RDV</option>
 			 <option value="180">3h avant le RDV</option>
@@ -399,6 +514,86 @@ font-size: 15px;
 			 </select>
 			 </div>
 		  </div>
+		
+		  <div class="col-lg-12 col-md-12 ">
+		  		<label>Code promo :</label>
+		  		<div class="input-group input-group-lg" >
+				    <input class="form-control "  type="text" id="mycodepromoRec">
+				    <span class="input-group-btn ">
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()" >valide</button>
+				    </span>
+				</div>
+          
+         </div>
+         <br>
+   
+
+         <div class="col-lg-12 col-md-12 ">
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <input type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+                            </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 " >
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
+                                <input type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+    <div class="input-group-append">
+    	<button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remiseRec()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+ 
+  </div>
+
+
+                            </div>
+                              <div id="divremiseRec" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
+                              	  <table class="table" id="tabRemiseRec">
+    <thead>
+      <tr>
+        <th>Remise</th>
+        <th>service</th>
+        <th>Reduction</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <?php if($reduction != 0){  ?>
+      <tr>
+
+        <td>carte fidelite ({{$reduction }} %)</td>
+        <td>total</td>
+        <td id="remiseCarteRec">0€</td>
+      </tr>
+  <?php } ?>
+
+      <tr>
+        <td>happy hours (30%)</td>
+        <td>total</td>
+        <td>16€</td>
+      </tr>
+     
+    </tbody>
+  </table>
+                              </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 ">
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
+                                <input type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+
+                            </div><br>
+                        </div>
 		  <?php if (isset($User)){?> 
 	   <a class="utf_progress_button button fullwidth_block margin-top-5" style="color:white" id="reserver2">Réserver</a>
 		
@@ -1109,9 +1304,177 @@ font-size: 15px;
 	</section>
   
  -->
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
  <script type="text/javascript">
+ 	function selectservice(){
+ 		var remiseCarte  =0 ;
+		var montant = 0 ;
+		var service = $('#service').val();
+		if (service.length != 0) {
+			for (var i = 0; i < service.length; i++) {
+				$('#service option[value='+service[i]+']').each(function(){
+					montant = montant + parseFloat(this.getAttribute('prix'));
+					document.getElementById('MontantReservation').value = montant;
+	     
+	   
+				});
+			}
+		}
+		else {
+			document.getElementById('MontantReservation').value = montant;
+		}
+		var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservation').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservation').value = total;
+		//alert(remiseCarte);
+	}
+ 	}
+ 	function remise(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremise");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+ 	}
+ 	function remiseRec(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremiseRec");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+ 	}
+ 	function fonctionvalide(){
+ 		var valCode = $('#mycodepromo').val();
+   		//alert(valchange);
+   		var service = $('#service').val();
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.CodePromoCheck') }}",
+                        method:"POST",
+						data:{valCode:valCode, _token:_token},
+                        success:function(data){
+                        	
+                        	if (data[0]==1) {
+                        		if (service.includes(data[1].toString())) {
+                        			Swal.fire(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemise");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservation').value = parseFloat(document.getElementById('RemiseReservation').value) + data[4];
+								    document.getElementById('totalReservation').value = parseFloat(document.getElementById('MontantReservation').value)-parseFloat(document.getElementById('RemiseReservation').value);
+
+
+                        		}
+                        		else {
+									Swal.fire(
+									  'service non selectionner!...',
+									  '',
+									  'question'
+									)
+                        		}
+
+
+                        		
+                        	}
+                        	else {
+                        		Swal.fire({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
+
+                        }
+                    });
+ 		
+
+ 	}
+ 	 	function fonctionvalideRec(){
+ 		var valCode = $('#mycodepromoRec').val();
+   		//alert(valchange);
+   		//var service = $('#service').val();
+   		var service = $('#servicereccurent').val();
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.CodePromoCheck') }}",
+                        method:"POST",
+						data:{valCode:valCode, _token:_token},
+                        success:function(data){
+                        	
+                        	if (data[0]==1) {
+                        		if (data[1].toString()==service) {
+                        			Swal.fire(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemiseRec");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
+								    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
+
+
+                        		}
+                        		else {
+									Swal.fire(
+									  'service non selectionner!...',
+									  '',
+									  'question'
+									)
+                        		}
+
+
+                        		
+                        	}
+                        	else {
+                        		Swal.fire({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
+
+                        }
+                    });
+ 		
+
+ 	}
  	
  	function SelectServiceRec(a){
+ 		remiseCarte = 0 ;
+ 		montant = a.options[a.selectedIndex].getAttribute('prixRec');
+ 		
+		document.getElementById('MontantReservationRec').value = montant;
  		periode=a.options[a.selectedIndex].getAttribute('periode');
  		nbr=a.options[a.selectedIndex].getAttribute('ndate');
  		frq=a.options[a.selectedIndex].getAttribute('frq');
@@ -1141,6 +1504,14 @@ font-size: 15px;
 
     	}
     	document.getElementById("dateRec").innerHTML = y;
+    	var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		//alert(remiseCarte);
+	}
     	
     }
  </script>

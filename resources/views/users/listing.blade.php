@@ -399,7 +399,7 @@ function geocodeAddress(geocoder, resultsMap) {
               <div class="row with-forms">  
 				  <div class="utf_submit_section col-md-4">
 				    <h4>Logo</h4>
-					<form action="{{ route('users.ajoutimage') }}" class="dropzone"  id="dropzoneFrom">
+					<form action="{{ route('users.ajoutimage') }}" class="dropzone"  id="dropzoneFrom"  >
 					  {{ csrf_field() }}
 					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
 					</form>
@@ -815,7 +815,58 @@ function geocodeAddress(geocoder, resultsMap) {
 					<a href="#small-dialog" class="button popup-with-zoom-anim">Ajouter</a> </center>
 					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
 				</div>                          
-            </div>				
+            </div>
+            <!----------------------------------------------------------------------------->
+            <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-diamond"></i>Code promo </h3>
+                </div>              
+        <div class="row">
+          <div class="col-md-12">
+          <table id="utf_pricing_list_section">
+            <tbody class="ui-sortable"  id="services">
+           <?php foreach($serviceWithCode as $Scode){ ?>
+            <?php $ser =  $services->find($Scode->id_service);  ?>
+            <tr class="pricing-list-item pattern ui-sortable-handle">
+              <td> 
+              <div class="col-md-2">
+                <img src="<?php echo  URL::asset('storage/images/'.$ser->thumb);?>"  style="max-width:100px"  />
+              </div>
+              <div class="col-md-2" style="max-width: 150px">
+                <label>Nom :</label>
+                <output >{{$ser->nom}} </output>
+
+              </div>
+              <div class="col-md-2">
+            <label>Pourcentage de réduction :</label>
+            <div >
+          <i class="data-unit" >%</i>
+          <input data-unit="%"  type="number" value="{{ $Scode->reduction }}" onchange="changeReductionCode(this)" id="p{{ $Scode->id }}">
+          </div>
+        </div>
+              <div class="col-md-2"  style="margin-left: 100px">
+                <label>Code promo :</label>
+                <output >{{$Scode->code}} </output>
+              </div>
+
+              
+              <div class="fm-close">
+              <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('services/remove_CodePromo/'.$Scode->id)}}" ><i class="fa fa-remove"></i></a>
+              </div>
+
+              </td>
+              
+            </tr>
+<?php } ?>
+            </tbody>
+          </table>
+          <br>
+                 <center>
+          <a href="#small-dialog9" class="button popup-with-zoom-anim">Ajouter</a> </center>
+          <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
+        </div>                          
+            </div>
+            <!----------------------------------------------------------------------------->				
 <div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
 					<h3><i class="sl sl-icon-present"></i>Carte de fidélité </h3>
@@ -835,6 +886,79 @@ function geocodeAddress(geocoder, resultsMap) {
 				</div>                          
             </div>	
 
+
+      <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-present"></i>Happy hours </h3>
+                </div>       
+        <div class="row">
+          <div class="col-md-12" >
+            <br>
+          </div>
+          <form action="{{ route('services.HappyHours') }}" method="post"  >
+            {{ csrf_field() }}
+            <input name="id_user" value="{{$user->id}}" hidden>
+          <div class="col-md-2">
+            <label>Pourcentage de réduction :</label>
+            <div >
+          <i class="data-unit" >%</i>
+          <input data-unit="%"  type="number" value="" name="reduction" required>
+          </div></div>
+          <div class="col-md-2">
+            <label>De :</label>
+            <div >
+          <input  type="datetime-local" value="" name="date_debut" required>
+          </div>
+
+        </div> 
+        <div class="col-md-2">
+            <label>à :</label>
+            <div >
+          <input  type="datetime-local" value="" name="date_fin">
+          </div>
+
+        </div>  
+        <div class="col-md-2">
+            <label>Places :</label>
+            <div >
+          <input  type="number" value="" name="places" required>
+          </div>
+
+        </div>
+        <div class="col-md-2">
+            <label></label>
+            <div >
+<center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+          </div>
+
+        </div></form> 
+
+      </div>
+      <div style="max-height: 200px; overflow-y: auto;">
+    <table class="table" style="font-size: 150%; "  >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Réduction</th>
+      <th scope="col">Places</th>
+      <th scope="col">Date</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php $x=0; foreach($happyhours as $happyhour){ $x=$x+1 ; ?>
+    <tr>
+      <th scope="row">{{$x}}</th>
+      <td>{{$happyhour->reduction}}%</td>
+      <td>{{$happyhour->places}}</td>
+      <td width="50%"><b>De</b> {{$happyhour->dateDebut}} <b>à</b> {{$happyhour->dateFin}}</td>
+      <td><a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('services/remove_happyhour/'.$happyhour->id)}}"><i class="fa fa-remove"></i></a></td>
+    </tr>
+  <?php } ?>
+ 
+  </tbody>
+</table></div>  
+</div>
 
 		<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -941,7 +1065,43 @@ function geocodeAddress(geocoder, resultsMap) {
 
 	
 		
+<!---------------------------------------------------------------------------------------------------->
+          <div id="small-dialog9" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter un code promo  </h3>
+          </div>
+      <form  method="post" enctype="multipart/form-data"   action="{{ route('services.CodePromo') }}"  >
+      {{ csrf_field() }}
+      
+     <div class="utf_signin_form style_one">
+      <input type="hidden" name="user" value="{{$user->id}}"  >
+       
+       <div class="fm-input ">
+                <label for="myServices">Services :</label>
+       <select onchange="myFunctionSelect()" name="myServices">
+        <?php foreach($services as $service){ ?>
+                  <option value="{{$service->id}}">{{$service->nom}}</option>
+                <?php } ?>
+                  
+                </select> 
+    </div><br>
+    <div class="fm-input ">
+            <label>Pourcentage de réduction :</label>
+            <div >
+          <input   type="number" min="1" max="99" value="1" name="redu">
+          </div>
+        </div>
+              <div class="fm-input ">
+                <label>code promo :</label>
+                <input type="test"  placeholder="Exemple: sc445sd7ff" id="nbrService"  name="code"  required="required">
+              </div>
+              <br>
+            <input type="submit" id="add" style="text-align:center;color:white;" value="Ajouter"></input>
 
+      </form>       
+    <!-- <a class="button" id="add" style="text-align:center">Ajouter</a>-->
+     </div>     
+     </div> 
 
 
        		  
@@ -1343,6 +1503,23 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
 
    <script>
+    function changeReductionCode(x){
+      var id = $(x).attr('id');
+      id=id.substring(1) ;
+      alert(id);
+      var valchange = $(x).val();
+      alert(valchange);
+      var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.reduction_CodePromo') }}",
+                        method:"POST",
+            data:{valchange:valchange, _token:_token, id:id},
+                        success:function(data){
+                          alert("ok");
+                        }
+                    });
+
+    }
    	function changeReduction(x){
    		var valchange = $(x).val();
    		//alert(valchange);

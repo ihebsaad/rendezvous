@@ -13,6 +13,7 @@ use \App\Reservation;
 use \App\Payment;
 use \App\Alerte;
 use \App\Cartefidelite;
+use \App\Codepromo;
 
  
  use Swift_Mailer;
@@ -99,8 +100,6 @@ class ReservationsController extends Controller
     public function addServiceRecurrent(Request $request)
 	{
 		
-
-
 		$periode =  $request->get('periode');
 		$reservation  = new Reservation([
               'client' => $request->get('client'),
@@ -510,6 +509,7 @@ class ReservationsController extends Controller
 	  
 	}
 	
+		
 	
 	
 	
