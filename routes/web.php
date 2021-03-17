@@ -22,6 +22,7 @@ Auth::routes();
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('/{slug}/{id}', 'UsersController@viewlisting');
 
 /*
 Route::get('/dashboard', function () {
@@ -158,5 +159,5 @@ Route::post('/payreservation','PaymentController@payreservation')->name('payrese
 
 });
 
-Route::get('/{slug}/{id}', 'UsersController@viewlisting');
+
 Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');

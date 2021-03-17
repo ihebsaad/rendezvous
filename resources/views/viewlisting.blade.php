@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
 <style>
 .fc .fc-non-business {
-background-color:lightgrey;
+background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermeture_couleur ; ?>;
 }
 </style>
 <style>
@@ -1846,6 +1846,7 @@ $("body").mouseup(function() {
   var heures_fermeture_semaine = <?php echo \App\Http\Controllers\CalendrierController::get_tab_heures_fermeture_semaine($user->id); ?> ;
   var heures_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController::get_tab_heures_indisp_rendezvous($user->id); ?> ;
   var jours_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController:: get_tab_jours_indisp_rendezvous($user->id); ?> ;
+  var minutes_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController::get_tab_minutes_indisp_rendezvous($user->id); ?> ;
 
   function get_Num_day(datestr)
   {
@@ -1937,7 +1938,14 @@ $("body").mouseup(function() {
            {
              return ['disabled'];
            }
-        }
+        },
+
+      onRenderMinute: function(datekb) {
+           if(minutes_indisp_rendezvous.indexOf((formatDate2(datekb)+":"+(parseInt(datekb.getUTCHours()))+":"+  (parseInt(datekb.getUTCMinutes()))))>-1)
+           {
+             return ['disabled'];
+           }
+        },
      
 });
 
@@ -1963,6 +1971,6 @@ $(this).datetimepicker('setStartDate', ch);
 <?php //echo \App\Http\Controllers\ReservationsController::reservationsdujour(); ?>
 
 
-<?php //dd( \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id)); ?>
+<?php // \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
 
   @endsection('content')
