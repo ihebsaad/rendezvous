@@ -180,8 +180,10 @@ class UsersController extends Controller
   		$reduction=0;
 		$user = User::find($id);
 		$happyhours = Happyhour::where('id_user',$id)->get();
+		$today=date('Y-m-d H:i:s');
+  		$myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->first();
 		 if (Auth::guest())
-            return view('viewlisting' ,  compact('user','id','reduction'));
+            return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours'));
         $cuser = auth()->user();
   		//dd($cuser->id);
   		$test=Cartefidelite::where('id_client',$cuser->id)->where('id_prest',$id)->exists();
@@ -191,7 +193,7 @@ class UsersController extends Controller
 				$reduction=User::where('id',$id)->value('reduction');
 			}
 			}
-        return view('viewlisting' ,  compact('user','id','reduction','happyhours'));
+        return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours'));
 		
 	         
 
@@ -234,6 +236,7 @@ class UsersController extends Controller
 
         $serviceWithCode = Codepromo::where('user_id',$user_id)->get();
         $happyhours = Happyhour::where('id_user',$user_id)->get();
+
 
 		return view('users.listing',  compact('user','id','services','categories','categories_user','serviceWithCode','happyhours')); 
 		

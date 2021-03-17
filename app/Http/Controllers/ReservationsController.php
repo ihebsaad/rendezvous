@@ -14,6 +14,9 @@ use \App\Payment;
 use \App\Alerte;
 use \App\Cartefidelite;
 use \App\Codepromo;
+use \App\Service;
+use \App\Happyhour;
+
 
  
  use Swift_Mailer;
@@ -229,7 +232,20 @@ class ReservationsController extends Controller
 		
 	public function add(Request $request)
 	{
-		//return ($request->get('prestataire'));
+		$Allreduction = "";
+		$listcodepromo=$request->get('listcodepromo');
+		for ($i=0; $i < sizeof($listcodepromo) ; $i++) { 
+			
+		$code = Codepromo::where('code',$listcodepromo[$i])->first();
+		$serviceId = $code->id_service ;
+        $service = Service::where('id',$serviceId)->first();
+        $serviceNom = $service->nom ;
+        $reducPromo = $code->reduction ;
+        $Allreduction = $Allreduction."Code promo : ".$reducPromo."% (".$serviceNom.") / " ;
+		}
+		if ($request->get('happyhour') != 0) {
+			$Allreduction = $Allreduction."Happy hours : ".$request->get('happyhour')."% / " ;
+		}
 		
  		$user=$request->get('user');
 		 /*$reservation  = new Reservation([
@@ -251,7 +267,7 @@ class ReservationsController extends Controller
 			$reduc=User::where('id',$request->get('prestataire'))->value('reduction');
 			if ($nbrRes==9) {
 				
-				$reservation->update(array('reduction'=>"Carte de fidélité : ".$reduc."%"));
+				$reservation->update(array('reduction'=>$Allreduction."Carte de fidélité : ".$reduc."%"));
 				$reservation->update(array('reductionVal'=>$reduc));
 
 

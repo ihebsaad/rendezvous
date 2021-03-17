@@ -4,6 +4,9 @@
  <?php  $User= auth()->user();
 
  ?>
+ <script type="text/javascript">
+ 	var listcodepromo = [];
+ </script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
  
 
@@ -187,7 +190,7 @@ font-size: 15px;
       <td>{{$happyhour->reduction}}%</td>
       <td>{{$happyhour->places}}</td>
       <td width="50%"><b>De</b> {{$happyhour->dateDebut}} <b>à</b> {{$happyhour->dateFin}}</td>
-      <td><a  class="delete fm-close"  href=""><i class="fa fa-remove"></i></a></td>
+      
     </tr>
   <?php } ?>
    
@@ -245,10 +248,13 @@ font-size: 15px;
 				<span>220$<small>person</small></span>				
 			</div>-->
 		  </h3>
-		  <input type="number" value="{{$reduction}}" name="" hidden id="catrefideliteVal">
+		  <input type="number" value="{{$reduction}}" name="" hidden id="catrefideliteVal" >
 		  <?php if($reduction != 0){  ?> 
 		  <h3 style="color: red"><i class="sl sl-icon-present"></i> Félicitation!<br> Vous bénéficierez pour la prochaine réservation d'une réduction de {{$reduction}}%</h3>
 		  <?php } ?>
+
+		  <?php if($myhappyhours != null) { echo '<input type="number" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
+		  else {  echo '<input type="number" value="0" id="myhappyhoursId" name="" hidden>'; } ?>
 		  <!----------------------------------- Nav tabs --------------------------------------------->
 		  <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
 		  	# code...
@@ -413,17 +419,13 @@ font-size: 15px;
         <td id="remiseCarte">0€</td>
       </tr>
   <?php } ?>
-
-      <tr>
-        <td>happy hours (30%)</td>
+<?php if($myhappyhours != null) { 
+    echo '<tr>
+        <td>happy hours ('.$myhappyhours->reduction .'%)</td>
         <td>total</td>
-        <td>16€</td>
-      </tr>
-      <tr>
-        <td>code promo (15%)</td>
-        <td>pizza</td>
-        <td>10€</td>
-      </tr>
+        <td id="remiseHappyhours" >0€</td>
+      </tr>' ; } ?>
+     
     </tbody>
   </table>
                               </div><br>
@@ -572,12 +574,14 @@ font-size: 15px;
         <td id="remiseCarteRec">0€</td>
       </tr>
   <?php } ?>
-
-      <tr>
-        <td>happy hours (30%)</td>
+  <?php if($myhappyhours != null) { 
+    echo '<tr>
+        <td>happy hours ('.$myhappyhours->reduction .'%)</td>
         <td>total</td>
-        <td>16€</td>
-      </tr>
+        <td id="remiseHappyhoursRec">0€</td>
+      </tr>' ; } ?>
+
+     
      
     </tbody>
   </table>
@@ -1307,6 +1311,7 @@ font-size: 15px;
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
  <script type="text/javascript">
  	function selectservice(){
+ 		var happyhours = $('#myhappyhoursId').val();
  		var remiseCarte  =0 ;
 		var montant = 0 ;
 		var service = $('#service').val();
@@ -1329,8 +1334,18 @@ font-size: 15px;
 		document.getElementById('RemiseReservation').value = remiseCarte;
 		total =montant -remiseCarte ;
 		document.getElementById('totalReservation').value = total;
+		document.getElementById("remiseCarte").innerHTML = (montant * reductioncarte)/100 +"€";
 		//alert(remiseCarte);
-	}
+		}
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservation').value = remiseCarte;
+		 document.getElementById("remiseHappyhours").innerHTML = (montant * happyhours)/100 +"€";
+
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservation').value = total;
+		//alert(remiseCarte);
+		}
  	}
  	function remise(){
  		//alert("ok");
@@ -1380,6 +1395,7 @@ font-size: 15px;
 								    cell1.innerHTML = "code promo ("+data[2]+"%)";
 								    cell2.innerHTML = data[3];
 								    cell3.innerHTML = data[4]+"€";
+								    listcodepromo.push(valCode);
 								   
 								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
 								    document.getElementById('RemiseReservation').value = parseFloat(document.getElementById('RemiseReservation').value) + data[4];
@@ -1471,6 +1487,7 @@ font-size: 15px;
  	}
  	
  	function SelectServiceRec(a){
+ 		var happyhours = $('#myhappyhoursId').val();
  		remiseCarte = 0 ;
  		montant = a.options[a.selectedIndex].getAttribute('prixRec');
  		
@@ -1510,8 +1527,18 @@ font-size: 15px;
 		document.getElementById('RemiseReservationRec').value = remiseCarte;
 		total =montant -remiseCarte ;
 		document.getElementById('totalReservationRec').value = total;
+		document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
 		//alert(remiseCarte);
-	}
+		}
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
+
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		//alert(remiseCarte);
+		}
 
         document.getElementById("dateRec").innerHTML = y;
     	//$("#dateRec").append(y);
@@ -1550,6 +1577,10 @@ font-size: 15px;
 			        for(var i = 0; i < inputs.length; i++){
                      alert($(inputs[i]).val());
                     }*/
+                    var happyhour = $('#myhappyhoursId').val();
+                    var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
+                    var Remise = parseFloat(document.getElementById('RemiseReservation').value);
+                    var Net = parseFloat(document.getElementById('totalReservation').value);
                     var _token = $('input[name="_token"]').val();
                     var remarques = $('#remarques').val();
                     var adultes = $('#adultes').val();
@@ -1566,10 +1597,10 @@ font-size: 15px;
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel   , _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel ,montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo , _token:_token},
                         success:function(data){
-                        //alert(JSON.stringify(data));
-						location.href= "{{ route('reservations') }}";
+                        alert(JSON.stringify(data));
+						//location.href= "{{ route('reservations') }}";
                         }
                     });
                
