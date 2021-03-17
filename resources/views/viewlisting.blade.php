@@ -1606,6 +1606,14 @@ font-size: 15px;
                
             });
 	 			$('#reserver2').click(function( ){
+
+	 				 var happyhour = $('#myhappyhoursId').val();
+                    var montant_tot = parseFloat(document.getElementById('MontantReservationRec').value);
+                    var Remise = parseFloat(document.getElementById('RemiseReservationRec').value);
+                    var Net = parseFloat(document.getElementById('totalReservationRec').value);
+
+
+
 	 				var e = document.getElementById("servicereccurent");
 					var periode = e.options[e.selectedIndex].getAttribute('periode');
 					 var frq=e.options[e.selectedIndex].getAttribute('frq');
@@ -1638,7 +1646,7 @@ font-size: 15px;
                     $.ajax({
                         url:"{{ route('reservations.add2') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,  rappel:rappel   , _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,  rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
                         success:function(data){
                         alert(JSON.stringify(data));
 						//location.href= "{{ route('reservations') }}";

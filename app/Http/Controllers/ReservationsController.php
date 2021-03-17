@@ -102,7 +102,20 @@ class ReservationsController extends Controller
     }
     public function addServiceRecurrent(Request $request)
 	{
-		
+		$Allreduction = "";
+		$listcodepromo=$request->get('listcodepromo');
+		for ($i=0; $i < sizeof($listcodepromo) ; $i++) { 
+			
+		$code = Codepromo::where('code',$listcodepromo[$i])->first();
+		$serviceId = $code->id_service ;
+        $service = Service::where('id',$serviceId)->first();
+        $serviceNom = $service->nom ;
+        $reducPromo = $code->reduction ;
+        $Allreduction = $Allreduction."Code promo : ".$reducPromo."% (".$serviceNom.") / " ;
+		}
+		if ($request->get('happyhour') != 0) {
+			$Allreduction = $Allreduction."Happy hours : ".$request->get('happyhour')."% / " ;
+		}
 		$periode =  $request->get('periode');
 		$reservation  = new Reservation([
               'client' => $request->get('client'),
@@ -111,6 +124,11 @@ class ReservationsController extends Controller
               'date_reservation' =>$request->date_reservation[0],
               'remarques' => $request->get('remarques'),
               'rappel' => $request->get('rappel'),
+              'happyhour' => $request->get('happyhour'),
+              'montant_tot' => $request->get('montant_tot'),
+              'Remise' => $request->get('Remise'),
+              'Net' => $request->get('Net'),
+              'listcodepromo' => $request->get('listcodepromo'),
               'recurrent' => 1,
             ]);
 		$reservation->save();
@@ -165,7 +183,7 @@ class ReservationsController extends Controller
 			$reduc=User::where('id',$request->get('prestataire'))->value('reduction');
 			if ($nbrRes==9) {
 				
-				$reservation->update(array('reduction'=>"Carte de fidélité : ".$reduc."%"));
+				$reservation->update(array('reduction'=>$Allreduction."Carte de fidélité : ".$reduc."%"));
 				$reservation->update(array('reductionVal'=>$reduc));
 
 
