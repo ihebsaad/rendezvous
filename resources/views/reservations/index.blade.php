@@ -85,7 +85,7 @@ background-color:#a0d468;
 
 
            ?>
-			<?php  $montant=$reservation->montant_tot; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
+			<?php  $montant=$reservation->Net; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
 			<?php $description=$reservation->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservation->service);?>
                 <tr> 
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client) ;?></td><?php }?>
@@ -116,7 +116,6 @@ background-color:#a0d468;
 				{{ csrf_field() }}
 				
  				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
-        <?php if( $reservation->reductionVal!=0) {$montant = $montant -(($montant * $reservation->reductionVal ) /100 );}?>        
  				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >       
 		<?php	if( $reservation->statut <2) { ?> 	<button class="button ">Payer</button> <?php  } ?> 
