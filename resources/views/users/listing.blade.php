@@ -953,7 +953,7 @@ function geocodeAddress(geocoder, resultsMap) {
       <td>{{$happyhour->reduction}}%</td>
       <td>{{$happyhour->places}}</td>
       <td>{{$happyhour->Beneficiaries}}</td>
-      <td width="50%"><b>De</b> {{$happyhour->dateDebut}} <b>à</b> {{$happyhour->dateFin}}</td>
+      <td width="50%"><b>De</b> <?php $dateDebut = new DateTime($happyhour->dateDebut); echo $dateDebut->format('d-m-Y H:i') ; ?> <b>à</b> <?php $dateFin = new DateTime($happyhour->dateFin); echo $dateFin->format('d-m-Y H:i') ; ?></td>
       <td><a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('services/remove_happyhour/'.$happyhour->id)}}"><i class="fa fa-remove"></i></a></td>
     </tr>
   <?php } ?>
