@@ -189,7 +189,7 @@ font-size: 15px;
       <th scope="row">{{$x}}</th>
       <td>{{$happyhour->reduction}}%</td>
       <td>{{$happyhour->places}}</td>
-      <td width="50%"><b>De</b> {{$happyhour->dateDebut}} <b>à</b> {{$happyhour->dateFin}}</td>
+      <td width="50%"><b>De</b> <?php $dateDebut = new DateTime($happyhour->dateDebut); echo $dateDebut->format('d-m-Y H:i') ; ?> <b>à</b> <?php $dateFin = new DateTime($happyhour->dateFin); echo $dateFin->format('d-m-Y H:i') ; ?></td>
       
     </tr>
   <?php } ?>
@@ -215,8 +215,24 @@ font-size: 15px;
 			<a href="{{$user->youtube}}" class="youtube-link"><i class="fa fa-youtube-play"></i> Youtube</a>
 		  </div>-->		  
         </div>
-	  </div>
-      
+	  
+	  <div id="utf_listing_amenities" class="utf_listing_section">
+          <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Services</h3>
+          <!--<ul class="utf_listing_features checkboxes margin-top-0">-->
+          <ul class="utf_listing_features checkboxes margin-top-0">
+		  <?php foreach ($services as $service)
+		  {
+		    echo '<li>  ';
+			 
+			echo $service->nom.'  -  <small><b>'.$service->prix.' €</b></small>' ;
+			if($service->thumb!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
+			
+           <!-- <li>Air Conditioned</li>-->
+
+              	 <?php } ?>      
+          </ul>
+        </div>
+      </div>
 	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
 	  
 	  <?php if( isset($User) && $user->id== $User->id) {   $format = "Y-m-d H:i:s";
@@ -253,8 +269,8 @@ font-size: 15px;
 		  <h3 style="color: red"><i class="sl sl-icon-present"></i> Félicitation!<br> Vous bénéficierez pour la prochaine réservation d'une réduction de {{$reduction}}%</h3>
 		  <?php } ?>
 
-		  <?php if($myhappyhours != null) { echo '<input type="number" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
-		  else {  echo '<input type="number" value="0" id="myhappyhoursId" name="" hidden>'; } ?>
+		  <?php if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
+		  else {  echo '<input type="number" happyhourid="0" value="0" id="myhappyhoursId" name="" hidden>'; } ?>
 		  <!----------------------------------- Nav tabs --------------------------------------------->
 		  <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
 		  	# code...
@@ -367,7 +383,7 @@ font-size: 15px;
 		  		<div class="input-group input-group-lg" >
 				    <input class="form-control " type="text" id="mycodepromo">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" >valide</button>
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
 				    </span>
 				</div>
           
@@ -522,7 +538,7 @@ font-size: 15px;
 		  		<div class="input-group input-group-lg" >
 				    <input class="form-control "  type="text" id="mycodepromoRec">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()" >valide</button>
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
 				    </span>
 				</div>
           
@@ -631,22 +647,7 @@ font-size: 15px;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 
         
-        <div id="utf_listing_amenities" class="utf_listing_section">
-          <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Services</h3>
-          <!--<ul class="utf_listing_features checkboxes margin-top-0">-->
-          <ul class="utf_listing_features checkboxes margin-top-0">
-		  <?php foreach ($services as $service)
-		  {
-		    echo '<li>  ';
-			 
-			echo $service->nom.'  -  <small><b>'.$service->prix.' €</b></small>' ;
-			if($service->thumb!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
-			
-           <!-- <li>Air Conditioned</li>-->
-
-              	 <?php } ?>      
-          </ul>
-        </div>
+        
         <style>
         video {
         width: 100%;
@@ -1577,6 +1578,8 @@ font-size: 15px;
 			        for(var i = 0; i < inputs.length; i++){
                      alert($(inputs[i]).val());
                     }*/
+                     var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
+                    
                     var happyhour = $('#myhappyhoursId').val();
                     var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
                     var Remise = parseFloat(document.getElementById('RemiseReservation').value);
@@ -1597,7 +1600,7 @@ font-size: 15px;
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel ,montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo , _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo , _token:_token},
                         success:function(data){
                         alert(JSON.stringify(data));
 						//location.href= "{{ route('reservations') }}";
@@ -1606,6 +1609,8 @@ font-size: 15px;
                
             });
 	 			$('#reserver2').click(function( ){
+	 				var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
+
 
 	 				 var happyhour = $('#myhappyhoursId').val();
                     var montant_tot = parseFloat(document.getElementById('MontantReservationRec').value);
@@ -1646,7 +1651,7 @@ font-size: 15px;
                     $.ajax({
                         url:"{{ route('reservations.add2') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,  rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
+                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
                         success:function(data){
                         alert(JSON.stringify(data));
 						//location.href= "{{ route('reservations') }}";

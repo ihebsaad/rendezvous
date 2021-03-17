@@ -941,6 +941,7 @@ function geocodeAddress(geocoder, resultsMap) {
       <th scope="col">#</th>
       <th scope="col">Réduction</th>
       <th scope="col">Places</th>
+      <th scope="col">Bénéficiaires</th>
       <th scope="col">Date</th>
       <th scope="col"></th>
     </tr>
@@ -951,6 +952,7 @@ function geocodeAddress(geocoder, resultsMap) {
       <th scope="row">{{$x}}</th>
       <td>{{$happyhour->reduction}}%</td>
       <td>{{$happyhour->places}}</td>
+      <td>{{$happyhour->Beneficiaries}}</td>
       <td width="50%"><b>De</b> {{$happyhour->dateDebut}} <b>à</b> {{$happyhour->dateFin}}</td>
       <td><a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('services/remove_happyhour/'.$happyhour->id)}}"><i class="fa fa-remove"></i></a></td>
     </tr>
