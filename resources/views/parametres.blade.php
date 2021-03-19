@@ -198,6 +198,101 @@ $commission_abonnement3= $parametres->commission_abonnement3;
  <div class="row" style="margin-bottom:30px">
 	   <button   class="button"  onclick="  updating('apropos_footer'); "   ><b><i class="sl sl-icon--save"></i> Enregistrer</b></button>
   </div>
+
+<!-- deb  heures indisponibilité  v2 -->
+
+      <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-basket-loaded"></i>Gestion questions / réponses pour prestataire</h3>
+                </div>              
+        <div class="row">
+          <div class="col-md-12 col-sm-4">
+            <h4></h4>
+          <table id="utf_pricing_list_section">
+            <tbody class="ui-sortable"  id="indispo">
+            <br>
+          <?php use App\PageFaq; $PageFaq=PageFaq::where('type','prest')->orderBy('id')->get();
+            foreach($PageFaq as $pf){
+            ?>
+              <tr class="pricing-list-item pattern ui-sortable-handle">
+              <td> 
+              
+              <div class="fm-input pricing-name" style="min-width:50%;">
+               Question:<!-- <input type="text" value="<?php //echo $pi->titre;?>" > -->
+                <textarea  type="text"  name="question" class="textarea tex-com" placeholder="Contenu de la page A Propos" id="qp{{$pf->id}}" name="question" onchange="changing_question_reponse(this)" required  ><?php echo $pf->question; ?></textarea>
+              </div>
+              
+              <div class="fm-input pricing-ingredients" style="min-width:30%;">
+                Réponse:<!-- <input type="text" value="<?php //echo $pi->date_debut;?>" > -->
+                <textarea  type="text"  class="textarea tex-com" placeholder="Contenu de la page A Propos" name="reponse" id="rp{{$pf->id}}" onchange="changing_question_reponse(this)" required><?php echo $pf->reponse; ?></textarea>
+              </div>
+             
+              <div class="fm-close" style="top:20px; right: 20px;">
+              <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('FaqsController@remove_question_response', [ 'id'=>$pf->id ])}}"><i class="fa fa-remove"></i></a>
+              </div>
+              
+              </td>
+            </tr>
+            
+            <?php } ?>
+            </tbody>
+          </table>
+          <br>
+            <center>
+          <a href="#question-reponse-prestataire" class="button popup-with-zoom-anim">Ajouter</a> </center>
+          <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
+        </div>                          
+            </div>
+
+
+             <!-- fin  heures indisponibilité  v2 -->
+   <!-- deb  heures indisponibilité  v2 -->
+
+      <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-basket-loaded"></i>Gestion questions / réponses pour Client</h3>
+                </div>              
+        <div class="row">
+          <div class="col-md-12 col-sm-4">
+            <h4></h4>
+          <table id="utf_pricing_list_section">
+            <tbody class="ui-sortable"  id="indispo">
+            <br>
+          <?php   $PageFaq=PageFaq::where('type','client')->orderBy('id')->get();
+            foreach( $PageFaq as $pf){
+            ?>
+              <tr class="pricing-list-item pattern ui-sortable-handle">
+              <td> 
+              
+              <div class="fm-input pricing-name" style="min-width:50%;">
+               Question:<!-- <input type="text" value="<?php //echo $pi->titre;?>" > -->
+                <textarea  type="text"  class="textarea tex-com" placeholder="Contenu de la page A Propos"  id="qc{{$pf->id}}" name="question" onchange="changing_question_reponse(this)" required  ><?php echo $pf->question; ?></textarea>
+              </div>
+              
+              <div class="fm-input pricing-ingredients" style="min-width:30%;">
+                Réponse:<!-- <input type="text" value="<?php //echo $pi->date_debut;?>" > -->
+                <textarea  type="text"  class="textarea tex-com" placeholder="Contenu de la page A Propos" name="reponse" id="rc{{$pf->id}}" onchange="changing_question_reponse(this)" required  ><?php echo $pf->reponse; ?></textarea>
+              </div>
+             
+              <div class="fm-close" style="top:20px; right: 20px;">
+              <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('FaqsController@remove_question_response', ['id'=>$pf->id ])}}"><i class="fa fa-remove"></i></a>
+              </div>
+              
+              </td>
+            </tr>
+            
+            <?php } ?>
+            </tbody>
+          </table>
+          <br>
+            <center>
+          <a href="#question-reponse-client" class="button popup-with-zoom-anim">Ajouter</a> </center>
+          <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
+        </div>                          
+            </div>
+
+
+             <!-- fin  heures indisponibilité  v2 -->
   
   
   <!--
@@ -206,7 +301,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
        <div class="form-group ">
          <label for="contenu"></label>
           <div class="editor" >
-           <textarea style="min-height: 380px;"  id="contacter" type="text"  class="textarea tex-com" placeholder="Contenu de la page contact" name="contact" required  ><?php echo $contacter; ?></textarea>
+           <textarea style="min-height: 380px;"  id="contacter" type="text"  class="textarea tex-com" placeholder="Contenu de la page contact" name="contact" required  ><?php// echo $contacter; ?></textarea>
            </div>
          </div>
     </div>
@@ -230,8 +325,67 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 	  
 	 </div>
  </div>
+     <!--  modal pour ajouter une indisponibilté -->
+
+       <div id="question-reponse-client" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter une question/réponse au client</h3>
+          </div>
+    <form method="post" enctype="multipart/form-data" action="{{ route('pagefaqs.store_question_reponse') }}">
+      {{ csrf_field() }}
+      
+       <div class="utf_signin_form style_one">
+       <input type="hidden" name="user" value="5"  >
+        <label>Question *: </label>
+        <div class="fm-input">
+        <textarea  type="text"  class="textarea tex-com"   name="question" required  ><?php //echo $pi->titre; ?></textarea>
+      </div>
+             <label>Réponse *: </label>
+      <div class="fm-input">
+        <textarea  type="text"  class="textarea tex-com"   name="reponse" required  ><?php //echo $pi->titre; ?></textarea>
+      </div>
+            <br>
+      <input type="hidden"  name="type" value="client">
+     
+      <br>
+           <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+
+      </form>       
+     </div>     
+     </div>     
+       
+    <!-- fin modal pour ajouter une indisponibilté -->  
  
- 
+  <!--  modal pour ajouter une indisponibilté -->
+
+       <div id="question-reponse-prestataire" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter une question/réponse pour prestataire</h3>
+          </div>
+  <form  method="post" enctype="multipart/form-data" action="{{ route('pagefaqs.store_question_reponse') }}" >
+      {{ csrf_field() }}
+      
+       <div class="utf_signin_form style_one">
+       <input type="hidden" name="user" value="5"  >
+        <label>Question *: </label>
+        <div class="fm-input">
+        <textarea  type="text"  class="textarea tex-com"   id="question_client" name="question" required  ><?php //echo $pi->titre; ?></textarea>
+      </div>
+        <label>Réponse *: </label>
+      <div class="fm-input">
+       <textarea  type="text"  class="textarea tex-com"   id="question_client" name="reponse" required  ><?php //echo $pi->titre; ?></textarea>
+      </div>
+
+      <input type="hidden"  name="type" value="prest">
+         
+      <br>
+           <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+
+      </form>       
+     </div>     
+     </div>     
+       
+    <!-- fin modal pour ajouter une indisponibilté -->  
   
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  <script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
@@ -239,6 +393,43 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> -->
 
 <script>
+    function changing_question_reponse(elm) {
+                var champ = elm.name;
+               // alert(champ);
+                var id1= elm.id;
+                var id=id1.substr(2);
+                //alert(id);
+                var type=id1.substring(0,2);
+              // alert(type);
+                var val = document.getElementById(id1).value;
+                //alert(val);
+              
+                //if ( (val != '')) {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ route('pagefaqs.update_question_reponse') }}",
+                    method: "POST",
+                    data: { id:id, type:type, champ: champ, val: val, _token: _token},
+                    success: function (data) {
+                        $('#' + champ).animate({
+                            opacity: '0.3',
+                        });
+                        $('#' + champ).animate({
+                            opacity: '1',
+                        });
+             
+                    swal({
+                        type: 'success',
+                        title: 'Modifié ...',
+                        text: 'Contenu modifié avec succès'
+          //  icon: "success",
+                    }); 
+          
+                     }
+          
+                });
+
+            }
 
    function changing(elm) {
          var champ= elm.id;

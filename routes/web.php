@@ -96,7 +96,13 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::post('/faqs/add','FaqsController@add')->name('faqs.add');
 	Route::get('/faqs/add','FaqsController@add')->name('faqs.add');
 	Route::post('/faqs/updating','FaqsController@updating')->name('faqs.updating'); 
-	Route::get('/faqs/remove/{id}/{user}', 'FaqsController@remove');
+	Route::get('/faqs/remove/{id}/{user}','FaqsController@remove');
+
+	Route::get('/pagefaqs/remove_question_response/{id}', 'FaqsController@remove_question_response');
+	Route::post('/pagefaqs/store_question_reponse','FaqsController@store_question_reponse')->name('pagefaqs.store_question_reponse');
+	Route::post('/pagefaqs/update_question_reponse','FaqsController@update_question_reponse')->name('pagefaqs.update_question_reponse');
+	
+	
 
 	Route::get('/reviews', array('as' => 'reviews','uses' => 'ReviewsController@index'));
 	Route::post('/reviews/add','ReviewsController@add')->name('reviews.add');

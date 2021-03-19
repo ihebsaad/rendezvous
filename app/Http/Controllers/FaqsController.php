@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Faq;
+use \App\PageFaq;
 
 class FaqsController extends Controller
 {
@@ -64,14 +65,54 @@ class FaqsController extends Controller
 
 
 	
-     public function remove($id,$user)
-    {
-  
-	 
+  public function remove($id,$user)
+  {  	 
 	DB::table('faqs')->where('id', $id)->delete();
 	return redirect (url('/listing/'.$user.'#faqs'));
 
 	}
+
+  public function remove_question_response($id)
+  {
+
+    DB::table('page_faqs')->where('id', $id)->delete();
+    return redirect (url('/parametres'));
+
+
+  }
+
+  public function store_question_reponse (Request $request)
+  {
+
+     //dd($request->all());
+     $faq  = new PageFaq([
+              
+              'question' => $request->get('question'),
+              'reponse' => $request->get('reponse'),
+              'type' => $request->get('type'),
+            ]);
+
+        $faq->save();
+
+         return redirect (url('/parametres'));
+ 
+  
+
+  }
+
+  public function update_question_reponse(Request $request)
+  {
+
+        $id= $request->get('id');
+        $champ= strval($request->get('champ'));
+        $val= strval($request->get('val'));
+        $type= strval($request->get('type'));
+       
+    
+         PageFaq::where('id', $id)->update(array($champ => $val));
+    
+
+  }
 	
 	
   

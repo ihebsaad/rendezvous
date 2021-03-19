@@ -10,6 +10,10 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 
     height: 900px ! important;
 }
+
+.dropdown-toggle:after{
+  display:none !important;
+}
 </style>
   <div class="search_container_block overlay_dark_part">
     <div class="main_inner_search_block" style="top:43%">
