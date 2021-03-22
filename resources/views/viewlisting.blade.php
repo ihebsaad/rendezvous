@@ -1408,7 +1408,7 @@ font-size: 15px;
                         		}
                         		else {
 									Swal.fire(
-									  'service non selectionner!...',
+									  'Code promo ne correspond pas au service selectionné !...',
 									  '',
 									  'question'
 									)
