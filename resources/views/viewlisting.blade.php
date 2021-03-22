@@ -1321,6 +1321,7 @@ font-size: 15px;
 				$('#service option[value='+service[i]+']').each(function(){
 					montant = montant + parseFloat(this.getAttribute('prix'));
 					document.getElementById('MontantReservation').value = montant;
+					document.getElementById('totalReservation').value = montant;
 	     
 	   
 				});
@@ -1328,6 +1329,7 @@ font-size: 15px;
 		}
 		else {
 			document.getElementById('MontantReservation').value = montant;
+			document.getElementById('totalReservation').value = montant;
 		}
 		var reductioncarte = document.getElementById('catrefideliteVal').value ;
 		if (reductioncarte!=0) {
@@ -1464,7 +1466,7 @@ font-size: 15px;
                         		}
                         		else {
 									Swal.fire(
-									  'service non selectionner!...',
+									  'Code promo ne correspond pas au service selectionné !...',
 									  '',
 									  'question'
 									)
@@ -1493,6 +1495,7 @@ font-size: 15px;
  		montant = a.options[a.selectedIndex].getAttribute('prixRec');
  		
 		document.getElementById('MontantReservationRec').value = montant;
+		document.getElementById('totalReservationRec').value = montant;
  		periode=a.options[a.selectedIndex].getAttribute('periode');
  		nbr=a.options[a.selectedIndex].getAttribute('ndate');
  		frq=a.options[a.selectedIndex].getAttribute('frq');
@@ -1523,6 +1526,7 @@ font-size: 15px;
     	}
     	document.getElementById("dateRec").innerHTML = y;
     	var reductioncarte = document.getElementById('catrefideliteVal').value ;
+
 		if (reductioncarte!=0) {
 		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
 		document.getElementById('RemiseReservationRec').value = remiseCarte;
