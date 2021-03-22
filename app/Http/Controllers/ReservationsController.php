@@ -104,6 +104,7 @@ class ReservationsController extends Controller
 	{
 		$Allreduction = "";
 		$listcodepromo=$request->get('listcodepromo');
+		if ($listcodepromo != null) {
 		for ($i=0; $i < sizeof($listcodepromo) ; $i++) { 
 			
 		$code = Codepromo::where('code',$listcodepromo[$i])->first();
@@ -113,6 +114,7 @@ class ReservationsController extends Controller
         $reducPromo = $code->reduction ;
         $Allreduction = $Allreduction."Code promo : ".$reducPromo."% (".$serviceNom.") / " ;
 		}
+	}
 		if ($request->get('happyhour') != 0) {
 			$Allreduction = $Allreduction."Happy hours : ".$request->get('happyhour')."% / " ;
 			$B=Happyhour::where('id',$request->get('happyhourid'))->value('Beneficiaries');
@@ -255,7 +257,7 @@ class ReservationsController extends Controller
 		$Allreduction = "";
 		$listcodepromo=$request->get('listcodepromo');
 		if ($listcodepromo != null) {
-			# code...
+		
 		
 		for ($i=0; $i < sizeof($listcodepromo) ; $i++) { 
 			
