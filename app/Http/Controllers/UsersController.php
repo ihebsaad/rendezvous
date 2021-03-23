@@ -183,7 +183,7 @@ class UsersController extends Controller
 		$happyhours = Happyhour::where('id_user',$id)->get();
 		$today= new DateTime();
 		//dd($today);
-  		$myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','>=',$today)->where('dateFin','<=',$today)->where('places','>','Beneficiaries')->first();
+  		$myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
   		//dd($myhappyhours);
 		 if (Auth::guest())
             return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours'));
