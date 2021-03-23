@@ -52,7 +52,7 @@ class ReservationsController extends Controller
 		if($cuser->user_type=='admin' ){
         $reservations = Reservation::orderBy('id','asc')->get();
 		}	
-
+        dd( $reservations);
 		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
         return view('reservations.index', compact('reservations'));
 
