@@ -994,7 +994,7 @@ class CalendrierController extends Controller
   // $idservicesreccurent=Service::where('recurrent','like','on')->pluck('id')->toArray();*/
     
        //dd($datecourante);
-     $servicesreccurents=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->where('statut',0)->where('recurrent',1)->get();
+     $servicesreccurents=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->where('statut',1)->where('recurrent',1)->get();
     // dd($servicesreccurents);
      foreach ($servicesreccurents as $srec) {
          $u= $srec->services_reserves;
