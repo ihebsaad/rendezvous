@@ -39,14 +39,14 @@ class ReservationsController extends Controller
 		
 		$cuser = auth()->user();
 		if($cuser->user_type=='prestataire' ){
-        $reservations = Reservation::where('prestataire',$cuser->id)->where('id_recc',null)->orderBy('created_at','DESC')->get();
+        $reservations = Reservation::where('prestataire',$cuser->id)->where('id_recc',null)->orderBy('id','DESC')->get();
 		}
 		if($cuser->user_type=='client' ){
-        $reservations = Reservation::where('client',$cuser->id)->where('id_recc',null)->orderBy('created_at','DESC')->get();
+        $reservations = Reservation::where('client',$cuser->id)->where('id_recc',null)->orderBy('id','DESC')->get();
 		}
 		
 		if($cuser->user_type=='admin' ){
-        $reservations = Reservation::orderBy('created_at','DESC')->get();
+        $reservations = Reservation::orderBy('id','DESC')->get();
 		}	
 
 		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
