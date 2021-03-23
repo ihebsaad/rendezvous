@@ -27,6 +27,7 @@ use \App\Happyhour;
 use Illuminate\Support\Str;
 
 
+ use DateTime;
 use Twilio\Rest\Client;
  
 class UsersController extends Controller
@@ -180,8 +181,9 @@ class UsersController extends Controller
   		$reduction=0;
 		$user = User::find($id);
 		$happyhours = Happyhour::where('id_user',$id)->get();
-		$today=date('Y-m-d H:i:s');
-  		$myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','<','Beneficiaries')->first();
+		$today= new DateTime();
+		//dd($today);
+  		$myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','>=',$today)->where('dateFin','<=',$today)->where('places','>','Beneficiaries')->first();
   		//dd($myhappyhours);
 		 if (Auth::guest())
             return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours'));
