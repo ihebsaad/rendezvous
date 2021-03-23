@@ -732,10 +732,10 @@ function geocodeAddress(geocoder, resultsMap) {
 						<tr class="pricing-list-item pattern ui-sortable-handle">
 						  <td> 
 							<div class="fm-input">
-							<?php if($service->thumb!=''){?>  <img src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"  style="max-width:100px"  /><?php }?>
+							<?php if($service->thumb!=''){?>  <br><img src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"  style="max-width:100px"  /><?php }?>
 							</div>
 							<div class="fm-input " style="max-width: 150px">
-								<label>type :</label>
+								<label><br>type :</label>
 								<?php if($service->recurrent=='off'){?>
 								<output class="button">Simlpe</output>
 							<?php } elseif($service->recurrent=='on'){?>
@@ -748,28 +748,29 @@ function geocodeAddress(geocoder, resultsMap) {
 							  <input type="number" onchange="changeService(this)" id="b<?php echo $service->id;?>" name="nbrService" value="<?php echo $service->nbrService;?>"  >
 							</div>
 							<div class="fm-input pricing-name" >
-								<label>Nom :</label>
+								<label><br>Nom :</label>
 							  <input type="text" onchange="changeService(this)" id="i<?php echo $service->id;?>" name="nom" value="<?php echo $service->nom;?>"   >
 							</div>
 
 							<div class="fm-input pricing-ingredients">
-								<label>Description :</label>
+								<label><br>Description :</label>
 							  <input type="text" onchange="changeService(this)" id="u<?php echo $service->id;?>" name="description" value="<?php echo $service->description;?>" >
 							</div>
 							<div class="fm-input ">
-								<label>Durée :</label>
+								<label><br>Durée :</label>
 							  <input type="time" onchange="changeService(this)" id="z<?php echo $service->id;?>" name="duree" value="<?php echo $service->duree;?>"   > 
 							</div>
 							<div class="fm-input pricing-price">
-								<label>Prix :</label>
-								<i class="data-unit">€</i>
+								<label><br>Prix : (€)</label>
+								
 							  <input type="text"   onchange="changeService(this)" id="y<?php echo $service->id;?>" name="prix"  data-unit="€"  value="<?php echo $service->prix;?>"   > 
 							</div>
 							
 
 							
-						 	<div class="fm-close">
-							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
+						 	<div class="fm-close" >
+                <br>
+							<a  class="delete fm-close"  style="top: 20px;" onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
 							</div>
 
 							</td>
