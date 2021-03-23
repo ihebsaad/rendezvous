@@ -71,7 +71,7 @@ background-color:#a0d468;
               </tr>
           </thead>
           <tbody>
-            <?php dd($reservations); ?>
+            <?php // dd($reservations); ?>
             @foreach($reservations as $reservation)
          <?php   
        /*  $service_name='';
