@@ -38,17 +38,17 @@ class ReservationsController extends Controller
     {
 		
 		$cuser = auth()->user();
-		dd($cuser->id);
+		//dd($cuser->id);
 		if($cuser->user_type=='prestataire' ){
-        $reservations = Reservation::orderBy('id','DESC')->where('prestataire',$cuser->id)->whereNull('id_recc')
+        $reservations = Reservation::orderBy('id','desc')->where('prestataire',$cuser->id)->whereNull('id_recc')
         ->get();
 		}
 		if($cuser->user_type=='client' ){
-        $reservations = Reservation::orderBy('id','DESC')->where('client',$cuser->id)->whereNull('id_recc')->get();
+        $reservations = Reservation::orderBy('id','desc')->where('client',$cuser->id)->whereNull('id_recc')->get();
 		}
 		
 		if($cuser->user_type=='admin' ){
-        $reservations = Reservation::orderBy('id','DESC')->get();
+        $reservations = Reservation::orderBy('id','desc')->get();
 		}	
 
 		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
