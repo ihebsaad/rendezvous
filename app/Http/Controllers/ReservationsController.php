@@ -43,8 +43,7 @@ class ReservationsController extends Controller
 		//dd($cuser->id);
 		 //$reservations = Reservation::orderBy('id','asc')->where('prestataire',$cuser->id)->whereNull('id_recc')
         //->get();
-       $reservations = DB::table('reservations')->orderBy('id','asc')->where('prestataire',$cuser->id)->whereNull('id_recc')
-        ->get();
+       $reservations = DB::table('reservations')->where('prestataire',$cuser->id)->whereNull('id_recc')->orderBy('id','asc')->get();
 		}
 		if($cuser->user_type=='client' ){
         $reservations = Reservation::orderBy('id','asc')->where('client',$cuser->id)->whereNull('id_recc')->get();
