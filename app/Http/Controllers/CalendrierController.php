@@ -999,6 +999,7 @@ class CalendrierController extends Controller
      foreach ($servicesreccurents as $srec) {
          $u= $srec->services_reserves;
          $ser=Service::where('id',$u)->first(["nom","duree","NbrService"]);
+         $debut=$srec->date_reservation;
 
          //$ser->$u;
 
