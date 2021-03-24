@@ -962,7 +962,7 @@ class CalendrierController extends Controller
 
       if($nbResvalide<$NbrService)
       {
-      $res[]=array('title'=>$ser->nom.' (vous pouvez réserver le même service à cette date )','start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_parall_couleur);
+      $res[]=array('title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_parall_couleur);
       }
       else
       {
@@ -1018,7 +1018,7 @@ class CalendrierController extends Controller
       
       if($nbResvalide<$NbrService)
       {
-      $res[]=array('title'=>$ser->nom.' (vous pouvez réserver le même service à cette date )','start'=>$debut, 'end'=> $fin, 'color' =>self::$rendezvous_parall_couleur);
+      $res[]=array('title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' =>self::$rendezvous_parall_couleur);
       }
       else
       {
