@@ -952,7 +952,7 @@ class CalendrierController extends Controller
        $ser=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
        //$pos1 = stripos($ser->duree,":");
       // $pos2 = strripos($ser->duree,":");
-      $nbResvalide=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->whereNotNull('date_reservation')->where('date_reservation','>',$datecourante)->where('statut',1)->WhereJsonContains('services_reserves',$sr)->where('recurrent',1)->whereNull('id_recc')->count();
+      $nbResvalide=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->whereNotNull('date_reservation')->where('date_reservation','>',$datecourante)->where('statut',1)->WhereJsonContains('services_reserves',$sr)->where('recurrent',0)->whereNull('id_recc')->count();
 
       $nbResvalide=intval($nbResvalide);
       $NbrService=intval($ser->NbrService);
