@@ -1,6 +1,19 @@
 ﻿@extends('layouts.frontlayout')
  
  @section('content')
+
+<style>
+    .legend { list-style: none; margin-left:10px;}
+    .legend li { float: left; margin-right: 15px;}
+    .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }
+  
+    /* your colors */
+    .legend .lightgrey { background-color: lightgrey;}
+    .legend .lightblue { background-color: lightblue; }
+    .legend .blue { background-color: blue; }
+    .legend .red{ background-color: red; }
+    .legend .pink{ background-color:pink; }
+</style>
  <?php  $User= auth()->user();
 
  ?>
@@ -1121,7 +1134,18 @@ font-size: 15px;
       
         <!-- Modal Header -->
         <div class="modal-header"  style="background-color: lightgrey;">
-          <h4 class="modal-title" style="font-size: 17px;" >Calendrier du prestataire</h4>
+          <h4 class="modal-title" style="font-size: 17px;" >Calendrier du prestataire</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <div id="legendcolor"  style="background-color:white; top:5px;"> 
+            <ul class="legend">
+              <li><span class="lightgrey"></span>horaires de fermeture</li>
+             <li><span class="pink"></span>Happy hours</li>
+              <li><span class="red"></span>Indisponibilité de prestataire</li>
+             <li><span class="lightblue"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
+            
+             <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
+           </ul>
+
+           </div>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -1134,6 +1158,8 @@ font-size: 15px;
                 }
             }
            </style>
+           
+         
          <div id="calpres" class="calpresk"> </div>
         </div>
         
