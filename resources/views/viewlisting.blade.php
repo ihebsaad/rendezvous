@@ -174,7 +174,7 @@ font-size: 15px;
         <div id="utf_listing_overview" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> <i class="sl sl-icon-present">
           	<?php /*$dt=new dateTime(); echo $dt->format("Y-m-d H:i");*/ ?>
-          </i> Happy hours</h3>
+          </i> Happy hours:  Offre exceptionnel à ne pas manquer !</h3>
           <div style="max-height: 120px; overflow-y: auto;">
 		<table class="table" style="font-size: 150%; "  >
   <thead>
