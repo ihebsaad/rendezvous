@@ -430,8 +430,9 @@ class ReservationsController extends Controller
 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
-	    $this->sendMail(trim($client->email),'Réservation validée',$message)	;
+	  //  $this->sendMail(trim($client->email),'Réservation validée',$message)	;
 
+         $this->sendMail(trim('kbskhaled@gmail.com'),'Réservation validée',$message)	;
 		 $alerte = new Alerte([
              'user' => $client->id,
 			 'titre'=>'Réservation validée',
