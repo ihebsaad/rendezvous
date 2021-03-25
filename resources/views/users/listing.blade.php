@@ -137,6 +137,18 @@ background-color:lightgrey;
 	height: 34px;
 }
 </style>
+<style>
+    .legend { list-style: none; margin-left:10px;}
+    .legend li { float: left; margin-right: 15px;}
+    .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }
+  
+    /* your colors */
+    .legend .lightgrey { background-color: lightgrey;}
+    .legend .lightblue { background-color: lightblue; }
+    .legend .blue { background-color: blue; }
+    .legend .red{ background-color: red; }
+    .legend .pink{ background-color:pink; }
+</style>
 <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
 
    <!-- Dashboard -->
@@ -705,9 +717,24 @@ function geocodeAddress(geocoder, resultsMap) {
 				<div class="row">
 				  <div class="col-md-12 ">
 				  	<h4>Calendrier :</h4>
+             <div id="legendcolor"  style="background-color:white; top:5px;"> 
+            <ul class="legend">
+              <li><span class="lightgrey"></span>horaires de fermeture</li>
+             <li><span class="pink"></span>Happy hours</li>
+              <li><span class="red"></span>Indisponibilité de prestataire</li>
+             <li><span class="lightblue"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
+            
+             <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
+           </ul>
+
+           </div>
 					<br>
-						
-                      <div id='calendar'></div>
+					</div>
+        </div>  
+        <br>
+            <div class="row">
+          <div class="col-md-12 ">	
+         <div id='calendar'></div>
 				</div>
 				</div>                          
             </div>
