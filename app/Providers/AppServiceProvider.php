@@ -29,10 +29,6 @@ class AppServiceProvider extends ServiceProvider
             view()->share('view_name', $view_name);
         });
 
-          if (class_exists('Swift_Preferences')) {
-        \Swift_Preferences::getInstance()->setTempDir(storage_path().'/tmp');
-    } else {
-        \Log::warning('Class Swift_Preferences does not exists');
-    }
+        
 		}
 }
