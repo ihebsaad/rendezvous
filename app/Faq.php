@@ -6,9 +6,8 @@ namespace App;
 
 class Faq extends Authenticatable
 {
- 
-   
+    
     protected $fillable = [
-   'question', 'reponse' ,'user'     ];
+   'question', 'reponse' ,'type','user'   ];
  
 }

@@ -1255,7 +1255,8 @@ function geocodeAddress(geocoder, resultsMap) {
 				?>			
 				</ul>				
               </div>              
-            </div>                        
+            </div>   
+                    
             
 			
 		 <div class="add_utf_listing_section margin-top-45"> 

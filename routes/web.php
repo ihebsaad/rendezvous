@@ -42,6 +42,11 @@ Route::get('/faqs', 'UsersController@faqs')->name('faqs');
 Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->name('ConditionsUtilisation');
 
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
+Route::get('/googlecalendar', 'CalendrierController@saveEventGoogleCalendar')->name('googlecalendar');
+Route::get('/cal.index', 'CalendrierController@index')->name('cal.index');
+Route::get('/oauthRedirect', 'CalendrierController@oauth')->name('oauthCallback');
+//Route::get('/oauthRedirect', 'ReservationsController@oauth')->name('oauthCallback');
+Route::get('/enregistrergooglecalendar/{id}', 'CalendrierController@enregistrergooglecalendar')->name('enregistrergooglecalendar');
 
 
 Route::group(['middleware' => 'auth'], function(){
@@ -118,7 +123,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 
 	Route::get('/reservations','ReservationsController@index')->name('reservations');
 	Route::get('/reservations/remove/{id}','ReservationsController@remove');
-	Route::get('/reservations/valider/{id}','ReservationsController@valider');
+	Route::get('/reservations/valider/{id}','ReservationsController@valider')->name('validation');
 	Route::get('/reservations/annuler/{id}','ReservationsController@annuler');
 	Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage');
 	Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage');
@@ -163,8 +168,12 @@ Route::post('/payreservation','PaymentController@payreservation')->name('payrese
 	Route::get('/payments','PaymentController@index')->name('payments');
 	Route::get('/payments/remove/{id}', 'PaymentController@remove');
 
+	Route::get('/googleagenda/{id}','CalendrierController@view')->name('googleagenda');
+    
+
+
 });
 
-
+Route::post('/savejsonfile','CalendrierController@savejsonfile')->name('savejsonfile');
 Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
 Route::get('/{slug}/{id}', 'UsersController@viewlisting');

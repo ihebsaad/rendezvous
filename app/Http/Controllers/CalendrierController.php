@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 use DB;
+use Route;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
@@ -13,7 +14,19 @@ use \App\Indisponibilite;
 use \App\Service;
 use \App\Reservation;
 use \App\Happyhour;
+use \App\Parametre;
+use \App\Categorie;
+//use SweetAlert;
+
+//use Spatie\GoogleCalendar\Event;
 use DateTime;
+use Carbon;
+
+use Google_Client;
+use Google_Service_Calendar;
+use Google_Service_Calendar_Event;
+use Google_Service_Calendar_EventDateTime;
+//Use RealRashid\SweetAlert\Facades\Alert;
 
 class CalendrierController extends Controller
 {
@@ -31,14 +44,254 @@ class CalendrierController extends Controller
   public static $tab_jours_indisp_rendezvous=array();
   public static $tab_minutes_indisp_rendezvous=array();
 
+
+  protected $client;
+
   //
 
 
-   /*  public function __construct()
+      public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
+     /*   $client = new Google_Client();
+        $client->setAuthConfig('public/credentials3.json');
+        $client->addScope(Google_Service_Calendar::CALENDAR);
+
+        $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
+        $client->setHttpClient($guzzleClient);
+        $this->client = $client;*/
+
+      if(Route::current()->action['as']=='enregistrergooglecalendar' || Route::current()->action['as']=='oauthCallback')
+       {
+        if(Route::current()->action['as']=='enregistrergooglecalendar' )
+        {
+           $id = Route::current()->parameters['id'];
+           Session::put('idres', $id);
+           //dd(Session::get('idres'));Session::put('success')
+        }
+        else
+        {
+          $id = Session::get('idres');
+         // dd($id);
+        }
+
+        $prest=User::find($id);
+        $client = new Google_Client();
+        $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
+        $client->addScope(Google_Service_Calendar::CALENDAR);
+         $client->setAccessType('offline');       
+        //$client->setApprovalPrompt('force');
+
+        $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
+        $client->setHttpClient($guzzleClient);
+        $this->client = $client;
+      }
+       
+       
     }
-*/
+
+    public function enregistrergooglecalendar($id)
+    {
+        
+        /*$prestataire=User::find($id);       
+        $client = new Google_Client();
+        $client->setAuthConfig('storage/googlecalendar/'.$prestataire->google_path_json);
+        $client->addScope(Google_Service_Calendar::CALENDAR);
+        $client->setAccessType('offline');
+        $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
+        $client->setHttpClient($guzzleClient);*/
+
+        $rurl = action('CalendrierController@oauth');
+        //dd($this->client);
+       
+        $this->client->setRedirectUri($rurl);
+       // $this->client->setAccessType('offline');
+        //$this->client->setApprovalPrompt('consent');
+        if (!isset($_GET['code'])) {
+            $auth_url = $this->client->createAuthUrl();
+            $filtered_url = filter_var($auth_url, FILTER_SANITIZE_URL);
+           // dd( $filtered_url );
+            return redirect($filtered_url);
+        } else {
+          
+              $this->client->authenticate($_GET['code']);
+             $access_token =  $this->client->getAccessToken();
+             //dd( $access_token);
+             //$tokens_decoded = json_decode($access_token);
+             $param=User::where('id', $prestataire->id)->first();
+             $param->google_access_token=$access_token;
+            
+             if(array_key_exists('refresh_token',$access_token))
+             {
+             $refreshToken =  $access_token['refresh_token'];
+             $param->google_refresh_token=$refreshToken;            
+             }
+             
+             $param->save();
+
+             
+
+            // dd( $refreshToken);
+           // $_SESSION['access_token'] = $this->client->getAccessToken();
+            //return redirect()->route('cal.index');
+           //SweetAlert::message("L\'enregistrement auprès google agenda est effectué avec succès");
+          // Alert::info('succès', 'L\'enregistrement auprès google agenda est effectué avec succès');
+              //Alert::alert('Title', 'Message', 'info');
+          // Session::put('success','L\'enregistrement auprès google agenda est effectué avec succès');
+            Session::put('enregistrementGoogle', "L\'enregistrement auprès google agenda est effectué avec succès");
+           return redirect('/googleagenda/'.$prestataire->id)->with('success', 'Réservation Validée et l\'évenement est enregistré dans google agenda avec succès ');
+
+    }
+  }
+
+    public function savejsonfile(Request $req)
+    {
+       //dd($req->all());
+     $id= $req->get('prestataire');
+   //$temp_file = $_FILES['file']['tmp_name'];
+
+     $name='';
+    if($req->file('jsonfile')!=null)
+    {
+     $jsonfile=$req->file('jsonfile');
+     $withoutExt = preg_replace('/\.[^.\s]{3,4}$/', '', $jsonfile->getClientOriginalName());
+
+     $name =  $withoutExt.'_'.$id.'.json';
+     $path = storage_path()."/googlecalendar/";
+     $url="/googlecalendar/".$name;
+     $jsonfile->move($path, $name);
+     User::where('id', $id)->update(array('google_path_json' =>$name));
+    }
+     //Alert::alert('Title', 'Message', 'info');
+     //return view('googlecalendar.index',compact());
+     Session::put('savejson', "le fichier Json est enregistré avec succès");
+     return redirect()->back();
+     // User::where('id', $id)->update(array('logo' => $name));
+
+    }
+
+     public function view ($id)
+     {
+
+        $categories = Categorie::orderBy('nom', 'asc')->get();
+         
+        $prestataire=User::find($id);
+
+        return view('googlecalendar.index', compact('prestataire')); 
+
+     }
+     public function index()
+    {
+        session_start();
+        if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+            $this->client->setAccessToken($_SESSION['access_token']);
+            $service = new Google_Service_Calendar($this->client);
+
+            $calendarId = 'primary';
+
+            $results = $service->events->listEvents($calendarId);
+            return $results->getItems();
+
+        } else {
+            return redirect()->route('oauthCallback');
+        }
+
+    }
+
+
+  public function saveEventGoogleCalendar()
+  {
+
+  /*  $event = new Event;
+    $event->name = 'Evenement David';
+    $event->startDateTime = Carbon\Carbon::now();
+    $event->endDateTime = Carbon\Carbon::now()->addHour();
+
+    $event->save();*/
+  /*  $events = Event::get();
+   foreach ($events as $e) {
+    $e->delete();
+   }*/
+
+    session_start();
+
+       /*$format = "Y-m-d H:i:s";
+       $startDateTime= (new \DateTime())->format('Y-m-d H:i:s');
+       $startDateTime2=\DateTime::createFromFormat($format,$startDateTime);
+       // $startDateTime = Carbon\Carbon::now();
+      $endDateTime = $startDateTime2->modify('+2 hours');
+          $endDateTime->format('Y-m-d H:i:s');*/
+          $startDateTime='2021-03-28T12:00:00';
+          $endDateTime= '2021-03-28T13:00:00';
+        if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+            $this->client->setAccessToken($_SESSION['access_token']);
+            $service = new Google_Service_Calendar($this->client);
+
+            $calendarId = 'primary';
+            $event = new Google_Service_Calendar_Event([
+                'summary' => 'oppaxxxx',
+                'description' =>'oppaxxxx',
+                'start' => ['dateTime' => $startDateTime, 'timeZone' => 'Africa/Tunis',],
+                'end' => ['dateTime' => $endDateTime , 'timeZone' => 'Africa/Tunis',],
+                'reminders' => ['useDefault' => true],
+            ]);
+            $results = $service->events->insert($calendarId, $event);
+            if (!$results) {
+                return response()->json(['status' => 'error', 'message' => 'Something went wrong']);
+            }
+            return response()->json(['status' => 'success', 'message' => 'Event Created']);
+        } else {
+
+            return redirect()->route('oauthCallback');
+        }
+
+
+  }
+
+   public function oauth()
+    {
+       
+        //session_start();
+    //  DB::table('payments')
+        $prestataire = auth()->user();
+        $rurl = action('CalendrierController@oauth');
+        $this->client->setRedirectUri($rurl);
+        if (!isset($_GET['code'])) {
+            $auth_url = $this->client->createAuthUrl();
+            $filtered_url = filter_var($auth_url, FILTER_SANITIZE_URL);
+           // dd( $filtered_url );
+            return redirect($filtered_url);
+        } else {
+
+                      
+             $this->client->authenticate($_GET['code']);
+            // $this->client->setAccessType('offline'); 
+             $access_token =  $this->client->getAccessToken();
+             //dd( $access_token);
+             //$tokens_decoded = json_decode($access_token);
+             $param=User::where('id', $prestataire->id)->first();
+             $param->google_access_token=$access_token;
+            
+             if(array_key_exists('refresh_token',$access_token))
+             {
+             $refreshToken =  $access_token['refresh_token'];
+             $param->google_refresh_token=$refreshToken;            
+             }
+             
+             $param->save();
+
+            // dd( $refreshToken);
+           // $_SESSION['access_token'] = $this->client->getAccessToken();
+            //return redirect()->route('cal.index');  
+           //SweetAlert::message("L\'enregistrement auprès google agenda est effectué avec succès");
+           //Session::put('success','L\'enregistrement auprès google agenda est effectué avec succès');
+           //Alert::alert('Title', 'Message', 'info');
+          Session::put('enregistrementGoogle', "L\'enregistrement auprès google agenda est effectué avec succès");
+           return redirect('/googleagenda/'.$prestataire->id)->with('success', 'L\'enregistrement auprès google agenda est effectué avec succès ');
+
+        }
+    }
+
   public static function get_tab_jours_fermeture_semaine($id)
   {
       self::calcul_jours_heures_fermeture_datetimepicker($id);
