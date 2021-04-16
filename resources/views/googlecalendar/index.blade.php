@@ -169,7 +169,7 @@
                   <div class="col-md-12 col-sm-4">
                    <center> <h3><b>Vous devez suivre les étapes décrites dans le document suivant</b></h3> </center>
                      <br>
-                         <iframe src="{{ asset('public/google_calendar_enregistrement_v2.pdf')}}" width="100%" height="800px">
+                         <iframe src="{{ asset('public/enregistrement_auprès_google_agenda.pdf')}}" width="100%" height="800px">
                          </iframe>
                     <br>
                     
