@@ -597,12 +597,12 @@ class ReservationsController extends Controller
             $endDateTime1= '2021-04-09T15:00:00';
                     //  'recurrence' => array('RRULE:FREQ=DAILY;COUNT=2'), 
             $calendarId = 'primary';
-
+           //'id'=> $lr['id'],
 
             foreach ($liste_rec as $lr ) {
 
             	 $event = new Google_Service_Calendar_Event([
-            	'id'=> $lr['id'],
+            	
                 'summary' => $lr['summary'],
                 'description' =>$lr['description'],
                 'start' => ['dateTime' => $lr['startDateTime'], 'timeZone' => 'Africa/Tunis',],
