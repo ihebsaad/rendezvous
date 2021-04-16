@@ -217,7 +217,7 @@
                                      
                     <br> 
                     <br> 
-                      <center> <span <?php if(! $prestataire->google_path_json){ echo "class='isDisabled'" ;} ?> > <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="javascript:void(0)"  href="{{route('enregistrergooglecalendar',$prestataire->id)}}"><i class="fa fa-check"></i> S'enregistrer auprès Google Calendar</a></span></center>
+                      <center> <span <?php if(! $prestataire->google_path_json){ echo "class='isDisabled'" ;} ?> > <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="javascript:void(0)"  href="{{route('enregistrergooglecalendar',$prestataire->id)}}"><i class="fa fa-check"></i> S'enregistrer auprès Google Agenda</a></span></center>
 
                 </div> 
                                        

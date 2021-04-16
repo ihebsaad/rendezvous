@@ -44,7 +44,7 @@ Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/googlecalendar', 'CalendrierController@saveEventGoogleCalendar')->name('googlecalendar');
 Route::get('/cal.index', 'CalendrierController@index')->name('cal.index');
-Route::get('/oauthRedirect', 'CalendrierController@oauth')->name('oauthCallback');
+Route::get('/oauthcallback', 'CalendrierController@oauth')->name('oauthCallback');
 //Route::get('/oauthRedirect', 'ReservationsController@oauth')->name('oauthCallback');
 Route::get('/enregistrergooglecalendar/{id}', 'CalendrierController@enregistrergooglecalendar')->name('enregistrergooglecalendar');
 
