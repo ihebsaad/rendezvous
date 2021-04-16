@@ -332,7 +332,7 @@ $('.image-upload-wrap').bind('dragover', function () {
   {
     if (Session::has('enregistrementGoogle'))
     {
-        echo ' swal("Enregistrement est effectué avec succès!", "'.Session::get('enregistrementGoogle').'","success");';
+        echo ' swal("L\'enregistrement est effectué avec succès!", "'.Session::get('enregistrementGoogle').'","success");';
         Session::forget('enregistrementGoogle');
         Session::flash('enregistrementGoogle');
 
