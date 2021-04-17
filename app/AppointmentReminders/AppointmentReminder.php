@@ -148,14 +148,14 @@ echo $service->sid  ;
         $infoprest = UsersController::infouser($PrestId);
         $titreprest = $infoprest['titre'];
         // info prestation
-        if (strpos($inforeservation["nom_serv_res"], ',') !== FALSE)
+        $infprests = rtrim($inforeservation['nom_serv_res'], ", ");
+        if (strpos($infprests, ',') !== FALSE)
         {
           $titrprest ="les prestations";
-          $infprests = rtrim($inforeservation['nom_serv_res'], ", ");
+          
         }
         else {
           $titrprest ="la prestation";
-          $infprests = $inforeservation["nom_serv_res"];
         }
         /*$infoserv = ServicesController::infoservice($ServId);
         $titreserv = $infoserv['nom'];*/
