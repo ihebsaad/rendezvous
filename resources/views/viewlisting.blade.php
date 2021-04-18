@@ -381,7 +381,7 @@ font-size: 15px;
 		  	<label >Rappel de mon rendez vous par SMS</label>
 		  	<!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
 			 <div  >
-			 <select class=" " id="rappel"  style="font-size: 150%">
+			 <select name="rappel" class=" " id="rappel"  style="font-size: 150%">
 			  <option value="60">1h avant le RDV </option>
               <option value="120">2h avant le RDV</option>
 			 <option value="180">3h avant le RDV</option>
