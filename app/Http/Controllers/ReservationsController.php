@@ -171,7 +171,7 @@ class ReservationsController extends Controller
               'services_reserves' => [$request->get('services_reserves')],
               'date_reservation' =>$request->date_reservation[0],
               'remarques' => $request->get('remarques'),
-              'rappel' => $request->get('rappelab'),
+              'rappel' => $request->get('rappel'),
               'happyhour' => $request->get('happyhour'),
               'montant_tot' => $request->get('montant_tot'),
               'Remise' => $request->get('Remise'),
@@ -216,7 +216,7 @@ class ReservationsController extends Controller
               'services_reserves' => [$request->get('services_reserves')],
               'date_reservation' =>date('Y-m-d h:i', strtotime($request->date_reservation[$i]. $days)),
               'remarques' => $request->get('remarques'),
-              'rappel' => $request->get('rappelab'),
+              'rappel' => $request->get('rappel'),
               'id_recc' => $id_recc ,
               'recurrent' => 1,
             ]);
