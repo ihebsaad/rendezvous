@@ -146,7 +146,14 @@ background-color:#a0d468;
   
   
   
-			 
+			 <form class="  " method="POST"      action="{{ route('createplan') }}" >
+				{{ csrf_field() }}
+				
+  				<input class="form-control " name="amount" type="hidden" value="1000"  >       
+  				<input class="form-control " name="plan_name" type="hidden" value="test plan"  >       
+ 				<input class="form-control " name="plan_description" type="hidden" value="desc plan"  >       
+		 	    <button class="button ">Test Payment</button>  
+			 </form>
 			
 			
 <!--
