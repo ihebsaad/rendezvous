@@ -84,7 +84,7 @@ figcaption {
 	  	
 	  <div class="col-md-6"> 
 			<center><!--  <a href="" class="button border with-icon"><i class="sl sl-icon-equalizer"></i> Consulter ma page de prestation</a> -->	
-			<a href="{{route('viewlisting',['slug'=>$user->generate_slug, 'id'=> $user->id] )}}" target="_blank" class="button "><i class="sl sl-icon-eye"> </i>Consulter ma page</a></center>
+			<a href="{{route('viewlisting',['slug'=>$user->generate_slug(), 'id'=> $user->id] )}}" target="_blank" class="button "><i class="sl sl-icon-eye"> </i>Consulter ma page</a></center>
 	  </div>
 	  <div class="col-md-6"> 
 	  	<center>
