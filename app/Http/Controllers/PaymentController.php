@@ -707,7 +707,8 @@ $tranche=200;
     $plan->setMerchantPreferences($merchantPreferences);
 
     try {
-        $createdPlan = $plan->create($apiContext);
+     //   $createdPlan = $plan->create($apiContext);
+        $createdPlan = $plan->create($this->_api_context);
     } catch (PayPal\Exception\PayPalConnectionException $ex) {
         echo $ex->getCode();
         echo $ex->getData();
