@@ -176,4 +176,4 @@ Route::post('/payreservation','PaymentController@payreservation')->name('payrese
 
 Route::post('/savejsonfile','CalendrierController@savejsonfile')->name('savejsonfile');
 Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
-Route::get('/{slug}/{id}', 'UsersController@viewlisting');
+Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');
