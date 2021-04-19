@@ -660,7 +660,7 @@ $amount=$request->get('amount');
 //if (! empty($_POST["plan_name"]) && ! empty($_POST["plan_description"]))  
     $plan = new Plan();
     $plan->setName($plan_name )
-        ->setDescription($plan_description)
+        ->setDescription($plan_description);
 
     // Set billing plan definitions
     $paymentDefinition = new PaymentDefinition();
