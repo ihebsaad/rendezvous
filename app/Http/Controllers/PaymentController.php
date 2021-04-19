@@ -730,8 +730,9 @@ try {
     $patchRequest = new PatchRequest();
     $patchRequest->addPatch($patch);
     $createdPlan->update($patchRequest, $apiContext);
-    $patchedPlan = Plan::get($createdPlan->getId(), $apiContext);
-    
+ 	
+   // $patchedPlan = Plan::get($createdPlan->getId(), $apiContext);
+  $patchedPlan =  $plan->setId($createdPlan->getId());
   //  require_once "createPHPTutorialSubscriptionAgreement.php";
 } catch (PayPal\Exception\PayPalConnectionException $ex) {
     echo $ex->getCode();
