@@ -651,7 +651,7 @@ class PaymentController extends Controller
 	
 	/****** Recurring *******/
 
-public function createplan( )
+public function createplan(Request $request)
 {	
 $plan_name=$request->get('plan_name');
 $plan_description=$request->get('plan_description');
