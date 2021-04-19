@@ -30,7 +30,8 @@
  <?php if( $user_type=='prestataire'  ){ ?> 		  
 		  <li class="<?php if ($view_name == 'users-listing'){echo 'active';} ?>  "><a href="{{ route('listing', ['id'=>$user->id]) }}"><i class="sl sl-icon-briefcase"></i> Mon Entreprise </a></li>       
 		  <li class="<?php if ($view_name == 'notes-index'){echo 'active';} ?>  "><a href="{{ route('reviews')}}"><i class="sl sl-icon-star"></i> Avis </a></li>       
- 		  <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('abonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li>  
+ 		  <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('abonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li> 
+ 		  <li class="<?php if ($view_name == 'googlecalendar-index'){echo 'active';} ?>  "><a href="{{ route('googleagenda',['id'=>$user->id]) }}"><i class="sl sl-icon-folder-alt"></i> Google Agenda </a></li> 
 
  <?php } ?>	
           <li class="<?php if ($view_name == 'payments-index'){echo 'active';} ?>  "><a href="{{ route('payments')}}"><i class="sl sl-icon-wallet"></i> Paiements </a></li>       

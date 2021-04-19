@@ -42,6 +42,11 @@ Route::get('/faqs', 'UsersController@faqs')->name('faqs');
 Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->name('ConditionsUtilisation');
 
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
+Route::get('/googlecalendar', 'CalendrierController@saveEventGoogleCalendar')->name('googlecalendar');
+Route::get('/cal.index', 'CalendrierController@index')->name('cal.index');
+Route::get('/oauthcallback', 'CalendrierController@oauth')->name('oauthCallback');
+//Route::get('/oauthRedirect', 'ReservationsController@oauth')->name('oauthCallback');
+Route::get('/enregistrergooglecalendar/{id}', 'CalendrierController@enregistrergooglecalendar')->name('enregistrergooglecalendar');
 
 
 Route::group(['middleware' => 'auth'], function(){
@@ -118,7 +123,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 
 	Route::get('/reservations','ReservationsController@index')->name('reservations');
 	Route::get('/reservations/remove/{id}','ReservationsController@remove');
-	Route::get('/reservations/valider/{id}','ReservationsController@valider');
+	Route::get('/reservations/valider/{id}','ReservationsController@valider')->name('validation');
 	Route::get('/reservations/annuler/{id}','ReservationsController@annuler');
 	Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage');
 	Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage');
@@ -136,13 +141,15 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::post('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
+ Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
 
 
 	Route::post('/pay','PaymentController@pay')->name('pay');
 	Route::get('/pay','PaymentController@pay')->name('pay');
 	Route::post('/paypal','PaymentController@payWithpaypal')->name('paypal');
+  Route::post('/createplan','PaymentController@createplan')->name('createplan');
 	Route::get('/payreservation','PaymentController@payreservation')->name('payreservation');
-Route::post('/payreservation','PaymentController@payreservation')->name('payreservation');
+    Route::post('/payreservation','PaymentController@payreservation')->name('payreservation');
 
 	Route::get('/status','PaymentController@getPaymentStatus')->name('status');
 	Route::get('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
@@ -163,8 +170,12 @@ Route::post('/payreservation','PaymentController@payreservation')->name('payrese
 	Route::get('/payments','PaymentController@index')->name('payments');
 	Route::get('/payments/remove/{id}', 'PaymentController@remove');
 
+	Route::get('/googleagenda/{id}','CalendrierController@view')->name('googleagenda');
+    
+
+
 });
 
-
+Route::post('/savejsonfile','CalendrierController@savejsonfile')->name('savejsonfile');
 Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
-Route::get('/{slug}/{id}', 'UsersController@viewlisting');
+Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');

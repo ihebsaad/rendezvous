@@ -20,7 +20,7 @@ use PayPal\Api\PaymentExecution;
 use Illuminate\Support\Facades\Input;
 use Redirect;
 use URL;
- use DB;
+use DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
@@ -29,6 +29,16 @@ use \App\Alerte;
 
 use Carbon\Carbon;
 use \App\Cartefidelite;
+
+use PayPal\Api\ChargeModel;
+use PayPal\Api\Currency;
+use PayPal\Api\MerchantPreferences;
+use PayPal\Api\Patch;
+use PayPal\Api\PatchRequest;
+use PayPal\Common\PayPalModel;
+use PayPal\Api\ShippingAddress;
+ 
+
 
  
  use Swift_Mailer;
@@ -631,6 +641,221 @@ class PaymentController extends Controller
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	/****** Recurring *******/
+
+public function createplan(Request $request)
+{	
+$plan_name=$request->get('plan_name');
+$plan_description=$request->get('plan_description');
+$amount=$request->get('amount');
+	// Create a new billing plan
+//if (! empty($_POST["plan_name"]) && ! empty($_POST["plan_description"]))  
+    $plan = new Plan();
+    $plan->setName($plan_name )
+        ->setDescription($plan_description);
+
+    // Set billing plan definitions
+    $paymentDefinition = new PaymentDefinition();
+    $paymentDefinition->setName('Regular Payments')
+        ->setType('REGULAR')
+        ->setFrequency('DAY')
+        ->setFrequencyInterval('1')
+        ->setCycles('4')
+        ->setAmount(new Currency(array(
+        'value' => $amount,
+        'currency' => 'EUR'
+    )));
+$tranche=$amount/4;
+$tranche=200;
+
+    // Set charge models
+    $chargeModel = new ChargeModel();
+    $chargeModel->setType('SHIPPING')->setAmount(new Currency(array(
+        'value' => $tranche,
+        'currency' => 'EUR'
+    )));
+    $paymentDefinition->setChargeModels(array(
+        $chargeModel
+    ));
+
+    // Set merchant preferences
+    $merchantPreferences = new MerchantPreferences();
+	
+    $merchantPreferences
+		->setReturnUrl(URL::route('statusplan'))
+		//->setReturnUrl('http://<host>/how-to-manage-recurring-payments-using-paypal-subscriptions-in-php/index.php?status=success')
+        ->setCancelUrl('https://prenezunrendezvous.com/')
+        ->setAutoBillAmount('yes')
+        ->setInitialFailAmountAction('CONTINUE')
+        ->setMaxFailAttempts('3')
+         ->setSetupFee(new Currency(array(
+        'value' => 0,
+        'currency' => 'EUR'
+    ))) ;
+
+    $plan->setPaymentDefinitions(array(
+        $paymentDefinition
+    ));
+    $plan->setMerchantPreferences($merchantPreferences);
+
+    try {
+     //   $createdPlan = $plan->create($apiContext);
+        $createdPlan = $plan->create($this->_api_context);
+    } catch (PayPal\Exception\PayPalConnectionException $ex) {
+        echo $ex->getCode();
+        echo $ex->getData();
+        die($ex);
+    } catch (Exception $ex) {
+        die($ex);
+    }
+	
+	
+	
+/***** activate Plan ***/	
+	
+try {
+    $patch = new Patch();
+    $value = new PayPalModel('{"state":"ACTIVE"}');
+    $patch->setOp('replace')
+        ->setPath('/')
+        ->setValue($value);
+    $patchRequest = new PatchRequest();
+    $patchRequest->addPatch($patch);
+    $createdPlan->update($patchRequest, $apiContext);
+ 	
+   // $patchedPlan = Plan::get($createdPlan->getId(), $apiContext);
+  $patchedPlan =  $plan->setId($createdPlan->getId());
+  //  require_once "createPHPTutorialSubscriptionAgreement.php";
+} catch (PayPal\Exception\PayPalConnectionException $ex) {
+    echo $ex->getCode();
+    echo $ex->getData();
+    die($ex);
+} catch (Exception $ex) {
+    die($ex);
+}
+	
+/*********/	
+
+
+
+
+// Create new agreement
+$startDate = date('c', time() + 3600);
+$agreement = new Agreement();
+$agreement->setName($plan_name)
+    ->setDescription($plan_description)
+    ->setStartDate($startDate);
+
+// Set plan id
+$plan = new Plan();
+$plan->setId($patchedPlan->getId());
+$agreement->setPlan($plan);
+
+// Add payer type
+$payer = new Payer();
+$payer->setPaymentMethod('paypal');
+$agreement->setPayer($payer);
+
+// Adding shipping details
+$shippingAddress = new ShippingAddress();
+$shippingAddress->setLine1('111 First Street')
+    ->setCity('Saratoga')
+    ->setState('CA')
+    ->setPostalCode('95070')
+    ->setCountryCode('US');
+$agreement->setShippingAddress($shippingAddress);
+
+try {
+    // Create agreement
+    $agreement = $agreement->create($apiContext);
+    
+    // Extract approval URL to redirect user
+    $approvalUrl = $agreement->getApprovalLink();
+    
+    header("Location: " . $approvalUrl);
+    exit();
+} catch (PayPal\Exception\PayPalConnectionException $ex) {
+    echo $ex->getCode();
+    echo $ex->getData();
+    die($ex);
+} catch (Exception $ex) {
+    die($ex);
+}
+
+
+
+
+
+	
+} // end createPlan function
+	
+ 	
+	
+	
+public function	statusplan(){
+		/*
+        $payment_id = Session::get('paypal_payment_id');
+         Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+		 \Session::put('error', 'Paiement échouée');
+       //     return Redirect::route('/pay');
+	     return redirect('/pay')->with('error', ' Paiement échouée  ');
+
+		}
+		$payment = Payment::get($payment_id, $this->_api_context);
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+         $result = $payment->execute($execution, $this->_api_context);
+		if ($result->getState() == 'approved') {
+		 \Session::put('success', 'Paiement avec succès');
+        //    return Redirect::route('/pay');
+		  return redirect('/pay/')->with('success', ' Paiement avec succès  ');
+
+		}
+		\Session::put('error', 'Paiement échoué');
+      //  return Redirect::route('/pay');
+	    return redirect('/pay/')->with('error', ' Paiement échoué  ');
+		*/
+		
+if (!empty($_GET['status'])) {
+    if($_GET['status'] == "success") {
+        $token = $_GET['token'];
+        $agreement = new \PayPal\Api\Agreement();
+        
+        try {
+            // Execute agreement
+            $agreement->execute($token, $apiContext);
+			 \Session::put('success', 'Paiement tranche avec succès');
+        //    return Redirect::route('/pay');
+		  return redirect('/pay/')->with('success', ' Paiement avec succès  ');
+
+        } catch (PayPal\Exception\PayPalConnectionException $ex) {
+            echo $ex->getCode();
+            echo $ex->getData();
+            die($ex);
+        } catch (Exception $ex) {
+            die($ex);
+        }
+    } else {
+        echo "user canceled agreement";
+    }
+    	\Session::put('error', 'Paiement plan échoué');
+      //  return Redirect::route('/pay');
+	    return redirect('/pay/')->with('error', ' Paiement échoué  ');
+	
+}		
+		
+		
+ }
+ 	
 	
 	
 	
