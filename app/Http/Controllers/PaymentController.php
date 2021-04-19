@@ -696,10 +696,10 @@ $tranche=200;
         ->setAutoBillAmount('yes')
         ->setInitialFailAmountAction('CONTINUE')
         ->setMaxFailAttempts('3')
-     /*   ->setSetupFee(new Currency(array(
+         ->setSetupFee(new Currency(array(
         'value' => 0,
         'currency' => 'EUR'
-    )))*/;
+    ))) ;
 
     $plan->setPaymentDefinitions(array(
         $paymentDefinition
