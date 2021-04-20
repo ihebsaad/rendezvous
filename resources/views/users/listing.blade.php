@@ -757,7 +757,7 @@ function geocodeAddress(geocoder, resultsMap) {
 					  foreach($services as $service){
  					  ?>
 						<tr class="pricing-list-item pattern ui-sortable-handle">
-						  <td> 
+						  <td style="align-items:baseline;"> 
 							<div class="fm-input">
 							<?php if($service->thumb!=''){?>  <img src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"  style="max-width:100px"  /><?php }?>
 							</div>
@@ -794,14 +794,74 @@ function geocodeAddress(geocoder, resultsMap) {
 							</div>
 							
 
+              
 							
+              <div class="fm-input " name="produits" style="max-width: 150px">
+								<label>Associer un produit:</label>
+								<a href="javascript:void(0)"   onclick="openchoices(<?php echo $service->id;?>)"  class="button" >Produits</a> 
+							</div>
+              <script>function openchoices(idwd) {
+                  var x = document.getElementById("K"+idwd);
+                 if (    x.style.display == "block") {
+    x.style.display = "none";} else {x.style.display = "block";}};
+        </script>
 						 	<div class="fm-close" >
              
 							<a  class="delete fm-close"  style="top: 20px;" onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
 							</div>
 
 							</td>
-							<td > 
+							<td style="align-items:baseline;"> 
+              <div class="fm-input "  style="display: none;" id="K<?php echo $service->id;?>">
+                <select onchange="changeProdSer(this)"  id="produit" class="utf_chosen_select_single"  name="produit[]" placeholder="Sélectionner un produit"   multiple style="font-weight: 17px !important; " >
+                <option> </option>
+                <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
+					<?php 
+					foreach($produit as $prod){
+						echo '<option  style="font-weight: 17px;" value="'.$prod->id.'" >'.$prod->nom_produit.'</option>';
+					}
+					?>
+              
+                    
+			          	</select>
+              </div>     
+              <script>
+                  function changeProdSer(a) {
+              var service = $(a).parent().attr('id');  
+              var serviceArray=service.split('').slice(1);
+              var serviceString = serviceArray.join('');
+              alert(serviceString);
+              var produit = $(a).val();
+		          if (produit.length != 0) {
+		              for (var i = 0; i < produit.length; i++) {
+                      var idchange =  produit[i];
+                      var valchange = serviceString ;
+                      var namechange = 'produit';
+   	                	var _token = $('input[name="_token"]').val();
+                       $.ajaxSetup({
+                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                                  });
+                        $.ajax({
+                           url:"{{ route('produit.Associate') }}",
+                          method:"POST",
+                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                             success:function(data){	changed=true;
+							
+                               $.notify({
+                                  message: 'produit ajoutée avec succès',
+                                icon: 'glyphicon glyphicon-check'},{
+                                type: 'success',
+                                delay: 3000,
+                                timer: 1000,	
+                                placement: {
+                                from: "bottom",
+                                align: "right" },					
+                              });	
+                            }
+                          });
+                      }
+                  } }</script>
 								
 							
 							<div class="fm-input " style="display: none;" id="f<?php echo $service->id;?>">
@@ -894,6 +954,209 @@ function geocodeAddress(geocoder, resultsMap) {
           <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
         </div>                          
             </div>
+            <!------------------------------produits----------------------------------------------->
+            <style>
+.switch {
+margin-left:29px;  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+    margin-left: -1px;
+    margin-top: -4px;}
+
+.slider.round:before {
+  border-radius: 50%;
+}</style>
+      <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="fa fa-product-hunt"></i>Produits </h3>
+          <script type="text/javascript">
+
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'none'){
+          e.style.display = 'block';
+          var namechange='section_product';
+          var valchange="active";
+          var idchange=id;
+          alert(idchange)
+          var _token = $('input[name="_token"]').val();
+                       $.ajaxSetup({
+                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                                  });
+          $.ajax({
+                           url:"{{ route('users.ProductSection') }}",
+                          method:"POST",
+                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                             success:function(data){	}});}
+          
+       else{
+          e.style.display = 'none';
+          var namechange='section_product';
+          var valchange="desactive";
+          var idchange=id;
+          var _token = $('input[name="_token"]').val();
+                       $.ajaxSetup({
+                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                                  });
+          $.ajax({
+                           url:"{{ route('users.ProductSection') }}",
+                          method:"POST",
+                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                             success:function(data){	}});}
+    }
+
+</script>
+<label name="active" class="switch">
+  <input onclick="toggle_visibility('<?php echo $user->id;?>')"  type="checkbox" checked>
+  <span class="slider round"></span>
+</label>
+                </div>              
+        <div class="row" id="<?php echo $user->id;?>">
+          <div class="col-md-12">
+          <table id="utf_pricing_list_section">
+            <tbody class="ui-sortable"  id="produits">
+           
+            
+             <?php
+ 
+            foreach($produit as $prod){
+            ?>
+            <tr class="pricing-list-item pattern ui-sortable-handle">
+              <td> 
+              <div class="fm-input">
+              <?php if($prod->image!=''){?>  <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"  style="max-width:100px"  />
+                <?php } ?></div>
+              
+              <div class="fm-input " style="max-width: 150px">
+                <label>type :</label>
+                  <output class="button">{{$prod->type}}</output>
+              
+
+                </div>
+
+            
+              <div class="fm-input pricing-name" >
+                <label>Nom :</label>
+                <input type="text" onchange="changeProduct(this)" id="i<?php echo $prod->id;?>" name="nom_produit" value="<?php echo $prod->nom_produit;?>"   >
+              </div>
+            
+
+              <div class="fm-input pricing-ingredients">
+                <label>Description :</label>
+                <input type="text" onchange="changeProduct(this)" id="h<?php echo $prod->id;?>" name="description" value="<?php echo $prod->description;?>" >
+              </div>
+              
+              <div class="fm-input pricing-price">
+                <label>Prix : (€)</label>
+                
+                <input type="text"   onchange="changeProduct(this)" id="x<?php echo $prod->id;?>" name="prix_unité"  data-unit="€"  value="<?php echo $prod->prix_unité;?>"   > 
+              </div>
+              
+              <div class="fm-close">
+              <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('/services/remove_product/'.$prod->id)}}" ><i class="fa fa-remove"></i></a>
+              </div>
+              
+              
+
+              </td>
+              <td > 
+                
+              
+              
+              
+              </td>
+              
+            </tr>
+
+            <?php } ?>
+            </tbody>
+          </table>
+          <br>
+                 <center>
+          <a href="#small-dialogProduct" class="button popup-with-zoom-anim">Ajouter</a> </center>
+          <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
+        </div>                          
+            </div>    
+
+            <script>     function changeProduct(a){
+      //alert("ok");
+      var valchange = $(a).val();
+      var idchange = ($(a).attr('id')).substring(1);
+      var namechange = $(a).attr('name');
+
+      //alert(namechange);
+      var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('produit.modif') }}",
+                        method:"POST",
+            data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                        success:function(data){
+                          
+                        }
+                    });
+
+  };  
+function myFunctionPSelect(){
+
+var x = document.getElementById("type").value;
+//alert(document.getElementById("periode").placeholder);
+if (x=="Numérique") {
+  document.getElementById("URL").style.display = 'block';
+  //document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
+}else if(x=="Physique"){document.getElementById("URL").style.display = 'none';}
+}
+</script>  
+            <!------------------------------------------------------------------------------>
+
             <!----------------------------------------------------------------------------->				
 <div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -1093,7 +1356,57 @@ function geocodeAddress(geocoder, resultsMap) {
 
           </div>--}}
 
-	
+	<!-------------------------Model Produit---------------------------------------------->
+  <div id="small-dialogProduct" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter un produit  </h3>
+          </div>
+      <form  method="post" enctype="multipart/form-data"   action="{{ route('produit.store') }}"  >
+      {{ csrf_field() }}
+      
+     <div class="utf_signin_form style_one">
+              <input type="hidden" name="user" value="{{$user->id}}"  />
+               <div class="fm-input ">
+                <label for="type">Type :</label>
+                <select id="type" name="type" onchange="myFunctionPSelect()">
+                <option value="Physique">Physique</option>
+                  <option value="Numérique" >Numérique</option>
+                </select> 
+              </div><br>
+              <div class="fm-input " id="URL" name="URL" hidden="true" >
+              <label for="Fichier">Fichier:</label>
+                <input type="file" name="Fichier" id="Fichier"  >
+                <label for="URL_telechargement">Url de télechargement:</label>
+                <input type="text" name="URL_telechargement" id="URL_telechargement" placeholder="URL de télechargement*"  >
+              </div><br></div>
+
+              
+                     <div class="fm-input ">
+                     <label for="image" >Importer une image</label>
+          <input type="file" name="image" id="image" required >
+       </div>
+       <br>
+     <div class="fm-input ">
+                <input type="text" placeholder="Nom du produit*" id="nom"  name="nom_produit" required >
+              </div>
+              <div class="fm-input  ">
+                <input type="text"   placeholder="description du produit*"  id="description"  name="description">
+              </div>
+              
+              
+              <div class="fm-input  "> 
+                <input type="text"      placeholder="prix du produit*" name="prix_unité" id="prix" required> 
+              </div>
+            <input type="submit" id="add" style="text-align:center;color:white;" value="Ajouter"></input>
+
+      </form>       
+    <!-- <a class="button" id="add" style="text-align:center">Ajouter</a>-->
+     </div>     
+     </div>     
+      <!----
+      
+            <!------------------------- Fin Model Produit---------------------------------------------->
+
 		
 <!---------------------------------------------------------------------------------------------------->
           <div id="small-dialog9" class="small-dialog zoom-anim-dialog mfp-hide">

@@ -20,6 +20,9 @@
  <script type="text/javascript">
  	var listcodepromo = [];
  </script>
+ 
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"> 
+
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
  
 
@@ -314,7 +317,8 @@ font-size: 15px;
 				<select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner" onchange="selectservice()"  multiple style="font-weight: 17px !important; " >
 				<option> </option>
 					<?php 
-					foreach($services as $service){
+					foreach($services as $service)
+					{ 
 						echo '<option  style="font-weight: 17px;" value="'.$service->id.'" prix="'.$service->prix.'">'.$service->nom.'</option>';
 					}
 					?>
@@ -403,6 +407,53 @@ font-size: 15px;
 				</div>
           
          </div>
+		 <div class="col-lg-12 col-md-12 " style="margin-top: 10px;
+    border-style: groove;
+    border-block-color: white;">
+		 <label>Produits :</label>
+		 <button style="margin-left: 84.4px;"class="btn btn-primary btn-lg"data-toggle="modal" data-target="#exampleModalCentered">
+  consulter
+</button>
+		 <script src="js/main.js"></script>
+		 <script src="js/velocity.min.js"></script>
+		 <script src="js/jquery-2.1.1.js"></script>
+		 <div class="input-group input-group-lg" >
+
+		  		@foreach($produit as $prod)
+				  <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>" style=" width: 4em;height: 3em;"  />
+				  <a >{{$prod->nom_produit}}</a>
+				  <input data-prefix="€" class="form-control" style="margin-top: -31px;
+    margin-bottom: 11px;
+    width: 81px;
+    margin-left: 156px;" placeholder="quantité" required type="number" value="" min="0" max="15"/>
+				
+				@endforeach
+		</div>
+          
+         </div>		
+		 <!-- Modal -->
+<div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+		 
+			 
+		  
          <br>
    
 
@@ -1345,7 +1396,8 @@ font-size: 15px;
 		var montant = 0 ;
 		var service = $('#service').val();
 		if (service.length != 0) {
-			for (var i = 0; i < service.length; i++) {
+			for (var i = 0; i < s
+			ervice.length; i++) {
 				$('#service option[value='+service[i]+']').each(function(){
 					montant = montant + parseFloat(this.getAttribute('prix'));
 					document.getElementById('MontantReservation').value = montant;
@@ -2003,6 +2055,7 @@ $(this).datetimepicker('setStartDate', ch);
   
 
 </script>
+
 
 
 <?php //echo \App\Http\Controllers\ReservationsController::reservationsdujour(); ?>
