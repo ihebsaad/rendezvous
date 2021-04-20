@@ -92,7 +92,7 @@ class ReservationsController extends Controller
                                         {
                                             return $t->id;
                                         })->reverse();
-        //dd( $reservations);
+        dd( $reservations);
 		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
         return view('reservations.index', compact('reservations'));
 
