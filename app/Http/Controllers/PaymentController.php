@@ -413,6 +413,8 @@ class PaymentController extends Controller
 		$message.='Réservation payée avec succès <br>';
 		$message.='<b>'.$titrprest.' :</b>  '.$infprests.'<br>';
 		$message.='<b>Totale :</b>  '.$Reservation->montant_tot.' €<br>';
+		$message.='<b>Remise :</b>  '.$Reservation->Remise.' €<br>';
+		$message.='<b>Montant payé :</b>  '.$Reservation->Net.' €<br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
 		$message.='<b>Prestataire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
@@ -432,6 +434,8 @@ class PaymentController extends Controller
 		$message.='Réservation payée<br>';
 		$message.='<b>'.$titrprest.' :</b>  '.$infprests.'<br>';
 		$message.='<b>Totale :</b>  '.$Reservation->montant_tot.' €<br>';
+		$message.='<b>Remise :</b>  '.$Reservation->Remise.' €<br>';
+		$message.='<b>Montant payé :</b>  '.$Reservation->Net.' €<br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
