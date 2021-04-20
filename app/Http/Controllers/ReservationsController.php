@@ -88,11 +88,11 @@ class ReservationsController extends Controller
 		if($cuser->user_type=='admin' ){
         $reservations = Reservation::whereNull('id_recc')->get();
 		}	
-		 $reservations=$reservations->sortBy(function($t)
+		 /*$reservations=$reservations->sortBy(function($t)
                                         {
                                             return $t->id;
-                                        })->reverse();
-        dd( $reservations);
+                                        })->reverse();*/
+        //dd( $reservations);
 		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
         return view('reservations.index', compact('reservations'));
 
