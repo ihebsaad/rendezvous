@@ -396,13 +396,25 @@ class PaymentController extends Controller
 		$serviceid = $Reservation->service;
 		
 		$service = \App\Service::find( $serviceid) ;
+
+		// info prestation
+        $infprests = rtrim($Reservation->nom_serv_res, ", ");
+        if (strpos($infprests, ',') !== FALSE)
+        {
+          $titrprest ="les prestations";
+          
+        }
+        else {
+          $titrprest ="la prestation";
+        }
 		
 		// Email au client
 		$message='Bonjour,<br>';
 		$message.='Réservation payée avec succès <br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>'.$titrprest.' :</b>  '.$infprests.'<br>';
+		$message.='<b>Totale :</b>  '.$Reservation->montant_tot.' €<br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
-		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
+		$message.='<b>Prestataire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
  	    $this->sendMail(trim($client->email),'Réservation payée',$message)	;
@@ -418,7 +430,8 @@ class PaymentController extends Controller
 		// Email au prestataire
 		$message='Bonjour,<br>';
 		$message.='Réservation payée<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>'.$titrprest.' :</b>  '.$infprests.'<br>';
+		$message.='<b>Totale :</b>  '.$Reservation->montant_tot.' €<br>';
 		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
