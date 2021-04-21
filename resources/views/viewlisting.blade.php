@@ -9,10 +9,11 @@
   
     /* your colors */
     .legend .lightgrey { background-color: lightgrey;}
-    .legend .lightblue { background-color: lightblue; }
+    .legend .brown { background-color: brown; }
     .legend .blue { background-color: blue; }
     .legend .red{ background-color: red; }
-    .legend .pink{ background-color:pink; }
+    .legend .green{ background-color: green;}
+    .legend .pink{ background-color: pink; }
 </style>
  <?php  $User= auth()->user();
 
@@ -1138,11 +1139,12 @@ font-size: 15px;
            <div id="legendcolor"  style="background-color:white; top:5px;"> 
             <ul class="legend">
               <li><span class="lightgrey"></span>horaires de fermeture</li>
-             <li><span class="pink"></span>Happy hours</li>
+             <li><span class="green"></span>Happy hours</li>
               <li><span class="red"></span>Indisponibilité de prestataire</li>
-             <li><span class="lightblue"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
+             <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
             
              <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
+             <li><span class="pink"></span>date courante</li>
            </ul>
 
            </div>
@@ -1851,10 +1853,11 @@ $("body").mouseup(function() {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay' //listMonth
+        right: 'timeGridWeek,dayGridMonth,timeGridDay' //listMonth
       },
       
       locale: initialLocaleCode,
+      initialView:'timeGridWeek',
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
       navLinks: true, // can click day/week names to navigate views

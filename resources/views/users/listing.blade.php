@@ -144,9 +144,10 @@ background-color:lightgrey;
   
     /* your colors */
     .legend .lightgrey { background-color: lightgrey;}
-    .legend .lightblue { background-color: lightblue; }
+    .legend .brown { background-color: brown; }
     .legend .blue { background-color: blue; }
     .legend .red{ background-color: red; }
+    .legend .green{ background-color:green; }
     .legend .pink{ background-color:pink; }
 </style>
 <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
@@ -720,11 +721,12 @@ function geocodeAddress(geocoder, resultsMap) {
              <div id="legendcolor"  style="background-color:white; top:5px;"> 
             <ul class="legend">
               <li><span class="lightgrey"></span>horaires de fermeture</li>
-             <li><span class="pink"></span>Happy hours</li>
+             <li><span class="green"></span>Happy hours</li>
               <li><span class="red"></span>Indisponibilité de prestataire</li>
-             <li><span class="lightblue"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
+             <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
             
              <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
+             <li><span class="pink"></span>date courante</li>
            </ul>
 
            </div>
@@ -989,6 +991,113 @@ function geocodeAddress(geocoder, resultsMap) {
   </tbody>
 </table></div>  
 </div>
+
+  <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-question"></i>Services Supplémentaires</h3>
+        </div>      
+        <div class="row">
+          <div class="col-md-12">
+           
+            <center> <label><h3>Liste des règles pour les services supplémentaires</h3></label></center><br><br>
+             <center> 
+            <table class="table table-striped" id="" style="width: 70% !important;">
+                <thead>
+                  <tr>
+                    <th><h2>Services additionnées</h2></th>
+                    <th><h2>Service offert</h2></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>"pizza + pizza"</td>
+                    <td>"1 pizza"</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>"lavage interne + lavage externe"</td>
+                    <td>"1 produit de brillance des jantes"</td>
+                    <td>X</td>
+                  </tr> 
+                   <tr>
+                    <td>"sandiwtch + pizza + pizza"</td>
+                    <td>"2 pizzas"</td>
+                    <td>X</td>
+                  </tr>
+                
+                </tbody>
+              </table>
+           </center> 
+          <br>
+           <hr>
+          <br>
+
+   <div class="">
+        <!-- bloc pour commentaires existants-->
+        <?php $nbcomm=0;?>
+
+          <div class="row">
+          <center> <label><h3>Créez une nouvelle règle pour les services supplémentaires</h3></label></center><br><br>
+          <div class="col-md-6 com_wrapper" style="border-right-style: solid;">          
+         <center> <label><h3>Addition des services</h3></label></center><br>
+      <?php if($nbcomm<3){?>
+       <div class="row">
+             <div class="col-md-10">
+            <!-- <input autocomplete="off"  type="text" onkeyup="changing(this)" size="50" style="width:100% ; " id="field_name[]"  name="field_name[]" value=""/>  --> 
+            <select name="cars" class="cars"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage interne">lavage interne</option></select>
+
+          </div>
+
+            <div class="col-md-2"> <a href="javascript:void(0);" class="com_button" title="Ajouter un champs"><?php if($nbcomm<=1){ ?><img width="26" height="26" src="{{ asset('public/img/add.png') }}" style="float:left"/> <br><?php } ?></a> </div>
+      </div> 
+    <?php } ?>
+    </div>
+     <div class="col-md-6" >
+      <center> <label><h3>Résultat pour l'addition des services</h3></label></center><br>
+      <div class="row">
+        <div class="col-md-3" >
+      <center><label>Service ou produit offert (résultat): </label></center>
+      </div>
+      <div class="col-md-6" >
+    <center> <select name="cars" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
+     </div>
+      <div class="col-md-1" >
+        avec quatité 
+     </div>
+      <div class="col-md-2" >
+      <input type="number" value="0" min="0" max="10">
+     </div>
+    </div>
+      </div> 
+      </div>
+      <div class="row">
+       <br>
+      <center> <a href="javascript:void(0)" class="button popup-with-zoom-anim">Valider</a> </center>
+       <br>
+      </div> 
+      <div class="row"> 
+       <form method="post" action="" >  
+       @csrf
+       <input type="hidden"  value="{{$user->id}}" name="user_ser_supp">  
+        <hr>
+        <br>
+       <center>
+        <label>Règle totale obtenue: </label>
+        <input autocomplete="off"  type="text"  size="80" style="width:80% ; " id="restotal"  name="restotal" value=""/> 
+      </center>
+    
+      </div>
+      <div class="row">
+       <br>
+      <center> <input type="submit" class="button popup-with-zoom-anim" value="Enregistrer" style="color:white"> </center>
+       <br>
+      </div> 
+      </form>
+   </div> 
+     </div> 
+   </div> 
+ </div>
 
 		<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -2051,10 +2160,11 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        right: 'timeGridWeek,dayGridMonth,timeGridDay,listMonth'
       },
       
       locale: initialLocaleCode,
+      initialView:'timeGridWeek',
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
       navLinks: true, // can click day/week names to navigate views
@@ -2070,7 +2180,7 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
         eventClick: function(info) {
 
           if (info.event.start) {
-           alert(info.event.start);
+           //alert(info.event.start);
             }
        },
        businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire($user->id); ?>,
@@ -2114,6 +2224,38 @@ var obj={
        //alert(JSON.stringify(obj));
    });
 </script>
+<!-- <input autocomplete="off"  style="width:100% ;" size="50" type="text" onkeyup="changing(this)" id="field_name[]"  name="field_name[]" value=""/> -->
+<script type="text/javascript">
+     $(document).ready(function(){
+    var maxField = <?php echo (5-$nbcomm) ?>; //Input fields increment limitation
+    var comButton = $('.com_button'); //Add button selector
+    var comwrapper = $('.com_wrapper'); //Input field wrapper
+    var comfieldHTML = '<div class="row"><br><center><img width="26" height="26"  src="{{ asset('public/img/plus.png') }}"/></center><br><div class="col-md-10"> <select name="cars" class="cars"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option></select></div> <div class="col-md-2"> <a href="javascript:void(0);" class="comremove_button"> <img width="26" height="26" style="float:left " src="{{ asset('public/img/moin.png') }}"/></a><br></div>  </div>'; //New input field html
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(comButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(comwrapper).append(comfieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(comwrapper).on('click', '.comremove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+
+     $(comwrapper).on('change', '.cars', function(e){
+       //alert($(this).find(":selected").text()) ;//Decrement field counter
+    });
+
+});
+</script>
+
 <?php
 $myArr = array('title'=>"John", 'start'=>"Mary", 'v'=>"Peter", 'b'=>"Sally");
 

@@ -33,9 +33,9 @@ class CalendrierController extends Controller
 
    public static $fermeture_couleur="lightgrey";
    public static $rendezvous_couleur="blue";
-   public static $rendezvous_parall_couleur="lightblue";
+   public static $rendezvous_parall_couleur="brown";
    public static $indispo_couleur="red";
-   public static $happyhours_couleur="pink";
+   public static $happyhours_couleur="lightgreen";
 
   // composant pour desactivation datetimepicker
   public static $tab_jours_fermeture_semaine=array();
