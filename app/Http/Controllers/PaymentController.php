@@ -46,6 +46,11 @@ use PayPal\Api\ShippingAddress;
  
 class PaymentController extends Controller
 {
+	public function payAcompteReservation()
+    {
+    	dd("ok");
+    }
+
 
 	public function index()
     { 
