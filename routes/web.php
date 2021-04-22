@@ -140,16 +140,16 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 
 	Route::post('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/payabn','PaymentController@payabn')->name('payabn');
-	Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
+	Route::get('/statusabn','PaymentCodntroller@getPaymentStatusAbn')->name('statusabn');
  Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
 
 
 	Route::post('/pay','PaymentController@pay')->name('pay');
 	Route::get('/pay','PaymentController@pay')->name('pay');
 	Route::post('/paypal','PaymentController@payWithpaypal')->name('paypal');
-  Route::post('/createplan','PaymentController@createplan')->name('createplan');
-	Route::get('/payreservation','PaymentController@payAcompteReservation')->name('payreservation');
-    Route::post('/payreservation','PaymentController@payAcompteReservation')->name('payreservation');
+  Route::post('/createplan','PaymentController@createplan')->name('createplan'); 
+	Route::get('/payreservation','PayPalController@payAcompteReservation')->name('payreservation');
+    Route::post('/payreservation','PayPalController@payAcompteReservation')->name('payreservation');
     Route::get('/successPayAcompteReservation','PayPalController@successPay');
 
 
