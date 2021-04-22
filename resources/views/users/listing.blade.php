@@ -138,6 +138,33 @@ background-color:lightgrey;
 }
 </style>
 <style>
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+.alert.ok {
+  padding: 20px;
+  background-color: #04aa6d;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+<style>
     .legend { list-style: none; margin-left:10px;}
     .legend li { float: left; margin-right: 15px;}
     .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }
@@ -159,6 +186,7 @@ background-color:lightgrey;
  table{background-color:white;border:none!important;;width:100%!important;}
  </style>
 
+
     <!-- Content -->
     <div class="utf_dashboard_content">  
 <!-- Session errors -->
@@ -177,6 +205,23 @@ background-color:lightgrey;
             <a class="close" href="#"></a> 
 		  </div>
  @endif	
+
+@if ( Session::has('msg') )
+@if ( Session::get('msg')=="off" )
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Erreur!</strong> E-mail Paypal incorrect.
+</div>
+@endif 
+@if ( Session::get('msg')=="on" )
+ <div class="alert ok">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Validé!</strong> E-mail Paypal Enregistré.
+</div>
+@endif 
+<?php Session::forget('msg'); ?>
+ @endif 
+
     	  {{--<a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> --}}
     	 <a href="{{$user->generate_slug()}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a>
 
@@ -249,6 +294,42 @@ background-color:lightgrey;
                 </div>
               </div>
             </div>
+             <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-present"></i>Configuration de paiement</h3>
+                </div>       
+        <div class="row">
+          <div class="col-md-12" >
+            <h2><b> Ajoutez une adresse E-mail de votre compte Paypal.</b></h2>
+            <br>
+          </div>
+          <form action="{{ route('check.paypal') }}"  >
+          <div class="col-md-8">
+            <label>Email :</label>
+            <div >
+          <input   type="text" value="{{ $user->emailPaypal }}" name="email" >
+          <input type="" name="id" value="{{ $user->id }}" hidden >
+          </div>
+        </div>
+        
+        </div>  
+        <div class="col-md-8">
+            <div >
+              <input type="submit" style="text-align:center;color:white;" value="Enregistrer"></input>
+            
+        </div>
+        </div>  
+
+</form>
+
+            </div>  </div>
+
+
+
+
+
+
+
 			<style>
  /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */

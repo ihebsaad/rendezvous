@@ -148,8 +148,13 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::get('/pay','PaymentController@pay')->name('pay');
 	Route::post('/paypal','PaymentController@payWithpaypal')->name('paypal');
   Route::post('/createplan','PaymentController@createplan')->name('createplan');
-	Route::get('/payreservation','PaymentController@payreservation')->name('payreservation');
-    Route::post('/payreservation','PaymentController@payreservation')->name('payreservation');
+	Route::get('/payreservation','PayPalController@payAcompteReservation')->name('payreservation');
+    Route::post('/payreservation','PayPalController@payAcompteReservation')->name('payreservation');
+    Route::get('/successPayAcompteReservation','PayPalController@successPay');
+
+
+        Route::get('/check/paypal','PaypalController@CheckEmail')->name('check.paypal');
+
 
 	Route::get('/status','PaymentController@getPaymentStatus')->name('status');
 	Route::get('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
