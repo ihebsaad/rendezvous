@@ -22,7 +22,7 @@ class PayPalController extends Controller
   public function CheckEmail(Request $request)
     {
         $id=$request->get('id');
-        $varEmail=$request->get('email');
+        $varEmail=$request->get('email'); 
         $this->provider = new AdaptivePayments('AdaptivePay');
 
         $data = [
@@ -65,41 +65,9 @@ class PayPalController extends Controller
 //-------------------------------------------payAcompteReservation---------------------------------------------
     public function payAcompteReservation(Request $request)
     {
-        $montant=$request->get('montant');
-        $desc=$request->get('description');
-        $reservation=$request->get('reservation');
-        $prestId=$request->get('prest');
-        $email=User::where('id',$prestId)->value('emailPaypal');
-        $abonnement=User::where('id',$prestId)->value('abonnement');
-        if ($abonnement==3) {
-            $k=60 ;
-        }elseif ($abonnement==2) {
-            $k=50 ;
-        }elseif ($abonnement==1) {
-            $k=30 ;
-        }
-        $acompte=($montant*$k)/100 ;
-        $this->provider = new AdaptivePayments('AdaptivePay');
-
-        $data = [
-            'receivers'  => [
-                [
-                    'email'   => $email,
-                    'amount'  => $acompte,
-                    
-                ],
-              
-            ],
-            'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-            'return_url' => url('/successPayAcompteReservation'),
-            'cancel_url' => url('payment/cancel'),
-        ];
-
-        $response = $this->provider->createPayRequest($data);
-        //dd($response);
-$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
-
-return redirect($redirect_url);
+        
+dd("ok");
+return "ok";
     }
 
 //----------------------------------------------end---------------------------------------------
