@@ -162,8 +162,8 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::post('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 
 	
-	Route::get('/status','MyPaypalController@successpay')->name('successpay');
-	Route::get('/status','MyPaypalController@cancelpay')->name('cancelpay');
+	Route::get('/successpay','MyPaypalController@successpay')->name('successpay');
+	Route::get('/cancelpay','MyPaypalController@cancelpay')->name('cancelpay');
 	
 	
 
