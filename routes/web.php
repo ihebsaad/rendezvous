@@ -153,7 +153,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/successPayAcompteReservation','PayPalController@successPay');
 
 
-        Route::get('/check/paypal','PaypalController@CheckEmail')->name('check.paypal');
+        Route::get('/check/paypal','MyPaypalController@CheckEmail')->name('check.paypal');
 
 
 	Route::get('/status','PaymentController@getPaymentStatus')->name('status');
