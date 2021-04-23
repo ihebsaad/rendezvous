@@ -127,7 +127,7 @@ background-color:#a0d468;
 <?php // paiement= 1 : acompte payé ?>				
 <?php // paiement= 2 : acompte et reste payés ?>				
 		<?php	if( $reservation->paiement ==0 ) { ?> 	<button class="button ">Payer l'acompte   </button> <?php  } ?> 
-		<?php	if( $reservation->paiement ==1 ) { ?> 	<button class="button ">Payer le Reste : <?php echo $reste;?></button> <?php  } ?> 
+		<?php	if( $reservation->paiement ==1 ) { ?> 	<button class="button ">Payer le Reste : <?php echo $reservation->reste;?></button> <?php  } ?> 
 				</form>
 			<?php } ?> 
 		
