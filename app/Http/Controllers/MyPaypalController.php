@@ -113,7 +113,7 @@ class MyPaypalController extends Controller
 		
 		
 		$response = $this->provider->createPayRequest($data);
-		//dd( $response);
+		 dd( $response);
 		//$key='';
 		//if(isset($response['payKey'])){$key=$response['payKey'];}
 
