@@ -81,8 +81,7 @@ class MyPaypalController extends Controller
         $prestId=$request->get('prest');
         $email=User::where('id',$prestId)->value('emailPaypal');
 		$Reservation=Reservation::find( $reservation);
-		dd($Reservation);
-		// Paiement d'acompte		
+ 		// Paiement d'acompte		
 		if($Reservation->paiement==0 || $Reservation->paiement ==null){
 		$abonnement=User::where('id',$prestId)->value('abonnement');
         if ($abonnement==3) {
