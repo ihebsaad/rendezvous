@@ -80,7 +80,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/modif','ServicesController@modif')->name('services.modif'); 
 	Route::post('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction');
 
-	Route::post('/services/CodePromo','ServicesController@codepromo')->name('services.CodePromo');
+		Route::post('/services/CodePromo','ServicesController@codepromo')->name('services.CodePromo');
 	Route::post('/services/reduction_CodePromo','ServicesController@CodePromoUpdate')->name('services.reduction_CodePromo');
 	Route::get('/services/remove_CodePromo/{k}','ServicesController@CodePromoRemove');
 	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck');
@@ -92,9 +92,9 @@ Route::group(['middleware' => 'auth'], function(){
  
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
 
-    Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
-    Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove');
-    Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
+Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
+Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove');
+Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 
 
 	Route::post('/faqs/saving','FaqsController@store')->name('faqs.saving');
@@ -119,7 +119,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 	Route::post('/reservations/add','ReservationsController@add')->name('reservations.add');
-	Route::post('/reservations/add2','ReservationsController@addServiceRecurrent')->name('reservations.add2');
+		Route::post('/reservations/add2','ReservationsController@addServiceRecurrent')->name('reservations.add2');
 
 	Route::get('/reservations','ReservationsController@index')->name('reservations');
 	Route::get('/reservations/remove/{id}','ReservationsController@remove');
@@ -140,26 +140,26 @@ Route::group(['middleware' => 'auth'], function(){
 
 	Route::post('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/payabn','PaymentController@payabn')->name('payabn');
-	Route::get('/statusabn','PaymentCodntroller@getPaymentStatusAbn')->name('statusabn');
-    Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
+	Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
+// Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
 
 
 	Route::post('/pay','PaymentController@pay')->name('pay');
 	Route::get('/pay','PaymentController@pay')->name('pay');
 	Route::post('/paypal','PaymentController@payWithpaypal')->name('paypal');
-    Route::post('/createplan','PaymentController@createplan')->name('createplan'); 
-	Route::get('/payreservation','MyPaypalController@payAcompteReservation')->name('payreservation');
-    Route::post('/payreservation','MyPaypalController@payAcompteReservation')->name('payreservation');
-    Route::get('/successPayAcompteReservation','PayPalController@successPay');
-
-
-        Route::get('/check/paypal','MyPaypalController@CheckEmail')->name('check.paypal');
-
+ // Route::post('/createplan','PaymentController@createplan')->name('createplan');
+	Route::get('/payreservation','PaymentController@payreservation')->name('payreservation');
+    Route::post('/payreservation','PaymentController@payreservation')->name('payreservation');
 
 	Route::get('/status','PaymentController@getPaymentStatus')->name('status');
 	Route::get('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 	Route::post('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 
+	
+	Route::get('/status','MyPaypalController@successpay')->name('successpay');
+	Route::get('/status','MyPaypalController@cancelpay')->name('cancelpay');
+	
+	
 
 	Route::get('/abonnements','AbonnementsController@index')->name('abonnements');
 	Route::get('/abonnements/remove/{id}', 'AbonnementsController@remove');
