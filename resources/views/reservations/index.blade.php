@@ -104,8 +104,11 @@ background-color:#a0d468;
 			<?php 
 			
 				if( $reservation->paiement==1) {
-					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important; " class="success statut">  Payée   </span>';
+					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important; " class="success statut"> Acompte Payée </span>';
 				}
+				if( $reservation->paiement==2) {
+					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important; " class="success statut"> Total Payée </span>';
+				}				
 				echo $statut;  
 	?>
 	</td> 
@@ -119,8 +122,12 @@ background-color:#a0d468;
 				
  				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
  				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
- 				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >       
-		<?php	if( $reservation->statut <2) { ?> 	<button class="button ">Payer l'acompte</button> <?php  } ?> 
+ 				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  > 
+<?php // paiement= 0 : acompte non payé ?>				
+<?php // paiement= 1 : acompte payé ?>				
+<?php // paiement= 2 : acompte et reste payés ?>				
+		<?php	if( $reservation->paiement ==0 ) { ?> 	<button class="button ">Payer l'acompte   </button> <?php  } ?> 
+		<?php	if( $reservation->paiement ==1 ) { ?> 	<button class="button ">Payer le Reste</button> <?php  } ?> 
 				</form>
 			<?php } ?> 
 		

@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Redirect;
 use Srmklive\PayPal\Services\AdaptivePayments;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use URL;
+
+
+use Illuminate\Support\Facades\Input;
+use DB;
+use Session;
+use \App\Reservation;
+use \App\Alerte;
+use Carbon\Carbon;
+use \App\Cartefidelite;
+
+
+
 class MyPaypalController extends Controller
 {
 	protected $provider;
@@ -59,15 +71,20 @@ class MyPaypalController extends Controller
         
     }   
 //-----------------------------------------------end------------------------------------------------
+
+
     //-------------------------------------------payAcompteReservation---------------------------------------------
-    public function payAcompteReservation(Request $request)
+    public function payReservation(Request $request)
     {
         $montant=$request->get('montant');
         $desc=$request->get('description');
         $reservation=$request->get('reservation');
         $prestId=$request->get('prest');
         $email=User::where('id',$prestId)->value('emailPaypal');
-        $abonnement=User::where('id',$prestId)->value('abonnement');
+
+		// Paiement d'acompte		
+		if($reservation->paiement==0 || $reservation->paiement ==null){
+		$abonnement=User::where('id',$prestId)->value('abonnement');
         if ($abonnement==3) {
             $k=60 ;
         }elseif ($abonnement==2) {
@@ -76,6 +93,7 @@ class MyPaypalController extends Controller
             $k=30 ;
         }
         $acompte=($montant*$k)/100 ;
+		$reste=$montant-$acompte;
         $this->provider = new AdaptivePayments('AdaptivePay');
 
         $data = [
@@ -88,17 +106,42 @@ class MyPaypalController extends Controller
               
             ],
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-          //  'return_url' => url('/successPayAcompteReservation'),
-            'return_url' =>URL::route('successpay',['reservation'=>$reservation,'type'=>'acompte']),
-          //  'cancel_url' => url('payment/cancel'),
-            'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
+             'return_url' =>URL::route('successpay',['reservation'=>$reservation,'type'=>'acompte','reste'=>$reste]),
+             'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
         ];
+		
+		} // end acompte
+
+		
+		// paiement reste
+		if($reservation->paiement==1){
+  
+		$reste=$reservation->reste;
+        $this->provider = new AdaptivePayments('AdaptivePay');
+
+        $data = [
+            'receivers'  => [
+                [
+                    'email'   => $email,
+                    'amount'  => $reste,              
+                ],
+              
+            ],
+            'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
+             'return_url' =>URL::route('successpay',['reservation'=>$reservation,'type'=>'reste','reste'=>0]),
+             'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
+        ];			
+			
+			
+		}
+		
+
 
         $response = $this->provider->createPayRequest($data);
         //dd($response);
-$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
-
-return redirect($redirect_url);
+		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+		return redirect($redirect_url);
+		
     }
 
 //----------------------------------------------end---------------------------------------------
@@ -108,9 +151,122 @@ return redirect($redirect_url);
 //-------------------------------------------successPay------------------------------------------
     public function successpay(Request $request)
     {
-        dd($request);
+ 
+         $reservation=$request->get('reservation');
+         $type=$request->get('type');
+         $reste=$request->get('reste');
+		 if($type=='acompte'){$titre='Acompte';}else
+		 {$titre='Montant Restant'; }
 
-return redirect('/');
+	// verifier success ..
+	
+		 \Session::put('success', 'Paiement avec succès');
+        //    return Redirect::route('/pay');
+
+		 // ajouter +1 au carte fidelite --------------------------------------------------------------
+ 		$idclient=Reservation::where('id',$reservation)->value('client');
+     	$idprestataire=Reservation::where('id',$reservation)->value('prestataire');
+    	$test=Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->exists();
+    	if ($test=='true') {
+     		$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation');
+    		if ($val==9) {
+
+    			$val =0;
+    			$nbr_fois = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_fois') +1;
+    			Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_fois' => $nbr_fois));
+    		}else {
+    			//dd('ok');
+    			$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation') +1;
+    			//dd($val);
+
+    		}
+    		Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_reservation' => $val));
+    		
+    	}else{
+    		//dd('ok');
+    		$newCarte = new Cartefidelite([
+              'id_client' => $idclient,
+              'id_prest' => $idprestataire,
+              'nbr_reservation' => 1,
+              'nbr_fois' => 0
+              
+           ]);
+
+        $newCarte->save();
+
+    	}
+    	//-----------------------------------------------------------------------------------------------------
+		
+		// changement statut réservation
+		Reservation::where('id',$reservation)->update(array('paiement' => 1));
+		// ajout commission ici
+		
+		
+		
+		 // Email
+		$Reservation = \App\Reservation::find( $reservation);
+		
+ 		$client =  \App\User::find($Reservation->client);
+		$prestataire =  \App\User::find($Reservation->prestataire);
+		$serviceid = $Reservation->service;
+		
+		$service = \App\Service::find( $serviceid) ;
+		
+		// Email au client
+		$message='Bonjour,<br>';
+		$message.='Réservation('.$titre.') payée avec succès <br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+		
+ 	    $this->sendMail(trim($client->email),'Réservation('.$titre.') payé',$message)	;
+    	
+		//enregistrement alerte
+    	$alerte = new Alerte([
+             'user' => $client->id,
+			 'titre'=>'Réservation payée('.$titre.')',						 
+             'details' => $message,
+         ]);	
+		 $alerte->save();
+ 
+		// Email au prestataire
+		$message='Bonjour,<br>';
+		$message.='Réservation payée('.$titre.')<br>';
+		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+		
+	    $this->sendMail(trim($prestataire->email),'Réservation payée',$message)	;
+    	//enregistrement alerte
+		$alerte = new Alerte([
+             'user' => $prestataire->id,
+			 'titre'=>'Réservation payée('.$titre.')',						 
+             'details' => $message,
+         ]);	
+		 $alerte->save();		
+		
+		// enregistrement payment dans la base
+		$paiement  =  new \App\Payment([
+             'payer_id' => Input::get('PayerID'),
+			 'payment_id'=>$payment_id,						 
+             'user' => $client->id,
+             'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
+             'beneficiaire_id' => $prestataire->id ,
+             'details' => 'paiement de réservation('.$titre.') pour : '.$prestataire->name. ' '.$prestataire->lastname,
+         ]);	
+		 
+		 $paiement->save();
+		 
+		  return redirect('/reservations/')->with('success', ' Paiement ('.$titre.') effectué avec succès  ');
+
+
+ 
+ 
+ 
+ 
+ 
     }
 	
 	
