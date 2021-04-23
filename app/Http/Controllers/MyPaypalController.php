@@ -113,7 +113,7 @@ class MyPaypalController extends Controller
 		
 		
 		$response = $this->provider->createPayRequest($data);
-		dd('1 | '.$response);
+		dd( $response);
 		//$key='';
 		//if(isset($response['payKey'])){$key=$response['payKey'];}
 
@@ -142,7 +142,7 @@ class MyPaypalController extends Controller
         ];			
 			
         $response = $this->provider->createPayRequest($data);
-         dd('2 | '.$response);
+         dd( $response);
 		//$key='';
 		//if(isset($response['payKey'])){$key=$response['payKey'];}
 		//$redirect_url = $this->provider->getRedirectUrl('approved', $key);
