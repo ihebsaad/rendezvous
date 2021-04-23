@@ -113,10 +113,11 @@ class MyPaypalController extends Controller
 		
 		
 		$response = $this->provider->createPayRequest($data);
-		$key='';
-		if(isset($response['payKey'])){$key=$response['payKey'];}
+		//$key='';
+		//if(isset($response['payKey'])){$key=$response['payKey'];}
 
-		$redirect_url = $this->provider->getRedirectUrl('approved', $key);
+		//$redirect_url = $this->provider->getRedirectUrl('approved', $key);
+		$redirect_url = $this->provider->getRedirectUrl('approved', $response);
 		return redirect($redirect_url);
 		} // end acompte
 
@@ -141,9 +142,10 @@ class MyPaypalController extends Controller
 			
         $response = $this->provider->createPayRequest($data);
         //dd($response);
-		$key='';
-		if(isset($response['payKey'])){$key=$response['payKey'];}
-		$redirect_url = $this->provider->getRedirectUrl('approved', $key);
+		//$key='';
+		//if(isset($response['payKey'])){$key=$response['payKey'];}
+		//$redirect_url = $this->provider->getRedirectUrl('approved', $key);
+		$redirect_url = $this->provider->getRedirectUrl( $response);
 		return redirect($redirect_url);
 		
 		}
