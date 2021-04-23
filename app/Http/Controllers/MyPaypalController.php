@@ -81,6 +81,9 @@ class MyPaypalController extends Controller
         $prestId=$request->get('prest');
         $email=User::where('id',$prestId)->value('emailPaypal');
 		$Reservation=Reservation::find( $reservation);
+		
+		$this->provider = new AdaptivePayments('AdaptivePay');
+
  		// Paiement d'acompte		
 		if($Reservation->paiement==0 || $Reservation->paiement ==null){
 		$abonnement=User::where('id',$prestId)->value('abonnement');
@@ -93,8 +96,7 @@ class MyPaypalController extends Controller
         }
         $acompte=($montant*$k)/100 ;
 		$reste=$montant-$acompte;
-        $this->provider = new AdaptivePayments('AdaptivePay');
-
+ 
         $data = [
             'receivers'  => [
                 [
@@ -111,8 +113,10 @@ class MyPaypalController extends Controller
 		
 		
 		$response = $this->provider->createPayRequest($data);
-        //dd($response);
-		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+		$key='';
+		if(isset($response['payKey'])){$key=$response['payKey'];}
+
+		$redirect_url = $this->provider->getRedirectUrl('approved', $key);
 		return redirect($redirect_url);
 		} // end acompte
 
@@ -121,7 +125,6 @@ class MyPaypalController extends Controller
 		if($Reservation->paiement==1){
   
 		$reste=$Reservation->reste;
-        $this->provider = new AdaptivePayments('AdaptivePay');
 
         $data = [
             'receivers'  => [
@@ -138,7 +141,9 @@ class MyPaypalController extends Controller
 			
         $response = $this->provider->createPayRequest($data);
         //dd($response);
-		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+		$key='';
+		if(isset($response['payKey'])){$key=$response['payKey'];}
+		$redirect_url = $this->provider->getRedirectUrl('approved', $key);
 		return redirect($redirect_url);
 		
 		}
