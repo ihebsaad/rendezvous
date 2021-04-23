@@ -23,7 +23,8 @@ use \App\Alerte;
 use Carbon\Carbon;
 use \App\Cartefidelite;
 
-
+ use Swift_Mailer;
+ use Mail;
 
 class MyPaypalController extends Controller
 {
