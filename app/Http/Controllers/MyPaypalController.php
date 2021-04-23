@@ -386,4 +386,31 @@ return redirect($redirect_url);
 //-------------------------------------------end---------------------------------------------
 
 
+
+
+public function sendMail($to,$sujet,$contenu){
+
+		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
+        $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+        $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+        $swiftMailer = new Swift_Mailer($swiftTransport);
+		Mail::setSwiftMailer($swiftMailer);
+		$from=\Config::get('mail.from.address') ;
+		$fromname=\Config::get('mail.from.name') ;
+		
+		Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
+         $message
+                 ->to($to)
+                    ->subject($sujet)
+                       ->setBody($contenu, 'text/html')
+                    ->setFrom([$from => $fromname]);         
+
+			});
+	  
+	}
+	
+	
+	
+
 }
