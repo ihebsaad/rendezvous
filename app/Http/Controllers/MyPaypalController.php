@@ -267,7 +267,7 @@ class MyPaypalController extends Controller
 		// enregistrement payment dans la base
 		$paiement  =  new \App\Payment([
              'payer_id' => Input::get('PayerID'),
-			 'payment_id'=>$payment_id,						 
+			 'payment_id'=>Input::get('payment_id') ,						 
              'user' => $client->id,
              'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
              'beneficiaire_id' => $prestataire->id ,
