@@ -115,7 +115,7 @@ background-color:#a0d468;
 		 
 			<td>
 			   <?php if($User->user_type =='client' ) {?>   
-            <?php if( $reservation->paiement==0) {?> 
+            <?php if( $reservation->paiement<2) {?> 
 				  <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
 				{{ csrf_field() }}
                 <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >

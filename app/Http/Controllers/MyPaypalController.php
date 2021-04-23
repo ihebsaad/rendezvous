@@ -214,7 +214,7 @@ class MyPaypalController extends Controller
 		if($type=='acompte'){
 				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste));	
 		}
-		if($type='reste'){
+		if($type=='reste'){
 			 Reservation::where('id',$reservation)->update(array('paiement' => 2,'reste'=>0));	
 		}
   		
