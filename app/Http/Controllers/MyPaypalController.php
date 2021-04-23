@@ -109,6 +109,11 @@ class MyPaypalController extends Controller
              'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
         ];
 		
+		
+		$response = $this->provider->createPayRequest($data);
+        //dd($response);
+		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+		return redirect($redirect_url);
 		} // end acompte
 
 		
@@ -131,15 +136,16 @@ class MyPaypalController extends Controller
              'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
         ];			
 			
-			
-		}
-		
-
-
         $response = $this->provider->createPayRequest($data);
         //dd($response);
 		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
 		return redirect($redirect_url);
+		
+		}
+		
+
+
+
 		
     }
 
