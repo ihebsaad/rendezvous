@@ -80,9 +80,9 @@ class MyPaypalController extends Controller
         $reservation=$request->get('reservation');
         $prestId=$request->get('prest');
         $email=User::where('id',$prestId)->value('emailPaypal');
-
+		$Reservation=Reservation::find( $reservation);
 		// Paiement d'acompte		
-		if($reservation->paiement==0 || $reservation->paiement ==null){
+		if($Reservation->paiement==0 || $Reservation->paiement ==null){
 		$abonnement=User::where('id',$prestId)->value('abonnement');
         if ($abonnement==3) {
             $k=60 ;
@@ -113,9 +113,9 @@ class MyPaypalController extends Controller
 
 		
 		// paiement reste
-		if($reservation->paiement==1){
+		if($Reservation->paiement==1){
   
-		$reste=$reservation->reste;
+		$reste=$Reservation->reste;
         $this->provider = new AdaptivePayments('AdaptivePay');
 
         $data = [
