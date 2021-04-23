@@ -18,8 +18,7 @@ use URL;
 
 use Illuminate\Support\Facades\Input;
 use DB;
-use Session;
-use \App\Reservation;
+ use \App\Reservation;
 use \App\Alerte;
 use Carbon\Carbon;
 use \App\Cartefidelite;
@@ -197,10 +196,13 @@ class MyPaypalController extends Controller
     	}
     	//-----------------------------------------------------------------------------------------------------
 		
-		// changement statut réservation
-		Reservation::where('id',$reservation)->update(array('paiement' => 1));
-		// ajout commission ici
-		
+		if($type=='acompte'){
+				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste));	
+		}
+		if($type='reste'){
+			 Reservation::where('id',$reservation)->update(array('paiement' => 2,'reste'=>0));	
+		}
+  		
 		
 		
 		 // Email
