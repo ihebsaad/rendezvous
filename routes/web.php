@@ -166,6 +166,14 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::get('/cancelpay','MyPaypalController@cancelpay')->name('cancelpay');
 	
 	
+	 Route::get('/preapproved','MyPaypalController@preapproved')->name('preapproved');
+	 Route::get('/approved','MyPaypalController@approved')->name('approved');
+	 Route::get('/canceled','MyPaypalController@canceled')->name('canceled');
+     Route::get('/getpreapproved','MyPaypalController@getpreapproved')->name('getpreapproved');
+    Route::post('/getpreapproved','MyPaypalController@getpreapproved')->name('getpreapproved');
+	
+	
+	
 
 	Route::get('/abonnements','AbonnementsController@index')->name('abonnements');
 	Route::get('/abonnements/remove/{id}', 'AbonnementsController@remove');

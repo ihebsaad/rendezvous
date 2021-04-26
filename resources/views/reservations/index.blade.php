@@ -84,11 +84,18 @@ background-color:#a0d468;
             }*/
 
 
+$allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
+	if( ( $reservation->reste >= 200  &&  $allow_slices     ){
+	// paiement sur tranches
+	}else{
+		
+		
+	}
 
            ?>
 			<?php  $montant=$reservation->Net; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
 			<?php $description=$reservation->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservation->service);?>
-                <tr> 
+    <?php $montant=$reservation->montant_tot;  ?>            <tr> 
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client);?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
@@ -127,8 +134,35 @@ background-color:#a0d468;
 <?php // paiement= 1 : acompte payé ?>				
 <?php // paiement= 2 : acompte et reste payés ?>				
 		<?php	if( $reservation->paiement ==0 ) { ?> 	<button class="button ">Payer l'acompte   </button> <?php  } ?> 
-		<?php	if( $reservation->paiement ==1 ) { ?> 	<button class="button ">Payer le Reste : <?php echo $reservation->reste;?> €</button> <?php  } ?> 
+		<?php	if( $reservation->paiement ==1 ) { 
+		
+		$allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
+	if( ( $reservation->reste >= 200  &&  $allow_slices     ){
+	// paiement sur tranches
+	
+	
+	}else{
+		
+		 
+		
+		?> 	<button class="button ">Payer le reste : <?php echo $reservation->reste;?> €</button> 
+		
+		<?php
+		} // paiement sans tranches
+		
+		} // acompte payé ?> 
 				</form>
+				
+		   		 <form class="  " method="POST" id="payment-form"    action="{{ route('getpreapproved') }}" >
+				{{ csrf_field() }}
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+				
+ 				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+ 				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
+ 				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >
+				<button class="button"  >TEST Pré-Approve</button>
+				</form>		
+				
 			<?php } ?> 
 		
 			<?php } ?> 
@@ -153,7 +187,7 @@ background-color:#a0d468;
         </table>
   
   
-   
+
 			
 <!--
 <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/jquery.dataTables.js') }}" ></script>

@@ -329,24 +329,38 @@ return redirect($redirect_url);
 
 
 //-------------------------------------------Preapproved---------------------------------------------
-    public function getPreapproved()
+    public function getpreapproved()
     {
-        $this->provider = new AdaptivePayments('preapproved');
-        
+		$montant=$request->get('montant');
+        $desc=$request->get('description');
+        $reservation=$request->get('reservation');
+        $prestId=$request->get('prest');
+        $email=User::where('id',$prestId)->value('emailPaypal');
+		$Reservation=Reservation::find( $reservation);
 
+		
+        $this->provider = new AdaptivePayments('preapproved');
+         
+		$tranche=$montant/4;
+
+		$today= date('Y-m-dTh:i:s' );
+		$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
         $data = [
-            "maxAmountPerPayment"=> 45.00, 
-            "maxNumberOfPayments"=> 20, 
-            'maxTotalAmountOfAllPayments'=> 800.00,
-            "endingDate" => "2022-02-02T20:40:52Z",
-            "startingDate" => "2021-04-27T10:45:52Z",
-            'return_url' => url('payment/success'),
-            'cancel_url' => url('payment/cancel'),
+          //  "maxAmountPerPayment"=> 45.00, 
+            "maxAmountPerPayment"=> $tranche, 
+            "maxNumberOfPayments"=> 4, 
+            'maxTotalAmountOfAllPayments'=> $montant,
+           // "endingDate" => "2022-02-02T20:40:52Z",
+            "endingDate" => $enddate,
+           // "startingDate" => "2021-04-27T10:45:52Z",
+            "startingDate" => $today,
+            'return_url' => URL::route('approved'),
+            'cancel_url' => URL::route('canceled') ,
         ];
 
         $response = $this->provider->createPayRequest($data);
         //dd($response);
-$redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
+$redirect_url = $this->provider->getRedirectUrl('preapproved', $response['preapprovalKey']);
 
 return redirect($redirect_url);
     }
@@ -410,6 +424,31 @@ public function sendMail($to,$sujet,$contenu){
 			});
 	  
 	}
+	
+	
+	
+	
+  public function approved(Request $request)
+    {
+        dd($request);
+
+	return redirect('/');
+    }	
+	
+  public function canceled(Request $request)
+    {
+        dd($request);
+
+	return redirect('/');
+    }	
+
+  public function preapproved(Request $request)
+    {
+        dd($request);
+
+	return redirect('/');
+    }	
+	
 	
 	
 	
