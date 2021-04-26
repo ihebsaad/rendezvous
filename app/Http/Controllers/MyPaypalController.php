@@ -329,7 +329,7 @@ return redirect($redirect_url);
 
 
 //-------------------------------------------Preapproved---------------------------------------------
-    public function getpreapproved()
+    public function getpreapproved(Request $request)
     {
 		$montant=$request->get('montant');
         $desc=$request->get('description');
