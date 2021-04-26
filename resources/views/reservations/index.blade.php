@@ -85,7 +85,7 @@ background-color:#a0d468;
 
 
 $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
-	if( ( $reservation->reste >= 200  &&  $allow_slices     ){
+	if(   $reservation->reste >= 200  &&  $allow_slices     ){
 	// paiement sur tranches
 	}else{
 		
