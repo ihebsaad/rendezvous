@@ -111,7 +111,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 			<?php 
 			
 				if( $reservation->paiement==1) {
-					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;display: inline-block; " class="success statut">Acompte Payé/span>';
+					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;display: inline-block; " class="success statut">Acompte Payé</span>';
 				}
 				if( $reservation->paiement==2) {
 					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;display: inline-block; " class="success statut">Total Payée</span>';
