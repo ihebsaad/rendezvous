@@ -83,7 +83,7 @@ background-color:#a0d468;
               $service_prix+= floatval($service->prix);
             }*/
 
-
+/*
 $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
 	if(   $reservation->reste >= 200  &&  $allow_slices     ){
 	// paiement sur tranches
@@ -91,7 +91,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 		
 		
 	}
-
+*/
            ?>
 			<?php  $montant=$reservation->Net; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
 			<?php $description=$reservation->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservation->service);?>
@@ -137,7 +137,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 		<?php	if( $reservation->paiement ==1 ) { 
 		
 		$allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
-	if( ( $reservation->reste >= 200  &&  $allow_slices     ){
+	if(   $reservation->reste >= 200  &&  $allow_slices     ){
 	// paiement sur tranches
 	
 	
