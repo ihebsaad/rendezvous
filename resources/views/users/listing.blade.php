@@ -299,14 +299,18 @@ background-color:lightgrey;
           <h3><i class="sl sl-icon-present"></i>Configuration de paiement</h3>
                 </div>       
         <div class="row">
-          <div class="col-md-12" >
-            <h2><b> Ajoutez une adresse E-mail de votre compte Paypal.</b></h2>
-            <br>
-			<?php if($user->allow_slices){$checked='checked';} else{$checked='';}  ?>
+		   <div class="col-md-12" >
+
+			 <?php if($user->allow_slices){$checked='checked';} else{$checked='';}  ?>
  			 <label style="font-weight:normal;font-size:22px"> 
                 <input style="width:20px;height:20px"  id="allow_slices"  type="checkbox"   <?php echo $checked; ?>   onchange="changing(this)"     >
 				Permettre le paiement en 4 tranches pour les réservations de 200€ ou plus </label> 
-          <br></div>
+          <br><br>
+		  </div>
+          <div class="col-md-12" >
+            <h2><b> Ajoutez une adresse E-mail de votre compte Paypal.</b></h2>
+            <br>
+</div>
           <form action="{{ route('check.paypal') }}"  >
           <div class="col-md-8">
             <label>Email :</label>
