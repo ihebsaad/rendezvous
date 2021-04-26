@@ -360,7 +360,7 @@ return redirect($redirect_url);
 
         $response = $this->provider->createPayRequest($data);
         // dd($response);
-$redirect_url = $this->provider->getRedirectUrl('preapproved', $response['preapprovalKey']);
+$redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
 
 return redirect($redirect_url);
     }
