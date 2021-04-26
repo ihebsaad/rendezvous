@@ -350,16 +350,16 @@ return redirect($redirect_url);
             "maxAmountPerPayment"=> $tranche, 
             "maxNumberOfPayments"=> 4, 
             'maxTotalAmountOfAllPayments'=> $montant,
-             "endingDate" => "2021-08-02T20:40:52Z",
+             "endingDate" => "2021-09-02T20:40:52Z",
            // "endingDate" => $enddate,
-             "startingDate" => "2021-04-02T10:45:52Z",
+             "startingDate" => "2021-05-02T10:45:52Z",
            // "startingDate" => $today,
             'return_url' => URL::route('approved'),
             'cancel_url' => URL::route('canceled') ,
         ];
 
         $response = $this->provider->createPayRequest($data);
-         dd($response);
+        // dd($response);
 $redirect_url = $this->provider->getRedirectUrl('preapproved', $response['preapprovalKey']);
 
 return redirect($redirect_url);
