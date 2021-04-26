@@ -302,6 +302,11 @@ background-color:lightgrey;
           <div class="col-md-12" >
             <h2><b> Ajoutez une adresse E-mail de votre compte Paypal.</b></h2>
             <br>
+			<?php if($user->allow_slices){$checked='checked';} else{$checked='';}  ?>
+			<input type="checkbox" <?php echo $checked; ?>  /> 
+			 <label><span class="checked">
+                            <input  id="allow_slices"  type="checkbox"   <?php echo $checked; ?>   onchange="changing(this)"     >
+                        </span> Permettre le paiement en 4 tranches pour les réservations de 200€ ou plus </label> 
           </div>
           <form action="{{ route('check.paypal') }}"  >
           <div class="col-md-8">
@@ -1838,12 +1843,18 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 
     	}
     }
-    
+  
+
    	function changing(elm) {
-                var champ = elm.id;
-
-                var val = document.getElementById(champ).value;
-
+               
+	   var champ = elm.id;
+       var val = document.getElementById(champ).value;
+				
+		// cas checkbox allow_slices		
+	 if(champ=='allow_slices'){
+		  if ($('#allow_slices').is(':checked'))
+         {val=1;}else{val=0;} 
+	 }
                 var user = $('#user').val();
                 //if ( (val != '')) {
                 var _token = $('input[name="_token"]').val();
