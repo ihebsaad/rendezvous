@@ -303,10 +303,10 @@ background-color:lightgrey;
             <h2><b> Ajoutez une adresse E-mail de votre compte Paypal.</b></h2>
             <br>
 			<?php if($user->allow_slices){$checked='checked';} else{$checked='';}  ?>
- 			 <label><span class="checked">
-                            <input  id="allow_slices"  type="checkbox"   <?php echo $checked; ?>   onchange="changing(this)"     >
-                        </span> Permettre le paiement en 4 tranches pour les réservations de 200€ ou plus </label> 
-          </div>
+ 			 <label style="font-weight:normal;font-size:22px"> 
+                <input style="width:20px;height:20px"  id="allow_slices"  type="checkbox"   <?php echo $checked; ?>   onchange="changing(this)"     >
+				Permettre le paiement en 4 tranches pour les réservations de 200€ ou plus </label> 
+          <br></div>
           <form action="{{ route('check.paypal') }}"  >
           <div class="col-md-8">
             <label>Email :</label>
