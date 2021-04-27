@@ -105,7 +105,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                     <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> € <?php if ($reservation->recurrent==1) {
                       echo ", <b>abonnement</b>" ;
                     } ?>)<small></td>
-                      <td>{{$reservation->Net  }}</td>
+                      <td style="font-weight:bold">{{$reservation->Net  }}  €</td>
                       <td>{{$reservation->reduction  }}</td>
  	<td>
 		<?php  if($reservation->statut==0){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-danger" >En attente</span>';}  ?>
@@ -130,7 +130,19 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 <?php // paiement= 0 : acompte non payé ?>				
 <?php // paiement= 1 : acompte payé ?>				
 <?php // paiement= 2 : acompte et reste payés ?>				
-		<?php	if( $reservation->paiement ==0 ) { ?> 	<button class="button ">Payer l'acompte</button> <?php  } ?> 
+		<?php	if( $reservation->paiement ==0 ) { ?> 	
+		
+				<form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
+				{{ csrf_field() }}
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+				
+ 				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+ 				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
+ 				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  > 		
+				
+				<button class="button ">Payer l'acompte</button> 
+				</form>		
+		<?php  } ?> 
 		<?php	if( $reservation->paiement ==1 ) { 
 		
 		$allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
@@ -144,7 +156,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
  				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
  				<input class="form-control " name="montant" type="hidden" value="<?php echo  $reservation->reste ; ?>"  >       
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >
-				<button class="button"  >Payer Tranche 1/4 de <?php echo $reservation->reste ; ?> </button>
+				<button class="button"  >Payer Tranche (1/4  de <?php echo $reservation->reste ; ?> €) </button>
 				</form>	
 	<?php			
 	}else{
