@@ -349,8 +349,7 @@ return redirect($redirect_url);
 
 		// $today= date('Y-m-d' ).'T'.date('H:i:s').'Z';
 		 $today= gmdate("Y-m-d\TH:i:s\Z");
-		 $start= date($today,strtotime("+1 hour"));
-
+		 
 		//$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
 		$enddate= date($today,strtotime("+4 months"));
         $data = [
@@ -361,11 +360,11 @@ return redirect($redirect_url);
            //  "endingDate" => "2021-09-02T20:40:52Z",
             "endingDate" => $enddate,
             // "startingDate" => "2021-05-02T10:45:52Z",
-             "startingDate" => $start,
+             "startingDate" => $today,
             'return_url' => URL::route('approved',['email'=>$email,'tranche'=>$tranche,'reservation'=>$reservation,'enddate'=>$enddate]),
             'cancel_url' => URL::route('canceled') ,
         ];
-
+		dd($data);
         $response = $this->provider->createPayRequest($data);
           dd($response);
 $redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
