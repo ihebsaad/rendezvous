@@ -351,7 +351,9 @@ return redirect($redirect_url);
 		 $today= gmdate("Y-m-d\TH:i:s\Z");
 		 
 		//$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
-		$enddate= date($today,strtotime("+4 months"));
+		//$enddate= date($today,strtotime("+4 months"));
+		$enddate=date('Y-m-d\TH:i:s\Z',strtotime("+4 months")) ;
+
         $data = [
           //  "maxAmountPerPayment"=> 45.00, 
             "maxAmountPerPayment"=> $tranche, 
@@ -364,7 +366,7 @@ return redirect($redirect_url);
             'return_url' => URL::route('approved',['email'=>$email,'tranche'=>$tranche,'reservation'=>$reservation,'enddate'=>$enddate]),
             'cancel_url' => URL::route('canceled') ,
         ];
-		dd($data);
+		//dd($data);
         $response = $this->provider->createPayRequest($data);
           dd($response);
 $redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
