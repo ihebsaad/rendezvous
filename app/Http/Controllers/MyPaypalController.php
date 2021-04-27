@@ -343,11 +343,11 @@ return redirect($redirect_url);
          
 		$tranche=$montant/4;
 
-		 $date = new \DateTime('NOW');
+		// $date = new \DateTime('NOW');
        // $today= $date->format('c');  
-        $today= $date->format(\DateTime::ISO8601);
+      //  $today= $date->format(\DateTime::ISO8601);
 
-		//$today= date('Y-m-dTh:i:s' );
+		 $today= date('Y-m-d' ).'T'.date('H:i:s').'Z';
 		//$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
 		$enddate= date($today,strtotime("+4 months"));
         $data = [
