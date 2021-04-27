@@ -343,7 +343,7 @@ return redirect($redirect_url);
          
 		$tranche=$montant/4;
 
-		$date = new DateTime('NOW');
+		$date = new \DateTime('NOW');
         $today= $date->format('c');  
         //$today= $date->format(DateTime::ISO8601);
 
