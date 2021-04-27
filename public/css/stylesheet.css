@@ -18330,3 +18330,59 @@ width: 5px;
 #utf_rev_slider_block .bootstrap-select.btn-group .dropdown-menu.inner{
     height: 150px;
 }
+#dialog_signin_part .mfp-close::after, #dialog_signin_part .mfp-close::before, #small-dialog .mfp-close::after, #small-dialog .mfp-close::before, .small-dialog .mfp-close::after, .small-dialog .mfp-close::before { top: 3px; } 
+   #dialog_signin_part .mfp-close, #small-dialog .mfp-close , .small-dialog .mfp-close { top: 15px; right: 20px; width: 40px; height: 40px; } 
+ #small-dialog .mfp-close, #dialog_signin_part, .mfp-close, .mfp-close:hover , .small-dialog .mfp-close{ color: #fff; }
+ #dialog_signin_part .mfp-close, #small-dialog .mfp-close ,.small-dialog .mfp-close {
+	color: #ff2222;
+	background-color:#fff;
+	border-radius: 30px;
+	top: 20px;
+	right: 20px;
+	width: 34px;
+	height: 34px;
+}
+.small-dialog{
+	background: #ffffff;
+    padding: 30px 20px;
+    padding-top: 0;
+    text-align: left;
+    max-width: 400px;
+    margin: 20px auto;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 4px;
+	}
+	 button.mfp-close {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: -20px;
+	display: block;
+	right: -12px;
+	cursor: pointer!important;
+	z-index: 9999;
+	color: #fff;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	border-radius:6px;
+	margin: 0px;
+	background-color: rgba(255, 255, 255, 0.2);
+	outline: none;
+	transform: translate3d(0, 0, 0);
+}
+#dialog_signin_part .mfp-close::after, #dialog_signin_part .mfp-close::before, #small-dialog .mfp-close::after, #small-dialog .mfp-close::before, .small-dialog .mfp-close::after, .small-dialog .mfp-close::before { top: 3px; } 
+   #dialog_signin_part .mfp-close, #small-dialog .mfp-close , .small-dialog .mfp-close { top: 15px; right: 20px; width: 40px; height: 40px; } 
+ #small-dialog .mfp-close, #dialog_signin_part, .mfp-close, .mfp-close:hover , .small-dialog .mfp-close{ color: #fff; }
+ #dialog_signin_part .mfp-close, #small-dialog .mfp-close ,.small-dialog .mfp-close {
+	color: #ff2222;
+	background-color:#fff;
+	border-radius: 30px;
+	top: 20px;
+	right: 20px;
+	width: 34px;
+	height: 34px;
+}

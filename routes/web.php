@@ -29,6 +29,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 */
+Route::get('/test',function(){return view('test');});
+Route::post('/users/Firstservice','UsersController@FirstService')->name('users.FirstService');
+
+
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
@@ -53,6 +57,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
+	Route::POST('/produit/clientProduits','UsersController@ClientProd')->name('ProductClient');
 
 	Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 	Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
@@ -66,6 +71,12 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/users/removevideo/{id}', 'UsersController@removevideo');
 	Route::get('/users/remove/{id}', 'UsersController@remove');
 	Route::get('/users/destroy/{id}', 'UsersController@destroy');
+	Route::post('/produit/modif','ServicesController@modifP')->name('produit.modif'); 
+    Route::post('/produit/store','ServicesController@storeP')->name('produit.store');
+
+    Route::get('/services/remove_product/{k}','ServicesController@ProductRemove');
+
+	Route::post('/users/productSection','UsersController@SectionProd')->name('users.ProductSection');
 
 	Route::post('/users/parametring','UsersController@parametring')->name('users.parametring');
 	Route::get('/parametres','UsersController@parametres')->name('parametres');
@@ -79,6 +90,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/updating','ServicesController@updating')->name('services.updating');
 	Route::post('/services/modif','ServicesController@modif')->name('services.modif'); 
 	Route::post('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction');
+	Route::post('/services/AssociateProd','ServicesController@insertServiceProd')->name('services.AssociateProd');
 
 		Route::post('/services/CodePromo','ServicesController@codepromo')->name('services.CodePromo');
 	Route::post('/services/reduction_CodePromo','ServicesController@CodePromoUpdate')->name('services.reduction_CodePromo');
@@ -86,6 +98,10 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck');
 	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours');
 	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove');
+	Route::post('/services/addProdtoService','ServicesController@insertServiceProd')->name('produit.Associate');
+	Route::post('/services/removeProdfromServ', 'ServicesController@removeServiceProd')->name('produit.removefromserv'); 
+
+
 
        
 
@@ -198,3 +214,4 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 Route::post('/savejsonfile','CalendrierController@savejsonfile')->name('savejsonfile');
 Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
 Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');
+ 

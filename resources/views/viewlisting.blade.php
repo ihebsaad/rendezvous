@@ -12,23 +12,21 @@
     .legend .brown { background-color: brown; }
     .legend .blue { background-color: blue; }
     .legend .red{ background-color: red; }
-    .legend .green{ background-color: green;}
+     .legend .green{ background-color: green;}
     .legend .pink{ background-color: pink; }
+ 
 </style>
  <?php  $User= auth()->user();
-
  ?>
  <script type="text/javascript">
  	var listcodepromo = [];
  </script>
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"> 
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
- 
-
 <link rel="stylesheet" type="text/css" href="../public/css/slider_carre/carousel.css" />
-
  <link rel="stylesheet" type="text/css" href="{{ asset('public/datetimepicker/css/bootstrap-datetimepicker.min.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
-
+ <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
+ 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
 <style>
@@ -40,7 +38,8 @@ background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermetu
 .datetimepicker { 
 font-size: 15px;
 }
-   </style> 
+   </style>
+
   <?php 
   $images = \App\Image::where('user',$user->id)->get();
   $nbimages =count($images );
@@ -105,7 +104,6 @@ font-size: 15px;
 	  		<?php 
 	    $reviews= \App\Review::where('prestataire',$user->id)->get();
         $countrev= count($reviews);
-
 		  $moy=$moy_qualite=$moy_service=$moy_prix=$moy_emplacement=$moy_espace=0;
 		$total=0; $total_qualite=$total_service=$total_prix=$total_emplacement=$total_espace=0;
 		if($countrev>0){
@@ -154,7 +152,6 @@ font-size: 15px;
 					$servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get();
 					foreach($categories_user as $cat){   $categorie =\App\Categorie::find( $cat->categorie);  
 			if(isset($categorie)){	if($categorie->parent==null){ 	echo ' <span class="listing-tag">'.$categorie->nom.'</span>';}  }
-
 					}
 		   $countadded= DB::table('favoris')->where('prestataire',$user->id)->count(); 
 		  ?> </h2>
@@ -307,7 +304,9 @@ font-size: 15px;
   	<div id="home" class="container tab-pane active"><br>';
   	} ?>
 		  <!------------------------------------------------------ Simple------------------------------------------------>
-    <?php  if (sizeof($services) != 0) { ?>
+
+
+	<?php  if (sizeof($services) != 0) { ?>
 		  <h5>(Vous pouvez réserver plusieurs services) </h5>
 
 		  <div class="row with-forms margin-top-0">
@@ -318,9 +317,14 @@ font-size: 15px;
 					foreach($services as $service){
 						echo '<option  style="font-weight: 17px;" value="'.$service->id.'" prix="'.$service->prix.'">'.$service->nom.'</option>';
 					}
+					
 					?>
+					
+					<meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
 				</select>
 			</div>
+			
 		  </div>		  
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
@@ -404,10 +408,138 @@ font-size: 15px;
 				</div>
           
          </div>
-         <br>
-   
+		 <!------------------section Produits---------->
+		<?php if(isset($User) and $User->user_type=='client' and $user->section_product=='active' ) {
+			?>
+ 		<script></script>
+		<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;"   >
+		<?php } else{?>
+			<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;"  hidden='true' >
+		<?php } ?>
 
-         <div class="col-lg-12 col-md-12 ">
+		 <label>Produits :</label>
+		 <input type="text" id="myText"  value="<?php if(isset($User)) echo $User->id;?>"hidden='true'> 
+		 
+		 <a   href="#Produits1" style="    margin-left: -3.6px;margin-top: 4px;margin-bottom: 1px;font-size: larger;" class="button border sign-in popup-with-zoom-anim">Consulter tous les produits</a>		
+		 <div class="input-group input-group-lg"  style="margin-left: -27px;    height: 152px;width: 293px;2overflow-y: auto; overflow-x: hidden;    vertical-align: middle;">
+		 <ul class="list-group">
+				<?php  foreach($produit as $prod){
+					if(isset($User)){ if($prod->id==$User->FirstService){ ?>
+  					
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+				  	<img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style="    width: 44px;"/>
+					<a  href="#k<?php echo $prod->id;?>"   class="popup-with-zoom-anim">{{$prod->nom_produit}}</a>
+					<div class="qtyButtons" value="<?php echo $prod->prix_unité;?>" style='width: 49px;margin-left: 35px;margin-right: 41px;'> 
+						<input type="text" name="qtyInput"  id="quantity_Produit" value="0">
+						<script>var quantity = $('#quantity_Produit').val();
+									var price= $('#quantity_Produit').val();
+ 									var product_Price=price * quantity;</script>
+						</li>
+			</ul>
+			</div >	
+			<?php }} }} ?>
+			
+
+
+				
+				<br>
+				
+<!---------------model view product---------->
+<?php  foreach($produit as $prod){?>
+<div id="k<?php echo $prod->id;?>" class="zoom-anim-dialog mfp-hide">
+<div class="modal-dialog">
+        <div class="modal-content" style="width: 700px;height: 400px; border-radius: 89px;">
+            <div class="modal-header" style="background: #255f9c;padding-block: 24px;border-radius: 89px;">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title" style="    font-size: x-large;font-style: oblique;color: aliceblue;"><?php echo $prod->nom_produit;?></h3>
+          	  </div>
+				<div class="utf_signin_form style_one">
+                <div class="row">
+                    <div class="col-md-6 product_img">
+                        <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>" class="img-responsive" style="width: 283px;height: 305px;margin-left: auto;">
+                    </div>
+                    <div class="col-md-6 product_content">
+                        <h4>Product Id: <span><?php echo $prod->id;?></span></h4>
+                       
+                        <p style="    font-family: emoji;"><?php echo $prod->description;?>
+						.</p>
+                        <h3 class="cost"><span class="glyphicon glyphicon-usd"></span> <?php echo $prod->prix_unité;?><small class="pre-cost"><span class="glyphicon glyphicon-usd"></span> €</small></h3>
+							<a  href="#Produits1"   class="popup-with-zoom-anim">retourner</a>
+                        <div class="space-ten"></div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>          
+        </div>
+    </div><?php }
+				?>
+<!---------------fin model---------->
+				
+				</div>
+         </div>	              
+<!---------------model all products---------->
+<div id="Produits1" class="zoom-anim-dialog mfp-hide">
+	<div class="modal-dialog" style="background: white;border-radius: 86px;">
+	<div class="modal-content" style="width: fit-content;border-radius: 32px;">
+		<center><h3 style="width: 683px;border-radius: 47px;font-size: 35px;font-family: 'Roboto';margin-bottom: revert;border-style: outset;background-color: #007bff;color: white;">Nos produits</h3></center>	
+
+			<div id="utf_listing_amenities" class="utf_listing_section" style="margin-left: 21px;overflow-y: scroll;height: 300px;border-radius: 47px;width: fit-content;background-color: white;">
+         		<ul class="utf_listing_features " >
+				 <center>
+		 		 <?php foreach ($produit as $prod)
+		  		{
+		    echo '<li style="width: 192px;display: inline-block;height: 195px;    margin-left: 29px;">  ';
+			 
+			echo $prod->nom_produit.'    <br><small><b>'.$prod->prix_unité.' €</b></small>' ;
+			if($prod->image!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="    margin-top: -5px;margin-bottom: 4px;border-radius: 20px;width: 180px;height: 114px;"  /> </a>'; }
+			?>
+			<a  href="#k<?php echo $prod->id;?>" style="margin-right: 24px;"  class="popup-with-zoom-anim">Voir plus</a>
+			<?php if (isset($User)){?> 
+
+			<?php if($User->user_type=="client"){  ?>  
+
+			<button  id="Acheter" value="<?php echo $User->id;?>"onclick='AddtoList(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >
+			Acheter</button>
+			<?php }else{?>
+			<button id="Acheter" hidden="true" value="<?php echo $User->id;?>"onclick='AddtoList(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >Acheter</button>
+              	 <?php }}} ?>    
+				     
+
+				   </center>  
+         	    </ul>
+       		 </div>
+	</div>
+	<script>
+	function AddtoList(id){
+		var idProduit=parseInt(id);
+			var idclient=document.getElementById("Acheter").value;		
+
+          	var _token = $('input[name="_token"]').val();
+         	  $.ajax({
+				headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url:"{{ route('ProductClient') }}",
+                    method:"POST",
+                    data:{idProduit:idProduit,idclient:idclient, _token:_token},
+                    success:function(data){changed=true;
+							
+							$.notify({
+							   message: 'produit ajoutée avec succès',
+							 icon: 'glyphicon glyphicon-check'},{
+							 type: 'success',
+							 delay: 3000,
+							 timer: 1000,	
+							 placement: {
+							 from: "bottom",
+							 align: "right" },					
+						   });		}});}
+
+	</script>
+</div></div>
+		 <!-- Modal -->
+<div class="col-lg-12 col-md-12 ">
          	<br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
@@ -491,9 +623,11 @@ font-size: 15px;
 	 
 			 
 	<?php	 } ?>
-			
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
           <div class="clearfix"></div>
-        <?php	 } ?>  
+    
           <!------------------------------------------------------ /Simple------------------------------------------------>
          		  <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {?>
 
@@ -669,14 +803,12 @@ font-size: 15px;
         width: 100%;
         height: auto;
         }
-
            .video-responsive { 
 			overflow:hidden; 
 			padding-bottom:56.25%; 
 			position:relative; 
 			height:0;
 			}
-
 			.video-responsive iframe {
 			left:0; 
 			top:0; 
@@ -778,6 +910,8 @@ font-size: 15px;
 							<div class="progress">
 								<div class="progress-bar" role="progressbar" style="width: <?php echo intval($moy_prix )* 20 ; ?>%" aria-valuenow="<?php echo intval($moy_prix )* 20 ; ?>" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
+
+
 						</div>
 						<div class="col-lg-1 review_progres_title"><small><strong><?php echo $moy_prix ;?></strong></small></div>
 					</div>
@@ -1340,13 +1474,25 @@ font-size: 15px;
   
  -->
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
  <script type="text/javascript">
+   var service = $('#service').val();
+   if(service==""){document.getElementById("listProduits").style.display='none';
+		}
  	function selectservice(){
  		var happyhours = $('#myhappyhoursId').val();
  		var remiseCarte  =0 ;
 		var montant = 0 ;
 		var service = $('#service').val();
+		
+		
+			if(service!=""){document.getElementById("listProduits").style.display='block';}
+                
+	
 		if (service.length != 0) {
+		
+
 			for (var i = 0; i < service.length; i++) {
 				$('#service option[value='+service[i]+']').each(function(){
 					montant = montant + parseFloat(this.getAttribute('prix'));
@@ -1356,8 +1502,37 @@ font-size: 15px;
 	   
 				});
 			}
+			var idservice=service[0];
+		var valchange=parseInt(idservice);
+		var idchange=document.getElementById("myText").value;
+
+   		var _token = $('input[name="_token"]').val();
+		   $.ajaxSetup({
+                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                                  });
+								  $.ajax({
+                        url:"{{ route('users.FirstService') }}",
+                        method:"POST",
+						data:{idchange:idchange,valchange:valchange, _token:_token},
+                        success:function(data){changed=true;
+							
+                               $.notify({
+                                  message:  'service selectionée avec succès',
+                                icon: 'glyphicon glyphicon-check'},{
+                                type: 'success',
+                                delay: 3000,
+                                timer: 1000,	
+                                placement: {
+                                from: "bottom",
+                                align: "right" },					
+                              });	
+                            }
+                          });
+
+
 		}
-		else {
+		else {			
+
 			document.getElementById('MontantReservation').value = montant;
 			document.getElementById('totalReservation').value = montant;
 		}
@@ -1369,12 +1544,11 @@ font-size: 15px;
 		document.getElementById('totalReservation').value = total;
 		document.getElementById("remiseCarte").innerHTML = (montant * reductioncarte)/100 +"€";
 		//alert(remiseCarte);
-		}
+		} 
 		if (happyhours!=0) {
 		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
 		document.getElementById('RemiseReservation').value = remiseCarte;
 		 document.getElementById("remiseHappyhours").innerHTML = (montant * happyhours)/100 +"€";
-
 		total =montant -remiseCarte ;
 		document.getElementById('totalReservation').value = total;
 		//alert(remiseCarte);
@@ -1433,8 +1607,6 @@ font-size: 15px;
 								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
 								    document.getElementById('RemiseReservation').value = parseFloat(document.getElementById('RemiseReservation').value) + data[4];
 								    document.getElementById('totalReservation').value = parseFloat(document.getElementById('MontantReservation').value)-parseFloat(document.getElementById('RemiseReservation').value);
-
-
                         		}
                         		else {
 									Swal.fire(
@@ -1443,8 +1615,6 @@ font-size: 15px;
 									  'question'
 									)
                         		}
-
-
                         		
                         	}
                         	else {
@@ -1454,11 +1624,9 @@ font-size: 15px;
 								  text: 'Code promo incorrect!',
 								})
                         	}
-
                         }
                     });
  		
-
  	}
  	 	function fonctionvalideRec(){
  		var valCode = $('#mycodepromoRec').val();
@@ -1491,8 +1659,6 @@ font-size: 15px;
 								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
 								    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
 								    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
-
-
                         		}
                         		else {
 									Swal.fire(
@@ -1501,8 +1667,6 @@ font-size: 15px;
 									  'question'
 									)
                         		}
-
-
                         		
                         	}
                         	else {
@@ -1512,11 +1676,9 @@ font-size: 15px;
 								  text: 'Code promo incorrect!',
 								})
                         	}
-
                         }
                     });
  		
-
  	}
  	
  	function SelectServiceRec(a){
@@ -1537,12 +1699,10 @@ font-size: 15px;
     	else if (frq=="Hebdomadaire") {
     		document.getElementById("msgRec").innerHTML = "NB: c'est un service Hebdomadaire (sur "+periode+" semaines) vous devez choisir "+nbr+" dates par semaine.";
     	
-
     	}
     	else if (frq=="Mensuelle") {
     		document.getElementById("msgRec").innerHTML = "NB: c'est un service Mensuelle (sur "+periode+" mois) vous devez choisir "+nbr+" dates par mois.";
     	
-
     	}
  		//alert(frq);
     	
@@ -1551,12 +1711,9 @@ font-size: 15px;
     	
     	for (var i = 0; i < nbr; i++) {
     		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
-
-
     	}
     	document.getElementById("dateRec").innerHTML = y;
     	var reductioncarte = document.getElementById('catrefideliteVal').value ;
-
 		if (reductioncarte!=0) {
 		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
 		document.getElementById('RemiseReservationRec').value = remiseCarte;
@@ -1569,17 +1726,16 @@ font-size: 15px;
 		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
 		document.getElementById('RemiseReservationRec').value = remiseCarte;
 		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
-
 		total =montant -remiseCarte ;
 		document.getElementById('totalReservationRec').value = total;
 		//alert(remiseCarte);
 		}
-
         document.getElementById("dateRec").innerHTML = y;
     	//$("#dateRec").append(y);
     	
     }
  </script>
+ 
 
  <?php if (isset($User)){ ?> 
  <script>
@@ -1644,27 +1800,18 @@ font-size: 15px;
             });
 	 			$('#reserver2').click(function( ){
 	 				var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
-
-
 	 				 var happyhour = $('#myhappyhoursId').val();
                     var montant_tot = parseFloat(document.getElementById('MontantReservationRec').value);
                     var Remise = parseFloat(document.getElementById('RemiseReservationRec').value);
                     var Net = parseFloat(document.getElementById('totalReservationRec').value);
-
-
-
 	 				var e = document.getElementById("servicereccurent");
 					var periode = e.options[e.selectedIndex].getAttribute('periode');
 					 var frq=e.options[e.selectedIndex].getAttribute('frq');
-
-
 	 				//alert(periode);
  	
-
 	 			var _token = $('input[name="_token"]').val();	
                 var nbrService = document.getElementById("nbrServiceRec").value ;
                 var date_reservation = [] ;
-
 			      for (var i = 0; i < nbrService; i++) {
 			      	var d= $('#datetimepickerRec'+((i+1).toString())).val();
 			      	 //alert(d);
@@ -1677,7 +1824,6 @@ font-size: 15px;
                     
                     var remarques = $('#remarques2').val();
                
-
                     var service = $('#servicereccurent').val();
                     var rappel = $('#rappel2').val();
 					//alert(JSON.stringify(service));
@@ -1724,7 +1870,6 @@ font-size: 15px;
 					});	
 					
 					document.getElementById("contactform").reset();
-
                         }
                     });
 		
@@ -1741,8 +1886,15 @@ font-size: 15px;
 <script  src="{{ URL::asset('public/scripts/maps.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/quantityButtons.js')}}"   ></script> 
 <script  src="{{ URL::asset('public/scripts/moment.min.js')}}"   ></script> 
-<script  src="{{ URL::asset('public/scripts/daterangepicker.js')}}"   ></script> 
+<script  src="{{ URL::asset('public/scripts/daterangepicker.js')}}"   ></script>
+<script  src="{{ URL::asset('public/scripts/chosen.min.js')}}"   ></script> 
+
 <script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
+
+
+
+
+
 
 
 <script>
@@ -1754,7 +1906,6 @@ $(function() {
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
-
 	locale: {
 		"daysOfWeek": [
             "Dim",
@@ -1782,7 +1933,6 @@ $(function() {
       format: 'DD/MM/YYYY'
     } ,
      minDate: today,
-
 		isInvalidDate: function(date) {
 		var disabled_start = moment('15/02/2021', 'MM/DD/YYYY');
 		var disabled_end = moment('17/02/2021', 'MM/DD/YYYY');
@@ -1790,7 +1940,6 @@ $(function() {
 		}
 	});
 });
-
 $('#date-picker').on('showCalendar.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-animated');
 });
@@ -1802,7 +1951,6 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').removeClass('calendar-visible');
 	$('.daterangepicker').addClass('calendar-hidden');
 });
-
 function close_panel_dropdown() {
 $('.panel-dropdown').removeClass("active");
 	$('.fs-inner-container.content').removeClass("faded-out");
@@ -1832,7 +1980,8 @@ $("body").mouseup(function() {
 });
 </script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <script src="{{  URL::asset('public/css/slider_carre/carousel.js') }}" type="text/javascript"></script> 
 
 
@@ -1843,17 +1992,19 @@ $("body").mouseup(function() {
 <script src="{{  URL::asset('public/datetimepicker/js/locales/bootstrap-datetimepicker.fr.js') }}"></script>
 
 	<script>
-
   document.addEventListener('DOMContentLoaded', function() {
     var initialLocaleCode = 'fr';
     var localeSelectorEl = document.getElementById('locale-selector');
     var calendarEl = document.getElementById('calpres');
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
+<<<<<<< HEAD
         right: 'timeGridWeek,dayGridMonth,timeGridDay' //listMonth
+=======
+		right: 'dayGridMonth,timeGridWeek,timeGridDay' //listMonth
+>>>>>>> origin/product_section
       },
       
       locale: initialLocaleCode,
@@ -1867,7 +2018,6 @@ $("body").mouseup(function() {
       
       events:<?php echo \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
     });
-
    // calendar.render();
      $('#calendrier_prestataire').on('shown.bs.modal', function () {
     calendar.render();
@@ -1875,19 +2025,15 @@ $("body").mouseup(function() {
     
   
   });
-
   $("#kbs").click(function(){
     $("#calendrier_prestataire").modal({backdrop: false});
 });
-
   $( document ).ready(function() {
-
   var disabledtimes_mapping = ["03/03/2021_22","03/04/2021_8", "03/04/2021_9", "03/04/2021_10"];
   var heures_fermeture_semaine = <?php echo \App\Http\Controllers\CalendrierController::get_tab_heures_fermeture_semaine($user->id); ?> ;
   var heures_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController::get_tab_heures_indisp_rendezvous($user->id); ?> ;
   var jours_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController:: get_tab_jours_indisp_rendezvous($user->id); ?> ;
   var minutes_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController::get_tab_minutes_indisp_rendezvous($user->id); ?> ;
-
   function get_Num_day(datestr)
   {
   	var datek = new Date(datestr);
@@ -1910,14 +2056,10 @@ $("body").mouseup(function() {
     //alert(day);
     var month = date.getMonth()+1; month = month>9?month:"0"+month;
     return  date.getFullYear()+"-"+month+"-"+day;
-
    }
-
    $(document).on('click','.dtpks', function(e){
-
     $(e.target).datetimepicker('show');
     //kapend =$(e.target);
-
    });
         
  $(document).on("focus", ".dtpks", function(){
@@ -1926,7 +2068,6 @@ $("body").mouseup(function() {
    $(this).datetimepicker({
      
        format: "dd-mm-yyyy h:ii",
-
       //format: "dd MM yyyy - hh:ii",
       
         autoclose: true,
@@ -1969,17 +2110,14 @@ $("body").mouseup(function() {
       {
         return ['disabled'];
       }
-
      // if(arra)
     },
-
      onRenderDay: function(date) {
            if(jours_indisp_rendezvous.indexOf(formatDate2(date))>-1)
            {
              return ['disabled'];
            }
         },
-
       onRenderMinute: function(datekb) {
            if(minutes_indisp_rendezvous.indexOf((formatDate2(datekb)+":"+(parseInt(datekb.getUTCHours()))+":"+  (parseInt(datekb.getUTCMinutes()))))>-1)
            {
@@ -1988,22 +2126,17 @@ $("body").mouseup(function() {
         },
      
 });
-
 var chc=new Date();
 ch=chc.getFullYear()+'-'+(chc.getMonth()+1)+'-'+chc.getDate();
 //alert(ch);
 $(this).datetimepicker('setStartDate', ch);
-
 //var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 //var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
 //var day = days[ chc.getDay() ];
 //var month = months[ chc.getMonth() ];
 //alert(chc.getDay());
 });
  });
- 
-  
 
 </script>
 
