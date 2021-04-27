@@ -29,6 +29,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 */
+Route::get('/test',function(){return view('test');});
+Route::post('/users/Firstservice','UsersController@FirstService')->name('users.FirstService');
+
+
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
@@ -48,6 +52,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
+	Route::POST('/produit/clientProduits','UsersController@ClientProd')->name('ProductClient');
 
 	Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 	Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
@@ -65,7 +70,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/produit/store','ServicesController@storeP')->name('produit.store');
 
     Route::get('/services/remove_product/{k}','ServicesController@ProductRemove');
-	
+
 	Route::post('/users/productSection','UsersController@SectionProd')->name('users.ProductSection');
 
 	Route::post('/users/parametring','UsersController@parametring')->name('users.parametring');

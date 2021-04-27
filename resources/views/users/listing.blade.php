@@ -822,8 +822,6 @@ function geocodeAddress(geocoder, resultsMap) {
 						echo '<option  style="font-weight: 17px;" value="'.$prod->id.'" >'.$prod->nom_produit.'</option>';
 					}
 					?>
-              
-                    
 			          	</select>
               </div>     
               <script>
@@ -1018,12 +1016,12 @@ input:checked + .slider:before {
       <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="fa fa-product-hunt"></i>Produits </h3>
-          <script type="text/javascript">
+          <script>
 
     function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'none'){
-          e.style.display = 'block';
+       e = document.getElementById(id);
+       if(e.style.display == 'none' ){
+         e.style.display = 'block';
           var namechange='section_product';
           var valchange="active";
           var idchange=id;
@@ -1036,10 +1034,22 @@ input:checked + .slider:before {
                            url:"{{ route('users.ProductSection') }}",
                           method:"POST",
                           data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
-                             success:function(data){	}});}
+                             success:function(data){
+                               
+                               $.notify({
+ 					                      message: 'Section activé avec succès',
+					                      icon: 'glyphicon glyphicon-check'},{
+ 					                        type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	}});}
           
-       else{
-          e.style.display = 'none';
+       else {
+        e.style.display ='none'
           var namechange='section_product';
           var valchange="desactive";
           var idchange=id;
@@ -1051,16 +1061,40 @@ input:checked + .slider:before {
                            url:"{{ route('users.ProductSection') }}",
                           method:"POST",
                           data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
-                             success:function(data){	}});}
+                             success:function(data){$.notify({
+ 					message: 'section desactivé avec succès',
+					icon: 'glyphicon glyphicon-check'
+					},{
+ 					type: 'success',
+					delay: 3000,
+					timer: 1000,	
+					placement: {
+						from: "bottom",
+						align: "right"
+						},					
+					});	}});}
     }
 
 </script>
-<label name="active" class="switch">
-  <input onclick="toggle_visibility('<?php echo $user->id;?>')"  type="checkbox" checked>
+
+<label class="switch">
+<?php if ($user->section_product== 'active'){
+  ?>
+  <input  id="toggleProd" onclick="toggle_visibility ('<?php echo $user->id;?>')" type="checkbox"   checked />
   <span class="slider round"></span>
 </label>
                 </div>              
         <div class="row" id="<?php echo $user->id;?>">
+        <?php 
+}else if ($user->section_product== 'desactive'){?>    
+<input onclick="toggle_visibility ('<?php echo $user->id;?>')" type="checkbox" />
+<span class="slider round"></span>
+</label>
+                </div>              
+        <div class="row" id="<?php echo $user->id;?>" hidden='true'>
+  <?php }?>
+
+
           <div class="col-md-12">
           <table id="utf_pricing_list_section">
             <tbody class="ui-sortable"  id="produits">
@@ -1079,17 +1113,11 @@ input:checked + .slider:before {
               <div class="fm-input " style="max-width: 150px">
                 <label>type :</label>
                   <output class="button">{{$prod->type}}</output>
-              
-
-                </div>
-
-            
+                </div> 
               <div class="fm-input pricing-name" >
                 <label>Nom :</label>
                 <input type="text" onchange="changeProduct(this)" id="i<?php echo $prod->id;?>" name="nom_produit" value="<?php echo $prod->nom_produit;?>"   >
               </div>
-            
-
               <div class="fm-input pricing-ingredients">
                 <label>Description :</label>
                 <input type="text" onchange="changeProduct(this)" id="h<?php echo $prod->id;?>" name="description" value="<?php echo $prod->description;?>" >
@@ -1104,19 +1132,11 @@ input:checked + .slider:before {
               <div class="fm-close">
               <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('/services/remove_product/'.$prod->id)}}" ><i class="fa fa-remove"></i></a>
               </div>
-              
-              
 
               </td>
-              <td > 
-                
-              
-              
-              
+              <td >  
               </td>
-              
             </tr>
-
             <?php } ?>
             </tbody>
           </table>

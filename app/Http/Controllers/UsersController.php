@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Service;
+use \App\Client_product;
 use \App\Categorie;
 use \App\Image;
 use \App\Reservation;
@@ -181,13 +182,15 @@ class UsersController extends Controller
         $happyhours = Happyhour::where('id_user',$id)->get();
         $today= new DateTime();
         $produit= Produit::where('user',$id)->get();
-
-        //dd($today);
+         //dd($today);
         $myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
         //dd($myhappyhours);
+
          if (Auth::guest())
             return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
         $cuser = auth()->user();
+        $clientProduct= Client_product::where('id_client',$cuser->id)->get();
+
         //dd($cuser->id);
         $test=Cartefidelite::where('id_client',$cuser->id)->where('id_prest',$id)->exists();
         if ($test=='true') {
@@ -220,7 +223,18 @@ class UsersController extends Controller
         
 
     }
-    
+      
+  public function FirstService(Request $request)
+  {
+     
+    $id= $request->get('idchange');
+  
+    $val= $request->get('valchange');
+    User::where('id', $id)->update(array('FirstService' => $val));
+
+
+
+   }
     public function SectionProd(Request $request)
     {
        
@@ -231,15 +245,32 @@ class UsersController extends Controller
   
   
      }
+     public function ClientProd(Request $request)
+     {
+      $val= $request->get('idProduit');
+      $id= $request->get('idclient');
+      $clientProduct= new Client_product([
+        'id_products' => $val,
+        'id_client' => $id,
+       ]);
+
+  $clientProduct->save();
+        
+
+   
+   
+   
+      }
     public function listing($id)
     {
         $cuser = auth()->user();
         $user_type=$cuser->user_type;
         $user_id=$cuser->id;
 
-        
          $services =\App\Service::where('user',$id)->get();
          $produit= Produit::where('user',$id)->get();
+         $clientProduct= Client_product::where('id_client',$cuser->id)->get();
+
 
         
         if(  $user_id == $id || $user_type=='admin' )
@@ -253,7 +284,7 @@ class UsersController extends Controller
         $happyhours = Happyhour::where('id_user',$user_id)->get();
 
 
-        return view('users.listing',  compact('user','id','services','categories','categories_user','serviceWithCode','happyhours','produit')); 
+        return view('users.listing',  compact('user','id','services','categories','categories_user','serviceWithCode','happyhours','produit','clientProduct')); 
         
         }
         
