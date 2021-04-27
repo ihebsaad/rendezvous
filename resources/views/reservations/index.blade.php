@@ -205,7 +205,15 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
         </table>
   
   
-
+		   		 <form class="  " method="POST" id="payment-form"    action="{{ route('getpreapproved') }}" >
+				{{ csrf_field() }}
+                <input class="form-control " name="prest" type="hidden" value="5"  >
+				
+ 				<input class="form-control " name="reservation" type="hidden" value="11"  >
+ 				<input class="form-control " name="montant" type="hidden" value="350"  >       
+ 				<input class="form-control " name="description" type="hidden" value="Tranche 1"  >
+				<button class="button"  >Test préapprove   </button>
+				</form>	
 			
 <!--
 <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/jquery.dataTables.js') }}" ></script>
