@@ -343,18 +343,23 @@ return redirect($redirect_url);
          
 		$tranche=$montant/4;
 
-		$today= date('Y-m-dTh:i:s' );
-		$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
+		$date = new DateTime('NOW');
+        $today= $date->format('c');  
+        //$today= $date->format(DateTime::ISO8601);
+
+		//$today= date('Y-m-dTh:i:s' );
+		//$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
+		$enddate= date($today,strtotime("+4 months"));
         $data = [
           //  "maxAmountPerPayment"=> 45.00, 
             "maxAmountPerPayment"=> $tranche, 
             "maxNumberOfPayments"=> 4, 
             'maxTotalAmountOfAllPayments'=> $montant,
-             "endingDate" => "2021-09-02T20:40:52Z",
-           // "endingDate" => $enddate,
-             "startingDate" => "2021-05-02T10:45:52Z",
-           // "startingDate" => $today,
-            'return_url' => URL::route('approved'),
+           //  "endingDate" => "2021-09-02T20:40:52Z",
+            "endingDate" => $enddate,
+            // "startingDate" => "2021-05-02T10:45:52Z",
+             "startingDate" => $today,
+            'return_url' => URL::route('approved',['email'=>$email,'tranche'=>$tranche,'reservation'=>$reservation,'enddate'=>$enddate]),
             'cancel_url' => URL::route('canceled') ,
         ];
 

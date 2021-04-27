@@ -56,6 +56,7 @@ background-color:#a0d468;
           <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
             <th style="width:10%">Date</th>
              <th  >Service</th>
+             <th>Prix</th>
              <th>Réduction</th>
              <th  >Statut</th>
            <th class="no-sort">Actions</th> 
@@ -65,6 +66,7 @@ background-color:#a0d468;
  <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
                   <th style="width:10%">Date</th>
                  <th>Service</th>
+                 <th>Prix</th>
                  <th>Réduction</th>
 				 <th>Statut</th> 
 				 <th></th> 
@@ -95,7 +97,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
            ?>
 			<?php  $montant=$reservation->Net; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
 			<?php $description=$reservation->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservation->service);?>
-    <?php $montant=$reservation->montant_tot;  ?>            <tr> 
+            <tr> 
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client);?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
@@ -103,6 +105,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                     <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> € <?php if ($reservation->recurrent==1) {
                       echo ", <b>abonnement</b>" ;
                     } ?>)<small></td>
+                      <td>{{$reservation->Net  }}</td>
                       <td>{{$reservation->reduction  }}</td>
  	<td>
 		<?php  if($reservation->statut==0){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-danger" >En attente</span>';}  ?>
@@ -123,45 +126,48 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 			<td>
 			   <?php if($User->user_type =='client' ) {?>   
             <?php if( $reservation->paiement<2) {?> 
-				  <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
-				{{ csrf_field() }}
-                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
-				
- 				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
- 				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
- 				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  > 
+				 
 <?php // paiement= 0 : acompte non payé ?>				
 <?php // paiement= 1 : acompte payé ?>				
 <?php // paiement= 2 : acompte et reste payés ?>				
-		<?php	if( $reservation->paiement ==0 ) { ?> 	<button class="button ">Payer l'acompte   </button> <?php  } ?> 
+		<?php	if( $reservation->paiement ==0 ) { ?> 	<button class="button ">Payer l'acompte</button> <?php  } ?> 
 		<?php	if( $reservation->paiement ==1 ) { 
 		
 		$allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
-	if(   $reservation->reste >= 200  &&  $allow_slices     ){
+	if(   $reservation->Net >= 200  &&  $allow_slices     ){
 	// paiement sur tranches
-	
-	
-	}else{
-		
-		 
-		
-		?> 	<button class="button ">Payer le reste : <?php echo $reservation->reste;?> €</button> 
-		
-		<?php
-		} // paiement sans tranches
-		
-		} // acompte payé ?> 
-				</form>
-				
+	?>
 		   		 <form class="  " method="POST" id="payment-form"    action="{{ route('getpreapproved') }}" >
 				{{ csrf_field() }}
                 <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
 				
  				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
- 				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
+ 				<input class="form-control " name="montant" type="hidden" value="<?php echo  $reservation->reste ; ?>"  >       
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >
-				<button class="button"  >TEST Pré-Approve</button>
-				</form>		
+				<button class="button"  >Payer Tranche 1/4 de <?php echo $reservation->reste ; ?> </button>
+				</form>	
+	<?php			
+	}else{
+		 
+		// payer reste
+		?> 	
+				<form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
+				{{ csrf_field() }}
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+				
+ 				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+ 				<input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
+ 				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  > 		
+		
+				<button class="button ">Payer le reste : <?php echo $reservation->reste;?> €</button> 
+				</form>
+		<?php
+		} // paiement sans tranches
+		
+		} // acompte payé ?> 
+				
+				
+	
 				
 			<?php } ?> 
 		
