@@ -368,7 +368,7 @@ return redirect($redirect_url);
         ];
 		//dd($data);
         $response = $this->provider->createPayRequest($data);
-          dd($response);
+        //  dd($response);
 $redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
 
 return redirect($redirect_url);
