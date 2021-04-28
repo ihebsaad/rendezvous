@@ -103,8 +103,8 @@ class MyPaypalController extends Controller
               
             ],
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-             'return_url' =>URL::route('successpay',['reservation'=>$reservation,'type'=>'acompte','reste'=>$reste]),
-             'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
+             'return_url' =>URL::route('successpay'),
+             'cancel_url' => URL::route('cancelpay'),
         ];
 		
 		
