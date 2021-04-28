@@ -542,7 +542,7 @@ public function sendMail($to,$sujet,$contenu){
             ],
          //   'senderEmail'=>$senderemail,
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-            'return_url' => URL::route('/'),
+            'return_url' => URL::route('home'),
             'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
         ];
 
