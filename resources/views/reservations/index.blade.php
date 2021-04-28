@@ -116,9 +116,7 @@ background-color:#a0d468;
             <th style="width:10%">Date</th>
 
              <th>Service</th>
-             <th>Prix</th>
-             <th>Service</th>
-
+             <th>Prix</th>       
              <th>Réduction</th>
              <th>Statut</th>
            <th class="no-sort">Actions</th> 
@@ -282,12 +280,12 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 				<button class="button"  >Test préapprove   </button>
 				</form>	
 
-  				<input class="form-control " name="amount" type="hidden" value="1000"  >       
+  				<!-- <input class="form-control " name="amount" type="hidden" value="1000"  >       
   				<input class="form-control " name="plan_name" type="hidden" value="test plan"  >       
  				<input class="form-control " name="plan_description" type="hidden" value="desc plan"  >       
 		 	    <button class="button ">Test Payment</button>  
 			 </form>
-
+ -->
       
 			
 			
