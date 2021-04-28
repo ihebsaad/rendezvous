@@ -91,10 +91,28 @@ class MyPaypalController extends Controller
         ];
 
         $response = $this->provider->createPayRequest($data);
-        dd($response['senderEmail']);
+        $email=$response['senderEmail'];
+        $this->provider = new AdaptivePayments('AdaptivePay');
+        $data = [
+            'receivers'  => [
+                [
+                    'email'   => $email,
+                    'amount'  => 50,
+                    
+                ],
+              
+            ],
+            'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
+             'return_url' =>URL::route('successpay',['reservation'=>$reservation,'type'=>'acompte','reste'=>$reste]),
+             'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
+        ];
+		
+		
+		$response = $this->provider->createPayRequest($data);
 //$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
 
-return $response;
+$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+		return redirect($redirect_url);
     }
 
 //-------------------------------------------end---------------------------------------------
