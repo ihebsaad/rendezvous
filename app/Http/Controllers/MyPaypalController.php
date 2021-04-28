@@ -556,7 +556,7 @@ public function sendMail($to,$sujet,$contenu){
     }	
 	
 	
-	    public   function payertranche( $reservation,$email,$montant,$key)
+   public  function payertranche( $reservation,$email,$montant,$key)
     {
 	/* $reservation=$request->get('reservation');
 	 $email=$request->get('email');
@@ -589,12 +589,12 @@ public function sendMail($to,$sujet,$contenu){
 			//https://prenezunrendezvous.com/payertranche/11/mohamed.achraf.besbes@gmail.com/87.5/PA-7TU76130YT554970G
              'senderEmail'=>'haithemsahlia-buyer@gmail.com',
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-            'return_url' => URL::route('home'),
+            'return_url' => URL::route('payertranchesuccess',['id'=>$retrait->id]),
             'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
         ];
 
         $response = $this->provider->createPayRequest($data);
-		
+		/*
 		if( $response['paymentExecStatus'] =='COMPLETED'){
 			// mise à jour statut
 			Retrait::where('id',$retrait->id)->update(
@@ -602,7 +602,7 @@ public function sendMail($to,$sujet,$contenu){
 			);
 			
 		}
-		
+		*/
          
 
 
@@ -614,6 +614,16 @@ public function sendMail($to,$sujet,$contenu){
        
        
     }
+	
+	
+	 public  function payertranchesuccess($id)
+	 {
+		 
+			Retrait::where('id',$id)->update(
+			array('statut'=>1)
+			); 
+		 
+	 }
 	
 
 }
