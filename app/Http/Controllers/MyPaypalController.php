@@ -484,12 +484,12 @@ public function sendMail($to,$sujet,$contenu){
 
 	// creation 4 lignes de retrait	 
 	 
-  		 $retrait1 = new Retrait([ 'email' =>  $email , 'date' =>  $date1, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
-  		 $retrait2 = new Retrait([ 'email' =>  $email , 'date' =>  $date2, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
-  		 $retrait3 = new Retrait([ 'email' =>  $email , 'date' =>  $date3, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
-  		 $retrait4 = new Retrait([ 'email' =>  $email , 'date' =>  $date4, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
+  		 $retrait1 = new Retrait([ 'email' =>  $email , 'date' =>  $date1, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche , 'reservation' =>  $reservation  ]);
+  		 $retrait2 = new Retrait([ 'email' =>  $email , 'date' =>  $date2, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche , 'reservation' =>  $reservation  ]);
+  		 $retrait3 = new Retrait([ 'email' =>  $email , 'date' =>  $date3, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche , 'reservation' =>  $reservation  ]);
+  		 $retrait4 = new Retrait([ 'email' =>  $email , 'date' =>  $date4, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche , 'reservation' =>  $reservation  ]);
 	  
-	  $retrait1->save(); 
+	   $retrait1->save(); 
 	   $retrait2->save(); 
 	   $retrait3->save(); 
 	   $retrait4->save(); 
@@ -514,7 +514,38 @@ public function sendMail($to,$sujet,$contenu){
     }	
 	
 	
-	
+	    public function payertranche( $reservation,$email,$montnant,$date,$key)
+    {
+		//  $format = "Y-m-d H:i:s";
+      //  $deb_seance_1 = \DateTime::createFromFormat($format, $deb_seance_1);
+       
+     // $tranche= Rettrait::where('statut',0)->where('date',)
+        $this->provider = new AdaptivePayments('preapproved-pay');
+
+        $data = [
+            'preapprovalKey'=>$key,
+            'receivers'  => [
+                [
+                    'email'   => $email,
+                    'amount'  => $montant,
+                    
+                ],
+              
+            ],
+         //   'senderEmail'=>$senderemail,
+            'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
+            'return_url' => URL::route('/'),
+            'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
+        ];
+
+        $response = $this->provider->createPayRequest($data);
+		
+         dd($response);
+
+
+    return $response;
+       
+    }
 	
 
 }

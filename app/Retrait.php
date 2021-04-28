@@ -8,6 +8,6 @@ class Retrait extends Authenticatable
 {
     
     protected $fillable = [
-   'email', 'date' ,'statut','preapprovalkey','amount'   ];
+   'email', 'date' ,'statut','preapprovalkey','amount','reservation'   ];
  
 }
