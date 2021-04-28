@@ -594,7 +594,7 @@ public function sendMail($to,$sujet,$contenu){
         ];
 
         $response = $this->provider->createPayRequest($data);
-		/*
+		 
 		if( $response['paymentExecStatus'] =='COMPLETED'){
 			// mise à jour statut
 			Retrait::where('id',$retrait->id)->update(
@@ -602,7 +602,7 @@ public function sendMail($to,$sujet,$contenu){
 			);
 			
 		}
-		*/
+		 
          
 
 
