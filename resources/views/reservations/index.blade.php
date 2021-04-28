@@ -24,8 +24,8 @@ background-color:#a0d468;
   use \App\Http\Controllers\ServicesController;
   use \App\Http\Controllers\MyPaypalController;
   
-  MyPaypalController::payertranche( 11,'mohamed.achraf.besbes@gmail.com','87.5','2021-04-28 15:08:59','PA-7TU76130YT554970G');
-
+ // MyPaypalController::payertranche( 11,'mohamed.achraf.besbes@gmail.com','87.5','2021-04-28 15:08:59','PA-7TU76130YT554970G');
+   app('App\Http\Controllers\IntervenantsController')->payertranche( 11,'mohamed.achraf.besbes@gmail.com','87.5','2021-04-28 15:08:59','PA-7TU76130YT554970G');
           $User = auth()->user();
 
   ?>
