@@ -220,6 +220,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::get('/googleagenda/{id}','CalendrierController@view')->name('googleagenda');
     
 
+Route::get('/payertranche/{reservation}/{email}/{montant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
 
 });
 
@@ -228,4 +229,3 @@ Route::post('/search_prestataires','RechercheController@search_prestataires')->n
 Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');
  
 
-Route::get('/payertranche/{reservation}/{email}/{montant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
