@@ -18,7 +18,7 @@ use \App\Codepromo;
 use \App\Service;
 use \App\Happyhour;
 use \App\ServiceSupp;
-
+use \App\Newdate;
 use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
@@ -27,7 +27,7 @@ use Google_Service_Calendar_EventDateTime;
  use Swift_Mailer;
  use Mail;
  
- use Newdate;
+
  use DateTime;
 
 class ReservationsController extends Controller
