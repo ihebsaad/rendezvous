@@ -514,7 +514,7 @@ public function sendMail($to,$sujet,$contenu){
     }	
 	
 	
-	    public function payertranche( $reservation,$email,$montnant,$date,$key)
+	    public static function payertranche( $reservation,$email,$montnant,$date,$key)
     {
 		//  $format = "Y-m-d H:i:s";
       //  $deb_seance_1 = \DateTime::createFromFormat($format, $deb_seance_1);
