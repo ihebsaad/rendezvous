@@ -598,7 +598,7 @@ public function sendMail($to,$sujet,$contenu){
 		if( $response['paymentExecStatus'] =='COMPLETED'){
 			// mise à jour statut
 			Retrait::where('id',$retrait->id)->update(
-			array('status'=>1)
+			array('statut'=>1)
 			);
 			
 		}
