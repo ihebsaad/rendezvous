@@ -46,8 +46,67 @@ background-color:#a0d468;
             <a class="close" href="#"></a> 
 		  </div>
  @endif
- 
+
+      <div class="row" style="background-color: white"> 
+          <div class="utf_add_listing_part_headline_part">
+            <h3><i class="sl sl-icon-present"></i>Personnalisation des statuts</h3>
+                </div>       
+        <div class="row">
+          <div class="col-md-12">
+          <center> <label><h3>Liste des statuts personnalisés</h3></label></center><br><br>
+             <center> 
+            <table class="table table-striped" id="table_serv_supp" style="width: 80% !important;">
+                <thead>
+                  <tr style="background-color: white">
+                    <th><h3>nom statut</h3></th>
+                    <th><h3>description statut</h3></th>
+                    <th><h3>couleur attribué</h3></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>la prestation commence</td>
+                    <td> description</td>
+                    <td><input type="color" id="myColor" value="#000000" style="border:none; height:25px; width:100px; background-color: transparent;" > </td>
+                    <td><input type="button" style="width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php //echo $rss->id ?>)"></td>
+                    </tr>
+                     <tr>
+                    <td> Prestation en cours</td>
+                    <td> description</td>
+                    <td><input type="color" id="myColor" value="#000000" style="border:none; height:25px; width:100px; background-color: transparent;" > </td>
+                    <td><input type="button" style=" width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php //echo $rss->id ?>)"></td>
+                    </tr>
+                     <tr>
+                    <td>Prestation fini</td>
+                    <td> description</td>
+                    <td><input type="color" id="myColor" value="#000000" style="border:none; height:25px; width:100px; background-color: transparent;"> </td>
+                    <td><input type="button" style=" width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php //echo $rss->id ?>)"></td>
+                    </tr>
+                    <tr>
+                    <td>Prestation fini</td>
+                    <td> description</td>
+                    <td><input type="color" id="myColor" value="#000000" style="border:none; height:25px; width:100px; background-color: transparent;" > </td>
+                    <td><input type="button" style=" width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php //echo $rss->id ?>)"></td>
+                    </tr>
+            
+                </tbody>
+              </table>
+           </center>         
+        </div>         
+      </div>  
+        <div class="row">
+        <center>
+          <center>
+          <a href="#ajoutstatut-dialog" class="button popup-with-zoom-anim">Ajouter</a> </center>         
+        </center>            
+        </div>
+        </div> 
+
+  <br><hr><br>
 	<!--<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
+      <center> <h2><b>Liste des réservations : </b></h2></center>
+            <br>
  
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
@@ -55,11 +114,13 @@ background-color:#a0d468;
            <?php if($User->user_type!='client') {?>  <th>Client</th><?php }?>
           <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
             <th style="width:10%">Date</th>
-             <th  >Service</th>
-             <th>Prix</th>
+
+             <th>Service</th>
+             <th>Prix</th>       
              <th>Réduction</th>
-             <th  >Statut</th>
+             <th>Statut</th>
            <th class="no-sort">Actions</th> 
+           
         </tr>
             <tr>
    <?php if($User->user_type!='client') {?>  <th>Client</th><?php }?>
@@ -69,7 +130,9 @@ background-color:#a0d468;
                  <th>Prix</th>
                  <th>Réduction</th>
 				 <th>Statut</th> 
-				 <th></th> 
+				 <th></th>
+   
+
               </tr>
           </thead>
           <tbody>
@@ -141,7 +204,8 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  > 		
 				
 				<button class="button ">Payer l'acompte</button> 
-				</form>		
+				</form>	
+        <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservation->id)}}" >Annuler/Reporter</a>	
 		<?php  } ?> 
 		<?php	if( $reservation->paiement ==1 ) { 
 		
@@ -189,11 +253,12 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 		  if($reservation->statut==0){	?> 
 		  <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservation->id)}}"><i class="fa fa-check"></i>  Valider</a>
 			 <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler</a>
-
 						      <?php } ?> 
-			 <?php } ?> 
-
+       <a  class="button button-danger popup-with-zoom-anim" style="margin:5px 5px 5px 5px"  onclick="insert_id_res('{{$reservation->id}}')" href="#updatestatut-dialog "><i class="fa fa-close"></i>  Changer Statut</a>
+			 <?php }//affiche_model(this,$reservation->id)} ?> 
+ 
 			</td>
+      
 
 		<!--	  <td>  
            <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@remove', $reservation->id)}}"><i class="fa fa-remove"></i></a>
@@ -209,11 +274,21 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 				{{ csrf_field() }}
                 <input class="form-control " name="prest" type="hidden" value="5"  >
 				
+
  				<input class="form-control " name="reservation" type="hidden" value="11"  >
  				<input class="form-control " name="montant" type="hidden" value="350"  >       
  				<input class="form-control " name="description" type="hidden" value="Tranche 1"  >
 				<button class="button"  >Test préapprove   </button>
 				</form>	
+
+  				<!-- <input class="form-control " name="amount" type="hidden" value="1000"  >       
+  				<input class="form-control " name="plan_name" type="hidden" value="test plan"  >       
+ 				<input class="form-control " name="plan_description" type="hidden" value="desc plan"  >       
+		 	    <button class="button ">Test Payment</button>  
+			 </form>
+ -->
+      
+			
 			
 <!--
 <script type="text/javascript" src="{{ asset('resources/assets/datatables/js/jquery.dataTables.js') }}" ></script>
@@ -233,10 +308,77 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 -->
 
 </div>
+<!--  modal pour ajouter un statut -->
+
+      <div id="ajoutstatut-dialog" class="small-dialog zoom-anim-dialog mfp-hide" style="position: fixed; top:20%; right: 40%">
+          <div class="small_dialog_header">
+            <h3>Ajouter un nouveau statut</h3>
+          </div>
+      <form  method="post" enctype="multipart/form-data"   action="{{ route('periodes_indisp.store') }}"  >
+      {{ csrf_field() }}
+      
+       <div class="utf_signin_form style_one">
+       <input type="hidden" name="user" value=""  >
+              <label>nom de nouveau statut :</label>
+        <div class="fm-input">
+        <input type="text" placeholder="Titre descriptif" id="tdesc"  name="tdesc" required>
+      </div>
+             <label>description </label>
+      <div class="fm-input">
+       <input type="text" placeholder="Titre descriptif" id="tdesc"  name="tdesc" required>
+      </div>
+            <br>
+      <label>Couleur :  </label>
+      <div class="fm-input"> 
+        <center><input type="color" id="myColor" value="#000000" style="border:none; height:25px; width:100%; background-color: transparent;" > </center>
+      </div>
+      <br>
+           <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+
+      </form>       
+     </div>     
+     </div>     
+       
+    <!-- fin modal pour ajouter un statut -->
+
+    <!--  modal pour mettre a jour un statut -->
+
+      <div id="updatestatut-dialog" class="small-dialog zoom-anim-dialog mfp-hide" style="position: fixed; top:20%; right: 40%">
+          <div class="small_dialog_header">
+            <h3>Mettre à jour le statut</h3>
+          </div>
+      <form  method="post" enctype="multipart/form-data"   action=""  >
+      {{ csrf_field() }}
+
+       <input type="hidden" value="" >      
+       <div class="utf_signin_form style_one">
+       <input type="hidden" id="idresstatut" name="idresstatut" value=""  >
+              <label>nom de nouveau statut :</label>
+        <div class="fm-input">
+        <select name="statut_ajour" id="statut_ajour">
+        <option value="volvo">la prestation commence</option>
+         <option value="saab"> Prestation en cours</option>
+         <option value="mercedes">Prestation fini </option>
+        <option value="audi">le client est parti</option>
+      </select>
+      </div>
+            
+      <br>
+           <center><input type="submit" style="text-align:center;color:white;" value="Modifier"></input></center>
+
+      </form> 
+      <br><hr><br>
+       <center><a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler le Statut personnalisé</a></center>
+
+     </div>     
+     </div>   
+       
+    <!-- fin modal pour mettre à jour un statut -->
 </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
-   
     <style>.searchfield{width:100px;}</style>
 <script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" type="text/javascript"></script> 
 
@@ -372,6 +514,12 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                     // alert('ERROR');
                 }
             });
+
+       function insert_id_res($id)
+       {
+        //alert($id);
+        $("#idresstatut").val($id);
+       }
 			
     </script>
 	

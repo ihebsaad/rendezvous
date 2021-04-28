@@ -22,6 +22,18 @@ Auth::routes();
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('/reservations/newDate/{id}','ReservationsController@newDate')->name('reservations.newDate');
+Route::get('/reservations/Addnewdate','ReservationsController@Addnewdate')->name('reservations.Addnewdate');
+Route::get('/reservations/sendnewdate','ReservationsController@sendnewdate')->name('reservations.sendnewdate');
+Route::get('/reservations/selectdate/{id}','ReservationsController@selectdate')->name('reservations.selectdate');
+Route::get('/reservations/changeDate','ReservationsController@changeDate')->name('reservations.changeDate');
+Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name('reservations.AnnulerRes');
+
+Route::get('/reservations/AnnulerReservation','ReservationsController@AnnulerReservation')->name('reservations.AnnulerReservation');
+Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif');
+Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter');
+
+
 
 
 /*
@@ -98,15 +110,15 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck');
 	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours');
 	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove');
+
 	Route::post('/services/addProdtoService','ServicesController@insertServiceProd')->name('produit.Associate');
 	Route::post('/services/removeProdfromServ', 'ServicesController@removeServiceProd')->name('produit.removefromserv'); 
 
 
-
-       
-
- 
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
+	Route::post('/enregistrer_regle_services_supp/', 'ServicesController@enregistrer_regle_services_supp')->name('regle_service_suppls');
+	Route::get('/supprimer_serv_suppl/{id}', 'ServicesController@supprimer_serv_suppl')->name('supprimer_serv_suppl');
+	
 
 Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
 Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove');
