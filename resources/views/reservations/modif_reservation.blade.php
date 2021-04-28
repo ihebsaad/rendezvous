@@ -96,7 +96,7 @@ background-color:#a0d468;
                 '',
                 'success'
               ).then((result) => {
-                  window.location.replace("//localhost/rendezvous/reservations");
+                  window.location.replace("https://prenezunrendezvous.com/reservations");
                 })
 
                }
@@ -121,7 +121,7 @@ background-color:#a0d468;
                 'Votre acompte sera remboursé',
                 'success'
               ).then((result) => {
-                  window.location.replace("//localhost/rendezvous/reservations");
+                  window.location.replace("https://prenezunrendezvous.com/reservations");
                 })
               
                }
