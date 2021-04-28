@@ -13,6 +13,7 @@ use \App\Produit;
 use \App\Service;
 use \App\Codepromo;
 use \App\Happyhour;
+use \App\ServiceSupp;
 
 class ServicesController extends Controller
 {
@@ -260,11 +261,23 @@ class ServicesController extends Controller
     }
     public function HappyHoursRemove($k)
     {
-      DB::table('happyhours')->where('id', $k)->delete();
-      
+      DB::table('happyhours')->where('id', $k)->delete();      
      
      return back();
     }
+
+     public function enregistrer_regle_services_supp(Request $req)
+    {
+     //dd($req->all()); 
+     $servicessuppl = new ServiceSupp([
+             'prestataire' => trim($req->get('prestataire')),
+             'regle' => trim($req->get('regle')),    
+         ]);  
+     $servicessuppl->save();   
+     
+     return back();
+    }
+
   
     public function addP(Request $request)
   {
@@ -387,6 +400,22 @@ class ServicesController extends Controller
            Produit::where('id', $id)->update(array($champ => $val));
  
      }
-  
+
+
+    public function supprimer_serv_suppl($id)
+    {
+     //dd($req->all()); 
+      //return($id);
+      $serv_supp=ServiceSupp::where('id', $id)->first();
+      $serv_supp->delete();
+      //DB::table('services_suppl')->where('id', $id)->delete();     
+      return 'ok';
+
+    }
+
+    
+	
+	
+
  }
 

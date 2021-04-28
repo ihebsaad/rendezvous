@@ -174,7 +174,7 @@ background-color:lightgrey;
     .legend .brown { background-color: brown; }
     .legend .blue { background-color: blue; }
     .legend .red{ background-color: red; }
-    .legend .green{ background-color:green; }
+    .legend .green{ background-color:lightgreen; }
     .legend .pink{ background-color:pink; }
 </style>
 <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
@@ -1373,31 +1373,26 @@ if (x=="Numérique") {
            
             <center> <label><h3>Liste des règles pour les services supplémentaires</h3></label></center><br><br>
              <center> 
-            <table class="table table-striped" id="" style="width: 70% !important;">
+            <table class="table table-striped" id="table_serv_supp" style="width: 80% !important;">
                 <thead>
                   <tr>
-                    <th><h2>Services additionnées</h2></th>
-                    <th><h2>Service offert</h2></th>
+                    <th><h3>Services additionnées</h3></th>
+                    <th><h3>Service(s) et/ou produit(s) offert(s)</h3></th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php use App\ServiceSupp; $regle_ser_supp=ServiceSupp::where('prestataire',$user->id)->get();?>
+                  <?php foreach($regle_ser_supp as $rss) {
+                  //dd($rss->re) 
+                     $res=explode('=', $rss->regle);
+                    ?>
                   <tr>
-                    <td>"pizza + pizza"</td>
-                    <td>"1 pizza"</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>"lavage interne + lavage externe"</td>
-                    <td>"1 produit de brillance des jantes"</td>
-                    <td>X</td>
-                  </tr> 
-                   <tr>
-                    <td>"sandiwtch + pizza + pizza"</td>
-                    <td>"2 pizzas"</td>
-                    <td>X</td>
-                  </tr>
-                
+                    <td>{{$res[0]}}</td>
+                    <td>{{$res[1]}}</td>
+                    <td><input type="button" style="width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php echo $rss->id ?>)"></td>
+                  </tr>                 
+                <?php } ?>
                 </tbody>
               </table>
            </center> 
@@ -1410,8 +1405,8 @@ if (x=="Numérique") {
         <?php $nbcomm=0;?>
 
           <div class="row">
-          <center> <label><h3>Créez une nouvelle règle pour les services supplémentaires</h3></label></center><br><br>
-          <div class="col-md-6 com_wrapper" style="border-right-style: solid;">          
+          <center> <label><h3>Créez une nouvelle règle pour offrir un service ou des produits supplémentaires</h3></label></center><br><br>
+          <div class="col-md-5 com_wrapper" style="border-right-style: solid;">          
          <center> <label><h3>Addition des services</h3></label></center><br>
       <?php if($nbcomm<3){?>
        <div class="row">
@@ -1425,44 +1420,76 @@ if (x=="Numérique") {
       </div> 
     <?php } ?>
     </div>
-     <div class="col-md-6" >
+    <div class="col-xs-1" style="width: 5px !important;" >
+    </div>
+     <div class="col-md-6" style="border-style: dotted; ">
       <center> <label><h3>Résultat pour l'addition des services</h3></label></center><br>
       <div class="row">
         <div class="col-md-3" >
       <center><label>Service ou produit offert (résultat): </label></center>
       </div>
       <div class="col-md-6" >
-    <center> <select name="cars" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
+    <center> <select name="cars" id="resser1" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
      </div>
       <div class="col-md-1" >
         avec quatité 
      </div>
       <div class="col-md-2" >
-      <input type="number" value="0" min="0" max="10">
+      <input id="qteres1" type="number" value="1" min="1" max="10">
+     </div>
+    </div>
+
+     <div class="row">
+        <div class="col-md-3" >
+      <center><label>Service ou produit offert (résultat): </label></center>
+      </div>
+      <div class="col-md-6" >
+    <center> <select name="cars" id="resser2" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
+     </div>
+      <div class="col-md-1" >
+        avec quatité 
+     </div>
+      <div class="col-md-2" >
+      <input id="qteres2" type="number" value="1" min="1" max="10">
+     </div>
+    </div>
+
+     <div class="row">
+        <div class="col-md-3" >
+      <center><label>Service ou produit offert (résultat): </label></center>
+      </div>
+      <div class="col-md-6" >
+    <center> <select name="cars" id="resser3" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
+     </div>
+      <div class="col-md-1" >
+        avec quatité 
+     </div>
+      <div class="col-md-2" >
+      <input id="qteres3" type="number" value="1" min="1" max="10">
      </div>
     </div>
       </div> 
       </div>
       <div class="row">
        <br>
-      <center> <a href="javascript:void(0)" class="button popup-with-zoom-anim">Valider</a> </center>
+      <center> <a onclick='ecrire_formule()' href="javascript:void(0)" class="button">Valider</a> </center>
        <br>
       </div> 
       <div class="row"> 
-       <form method="post" action="" >  
+       <form method="post" action="{{route('regle_service_suppls')}}" >  
        @csrf
-       <input type="hidden"  value="{{$user->id}}" name="user_ser_supp">  
+       <input type="hidden"  value="{{$user->id}}" name="prestataire">  
         <hr>
         <br>
        <center>
         <label>Règle totale obtenue: </label>
-        <input autocomplete="off"  type="text"  size="80" style="width:80% ; " id="restotal"  name="restotal" value=""/> 
+        <input autocomplete="off"  type="text"  size="80" style="width:80% ; " id="restotal"  name="regle" value=""/> 
       </center>
     
       </div>
       <div class="row">
        <br>
-      <center> <input type="submit" class="button popup-with-zoom-anim" value="Enregistrer" style="color:white"> </center>
+      <center> <input type="submit" class="button" value="Enregistrer" style="color:white"> </center>
        <br>
       </div> 
       </form>
@@ -2678,10 +2705,105 @@ var obj={
     });
 
      $(comwrapper).on('change', '.cars', function(e){
-       //alert($(this).find(":selected").text()) ;//Decrement field counter
+       //alert($(this).find(":selected").text()) ;//Decrement field counter       
     });
 
 });
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+  function ecrire_formule() {  
+  var inputs = $(".cars");
+  var formule='';
+       for(var i = 0; i < inputs.length; i++){
+          if($(inputs[i]).find(":selected").text())
+          {
+            if(i!=0)
+            {
+            formule+=' + '+$(inputs[i]).find(":selected").text();
+            }
+            else
+            {
+            formule+=$(inputs[i]).find(":selected").text();
+            }
+          }
+        } 
+
+        //alert(formule);  
+
+        var res1=$("#resser1").find(":selected").text();
+        var qteres1=$("#qteres1").val();
+        var res2=$("#resser2").find(":selected").text();
+        var qteres2=$("#qteres2").val();
+        var res3=$("#resser3").find(":selected").text();
+        var qteres3=$("#qteres3").val();
+
+        if(!res1 && !res2 && !res3 || !formule)
+        {
+          if(!res1 && !res2 && !res3)
+          {
+            swal("Vous devez saisir au moins un service ou un produit à offrir !");
+          }
+           else{
+            swal("Vous devez saisir au moins un service dans la section Addition des services !");
+          }
+        }
+        else
+        {
+          if(res1)
+          {
+            formule+=' = '+qteres1+' '+res1;
+          }
+          if(res2)
+          {
+             if(!res1)
+             {
+              formule+=' = '+qteres2+' '+res2;
+             }
+             else
+             {
+              formule+=' + '+qteres2+' '+res2;
+             }
+          }
+
+          if(res3)
+          {
+             if(!res2 && !res1)
+             {
+              formule+=' = '+qteres3+' '+res3;
+             }
+             else
+             {
+              formule+=' + '+qteres3+' '+res3;
+             }
+          }
+
+         $('#restotal').val(formule);
+
+        }
+
+                
+ //myWindow=window.open('lead_data.php?leadid=1','myWin','width=400,height=650')
+}
+
+function deleteRow(r,id) {
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("table_serv_supp").deleteRow(i);
+
+  //var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:"{{ url('/') }}"+"/supprimer_serv_suppl/"+id,
+            method:"get",
+            data:{id:id},
+            success:function(data){
+             // alert(data);
+              swal("Règle supprimée avec succès");
+            }
+        });
+
+
+}
 </script>
 
 <?php

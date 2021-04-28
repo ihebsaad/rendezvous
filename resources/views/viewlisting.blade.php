@@ -245,6 +245,34 @@ font-size: 15px;
               	 <?php } ?>      
           </ul>
         </div>
+        <div id="utf_listing_overview" class="utf_listing_section">
+          <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> <i class="sl sl-icon-present">
+          	<?php /*$dt=new dateTime(); echo $dt->format("Y-m-d H:i");*/ ?>
+          </i> Services supplémentaires</h3>
+          <div style="max-height: 120px; overflow-y: auto;">
+		<table class="table" style="font-size: 150%; "  >
+                <thead>
+                  <tr>
+                    <th><h3><b>Services additionnées</b></h3></th>
+                    <th><h3><b>Service(s) et/ou produit(s) offert(s)</b></h3></th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php use App\ServiceSupp; $regle_ser_supp=ServiceSupp::where('prestataire',$user->id)->get();?>
+                  <?php foreach($regle_ser_supp as $rss) {
+                  //dd($rss->re) 
+                     $res=explode('=', $rss->regle);
+                    ?>
+                  <tr>
+                    <td>{{$res[0]}}</td>
+                    <td>{{$res[1]}}</td>                  
+                  </tr>                 
+                <?php } ?>
+                </tbody>
+</table></div>
+			  
+        </div>
       </div>
 	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
 	  

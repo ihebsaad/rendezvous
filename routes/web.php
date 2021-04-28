@@ -98,15 +98,15 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck');
 	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours');
 	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove');
+
 	Route::post('/services/addProdtoService','ServicesController@insertServiceProd')->name('produit.Associate');
 	Route::post('/services/removeProdfromServ', 'ServicesController@removeServiceProd')->name('produit.removefromserv'); 
 
 
-
-       
-
- 
 	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
+	Route::post('/enregistrer_regle_services_supp/', 'ServicesController@enregistrer_regle_services_supp')->name('regle_service_suppls');
+	Route::get('/supprimer_serv_suppl/{id}', 'ServicesController@supprimer_serv_suppl')->name('supprimer_serv_suppl');
+	
 
 Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
 Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove');

@@ -17,6 +17,7 @@ use \App\Cartefidelite;
 use \App\Codepromo;
 use \App\Service;
 use \App\Happyhour;
+use \App\ServiceSupp;
 
 use Google_Client;
 use Google_Service_Calendar;
@@ -360,6 +361,19 @@ class ReservationsController extends Controller
             }
 
 		}
+		/*partie analyse de résevation avec les services supplémentaires*/
+
+		/*$services_res=explode(', ',$service_name);
+		$services_supp=ServiceSupp::where('id',$prestataire->id)->get();
+		foreach ($services_supp as $ss) {
+
+			$ser_supp=explode('=',$ss->regle);
+			$ser_sup2=explode('+',$ser_supp[0]);
+			
+		}*/
+
+		/*fin partie analyse de résevation avec les services supplémentaires*/
+
          $reservation->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix));
 		return($service_prix); 
 		$service = \App\Service::find($request->get('service'));
