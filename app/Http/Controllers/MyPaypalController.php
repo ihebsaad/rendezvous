@@ -87,7 +87,7 @@ class MyPaypalController extends Controller
         ];
 
         $response = $this->provider->createPayRequest($data);
-        //dd($response);
+        dd($response);
 //$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
 
 return $response;
