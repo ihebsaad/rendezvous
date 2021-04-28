@@ -477,7 +477,7 @@ public function sendMail($to,$sujet,$contenu){
 	 $date4=$request->get('date4');
 	// $preapprovalKey=$request->get('preapprovalKey');
 	// get key from session
-	  $preapprovalKey = \Session::get('preapprovalKey');
+	  $preapprovalkey = \Session::get('preapprovalKey');
 
 
 	// creation 4 lignes de retrait	 
