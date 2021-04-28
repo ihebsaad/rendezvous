@@ -57,6 +57,8 @@ background-color:#a0d468;
           <h3><i class="sl sl-icon-refresh"></i>Annuler la reservation </h3>
                 </div>       
         <div class="row">
+        <form class="  " method="get"  action="{{ route('reservations.annule',$idres) }}" >
+
           <div class="col-md-12" >
             <h2> Merci de remettre l`acompte à votre client. </h2>
             <br>
@@ -64,8 +66,9 @@ background-color:#a0d468;
           <input type="" name="idres" value="" hidden>
           </div>
           <div class="col-md-12">
-          <input type="submit" style="text-align:center;color:white;margin-top: 30px" value="Remettre l`acompte" onclick="functionEnvoyer()" ></input>
-        </div> 
+          <input type="submit" style="text-align:center;color:white;margin-top: 30px" value="Remettre l`acompte" ></input>
+          <input type="" name="idres" value="{{$idres}}" hidden>
+        </div> </form>
             
 
           </div></div>
@@ -77,18 +80,7 @@ background-color:#a0d468;
 </div> </div></div>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
-	<script type="text/javascript">
-
-function functionEnvoyer() {
-   alert("Nous sommes en train de le développer ");
-
-
-
-
-    
-};
-  
-  </script>
+	
  @endsection
 
  

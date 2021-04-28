@@ -275,7 +275,7 @@ class ReservationsController extends Controller
 		$message='Bonjour,<br>';
 		$message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé par votre client '.$client->name.' '.$client->lastname.' .<br>';
 			
-		$message.='Merci de lui remettre l`acompte. (<a href="https://prenezunrendezvous.com/reservations/AnnulerReservation" > Lien </a>) <br>';	
+		$message.='Merci de lui remettre l`acompte. (<a href="https://prenezunrendezvous.com/reservations/AnnulerReservation/'.$Reservation->id.'" > Lien </a>) <br>';	
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
@@ -286,11 +286,12 @@ class ReservationsController extends Controller
     	
     	return "ko";
     }	
-    public function AnnulerReservation()
+    public function AnnulerReservation($id)
    {
+   	$idres=$id;
    
     	
-    	return view('reservations.annuler_reservation');
+    	return view('reservations.annuler_reservation', compact('idres'));
     }		
     public function index()
     {

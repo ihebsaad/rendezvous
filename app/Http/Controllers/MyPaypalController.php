@@ -74,7 +74,48 @@ class MyPaypalController extends Controller
         
     }   
 //-----------------------------------------------end------------------------------------------------
+    //-------------------------------------------PaymentDetails---------------------------------------------
+    public function PaymentDetails($id)
+    {
+    	$Reservation=Reservation::find($id);
 
+
+        $this->provider = new AdaptivePayments('PaymentDetails');
+
+        $data = [
+            
+            'key' => $Reservation->payKey,
+            'return_url' => url('payment/success'),
+            'cancel_url' => url('payment/cancel'),
+            
+        ];
+
+        $response = $this->provider->createPayRequest($data);
+        $email=$response['senderEmail'];
+        $this->provider = new AdaptivePayments('AdaptivePay');
+        $data = [
+            'receivers'  => [
+                [
+                    'email'   => $email,
+                    'amount'  => 50,
+                    
+                ],
+              
+            ],
+            'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
+             'return_url' =>URL::route('successpay'),
+             'cancel_url' => URL::route('cancelpay'),
+        ];
+		
+		
+		$response = $this->provider->createPayRequest($data);
+//$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+
+$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+		return redirect($redirect_url);
+    }
+
+//-------------------------------------------end---------------------------------------------
 
     //-------------------------------------------payAcompteReservation---------------------------------------------
     public function payReservation(Request $request)
@@ -120,7 +161,7 @@ class MyPaypalController extends Controller
 		 //dd( $response);
 		//$key='';
 		//if(isset($response['payKey'])){$key=$response['payKey'];}
-
+		Reservation::where('id',$reservation)->update(array('payKey' => $response['payKey']));
 		//$redirect_url = $this->provider->getRedirectUrl('approved', $key);
 		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
 		return redirect($redirect_url);
@@ -168,6 +209,7 @@ class MyPaypalController extends Controller
 //-------------------------------------------successPay------------------------------------------
     public function successpay(Request $request)
     {
+
  
          $reservation=$request->get('reservation');
          $type=$request->get('type');
