@@ -518,11 +518,11 @@ public function sendMail($to,$sujet,$contenu){
     {
 	 $reservation=$request->get('reservation');
 	 $email=$request->get('email');
-	 $montnant=$request->get('montnant');
+	 $montant=$request->get('montant');
 	// $date=$request->get('date');
 	 $key=$request->get('key');
  
-		//( $reservation,$email,$montnant,$date,$key)
+		//( $reservation,$email,$montant,$date,$key)
  
 		//  $format = "Y-m-d H:i:s";
       //  $deb_seance_1 = \DateTime::createFromFormat($format, $deb_seance_1);

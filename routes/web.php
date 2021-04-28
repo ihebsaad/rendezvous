@@ -228,4 +228,4 @@ Route::post('/search_prestataires','RechercheController@search_prestataires')->n
 Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');
  
 
-Route::get('/payertranche/{reservation}/{email}/{montnant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
+Route::get('/payertranche/{reservation}/{email}/{montant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
