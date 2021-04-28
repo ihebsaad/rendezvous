@@ -227,3 +227,5 @@ Route::post('/savejsonfile','CalendrierController@savejsonfile')->name('savejson
 Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
 Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');
  
+
+Route::get('/payertranche/{reservation}/{email}/{montnant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
