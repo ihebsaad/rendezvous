@@ -204,7 +204,8 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  > 		
 				
 				<button class="button ">Payer l'acompte</button> 
-				</form>		
+				</form>	
+        <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservation->id)}}" ><i class="fa fa-close"></i>  Annuler/Reporter</a>	
 		<?php  } ?> 
 		<?php	if( $reservation->paiement ==1 ) { 
 		
