@@ -108,7 +108,7 @@ class ReservationsController extends Controller
 		$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br>';
 		$message.='<b>Date :</b> '.$date .' Heure : '.$heure .'<br>';
 		$message.='Merci de proposer maximum 15 dates avec des horaires qui vous conviennent. 
-		(<a href="https://localhost/rendezvous/reservations/newDate/'.$Reservation->id.'" > Lien </a>). <br>';
+		(<a href="https://prenezunrendezvous.com/reservations/newDate/'.$Reservation->id.'" > Lien </a>). <br>';
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
@@ -181,7 +181,7 @@ class ReservationsController extends Controller
 		$message.='Pour le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) .<br>';
 		$message.='votre prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a> a vous proposé des nouvelles dates. <br>';
 		$message.='Merci de choisir une seule date :  
-		(<a href="https://localhost/rendezvous/reservations/selectdate/'.$Reservation->id.'" > Lien </a>). <br>';
+		(<a href="https://prenezunrendezvous.com/reservations/selectdate/'.$Reservation->id.'" > Lien </a>). <br>';
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
@@ -244,7 +244,7 @@ class ReservationsController extends Controller
 			
 		$message.='<b>ATTENTION :</b> <br>';	
 		$message.='-Vous avez le droit d`annuler ou de reporter le rendez-vous 5 jours avant le rdv. 
-		(<a href="https://localhost/rendezvous/reservations/modifier/'.$Reservation->id.'" > Lien </a>). <br>';
+		(<a href="https://prenezunrendezvous.com/reservations/modifier/'.$Reservation->id.'" > Lien </a>). <br>';
 		$message.='-Au delà des 5 jours avant le rendez vous votre accompte ne sera pas remboursé.  <br>';
 		$message.='-Au delà des 5 jours, Il vous sera impossible d`annuler ou de reporter le rendez-vous.  <br>';
 		$message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
@@ -275,7 +275,7 @@ class ReservationsController extends Controller
 		$message='Bonjour,<br>';
 		$message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé par votre client '.$client->name.' '.$client->lastname.' .<br>';
 			
-		$message.='Merci de lui remettre l`acompte. (<a href="https://localhost/rendezvous/reservations/AnnulerReservation" > Lien </a>) <br>';	
+		$message.='Merci de lui remettre l`acompte. (<a href="https://prenezunrendezvous.com/reservations/AnnulerReservation" > Lien </a>) <br>';	
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
