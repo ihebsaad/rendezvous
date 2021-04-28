@@ -2028,11 +2028,9 @@ $("body").mouseup(function() {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-<<<<<<< HEAD
+
         right: 'timeGridWeek,dayGridMonth,timeGridDay' //listMonth
-=======
-		right: 'dayGridMonth,timeGridWeek,timeGridDay' //listMonth
->>>>>>> origin/product_section
+
       },
       
       locale: initialLocaleCode,
