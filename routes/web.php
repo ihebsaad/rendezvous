@@ -31,6 +31,7 @@ Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name
 
 Route::get('/reservations/AnnulerReservation','ReservationsController@AnnulerReservation')->name('reservations.AnnulerReservation');
 Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif');
+Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter');
 
 
 
