@@ -47,10 +47,6 @@ background-color:#a0d468;
 		  </div>
  @endif
 
- <option value="saab"> Prestation en cours</option>
-         <option value="mercedes">Prestation fini </option>
-        <option value="audi">le client est parti</option>
-
       <div class="row" style="background-color: white"> 
           <div class="utf_add_listing_part_headline_part">
             <h3><i class="sl sl-icon-present"></i>Personnalisation des statuts</h3>
