@@ -540,6 +540,7 @@ public function sendMail($to,$sujet,$contenu){
                 ],
               
             ],
+			//https://prenezunrendezvous.com/payertranche/11/mohamed.achraf.besbes@gmail.com/87.5/PA-7TU76130YT554970G
              'senderEmail'=>'haithemsahlia-buyer@gmail.com',
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
             'return_url' => URL::route('home'),
