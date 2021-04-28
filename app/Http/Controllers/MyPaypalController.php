@@ -212,7 +212,14 @@ class MyPaypalController extends Controller
 
     	}
     	//-----------------------------------------------------------------------------------------------------
+		 // Email
+		$Reservation = \App\Reservation::find( $reservation);
 		
+ 		$client =  \App\User::find($Reservation->client);
+		$prestataire =  \App\User::find($Reservation->prestataire);
+		$serviceid = $Reservation->service;
+		
+		$service = \App\Service::find( $serviceid) ;
 		if($type=='acompte'){
 				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste));	
 				$date = new DateTime($Reservation->date_reservation);
@@ -244,14 +251,7 @@ class MyPaypalController extends Controller
   		
 		
 		
-		 // Email
-		$Reservation = \App\Reservation::find( $reservation);
 		
- 		$client =  \App\User::find($Reservation->client);
-		$prestataire =  \App\User::find($Reservation->prestataire);
-		$serviceid = $Reservation->service;
-		
-		$service = \App\Service::find( $serviceid) ;
 		
 		
     	
