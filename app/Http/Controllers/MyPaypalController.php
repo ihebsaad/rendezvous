@@ -8,6 +8,7 @@ use App\Invoice;
 use App\IPNStatus;
 use App\Item;
 use App\User;
+use App\Retrait;
 use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -472,9 +473,19 @@ public function sendMail($to,$sujet,$contenu){
 
 	// creation 4 lignes de retrait	 
 	 
-	
+  		 $retrait1 = new Retrait([ 'email' =>  $email , 'date' =>  $date1, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
+  		 $retrait2 = new Retrait([ 'email' =>  $email , 'date' =>  $date2, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
+  		 $retrait3 = new Retrait([ 'email' =>  $email , 'date' =>  $date3, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
+  		 $retrait4 = new Retrait([ 'email' =>  $email , 'date' =>  $date4, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche  ]);
+	  
+	  $retrait1->save(); 
+	   $retrait2->save(); 
+	   $retrait3->save(); 
+	   $retrait4->save(); 
+		  
+	 return redirect('/reservations')->with('success', ' Accord fait avec succès  ');
 
-	return redirect('/');
+ 
     }	
 	
   public function canceled(Request $request)
