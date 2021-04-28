@@ -70,7 +70,228 @@ class ReservationsController extends Controller
         }
     }
 
+	public function modifier($id)
+    {
+
+
+    	$reservation = Reservation::where('id',$id)->first();
+    	//dd($reservation);
+    	$prestataire=User::find($reservation->prestataire);
+    	$date = new DateTime($reservation->date_reservation);
+		$date = $date->format('d-m-Y');
+		$today = new DateTime();
+		$today = $today->format('d-m-Y');
+		$posible = strtotime($today. ' + 5 days')<strtotime($date);
+
+		$heure = new DateTime($reservation->date_reservation);
+		$heure = $heure->format('H:i');
+		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
+    	return view("reservations.modif_reservation", compact('reservation','date','heure','name','posible'));
+    }
+    public function reporter(Request $request)
+    {
+ 
+
+    	$idReservation = $request->get('idReservation');
+    	$Reservation = Reservation::where('id',$idReservation)->first();
+    	//dd($Reservation);
+    	$client=User::find($Reservation->client);
+    	$date = new DateTime($Reservation->date_reservation);
+		$date = $date->format('d-m-Y');
+		$heure = new DateTime($Reservation->date_reservation);
+		$heure = $heure->format('H:i');
+		$prestataire=User::find($Reservation->prestataire);
+
+		// Email au prest
+		$message='Bonjour,<br>';
+		$message.='Votre client '.$client->name.' '.$client->lastname.' veut reporter son rdv .<br>';
+		$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br>';
+		$message.='<b>Date :</b> '.$date .' Heure : '.$heure .'<br>';
+		$message.='Merci de proposer maximum 15 dates avec des horaires qui vous conviennent. 
+		(<a href="https://localhost/rendezvous/reservations/newDate/'.$Reservation->id.'" > Lien </a>). <br>';
 		
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+		
+ 	    $this->sendMail(trim($prestataire->email),'Reporter un rendez-vous',$message)	;
+
+
+    	
+    	return "ok";
+    }	
+    public function newDate($id)
+    {
+
+    	$Newdates = Newdate::where('idres',$id)->get();
+    	$reservation = Reservation::where('id',$id)->first();
+    	//dd($reservation);
+    	$prestataire=User::find($reservation->prestataire);
+    	$date = new DateTime($reservation->date_reservation);
+		$date = $date->format('d-m-Y');
+		$today = new DateTime();
+		$today = $today->format('d-m-Y');
+		$posible = strtotime($today. ' + 5 days')<strtotime($date);
+
+		$heure = new DateTime($reservation->date_reservation);
+		$heure = $heure->format('H:i');
+		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
+    	return view("reservations.newDateReservation", compact('reservation','date','heure','name','Newdates'));
+    }
+    public function Addnewdate(Request $request)
+    {
+    	$Newdates = Newdate::where('idres',$request->get('idres'))->get();
+    	if (count($Newdates)<15) {
+    	
+    	$date = $request->get('date');
+    	
+    	$reservation = Reservation::where('id',$request->get('idres'))->first();
+    	$reservation  = new Newdate([
+              'client' => $reservation->client,
+              'prestataire' => $reservation->prestataire,
+              'date' => $date,
+              'idres'=> $request->get('idres'),
+              
+            ]);
+		$reservation->save();
+
+
+    	return "ok";
+    }else
+    {
+    	return "no";
+    }
+
+    }
+    public function sendnewdate(Request $request)
+    {
+    	
+    	$idReservation = $request->get('idres');
+    	$Reservation = Reservation::where('id',$idReservation)->first();
+    	//dd($Reservation);
+    	$client=User::find($Reservation->client);
+    	$date = new DateTime($Reservation->date_reservation);
+		$date = $date->format('d-m-Y');
+		$heure = new DateTime($Reservation->date_reservation);
+		$heure = $heure->format('H:i');
+		$prestataire=User::find($Reservation->prestataire);
+
+		// Email au client
+		$message='Bonjour,<br>';
+		$message.='Pour le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) .<br>';
+		$message.='votre prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a> a vous proposé des nouvelles dates. <br>';
+		$message.='Merci de choisir une seule date :  
+		(<a href="https://localhost/rendezvous/reservations/selectdate/'.$Reservation->id.'" > Lien </a>). <br>';
+		
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+		
+ 	    $this->sendMail(trim($client->email),'report du rendez-vous',$message)	;
+ 	    return "ok";
+
+    }
+    public function selectdate($id)
+   {
+
+    	$Newdates = Newdate::where('idres',$id)->get();
+    	$reservation = Reservation::where('id',$id)->first();
+    	//dd($reservation);
+    	$prestataire=User::find($reservation->prestataire);
+    	$date = new DateTime($reservation->date_reservation);
+		$date = $date->format('d-m-Y');
+		$today = new DateTime();
+		$today = $today->format('d-m-Y');
+		$posible = strtotime($today. ' + 5 days')<strtotime($date);
+
+		$heure = new DateTime($reservation->date_reservation);
+		$heure = $heure->format('H:i');
+		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
+    	return view("reservations.selectDateReservation", compact('reservation','date','heure','name','Newdates'));
+    }	
+    public function changeDate(Request $request)
+    {
+    	$idReservation = $request->get('idres');
+    	$date = $request->get('date');
+    	Reservation::where('id', $idReservation)->update(array('date_reservation' => $date ));
+
+    	$Reservation = Reservation::where('id',$idReservation)->first();
+    	//dd($Reservation);
+    	$client=User::find($Reservation->client);
+    	$date = new DateTime($Reservation->date_reservation);
+		$date = $date->format('d-m-Y');
+		$heure = new DateTime($Reservation->date_reservation);
+		$heure = $heure->format('H:i');
+		$prestataire=User::find($Reservation->prestataire);
+
+    	// Email au prestataire
+		$message='Bonjour,<br>';
+		$message.='Votre client '.$client->name.' '.$client->lastname.' a choisi une nouvelle date :  '.$date .' à '.$heure .' .<br>';
+		$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br>';
+		
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+		
+ 	    $this->sendMail(trim($prestataire->email),'Rendez-vous reporté',$message)	;
+
+
+ 	    // Email au client
+		$message='Bonjour,<br>';
+		//$message.='Réservation('.$titre.') payée avec succès <br>';
+		$message.='Votre rendez-vous  est confirmé le <b>'.$date .'</b> à <b>'.$heure .'</b> avec le prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
+		$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
+			
+		$message.='<b>ATTENTION :</b> <br>';	
+		$message.='-Vous avez le droit d`annuler ou de reporter le rendez-vous 5 jours avant le rdv. 
+		(<a href="https://localhost/rendezvous/reservations/modifier/'.$Reservation->id.'" > Lien </a>). <br>';
+		$message.='-Au delà des 5 jours avant le rendez vous votre accompte ne sera pas remboursé.  <br>';
+		$message.='-Au delà des 5 jours, Il vous sera impossible d`annuler ou de reporter le rendez-vous.  <br>';
+		$message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+		
+ 	    $this->sendMail(trim($client->email),'Rendez-vous reporté',$message)	;
+
+    	return $date ;
+    }
+    public function AnnulerRes(Request $request)
+   {
+   	Reservation::where('id', $request->get('idReservation'))->update(array('statut' => 2 ));
+   		$idReservation = $request->get('idReservation');
+    	$date = $request->get('date');
+
+    	$Reservation = Reservation::where('id',$idReservation)->first();
+    	//dd($Reservation);
+    	$client=User::find($Reservation->client);
+    	$date = new DateTime($Reservation->date_reservation);
+		$date = $date->format('d-m-Y');
+		$heure = new DateTime($Reservation->date_reservation);
+		$heure = $heure->format('H:i');
+		$prestataire=User::find($Reservation->prestataire);
+   	//dd("ok");
+   	// Email au client
+		$message='Bonjour,<br>';
+		$message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé par votre client '.$client->name.' '.$client->lastname.' .<br>';
+			
+		$message.='Merci de lui remettre l`acompte. (<a href="https://localhost/rendezvous/reservations/AnnulerReservation" > Lien </a>) <br>';	
+		
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+		
+ 	    $this->sendMail(trim($client->email),'Réservation annulée',$message)	;
+
+    	
+    	return "ko";
+    }	
+    public function AnnulerReservation()
+   {
+   
+    	
+    	return view('reservations.annuler_reservation');
+    }		
     public function index()
     {
 		

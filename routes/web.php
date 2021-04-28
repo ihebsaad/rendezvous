@@ -22,6 +22,16 @@ Auth::routes();
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('/reservations/newDate/{id}','ReservationsController@newDate')->name('reservations.newDate');
+Route::get('/reservations/Addnewdate','ReservationsController@Addnewdate')->name('reservations.Addnewdate');
+Route::get('/reservations/sendnewdate','ReservationsController@sendnewdate')->name('reservations.sendnewdate');
+Route::get('/reservations/selectdate/{id}','ReservationsController@selectdate')->name('reservations.selectdate');
+Route::get('/reservations/changeDate','ReservationsController@changeDate')->name('reservations.changeDate');
+Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name('reservations.AnnulerRes');
+
+Route::get('/reservations/AnnulerReservation','ReservationsController@AnnulerReservation')->name('reservations.AnnulerReservation');
+
+
 
 
 /*
