@@ -65,6 +65,7 @@ background-color:#a0d468;
           </div>
           <div class="col-md-12">
           <input type="submit" style="text-align:center;color:white;margin-top: 30px" value="Remettre l`acompte" onclick="functionEnvoyer()" ></input>
+          <input type="" name="idres" value="{{$idres}}" hidden>
         </div> 
             
 
@@ -80,11 +81,28 @@ background-color:#a0d468;
 	<script type="text/javascript">
 
 function functionEnvoyer() {
-   alert("Nous sommes en train de le développer ");
+  alert("Nous sommes en train de le développer ");
+ var idres = $('input[name="idres"]').val();
+      var _token = $('input[name="_token"]').val();
 
 
 
+$.ajax({
+            url: "{{ route('reservations.annule') }}",
+            method: "get",
+            data: {idres: idres, _token: _token},
+            success: function (data) {
+              alert(data);
+              Swal.fire(
+                'Demande envoyée',
+                '',
+                'success'
+              ).then((result) => {
+                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                })
 
+               }
+             });
     
 };
   
