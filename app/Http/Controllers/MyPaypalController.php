@@ -524,11 +524,15 @@ public function sendMail($to,$sujet,$contenu){
  */
 		//( $reservation,$email,$montant,$date,$key)
  
-		//  $format = "Y-m-d H:i:s";
-      //  $deb_seance_1 = \DateTime::createFromFormat($format, $deb_seance_1);
+		//  $format = "Y-m-d H:i:s";28/04-17
+		$now = date('Y-m-d H:i:s'); 
+        // $date = \DateTime::createFromFormat($format, $deb_seance_1);
        
-     // $tranche= Rettrait::where('statut',0)->where('date',)
-        $this->provider = new AdaptivePayments('preapproved-pay');
+       $retraits= Retrait::where('statut',0)->get( );
+	 foreach($retraits as $retrait){
+		 if( $retrait->date < $now ){
+			 
+ $this->provider = new AdaptivePayments('preapproved-pay');
 
         $data = [
             'preapprovalKey'=>$key,
@@ -549,10 +553,23 @@ public function sendMail($to,$sujet,$contenu){
 
         $response = $this->provider->createPayRequest($data);
 		
-         dd($response);
+		if( $response['paymentExecStatus'] =='COMPLETED'){
+			// mise à jour statut
+			Retrait::where('id',$retrait->id)->update(
+			array('status'=>1)
+			);
+			
+		}
+		
+         
 
 
-    return $response;
+		return $response;
+
+ 
+		 } //if
+	 }// foreach
+       
        
     }
 	
