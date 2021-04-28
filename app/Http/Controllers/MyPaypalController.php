@@ -514,14 +514,14 @@ public function sendMail($to,$sujet,$contenu){
     }	
 	
 	
-	    public   function payertranche(Request $request)
+	    public   function payertranche( $reservation,$email,$montant,$key)
     {
-	 $reservation=$request->get('reservation');
+	/* $reservation=$request->get('reservation');
 	 $email=$request->get('email');
 	 $montant=$request->get('montant');
 	// $date=$request->get('date');
 	 $key=$request->get('key');
- dd($email);
+ */
 		//( $reservation,$email,$montant,$date,$key)
  
 		//  $format = "Y-m-d H:i:s";
