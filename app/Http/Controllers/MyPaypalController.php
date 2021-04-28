@@ -85,6 +85,8 @@ class MyPaypalController extends Controller
         $data = [
             
             'key' => $Reservation->payKey,
+            'return_url' => url('payment/success'),
+            'cancel_url' => url('payment/cancel'),
             
         ];
 
@@ -189,7 +191,7 @@ return $response;
 //-------------------------------------------successPay------------------------------------------
     public function successpay(Request $request)
     {
-    	
+
  
          $reservation=$request->get('reservation');
          $type=$request->get('type');
