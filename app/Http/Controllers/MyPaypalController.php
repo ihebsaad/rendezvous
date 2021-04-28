@@ -290,9 +290,11 @@ class MyPaypalController extends Controller
 //-------------------------------------------	
   public function cancelpay(Request $request)
     {
-        dd($request);
+      //  dd($request);
+	   $reservation=$request->get('reservation');
 
-return redirect('/');
+     return view('reservations.cancel',['reservation'=>$reservation]);
+
     }
 
 
@@ -352,7 +354,9 @@ return redirect($redirect_url);
 		 
 		//$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
 		//$enddate= date($today,strtotime("+4 months"));
-		$enddate=date('Y-m-d\TH:i:s\Z',strtotime("+4 months")) ;
+		$date2=date('Y-m-d\TH:i:s\Z',strtotime("+1 month")) ;
+		$date3=date('Y-m-d\TH:i:s\Z',strtotime("+2 months")) ;
+ 		$enddate=date('Y-m-d\TH:i:s\Z',strtotime("+3 months")) ;
 
         $data = [
           //  "maxAmountPerPayment"=> 45.00, 
@@ -363,7 +367,7 @@ return redirect($redirect_url);
             "endingDate" => $enddate,
             // "startingDate" => "2021-05-02T10:45:52Z",
              "startingDate" => $today,
-            'return_url' => URL::route('approved',['email'=>$email,'tranche'=>$tranche,'reservation'=>$reservation,'enddate'=>$enddate]),
+            'return_url' => URL::route('approved',['email'=>$email,'tranche'=>$tranche,'reservation'=>$reservation,'date1'=>$today,'date2'=>$date2,'date3'=>$date3,'date4'=>$enddate ]),
             'cancel_url' => URL::route('canceled') ,
         ];
 		//dd($data);
@@ -439,7 +443,20 @@ public function sendMail($to,$sujet,$contenu){
 	
   public function approved(Request $request)
     {
-        dd($request);
+       // dd($request);
+	 
+	 $reservation=$request->get('reservation');
+	 $email=$request->get('email');
+	 $tranche=$request->get('tranche');
+	 $date1=$request->get('date1');
+	 $date2=$request->get('date2');
+	 $date3=$request->get('date3');
+	 $date4=$request->get('date4');
+	 $preapprovalKey=$request->get('preapprovalKey');
+
+	// creation 4 lignes de retrait	 
+	 
+	
 
 	return redirect('/');
     }	
