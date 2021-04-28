@@ -385,11 +385,15 @@ return redirect($redirect_url);
             // "startingDate" => "2021-05-02T10:45:52Z",
              "startingDate" => $today,
             'return_url' => URL::route('approved',['email'=>$email,'tranche'=>$tranche,'reservation'=>$reservation,'date1'=>$today,'date2'=>$date2,'date3'=>$date3,'date4'=>$enddate ]),
-            'cancel_url' => URL::route('canceled') ,
+            'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]) ,
         ];
 		//dd($data);
         $response = $this->provider->createPayRequest($data);
         //  dd($response);
+		
+		// save key
+		 session(['preapprovalKey' => $response['preapprovalKey']]);
+
 $redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
 
 return redirect($redirect_url);
@@ -469,7 +473,10 @@ public function sendMail($to,$sujet,$contenu){
 	 $date2=$request->get('date2');
 	 $date3=$request->get('date3');
 	 $date4=$request->get('date4');
-	 $preapprovalKey=$request->get('preapprovalKey');
+	// $preapprovalKey=$request->get('preapprovalKey');
+	// get key from session
+	  $preapprovalKey = session('preapprovalKey');
+
 
 	// creation 4 lignes de retrait	 
 	 
