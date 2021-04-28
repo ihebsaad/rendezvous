@@ -57,7 +57,7 @@ background-color:#a0d468;
           <h3><i class="sl sl-icon-refresh"></i>Annuler la reservation </h3>
                 </div>       
         <div class="row">
-        <form class="  " method="POST" id="payment-form"  action="{{ route('reservations.annule',$idres) }}" >
+        <form class="  " method="get"  action="{{ route('reservations.annule',$idres) }}" >
 
           <div class="col-md-12" >
             <h2> Merci de remettre l`acompte à votre client. </h2>

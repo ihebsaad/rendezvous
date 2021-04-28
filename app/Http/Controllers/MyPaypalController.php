@@ -75,7 +75,7 @@ class MyPaypalController extends Controller
     }   
 //-----------------------------------------------end------------------------------------------------
     //-------------------------------------------PaymentDetails---------------------------------------------
-    public function PaymentDetails()
+    public function PaymentDetails($id)
     {
         $this->provider = new AdaptivePayments('PaymentDetails');
 

@@ -32,7 +32,7 @@ Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name
 Route::get('/reservations/AnnulerReservation/{id}','ReservationsController@AnnulerReservation')->name('reservations.AnnulerReservation');
 Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif');
 Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter');
-Route::get('/reservations.annule','MyPaypalController@PaymentDetails')->name('reservations.annule');
+Route::get('/reservations.annule/{id}','MyPaypalController@PaymentDetails')->name('reservations.annule');
 
 
 
