@@ -368,12 +368,14 @@ return redirect($redirect_url);
 
 		// $today= date('Y-m-d' ).'T'.date('H:i:s').'Z';
 		 $today= gmdate("Y-m-d\TH:i:s\Z");
-		 
+		 $enddate=date('Y-m-d\TH:i:s\Z',strtotime("+3 months")) ;
+
 		//$enddate= date('Y-m-dTh:i:s',strtotime("+4 months"));
 		//$enddate= date($today,strtotime("+4 months"));
-		$date2=date('Y-m-d\TH:i:s\Z',strtotime("+1 month")) ;
-		$date3=date('Y-m-d\TH:i:s\Z',strtotime("+2 months")) ;
- 		$enddate=date('Y-m-d\TH:i:s\Z',strtotime("+3 months")) ;
+		$date1=date('Y-m-d H:i:s') ;
+		$date2=date('Y-m-d H:i:s',strtotime("+1 month")) ;
+		$date3=date('Y-m-d H:i:s',strtotime("+2 months")) ;
+		$date4=date('Y-m-d H:i:s',strtotime("+3 months")) ;
 
         $data = [
           //  "maxAmountPerPayment"=> 45.00, 
