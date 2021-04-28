@@ -521,7 +521,7 @@ public function sendMail($to,$sujet,$contenu){
 	 $montant=$request->get('montant');
 	// $date=$request->get('date');
 	 $key=$request->get('key');
- 
+ dd($email);
 		//( $reservation,$email,$montant,$date,$key)
  
 		//  $format = "Y-m-d H:i:s";
