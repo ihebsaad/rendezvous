@@ -105,9 +105,13 @@ class ReservationsController extends Controller
     }
     public function reporter(Request $request)
     {
+      $idReservation = $request->get('idReservation');
+      $Reservation = Reservation::where('id',$idReservation)->first();
+      $nbrReport = $Reservation ->nbrReport;
+      Reservation::where('id', $idReservation)->update(array('nbrReport' => $nbrReport+1 ));
  
 
-    	$idReservation = $request->get('idReservation');
+    	
     	$Reservation = Reservation::where('id',$idReservation)->first();
     	//dd($Reservation);
     	$client=User::find($Reservation->client);

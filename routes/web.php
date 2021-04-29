@@ -193,7 +193,8 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	
 	Route::get('/successpay','MyPaypalController@successpay')->name('successpay');
 	Route::get('/cancelpay','MyPaypalController@cancelpay')->name('cancelpay');
-	
+	Route::get('/successpay2','MyPaypalController@successpay2')->name('successpay2');
+	Route::get('/cancelpay2','MyPaypalController@cancelpay2')->name('cancelpay2');
 	
 	 Route::get('/preapproved','MyPaypalController@preapproved')->name('preapproved');
 	 Route::get('/approved','MyPaypalController@approved')->name('approved');
