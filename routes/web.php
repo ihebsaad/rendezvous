@@ -222,6 +222,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
     
 
 Route::get('/payertranche/{reservation}/{email}/{montant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
+Route::get('/payertranche/{id}', 'MyPaypalController@payertranchesuccess')->name('payertranchesuccess');
 
 });
 
