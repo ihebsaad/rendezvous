@@ -57,6 +57,7 @@ background-color:#a0d468;
                 </div>  
                 <input type="" name="idReservation" value="{{$reservation->id}}" hidden >    
         <div class="row">
+          <?php if ($nbrReport<=5): ?>
           <?php if ($posible==true): ?>
             
           
@@ -74,6 +75,9 @@ background-color:#a0d468;
         </div>
         <?php else: ?>
           <h2><b> Impossible!</b> Vous n'avez pas le droit d'annuler ou de reporter le rendez-vous car il vous reste moins de 5 jours pour le rendez-vous. </h2>
+        <?php endif ?>
+        <?php else: ?>
+          <h2><b> Impossible!</b> Vous avez atteindre le maximum de nombre des reports. </h2>
         <?php endif ?>
         </div>                          
             </div>  </div></div>

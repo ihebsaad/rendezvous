@@ -130,6 +130,11 @@ var dateStr = moment(date).format('DD-MM-YYYY hh:mm');
                 else
                 {
                   alert("no");
+                  Swal.fire(
+                'Vous avez atteindre le maximum.',
+                '',
+                'error'
+              )
                 }
                }
              });
@@ -149,7 +154,13 @@ var _token = $('input[name="_token"]').val();
             method: "get",
             data: {idres:idres, _token: _token},
             success: function (data) {
-              alert(data);
+              Swal.fire(
+                'Proposition envoyée',
+                '',
+                'success'
+              ).then((result) => {
+                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                })
              
                }
              });

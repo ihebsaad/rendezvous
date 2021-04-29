@@ -100,7 +100,8 @@ class ReservationsController extends Controller
 		$heure = new DateTime($reservation->date_reservation);
 		$heure = $heure->format('H:i');
 		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
-    	return view("reservations.modif_reservation", compact('reservation','date','heure','name','posible'));
+    $nbrReport = $reservation->nbrReport;
+    	return view("reservations.modif_reservation", compact('reservation','date','heure','name','posible','nbrReport'));
     }
     public function reporter(Request $request)
     {
