@@ -184,7 +184,10 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 				}
 				if( $reservation->paiement==2) {
 					$statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;display: inline-block; " class="success statut">Total Payée</span>';
-				}				
+				}
+				if( $reservation->paiement==3) {
+					$statut.= '  <span style="margin:4px 4px 4px 4px;color:black!important;font-weight:blod;padding:3px 3px 3px 3px!important;display: inline-block; " class="success statut">Payée par tranches</span>';
+				}					
 				echo $statut;  
 	?>
 	</td> 
