@@ -555,61 +555,7 @@ public function sendMail($to,$sujet,$contenu){
 	   $retrait2->save(); 
 	   $retrait3->save(); 
 	   $retrait4->save(); 
-		  
-	    /**********/      
-          
- // Email
- $titre='paiement par tranches';
-        $Reservation = \App\Reservation::find( $reservation);
-         $client =  \App\User::find($Reservation->client);
-        $prestataire =  \App\User::find($Reservation->prestataire);
-        $serviceid = $Reservation->service;
-        $service = \App\Service::find( $serviceid) ;
-          // mettre à jour le statut paiement de réservation
-         Reservation::where('id',$reservation)->update(array('paiement' => 3,'reste'=>0));    
-    // Email au client
-        $message='Bonjour,<br>';
-        $message.='Réservation payée('.$titre.')<br>';
-        $message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-        $message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
-        $message.='Prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
-        $message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
-        $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';    
-        //enregistrement alerte
-        $alerte = new Alerte([
-             'user' => $client->id,
-             'titre'=>'Réservation payée('.$titre.')',                         
-             'details' => $message,
-         ]);    
-         $alerte->save();
-        // Email au prestataire
-        $message='Bonjour,<br>';
-        $message.='Réservation payée('.$titre.')<br>';
-        $message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-        $message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
-        $message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
-        $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';    
-        
-        $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)    ;
-        //enregistrement alerte
-        $alerte = new Alerte([
-             'user' => $prestataire->id,
-             'titre'=>'Réservation payée('.$titre.')',                         
-             'details' => $message,
-         ]);    
-         $alerte->save();        
-        
-        // enregistrement payment dans la base
-        $paiement  =  new \App\Payment([
-             'payer_id' => Input::get('PayerID'),
-             'payment_id'=>Input::get('payment_id') ,                         
-             'user' => $client->id,
-             'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
-             'beneficiaire_id' => $prestataire->id ,
-             'details' => 'paiement de réservation('.$titre.') pour : '.$prestataire->name. ' '.$prestataire->lastname,
-         ]);    
-         
-         $paiement->save();          
+	  
 
 		 
 		 
@@ -670,6 +616,69 @@ public function sendMail($to,$sujet,$contenu){
 			Retrait::where('id',$retrait->id)->update(
 			array('statut'=>1)
 			);
+			
+			
+			
+	  
+	    /**********/      
+          
+ // Email
+ $titre='Tranche';
+        $Reservation = \App\Reservation::find( $reservation);
+         $client =  \App\User::find($Reservation->client);
+        $prestataire =  \App\User::find($Reservation->prestataire);
+        $serviceid = $Reservation->service;
+        $service = \App\Service::find( $serviceid) ;
+          // mettre à jour le statut paiement de réservation
+         Reservation::where('id',$reservation)->update(array('paiement' => 3,'reste'=>0));    
+    // Email au client
+        $message='Bonjour,<br>';
+        $message.='Réservation payée('.$titre.')<br>';
+        $message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+        $message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+        $message.='Prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
+        $message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
+        $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';    
+        //enregistrement alerte
+        $alerte = new Alerte([
+             'user' => $client->id,
+             'titre'=>'Réservation payée('.$titre.')',                         
+             'details' => $message,
+         ]);    
+         $alerte->save();
+        // Email au prestataire
+        $message='Bonjour,<br>';
+        $message.='Réservation payée('.$titre.')<br>';
+        $message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+        $message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+        $message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
+        $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';    
+        
+        $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)    ;
+        //enregistrement alerte
+        $alerte = new Alerte([
+             'user' => $prestataire->id,
+             'titre'=>'Réservation payée('.$titre.')',                         
+             'details' => $message,
+         ]);    
+         $alerte->save();        
+        
+        // enregistrement payment dans la base
+        $paiement  =  new \App\Payment([
+            // 'payer_id' => Input::get('PayerID'),
+            // 'payment_id'=>Input::get('payment_id') ,                         
+             'user' => $client->id,
+             'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
+             'beneficiaire_id' => $prestataire->id ,
+             'details' => 'paiement de réservation('.$titre.') pour : '.$prestataire->name. ' '.$prestataire->lastname,
+         ]);    
+         
+         $paiement->save();        			
+			
+			
+			
+			
+			
 			
 		}
 		 
