@@ -89,7 +89,7 @@ class MyPaypalController extends Controller
             'cancel_url' => url('payment/cancel'),
             
         ];
-
+        $amount = $Reservation->Net - $Reservation->reste ;
         $response = $this->provider->createPayRequest($data);
         $email=$response['senderEmail'];
         $this->provider = new AdaptivePayments('AdaptivePay');
@@ -97,7 +97,7 @@ class MyPaypalController extends Controller
             'receivers'  => [
                 [
                     'email'   => $email,
-                    'amount'  => 50,
+                    'amount'  => $amount,
                     
                 ],
               

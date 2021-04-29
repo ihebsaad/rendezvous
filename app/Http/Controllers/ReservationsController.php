@@ -72,9 +72,23 @@ class ReservationsController extends Controller
 
 	public function modifier($id)
     {
+       
+      if (Auth::guest()){
+        Session::put('msgs', 'E1');
+        
+            return redirect('/');
+      }
+    $cuser = auth()->user();
+    $reservation = Reservation::where('id',$id)->first();
+      
+    if($cuser->id!=$reservation->client){
+      Session::put('msgs', 'E2');
+      return redirect('/');
+
+    }
 
 
-    	$reservation = Reservation::where('id',$id)->first();
+
     	//dd($reservation);
     	$prestataire=User::find($reservation->prestataire);
     	$date = new DateTime($reservation->date_reservation);
@@ -122,9 +136,21 @@ class ReservationsController extends Controller
     }	
     public function newDate($id)
     {
+      if (Auth::guest()){
+        Session::put('msgs', 'E1');
+        
+            return redirect('/');
+      }
+    $cuser = auth()->user();
+    $reservation = Reservation::where('id',$id)->first();
+      
+    if($cuser->id!=$reservation->prestataire){
+      Session::put('msgs', 'E2');
+      return redirect('/');
+
+    }
 
     	$Newdates = Newdate::where('idres',$id)->get();
-    	$reservation = Reservation::where('id',$id)->first();
     	//dd($reservation);
     	$prestataire=User::find($reservation->prestataire);
     	$date = new DateTime($reservation->date_reservation);
@@ -288,6 +314,19 @@ class ReservationsController extends Controller
     }	
     public function AnnulerReservation($id)
    {
+    if (Auth::guest()){
+        Session::put('msgs', 'E1');
+        
+            return redirect('/');
+      }
+    $cuser = auth()->user();
+    $reservation = Reservation::where('id',$id)->first();
+      
+    if($cuser->id!=$reservation->prestataire){
+      Session::put('msgs', 'E2');
+      return redirect('/');
+
+    }
    	$idres=$id;
    
     	

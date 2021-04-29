@@ -115,7 +115,7 @@ background-color:#a0d468;
             method: "get",
             data: {idReservation: idReservation, _token: _token},
             success: function (data) {
-              alert(data);
+              //alert(data);
               Swal.fire(
                 'rendez-vous annulé',
                 'Votre acompte sera remboursé',
