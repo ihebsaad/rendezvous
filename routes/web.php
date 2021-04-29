@@ -221,7 +221,6 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::get('/googleagenda/{id}','CalendrierController@view')->name('googleagenda');
     
 
-Route::get('/payertranche', 'MyPaypalController@payertranche')->name('payertranche');
 //Route::get('/payertranche/{reservation}/{email}/{montant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
 //Route::get('/payertranche/{id}', 'MyPaypalController@payertranchesuccess')->name('payertranchesuccess');
 
@@ -232,3 +231,9 @@ Route::post('/search_prestataires','RechercheController@search_prestataires')->n
 Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');
  
 
+Route::group(['middleware'=>['guest']], function(){
+//Your routes
+Route::get('/payertranche', 'MyPaypalController@payertranche')->name('payertranche');
+
+
+});
