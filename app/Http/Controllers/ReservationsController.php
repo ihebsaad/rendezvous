@@ -72,9 +72,23 @@ class ReservationsController extends Controller
 
 	public function modifier($id)
     {
+       
+      if (Auth::guest()){
+        Session::put('msgs', 'E1');
+        
+            return redirect('/');
+      }
+    $cuser = auth()->user();
+    $reservation = Reservation::where('id',$id)->first();
+      
+    if($cuser->id!=$reservation->client){
+      Session::put('msgs', 'E2');
+      return redirect('/');
+
+    }
 
 
-    	$reservation = Reservation::where('id',$id)->first();
+
     	//dd($reservation);
     	$prestataire=User::find($reservation->prestataire);
     	$date = new DateTime($reservation->date_reservation);
@@ -86,7 +100,8 @@ class ReservationsController extends Controller
 		$heure = new DateTime($reservation->date_reservation);
 		$heure = $heure->format('H:i');
 		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
-    	return view("reservations.modif_reservation", compact('reservation','date','heure','name','posible'));
+    $nbrReport = $reservation->nbrReport;
+    	return view("reservations.modif_reservation", compact('reservation','date','heure','name','posible','nbrReport'));
     }
     public function reporter(Request $request)
     {
@@ -122,9 +137,21 @@ class ReservationsController extends Controller
     }	
     public function newDate($id)
     {
+      if (Auth::guest()){
+        Session::put('msgs', 'E1');
+        
+            return redirect('/');
+      }
+    $cuser = auth()->user();
+    $reservation = Reservation::where('id',$id)->first();
+      
+    if($cuser->id!=$reservation->prestataire){
+      Session::put('msgs', 'E2');
+      return redirect('/');
+
+    }
 
     	$Newdates = Newdate::where('idres',$id)->get();
-    	$reservation = Reservation::where('id',$id)->first();
     	//dd($reservation);
     	$prestataire=User::find($reservation->prestataire);
     	$date = new DateTime($reservation->date_reservation);
@@ -288,6 +315,19 @@ class ReservationsController extends Controller
     }	
     public function AnnulerReservation($id)
    {
+    if (Auth::guest()){
+        Session::put('msgs', 'E1');
+        
+            return redirect('/');
+      }
+    $cuser = auth()->user();
+    $reservation = Reservation::where('id',$id)->first();
+      
+    if($cuser->id!=$reservation->prestataire){
+      Session::put('msgs', 'E2');
+      return redirect('/');
+
+    }
    	$idres=$id;
    
     	

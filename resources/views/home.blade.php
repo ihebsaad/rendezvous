@@ -3,6 +3,22 @@
 
  
  @section('content')
+
+@if ( Session::has('msgs') )
+@if ( Session::get('msgs')=="E1" )
+<div class="notification notice closeable">
+      <p><span>Notification!</span> Merci de bien vouloir vous connecter avant de cliquer sur le lien.</p>
+      <a class="close" href="#"></a> 
+      </div>
+@endif 
+@if ( Session::get('msgs')=="E2" )
+ <div class="notification warning closeable">
+      <p><span>Attention!</span> Vous n'avez pas le droit d'accéder à cette page.</p>
+      <a class="close" href="#"></a> 
+      </div>
+@endif 
+<?php Session::forget('msgs'); ?>
+ @endif 
   @include('layouts.slider')
 <style>
   section.pricing {
@@ -148,11 +164,13 @@
 <img src="public/images/clavier.png" alt="" style="width:100%; height:375px; z-index:-9; top:-10px; ">
 </div>
 </div>-->
+
 <div class="parallax margin-top-65" data-background="public/images/inscription_coiffure.jpg" style="background-image: url(&quot;public/images/inscription_coiffure.jpg&quot;); background-attachment: fixed; background-position: 50% -40.8324px;" style="height: 580px;"><div class="parallax-overlay"></div> 
     <div class="utf_text_content white-font" style="padding:120px 0px; height: 580px;">
       <div class="container" style="top: 0px;">
         <div class="row">
           <div class="col-lg-12 col-sm-12">
+
             <!-- <h2 style="font-family:'Lucida Handwriting',cursive">Offre de lancement <br> Inscription gratuite pendant 1 mois <br></h2>
             <p style="font-size:150%;font-family:'Lucida Handwriting',cursive"> Pour les 100 premiers prestataires de services </p> -->
 
