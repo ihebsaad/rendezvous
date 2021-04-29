@@ -606,7 +606,7 @@ public function sendMail($to,$sujet,$contenu){
            //  'senderEmail'=>'haithemsahlia-buyer@gmail.com',
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
             'return_url' => URL::route('home' ),
-            'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
+            'cancel_url' => URL::route('cancelpay',['reservation'=>$retrait->reservation]),
         ];
 
         $response = $this->provider->createPayRequest($data);
@@ -619,9 +619,8 @@ public function sendMail($to,$sujet,$contenu){
 			
 			
 			
-	  
-	    /********      
-          
+	$reservation=  $retrait->reservation ;
+	    
  // Email
  $titre='Tranche';
         $Reservation = \App\Reservation::find( $reservation);
@@ -676,7 +675,7 @@ public function sendMail($to,$sujet,$contenu){
          $paiement->save();        			
 			
 			
-			*/
+		 
 			
 			
 			
