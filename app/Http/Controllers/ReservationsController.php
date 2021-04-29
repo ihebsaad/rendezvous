@@ -101,6 +101,7 @@ class ReservationsController extends Controller
 		$heure = $heure->format('H:i');
 		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
     $nbrReport = $reservation->nbrReport;
+    //dd($nbrReport);
     	return view("reservations.modif_reservation", compact('reservation','date','heure','name','posible','nbrReport'));
     }
     public function reporter(Request $request)

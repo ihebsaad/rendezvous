@@ -84,7 +84,8 @@ background-color:#a0d468;
 	<script type="text/javascript">
    function FunctionReporter(){
     var nbrReport = $('input[name="nbrReport"]').val();
-    if (nbrReport<=5) {
+    //alert(parseInt(nbrReport));
+    if (parseInt(nbrReport)<=5) {
     if(confirm('Êtes-vous sûrs d`envoyer une demande de reportation?'))
     {
       //alert("ok");
@@ -105,14 +106,16 @@ background-color:#a0d468;
 
                }
              });
-    }}else {
+    }
+  }else {
       Swal.fire(
                 'Impossible! ',
                 'Vous avez atteindre le maximum de nombre des reports.',
                 'error'
               ).then((result) => {
                   window.location.replace("https://prenezunrendezvous.com/reservations");
-    }
+    })
+            }
 
   }
   function FunctionAnnuler(){
