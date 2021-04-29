@@ -209,11 +209,7 @@ public function successpay2(Request $request)
         ];			
 			
         $response = $this->provider->createPayRequest($data);
-        // dd( $response);
-		//$key='';
-		//if(isset($response['payKey'])){$key=$response['payKey'];}
-		//$redirect_url = $this->provider->getRedirectUrl('approved', $key);
-		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
+ 		$redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey']);
 		return redirect($redirect_url);
 		
 		}
@@ -455,7 +451,7 @@ return redirect($redirect_url);
         ];
 		//dd($data);
         $response = $this->provider->createPayRequest($data);
-        //  dd($response);
+         dd($response);
 		
 	    \Session::forget('preapprovalKey');
 
