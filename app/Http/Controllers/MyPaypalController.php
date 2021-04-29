@@ -442,6 +442,7 @@ return redirect($redirect_url);
             "maxAmountPerPayment"=> $tranche, 
             "maxNumberOfPayments"=> 4, 
             'maxTotalAmountOfAllPayments'=> $montant,
+            "senderEmail" => "haithemsahlia-buyer@gmail.com",
            //  "endingDate" => "2021-09-02T20:40:52Z",
             "endingDate" => $enddate,
             // "startingDate" => "2021-05-02T10:45:52Z",
@@ -451,14 +452,12 @@ return redirect($redirect_url);
         ];
 		//dd($data);
         $response = $this->provider->createPayRequest($data);
- 		$senderEmail=$response['senderEmail'];
-
+ 
 	    \Session::forget('preapprovalKey');
 
 		// save key
 		 \Session::put(['preapprovalKey' => $response['preapprovalKey']]);
-		 \Session::put(['senderEmail' => $senderEmail ]);
-
+ 
 $redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
 
 return redirect($redirect_url);
@@ -542,7 +541,7 @@ public function sendMail($to,$sujet,$contenu){
 	// get key from session
 	  $preapprovalkey = \Session::get('preapprovalKey');
 
-	dd( \Session::get('senderEmail')   );
+	//dd( \Session::get('senderEmail')   );
 	// creation 4 lignes de retrait	 
 	 
   		 $retrait1 = new Retrait([ 'email' =>  $email , 'date' =>  $date1, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche , 'reservation' =>  $reservation  ]);
