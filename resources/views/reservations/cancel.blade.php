@@ -47,10 +47,10 @@ background-color:#a0d468;
 		  </div>
  @endif
  
-<center> <h2> Paiement annulé ou non effectué</h2> </center>
+<center> <h2> Paiement annulé ou non effectué</h2> </center><br>
 
 Vérifiez votre compte PayPal et contacter l'administration du site.
-<br>
+<br><br>
 <?php
 
 if( isset ($reservation )){
@@ -58,7 +58,7 @@ if( isset ($reservation )){
 	
 }
  ?>
- <a href="https://prenezunrendezvous.com/reservations"> Liste des réservations</a><br>
+<br> <a href="https://prenezunrendezvous.com/reservations"> Liste des réservations</a><br>
 
   <!-- 
  <script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" type="text/javascript"></script> 

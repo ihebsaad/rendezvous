@@ -442,7 +442,7 @@ return redirect($redirect_url);
             "maxAmountPerPayment"=> $tranche, 
             "maxNumberOfPayments"=> 4, 
             'maxTotalAmountOfAllPayments'=> $montant,
-            "senderEmail" => "haithemsahlia-buyer@gmail.com",
+           // "senderEmail" => "haithemsahlia-buyer@gmail.com",
            //  "endingDate" => "2021-09-02T20:40:52Z",
             "endingDate" => $enddate,
             // "startingDate" => "2021-05-02T10:45:52Z",
@@ -540,7 +540,8 @@ public function sendMail($to,$sujet,$contenu){
 	// $preapprovalKey=$request->get('preapprovalKey');
 	// get key from session
 	  $preapprovalkey = \Session::get('preapprovalKey');
-
+		$senderEmail = Input::get('senderEmail');
+		dd($senderEmail);
 	//dd( \Session::get('senderEmail')   );
 	// creation 4 lignes de retrait	 
 	 
