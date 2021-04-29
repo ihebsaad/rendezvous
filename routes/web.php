@@ -202,6 +202,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
      Route::get('/getpreapproved','MyPaypalController@getpreapproved')->name('getpreapproved');
     Route::post('/getpreapproved','MyPaypalController@getpreapproved')->name('getpreapproved');
 	
+	Route::get('/notification','MyPaypalController@notification')->name('notification');
 	
 	
 

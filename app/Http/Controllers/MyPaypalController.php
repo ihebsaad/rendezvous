@@ -694,6 +694,11 @@ public function sendMail($to,$sujet,$contenu){
 			); 
 		 
 	 }
-	
+	 
+	 public function notification (Request $request)
+	 {
+		 dd($request);
+		 
+	 }
 
 }
