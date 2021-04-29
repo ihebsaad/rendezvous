@@ -623,7 +623,7 @@ public function sendMail($to,$sujet,$contenu){
     }	
 	
 	
-   public  function payertranche( $reservation,$email,$montant,$key)
+   public  function payertranche(  )
     {
 		
 		$now = date('Y-m-d H:i:s'); 
