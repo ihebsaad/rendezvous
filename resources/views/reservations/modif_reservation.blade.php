@@ -129,7 +129,7 @@ background-color:#a0d468;
               //alert(data);
               Swal.fire(
                 'rendez-vous annulé',
-                'Votre acompte sera remboursé',
+                'Votre montant payé sera remboursé',
                 'success'
               ).then((result) => {
                   window.location.replace("https://prenezunrendezvous.com/reservations");
