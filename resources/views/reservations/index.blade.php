@@ -187,7 +187,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 				}
 				if( $reservation->paiement==3) {
 					$retraits=\App\Retrait::where('reservation',$reservation->id)->where('statut',1)->count();
-					$statut.= '  <span style="margin:4px 4px 4px 4px;color:black!important;font-weight:blod;padding:3px 3px 3px 3px!important;display: inline-block; " class="success statut">Paiement par tranches : acompte + ('.$retraits.'/4) tranches payées</span>';
+					$statut.= '  <span style="margin:12px 12px 12px 12px;color:black!important;font-weight:blod;padding:3px 3px 3px 3px!important;display: inline-block; " class="success statut">Paiement par tranches : acompte + ('.$retraits.'/4) tranches payées</span>';
 				}					
 				echo $statut;  
 	?>
