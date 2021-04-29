@@ -103,8 +103,8 @@ class MyPaypalController extends Controller
               
             ],
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-             'return_url' =>URL::route('successpay'),
-             'cancel_url' => URL::route('cancelpay'),
+             'return_url' =>URL::route('successpay2',['reservation'=>$id]),
+             'cancel_url' => URL::route('cancelpay2'),
         ];
 		
 		
@@ -116,6 +116,28 @@ $redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey'])
     }
 
 //-------------------------------------------end---------------------------------------------
+public function successpay2(Request $request)
+    {
+      $Reservation = Reservation::where('id',$request->get('reservation'))->first();
+      //dd($Reservation);
+      $client=User::find($Reservation->client);
+      $date = new DateTime($Reservation->date_reservation);
+    $date = $date->format('d-m-Y');
+    $heure = new DateTime($Reservation->date_reservation);
+    $heure = $heure->format('H:i');
+    $prestataire=User::find($Reservation->prestataire);
+
+    // Email au prest
+    $message='Bonjour,<br>';
+    $message.='Votre Prestataire '.$prestataire->name.' '.$prestataire->lastname.'a remboursé votre montant payé.<br>';
+   
+    
+    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+    
+      $this->sendMail(trim($client->email),'Remboursement',$message) ;
+    }
 
     //-------------------------------------------payAcompteReservation---------------------------------------------
     public function payReservation(Request $request)
@@ -310,7 +332,7 @@ $redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey'])
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
-	    $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)	;
+	    $this->sendMail(trim($prestataire->email),'Réservation payée',$message)	;
     	//enregistrement alerte
 		$alerte = new Alerte([
              'user' => $prestataire->id,
@@ -333,6 +355,9 @@ $redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey'])
 		 
 		  return redirect('/reservations/')->with('success', ' Paiement ('.$titre.') effectué avec succès  ');
 
+
+ 
+ 
  
  
  
@@ -529,76 +554,6 @@ public function sendMail($to,$sujet,$contenu){
 	   $retrait3->save(); 
 	   $retrait4->save(); 
 		  
-		  
-		  
-	/**********/	  
-		  
- // Email
- $titre='paiement par tranches';
-		$Reservation = \App\Reservation::find( $reservation);
-		
- 		$client =  \App\User::find($Reservation->client);
-		$prestataire =  \App\User::find($Reservation->prestataire);
-		$serviceid = $Reservation->service;
-		
-		$service = \App\Service::find( $serviceid) ;
- 
-  		// mettre à jour le statut paiement de réservation
-		 Reservation::where('id',$reservation)->update(array('paiement' => 3,'reste'=>0));	
-
-		
-	// Email au client
-		$message='Bonjour,<br>';
-		$message.='Réservation payée('.$titre.')<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
-		$message.='Prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
-		$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
-		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
-    	
-		//enregistrement alerte
-    	$alerte = new Alerte([
-             'user' => $client->id,
-			 'titre'=>'Réservation payée('.$titre.')',						 
-             'details' => $message,
-         ]);	
-		 $alerte->save();
- 
-		// Email au prestataire
-		$message='Bonjour,<br>';
-		$message.='Réservation payée('.$titre.')<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
-		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
-		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
-		
-	    $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)	;
-    	//enregistrement alerte
-		$alerte = new Alerte([
-             'user' => $prestataire->id,
-			 'titre'=>'Réservation payée('.$titre.')',						 
-             'details' => $message,
-         ]);	
-		 $alerte->save();		
-		
-		// enregistrement payment dans la base
-		$paiement  =  new \App\Payment([
-             'payer_id' => Input::get('PayerID'),
-			 'payment_id'=>Input::get('payment_id') ,						 
-             'user' => $client->id,
-             'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
-             'beneficiaire_id' => $prestataire->id ,
-             'details' => 'paiement de réservation('.$titre.') pour : '.$prestataire->name. ' '.$prestataire->lastname,
-         ]);	
-		 
-		 $paiement->save();		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
 	 return redirect('/reservations')->with('success', ' Accord fait avec succès  ');
 
  
@@ -619,27 +574,32 @@ public function sendMail($to,$sujet,$contenu){
     }	
 	
 	
-   public  function payertranche(  )
+   public  function payertranche( $reservation,$email,$montant,$key)
     {
-		
+	/* $reservation=$request->get('reservation');
+	 $email=$request->get('email');
+	 $montant=$request->get('montant');
+	// $date=$request->get('date');
+	 $key=$request->get('key');
+ */
+		//( $reservation,$email,$montant,$date,$key)
+ 
+		//  $format = "Y-m-d H:i:s";28/04-17
 		$now = date('Y-m-d H:i:s'); 
-        
-	   // tous les retraits non effectué
+        // $date = \DateTime::createFromFormat($format, $deb_seance_1);
+       
        $retraits= Retrait::where('statut',0)->get( );
-	   
 	 foreach($retraits as $retrait){
-		 
-		 // vérification date retrait par rapport heure actuelle
 		 if( $retrait->date < $now ){
 			 
-		$this->provider = new AdaptivePayments('preapproved-pay');
+ $this->provider = new AdaptivePayments('preapproved-pay');
 
         $data = [
-            'preapprovalKey'=>$retrait->preapprovalkey,
+            'preapprovalKey'=>$key,
             'receivers'  => [
                 [
-                    'email'   => $retrait->email,
-                    'amount'  => $retrait->amount,
+                    'email'   => $email,
+                    'amount'  => $montant,
                     
                 ],
               
@@ -647,22 +607,23 @@ public function sendMail($to,$sujet,$contenu){
 			//https://prenezunrendezvous.com/payertranche/11/mohamed.achraf.besbes@gmail.com/87.5/PA-7TU76130YT554970G
              'senderEmail'=>'haithemsahlia-buyer@gmail.com',
             'payer'      => 'EACHRECEIVER', // (Optional) Describes who pays PayPal fees. Allowed values are: 'SENDER', 'PRIMARYRECEIVER', 'EACHRECEIVER' (Default), 'SECONDARYONLY'
-          //  'return_url' => URL::route('payertranchesuccess',['id'=>$retrait->id]),
-            'return_url' => URL::route('home' ),
+            'return_url' => URL::route('payertranchesuccess',['id'=>$retrait->id]),
             'cancel_url' => URL::route('cancelpay',['reservation'=>$reservation]),
         ];
 
         $response = $this->provider->createPayRequest($data);
 		 
 		if( $response['paymentExecStatus'] =='COMPLETED'){
-			// mise à jour statut retrait à effectué
+			// mise à jour statut
 			Retrait::where('id',$retrait->id)->update(
 			array('statut'=>1)
 			);
 			
 		}
 		 
-          
+         
+
+
 		return $response;
 
  
@@ -672,5 +633,15 @@ public function sendMail($to,$sujet,$contenu){
        
     }
 	
- 
+	
+	 public  function payertranchesuccess($id)
+	 {
+		 
+			Retrait::where('id',$id)->update(
+			array('statut'=>1)
+			); 
+		 
+	 }
+	
+
 }

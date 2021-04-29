@@ -55,9 +55,10 @@ background-color:#a0d468;
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-refresh"></i>Reporter/Annuler rendez-vous  </h3>
                 </div>  
-                <input type="" name="idReservation" value="{{$reservation->id}}" hidden >    
+                <input type="" name="idReservation" value="{{$reservation->id}}" hidden >  
+                <input type="" name="nbrReport" value="{{$nbrReport}}" hidden >  
+
         <div class="row">
-          <?php if ($nbrReport<=5): ?>
           <?php if ($posible==true): ?>
             
           
@@ -76,15 +77,14 @@ background-color:#a0d468;
         <?php else: ?>
           <h2><b> Impossible!</b> Vous n'avez pas le droit d'annuler ou de reporter le rendez-vous car il vous reste moins de 5 jours pour le rendez-vous. </h2>
         <?php endif ?>
-        <?php else: ?>
-          <h2><b> Impossible!</b> Vous avez atteindre le maximum de nombre des reports. </h2>
-        <?php endif ?>
         </div>                          
             </div>  </div></div>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 	<script type="text/javascript">
    function FunctionReporter(){
+    var nbrReport = $('input[name="nbrReport"]').val();
+    if (nbrReport<=5) {
     if(confirm('Êtes-vous sûrs d`envoyer une demande de reportation?'))
     {
       //alert("ok");
@@ -105,6 +105,13 @@ background-color:#a0d468;
 
                }
              });
+    }}else {
+      Swal.fire(
+                'Impossible! ',
+                'Vous avez atteindre le maximum de nombre des reports.',
+                'error'
+              ).then((result) => {
+                  window.location.replace("https://prenezunrendezvous.com/reservations");
     }
 
   }
@@ -122,7 +129,7 @@ background-color:#a0d468;
               //alert(data);
               Swal.fire(
                 'rendez-vous annulé',
-                'Votre acompte sera remboursé',
+                'Votre montant payé sera remboursé',
                 'success'
               ).then((result) => {
                   window.location.replace("https://prenezunrendezvous.com/reservations");
