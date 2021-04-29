@@ -122,14 +122,14 @@ var dateStr = moment(date).format('DD-MM-YYYY hh:mm');
             method: "get",
             data: {date: date2,idres:idres, _token: _token},
             success: function (data) {
-              alert(data);
+              //alert(data);
               if (data=="ok") {
               var markup ='<tr><td>'+dateStr+'</td><td><a  class="delete fm-close"  href="#"><i class="fa fa-remove"></i></a></td></tr>;'
                 $("table tbody").append(markup);
                 }
                 else
                 {
-                  alert("no");
+                  //alert("no");
                   Swal.fire(
                 'Vous avez atteindre le maximum.',
                 '',

@@ -103,7 +103,13 @@ var _token = $('input[name="_token"]').val();
             method: "get",
             data: {idres:idres, date:date , _token: _token},
             success: function (data) {
-              alert(data);
+              Swal.fire(
+                'Proposition envoyée',
+                '',
+                'success'
+              ).then((result) => {
+                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                })
              
                }
              });
