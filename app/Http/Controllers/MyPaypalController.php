@@ -620,7 +620,7 @@ public function sendMail($to,$sujet,$contenu){
 			
 			
 	  
-	    /**********/      
+	    /********      
           
  // Email
  $titre='Tranche';
@@ -676,7 +676,7 @@ public function sendMail($to,$sujet,$contenu){
          $paiement->save();        			
 			
 			
-			
+			*/
 			
 			
 			
