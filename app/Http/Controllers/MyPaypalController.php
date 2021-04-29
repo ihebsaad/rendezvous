@@ -451,12 +451,12 @@ return redirect($redirect_url);
         ];
 		//dd($data);
         $response = $this->provider->createPayRequest($data);
-         dd($response);
-		
+ 		
 	    \Session::forget('preapprovalKey');
 
 		// save key
 		 \Session::put(['preapprovalKey' => $response['preapprovalKey']]);
+		 \Session::put(['response' => $response ]);
 
 $redirect_url = $this->provider->getRedirectUrl('pre-approved', $response['preapprovalKey']);
 
@@ -541,7 +541,7 @@ public function sendMail($to,$sujet,$contenu){
 	// get key from session
 	  $preapprovalkey = \Session::get('preapprovalKey');
 
-
+	dd( \Session::get('response')   );
 	// creation 4 lignes de retrait	 
 	 
   		 $retrait1 = new Retrait([ 'email' =>  $email , 'date' =>  $date1, 'preapprovalkey' =>  $preapprovalkey , 'amount' =>  $tranche , 'reservation' =>  $reservation  ]);
