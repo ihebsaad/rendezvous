@@ -1,4 +1,4 @@
-﻿@extends('layouts.frontlayout')
+@extends('layouts.frontlayout')
  
  @section('content')
 
@@ -174,14 +174,18 @@ font-size: 15px;
 		  </div>-->
           </div>
           
-          <div class="col-lg-3 col-md-3 ">
+         <div class="col-lg-3 col-md-3 ">
+       <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
        	<?php $url1=  URL::asset('storage\qrcodes'); 
        	$urlqrcode = $url1."/".$user->qr_code;  ?>
         <center><img src="{{$urlqrcode}}" alt="" width="130" height="130"></center>
 
+      <?php } ?>
+
 	  </div>
 	  </div>
         </div>
+    <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
         <div id="utf_listing_overview" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> <i class="sl sl-icon-present">
           	<?php /*$dt=new dateTime(); echo $dt->format("Y-m-d H:i");*/ ?>
@@ -211,6 +215,7 @@ font-size: 15px;
 </table></div>
 			  
         </div>
+         <?php } ?>
         <div id="utf_listing_overview" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> Description</h3>
           <p>{{$user->description}}
@@ -297,18 +302,23 @@ font-size: 15px;
       <?php } ?>
 	  <div class="utf_box_widget booking_widget_box">
 	      <h3><i class="fa fa-calendar"></i> Réserver un service 
-
+        <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
 	      <center> <button type="button" id="kbs" class="btn btn-primary" style="font-size: 12px; width: 180px;" data-toggle="modal" data-target="#calendrier_prestataire">
            <b>Voir calendrier du prestataire</b>
           </button> </center>
+
+            <?php } ?>
 			<!--<div class="price">
 				<span>220$<small>person</small></span>				
 			</div>-->
 		  </h3>
+
 		  <input type="number" value="{{$reduction}}" name="" hidden id="catrefideliteVal" >
 		  <?php if($reduction != 0){  ?> 
 		  <h3 style="color: red"><i class="sl sl-icon-present"></i> Félicitation!<br> Vous bénéficierez pour la prochaine réservation d'une réduction de {{$reduction}}%</h3>
 		  <?php } ?>
+
+		  <?php if(($user->type_abonn_essai && $user->type_abonn_essai!="type3" ) || ($user->type_abonn &&  $user->type_abonn!="type3" )) { $myhappyhours = null; } ?>
 
 		  <?php if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
 		  else {  echo '<input type="number" happyhourid="0" value="0" id="myhappyhoursId" name="" hidden>'; } ?>
@@ -426,6 +436,7 @@ font-size: 15px;
 		  </div>
 
 		  </div>
+		<?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
 		  	<div class="col-lg-12 col-md-12 ">
 		  		<label>Code promo :</label>
 		  		<div class="input-group input-group-lg" >
@@ -436,6 +447,7 @@ font-size: 15px;
 				</div>
           
          </div>
+     <?php } ?>
 		 <!------------------section Produits---------->
 		<?php if(isset($User) and $User->user_type=='client' and $user->section_product=='active' ) {
 			?>
@@ -662,7 +674,9 @@ font-size: 15px;
           	</div>
           <div id="menu1" class="container tab-pane fade"><br>
           <?php } ?>
-          	 <?php  if (sizeof($servicesreccurent) != 0) { ?>
+          	 <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" )|| ($user->type_abonn &&  $user->type_abonn=="type3" )) { 
+
+          	 	if (sizeof($servicesreccurent) != 0) {  ?>
       <div class="row with-forms margin-top-0 " style="font-size: 150%">
 			<div class="col-lg-12">
 				<label for="cars">Service à abonnement:</label>
@@ -811,7 +825,7 @@ font-size: 15px;
 			
           <div class="clearfix"></div>
  
-     <?php } ?>
+     <?php } }// fin onglet service recurrent ?>
     <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {?>
   </div>
     </div>
@@ -1505,10 +1519,14 @@ font-size: 15px;
 
 
  <script type="text/javascript">
+ 	/*$('#service').on('change', function(evt, params) { alert("sel"+params.selected);
+
+ 	alert("des"+params.deselected);});*/
    var service = $('#service').val();
    if(service==""){document.getElementById("listProduits").style.display='none';
 		}
  	function selectservice(){
+ 		//lert("ft sele");
  		var happyhours = $('#myhappyhoursId').val();
  		var remiseCarte  =0 ;
 		var montant = 0 ;
@@ -1604,6 +1622,8 @@ font-size: 15px;
   
   }
  	}
+
+ 
  	function fonctionvalide(){
  		var valCode = $('#mycodepromo').val();
    		//alert(valchange);
@@ -1656,6 +1676,7 @@ font-size: 15px;
                     });
  		
  	}
+
  	 	function fonctionvalideRec(){
  		var valCode = $('#mycodepromoRec').val();
    		//alert(valchange);
@@ -1796,9 +1817,11 @@ font-size: 15px;
 			        for(var i = 0; i < inputs.length; i++){
                      alert($(inputs[i]).val());
                     }*/
-                     var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
-                    
+                   
+                    var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
                     var happyhour = $('#myhappyhoursId').val();
+                     
+
                     var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
                     var Remise = parseFloat(document.getElementById('RemiseReservation').value);
                     var Net = parseFloat(document.getElementById('totalReservation').value);
