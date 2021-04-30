@@ -139,6 +139,12 @@ public function successpay2(Request $request)
 
     
       $this->sendMail(trim($client->email),'Réservation annulée _ Remboursement',$message) ;
+      $alerte = new Alerte([
+             'user' => $client->id,
+       'titre'=>'Réservation annulée',       
+             'details' => $message,
+         ]);  
+     $alerte->save();
     }
 
     //-------------------------------------------payAcompteReservation---------------------------------------------

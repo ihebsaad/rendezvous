@@ -313,7 +313,7 @@ class ReservationsController extends Controller
 
 
 		
- 	    $this->sendMail(trim($client->email),'Réservation annulée',$message)	;
+ 	    $this->sendMail(trim($prestataire->email),'Réservation annulée',$message)	;
 
     	
     	return "ko";
