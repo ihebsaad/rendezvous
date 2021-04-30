@@ -188,7 +188,7 @@ public function successpay2(Request $request)
 		
 		
 		$response = $this->provider->createPayRequest($data);
-		 //dd( $response);
+		 dd( $response);
 		//$key='';
 		//if(isset($response['payKey'])){$key=$response['payKey'];}
 		Reservation::where('id',$reservation)->update(array('payKey' => $response['payKey']));
