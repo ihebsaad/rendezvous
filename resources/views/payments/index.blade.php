@@ -58,7 +58,7 @@
 					<td><?php echo   date('d/m/Y H:i', strtotime($payment->created_at ))  ;?></td>
                      <td> <?php echo UsersController::ChampById('name',$payment->user).' '.UsersController::ChampById('lastname',$payment->user)  ;?> </td>
                      <td> <?php echo $payment->beneficiaire ;?> </td>
-                     <td> <?php echo $payment->details;?><br> <b>ID paiement :</b> <?php echo $payment->payment_id; ?><br> <b>ID Payer : </b><?php echo $payment->payer_id;?></td>
+                     <td> <?php echo $payment->details;?>   </td>
                     <td>  
            <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('PaymentController@remove', $payment->id)}}"><i class="fa fa-remove"></i></a>
 
