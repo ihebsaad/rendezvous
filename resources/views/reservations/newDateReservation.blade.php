@@ -95,7 +95,7 @@ background-color:#a0d468;
 <tr>
       
       <td >{{$Newdate->date}}</td>
-      <td ><a  class="delete fm-close"  href="#"><i class="fa fa-remove"></i></a></td>
+      <td ><a  class="delete fm-close" data-id="{{$Newdate->id}}" onclick="RemoveFunction(this)" href="#"><i class="fa fa-remove"></i></a></td>
     </tr>
  <?php  } ?>
   </tbody>
@@ -123,8 +123,8 @@ var dateStr = moment(date).format('DD-MM-YYYY hh:mm');
             data: {date: date2,idres:idres, _token: _token},
             success: function (data) {
               //alert(data);
-              if (data=="ok") {
-              var markup ='<tr><td>'+dateStr+'</td><td><a  class="delete fm-close"  href="#"><i class="fa fa-remove"></i></a></td></tr>;'
+              if (data!=0) {
+              var markup ='<tr><td>'+dateStr+'</td><td><a  class="delete fm-close" data-id="'+data+'" onclick="RemoveFunction(this)" href="#"><i class="fa fa-remove"></i></a></td></tr>;'
                 $("table tbody").append(markup);
                 }
                 else
@@ -169,7 +169,25 @@ var _token = $('input[name="_token"]').val();
 
     
 };
-  
+function RemoveFunction(data) {
+var _token = $('input[name="_token"]').val();
+ 
+ var dateId = $(data).attr('data-id');
+
+
+ $.ajax({
+            url: "{{ route('reservations.deletenewdate') }}",
+            method: "get",
+            data: {dateId:dateId, _token: _token},
+            success: function (data) {
+              window.location.reload();
+              
+             
+               }
+             });
+
+    
+};
   </script>
  @endsection
 

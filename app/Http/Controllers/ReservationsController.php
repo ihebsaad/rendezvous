@@ -185,15 +185,20 @@ class ReservationsController extends Controller
               'idres'=> $request->get('idres'),
               
             ]);
+      
 		$reservation->save();
+    $idr =$reservation->id;
 
-
-    	return "ok";
+    	return $idr;
     }else
     {
-    	return "no";
+    	return 0;
     }
 
+    }
+    public function deletenewdate(Request $request)
+    {
+      DB::table('newdates')->where('id', $request->get('dateId'))->delete();
     }
     public function sendnewdate(Request $request)
     {

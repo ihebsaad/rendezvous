@@ -33,7 +33,7 @@ Route::get('/reservations/AnnulerReservation/{id}','ReservationsController@Annul
 Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif');
 Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter');
 Route::get('/reservations.annule/{id}','MyPaypalController@PaymentDetails')->name('reservations.annule');
-
+Route::get('/reservations/deletenewdate','ReservationsController@deletenewdate')->name('reservations.deletenewdate');
 
 
 
