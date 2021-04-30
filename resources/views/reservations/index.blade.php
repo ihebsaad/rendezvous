@@ -227,7 +227,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
  				<input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
  				<input class="form-control " name="montant" type="hidden" value="<?php echo  $reservation->reste ; ?>"  >       
  				<input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >
-				<button class="button"  >Payer Tranche (1/4  de <?php echo $reservation->reste ; ?> €) </button>
+				<button class="button"  >Payer Tranche (1/4  de <?php echo $reservation->reste ; ?>€) </button>
 				</form>	
 	<?php			
 	}else{
