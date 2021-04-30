@@ -118,6 +118,7 @@ $redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey'])
 //-------------------------------------------end---------------------------------------------
 public function successpay2(Request $request)
     {
+      Reservation::where('id', $request->get('reservation'))->update(array('statut' => 2 ));
       $Reservation = Reservation::where('id',$request->get('reservation'))->first();
       //dd($Reservation);
       $client=User::find($Reservation->client);
@@ -129,6 +130,7 @@ public function successpay2(Request $request)
 
     // Email au prest
     $message='Bonjour,<br>';
+    $message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé.';
     $message.='Votre Prestataire '.$prestataire->name.' '.$prestataire->lastname.'a remboursé votre montant payé.<br>';
    
     
@@ -136,7 +138,7 @@ public function successpay2(Request $request)
 
 
     
-      $this->sendMail(trim($client->email),'Remboursement',$message) ;
+      $this->sendMail(trim($client->email),'Réservation annulée _ Remboursement',$message) ;
     }
 
     //-------------------------------------------payAcompteReservation---------------------------------------------
