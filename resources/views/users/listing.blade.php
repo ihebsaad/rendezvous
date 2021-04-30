@@ -219,7 +219,7 @@ background-color:lightgrey;
   <strong>Validé!</strong> E-mail Paypal Enregistré.
 </div>
 @endif 
-<?php Session::forget('msg'); ?>
+<?php Session::forget('msg');  ?>
  @endif 
 
     	  {{--<a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> --}}
@@ -294,7 +294,9 @@ background-color:lightgrey;
                 </div>
               </div>
             </div>
-             <div class="add_utf_listing_section margin-top-45"> 
+
+
+<div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-present"></i>Configuration de paiement</h3>
                 </div>       
@@ -331,8 +333,6 @@ background-color:lightgrey;
 </form>
 
             </div>  </div>
-
-
 
 
 
@@ -752,7 +752,8 @@ function geocodeAddress(geocoder, resultsMap) {
            
 
              <!-- deb  heures indisponibilité  v2 -->
-
+             <?php use App\Indisponibilite; ?>
+    <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
       <div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
 					<h3><i class="sl sl-icon-basket-loaded"></i>Heures d'indisponibilité</h3>
@@ -763,7 +764,7 @@ function geocodeAddress(geocoder, resultsMap) {
 					<table id="utf_pricing_list_section">
 					  <tbody class="ui-sortable"  id="indispo">
 					 	<br>
-					<?php use App\Indisponibilite;  $periodes_indisp=Indisponibilite::where('prest_id',$user->id)->get();
+					<?php   $periodes_indisp=Indisponibilite::where('prest_id',$user->id)->get();
 					  foreach($periodes_indisp as $pi){
  					  ?>
  					  	<tr class="pricing-list-item pattern ui-sortable-handle">
@@ -796,10 +797,11 @@ function geocodeAddress(geocoder, resultsMap) {
 				</div>                          
             </div>
 
-
+     <?php } ?>
              <!-- fin  heures indisponibilité  v2 -->
 
              <!-- deb  heures indisponibilité  v3 -->
+             <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
               <div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
 					<h3><i class="sl sl-icon-basket-loaded"></i>Heures d'indisponibilité - Rendez vous confirmés - Heures ouverture et fermeture </h3>
@@ -831,7 +833,7 @@ function geocodeAddress(geocoder, resultsMap) {
             </div>
 
              <!-- fin  heures indisponibilité  v3 -->
-
+         <?php } ?>
 			
 			<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -993,7 +995,10 @@ function geocodeAddress(geocoder, resultsMap) {
 					<!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
 				</div>                          
             </div>
-            <!----------------------------------------------------------------------------->
+   <!----------------------------------------------------------------------------->
+     <!-------------------------------- Debut de Code promo--------------------------------------------->
+     <?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
             <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-diamond"></i>Code promo </h3>
@@ -1043,6 +1048,10 @@ function geocodeAddress(geocoder, resultsMap) {
           <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
         </div>                          
             </div>
+
+    <?php } ?>
+<!------------------------------fin code promo----------------------------------------------->
+
             <!------------------------------produits----------------------------------------------->
             <style>
 .switch {
@@ -1288,6 +1297,7 @@ if (x=="Numérique") {
 				</div>                          
             </div>	
 
+  <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
 
       <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
@@ -1363,7 +1373,7 @@ if (x=="Numérique") {
   </tbody>
 </table></div>  
 </div>
-
+ <?php } ?>
   <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-question"></i>Services Supplémentaires</h3>
