@@ -440,11 +440,7 @@ font-size: 15px;
 			</ul>
 			</div >	
 			<?php }} }} ?>
-			
-
-
-				
-				<br>
+			<br>
 				
 <!---------------model view product---------->
 <?php  foreach($produit as $prod){?>
@@ -514,29 +510,15 @@ font-size: 15px;
 	</div>
 	<script>
 	function AddtoList(id){
-		var idProduit=parseInt(id);
-			var idclient=document.getElementById("Acheter").value;		
-
+			var idProduit=id;
           	var _token = $('input[name="_token"]').val();
          	  $.ajax({
-				headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
                     url:"{{ route('ProductClient') }}",
                     method:"POST",
-                    data:{idProduit:idProduit,idclient:idclient, _token:_token},
-                    success:function(data){changed=true;
-							
-							$.notify({
-							   message: 'produit ajoutée avec succès',
-							 icon: 'glyphicon glyphicon-check'},{
-							 type: 'success',
-							 delay: 3000,
-							 timer: 1000,	
-							 placement: {
-							 from: "bottom",
-							 align: "right" },					
-						   });		}});}
+                    data:{idProduit:idProduit, _token:_token},
+                    success:function(data){
+						
+						}});}
 
 	</script>
 </div></div>
@@ -1503,14 +1485,11 @@ font-size: 15px;
 	   
 				});
 			}
-			var idservice=service[0];
+		var idservice=service[0];
 		var valchange=parseInt(idservice);
 		var idchange=document.getElementById("myText").value;
 
    		var _token = $('input[name="_token"]').val();
-		   $.ajaxSetup({
-                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                                  });
 								  $.ajax({
                         url:"{{ route('users.FirstService') }}",
                         method:"POST",
@@ -1846,7 +1825,8 @@ font-size: 15px;
  		             var _token = $('input[name="_token"]').val();
  
                     var emetteur = $('#emetteur').val();
-                    var email = $('#email').val();
+                    var email =
+					$('#email').val();
                     var tel = $('#tel').val();
                     var contenu = $('#contenu').val();
                     var to = $('#to').val();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -195,22 +196,26 @@ class ServicesController extends Controller
      
      
     }
+    //add to table -produit_service-
     public function insertServiceProd(Request $request)
 	{
- 		
-    $id= $request->get('idchange');
-    $val= strval($request->get('valchange'));
-    $idServ = (int)$val;
-    Produit::where('id', $id)->update(array('service_id' => $val));
+    $id = $request->get('idproduit');
 
+    $val= $request->get('idservice');
+    $values = array('produit_id' => $id,'service_id' => $val);
+    DB::table('produit_service')->insert($values);
+  
 
 
  	}
-	
+	//remove frome'produit_service' table
 	 public function removeServiceProd(Request $request)
     {
-      $id= $request->get('idchange');
-      Produit::where('id', $id)->update(array('service_id' => NULL));	//return back();
+      $id = $request->get('idproduit');
+
+      $val= $request->get('idservice');
+      DB::table('produit_service')->where('produit_id',$id)->where('service_id',$val)->delete();
+    
 
 	}
     public function CodePromoRemove($k)

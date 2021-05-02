@@ -93,10 +93,11 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck');
 	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours');
 	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove');
+//add associated product
 	Route::post('/services/addProdtoService','ServicesController@insertServiceProd')->name('produit.Associate');
-	Route::post('/services/removeProdfromServ', 'ServicesController@removeServiceProd')->name('produit.removefromserv'); 
-
-
+//remove associated product
+	Route::post('/services/removeProduit', 'ServicesController@removeServiceProd')->name('service.removeProd');
+	
 
        
 
