@@ -896,8 +896,8 @@ function geocodeAddress(geocoder, resultsMap) {
               <script>function openchoices(idwd) {
                   var x = document.getElementById("K"+idwd);
                  if (    x.style.display == "block") {
-    x.style.display = "none";} else {x.style.display = "block";}};
-        </script>
+                 x.style.display = "none";} else {x.style.display = "block";}};
+              </script>
 						 	<div class="fm-close" >
              
 							<a  class="delete fm-close"  style="top: 20px;" onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
@@ -1112,108 +1112,37 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-}</style>
-      <div class="add_utf_listing_section margin-top-45"> 
-        <div class="utf_add_listing_part_headline_part">
-          <h3><i class="fa fa-product-hunt"></i>Produits </h3>
-          <script>
-
-    function toggle_visibility(id) {
-       e = document.getElementById(id);
-       if(e.style.display == 'none' ){
-         e.style.display = 'block';
-          var namechange='section_product';
-          var valchange="active";
-          var idchange=id;
-          alert(idchange)
-          var _token = $('input[name="_token"]').val();
-                       $.ajaxSetup({
-                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                                  });
-          $.ajax({
-                           url:"{{ route('users.ProductSection') }}",
-                          method:"POST",
-                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
-                             success:function(data){
-                               
-                               $.notify({
- 					                      message: 'Section activé avec succès',
-					                      icon: 'glyphicon glyphicon-check'},{
- 					                        type: 'success',
-					delay: 3000,
-					timer: 1000,	
-					placement: {
-						from: "bottom",
-						align: "right"
-						},					
-					});	}});}
-          
-       else {
-        e.style.display ='none'
-          var namechange='section_product';
-          var valchange="desactive";
-          var idchange=id;
-          var _token = $('input[name="_token"]').val();
-                       $.ajaxSetup({
-                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                                  });
-          $.ajax({
-                           url:"{{ route('users.ProductSection') }}",
-                          method:"POST",
-                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
-                             success:function(data){$.notify({
- 					message: 'section desactivé avec succès',
-					icon: 'glyphicon glyphicon-check'
-					},{
- 					type: 'success',
-					delay: 3000,
-					timer: 1000,	
-					placement: {
-						from: "bottom",
-						align: "right"
-						},					
-					});	}});}
-    }
-
-</script>
-
-<label class="switch">
-<?php if ($user->section_product== 'active'){
-  ?>
-  <input  id="toggleProd" onclick="toggle_visibility ('<?php echo $user->id;?>')" type="checkbox"   checked />
-  <span class="slider round"></span>
-</label>
-                </div>              
-        <div class="row" id="<?php echo $user->id;?>">
-        <?php 
-}else if ($user->section_product== 'desactive'){?>    
-<input onclick="toggle_visibility ('<?php echo $user->id;?>')" type="checkbox" />
-<span class="slider round"></span>
-</label>
-                </div>              
-        <div class="row" id="<?php echo $user->id;?>" hidden='true'>
-  <?php }?>
+}
+</style>
+     
 
 
-          <div class="col-md-12">
-          <table id="utf_pricing_list_section">
-            <tbody class="ui-sortable"  id="produits">
-           
-            
-             <?php
- 
-            foreach($produit as $prod){
-            ?>
-            <tr class="pricing-list-item pattern ui-sortable-handle">
-              <td> 
+
+ <!-------------------------------------------produits----------------------------------->
+
+<div class="add_utf_listing_section margin-top-45"> 
+  <div class="utf_add_listing_part_headline_part">
+    <h3><i class="fa fa-product-hunt"></i>Produits </h3>
+    <label class="switch">
+      <input  id="toggleProd" onclick="toggle_visibility ('<?php echo $user->id;?>')" type="checkbox"  <?php if ($user->section_product== 'active'){ echo 'checked' ; } ?>   />
+      <span class="slider round"></span>
+    </label>
+  </div>
+  <div class="row" id="<?php echo  $user->id;?>" <?php if ($user->section_product== 'desactive') { echo 'type="checkbox"'; } ?> >
+    <div class="col-md-12">
+      <table id="utf_pricing_list_section">
+        <tbody class="ui-sortable"  id="produits">
+        <?php foreach($produit as $prod){ ?>
+          <tr class="pricing-list-item pattern ui-sortable-handle">
+            <td>
               <div class="fm-input">
-              <?php if($prod->image!=''){?>  <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"  style="max-width:100px"  />
-                <?php } ?></div>
-              
+                <?php if($prod->image!=''){?>  <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"  style="max-width:100px"  />
+                <?php } ?>
+              </div>
               <div class="fm-input " style="max-width: 150px">
                 <label>type :</label>
-                  <output class="button">{{$prod->type}}</output>
-                </div> 
+                <output class="button">{{$prod->type}}</output>
+              </div>
               <div class="fm-input pricing-name" >
                 <label>Nom :</label>
                 <input type="text" onchange="changeProduct(this)" id="i<?php echo $prod->id;?>" name="nom_produit" value="<?php echo $prod->nom_produit;?>"   >
@@ -1222,59 +1151,25 @@ input:checked + .slider:before {
                 <label>Description :</label>
                 <input type="text" onchange="changeProduct(this)" id="h<?php echo $prod->id;?>" name="description" value="<?php echo $prod->description;?>" >
               </div>
-              
               <div class="fm-input pricing-price">
                 <label>Prix : (€)</label>
-                
-                <input type="text"   onchange="changeProduct(this)" id="x<?php echo $prod->id;?>" name="prix_unité"  data-unit="€"  value="<?php echo $prod->prix_unité;?>"   > 
+                <input type="text"   onchange="changeProduct(this)" id="x<?php echo $prod->id;?>" name="prix_unité"  data-unit="€"  value="<?php echo $prod->prix_unité;?>"   >
               </div>
-              
               <div class="fm-close">
-              <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('/services/remove_product/'.$prod->id)}}" ><i class="fa fa-remove"></i></a>
+                <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')" href="{{url('/services/remove_product/'.$prod->id)}}" ><i class="fa fa-remove"></i></a>
               </div>
-
-              </td>
-              <td >  
-              </td>
-            </tr>
-            <?php } ?>
-            </tbody>
-          </table>
-          <br>
-                 <center>
-          <a href="#small-dialogProduct" class="button popup-with-zoom-anim">Ajouter</a> </center>
-          <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
-        </div>                          
-            </div>    
-
-            <script>     function changeProduct(a){
-      //alert("ok");
-      var valchange = $(a).val();
-      var idchange = ($(a).attr('id')).substring(1);
-      var namechange = $(a).attr('name');
-
-      //alert(namechange);
-      var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url:"{{ route('produit.modif') }}",
-                        method:"POST",
-            data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
-                        success:function(data){
-                          
-                        }
-                    });
-
-  };  
-function myFunctionPSelect(){
-
-var x = document.getElementById("type").value;
-//alert(document.getElementById("periode").placeholder);
-if (x=="Numérique") {
-  document.getElementById("URL").style.display = 'block';
-  //document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
-}else if(x=="Physique"){document.getElementById("URL").style.display = 'none';}
-}
-</script>  
+            </td>
+            <td ></td>
+          </tr>
+        <?php } ?>
+        </tbody>
+      </table>
+      <br>
+      <center><a href="#small-dialogProduct" class="button popup-with-zoom-anim">Ajouter</a></center>
+      <!--<a href="#" class="button add-pricing-submenu">Add Category</a> -->
+    </div>
+  </div>
+</div>              
             <!------------------------------------------------------------------------------>
 
             <!----------------------------------------------------------------------------->				
@@ -2098,6 +1993,94 @@ $("#dimanche_f").val("<?php echo $user->dimanche_f ; ?>");
 <?php } ?>
 */
 </script> 
+<script>     function changeProduct(a){
+      //alert("ok");
+      var valchange = $(a).val();
+      var idchange = ($(a).attr('id')).substring(1);
+      var namechange = $(a).attr('name');
+
+      //alert(namechange);
+      var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('produit.modif') }}",
+                        method:"POST",
+            data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                        success:function(data){
+                          
+                        }
+                    });
+
+  };  
+function myFunctionPSelect(){
+
+var x = document.getElementById("type").value;
+//alert(document.getElementById("periode").placeholder);
+if (x=="Numérique") {
+  document.getElementById("URL").style.display = 'block';
+  //document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
+}else if(x=="Physique"){document.getElementById("URL").style.display = 'none';}
+}
+</script>  
+<script>
+
+    function toggle_visibility(id) {
+       e = document.getElementById(id);
+       if(e.style.display == 'none' ){
+         e.style.display = 'block';
+          var namechange='section_product';
+          var valchange="active";
+          var idchange=id;
+          alert(idchange)
+          var _token = $('input[name="_token"]').val();
+                       $.ajaxSetup({
+                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                                  });
+          $.ajax({
+                           url:"{{ route('users.ProductSection') }}",
+                          method:"POST",
+                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                             success:function(data){
+                               
+                               $.notify({
+                                message: 'Section activé avec succès',
+                                icon: 'glyphicon glyphicon-check'},{
+                                  type: 'success',
+          delay: 3000,
+          timer: 1000,  
+          placement: {
+            from: "bottom",
+            align: "right"
+            },          
+          }); }});}
+          
+       else {
+        e.style.display ='none'
+          var namechange='section_product';
+          var valchange="desactive";
+          var idchange=id;
+          var _token = $('input[name="_token"]').val();
+                       $.ajaxSetup({
+                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                                  });
+          $.ajax({
+                           url:"{{ route('users.ProductSection') }}",
+                          method:"POST",
+                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                             success:function(data){$.notify({
+          message: 'section desactivé avec succès',
+          icon: 'glyphicon glyphicon-check'
+          },{
+          type: 'success',
+          delay: 3000,
+          timer: 1000,  
+          placement: {
+            from: "bottom",
+            align: "right"
+            },          
+          }); }});}
+    }
+
+</script>
 <script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
 
 
