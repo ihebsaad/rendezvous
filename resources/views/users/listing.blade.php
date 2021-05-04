@@ -907,7 +907,7 @@ function geocodeAddress(geocoder, resultsMap) {
 							<td style="align-items:baseline;"> 
               <div class="fm-input "  style="display: none;" id="K<?php echo $service->id;?>">
                 <select onchange="changeProdSer(this)"  id="produit" class="utf_chosen_select_single"  name="produit[]" placeholder="Sélectionner un produit"   multiple style="font-weight: 17px !important; " >
-                <option> </option>
+                <option> test </option>
                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
 					<?php 
@@ -1053,7 +1053,7 @@ function geocodeAddress(geocoder, resultsMap) {
 <!------------------------------fin code promo----------------------------------------------->
 
             <!------------------------------produits----------------------------------------------->
-            <style>
+<style>
 .switch {
 margin-left:29px;  display: inline-block;
   width: 60px;
@@ -1553,9 +1553,7 @@ input:checked + .slider:before {
     <!-- <a class="button" id="add" style="text-align:center">Ajouter</a>-->
      </div>     
      </div>     
-      <!----
-      
-            <!------------------------- Fin Model Produit---------------------------------------------->
+      <!--------------------------------------------- Fin Model Produit---------------------------------------------->
 
 		
 <!---------------------------------------------------------------------------------------------------->
@@ -2030,7 +2028,7 @@ if (x=="Numérique") {
           var namechange='section_product';
           var valchange="active";
           var idchange=id;
-          alert(idchange)
+          //alert(idchange)
           var _token = $('input[name="_token"]').val();
                        $.ajaxSetup({
                           headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
