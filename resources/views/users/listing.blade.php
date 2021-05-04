@@ -907,7 +907,7 @@ function geocodeAddress(geocoder, resultsMap) {
 							<td style="align-items:baseline;"> 
               <div class="fm-input "  style="display: none;" id="K<?php echo $service->id;?>">
                 <select onchange="changeProdSer(this)"  id="produit" class="utf_chosen_select_single"  name="produit[]" placeholder="Sélectionner un produit"   multiple style="font-weight: 17px !important; " >
-                <option> test </option>
+                <option selected> test </option>
                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
 					<?php 
