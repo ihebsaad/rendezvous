@@ -900,44 +900,77 @@ function geocodeAddress(geocoder, resultsMap) {
               </script>
 						 	<div class="fm-close" >
              
-							<a  class="delete fm-close"  style="top: 20px;" onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
+							<a  class="delete fm-close"   style="top: 20px;" onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ServicesController@remove', [ 'id'=>$service->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>
 							</div>
 
 							</td>
 							<td style="align-items:baseline;"> 
               <div class="fm-input "  style="display: none;" id="K<?php echo $service->id;?>">
                 <select onchange="changeProdSer(this)"  id="produit" class="utf_chosen_select_single"  name="produit[]" placeholder="Sélectionner un produit"   multiple style="font-weight: 17px !important; " >
-                <option selected> test </option>
-                <option selected> test2 </option>
-                <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
-
-					<?php 
+ 
+                <option> </option>
+              <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+                <?php // show in the input select the previous associated products syntax correct but still won't work 
+					foreach($produit as $prod){ $produits = \App\Service::find($service->id)->produit();
+            foreach($produits as $produits){
+          if($prod->id==$produits)?>
+              <script>
+  $('#produit').find('option[value="' + <?php echo $prod->nom_produit  ?> + '"]').prop('selected', true);</script>	<?php }} ?>
+ 					<?php 
 					foreach($produit as $prod){
 						echo '<option  style="font-weight: 17px;" value="'.$prod->id.'" >'.$prod->nom_produit.'</option>';
 					}
-					?>
-			          	</select>
+					?>        	</select>
+                 
               </div>     
-              <script>
-                  function changeProdSer(a) {
+              <script>//to delete the id produit and id service from the table db 'produit_service' but it woud'nt work 
+               $(".search-choice-close").on("click", function(){
+                $(this).parent('.li').remove();
+                var idproduit = $('#produit').val();
+                var idservice = $('#produit').parent().attr('id');
+
+                alert(idservice);
+                var _token = $('input[name="_token"]').val();
+                       $.ajaxSetup({
+                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                                  });
+                        $.ajax({
+                           url:"{{ route('service.removeProd') }}",
+                          method:"POST",
+                          data:{idservice:idservice,idproduit:idproduit, _token:_token},
+                             success:function(data){	changed=true;
+							
+                               $.notify({
+                                  message: 'produit supprimé avec succès',
+                                icon: 'glyphicon glyphicon-check'},{
+                                type: 'success',
+                                delay: 3000,
+                                timer: 1000,	
+                                placement: {
+                                from: "bottom",
+                                align: "right" },					
+                              });	
+                            }
+                          });
+
+              });
+             function changeProdSer(a){
               var service = $(a).parent().attr('id');  
               var serviceArray=service.split('').slice(1);
               var serviceString = serviceArray.join('');
-              alert(serviceString);
               var produit = $(a).val();
 		          if (produit.length != 0) {
 		              for (var i = 0; i < produit.length; i++) {
-                      var idchange =  produit[i];
-                      var valchange = serviceString ;
-                      var namechange = 'produit';
+                      var idproduit =  produit[i];
+                      var idservice = serviceString ;
    	                	var _token = $('input[name="_token"]').val();
                        $.ajaxSetup({
                           headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                                   });
                         $.ajax({
-                           url:"{{ route('produit.Associate') }}",
+                           url:"{{ route('services.AssociateProd') }}",
                           method:"POST",
-                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
+                          data:{idservice:idservice,idproduit:idproduit, _token:_token},
                              success:function(data){	changed=true;
 							
                                $.notify({
@@ -953,7 +986,8 @@ function geocodeAddress(geocoder, resultsMap) {
                             }
                           });
                       }
-                  } }</script>
+                  } }
+                  </script>
 								
 							
 							<div class="fm-input " style="display: none;" id="f<?php echo $service->id;?>">
