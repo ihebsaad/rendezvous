@@ -155,7 +155,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::get('/reservations','ReservationsController@index')->name('reservations');
 	Route::get('/reservations/remove/{id}','ReservationsController@remove');
 	Route::get('/reservations/valider/{id}','ReservationsController@valider')->name('validation');
-	Route::get('/reservations/annuler/{id}','ReservationsController@annuler');
+	Route::get('/reservations/annuler/{id}','ReservationsController@annuler')->name('annul');
 	Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage');
 	Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage');
 

@@ -75,16 +75,19 @@ class CalendrierController extends Controller
          // dd($id);
         }
 
-        $prest=User::find($id);
+       $prest=User::find($id);
+       if($prest->google_path_json)
+        {
         $client = new Google_Client();
         $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
         $client->addScope(Google_Service_Calendar::CALENDAR);
-         $client->setAccessType('offline');       
+        $client->setAccessType('offline');       
         //$client->setApprovalPrompt('force');
 
         $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
         $client->setHttpClient($guzzleClient);
         $this->client = $client;
+        }
       }
        
        

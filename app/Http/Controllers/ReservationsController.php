@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
 use Route;
-
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -38,9 +38,22 @@ class ReservationsController extends Controller
     {
         //$this->middleware('auth');
        
-       if(Route::current()->action['as']=='validation' || Route::current()->action['as']=='oauthCallback')
+       if(Route::current()->action['as']=='validation' || Route::current()->action['as']=='reservations.changeDate'  || Route::current()->action['as']=='oauthCallback' || Route::current()->action['as']=='reservations.AnnulerRes' )
        {
-       	if(Route::current()->action['as']=='validation')
+   
+        if(Route::current()->action['as']=='reservations.AnnulerRes')
+        {
+        	$id = Input::get('idReservation');
+            Session::put('idres', $id);
+        }
+
+        if(Route::current()->action['as']=='reservations.changeDate')
+        {
+        	$id = Input::get('idres');
+            Session::put('idres', $id);
+        }
+
+       	if(Route::current()->action['as']=='validation' || Route::current()->action['as']=='annul'  )
        	{
            $id = Route::current()->parameters['id'];
            Session::put('idres', $id);
@@ -57,6 +70,8 @@ class ReservationsController extends Controller
          $idprest=Reservation::find($id)->prestataire;
          $prest=User::find($idprest);
          //dd($prest->google_path_json);
+         if($prest->google_path_json)
+        {
         $client = new Google_Client();
         $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
         $client->addScope(Google_Service_Calendar::CALENDAR);
@@ -65,7 +80,7 @@ class ReservationsController extends Controller
         $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
         $client->setHttpClient($guzzleClient);
         $this->client = $client;
-
+         }
       //  dd( $this->client);
         }
     }
@@ -222,9 +237,17 @@ class ReservationsController extends Controller
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
-
+        $alerte = new Alerte([
+             'user' => $client->id,
+			 'titre'=>'Nouvelle date de prestation',
+             'details' => $message,
+         ]);	
+		 $alerte->save();
 		
  	    $this->sendMail(trim($client->email),'report du rendez-vous',$message)	;
+
+ 	     
+
  	    return "ok";
 
     }
@@ -245,7 +268,8 @@ class ReservationsController extends Controller
 		$heure = $heure->format('H:i');
 		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
     	return view("reservations.selectDateReservation", compact('reservation','date','heure','name','Newdates'));
-    }	
+    }
+    // report d'une date par le client	
     public function changeDate(Request $request)
     {
     	$idReservation = $request->get('idres');
@@ -291,8 +315,81 @@ class ReservationsController extends Controller
 		
  	    $this->sendMail(trim($client->email),'Rendez-vous reporté',$message)	;
 
+ 	    // ------------------Update l'évenement dans google calendar------------------------------------
+
+  if($prestataire->google_path_json && $prestataire->google_access_token && $prestataire->google_refresh_token)
+   {
+      //voir si la réservation est récurrente ou non
+        $liste_rec= array();
+        $reservation=$Reservation;
+        $idevent=$reservation->id_event_google_cal;
+
+        if($idevent)
+        {
+
+        	 $param=User::where('id',$prestataire->id)->first();
+             $access_token=$param->google_access_token;
+
+           if(isset($access_token) && $access_token)
+            {   
+
+              $this->client->setAccessToken($access_token);
+              if ($this->client->isAccessTokenExpired()) {
+              $this->client->refreshToken($param->google_refresh_token);
+              }
+
+            $service = new Google_Service_Calendar($this->client);
+
+        	$debut=$reservation->date_reservation;
+        	$debut=str_replace(' ','T',$debut);
+        	//$maxduree=0;
+        	//$service_duree="01:00";
+        	foreach ($reservation->services_reserves as $sr) { 
+			$serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+            /*$intduree=intval(strval(str_replace(':','',$serv->duree)));
+            if($intduree>$maxduree)
+            {
+             $maxduree=$intduree;
+             $service_duree=$serv->duree;
+            }*/
+	        $hour=substr($serv->duree, 0, 2);
+	        $minutes=substr($serv->duree,3,2);	     
+	        }
+           // $hour=substr($service_duree, 0, 2);
+	        //$minutes=substr($service_duree,3,2);
+
+	        $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+	        $fin=str_replace(' ','T', $fin);
+
+	        // update times
+	        $startDate = date("Y-m-d", strtotime($debut));
+            $startTime = date("H:i", strtotime($debut));
+            $idevent=Reservation::where('id',$reservation->id)->first()->id_event_google_cal;
+            $event = $service->events->get('primary',  $idevent);
+            $start = new Google_Service_Calendar_EventDateTime();
+            $start->setDateTime($startDate.'T'.$startTime.':00.000+01:00');
+           // $start->setTimeZone('Africa/Tunis');
+	        $event->setStart($start);
+	       $endDate = date("Y-m-d", strtotime($fin));
+           $endTime = date("H:i", strtotime($fin));
+	       $end = new Google_Service_Calendar_EventDateTime();
+	       $end->setDateTime($endDate.'T'.$endTime.':00.000+01:00');
+	       //$end->setTimeZone('Africa/Tunis');
+	       $event->setEnd($end);
+           $updatedEvent = $service->events->update('primary', $event->getId(), $event);
+          }
+	        //
+        }// fin test idevent
+
+
+    }// fin if ( file json et les tokens existe)
+
+   // --------------------fin update au google calendar ----------------------------------------------------
+
     	return $date ;
     }
+
+    // réservation annulée par le client	
     public function AnnulerRes(Request $request)
    {
    	Reservation::where('id', $request->get('idReservation'))->update(array('statut' => 2 ));
@@ -316,13 +413,13 @@ class ReservationsController extends Controller
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
-
 		
- 	    $this->sendMail(trim($prestataire->email),'Réservation annulée',$message)	;
+ 	    $this->sendMail(trim($prestataire->email),'Réservation annulée',$message);
 
-    	
+     	
     	return "ko";
-    }	
+    }
+    
     public function AnnulerReservation($id)
    {
     if (Auth::guest()){
@@ -738,7 +835,7 @@ class ReservationsController extends Controller
      public function valider($id)
     {
           
-          //Reservation::where('id', $id)->update(array('statut' => 1 ));
+          Reservation::where('id', $id)->update(array('statut' => 1 ));
 		  $reservation = \App\Reservation::find($id);
 		  $service = \App\Service::find($reservation->service);
 		  $client = \App\User::find( $reservation->client );
@@ -752,194 +849,19 @@ class ReservationsController extends Controller
 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
-	  //  $this->sendMail(trim($client->email),'Réservation validée',$message)	;
+	   $this->sendMail(trim($client->email),'Réservation validée',$message)	;
 
-    /* $this->sendMail(trim('kbskhaled@gmail.com'),'Réservation validée',$message)	;
+    /* $this->sendMail(trim('kbskhaled@gmail.com'),'Réservation validée',$message)	;*/
 		 $alerte = new Alerte([
              'user' => $client->id,
 			 'titre'=>'Réservation validée',
              'details' => $message,
          ]);	
-		 $alerte->save();*/
+		 $alerte->save();
 
  // ------------------sauvgarder l'évenement dans google calendar------------------------------------
 
-  if( $prestataire->google_path_json && $prestataire->google_access_token && $prestataire->google_refresh_token)
-   {
-      //voir si la réservation est récurrente ou non
-        $liste_rec= array();
-		 if($reservation->recurrent==1)
-		 {
-		 	 $idres=$reservation->id.'reccuring'.$reservation->id;
-		 	 $hour=0;
-		 	 $minutes=0;
-		 	//$idcount=0;
-		 	/*$format="Y-m-d H:i:s";
-		 	$datecourante=new DateTime();
-		 	$datecourante=$datecourante->format($format);
-		 	$datecourante=str_replace(' ','',$datecourante);*/
-		 	$debut=$reservation->date_reservation;
-		    $debut=str_replace(' ','T',$debut);
-		    //dd($debut);
-			foreach ($reservation->services_reserves as $sr) { 
-			$serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
-	        $hour=substr($serv->duree, 0, 2);
-	       // dd($hour);
-	        $minutes=substr($serv->duree,3,2);
-	     
-	        }
-	        $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
-	        $fin=str_replace(' ','T', $fin);
-            $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin, 'summary' =>$reservation->nom_serv_res , 'description'=>'service récurrent (séance de début)' );
-            $liste_rec[]= $un_service_res ;
-
-            //$reservation->update(array('id_event_google_cal'=> $idres));
-            DB::table('reservations')
-            ->where('id', $reservation->id)
-            ->update(['id_event_google_cal' => $idres]);
-        
-		 // get recurring reserved services
-		 $recs=Reservation::whereNotNull('id_recc')->whereNotNull('date_reservation')->where('id_recc',$reservation->id)->get();
-
-        // browse recurring reserved services
-		 foreach ($recs as $rec) {
-             
-            //create id reserved reccuring service to save in google calendar
-		 	$idres=$reservation->id.'reccuring'.$rec->id;
-
-		 	// calculate the start of the reservation
-		 	$debut=$rec->date_reservation;
-		    $debut=str_replace(' ','T',$debut);
-            
-	        //calculate the end of reserved service
-	        $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
-	        $fin=str_replace(' ','T', $fin);
-	        /*foreach ($rec->services_reserves as $sr) { 
-			$serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
-	        $hour=substr($serv->duree, 0, 2);
-	        $minutes=substr($serv->duree,3,2);
-	         }*/
-
-            $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin,'summary' =>$reservation->nom_serv_res, 'description'=>'service récurrent '.$reservation->nom_serv_res );
-             $liste_rec[]= $un_service_res;
-             //$rec->update(array('id_event_google_cal'=> $idres));
-             DB::table('reservations')
-            ->where('id',  $rec->id)
-            ->update(['id_event_google_cal' => $idres]);
-		 	
-		 }
-		 	
-	 }
-	 else // service simple (non récurrent)
-	 {
-        $idres=$reservation->id.'simple'.$reservation->id;
-	 	$debut=$reservation->date_reservation;
-		$debut=str_replace(' ','T',$debut);
-		//dd($debut);
-		foreach ($reservation->services_reserves as $sr) { 
-		$serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
-        $hour=substr($serv->duree, 0, 2);
-       // dd($hour);
-        $minutes=substr($serv->duree,3,2);
-       // dd($minutes);
-        //$fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
-        //$fin=str_replace(' ','T', $fin);
-   
-        }
-
-        $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
-	    $fin=str_replace(' ','T', $fin);
-        $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin, 'summary' =>$reservation->nom_serv_res , 'description'=>'service simple' );
-            $liste_rec[]= $un_service_res ;
-
-         //$reservation->update(array('id_event_google_cal'=> $idres));
-         DB::table('reservations')
-            ->where('id',$reservation->id)
-            ->update(['id_event_google_cal' => $idres]);
-
-	 }
-
-         
-	//dd($liste_rec);
-
-		  $startDateTime=$debut;
-          $endDateTime= $fin;
-          $param=User::where('id',$prestataire->id)->first();
-          $access_token=$param->google_access_token;
-         // dd($this->client);
-        if (isset($access_token) && $access_token) {
-            //dd($access_token);
-             $this->client->setAccessToken($access_token);
-              if ($this->client->isAccessTokenExpired()) {
-              $this->client->refreshToken($param->google_refresh_token);
-              }
-
-            $service = new Google_Service_Calendar($this->client);
-
-            $startDateTime='2021-04-14T13:00:00';
-            $endDateTime= '2021-04-14T16:00:00';
-
-            $startDateTime1='2021-04-09T14:00:00';
-            $endDateTime1= '2021-04-09T15:00:00';
-                    //  'recurrence' => array('RRULE:FREQ=DAILY;COUNT=2'), 
-            $calendarId = 'primary';
-           //'id'=> $lr['id'],
-
-            foreach ($liste_rec as $lr ) {
-
-            	 $event = new Google_Service_Calendar_Event([
-            	
-                'summary' => $lr['summary'],
-                'description' =>$lr['description'],
-                'start' => ['dateTime' => $lr['startDateTime'], 'timeZone' => 'Africa/Tunis',],
-                'end' => ['dateTime' => $lr['endDateTime'] , 'timeZone' => 'Africa/Tunis',],
-              ]);
-            	
-             $results = $service->events->insert($calendarId, $event);
-            }
-
-          /*  $event = new Google_Service_Calendar_Event([
-            	'id'=> '110reccuring2021',
-                'summary' => 'khaled_test',
-                'description' =>'khaled_test',
-                'start' => ['dateTime' => $startDateTime, 'timeZone' => 'Africa/Tunis',],
-                'end' => ['dateTime' => $endDateTime , 'timeZone' => 'Africa/Tunis',],
-                'reminders' => ['useDefault' =>false],                              
-  
-            ]);*/
-
-
-             //'recurrence' => array(' RRULE:FREQ=WEEKLY;COUNT=4;BYDAY=FR,SU;BYHOUR=9,16'),
-
-           /*  $event1 = new Google_Service_Calendar_Event([
-             
-                'summary' => 'khaled_test1',
-                'description' =>'khaled_test1',
-                'start' => ['dateTime' => $startDateTime1, 'timeZone' => 'Africa/Tunis',],
-                'end' => ['dateTime' => $endDateTime1 , 'timeZone' => 'Africa/Tunis',],
-                'reminders' => ['useDefault' =>false],
-                  
-  
-            ]);*/
-           
-           // $results1 = $service->events->insert($calendarId, $event1);
-           // $service->events->delete('primary', 'abc2111');
-             /* $access_token = $this->client->getAccessToken();
-              $refreshToken =  $access_token['refresh_token'];             
-              $param->google_access_token=$access_token;
-              $param->google_refresh_token=$refreshToken;
-              $param->save();*/
-
-            if (!$results) {
-                return response()->json(['status' => 'error', 'message' => 'Something went wrong']);
-            }
-            //return response()->json(['status' => 'success', 'message' => 'Event Created']);
-             return redirect('/reservations')->with('success', 'Réservation Validée et l\'évenement est enregestré dans google agenda avec succès ');
-        } else {
-            return redirect()->route('oauthCallback');
-        }
-    }// fin if ( file json et les tokens existe)
-
+ 
    // --------------------fin sauvgarde au google calendar ----------------------------------------------------
 		 
        return redirect('/reservations')->with('success', 'Réservation Validée  ');
@@ -981,7 +903,7 @@ class ReservationsController extends Controller
         }
     }
 
-	  
+	  // annuler par prestataire
       public function annuler($id)
     {
  		
@@ -1009,7 +931,8 @@ class ReservationsController extends Controller
              'details' => $message,
          ]);	
 		 $alerte->save();
-		 
+
+				 
 		 
        return redirect('/reservations')->with('success', 'Réservation Anunulée  ');
 

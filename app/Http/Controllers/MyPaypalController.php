@@ -9,6 +9,7 @@ use App\IPNStatus;
 use App\Item;
 use App\User;
 use App\Retrait;
+use App\Service;
 use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -19,7 +20,7 @@ use URL;
 
 use Illuminate\Support\Facades\Input;
 use DB;
- use \App\Reservation;
+use \App\Reservation;
 use \App\Alerte;
 use Carbon\Carbon;
 use \App\Cartefidelite;
@@ -29,9 +30,54 @@ use \App\Cartefidelite;
  use DateTime;
 
 
+use Google_Client;
+use Google_Service_Calendar;
+use Google_Service_Calendar_Event;
+use Google_Service_Calendar_EventDateTime;
+
+
 class MyPaypalController extends Controller
 {
 	protected $provider;
+
+    public function __construct()
+    {
+        //$this->middleware('auth');
+       
+       if(Route::current()->action['as']=='payreservation' || Route::current()->action['as']=='successpay' || Route::current()->action['as']=='oauthCallback' || Route::current()->action['as']=='successpay2')
+       {
+        if(Route::current()->action['as']=='payreservation' || Route::current()->action['as']=='successpay' || Route::current()->action['as']=='successpay2' )
+        {
+           $id = Input::get('reservation');
+           Session::put('idres', $id);
+          
+        }
+        else
+        {
+          $id = Session::get('idres');
+         // dd($id);
+        }
+
+       
+       
+         $idprest=Reservation::find($id)->prestataire;
+         $prest=User::find($idprest);
+         //dd($prest->google_path_json);
+        if($prest->google_path_json)
+        {
+        $client = new Google_Client();
+        $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
+        $client->addScope(Google_Service_Calendar::CALENDAR);
+        $client->setAccessType('offline');
+
+        $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
+        $client->setHttpClient($guzzleClient);
+        $this->client = $client;
+        }
+
+      //  dd( $this->client);
+        }
+    }
 	//-------------------------------------------CheckEmail---------------------------------------------
 
   public function CheckEmail(Request $request)
@@ -116,6 +162,8 @@ $redirect_url = $this->provider->getRedirectUrl('approved', $response['payKey'])
     }
 
 //-------------------------------------------end---------------------------------------------
+
+    // appler lorssque le prestataire rembourse les argent au vlient  (annuler Res)
 public function successpay2(Request $request)
     {
       Reservation::where('id', $request->get('reservation'))->update(array('statut' => 2 ));
@@ -145,15 +193,56 @@ public function successpay2(Request $request)
              'details' => $message,
          ]);  
      $alerte->save();
+
+      // ------------------delete l'évenement dans google calendar------------------------------------
+
+  if($prestataire->google_path_json && $prestataire->google_access_token && $prestataire->google_refresh_token)
+   {
+      //voir si la réservation est récurrente ou non
+       
+        $reservation=$Reservation;
+        $idevent=$reservation->id_event_google_cal;
+
+        if($idevent)
+        {
+
+           $param=User::where('id',$prestataire->id)->first();
+             $access_token=$param->google_access_token;
+
+           if(isset($access_token) && $access_token)
+            {   
+
+              $this->client->setAccessToken($access_token);
+              if ($this->client->isAccessTokenExpired()) {
+              $this->client->refreshToken($param->google_refresh_token);
+              }
+
+            $service = new Google_Service_Calendar($this->client);
+            $service->events->delete('primary', $idevent);
+            Reservation::where('id', $reservation->id)->update(['id_event_google_cal' => null]);
+
+          }
+          //
+        }// fin test idevent
+
+
+    }// fin if ( file json et les tokens existe)
+
+   // --------------------fin delete event from google calendar----------------------------------------------------
+
+     return redirect('/reservations/')->with('success', ' Paiement  effectué avec succès  ');
     }
 
     //-------------------------------------------payAcompteReservation---------------------------------------------
     public function payReservation(Request $request)
     {
+        //dd('pay acompte');
         $montant=$request->get('montant');
+
+       // dd($request->get('reservation'));
         $desc=$request->get('description');
         $reservation=$request->get('reservation');
-        $prestId=$request->get('prest');
+        $prestId=$request->get('prest'); 
         $email=User::where('id',$prestId)->value('emailPaypal');
 		$Reservation=Reservation::find( $reservation);
 		
@@ -188,7 +277,7 @@ public function successpay2(Request $request)
 		
 		
 		$response = $this->provider->createPayRequest($data);
-		 //dd( $response);
+		// dd( $response);
 		//$key='';
 		//if(isset($response['payKey'])){$key=$response['payKey'];}
 		Reservation::where('id',$reservation)->update(array('payKey' => $response['payKey']));
@@ -309,11 +398,12 @@ public function successpay2(Request $request)
 				$message.='-Au delà des 5 jours, Il vous sera impossible d`annuler ou de reporter le rendez-vous.  <br>';
 				$message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
 				$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
- 
-
-				
+ 	
 		 	    $this->sendMail(trim($client->email),'Réservation('.$titre.') payé',$message)	;	
-		}
+
+        
+
+		} // fin if type == acompte
 		if($type=='reste'){
 			 Reservation::where('id',$reservation)->update(array('paiement' => 2,'reste'=>0));	
 			 
@@ -339,10 +429,7 @@ public function successpay2(Request $request)
 			 
 		}
   		
-		
-		
-		
-		
+				
 		
     	
 		//enregistrement alerte
@@ -381,14 +468,157 @@ public function successpay2(Request $request)
          ]);	
 		 
 		 $paiement->save();
+
+     // avant la redirection on va sauvgarder l'évenement dans google Agenda si le type est acompte
+
+    if($type=='acompte')
+     {
+
+    // ------------------sauvgarder l'évenement dans google calendar------------------------------------
+
+  if($prestataire->google_path_json && $prestataire->google_access_token && $prestataire->google_refresh_token)
+    {
+      //voir si la réservation est récurrente ou non
+        $liste_rec= array();
+     if($Reservation->recurrent==1)
+     {
+       $idres=$Reservation->id.'reccuring'.$Reservation->id;
+       $hour=0;
+       $minutes=0;
+      //$idcount=0;
+      /*$format="Y-m-d H:i:s";
+      $datecourante=new DateTime();
+      $datecourante=$datecourante->format($format);
+      $datecourante=str_replace(' ','',$datecourante);*/
+      $debut=$Reservation->date_reservation;
+        $debut=str_replace(' ','T',$debut);
+        //dd($debut);
+      foreach ($Reservation->services_reserves as $sr) { 
+      $serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+          $hour=substr($serv->duree, 0, 2);
+         // dd($hour);
+          $minutes=substr($serv->duree,3,2);
+       
+          }
+          $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+          $fin=str_replace(' ','T', $fin);
+            $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin, 'summary' =>$Reservation->nom_serv_res , 'description'=>'service récurrent (séance de début)' );
+            $liste_rec[]= $un_service_res ;
+
+            //$Reservation->update(array('id_event_google_cal'=> $idres));
+            DB::table('reservations')
+            ->where('id', $Reservation->id)
+            ->update(['id_event_google_cal' => $idres]);
+        
+     // get recurring reserved services
+     $recs=Reservation::whereNotNull('id_recc')->whereNotNull('date_reservation')->where('id_recc',$Reservation->id)->get();
+
+        // browse recurring reserved services
+     foreach ($recs as $rec) {
+             
+            //create id reserved reccuring service to save in google calendar
+      $idres=$Reservation->id.'reccuring'.$rec->id;
+
+      // calculate the start of the reservation
+      $debut=$rec->date_reservation;
+        $debut=str_replace(' ','T',$debut);
+            
+          //calculate the end of reserved service
+          $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+          $fin=str_replace(' ','T', $fin);
+          /*foreach ($rec->services_reserves as $sr) { 
+      $serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+          $hour=substr($serv->duree, 0, 2);
+          $minutes=substr($serv->duree,3,2);
+           }*/
+
+            $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin,'summary' =>$Reservation->nom_serv_res, 'description'=>'service récurrent '.$Reservation->nom_serv_res );
+             $liste_rec[]= $un_service_res;
+             //$rec->update(array('id_event_google_cal'=> $idres));
+             DB::table('reservations')
+            ->where('id',  $rec->id)
+            ->update(['id_event_google_cal' => $idres]);
+      
+     }
+      
+   }
+   else // service simple (non récurrent)
+   {
+        $idres=$Reservation->id.'simple'.$Reservation->id;
+    $debut=$Reservation->date_reservation;
+    $debut=str_replace(' ','T',$debut);
+    //dd($debut);
+    foreach ($Reservation->services_reserves as $sr) { 
+    $serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+        $hour=substr($serv->duree, 0, 2);
+       // dd($hour);
+        $minutes=substr($serv->duree,3,2);
+       // dd($minutes);
+        //$fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+        //$fin=str_replace(' ','T', $fin);
+   
+        }
+
+        $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+        $fin=str_replace(' ','T', $fin);
+        $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin, 'summary' =>$Reservation->nom_serv_res , 'description'=>'service simple' );
+            $liste_rec[]= $un_service_res ;
+
+         //$Reservation->update(array('id_event_google_cal'=> $idres));
+         DB::table('reservations')
+            ->where('id',$Reservation->id)
+            ->update(['id_event_google_cal' => $idres]);
+
+   }
+
+       $startDateTime=$debut;
+          $endDateTime= $fin;
+          $param=User::where('id',$prestataire->id)->first();
+          $access_token=$param->google_access_token;
+         // dd($this->client);
+        if (isset($access_token) && $access_token) {
+            //dd($access_token);
+             $this->client->setAccessToken($access_token);
+              if ($this->client->isAccessTokenExpired()) {
+              $this->client->refreshToken($param->google_refresh_token);
+              }
+
+            $service = new Google_Service_Calendar($this->client);
+           //  'recurrence' => array('RRULE:FREQ=DAILY;COUNT=2'), 
+            $calendarId = 'primary';
+           //'id'=> $lr['id'],
+
+            foreach ($liste_rec as $lr ) {
+
+               $event = new Google_Service_Calendar_Event([
+                'id'=> $lr['id'],
+                'summary' => $lr['summary'],
+                'description' =>$lr['description'],
+                'start' => ['dateTime' => $lr['startDateTime'], 'timeZone' => 'Africa/Tunis',],
+                'end' => ['dateTime' => $lr['endDateTime'] , 'timeZone' => 'Africa/Tunis',],
+              ]);
+              
+             $results = $service->events->insert($calendarId, $event);
+            }
+
+
+            if (!$results) {
+                return response()->json(['status' => 'error', 'message' => 'Something went wrong']);
+            }
+            //return response()->json(['status' => 'success', 'message' => 'Event Created']);
+             return redirect('/reservations')->with('success', 'Réservation Validée et l\'évenement est enregestré dans google agenda avec succès ');
+        } else {
+            return redirect()->route('oauthCallback');
+        }
+    }// fin if ( file json et les tokens existe)
+
+   // --------------------fin sauvgarde au google calendar ----------------------------------------------------
+  
+
+     }// fin if $type=acompte
 		 
 		  return redirect('/reservations/')->with('success', ' Paiement ('.$titre.') effectué avec succès  ');
 
-
- 
- 
- 
- 
  
     }
 	
@@ -534,8 +764,11 @@ return redirect($redirect_url);
 public function sendMail($to,$sujet,$contenu){
 
 		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
-        $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
-        $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+    $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+    $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+    //$swiftTransport->setUsername('ihebs009@gmail.com'); //adresse email
+    //$swiftTransport->setPassword('eSolutions2020*'); // mot de passe email
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);
@@ -737,5 +970,42 @@ public function sendMail($to,$sujet,$contenu){
 		 dd($request);
 		 
 	 }
+
+     public function oauth()
+    {
+        //session_start();
+    //  DB::table('payments')
+      $prestataire = auth()->user();
+        $rurl = action('MyPaypalController@oauth');
+        //dd($this->client);
+        $this->client->setRedirectUri($rurl);
+        if (!isset($_GET['code'])) {
+            $auth_url = $this->client->createAuthUrl();
+            $filtered_url = filter_var($auth_url, FILTER_SANITIZE_URL);
+           // dd( $filtered_url );
+            return redirect($filtered_url);
+        } else {
+          
+             $this->client->authenticate($_GET['code']);
+
+
+             $access_token =  $this->client->getAccessToken();
+             //dd( $access_token);
+             //$tokens_decoded = json_decode($access_token);
+             $refreshToken =  $access_token['refresh_token'];
+
+             $param=User::where('id', $prestataire->id)->first();
+             $param->google_access_token=$access_token;
+             $param->google_refresh_token=$refreshToken;
+             $param->save();
+
+            // dd( $refreshToken);
+           // $_SESSION['access_token'] = $this->client->getAccessToken();
+            //return redirect()->route('cal.index');
+           return redirect('/reservations')->with('success', 'Réservation Validée et l\'évenement est enregestré dans google agenda avec succès ');
+
+        }
+    }
+
 
 }

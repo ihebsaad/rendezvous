@@ -110,7 +110,7 @@ background-color:#a0d468;
   }else {
       Swal.fire(
                 'Impossible! ',
-                'Vous avez atteindre le maximum de nombre des reports.',
+                'Vous avez atteint le maximum de nombre des reports.',
                 'error'
               ).then((result) => {
                   window.location.replace("https://prenezunrendezvous.com/reservations");
