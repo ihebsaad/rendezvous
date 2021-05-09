@@ -139,6 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,

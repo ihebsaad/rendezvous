@@ -200,11 +200,11 @@ class ServicesController extends Controller
     //add to table -produit_service-
     public function insertServiceProd(Request $request)
 	{
-    $id = $request->get('idproduit');
+    $id = $request->get('produit');
 
-    $val= $request->get('idservice');
-    $values = array('produit_id' => $id,'service_id' => $val);
-    DB::table('produit_service')->insert($values);
+    $idService= $request->get('idservice');
+    Service::where('id', $idService)->update(array('produits_id' => json_encode($id)));
+    return [$id] ;
   
 
 

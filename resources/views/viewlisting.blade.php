@@ -1,7 +1,7 @@
 @extends('layouts.frontlayout')
  
  @section('content')
-
+<?php $mab = array(); ?>
 <style>
     .legend { list-style: none; margin-left:10px;}
     .legend li { float: left; margin-right: 15px;}
@@ -20,6 +20,8 @@
  ?>
  <script type="text/javascript">
  	var listcodepromo = [];
+  var produitslist =[];
+  var qtyproduits = [];
  </script>
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"> 
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
@@ -353,7 +355,9 @@ font-size: 15px;
 				<option> </option>
 					<?php 
 					foreach($services as $service){
-						echo '<option  style="font-weight: 17px;" value="'.$service->id.'" prix="'.$service->prix.'">'.$service->nom.'</option>';
+						echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
+            
+            $mab[$service->id]=$service->produits_id ;
 					}
 					
 					?>
@@ -450,78 +454,100 @@ font-size: 15px;
          </div>
      <?php } ?>
 		 <!------------------section Produits---------->
-		<?php if(isset($User) and $User->user_type=='client' and $user->section_product=='active' ) {
-			?>
- 		<script></script>
-		<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;"   >
-		<?php } else{?>
-			<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;"  hidden='true' >
-		<?php } ?>
+		<style type="text/css">
+    .counter {
+  width: 120px;
+  margin: 5px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height:30px!important; 
 
-		 <label>Produits :</label>
-		 <input type="text" id="myText"  value="<?php if(isset($User)) echo $User->id;?>"hidden='true'> 
-		 
-		 <a   href="#Produits1" style="    margin-left: -3.6px;margin-top: 4px;margin-bottom: 1px;font-size: larger;" class="button border sign-in popup-with-zoom-anim">Consulter tous les produits</a>		
-		 <div class="input-group input-group-lg"  style="margin-left: -27px;    height: 152px;width: 293px;2overflow-y: auto; overflow-x: hidden;    vertical-align: middle;">
-		 <ul class="list-group">
-				<?php  foreach($produit as $prod){
-					if(isset($User)){ if($prod->id==$User->FirstService){ ?>
-  					
-					  <li class="list-group-item d-flex justify-content-between align-items-center">
-				  	<img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style="    width: 44px;"/>
-					<a  href="#k<?php echo $prod->id;?>"   class="popup-with-zoom-anim">{{$prod->nom_produit}}</a>
-					<div class="qtyButtons" value="<?php echo $prod->prix_unité;?>" style='width: 49px;margin-left: 35px;margin-right: 41px;'> 
-						<input type="text" name="qtyInput"  id="quantity_Produit" value="0">
-						<script>var quantity = $('#quantity_Produit').val();
-									var price= $('#quantity_Produit').val();
- 									var product_Price=price * quantity;</script>
-						</li>
-			</ul>
-			</div >	
-			<?php }} }} ?>
-			<br>
+}
+.up,
+.down {
+  display: block;
+  color: white;
+  font-size: 18px;
+  padding: 0 7px;
+  margin: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 20px;
+  width: 24px;
+  line-height: 24px;
+  height: 24px;
+  user-select: none;
+
+  &:hover {
+    color: darken(#74b816, 40%);
+  }
+}
+input {
+  appearance: none;
+  border: 0;
+  background: white;
+  text-align: center;
+  
+  line-height: 24px;
+  font-size: 25px;
+  border-radius: 5px;
+   padding: 10px!important;
+}
+  
+    </style>
+			<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
+        <label>Produits :</label>
+        <a   href="#Produits1" style="    margin-left: -3.6px;margin-top: 4px;margin-bottom: 1px;font-size: 15px;" class="button border sign-in popup-with-zoom-anim">Consulter tous nos produits</a><br>
+        <div id="sectionproduitsup" class="input-group input-group-lg"  style="margin-left: -27px;height: 152px;width: 293px;overflow-y: auto; overflow-x: hidden;    vertical-align: middle;
+        border: 1px solid #007bff; display: none;" >
+  				  
+              <table style="width: 100%">
+                <tbody style="width: 100%">
+                  <?php  foreach($produit as $prod){ ?>
+                    <tr  hidden="true" id="qt<?php echo $prod->id;?>">
+                      <td colspan="3"><hr></td>
+                    </tr>
+                      <tr  hidden="true" id="qy<?php echo $prod->id;?>">
+
+                          <td colspan="3"> &nbsp &nbsp<strong><a style="font-size:  15px" href="#k<?php echo $prod->id;?>"   class="popup-with-zoom-anim" >{{$prod->nom_produit}}</a></strong></td>
+                        </tr>
+                  <tr hidden="true" id="q<?php echo $prod->id;?>">
+                    
+                    <td> &nbsp &nbsp<img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/></td>
+                    <td><b style="font-size: 20px">{{$prod->prix_unité}} €</b></td>
+                    <td style="size: 15px;height: 20px" >
+                      <div class='counter'>
+                      <div class='down' onclick='decreaseCount(event, this)' style="color: #007bff;">-</div>
+                      <input type='text' prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" value='0' style="background-color: #007bff;color: #fff" disabled>
+                      <div class='up'  onclick='increaseCount(event, this)' style="color: #007bff;">+</div>
+                       </div></td>
+                
+                  </tr>
+              
+                <?php } ?>
+                </tbody>
+              </table>
+              
+              
+            
 				
-<!---------------model view product---------->
-<?php  foreach($produit as $prod){?>
-<div id="k<?php echo $prod->id;?>" class="zoom-anim-dialog mfp-hide">
-<div class="modal-dialog">
-        <div class="modal-content" style="width: 700px;height: 400px; border-radius: 89px;">
-            <div class="modal-header" style="background: #255f9c;padding-block: 24px;border-radius: 89px;">
-                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                <h3 class="modal-title" style="    font-size: x-large;font-style: oblique;color: aliceblue;"><?php echo $prod->nom_produit;?></h3>
-          	  </div>
-				<div class="utf_signin_form style_one">
-                <div class="row">
-                    <div class="col-md-6 product_img">
-                        <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>" class="img-responsive" style="width: 283px;height: 305px;margin-left: auto;">
-                    </div>
-                    <div class="col-md-6 product_content">
-                        <h4>Product Id: <span><?php echo $prod->id;?></span></h4>
-                       
-                        <p style="    font-family: emoji;"><?php echo $prod->description;?>
-						.</p>
-                        <h3 class="cost"><span class="glyphicon glyphicon-usd"></span> <?php echo $prod->prix_unité;?><small class="pre-cost"><span class="glyphicon glyphicon-usd"></span> €</small></h3>
-							<a  href="#Produits1"   class="popup-with-zoom-anim">retourner</a>
-                        <div class="space-ten"></div>
-                       
-                    </div>
-                </div>
-            </div>
-        </div>          
-        </div>
-    </div><?php }
-				?>
-<!---------------fin model---------->
+			
+			<br><br>
+
 				
 				</div>
-         </div>	              
+         </div>	 
+<?php } ?>
+
 <!---------------model all products---------->
+
 <div id="Produits1" class="zoom-anim-dialog mfp-hide">
 	<div class="modal-dialog" style="background: white;border-radius: 86px;">
 	<div class="modal-content" style="width: fit-content;border-radius: 32px;">
 		<center><h3 style="width: 683px;border-radius: 47px;font-size: 35px;font-family: 'Roboto';margin-bottom: revert;border-style: outset;background-color: #007bff;color: white;">Nos produits</h3></center>	
 
-			<div id="utf_listing_amenities" class="utf_listing_section" style="margin-left: 21px;overflow-y: scroll;height: 300px;border-radius: 47px;width: fit-content;background-color: white;">
+			<div id="utf_listing_amenities" class="utf_listing_section" style="margin: 21px; overflow-y: scroll; height: 500px;border-radius: 47px;width: fit-content;background-color: white;">
          		<ul class="utf_listing_features " >
 				 <center>
 		 		 <?php foreach ($produit as $prod)
@@ -531,35 +557,17 @@ font-size: 15px;
 			echo $prod->nom_produit.'    <br><small><b>'.$prod->prix_unité.' €</b></small>' ;
 			if($prod->image!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="    margin-top: -5px;margin-bottom: 4px;border-radius: 20px;width: 180px;height: 114px;"  /> </a>'; }
 			?>
-			<a  href="#k<?php echo $prod->id;?>" style="margin-right: 24px;"  class="popup-with-zoom-anim">Voir plus</a>
-			<?php if (isset($User)){?> 
-
-			<?php if($User->user_type=="client"){  ?>  
-
-			<button  id="Acheter" value="<?php echo $User->id;?>"onclick='AddtoList(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >
-			Acheter</button>
-			<?php }else{?>
-			<button id="Acheter" hidden="true" value="<?php echo $User->id;?>"onclick='AddtoList(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >Acheter</button>
-              	 <?php }}} ?>    
+			<a  href="#i<?php echo $prod->id;?>"  style="margin-right: 24px;"  class="popup-with-zoom-anim">Voir plus</a>
+      <button  id="Acheter" value="<?php echo $User->id;?>"onclick='visibilityFunction(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >
+			Ajouter</button>
+			
+      <?php } ?>    
 				     
 
 				   </center>  
          	    </ul>
        		 </div>
 	</div>
-	<script>
-	function AddtoList(id){
-			var idProduit=id;
-          	var _token = $('input[name="_token"]').val();
-         	  $.ajax({
-                    url:"{{ route('ProductClient') }}",
-                    method:"POST",
-                    data:{idProduit:idProduit, _token:_token},
-                    success:function(data){
-						
-						}});}
-
-	</script>
 </div></div>
 		 <!-- Modal -->
 <div class="col-lg-12 col-md-12 ">
@@ -1498,25 +1506,117 @@ font-size: 15px;
 	</section>
   
  -->
+ <?php  foreach($produit as $prod){?>
+<div id="i<?php echo $prod->id;?>" class="zoom-anim-dialog mfp-hide">
+<div class="modal-dialog">
+        <div class="modal-content" style="width: 700px;height: 400px; border-radius: 89px;">
+            <div class="modal-header" style="background: #255f9c;padding-block: 24px;border-radius: 89px;">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title" style="    font-size: x-large;font-style: oblique;color: aliceblue;"><?php echo $prod->nom_produit;?></h3>
+              </div>
+        <div class="utf_signin_form style_one">
+                <div class="row">
+                    <div class="col-md-6 product_img">
+                        <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>" class="img-responsive" style="width: 283px;height: 305px;margin-left: auto;">
+                    </div>
+                    <div class="col-md-6 product_content">
+                        <h4>Product Id: <span><?php echo $prod->id;?></span></h4>
+                       
+                        <p style="    font-family: emoji;"><?php echo $prod->description;?>
+            .</p>
+                        <h3 class="cost"><span class="glyphicon glyphicon-usd"></span> <?php echo $prod->prix_unité;?><small class="pre-cost"><span class="glyphicon glyphicon-usd"></span> €</small></h3>
+              <a  href="#Produits1"   class="popup-with-zoom-anim">retourner</a>
+                        <div class="space-ten"></div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>          
+        </div>
+    </div><?php }
+        ?>
+<!---------------fin model---------->
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script type="text/javascript">
+                function increaseCount(e, el) {
+  var input = el.previousElementSibling;
+  var value = parseInt(input.value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  input.value = value;
 
+  calcul( parseFloat((input.getAttribute('prix')) ));
+}
+function decreaseCount(e, el) {
+  var input = el.nextElementSibling;
+  var value = parseInt(input.value, 10);
+ // alert(value);
+  if (value > 0) {
+    value = isNaN(value) ? 0 : value;
+    value--;
+    input.value = value;
+    //alert(( (input.getAttribute('prix') )));
+    calcul( -( parseFloat((input.getAttribute('prix')) )));
+  }
+}
+function calcul(val){
+    var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
+    var Remise = parseFloat(document.getElementById('RemiseReservation').value);
+    var Net = parseFloat(document.getElementById('totalReservation').value);
+    document.getElementById('MontantReservation').value = montant_tot+val;
+    document.getElementById('totalReservation').value = montant_tot+val-Remise;
+}
+
+
+ </script>
 
  <script type="text/javascript">
  	/*$('#service').on('change', function(evt, params) { alert("sel"+params.selected);
 
  	alert("des"+params.deselected);});*/
-   var service = $('#service').val();
-   if(service==""){document.getElementById("listProduits").style.display='none';
-		}
+   
+function viewproduit(){
+  alert("ok");
+}
+    function visibilityFunction(element){
+      //alert("q"+element+"");
+      document.getElementById("sectionproduitsup").style.display = 'block';
+      var t = "q"+element+"" ;
+      //document.getElementById(t).style.visibility = "";
+      
+      if (!(produitslist.includes(element))) {
+      produitslist.push(element);
+      document.getElementById(t).hidden = false;
+      document.getElementById("qt"+element+"").hidden = false;
+      document.getElementById("qy"+element+"").hidden = false;
+    }
+
+    }
  	function selectservice(){
  		//lert("ft sele");
  		var happyhours = $('#myhappyhoursId').val();
  		var remiseCarte  =0 ;
 		var montant = 0 ;
 		var service = $('#service').val();
+    var test = <?php echo json_encode($mab) ; ?> ;
+    //alert(test[8][0]);
+    if (service.length != 0) {
+      for (var i = 0; i < service.length; i++) {
+        $('#service option[value='+service[i]+']').each(function(){
+          id = this.getAttribute('value');
+          if (test[id] != null) {
+          test[id].forEach(element => visibilityFunction(element));
+          //document.getElementById("myP").style.visibility = "hidden";
+
+         }
+       
+     
+        });
+      }
+    }
+
+ 
 		
-		
-			if(service!=""){document.getElementById("listProduits").style.display='block';}
                 
 	
 		if (service.length != 0) {
@@ -1797,6 +1897,12 @@ font-size: 15px;
 			        for(var i = 0; i < inputs.length; i++){
                      alert($(inputs[i]).val());
                     }*/
+                    //qtyproduits
+                    for (var i = 0; i < produitslist.length; i++) {
+                      var qty = document.getElementById('k'+produitslist[i]+'').value;
+                      qtyproduits[i]=qty ;
+                      //alert(qtyproduits);
+                    }
                    
                     var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
                     var happyhour = $('#myhappyhoursId').val();
@@ -1821,7 +1927,7 @@ font-size: 15px;
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
                         method:"POST",
-                        data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo , _token:_token},
+                        data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo , _token:_token},
                         success:function(data){
                         //alert(JSON.stringify(data));
 						location.href= "{{ route('reservations') }}";

@@ -906,87 +906,65 @@ function geocodeAddress(geocoder, resultsMap) {
 							</td>
 							<td style="align-items:baseline;"> 
               <div class="fm-input "  style="display: none;" id="K<?php echo $service->id;?>">
-                <select onchange="changeProdSer(this)"  id="produit" class="utf_chosen_select_single"  name="produit[]" placeholder="Sélectionner un produit"   multiple style="font-weight: 17px !important; " >
- 
-                <option> </option>
-              <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
-                <?php // show in the input select the previous associated products syntax correct but still won't work 
-					foreach($produit as $prod){ $produits = \App\Service::find($service->id)->produit();
-            foreach($produits as $produits){
-          if($prod->id==$produits)?>
-              <script>
-  $('#produit').find('option[value="' + <?php echo $prod->nom_produit  ?> + '"]').prop('selected', true);</script>	<?php }} ?>
- 					<?php 
-					foreach($produit as $prod){
-						echo '<option  style="font-weight: 17px;" value="'.$prod->id.'" >'.$prod->nom_produit.'</option>';
-					}
-					?>        	</select>
+                <select class="utf_chosen_select_single" id="produit" name="produit[]" placeholder="Sélectionner un produit" onchange="changeProdSer(this)"  multiple style="font-weight: 17px !important; " >
+        <option > </option>
+          <?php 
+          foreach($produit as $prod){
+            //dd($service->produits_id);
+            if ($service->produits_id != null) {
+           
+            if ( in_array($prod->id, $service->produits_id)) {
+          echo '<option  style="font-weight: 17px;" value="'.$prod->id.'" selected>'.$prod->nom_produit.'</option>';
+            
+          } else {
+            echo '<option  style="font-weight: 17px;" value="'.$prod->id.'" >'.$prod->nom_produit.'</option>'; 
+           }
+          } else {
+            echo '<option  style="font-weight: 17px;" value="'.$prod->id.'" >'.$prod->nom_produit.'</option>'; 
+           }
+
+
+           }
+          ?>
+          
+          <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
+        </select>
+                
                  
               </div>     
               <script>//to delete the id produit and id service from the table db 'produit_service' but it woud'nt work 
-               $(".search-choice-close").on("click", function(){
-                $(this).parent('.li').remove();
-                var idproduit = $('#produit').val();
-                var idservice = $('#produit').parent().attr('id');
-
-                alert(idservice);
-                var _token = $('input[name="_token"]').val();
-                       $.ajaxSetup({
-                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                                  });
-                        $.ajax({
-                           url:"{{ route('service.removeProd') }}",
-                          method:"POST",
-                          data:{idservice:idservice,idproduit:idproduit, _token:_token},
-                             success:function(data){	changed=true;
-							
-                               $.notify({
-                                  message: 'produit supprimé avec succès',
-                                icon: 'glyphicon glyphicon-check'},{
-                                type: 'success',
-                                delay: 3000,
-                                timer: 1000,	
-                                placement: {
-                                from: "bottom",
-                                align: "right" },					
-                              });	
-                            }
-                          });
-
-              });
+               
              function changeProdSer(a){
               var service = $(a).parent().attr('id');  
               var serviceArray=service.split('').slice(1);
               var serviceString = serviceArray.join('');
               var produit = $(a).val();
-		          if (produit.length != 0) {
-		              for (var i = 0; i < produit.length; i++) {
-                      var idproduit =  produit[i];
-                      var idservice = serviceString ;
-   	                	var _token = $('input[name="_token"]').val();
-                       $.ajaxSetup({
-                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                                  });
-                        $.ajax({
-                           url:"{{ route('services.AssociateProd') }}",
-                          method:"POST",
-                          data:{idservice:idservice,idproduit:idproduit, _token:_token},
-                             success:function(data){	changed=true;
-							
-                               $.notify({
-                                  message: 'produit ajoutée avec succès',
-                                icon: 'glyphicon glyphicon-check'},{
-                                type: 'success',
-                                delay: 3000,
-                                timer: 1000,	
-                                placement: {
-                                from: "bottom",
-                                align: "right" },					
-                              });	
-                            }
-                          });
-                      }
-                  } }
+              //alert(serviceString);
+		          
+              var idservice = serviceString ;
+              	var _token = $('input[name="_token"]').val();
+               
+                $.ajax({
+                   url:"{{ route('services.AssociateProd') }}",
+                  method:"POST",
+                  data:{idservice:idservice,produit:produit, _token:_token},
+                     success:function(data){	changed=true;
+			               alert(data);
+                       $.notify({
+                          message: 'produit ajoutée avec succès',
+                        icon: 'glyphicon glyphicon-check'},{
+                        type: 'success',
+                        delay: 3000,
+                        timer: 1000,	
+                        placement: {
+                        from: "bottom",
+                        align: "right" },					
+                      });	
+                    }
+                  });
+                      
+                  } 
                   </script>
 								
 							
