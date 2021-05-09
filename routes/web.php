@@ -36,7 +36,13 @@ Route::get('/reservations.annule/{id}','MyPaypalController@PaymentDetails')->nam
 Route::get('/reservations/deletenewdate','ReservationsController@deletenewdate')->name('reservations.deletenewdate');
 
 
+Route::get('/teststa','StatistiqueController@index')->name('teststa');
 
+
+
+Route::get('/ok', function () {
+    return view('statistiques');
+});
 /*
 Route::get('/dashboard', function () {
     return view('dashboard');
