@@ -564,7 +564,7 @@ input {
 			if($prod->image!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="    margin-top: -5px;margin-bottom: 4px;border-radius: 20px;width: 180px;height: 114px;"  /> </a>'; }
 			?>
 			<a  href="#i<?php echo $prod->id;?>"  style="margin-right: 24px;"  class="popup-with-zoom-anim">Voir plus</a>
-      <button  id="Acheter" value="<?php echo $User->id;?>"onclick='visibilityFunction(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >
+      <button onclick='visibilityFunction(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >
 			Ajouter</button>
 			
       <?php } ?>    

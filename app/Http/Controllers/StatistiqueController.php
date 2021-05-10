@@ -148,7 +148,7 @@ class StatistiqueController extends Controller
           $rqtptop = $rqtp;
           $rqtptop .= "SELECT *
           FROM produits p
-          INNER JOIN (SELECT sum(quantity) as total FROM client_products WHERE id_products = $n 
+          INNER JOIN (SELECT sum(quantity) as total FROM client_products WHERE id_products = $t 
           AND created_at >= '$debut 00:00:00' 
           AND created_at <= '$fin 23:59:59' ) b ON p.id = $t
           ORDER BY total DESC LIMIT 3";
