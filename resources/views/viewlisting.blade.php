@@ -822,8 +822,8 @@ output {
 			<?php } ?>
 			 <?php } ?>
 		 <?php }else{  ?>
-		 
-		 <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a>
+		 <center>
+		 <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a></center>
 	 
 			 
 	<?php	 } ?>
