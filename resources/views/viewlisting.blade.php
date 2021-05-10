@@ -489,14 +489,14 @@ font-size: 15px;
     color: darken(#74b816, 40%);
   }
 }
-input {
+output {
   appearance: none;
   border: 0;
   background: white;
   text-align: center;
   
   line-height: 24px;
-  font-size: 25px;
+  font-size: 21px;
   border-radius: 5px;
    padding: 10px!important;
 }
@@ -505,8 +505,8 @@ input {
 			<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
         <label>Produits :</label>
         <a   href="#Produits1" style="    margin-left: -3.6px;margin-top: 4px;margin-bottom: 1px;font-size: 15px;" class="button border sign-in popup-with-zoom-anim">Consulter tous nos produits</a><br>
-        <div id="sectionproduitsup" class="input-group input-group-lg"  style="margin-left: -27px;height: 152px;width: 293px;overflow-y: auto; overflow-x: hidden;    vertical-align: middle;
-        border: 1px solid #007bff; display: none;" >
+        <div id="sectionproduitsup" class="input-group input-group-lg"  style="height: 152px;width: 253px;overflow-y: auto; overflow-x: hidden;    vertical-align: middle;
+        border: 1px solid #007bff; display: none;background-color: #666666; " >
   				  
               <table style="width: 100%">
                 <tbody style="width: 100%">
@@ -516,17 +516,17 @@ input {
                     </tr>
                       <tr  hidden="true" id="qy<?php echo $prod->id;?>">
 
-                          <td colspan="3"> &nbsp &nbsp<strong><a style="font-size:  15px" href="#k<?php echo $prod->id;?>"   class="popup-with-zoom-anim" >{{$prod->nom_produit}}</a></strong></td>
+                          <td colspan="3"> &nbsp &nbsp<strong><a style="font-size:  15px;color: #fff;font-family: 'Nunito', sans-serif;" href="#i<?php echo $prod->id;?>"   class="popup-with-zoom-anim" >{{$prod->nom_produit}}</a></strong></td>
                         </tr>
                   <tr hidden="true" id="q<?php echo $prod->id;?>">
                     
                     <td> &nbsp &nbsp<img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/></td>
-                    <td><b style="font-size: 20px">{{$prod->prix_unité}} €</b></td>
+                    <td>&nbsp<b style="font-size: 15px;color: #fff;font-family: 'Nunito', sans-serif;">{{$prod->prix_unité}} €</b></td>
                     <td style="size: 15px;height: 20px" >
                       <div class='counter'>
-                      <div class='down' onclick='decreaseCount(event, this)' style="color: #007bff;">-</div>
-                      <input type='text' prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" value='0' style="background-color: #007bff;color: #fff" disabled>
-                      <div class='up'  onclick='increaseCount(event, this)' style="color: #007bff;">+</div>
+                      <div class='down' onclick='decreaseCount(event, this)' style="background-color: #fff;color: #666666">-</div>
+                      <output type='number' prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" value='0' style="background-color: #666666;color: #fff" >0</output>
+                      <div class='up'  onclick='increaseCount(event, this)' style="background-color: #fff;color: #666666">+</div>
                        </div></td>
                 
                   </tr>
@@ -545,42 +545,48 @@ input {
 				</div>
          </div>	 
 <?php } ?>
-
+<style type="text/css">
+ .mfp-close::after, .mfp-close::before {
+    top: 0px!important;
+}
+</style>
 <!---------------model all products---------->
-
-<div id="Produits1" class="zoom-anim-dialog mfp-hide">
-	<div class="modal-dialog" style="background: white;border-radius: 86px;">
-	<div class="modal-content" style="width: fit-content;border-radius: 32px;">
-		<center><h3 style="width: 683px;border-radius: 47px;font-size: 35px;font-family: 'Roboto';margin-bottom: revert;border-style: outset;background-color: #007bff;color: white;">Nos produits</h3></center>	
-
-			<div id="utf_listing_amenities" class="utf_listing_section" style="margin: 21px; overflow-y: scroll; height: 500px;border-radius: 47px;width: fit-content;background-color: white;">
-         		<ul class="utf_listing_features " >
-				 <center>
-		 		 <?php foreach ($produit as $prod)
-		  		{
-		    echo '<li style="width: 192px;display: inline-block;height: 195px;    margin-left: 29px;">  ';
-			 
-			echo $prod->nom_produit.'    <br><small><b>'.$prod->prix_unité.' €</b></small>' ;
-			if($prod->image!=''){ echo '<br><a href="'. URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="    margin-top: -5px;margin-bottom: 4px;border-radius: 20px;width: 180px;height: 114px;"  /> </a>'; }
-			?>
-			<a  href="#i<?php echo $prod->id;?>"  style="margin-right: 24px;"  class="popup-with-zoom-anim">Voir plus</a>
-      <button onclick='visibilityFunction(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >
-			Ajouter</button>
-			
-      <?php } ?>    
-				     
-
-				   </center>  
-         	    </ul>
-       		 </div>
-	</div>
-</div></div>
+<div id="Produits1" class="zoom-anim-dialog mfp-hide ">
+  <div class="modal-dialog" style="background: white;border-radius: 86px;font-family: 'Nunito', sans-serif;">
+    <div class="modal-content" style="width: fit-content;border-radius: 32px;">
+      <center><br><h4 style="font-size: 35px;color: #007bff;">Nos produits</h4></center>
+      <div id="utf_listing_amenities" class="utf_listing_section" style="margin: 21px; overflow-y: auto; height: 500px;border-radius: 47px;width: fit-content;background-color: white;">
+        <ul class="utf_listing_features " >
+          <center>
+            <?php foreach ($produit as $prod) { ?>
+              <li style="display: inline-block;height: 195px; margin-left: 29px;">
+                <div style="height: 30px!important;"><b > {{$prod->nom_produit }}</b></div>
+                <br>
+                <a href=" {{ URL::asset('storage/images/'.$prod->image)}}" data-lightbox="photos">
+                  <img src="{{ URL::asset('storage/images/'.$prod->image) }}"  style=" margin-top: -5px;margin-bottom: 4px;border-radius: 20px;width: 180px!important;height: 114px!important;"  />
+                </a>
+                <br>
+                <small><b>{{ $prod->prix_unité }} €</b></small>
+                <a  href="#i<?php echo $prod->id;?>"  style="margin-left: 20px;margin-right: 5px;margin-top: 2px!important ;font-size: 20px!important;color: red"  class="popup-with-zoom-anim">
+                  <i class="sl sl-icon-eye" ></i>
+                </a>
+                <button onclick='visibilityFunction(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >Acheter
+                </button>
+                <br><br>
+              </li>
+            <?php } ?>
+          </center>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 		 <!-- Modal -->
 <div class="col-lg-12 col-md-12 ">
          	<br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
-                                <input type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
     <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
   </div>
@@ -590,7 +596,7 @@ input {
          	<br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
-                                <input type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
     <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
   </div>
@@ -635,7 +641,7 @@ input {
          	<br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
-                                <input type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
     <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
   </div>
@@ -661,7 +667,7 @@ input {
 			 
 	<?php	 } ?>
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script></div>
 
           <div class="clearfix"></div>
     
