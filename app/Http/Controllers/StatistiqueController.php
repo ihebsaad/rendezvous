@@ -181,7 +181,7 @@ class StatistiqueController extends Controller
                 $rs=8-$i;
                 $date = date('Y-m-d', strtotime($date. ' - '.$rs.' day'));
                 
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at >='$date 00:00:00' AND r.created_at <='$date 23:59:59' " ) );
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at >='$date 00:00:00' AND r.created_at <='$date 23:59:59' " ) );
                
                 $y[$i]=$ca[0]->ca;
                 
@@ -195,7 +195,7 @@ class StatistiqueController extends Controller
               $rs=$r-1;
               $debut = date('Y-m-d', strtotime($today. ' - '.$rs.' days'));
               $fin=date('Y-m-d');
-              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
+              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
               $y=[0,0,0,0,0];
               for ($i=0; $i < 4 ; $i++) { 
@@ -208,7 +208,7 @@ class StatistiqueController extends Controller
                 $rs=$r+3*7-7*$i;
                 $fin = date('Y-m-d', strtotime($fin. ' - '.$rs.' day'));
                 //dd($fin);
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
                 $y[$i]=$ca[0]->ca;
                 
@@ -225,7 +225,7 @@ class StatistiqueController extends Controller
               $rs=$r-1;
               $debut = date('Y-m-d', strtotime($today. ' - '.$rs.' days'));
               $fin=date('Y-m-d');
-              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
+              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
               $y=[0,0,0,0,0,0,0,0,0,0,0,0,0];
               for ($i=0; $i < 12 ; $i++) { 
@@ -238,7 +238,7 @@ class StatistiqueController extends Controller
                 $rs=$r+11*7-7*$i;
                 $fin = date('Y-m-d', strtotime($fin. ' - '.$rs.' day'));
                 //dd($fin);
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
                 $y[$i]=$ca[0]->ca;
                 
@@ -272,12 +272,12 @@ class StatistiqueController extends Controller
               $debut = date('Y-m-d', strtotime($date. ' - '.$rs.' month'));
               $rs= 11 - $i;
               $fin = date('Y-m-d', strtotime($date. ' - '.$rs.' month'));
-              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <'$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
+              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at <'$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
               $y[$i]=(float)($ca[0]->ca);
              
               
               }
-              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at  >='$date 00:00:00'" ) );
+              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at  >='$date 00:00:00'" ) );
               $y[12]=(float)($ca[0]->ca);
              // dd($ca[0]->ca);
               
@@ -291,7 +291,7 @@ class StatistiqueController extends Controller
               $rs=$r-1;
               $debut = date('Y-m-d', strtotime($today. ' - '.$rs.' days'));
               $fin=date('Y-m-d');
-              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
+              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
               $y=[0,0,0,0,0];
               for ($i=0; $i < 4 ; $i++) { 
@@ -304,7 +304,7 @@ class StatistiqueController extends Controller
                 $rs=$r+3*7-7*$i;
                 $fin = date('Y-m-d', strtotime($fin. ' - '.$rs.' day'));
                 //dd($fin);
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.prestataire ='$cuser->id' AND r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
                 $y[$i]=$ca[0]->ca;
                 
