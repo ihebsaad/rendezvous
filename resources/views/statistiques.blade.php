@@ -70,21 +70,28 @@ background-color:#a0d468;
           </div>
             <br>
         </div></form>
+        
+      </div> 
+
+<div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-chart"></i>Chiffre d'affaire </h3>
+        </div>       
+        <div class="row">
+
         <div class="col-sm-offset-2 col-sm-12">
 
 <div class=" text-center" style="width: 50%">
     {!! $usersChart->container() !!}
 </div>
 </div>
-      </div> 
-
-
+      </div> </div>
 
        <div class="row"> 
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-6 col-md-6"  style="padding-top: 15px">
           <div class="utf_dashboard_list_box margin-top-0">
       
-      <h4>Top 3 Services</h4>
+      <h4><i class="sl sl-icon-arrow-up-circle"></i>Les 3 Services les plus vendus</h4>
       <ul>   
       <?php foreach($topservices as $topservice){ ?>   
       <?php if ($topservice->total != 0) { ?>  
@@ -158,10 +165,10 @@ background-color:#a0d468;
             </div>                        
           </div>
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-6 col-md-6" style="padding-top: 15px">
           <div class="utf_dashboard_list_box margin-top-0">
       
-      <h4>3 Services les moins vendus</h4>
+      <h4><i class="sl sl-icon-arrow-down-circle"></i> Les 3 Services les moins vendus</h4>
       <ul>        
         <?php foreach($basservices as $basservice){ ?>     
         <li class="utf_approved_booking_listing">
@@ -204,10 +211,10 @@ background-color:#a0d468;
 
 
           <!------------------------stat produits-------------------->
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-6 col-md-6" style="padding-top: 15px">
           <div class="utf_dashboard_list_box margin-top-0">
       
-      <h4>Top 3 produits</h4>
+      <h4><i class="sl sl-icon-arrow-up-circle"></i>Les 3 Produits les plus vendus</h4>
       <ul>        
         <?php foreach($topproduits as $topproduit){ ?>     
         <li class="utf_approved_booking_listing">
@@ -245,10 +252,10 @@ background-color:#a0d468;
             </ul>
             </div>                        
           </div>
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-6 col-md-6" style="padding-top: 15px">
           <div class="utf_dashboard_list_box margin-top-0">
       
-      <h4>3 Produits les moins vendus</h4>
+      <h4><i class="sl sl-icon-arrow-down-circle"></i> Les 3 Produits les moins vendus</h4>
       <ul>        
         <?php foreach($basproduits as $basproduit){ ?>     
         <li class="utf_approved_booking_listing">
