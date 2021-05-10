@@ -554,30 +554,30 @@ output {
 </style>
 <!---------------model all products---------->
 <div id="Produits1" class="zoom-anim-dialog mfp-hide ">
-  <div class="modal-dialog" style="background: white;border-radius: 86px;font-family: 'Nunito', sans-serif;">
-    <div class="modal-content" style="width: fit-content;border-radius: 32px;">
+  <div class="modal-dialog" style="background: white;border-radius: 10px;font-family: 'Nunito', sans-serif;">
+    <div class="modal-content" style="width: fit-content;border-radius: 10px;">
       <center><br><h4 style="font-size: 35px;color: #007bff;">Nos produits</h4></center>
       <div id="utf_listing_amenities" class="utf_listing_section" style="margin: 21px; overflow-y: auto; height: 500px;border-radius: 47px;width: fit-content;background-color: white;">
         <ul class="utf_listing_features " >
-          <center>
             <?php foreach ($produit as $prod) { ?>
               <li style="display: inline-block;height: 195px; margin-left: 29px;">
-                <div style="height: 30px!important;"><b > {{$prod->nom_produit }}</b></div>
+                <div style="height: 30px!important;float: left;"><b > {{$prod->nom_produit }}</b></div>
                 <br>
                 <a href=" {{ URL::asset('storage/images/'.$prod->image)}}" data-lightbox="photos">
-                  <img src="{{ URL::asset('storage/images/'.$prod->image) }}"  style=" margin-top: -5px;margin-bottom: 4px;border-radius: 20px;width: 180px!important;height: 114px!important;"  />
+                  <img src="{{ URL::asset('storage/images/'.$prod->image) }}"  style=" margin-top: -5px;margin-bottom: 4px;width: 180px!important;height: 114px!important;"  />
                 </a>
                 <br>
-                <small><b>{{ $prod->prix_unité }} €</b></small>
+
+                <center>
+                <small><b style="color: #8f8f8f">{{ $prod->prix_unité }} €</b></small>
                 <a  href="#i<?php echo $prod->id;?>"  style="margin-left: 20px;margin-right: 5px;margin-top: 2px!important ;font-size: 20px!important;color: red"  class="popup-with-zoom-anim">
                   <i class="sl sl-icon-eye" ></i>
                 </a>
                 <button onclick='visibilityFunction(<?php echo $prod->id;?>)' class="btn btn-primary btn-lg" >Acheter
-                </button>
+                </button></center>
                 <br><br>
               </li>
             <?php } ?>
-          </center>
         </ul>
       </div>
     </div>
@@ -1523,23 +1523,23 @@ output {
  <?php  foreach($produit as $prod){?>
 <div id="i<?php echo $prod->id;?>" class="zoom-anim-dialog mfp-hide">
 <div class="modal-dialog">
-        <div class="modal-content" style="width: 700px;height: 400px; border-radius: 89px;">
-            <div class="modal-header" style="background: #255f9c;padding-block: 24px;border-radius: 89px;">
+        <div class="modal-content" style="height: 400px; border-radius: 10px;">
+            <div class="modal-header" style="border-radius: 10px;">
                 <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                <h3 class="modal-title" style="    font-size: x-large;font-style: oblique;color: aliceblue;"><?php echo $prod->nom_produit;?></h3>
+                <h3 class="modal-title" style="    font-size: x-large;font-style: oblique;color: #337ab7;"><?php echo $prod->nom_produit;?></h3>
               </div>
         <div class="utf_signin_form style_one">
                 <div class="row">
                     <div class="col-md-6 product_img">
-                        <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>" class="img-responsive" style="width: 283px;height: 305px;margin-left: auto;">
+                        <img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>" class="img-responsive" style="width: 300px;float: left;margin-top: 30px;margin-left: 20px">
                     </div>
                     <div class="col-md-6 product_content">
-                        <h4>Product Id: <span><?php echo $prod->id;?></span></h4>
+                      <label>Description :</label>
                        
-                        <p style="    font-family: emoji;"><?php echo $prod->description;?>
-            .</p>
-                        <h3 class="cost"><span class="glyphicon glyphicon-usd"></span> <?php echo $prod->prix_unité;?><small class="pre-cost"><span class="glyphicon glyphicon-usd"></span> €</small></h3>
-              <a  href="#Produits1"   class="popup-with-zoom-anim">retourner</a>
+                        <p style="overflow-x: auto;max-height: 200px"><?php echo $prod->description;?>.</p>
+                        <label>Prix : <b><?php echo $prod->prix_unité;?> €</b></label>
+                        <br>
+              <a  href="#Produits1" style="font-size: 15px;"  class="popup-with-zoom-anim"><b>retourner</b></a>
                         <div class="space-ten"></div>
                        
                     </div>
