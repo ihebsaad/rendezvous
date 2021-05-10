@@ -71,6 +71,11 @@ class LoginController extends Controller
         {
       		if($user->expire=='' || ($user->expire &&  $date_exp < $date_15j  )){
 				//return redirect('/pricing');
+                User::where('id',$user)->update(array('type_abonn_essai' => null));
+                if($user->expire &&  $date_exp < $date_15j)
+                {
+                   User::where('id',$user)->update(array('type_abonn' => null)); 
+                }
                 return view('users.payement_non_regle', compact('user'));
 				}else{
 				 return redirect('/dashboard');

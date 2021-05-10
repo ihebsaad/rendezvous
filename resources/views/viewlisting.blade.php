@@ -203,7 +203,14 @@ font-size: 15px;
     </tr>
   </thead>
   <tbody>
-    <?php $x=0; foreach($happyhours as $happyhour){ $x=$x+1 ; ?>
+    <?php //date_default_timezone_set('Africa/tunis');
+      $x=0; foreach($happyhours as $happyhour){ $x=$x+1 ; 
+      $dateF = new DateTime($happyhour->dateFin);
+      $aujour= new DateTime();
+     // dd($dateF);
+      if($aujour<$dateF)
+      {
+    	?>
     <tr>
       <th scope="row">{{$x}}</th>
       <td>{{$happyhour->reduction}}%</td>
@@ -211,7 +218,7 @@ font-size: 15px;
       <td width="50%"><b>De</b> <?php $dateDebut = new DateTime($happyhour->dateDebut); echo $dateDebut->format('d-m-Y H:i') ; ?> <b>à</b> <?php $dateFin = new DateTime($happyhour->dateFin); echo $dateFin->format('d-m-Y H:i') ; ?></td>
       
     </tr>
-  <?php } ?>
+  <?php }} ?>
    
   </tbody>
 </table></div>
@@ -252,7 +259,7 @@ font-size: 15px;
               	 <?php } ?>      
           </ul>
         </div>
-        <div id="utf_listing_overview" class="utf_listing_section">
+      <!--  <div id="utf_listing_overview" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> <i class="sl sl-icon-present">
           	<?php /*$dt=new dateTime(); echo $dt->format("Y-m-d H:i");*/ ?>
           </i> Services supplémentaires</h3>
@@ -279,7 +286,7 @@ font-size: 15px;
                 </tbody>
 </table></div>
 			  
-        </div>
+        </div>  -->
       </div>
 	  <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
 	  
@@ -408,7 +415,6 @@ font-size: 15px;
 						<div class="qtyButtons">
 							<div class="qtyTitle">Adultes</div>
 							<input type="text" name="qtyInput" id="adultes" value="1">
-						</div>
 						<div class="qtyButtons">
 							<div class="qtyTitle">Enfants</div>
 							<input type="text" name="qtyInput" id="enfants" value="0">

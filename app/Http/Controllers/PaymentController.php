@@ -516,7 +516,9 @@ class PaymentController extends Controller
 			 // today + abonnement
  		if($abn!=3){$datee = (new \DateTime())->modify('+31 days')->format($format);}
 		else{
-			$datee = (new \DateTime())->modify('+366 days')->format($format);
+			//$datee = (new \DateTime())->modify('+366 days')->format($format);
+			$datee = (new \DateTime())->modify('+31 days')->format($format);
+
 		}
 	  
 		 }else{
@@ -528,7 +530,9 @@ class PaymentController extends Controller
 			 // today + abonnement
 		if($abn!=3){$datee = (new \DateTime())->modify('+31 days')->format($format);}
 		else{
-			$datee = (new \DateTime())->modify('+366 days')->format($format);
+			//$datee = (new \DateTime())->modify('+366 days')->format($format);
+			$datee = (new \DateTime())->modify('+31 days')->format($format);
+
 		}
 		 }
 		 
@@ -544,7 +548,9 @@ class PaymentController extends Controller
 */
 		 $newdate = Carbon::createFromFormat('Y-m-d H:i:s', $prestataire->expire);
 		 if($abn!=3){$daysToAdd = 31;}
-		else{$daysToAdd = 365;}
+		else{//$daysToAdd = 365;
+           $daysToAdd = 31;
+		}
 		 
 		 $newdate = $newdate->addDays($daysToAdd);
 		 $datee =  $newdate;
@@ -559,10 +565,18 @@ class PaymentController extends Controller
 
 		  
 		User::where('id',$user)->update(array('expire' => $datee,'abonnement'=>$abn));
-		
+		if($abn==1){
+		User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type1'));
+		}
+		if($abn==2){
+		User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type2'));
+		}
+		if($abn==3){
+		User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type3'));
+		}
 		
 		 // Email
- 		
+ 		 $typeabn='';
   		 $parametres=DB::table('parametres')->where('id', 1)->first();
 			if($abn==1){
 				$abonnement='N°: 1 | ' .$parametres->abonnement1.' (mensuel)';

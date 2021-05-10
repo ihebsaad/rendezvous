@@ -302,13 +302,13 @@ background-color:lightgrey;
                 </div>       
         <div class="row">
 		   <div class="col-md-12" >
-
+        <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?> 
 			 <?php if($user->allow_slices){$checked='checked';} else{$checked='';}  ?>
  			 <label style="font-weight:normal;font-size:22px"> 
                 <input style="width:20px;height:20px"  id="allow_slices"  type="checkbox"   <?php echo $checked; ?>   onchange="changing(this)"     >
 				Permettre le paiement en 4 tranches pour les réservations de 200€ ou plus </label> 
           <br><br>
-		  </div>
+		  </div><?php }?>
           <div class="col-md-12" >
             <h2><b> Ajoutez une adresse E-mail de votre compte Paypal.</b></h2>
             <br>
@@ -1282,7 +1282,7 @@ input:checked + .slider:before {
 </table></div>  
 </div>
  <?php } ?>
-  <div class="add_utf_listing_section margin-top-45"> 
+  <!--<div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-question"></i>Services Supplémentaires</h3>
         </div>      
@@ -1319,7 +1319,7 @@ input:checked + .slider:before {
           <br>
 
    <div class="">
-        <!-- bloc pour commentaires existants-->
+     
         <?php $nbcomm=0;?>
 
           <div class="row">
@@ -1329,7 +1329,7 @@ input:checked + .slider:before {
       <?php if($nbcomm<3){?>
        <div class="row">
              <div class="col-md-10">
-            <!-- <input autocomplete="off"  type="text" onkeyup="changing(this)" size="50" style="width:100% ; " id="field_name[]"  name="field_name[]" value=""/>  --> 
+       
             <select name="cars" class="cars"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage interne">lavage interne</option></select>
 
           </div>
@@ -1414,7 +1414,7 @@ input:checked + .slider:before {
    </div> 
      </div> 
    </div> 
- </div>
+ </div>-->
 
 		<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -1649,7 +1649,8 @@ input:checked + .slider:before {
 							<label>Récurrent :</label>
 							<br>
 							<label class="switch" >
-							  <input type="checkbox" id="toggleswitch" name="toggleswitch">
+							  <input type="checkbox" id="toggleswitch" name="toggleswitch" <?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type1" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type1" ))) { echo "disabled"; }?>>
 							  <span class="slider round"></span>
 							</label>
 							<div id="reccurent" style="display: none;" >

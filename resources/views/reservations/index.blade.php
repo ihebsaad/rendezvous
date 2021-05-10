@@ -49,7 +49,7 @@ background-color:#a0d468;
             <a class="close" href="#"></a> 
 		  </div>
  @endif
-
+<!-- 
       <div class="row" style="background-color: white"> 
           <div class="utf_add_listing_part_headline_part">
             <h3><i class="sl sl-icon-present"></i>Personnalisation des statuts</h3>
@@ -106,7 +106,7 @@ background-color:#a0d468;
         </div>
         </div> 
 
-  <br><hr><br>
+  <br><hr><br> -->
 	<!--<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
       <center> <h2><b>Liste des réservations : </b></h2></center>
             <br>
@@ -139,7 +139,12 @@ background-color:#a0d468;
               </tr>
           </thead>
           <tbody>
-            <?php // dd($reservations); ?>
+            <?php // dd($reservations);
+
+            $reservations=$reservations->sortBy(function($t)
+                                        {
+                                            return $t->created_at;
+                                        })->reverse(); //dd($reservations);?>
             @foreach($reservations as $reservation)
          <?php   
        /*  $service_name='';
@@ -215,9 +220,13 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
         	
 		<?php  } ?> 
 		<?php	if( $reservation->paiement ==1 ) { 
-		
+		$type_abonn_essai = UsersController::ChampById('$type_abonn_essai',$reservation->prestataire) ; 
+    $type_abonn = UsersController::ChampById('$type_abonn',$reservation->prestataire);
 		$allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
-	if(   $reservation->Net >= 200  &&  $allow_slices     ){
+   
+     if(($type_abonn_essai && ($type_abonn_essai=="type2" || $type_abonn_essai=="type3" ))|| ($type_abonn && ($type_abonn=="type2" || $type_abonn=="type3" ))) { 
+    
+	if( $reservation->Net >= 200  &&  $allow_slices ){
 	// paiement sur tranches
 	?>
 		   		 <form class="  " method="POST" id="payment-form"    action="{{ route('getpreapproved') }}" >
@@ -247,8 +256,26 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
         <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservation->id)}}" >Annuler/Reporter</a>
 		<?php
 		} // paiement sans tranches
+     }// fin if type 2 ou type 3 abonneùent
+
+     //if type 1 abonnement donc payer dire ctement le reste
+     if(($type_abonn_essai && $type_abonn_essai=="type1" )||($type_abonn && $type_abonn=="type1")) { ?>
+
+      <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
+        {{ csrf_field() }}
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+        
+        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+        <input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
+        <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
+    
+        <button class="button ">Payer le reste : <?php echo $reservation->reste;?> €</button> 
+        </form>
+        <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservation->id)}}" >Annuler/Reporter</a>
+    
 		
-		} // acompte payé ?> 
+		<?php }
+    } // acompte payé ?> 
 				
 				
 	
