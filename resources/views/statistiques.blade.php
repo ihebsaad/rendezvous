@@ -38,7 +38,7 @@ background-color:#a0d468;
           <div class="col-md-12" >
             <h2><b> Choisissez la période de statistique.</b> (Par défaut: le dernier mois)</h2>
           </div>
-         <form class="  " method="get"   action="{{ route('teststa') }}" >
+         <form class="  " method="get"   action="{{ route('Statistiques') }}" >
 
           <div class="col-md-12" >
             <br>
