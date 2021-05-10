@@ -504,7 +504,9 @@ output {
     </style>
 			<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
         <label>Produits :</label>
-        <a   href="#Produits1" style="    margin-left: -3.6px;margin-top: 4px;margin-bottom: 1px;font-size: 15px;" class="button border sign-in popup-with-zoom-anim">Consulter tous nos produits</a><br>
+        <br><center>
+        <a href="#Produits1" class="button border sign-in popup-with-zoom-anim">Consulter tous nos produits</a></center>
+        <br>
         <div id="sectionproduitsup" class="input-group input-group-lg"  style="height: 152px;width: 253px;overflow-y: auto; overflow-x: hidden;    vertical-align: middle;
         border: 1px solid #007bff; display: none;background-color: #666666; " >
   				  
