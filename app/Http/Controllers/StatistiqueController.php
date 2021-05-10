@@ -136,8 +136,12 @@ class StatistiqueController extends Controller
           AND created_at <= '$fin 23:59:59') b ON p.id = $n
           UNION ";
           };
-          //dd($rqt);
-          $t = $produits[count($produits)-1]->id;
+          //dd(count($produits));
+          $t = 0 ;
+          if (count($produits) != 0) {
+            $t = $produits[count($produits)-1]->id;
+          }
+          
           $rqtptop = $rqtp;
           $rqtptop .= "SELECT *
           FROM produits p
