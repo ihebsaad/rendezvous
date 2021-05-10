@@ -100,7 +100,10 @@ class StatistiqueController extends Controller
           UNION ";
           };
           //dd($rqt);
-          $t = $services[count($services)-1]->id;
+          $t = 0 ;
+          if (count($services) != 0) {
+            $t = $services[count($services)-1]->id;
+          }
           $rqttop = $rqt;
           $rqttop .= "SELECT *
           FROM services A
