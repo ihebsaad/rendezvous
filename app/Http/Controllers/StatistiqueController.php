@@ -48,19 +48,20 @@ class StatistiqueController extends Controller
       }
       //dd($today);
       if ($request->has('periode')){
-        if ($request->get('debut')==7) {
+        if ($request->get('periode')==7) {
           $today=date('Y-m-d');
           $debut = new DateTime();
           $debut = $debut->format('Y-m-d');
           $debut = date('Y-m-d', strtotime($today. ' - 7 days'));
           $fin=date('Y-m-d');
-        }elseif ($request->get('debut')==3) {
+          //dd($debut);
+        }elseif ($request->get('periode')==3) {
           $today=date('Y-m-d');
           $debut = new DateTime();
           $debut = $debut->format('Y-m-d');
           $debut = date('Y-m-d', strtotime($today. ' - 3 month'));
           $fin=date('Y-m-d');
-        }elseif ($request->get('debut')==12) {
+        }elseif ($request->get('periode')==12) {
           $today=date('Y-m-d');
           $debut = new DateTime();
           $debut = $debut->format('Y-m-d');
@@ -94,8 +95,8 @@ class StatistiqueController extends Controller
           $rqt .= "SELECT *
           FROM services A
           INNER JOIN (SELECT count(*) as total FROM reservations WHERE JSON_SEARCH(services_reserves, 'all', '$n') IS NOT NULL 
-          AND created_at >= '$debut' 
-          AND created_at <= '$fin') b ON A.id = $n
+          AND created_at >= '$debut 00:00:00' 
+          AND created_at <= '$fin 23:59:59') b ON A.id = $n
           UNION ";
           };
           //dd($rqt);
@@ -104,18 +105,18 @@ class StatistiqueController extends Controller
           $rqttop .= "SELECT *
           FROM services A
           INNER JOIN (SELECT count(*) as total FROM reservations WHERE JSON_SEARCH(services_reserves, 'all', $t) IS NOT NULL 
-          AND created_at >= '$debut' 
-          AND created_at <= '$fin' ) b ON A.id = $t
+          AND created_at >= '$debut 00:00:00' 
+          AND created_at <= '$fin 23:59:59' ) b ON A.id = $t
           ORDER BY total DESC LIMIT 3";
 
           $topservices = DB::select( DB::raw($rqttop) );
-          //dd($topservices);
+          //dd($rqttop);
           $rqtbas = $rqt ;
           $rqtbas .= "SELECT *
           FROM services A
           INNER JOIN (SELECT count(*) as total FROM reservations WHERE JSON_SEARCH(services_reserves, 'all', $t) IS NOT NULL 
-          AND created_at >= '$debut' 
-          AND created_at <= '$fin' ) b ON A.id = $t
+          AND created_at >= '$debut 00:00:00' 
+          AND created_at <= '$fin 23:59:59' ) b ON A.id = $t
           ORDER BY total ASC LIMIT 3";
           $basservices = DB::select( DB::raw($rqtbas) );
 
@@ -131,7 +132,7 @@ class StatistiqueController extends Controller
           $rqtp .= "SELECT *
           FROM produits p
           INNER JOIN (SELECT sum(quantity) as total FROM client_products WHERE id_products = $n 
-          AND created_at >= '$debut' 
+          AND created_at >= '$debut 00:00:00' 
           AND created_at <= '$fin 23:59:59') b ON p.id = $n
           UNION ";
           };
@@ -141,7 +142,7 @@ class StatistiqueController extends Controller
           $rqtptop .= "SELECT *
           FROM produits p
           INNER JOIN (SELECT sum(quantity) as total FROM client_products WHERE id_products = $n 
-          AND created_at >= '$debut' 
+          AND created_at >= '$debut 00:00:00' 
           AND created_at <= '$fin 23:59:59' ) b ON p.id = $t
           ORDER BY total DESC LIMIT 3";
 
@@ -151,11 +152,11 @@ class StatistiqueController extends Controller
           $rqtpbas .= "SELECT *
           FROM produits p
           INNER JOIN (SELECT sum(quantity) as total FROM client_products WHERE id_products = $n 
-          AND created_at >= '$debut' 
+          AND created_at >= '$debut 00:00:00' 
           AND created_at <= '$fin 23:59:59' ) b ON p.id = $t
           ORDER BY total ASC LIMIT 3";
           $basproduits = DB::select( DB::raw($rqtpbas) );
-          //dd($basproduit);
+          //dd($basproduits);
 
 
 
@@ -173,8 +174,8 @@ class StatistiqueController extends Controller
                 $rs=8-$i;
                 $date = date('Y-m-d', strtotime($date. ' - '.$rs.' day'));
                 
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at ='$date' " ) );
-                
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at >='$date 00:00:00' AND r.created_at <='$date 23:59:59' " ) );
+               
                 $y[$i]=$ca[0]->ca;
                 
               }
@@ -187,7 +188,7 @@ class StatistiqueController extends Controller
               $rs=$r-1;
               $debut = date('Y-m-d', strtotime($today. ' - '.$rs.' days'));
               $fin=date('Y-m-d');
-              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin' AND r.created_at  >='$debut'" ) );
+              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
               $y=[0,0,0,0,0];
               for ($i=0; $i < 4 ; $i++) { 
@@ -200,7 +201,7 @@ class StatistiqueController extends Controller
                 $rs=$r+3*7-7*$i;
                 $fin = date('Y-m-d', strtotime($fin. ' - '.$rs.' day'));
                 //dd($fin);
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin' AND r.created_at  >='$debut'" ) );
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
                 $y[$i]=$ca[0]->ca;
                 
@@ -217,7 +218,7 @@ class StatistiqueController extends Controller
               $rs=$r-1;
               $debut = date('Y-m-d', strtotime($today. ' - '.$rs.' days'));
               $fin=date('Y-m-d');
-              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin' AND r.created_at  >='$debut'" ) );
+              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
               $y=[0,0,0,0,0,0,0,0,0,0,0,0,0];
               for ($i=0; $i < 12 ; $i++) { 
@@ -230,7 +231,7 @@ class StatistiqueController extends Controller
                 $rs=$r+11*7-7*$i;
                 $fin = date('Y-m-d', strtotime($fin. ' - '.$rs.' day'));
                 //dd($fin);
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin' AND r.created_at  >='$debut'" ) );
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
                 $y[$i]=$ca[0]->ca;
                 
@@ -264,12 +265,12 @@ class StatistiqueController extends Controller
               $debut = date('Y-m-d', strtotime($date. ' - '.$rs.' month'));
               $rs= 11 - $i;
               $fin = date('Y-m-d', strtotime($date. ' - '.$rs.' month'));
-              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <'$fin' AND r.created_at  >='$debut'" ) );
+              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <'$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
               $y[$i]=(float)($ca[0]->ca);
              
               
               }
-              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at  >='$date'" ) );
+              $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at  >='$date 00:00:00'" ) );
               $y[12]=(float)($ca[0]->ca);
              // dd($ca[0]->ca);
               
@@ -283,7 +284,7 @@ class StatistiqueController extends Controller
               $rs=$r-1;
               $debut = date('Y-m-d', strtotime($today. ' - '.$rs.' days'));
               $fin=date('Y-m-d');
-              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin' AND r.created_at  >='$debut'" ) );
+              $cacs = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
               $y=[0,0,0,0,0];
               for ($i=0; $i < 4 ; $i++) { 
@@ -296,7 +297,7 @@ class StatistiqueController extends Controller
                 $rs=$r+3*7-7*$i;
                 $fin = date('Y-m-d', strtotime($fin. ' - '.$rs.' day'));
                 //dd($fin);
-                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin' AND r.created_at  >='$debut'" ) );
+                $ca = DB::select( DB::raw("SELECT sum(Net) as ca FROM reservations r WHERE r.created_at <='$fin 23:59:59' AND r.created_at  >='$debut 00:00:00'" ) );
 
                 $y[$i]=$ca[0]->ca;
                 

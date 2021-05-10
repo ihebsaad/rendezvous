@@ -79,9 +79,9 @@ background-color:#a0d468;
         </div>       
         <div class="row">
 
-        <div class="col-sm-offset-2 col-sm-12">
+        <div class=" col-sm-12">
 
-<div class=" text-center" style="width: 50%">
+<div class=" text-center" style="width: 100%">
     {!! $usersChart->container() !!}
 </div>
 </div>
@@ -94,7 +94,7 @@ background-color:#a0d468;
       <h4><i class="sl sl-icon-arrow-up-circle"></i>Les 3 Services les plus vendus</h4>
       <ul>   
       <?php foreach($topservices as $topservice){ ?>   
-      <?php if ($topservice->total != 0) { ?>  
+      
         <li class="utf_approved_booking_listing">
         <div class="utf_list_box_listing_item bookings">
           <div class="utf_list_box_listing_item-img"><img src="<?php echo URL::asset('storage/images/'.$topservice->thumb) ?>" alt=""></div>
@@ -125,38 +125,7 @@ background-color:#a0d468;
           </div>
         </div>
         </li>
-<?php } else { ?>
-   <li class="utf_approved_booking_listing">
-        <div class="utf_list_box_listing_item bookings">
-          <div class="utf_list_box_listing_item-img"><img src="" alt=""></div>
-          <div class="utf_list_box_listing_item_content">
-          <div class="inner">
-            <h3>Aucun service </h3>
-            <div class="utf_inner_booking_listing_list">
-            <h5>Description:</h5>
-            <ul class="utf_booking_listing_list">
-              <li></li>                            
-            </ul>
-            </div>
-           
-            
-            <div class="utf_inner_booking_listing_list">
-            <h5>Prix:</h5>
-            <ul class="utf_booking_listing_list">
-              <li class="highlighted">€ 0 </li>
-            </ul>
-            </div>
-            <div class="utf_inner_booking_listing_list">
-            <h5>Nombre de ventes:</h5>
-            <ul class="utf_booking_listing_list">
-              <li class="highlighted">0 </li>
-            </ul>
-            </div>                         
-          </div>
-          </div>
-        </div>
-        </li>
-<?php } ?>
+
 
 
 <?php } ?>
@@ -240,7 +209,11 @@ background-color:#a0d468;
             <div class="utf_inner_booking_listing_list">
             <h5>Nombre de ventes:</h5>
             <ul class="utf_booking_listing_list">
-              <li class="highlighted">{{$topproduit->total}} </li>
+              <li class="highlighted"><?php if ($topproduit->total == null) {
+                echo 0 ;
+              } else {
+                echo $topproduit->total ;
+              } ?> </li>
             </ul>
             </div>                         
           </div>
@@ -281,7 +254,11 @@ background-color:#a0d468;
             <div class="utf_inner_booking_listing_list">
             <h5>Nombre de ventes:</h5>
             <ul class="utf_booking_listing_list">
-              <li class="highlighted">{{$basproduit->total}} </li>
+              <li class="highlighted"><?php if ($basproduit->total == null) {
+                echo 0 ;
+              } else {
+                echo $basproduit->total ;
+              } ?> </li>
             </ul>
             </div>                         
           </div>
@@ -307,7 +284,7 @@ background-color:#a0d468;
            
 
 
-</div></div>
+</div></div></div>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 	<script type="text/javascript">
