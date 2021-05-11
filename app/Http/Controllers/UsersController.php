@@ -56,6 +56,31 @@ class UsersController extends Controller
         }
         
     }
+    public static function ChangeBoxes(Request $request)
+    {
+        $Box1a=$request->get('Box1a');
+        DB::table('parametres')->where('id', 1)->update(array('Box1a'=> $Box1a));
+        $Box1b=$request->get('Box1b');
+        DB::table('parametres')->where('id', 1)->update(array('Box1b'=> $Box1b));
+
+        $Box2a=$request->get('Box2a');
+        DB::table('parametres')->where('id', 1)->update(array('Box2a'=> $Box2a));
+        $Box2b=$request->get('Box2b');
+        DB::table('parametres')->where('id', 1)->update(array('Box2b'=> $Box2b));
+
+        $Box3a=$request->get('Box3a');
+        DB::table('parametres')->where('id', 1)->update(array('Box3a'=> $Box3a));
+        $Box3b=$request->get('Box3b');
+        DB::table('parametres')->where('id', 1)->update(array('Box3b'=> $Box3b));
+
+        $Box4a=$request->get('Box4a');
+        DB::table('parametres')->where('id', 1)->update(array('Box4a'=> $Box4a));
+        $Box4b=$request->get('Box4b');
+        DB::table('parametres')->where('id', 1)->update(array('Box4b'=> $Box4b));
+        
+        
+        return "ok";
+    }
     public static function changetext(Request $request)
     {
         $val=$request->get('val');

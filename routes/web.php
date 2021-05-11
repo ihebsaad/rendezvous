@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
 	Route::POST('/produit/clientProduits','UsersController@ClientProd')->name('ProductClient');
 	Route::POST('/users/changehometext','UsersController@changetext')->name('users.changehometext');
+		Route::POST('/users/ChangeBoxes','UsersController@ChangeBoxes')->name('users.ChangeBoxes');
+
 
 	Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 	Route::get('/listing/{id}', 'UsersController@listing')->name('listing');

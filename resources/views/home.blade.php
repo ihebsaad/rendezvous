@@ -1,5 +1,8 @@
 @extends('layouts.frontlayout')
- 
+ <?php
+ $parametres=DB::table('parametres')->where('id', 1)->first();
+
+?>
 
  
  @section('content')
@@ -213,16 +216,15 @@
       <!-- Free Tier -->
       <div class="col-md-3">
         <div class="card mb-5 mb-lg-0">
-          <div class="card-body">
+          <div class="card-body" style="min-height: 380px!important">
           	<br>
             <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
             <center><span  style="color:#006ED2" ><i class="fa  fa-search fa-5x"></i></span></center>
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;padding-bottom: 50px">
-               Recherchez une prestation de service parmi nos différentes catégories populaires
-            </p></center>
+            <center><p style="font-size:130%;">{{$parametres->Box1a}}</p>
+              <center><p style="color:grey">{{$parametres->Box1b}}</p></center></center>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
           </div>
         </div>
@@ -230,16 +232,15 @@
 
       <div class="col-md-3">
         <div class="card mb-5 mb-lg-0">
-          <div class="card-body">
+          <div class="card-body" style="min-height: 380px!important">
             <br>
             <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
             <center><span  style="color:#006ED2"><i class="fa fa-check fa-5x"></i></span></center>
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;padding-bottom: 25px">
-               Comparez les avis et les notes des professionels près de chez vous  
-            </p><br>
+            <center><p style="font-size:130%;">{{$parametres->Box2a}}</p>
+              <center><p style="color:grey">{{$parametres->Box2b}}</p></center><br>
             <br>    </center>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
          
@@ -249,16 +250,15 @@
 
       <div class="col-md-3">
         <div class="card mb-5 mb-lg-0">
-          <div class="card-body">
+          <div class="card-body" style="min-height: 380px!important">
             <br>
             <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
             <center><span style="color:#006ED2" ><i class="fa fa-calendar fa-5x"></i></span></center>
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;padding-bottom: 23px">
-               Sélectionnez les professionnels avec qui vous souhaitez prendre rendez-vous
-            </p></center> <br>
+            <center><p style="font-size:130%;">{{$parametres->Box3a}}</p></center>
+            <center><p style="color:grey">{{$parametres->Box3b}}</p></center> <br>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
          </div>
         </div>
@@ -266,19 +266,15 @@
 
       <div class="col-md-3">
         <div class="card mb-5 mb-lg-0">
-          <div class="card-body">
+          <div class="card-body" style="min-height: 380px!important">
             <br>
             <!-- <h5 class="card-title text-muted text-uppercase text-center">Free</h5> -->
             <center><span  style="color:#006ED2"><i class="fa icon-material-outline-credit-card fa-5x"></i></span></center>
             <!-- <h6 class="card-price text-center">$0<span class="period">/month</span></h6> -->
             <br>
             <br>
-            <center><p style="font-size:130%;">
-               Payez la prestation de service en ligne avec toute sécurité
-            </p></center>
-            <center><p style="color:grey">
-               Payez soit par carte bleu ou via paypal
-            </p></center>
+            <center><p style="font-size:130%;">{{$parametres->Box4a}}</p></center>
+            <center><p style="color:grey">{{$parametres->Box4b}}</p></center>
             <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
           </div>
         </div>
