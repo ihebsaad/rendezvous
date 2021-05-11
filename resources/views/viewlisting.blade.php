@@ -262,7 +262,7 @@ font-size: 15px;
       <!--  <div id="utf_listing_overview" class="utf_listing_section">
           <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30"> <i class="sl sl-icon-present">
           	<?php /*$dt=new dateTime(); echo $dt->format("Y-m-d H:i");*/ ?>
-          </i> Services supplémentaires</h3>
+          </i> Profitez de nos bons plans </h3>
           <div style="max-height: 120px; overflow-y: auto;">
 		<table class="table" style="font-size: 150%; "  >
                 <thead>
@@ -502,11 +502,15 @@ output {
 }
   
     </style>
+    <?php 
+     if(($user->type_abonn_essai &&  $user->type_abonn_essai=="type3" )|| ($user->type_abonn &&  $user->type_abonn=="type3" )) { ?>
 			<div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
+         
         <label>Produits :</label>
         <br><center>
         <a href="#Produits1" class="button border sign-in popup-with-zoom-anim">Consulter tous nos produits</a></center>
         <br>
+
         <div id="sectionproduitsup" class="input-group input-group-lg"  style="height: 152px;width: 253px;overflow-y: auto; overflow-x: hidden;    vertical-align: middle;
         border: 1px solid #007bff; display: none;background-color: #666666; " >
   				  
@@ -546,6 +550,7 @@ output {
 				
 				</div>
          </div>	 
+<?php } ?>
 <?php } ?>
 <style type="text/css">
  .mfp-close::after, .mfp-close::before {
