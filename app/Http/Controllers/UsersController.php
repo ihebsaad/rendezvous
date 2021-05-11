@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use DB;
 use QrCode;
 use URL;
+use \App\Parametre;
 
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -55,7 +56,14 @@ class UsersController extends Controller
         }
         
     }
-    
+    public static function changetext(Request $request)
+    {
+        $val=$request->get('val');
+        DB::table('parametres')->where('id', 1)->update(array('hometext'=> $val));
+        
+        return "ok";
+    }
+ 
     public static function infouser($id)
     {
         $infouser=\App\User::find($id);

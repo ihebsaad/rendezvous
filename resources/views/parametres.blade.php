@@ -159,7 +159,26 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 	 
 			   
 			  </div>
-		</div>	  
+		</div>	
+    <!-----------------------------text ---------------------------------------->
+    <div class="add_utf_listing_section margin-top-45"> 
+              <div class="utf_add_listing_part_headline_part">
+                <h3><i class="sl sl-icon-screen-desktop"></i>Textes du vidéo d'accueil</h3>
+              </div>  
+           <div class="row">
+
+          <div class="col-md-12">
+            <label>Texte :</label>           
+            <input id="idtext" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->hometext}}" />
+          </div>
+          <div class="col-md-6">
+            <input type="submit" onclick="savetext()" style="text-align:center;color:white;" value="Enregistrer"></input>
+          </div>
+          
+          </div>  
+          
+     </div>   
+    <!-------------------------------------------------------------------------->  
  	
 	
 		 <div class="add_utf_listing_section margin-top-45"> 
@@ -393,6 +412,28 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> -->
 
 <script>
+  function savetext(){
+   
+    var val = document.getElementById("idtext").value;
+     //alert(val);
+    var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ route('users.changehometext') }}",
+                    method: "POST",
+                    data: {val: val, _token: _token},
+                    success: function (data) {
+                                     
+                    swal({
+                        type: 'success',
+                        title: 'Modifié ...',
+                        text: 'Contenu modifié avec succès'
+          //  icon: "success",
+                    }); 
+          
+                     }
+          
+                });
+  }
     function changing_question_reponse(elm) {
                 var champ = elm.name;
                // alert(champ);
