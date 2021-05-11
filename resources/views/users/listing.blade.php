@@ -262,7 +262,7 @@ background-color:lightgrey;
                  
                  </div>                   
                   <div class="col-md-12">
-	                  <h5>Fuseau horaire</h5> 
+	                  <h5>Fuseau horaire (Obligatoire)</h5> 
 	                  <div class="row with-forms">
 	                  	<div class="col-md-6">
 							  <select  name="fhoraire" id="fhoraire" title="Selectionnez votre fuseau horaire" onchange="changing(this);location.reload();">
@@ -310,7 +310,7 @@ background-color:lightgrey;
           <br><br>
 		  </div><?php }?>
           <div class="col-md-12" >
-            <h2><b> Ajoutez une adresse E-mail de votre compte Paypal.</b></h2>
+            <h2><b> Ajoutez une adresse E-mail de votre compte Paypal (Obligatoire pour que les clients paient les acomptes et les restes).</b></h2>
             <br>
 </div>
           <form action="{{ route('check.paypal') }}"  >
@@ -1132,7 +1132,8 @@ input:checked + .slider:before {
 
 
  <!-------------------------------------------produits----------------------------------->
-
+<?php 
+     if(($user->type_abonn_essai &&  $user->type_abonn_essai=="type3" )|| ($user->type_abonn &&  $user->type_abonn=="type3" )) { ?>
 <div class="add_utf_listing_section margin-top-45"> 
   <div class="utf_add_listing_part_headline_part">
     <h3><i class="fa fa-product-hunt"></i>Produits </h3>
@@ -1183,7 +1184,7 @@ input:checked + .slider:before {
     </div>
   </div>
 </div>              
-            <!------------------------------------------------------------------------------>
+     <?php } ?>        <!------------------------------------------------------------------------------>
 
             <!----------------------------------------------------------------------------->				
 <div class="add_utf_listing_section margin-top-45"> 

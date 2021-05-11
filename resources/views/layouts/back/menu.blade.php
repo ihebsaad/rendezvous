@@ -33,9 +33,10 @@
  		  <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('abonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li> 
  		   <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
  		  <li class="<?php if ($view_name == 'googlecalendar-index'){echo 'active';} ?>  "><a href="{{ route('googleagenda',['id'=>$user->id]) }}"><i class="sl sl-icon-folder-alt"></i> Google Agenda </a></li> 
- 		   <?php } ?>	
+ 		   <?php } ?>
+ 		  <?php if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>	
  		   <li class="<?php if ($view_name == 'statistiques'){echo 'active';} ?>  "><a href="{{ route('Statistiques') }}"><i class="sl sl-icon-chart"></i> Statistiques </a></li> 
-
+           <?php } ?>
  <?php } ?>	
           <li class="<?php if ($view_name == 'payments-index'){echo 'active';} ?>  "><a href="{{ route('payments')}}"><i class="sl sl-icon-wallet"></i> Paiements </a></li>       
 
