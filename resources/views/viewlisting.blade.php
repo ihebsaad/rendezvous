@@ -554,9 +554,12 @@ output {
 </style>
 <!---------------model all products---------->
 <div id="Produits1" class="zoom-anim-dialog mfp-hide ">
-  <div class="modal-dialog" style="background: white;border-radius: 10px;font-family: 'Nunito', sans-serif;">
+  <button type="button" class="mfp-close" style=""></button>
+  <div class="modal-dialog modal-lg" style="background: white;border-radius: 10px;font-family: 'Nunito', sans-serif;">
+
     <div class="modal-content" style="width: fit-content;border-radius: 10px;">
-      <center><br><h4 style="font-size: 35px;color: #007bff;">Nos produits</h4></center>
+      <center><br><h5 style="font-size: 35px;color: #007bff;">Nos produits</h5></center>
+      
       <div id="utf_listing_amenities" class="utf_listing_section" style="margin: 21px; overflow-y: auto; height: 500px;border-radius: 47px;width: fit-content;background-color: white;">
         <ul class="utf_listing_features " >
             <?php foreach ($produit as $prod) { ?>
@@ -581,6 +584,7 @@ output {
         </ul>
       </div>
     </div>
+
   </div>
 </div>
 		 <!-- Modal -->
@@ -1522,11 +1526,13 @@ output {
  -->
  <?php  foreach($produit as $prod){?>
 <div id="i<?php echo $prod->id;?>" class="zoom-anim-dialog mfp-hide">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
         <div class="modal-content" style="height: 400px; border-radius: 10px;">
             <div class="modal-header" style="border-radius: 10px;">
-                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                <h3 class="modal-title" style="    font-size: x-large;font-style: oblique;color: #337ab7;"><?php echo $prod->nom_produit;?></h3>
+                
+                <h3 class="modal-title" style="font-size: x-large;font-style: oblique;color: #337ab7;float: left;"><?php echo $prod->nom_produit;?></h3>
+                <a href="#Produits1" style="font-size: 25px" class="popup-with-zoom-anim"> <i class="im im-icon-Back"></i></a>
+
               </div>
         <div class="utf_signin_form style_one">
                 <div class="row">
@@ -1539,7 +1545,9 @@ output {
                         <p style="overflow-x: auto;max-height: 200px"><?php echo $prod->description;?>.</p>
                         <label>Prix : <b><?php echo $prod->prix_unité;?> €</b></label>
                         <br>
-              <a  href="#Produits1" style="font-size: 15px;"  class="popup-with-zoom-anim"><b>retourner</b></a>
+                        <button  class="btn btn-primary btn-lg" ><a  href="#Produits1" style="font-size: 15px;color: #fff" onclick='visibilityFunction(<?php echo $prod->id;?>)' class="popup-with-zoom-anim"><b>Acheter</b></a>
+                </button>
+              
                         <div class="space-ten"></div>
                        
                     </div>
