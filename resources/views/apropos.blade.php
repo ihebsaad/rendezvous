@@ -79,42 +79,24 @@ figcaption {
 <div class="container">
 	<div class="row divimg margin-bottom-40 margin-top-50">
 	  <div class="col-md-12"> 
-			<h4 class="headline_part margin-top-0 margin-bottom-15">Prenezunrendezvous.com</h4>
-			<p><?php echo $apropos;?></p>
+			<h4 class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos1a;?></h4>
+			<p><?php echo $parametres->apropos1b;?></p>
 	  </div>
 	</div>
 	<div class="row margin-bottom-50 margin-top-30">
 	  <div class="col-md-6"> 
-				<h4 class="headline_part margin-top-0 margin-bottom-15">Pourquoi être présent sur cette annuaire en tant que prestataire de services ?</h4>
-				<ul>
-				  <li>Vous allez pouvoir gagner au fur et à mesure de la visibilité.</li>
-				  <li>Profiter de notre communication sur les réseaux sociaux et autres médias de communication.</li>
-				  <li>Présentez votre entreprise ( horaires d'ouverture et de fermeture et votre activité ).</li>
-				  <li>Vendre vos prestations de services en ligne.</li>
-				  <li>Avoir un agenda en ligne.</li>
-				  <li>Avoir des avis clients.</li>
-				  <li>Permettre à vos clients de vous trouvez facilement avec Google Maps.</li>
-				  <li>Permettre à vos clients d'avoir un rappel SMS du rendez-vous qu'ils auront pris afin de ne manquer aucun rendez-vous clients.</li>
-				  <li>Avoir la possibilité de proposer à vos clients de proposer un acompte de 50% du montant de la prestation de service lors de la prise de rdv.</li>
-				  <li>Très bientôt nous allons donner la possibilité à vos clients de payer en 4 fois vos prestations de services à partir d'un montant de 300€.</li>
-				  <li>Et bien d'autres nouveautés.</li>
-
-				</ul>
+				<h4 class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos2a;?></h4>
+				<?php echo $parametres->apropos2b;?>
 	  </div>
 	  <div class="col-md-6"> 
-			<h4 class="headline_part margin-top-0 margin-bottom-15">Qui est derrière ce projet</h4>
+			<h4 class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos3a;?></h4>
 			<div class="clearfix">
 			  <figure style="width:30%;margin-right:20px" class="float-left">
 				  <img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais">
 				  <figcaption>Mr MAXIME David</figcaption>
 			  </figure>
-			  <p>C'est <b>Mr MAXIME David</b>, Martiniquais, qui auparavant avait été prestataire de service à domicile dans le blanchiment dentaire. Il a été partenaire avec miss martinique et aussi pour l'émission miroir créole qui était sur la chaîne tv locale martinique première.</p>
-			  <p style="padding-top: 10px">Ayant connu certaines galères par rapport au prise de rendez vous avec les clients et le manque de visibilité. C'est alors qu'il a eu la belle idée de faire un annuaire de prise de rendez vous qui permettra au prestataire de service d'avoir plus de confort dans leurs prise de rendez vous avec leurs clients, et de permettre aux gens de prendre rendez vous avec des prestataires de services en ligne en quelque clics.</p>
-
-		      <p style="padding-top: 10px">Nous espérons tous que ce projet vous plaira et nous vous invitons à partager ce site sur les réseaux sociaux avec vos amies et votre famille afin qu'un grand nombre de personnes en Martinique et en Guadeloupe puissent trouver les meilleurs prestataires de services sur rendez-vous.</p>
-
-		      <p style="padding-top: 10px">Prestataires de services et clients,<br>
-		      Nous vous souhaitons la bienvenue sur <a style="color:blue;" href="https://prenezunrendezvous.com/" > prenezunrendezvous.com</a>
+			  <p><?php echo $parametres->apropos3b;?></p>
+			  <p style="padding-top: 10px"><?php echo $parametres->apropos3c;?>
 		      </p>
 			</div>
 		    

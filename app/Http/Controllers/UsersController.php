@@ -56,6 +56,28 @@ class UsersController extends Controller
         }
         
     }
+    public static function ChangeApropos(Request $request)
+    {
+        $apropos1a=$request->get('apropos1a');
+        DB::table('parametres')->where('id', 1)->update(array('apropos1a'=> $apropos1a));
+        $apropos1b=$request->get('apropos1b');
+        DB::table('parametres')->where('id', 1)->update(array('apropos1b'=> $apropos1b));
+
+        $apropos2a=$request->get('apropos2a');
+        DB::table('parametres')->where('id', 1)->update(array('apropos2a'=> $apropos2a));
+        $apropos2b=$request->get('apropos2b');
+        DB::table('parametres')->where('id', 1)->update(array('apropos2b'=> $apropos2b));
+
+        $apropos3a=$request->get('apropos3a');
+        DB::table('parametres')->where('id', 1)->update(array('apropos3a'=> $apropos3a));
+        $apropos3b=$request->get('apropos3b');
+        DB::table('parametres')->where('id', 1)->update(array('apropos3b'=> $apropos3b));
+        $apropos3c=$request->get('apropos3c');
+        DB::table('parametres')->where('id', 1)->update(array('apropos3c'=> $apropos3c));
+        
+        
+        return "ok";
+    }
     public static function ChangeBoxes(Request $request)
     {
         $Box1a=$request->get('Box1a');

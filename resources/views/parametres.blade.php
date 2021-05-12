@@ -256,7 +256,69 @@ $commission_abonnement3= $parametres->commission_abonnement3;
           </div>
      </div>   
     <!-------------------------------------------------------------------------->  
- 	
+    <style type="text/css">
+      figure {
+  border: 1px #cccccc solid;
+  padding: 4px;
+  margin: 4px;
+}
+
+figcaption {
+  background-color: black;
+  color: white;
+  font-style: italic;
+  padding: 2px;
+  text-align: center;
+}
+    </style>
+ 	<!-----------------------------A propos ---------------------------------------->
+    <div class="add_utf_listing_section margin-top-45"> 
+              <div class="utf_add_listing_part_headline_part">
+                <h3><i class="sl sl-icon-screen-desktop"></i>A Propos</h3>
+              </div>  
+           <div class="row">
+
+          <div class="col-md-12">
+            <input id="apropos1a" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->apropos1a}}" />
+
+            <textarea id="apropos1b" style="">{{$parametres->apropos1b}}</textarea>
+          </div>
+          <div class="col-md-6">
+            <input id="apropos2a" type="text" name="" value="{{$parametres->apropos2a}}">
+            <textarea id="apropos2b" style="height: 535px">{{$parametres->apropos2b}}</textarea>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+
+              <div class="col-md-12">
+                <input id="apropos3a" type="text" value="{{$parametres->apropos3a}}" name="">
+              </div>
+              <div class="col-md-4">
+                <figure style="max-height: 200px" class="float-left">
+                  <img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais">
+                  <figcaption>Mr MAXIME David</figcaption>
+                 </figure>
+              </div>
+              <div class="col-md-8">
+                <textarea id="apropos3b" style="height: 200px">{{$parametres->apropos3b}}</textarea>
+              </div>
+              <div class="col-md-12">
+                <textarea id="apropos3c" style="height: 300px">{{$parametres->apropos3c}}</textarea>
+              </div>
+              
+            </div>
+            
+            
+            
+          </div>
+          <div class="col-md-6">
+            <input  type="submit" onclick="saveApropos()" style="text-align:center;color:white;" value="Enregistrer"></input>
+          </div>
+          
+          </div>  
+          
+     </div>   
+    <!-------------------------------------------------------------------------->
 	
 		 <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
@@ -489,6 +551,37 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> -->
 
 <script>
+    function saveApropos(){
+    //alert("okko");
+     var apropos1a = document.getElementById("apropos1a").value;
+    var apropos1b = document.getElementById("apropos1b").value;
+
+    var apropos2a = document.getElementById("apropos2a").value;
+    var apropos2b = document.getElementById("apropos2b").value;
+
+    var apropos3a = document.getElementById("apropos3a").value;
+    var apropos3b = document.getElementById("apropos3b").value;
+    var apropos3c = document.getElementById("apropos3c").value;
+
+     //alert(Box1a);
+    var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ route('users.ChangeApropos') }}",
+                    method: "POST",
+                    data: {apropos1a: apropos1a,apropos1b: apropos1b,apropos2a: apropos2a,apropos2b: apropos2b,apropos3a: apropos3a,apropos3b: apropos3b,apropos3c:apropos3c , _token: _token},
+                    success: function (data) {
+                                     
+                    swal({
+                        type: 'success',
+                        title: 'Modifié ...',
+                        text: 'Contenu modifié avec succès'
+          //  icon: "success",
+                    }); 
+          
+                     }
+          
+                });
+  }
   function ChangeBoxes(){
     //alert("okko");
      var Box1a = document.getElementById("Box1a").value;

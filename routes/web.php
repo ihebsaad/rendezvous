@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::POST('/produit/clientProduits','UsersController@ClientProd')->name('ProductClient');
 	Route::POST('/users/changehometext','UsersController@changetext')->name('users.changehometext');
 		Route::POST('/users/ChangeBoxes','UsersController@ChangeBoxes')->name('users.ChangeBoxes');
+		Route::POST('/users/ChangeApropos','UsersController@ChangeApropos')->name('users.ChangeApropos');
 
 
 	Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
