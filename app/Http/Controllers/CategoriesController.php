@@ -50,14 +50,31 @@ class CategoriesController extends Controller
  
   	public function add(Request $request)
 	{
- 		 $categorie  = new Categorie([
+    $categorie  = new Categorie([
                'nom' => $request->get('nom'),
               'description' => $request->get('description'),
               'parent' => $request->get('parent'),
            ]);
  
         $categorie->save();
-    return $categorie->id;
+        $id_categorie = $categorie ->id ;
+    if($request->file('image')!=null)
+    {$image=$request->file('image');
+     $filenamewithextension =  $image->getClientOriginalName();
+    //get filename without extension
+    $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    //get file extension
+    $extension = $request->file('image')->getClientOriginalExtension();
+    //filename to store
+    $filenametostore = $filename.'_'.time().'.'.$extension;
+      $path = storage_path()."/categories/";
+    
+         $image->move($path,  $filenametostore );
+         Categorie::where('id', $id_categorie)->update(array('image' => $filenametostore));
+    }
+   
+ 		 
+    return back();
 		//	return back();
     //  return redirect('/listing/'.$user)->with('success', ' ajouté  ');
 

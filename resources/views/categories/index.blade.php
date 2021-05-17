@@ -16,7 +16,7 @@
 @include('layouts.back.menu')
 <div class="utf_dashboard_content"> 
 <!-- Session errors -->
- @if ($errors->any())
+ @if ($errors->any()) 
              <div class="alert alert-danger">
                  <ul>
                      @foreach ($errors->all() as $error)
@@ -38,6 +38,7 @@
         <thead>
         <tr id="headtable">
             <th>ID</th>
+            <th>Image</th>
             <th>Nom</th>
             <th>Description</th>
              <th  >Mère </th>
@@ -45,6 +46,7 @@
         </tr>
             <tr>
                 <th>ID</th>
+                <th>Image</th>
                 <th>Nom</th>
                 <th>Description</th>
                  <th> </th><th> </th> 
@@ -54,6 +56,7 @@
             @foreach($categories as $categorie)
                 <tr> 
                     <td>{{$categorie->id}}</td>
+                    <td><img  src="<?php echo  URL::asset('storage/categories/'.$categorie->image);?>" style="max-width:80px" /></td>
                      <td> {{$categorie->nom  }} </td>
                     <td>{{$categorie->description}}</td>
                    <td><?php echo CategoriesController::champById('nom',$categorie->parent);?> </td>
@@ -73,25 +76,32 @@
             <h3>Ajouter une catégorie</h3>
           </div>
 		 <div class="utf_signin_form style_one">
+            <form  action="{{url('/')}}/categories/add" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+
+            <div class="fm-input ">
+                              <input type="file" id="image" name="image" />
+                            </div><br>
 			
 		 <div class="fm-input ">
-							  <input type="text" placeholder="nom *" id="nom">
+							  <input type="text" placeholder="nom *" name="nom" id="nom">
 							</div>
 							<div class="fm-input  ">
-							  <input type="text"   placeholder="description"  id="description">
+							  <input type="text"   placeholder="description"  id="description" name="description">
 							</div>
 
 						 <div class="fm-input  "> 
 							 <label>Catégorie mère</label>
-								<select type="text" value="" id="parent"  >
+								<select type="text" value="" id="parent" name="parent"  >
 							  <option></option>
 							  <?php foreach ($categories as $cat){ 
 							   echo '<option value="'.$cat->id.'">'.$cat->nom.'</option>';
 
 							    }?>
 							  </select>
-							</div>
-		 <a class="button" id="add" style="text-align:center">Ajouter</a>
+							</div><br>
+                            <input type="submit" value="Ajouter" name="">
+    </form>
 		 </div>		  
 		 </div>		
 		 
@@ -227,36 +237,7 @@
 
 		
 		
-		   $('#add').click(function(){
-                 var nom = $('#nom').val();
-                var description = $('#description').val();
-                var parent = $('#parent').val();
 
-				if ((nom != '')  )
-                {
-                    var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url:"{{ route('categories.add') }}",
-                        method:"POST",
-                        data:{nom:nom,description:description,parent:parent , _token:_token},
-                        success:function(data){
- 
-					     categorie =parseInt(data);
-						 if(categorie>0)
-						{ 
- 						$( ".mfp-close" ).trigger( "click" );
-
- 	
- 						}
-						
-					    location.reload();
-  
-                        }
-                    });
-                }else{
-                    // alert('ERROR');
-                }
-            });
 			
     </script>
 	
