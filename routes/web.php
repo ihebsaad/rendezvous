@@ -81,6 +81,8 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::POST('/users/ChangeBoxes','UsersController@ChangeBoxes')->name('users.ChangeBoxes');
 		Route::POST('/users/ChangeApropos','UsersController@ChangeApropos')->name('users.ChangeApropos');
 
+Route::get('/users/editPlan','UsersController@editPlan')->name('users.editPlan');
+Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.deleteLine');
 
 	Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
 	Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
