@@ -71,6 +71,9 @@ Route::get('/oauthcallback', 'CalendrierController@oauth')->name('oauthCallback'
 //Route::get('/oauthRedirect', 'ReservationsController@oauth')->name('oauthCallback');
 Route::get('/enregistrergooglecalendar/{id}', 'CalendrierController@enregistrergooglecalendar')->name('enregistrergooglecalendar');
 
+// regle service supplementaires
+Route::get('/get_liste_regles_services_suppl/{id}', 'ServicesController@get_liste_regles_services_suppl')->name('liste_regles_services_suppl');
+
 
 Route::group(['middleware' => 'auth'], function(){
 

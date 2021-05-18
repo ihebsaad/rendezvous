@@ -1132,7 +1132,7 @@ output {
       <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
 			
 		
-        <div class="utf_box_widget margin-top-35">
+        <!-- <div class="utf_box_widget margin-top-35">
           <h3><i class="sl sl-icon-phone"></i> Contact Info</h3>
           <div class="utf_hosted_by_user_title"> <a href="#" class="utf_hosted_by_avatar_listing"><img src="<?php echo  URL::asset('storage/images/'.$user->logo);?>" alt="" style="width:105px; height:105px"></a>
            <h4 style="margin: 15px 10px 10px;"><a href="#">{{$user->responsable}}</a><span> </span>
@@ -1149,10 +1149,10 @@ output {
           <ul class="utf_listing_detail_sidebar">
             <li><i class="sl sl-icon-map"></i> {{$user->adresse}}</li>
             <li><i class="sl sl-icon-phone"></i> {{$user->tel}}</li>
-          <!--  <li><i class="sl sl-icon-globe"></i> <a href="#">www.example.com</a></li>-->
+           <li><i class="sl sl-icon-globe"></i> <a href="#">www.example.com</a></li>
             <li><i class="fa fa-envelope-o"></i> <a href="mailto:info@example.com">{{$user->email}}</a></li>
           </ul>		  
-        </div>
+        </div> -->
         <div class="utf_box_widget margin-top-35">
           <h3><i class="sl sl-icon-folder-alt"></i> Catégories</h3>
           <ul class="utf_listing_detail_sidebar">
@@ -1174,8 +1174,8 @@ output {
 				echo  $user->mardi_o.' - '.$user->mardi_f ;}else{echo 'Fermé';} ?>
 				</span></li>
             <li>Mercredi <span>
-			<?php if ($user->mrecredi_o !='' && $user->mrecredi_f  !='' ){
-				echo  $user->mrecredi_o.' - '.$user->mrecredi_f; }else{echo 'Fermé';} ?>
+			<?php if ($user->mercredi_o !='' && $user->mercredi_f  !='' ){
+				echo  $user->mercredi_o.' - '.$user->mercredi_f; }else{echo 'Fermé';} ?>
 				</span></li>
             <li>Jeudi <span>
 			<?php if ($user->jeudi_o !='' && $user->jeudi_f  !='' ){
@@ -1603,8 +1603,42 @@ function calcul(val){
  	alert("des"+params.deselected);});*/
    
 function viewproduit(){
-  alert("ok");
+  //alert("ok");
 }
+
+   // function get_liste_regles_services_suppl()
+    // {
+     	$( document ).ready(function() {
+
+     		$('#service').on('change', function(evt, params) { 
+     		 //alert("sel "+params.selected);
+            // alert("des "+params.deselected);
+            var items = $("#service option:selected").map(function() {
+                 return $(this).text();
+             }).get();
+
+          //  alert(items);
+           //var selected_value = $(this).toArray().map(x => $(x).val());
+            // alert(selected_value)
+         });
+     		//alert ('raedy');
+		 $.ajax({
+        url:"{{url('/')}}/get_liste_regles_services_suppl/<?php echo $user->id; ?>",
+        method:"get",
+        success:function(data){			
+            //alert(data);	
+            var res = data.split(";");
+            res.splice(0,1);
+            for(var i=0; i<res.length ; i++)
+            {
+            	//alert(res[1]);
+            }
+            }
+          });
+
+          });
+
+    // }
     function visibilityFunction(element){
       //alert("q"+element+"");
       document.getElementById("sectionproduitsup").style.display = 'block';

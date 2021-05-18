@@ -418,6 +418,19 @@ class ServicesController extends Controller
 
     }
 
+    public function get_liste_regles_services_suppl($id)
+    {
+     
+      $serv_supp=ServiceSupp::where('prestataire', $id)->get();
+      $res='';
+      foreach ($serv_supp as $ss) {
+        $res= $res.';'.$ss->regle;
+      }
+      //DB::table('services_suppl')->where('id', $id)->delete();     
+      return $res;
+
+    }
+
     
 	
 	
