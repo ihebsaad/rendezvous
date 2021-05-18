@@ -233,6 +233,7 @@
  <!-- plan 2 - end -->  
  <!-- plan 1 - start -->  
       <div class="plan featured col-md-4 col-sm-6 col-xs-12">
+        <input type="checkbox" class="read-more-state" id="post-1" />
        <div class="utf_price_plan">
           <h3> <?php echo $parametres->abonnement1;?></h3>
           <span class="value" id="prixA"><?php echo $parametres->cout_abonnement1;?>€<span>TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
@@ -251,7 +252,7 @@
                   
                    } ?>
                  </ul>
-                 
+                 <label for="post-1" class="read-more-trigger"></label></br>
                @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
       @else
         <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
