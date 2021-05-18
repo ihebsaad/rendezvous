@@ -1603,7 +1603,7 @@ function calcul(val){
  	alert("des"+params.deselected);});*/
    
 function viewproduit(){
-  alert("ok");
+  //alert("ok");
 }
 
    // function get_liste_regles_services_suppl()
@@ -1617,7 +1617,7 @@ function viewproduit(){
                  return $(this).text();
              }).get();
 
-            alert(items);
+          //  alert(items);
            //var selected_value = $(this).toArray().map(x => $(x).val());
             // alert(selected_value)
          });
