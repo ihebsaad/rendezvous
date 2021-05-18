@@ -379,7 +379,7 @@ figcaption {
               </div>
               <div class="col-md-4" style="margin-top: 20px;">
                 <figure style="max-height: 250px" class="float-left">
-                  <img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais" style="max-height: 200px">
+                  <center><img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais" style="max-height: 200px"></center>
                   <figcaption>Mr MAXIME David</figcaption>
                  </figure>
               </div>
