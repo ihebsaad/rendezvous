@@ -555,15 +555,19 @@ output {
 <style type="text/css">
  .mfp-close::after, .mfp-close::before {
     top: 0px!important;
+    left: 95%;
+
 }
 </style>
 <!---------------model all products---------->
 <div id="Produits1" class="zoom-anim-dialog mfp-hide ">
-  <button type="button" class="mfp-close" style=""></button>
   <div class="modal-dialog modal-lg" style="background: white;border-radius: 10px;font-family: 'Nunito', sans-serif;">
 
     <div class="modal-content" style="width: fit-content;border-radius: 10px;">
+      <div>
+      <a style="float: right!important;margin: 20px;left: 0% !important" class="mfp-close"></a>
       <center><br><h5 style="font-size: 35px;color: #007bff;">Nos produits</h5></center>
+</div>
       
       <div id="utf_listing_amenities" class="utf_listing_section" style="margin: 21px; overflow-y: auto; height: 500px;border-radius: 47px;width: fit-content;background-color: white;">
         <ul class="utf_listing_features " >
@@ -1534,6 +1538,7 @@ output {
 <div class="modal-dialog modal-lg">
         <div class="modal-content" style="height: 400px; border-radius: 10px;">
             <div class="modal-header" style="border-radius: 10px;">
+              <button class="mfp-close"></button>
                 
                 <h3 class="modal-title" style="font-size: x-large;font-style: oblique;color: #337ab7;float: left;"><?php echo $prod->nom_produit;?></h3>
                 <a href="#Produits1" style="font-size: 25px" class="popup-with-zoom-anim"> <i class="im im-icon-Back"></i></a>
