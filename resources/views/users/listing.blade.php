@@ -952,7 +952,7 @@ function geocodeAddress(geocoder, resultsMap) {
                   method:"POST",
                   data:{idservice:idservice,produit:produit, _token:_token},
                      success:function(data){	changed=true;
-			               alert(data);
+			               //alert(data);
                        $.notify({
                           message: 'produit ajoutée avec succès',
                         icon: 'glyphicon glyphicon-check'},{
@@ -2103,16 +2103,16 @@ if (x=="Numérique") {
     function changeReductionCode(x){
       var id = $(x).attr('id');
       id=id.substring(1) ;
-      alert(id);
+     // alert(id);
       var valchange = $(x).val();
-      alert(valchange);
+     // alert(valchange);
       var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('services.reduction_CodePromo') }}",
                         method:"POST",
             data:{valchange:valchange, _token:_token, id:id},
                         success:function(data){
-                          alert("ok");
+                         // alert("ok");
                         }
                     });
 
@@ -2455,11 +2455,11 @@ if (x=="Numérique") {
 				
 			///here
  		var checked =document.getElementById('cat-'+cat).checked  ;
-		 alert(checked);
+		 //alert(checked);
 				  var user = $('#user').val();
 
-				  alert(user);
-				  alert(cat);
+				  //alert(user);
+				 // alert(cat);
 				 var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('categories.insert') }}",
