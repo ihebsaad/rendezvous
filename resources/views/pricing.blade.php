@@ -239,7 +239,7 @@
         </div>
         
               <div class="utf_price_plan_features">
-                <ul style="padding-bottom: 28px">
+                <ul class="read-more-wrap">
                   <?php $x=0; foreach($abonnementA as $ab) { 
                     if ($x<5) {
                       echo  '<li>'.$ab->contenu.'</li>' ;
@@ -250,7 +250,6 @@
                      
                   
                    } ?>
-                  <?php // echo $parametres->commission_abonnement1;?>
                  </ul>
                  
                @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
