@@ -68,11 +68,90 @@
   line-height: 2;
 }
  </style>
+ <style type="text/css">
+   .pricing-container {
+  width: 90%;
+  max-width: 1170px;
+  margin: 4em auto;
+}
+
+.pricing-container {
+    margin: 6em auto;
+}
+.pricing-container.full-width {
+    width: 100%;
+    max-width: none;
+}
+
+.pricing-switcher {
+  text-align: center;
+}
+
+.pricing-switcher .fieldset {
+  display: inline-block;
+  position: relative;
+  padding: 2px;
+  border-radius: 50em;
+  border: 2px solid #fc346c;
+}
+
+.pricing-switcher input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.pricing-switcher label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  float: left;
+  width: 90px;
+  height: 32px;
+  line-height: 40px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  
+}
+
+.pricing-switcher .switch {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 40px;
+  width: 90px;
+  background-color: #fc346c;
+  border-radius: 50em;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  transition: transform 0.5s;
+}
+
+.pricing-switcher input[type="radio"]:checked + label + .switch,
+.pricing-switcher input[type="radio"]:checked + label:nth-of-type(n) + .switch {
+  -webkit-transform: translateX(90px);
+  -moz-transform: translateX(90px);
+  -ms-transform: translateX(90px);
+  -o-transform: translateX(90px);
+  transform: translateX(90px);
+}
+
+
+
+ </style>
 <br>
   <section class="fullwidth_block margin-top-0 padding-top-0 padding-bottom-50" data-background-color="#fff"> 
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <div class="pricing-switcher">
+      <p class="fieldset">
+        <input type="radio" name="duration-1" value="Mensuel" id="monthly-1" checked>
+        <label for="monthly-1" style="color: #fff;font-size: 16px" id="monthlylabel"><b>Mensuel</b></label>
+        <input type="radio" name="duration-1" value="Annuel" id="yearly-1">
+        <label for="yearly-1" style="color: #fc346c;font-size: 16px" id="yearlylabel"><b>Annuel</b></label>
+        <span class="switch"></span>
+      </p>
+    </div>
           <h3 class="headline_part centered margin-bottom-20">Choisissez votre Plan<span></span></h3>
         </div>
       </div>
@@ -83,29 +162,22 @@
       <div class="plan featured col-md-4 col-sm-6 col-xs-12">
         <div class="utf_price_plan">
           <h3><?php echo $parametres->abonnement3;?></h3>
-          <span class="value"><?php echo $parametres->cout_abonnement3;?>€<span>TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
+          <span class="value" id="prixC"><?php echo $parametres->cout_abonnement3;?>€<span id="uniteC">TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
         </div>
         
               <div class="utf_price_plan_features">
               	<input type="checkbox" class="read-more-state" id="post-3" />
                 <ul class="read-more-wrap">
-                  <li>Réservations en ligne illimitées <b style="color:green">24/7</b></li>
-                  <li>Rappels SMS illimités</li>
-                  <li><b style="color:green">Entreprise mise en avant</b> dans la recherche</li>
-                  <li>Rappels SMS</li>		
-                  <li><b style="color:green">Acompte de 60%</b> lors de la prise de RDV pour les services</li>	
-                  <li>Codes promo</li> 
-                  <li class="read-more-target">Carte de fidélité virtuelle <b style="color:green">(9 séances achetées et la 10ème prestation aura une réduction)</b></li> 
-                  <li class="read-more-target">Paiement en plusieurs fois <b style="color:green">à partir de 200€</b></li>
-                  <li class="read-more-target">Tableau de statistiques des ventes, des services et des produits</li>
-                  <li class="read-more-target">Service client accessible <b style="color:green">7J/7</b></li>
-                  <li class="read-more-target">Choisir les jours et les heures d'indisponibilité dans votre calendrier</li>
-                  <li class="read-more-target">Obtenir un QR code qui va ramener à votre page</li>
-                  <li class="read-more-target">Système de gestion des heures creuses "happy hours"</li>
-                  <li class="read-more-target">Synchronisation du calendrier du site avec votre google agenda</li>
-                  <li class="read-more-target">Agenda flexible</li>
-                  <li class="read-more-target">Service récurrent</li>                  
-                  <li class="read-more-target">Boutique de vente de produits physiques et numériques</li>
+                  <?php $x=0; foreach($abonnementC as $ab) { 
+                    if ($x<5) {
+                      echo  '<li>'.$ab->contenu.'</li>' ;
+                    } else {
+                      echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
+                    }
+                      $x=$x+1;  
+                     
+                  
+                   } ?>
                 </ul>
                  <label for="post-3" class="read-more-trigger"></label></br>
               @guest  <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
@@ -128,21 +200,21 @@
       <div class="plan featured brilliant col-md-4 col-sm-6 col-xs-12 active">
         <div class="utf_price_plan" style="background-color: #3d92e0;">
           <h3><?php echo $parametres->abonnement2;?></h3>
-          <span class="value"><?php echo $parametres->cout_abonnement2;?>€<span>TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
+          <span class="value" id="prixB"><?php echo $parametres->cout_abonnement2;?>€<span id="uniteB">TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
 		</div>
               <div class="utf_price_plan_features">
               	<input type="checkbox" class="read-more-state" id="post-2" />
                 <ul class="read-more-wrap">
-                  <li>Réservations en ligne illimitées <b style="color:green">24/7</b></li>
-                  <li>Rappels SMS illimités</li>
-                  <li><b style="color:green">Entreprise mise en avant</b> dans la recherche</li>
-                  <li>Rappels SMS</li>		
-                  <li><b style="color:green">Acompte de 50%</b> lors de la prise de RDV pour les services</li>	 
-                  <li>Codes promo</li>
-                  <li class="read-more-target">Carte de fidélité virtuelle <b style="color:green">(9 séances achetées et la 10ème prestation aura une réduction)</b></li> 
-                  <li class="read-more-target">Paiement en plusieurs fois <b style="color:green">à partir de 200€</b></li>
-                  <li class="read-more-target">Tableau de statistiques des ventes et des services</li>
-                  <li class="read-more-target">Service client accessible <b style="color:green">6J/7</b></li>
+                  <?php $x=0; foreach($abonnementB as $ab) { 
+                    if ($x<5) {
+                      echo  '<li>'.$ab->contenu.'</li>' ;
+                    } else {
+                      echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
+                    }
+                      $x=$x+1;  
+                     
+                  
+                   } ?>
                  </ul>
                  <label for="post-2" class="read-more-trigger"></label></br>
                 @guest <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');" ><i class="sl sl-icon-basket"></i> Acheter</a> 
@@ -163,19 +235,24 @@
       <div class="plan featured col-md-4 col-sm-6 col-xs-12">
        <div class="utf_price_plan">
           <h3> <?php echo $parametres->abonnement1;?></h3>
-          <span class="value"><?php echo $parametres->cout_abonnement1;?>€<span>TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
+          <span class="value" id="prixA"><?php echo $parametres->cout_abonnement1;?>€<span>TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
         </div>
         
               <div class="utf_price_plan_features">
                 <ul style="padding-bottom: 28px">
-                  <li>Réservations en ligne illimitées <b style="color:green">24/7</b></li>
-                  <li>Rappels SMS illimités</li>
-                  <li><b style="color:green">Acompte de 30%</b> lors de la prise de RDV pour les services</li>	
-                  <li>Carte de fidélité virtuelle <b style="color:green">(5 séances achetées et la 6ème prestation aura une réduction)</b></li>
-                  <li>Service client accessible <b style="color:green">6J/7</b></li>
+                  <?php $x=0; foreach($abonnementA as $ab) { 
+                    if ($x<5) {
+                      echo  '<li>'.$ab->contenu.'</li>' ;
+                    } else {
+                      echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
+                    }
+                      $x=$x+1;  
+                     
+                  
+                   } ?>
                   <?php // echo $parametres->commission_abonnement1;?>
                  </ul>
-                 <br>
+                 
                @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
       @else
         <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
@@ -195,6 +272,46 @@
       </div> 
     </div>    
   </section>
+  <script type="text/javascript">
+     
+      var chkboxes = $('input[type=radio]');
+chkboxes.click(function() {
+  
+  var unite = "TTC / Par Mois";
+  var prix1= <?php echo $parametres->cout_abonnement1;?> ;
+  var prix2= <?php echo $parametres->cout_abonnement2;?> ;
+  var prix3= <?php echo $parametres->cout_abonnement3;?> ;
+  if (this.value=="Annuel") {
+
+    unite = "TTC / Par an";
+    prix1 = (prix1) * 12;
+    prix2 = (prix2) * 12;
+    prix3 = (prix3) * 12;
+    document.getElementById("yearlylabel").style.color = "#fff";
+    document.getElementById("monthlylabel").style.color = "#fc346c";
+  } else {
+    document.getElementById("yearlylabel").style.color = "#fc346c";
+    document.getElementById("monthlylabel").style.color = "#fff";
+  }
+    
+    //alert (this.value);
+    //document.getElementById("prixA").innerHTML = ;
+    $('#prixA').animate({'opacity': 0}, 400, function(){
+        $(this).html(' '+prix1+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
+    });
+    $('#prixB').animate({'opacity': 0}, 400, function(){
+        $(this).html(' '+prix2+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
+    });
+    $('#prixC').animate({'opacity': 0}, 400, function(){
+        $(this).html(' '+prix3+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
+    });
+    
+    
+          
+});
+
+   
+  </script>
   
   
  @endsection

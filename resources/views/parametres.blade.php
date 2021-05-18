@@ -77,8 +77,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 						<input type="number" class="input-text" id="cout_abonnement1" placeholder="" value="<?php echo $cout_abonnement1;?>" onchange="changing(this)">
 					</div>
 					<div class="col-md-3">
-						<label>Commission</label>						
-						<input type="number" class="input-text" id="commission_abonnement1" placeholder="" value="<?php echo $commission_abonnement1;?>"  onchange="changing(this)">
+						<a href="#Abonnement1" class="pull-right button popup-with-zoom-anim" style="margin-top: 25px">Modifier le contenu</a>
 					</div>
 					
 					</div>
@@ -95,8 +94,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 						<input type="number" class="input-text" id="cout_abonnement2"  placeholder="" value="<?php echo $cout_abonnement2;?>" onchange="changing(this)">					
 					</div>
 					<div class="col-md-3">
-						<label>Commission </label>
-						<input type="number" class="input-text"  id="commission_abonnement2" placeholder="" value="<?php echo $commission_abonnement2;?>"  onchange="changing(this)">					
+						<a href="#Abonnement2" class="pull-right button popup-with-zoom-anim" style="margin-top: 25px">Modifier le contenu</a>					
 					</div>
 					
 					</div>
@@ -112,8 +110,7 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 						<input type="number" class="input-text" id="cout_abonnement3"  placeholder="" value="<?php echo $cout_abonnement3;?>" onchange="changing(this)">					
 					</div>
 					<div class="col-md-3">
-						<label>Commission  </label>
-						<input type="number" class="input-text"  id="commission_abonnement3" placeholder="" value="<?php echo $commission_abonnement3;?>"  onchange="changing(this)">					
+						<a href="#Abonnement3" class="pull-right button popup-with-zoom-anim" style="margin-top: 25px">Modifier le contenu</a> 				
 					</div>
 					
 					</div>
@@ -121,10 +118,97 @@ $commission_abonnement3= $parametres->commission_abonnement3;
 					</div>	
 					
 		 </div>					
-	 
+	  
+ <!---------------------------------------modal--------------------------------------------------->
+          <div id="Abonnement1" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Abonnement 1</h3>
+          </div>
+          <div class="utf_price_plan_features">
+            <ul style="padding-bottom: 5px">
+              <?php  foreach($abonnementA as $ab) { 
+                       echo  '<li><span id="a'.$ab->id.'">'.$ab->contenu.'</span> <a href="javascript:void(0)"  onclick="supprimeLinge('.$ab->id.')"><i class="sl sl-icon-trash" style="color:red"></i></a> <a href="javascript:void(0)" att="a" onclick="modifLinge('.$ab->id.',this)"><i class="sl sl-icon-note" style="color:red"></i></a></li>' ; 
+                     
+                  
+                   } ?>
+                 </ul>
+
+                            
+     </div> 
+     <form action="{{ route('users.editPlan') }}" method="get" > 
+     <div id="Modifa">
+     <textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne "></textarea>
+     </div><br>
+     <input type="" name="abonnement" hidden="hidden" value="1">
+     <input type="" name="idligne" id="idlignea" hidden="hidden" value="0">
+     <div>
+     <input type="submit" id="buttonSubmita" value="Ajouter" name=""> 
+     <a class="button annuler1" id="annulera" att2="a" style="background-color: red;display: none;float: right;">Annuler</a>
+</div>
+</form>
+     </div> 
 	 
 
-  
+  <!------------------------------------Abonnement2------------------------------------------------------>
+  <div id="Abonnement2" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Abonnement 2</h3>
+          </div>
+          <div class="utf_price_plan_features">
+            <ul style="padding-bottom: 5px">
+              <?php  foreach($abonnementB as $ab) { 
+                       echo  '<li><span id="b'.$ab->id.'">'.$ab->contenu.'</span> <a href="javascript:void(0)"  onclick="supprimeLinge('.$ab->id.')"><i class="sl sl-icon-trash" style="color:red"></i></a> <a href="javascript:void(0)" att="b"  onclick="modifLinge('.$ab->id.', this)"><i class="sl sl-icon-note" style="color:red"></i></a></li>' ; 
+                     
+                  
+                   } ?>
+                 </ul>
+
+                            
+     </div> 
+     <form action="{{ route('users.editPlan') }}" method="get" > 
+     <div id="Modifb">
+     <textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne "></textarea>
+     </div><br>
+     <input type="" name="abonnement" hidden="hidden" value="2">
+     <input type="" name="idligne" id="idligneb" hidden="hidden" value="0">
+     <div>
+     <input type="submit" id="buttonSubmitb" value="Ajouter" name=""> 
+     <a class="button annuler1" id="annulerb" att2="b" style="background-color: red;display: none;float: right;">Annuler</a>
+</div>
+</form>
+     </div> 
+   
+
+  <!---------------------------------------Abonnement3--------------------------------------------------->
+  <div id="Abonnement3" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Abonnement 3</h3>
+          </div>
+          <div class="utf_price_plan_features">
+            <ul style="padding-bottom: 5px">
+              <?php  foreach($abonnementC as $ab) { 
+                       echo  '<li><span id="c'.$ab->id.'">'.$ab->contenu.'</span> <a href="javascript:void(0)"  onclick="supprimeLinge('.$ab->id.')"><i class="sl sl-icon-trash" style="color:red"></i></a> <a href="javascript:void(0)" att="c" onclick="modifLinge('.$ab->id.' , this)"><i class="sl sl-icon-note" style="color:red"></i></a></li>' ; 
+                     
+                  
+                   } ?>
+                 </ul>
+
+                            
+     </div> 
+     <form action="{{ route('users.editPlan') }}" method="get" > 
+     <div id="Modifc">
+     <textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne "></textarea>
+     </div><br>
+     <input type="" name="abonnement" hidden="hidden" value="3">
+     <input type="" name="idligne" id="idlignec" hidden="hidden" value="0">
+     <div>
+     <input type="submit" id="buttonSubmitc" value="Ajouter" name=""> 
+     <a class="button annuler1" id="annulerc" att2="c" style="background-color: red;display: none;float: right;">Annuler</a>
+</div>
+</form>
+     </div> 
+
+  <!------------------------------------------------------------------------------------------>
        <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-film"></i> Logo et Video</h3>
@@ -551,6 +635,45 @@ figcaption {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> -->
 
 <script>
+  function supprimeLinge(a){
+    
+    if(confirm('Êtes-vous sûrs ?'))
+    {
+      
+      var idligne = a ;
+      var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "{{ route('users.deleteLine') }}",
+            method: "get",
+            data: {idligne:idligne, _token: _token},
+            success: function (data) {
+                             
+              location.reload() ;
+             }
+  
+        });
+    }
+  }
+  function modifLinge(a,b){
+    var x = b.getAttribute("att");
+    y=document.getElementById(x+a).innerHTML ;
+    $("#annuler"+x).css("display","block");
+    document.getElementById("buttonSubmit"+x).value = "Enregistrer" ;
+    document.getElementById("idligne"+x).value = a ;
+    $("#buttonSubmit"+x).css("background-color","green");
+    document.getElementById("Modif"+x).innerHTML = '<textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne ">'+y+'</textarea>';
+
+    //alert(y);
+  }
+  $('.annuler1').on('click',function(){
+    var x= this.getAttribute("att2");
+    //alert(x);
+    $("#annuler"+x).css("display","none");
+    document.getElementById("buttonSubmit"+x).value = "Ajouter" ;
+    $("#buttonSubmit"+x).css("background-color","");
+    document.getElementById("idligne"+x).value = 0 ;
+    document.getElementById("Modif"+x).innerHTML = '<textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne "></textarea>';
+  });
     function saveApropos(){
     //alert("okko");
      var apropos1a = document.getElementById("apropos1a").value;

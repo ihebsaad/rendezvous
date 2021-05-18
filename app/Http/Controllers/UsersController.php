@@ -24,7 +24,8 @@ use \App\Produit;
 use \App\Calendrier;
 use \App\Cartefidelite;
 use \App\Codepromo;
-use \App\Happyhour;   
+use \App\Happyhour;
+use \App\Contenu_plan;    
 
 use Illuminate\Support\Str;
 
@@ -55,6 +56,26 @@ class UsersController extends Controller
       return view('users.index',  compact('users') );       
         }
         
+    }
+    public function editPlan(Request $request)
+    {
+        //dd($request->idligne);
+        if ($request->idligne==0) {
+
+            $a= new Contenu_plan([
+                 'abonnement' => $request->abonnement,
+                 'contenu'=> $request->contenuPlan
+             ]);
+            $a->save();  
+        } else {
+           DB::table('contenu_plans')->where('id', $request->idligne)->update(array('contenu'=> $request->contenuPlan)); 
+        }
+        return back();
+         
+    }
+    public function deleteLine(Request $request){
+        DB::table('contenu_plans')->where('id', $request->idligne)->delete();
+        return "ok" ;
     }
     public static function ChangeApropos(Request $request)
     {
@@ -126,8 +147,11 @@ class UsersController extends Controller
 
         if(   $user_type=='admin' )
         { 
-        
-      return view('parametres' );       
+            
+        $abonnementA =  Contenu_plan::where('abonnement',1)->get();
+        $abonnementB =  Contenu_plan::where('abonnement',2)->get();
+        $abonnementC =  Contenu_plan::where('abonnement',3)->get();
+      return view('parametres', compact('abonnementA','abonnementB','abonnementC') );       
         }else{
             
             //return back();
@@ -204,8 +228,11 @@ class UsersController extends Controller
     
        public function pricing()
     {
+        $abonnementA =  Contenu_plan::where('abonnement',1)->get();
+        $abonnementB =  Contenu_plan::where('abonnement',2)->get();
+        $abonnementC =  Contenu_plan::where('abonnement',3)->get();
          
-      return view('pricing' );       
+      return view('pricing' , compact('abonnementA','abonnementB','abonnementC'));       
 
     }
     

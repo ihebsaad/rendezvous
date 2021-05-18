@@ -39,6 +39,7 @@
  @endif
  <a href="{{route('pricing')}}" class="pull-right button ">S'abonner / Prolonger</a> 
  
+ 
      <table class="table table-striped table-hover" id="mytable" style="width:100%">
         <thead>
         <tr id="headtable">
