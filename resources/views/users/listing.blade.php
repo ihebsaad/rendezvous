@@ -888,11 +888,13 @@ function geocodeAddress(geocoder, resultsMap) {
 							
 
               
-							
+							 <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
               <div class="fm-input " name="produits" style="max-width: 150px">
 								<label>Associer un produit:</label>
 								<a href="javascript:void(0)"   onclick="openchoices(<?php echo $service->id;?>)"  class="button" >Produits</a> 
 							</div>
+            <?php }   ?> 
+
               <script>function openchoices(idwd) {
                   var x = document.getElementById("K"+idwd);
                  if (    x.style.display == "block") {
