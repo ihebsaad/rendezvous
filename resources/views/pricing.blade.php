@@ -233,13 +233,14 @@
  <!-- plan 2 - end -->  
  <!-- plan 1 - start -->  
       <div class="plan featured col-md-4 col-sm-6 col-xs-12">
-        <input type="checkbox" class="read-more-state" id="post-1" />
+        
        <div class="utf_price_plan">
           <h3> <?php echo $parametres->abonnement1;?></h3>
           <span class="value" id="prixA"><?php echo $parametres->cout_abonnement1;?>€<span>TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
         </div>
         
               <div class="utf_price_plan_features">
+                <input type="checkbox" class="read-more-state" id="post-1" />
                 <ul class="read-more-wrap">
                   <?php $x=0; foreach($abonnementA as $ab) { 
                     if ($x<5) {
