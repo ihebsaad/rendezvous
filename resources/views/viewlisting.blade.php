@@ -1692,29 +1692,7 @@ function viewproduit(){
 	   
 				});
 			}
-		var idservice=service[0];
-		var valchange=parseInt(idservice);
-		var idchange=document.getElementById("myText").value;
-
-   		var _token = $('input[name="_token"]').val();
-								  $.ajax({
-                        url:"{{ route('users.FirstService') }}",
-                        method:"POST",
-						data:{idchange:idchange,valchange:valchange, _token:_token},
-                        success:function(data){changed=true;
-							
-                               $.notify({
-                                  message:  'service selectionée avec succès',
-                                icon: 'glyphicon glyphicon-check'},{
-                                type: 'success',
-                                delay: 3000,
-                                timer: 1000,	
-                                placement: {
-                                from: "bottom",
-                                align: "right" },					
-                              });	
-                            }
-                          });
+		
 
 
 		}
