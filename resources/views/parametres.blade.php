@@ -369,7 +369,7 @@ figcaption {
           </div>
           <div class="col-md-6">
             <input id="apropos2a" type="text" name="" value="{{$parametres->apropos2a}}">
-            <textarea id="apropos2b" style="height: 535px">{{$parametres->apropos2b}}</textarea>
+            <textarea id="apropos2b" style="height: 560px">{{$parametres->apropos2b}}</textarea>
           </div>
           <div class="col-md-6">
             <div class="row">
@@ -377,13 +377,14 @@ figcaption {
               <div class="col-md-12">
                 <input id="apropos3a" type="text" value="{{$parametres->apropos3a}}" name="">
               </div>
-              <div class="col-md-4">
-                <figure style="max-height: 200px" class="float-left">
-                  <img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais">
+              <div class="col-md-4" style="margin-top: 20px;">
+                <figure style="max-height: 250px" class="float-left">
+                  <img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais" style="max-height: 200px">
                   <figcaption>Mr MAXIME David</figcaption>
                  </figure>
               </div>
               <div class="col-md-8">
+                <br>
                 <textarea id="apropos3b" style="height: 200px">{{$parametres->apropos3b}}</textarea>
               </div>
               <div class="col-md-12">
