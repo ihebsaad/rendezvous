@@ -10,7 +10,43 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
+            <style type="text/css">
  
+      @media only screen
+    and (min-device-width : 0px)
+    and (max-device-width : 480px) {
+     .sizeA
+     {
+      width: 95vw;
+     }    
+    }
+    @media only screen
+    and (min-device-width : 1024px)
+     {
+     .sizeA
+     {
+      width: 100%;
+     }    
+    }
+    @media only screen
+    and (max-device-width : 1023px)
+    and (min-device-width : 600px)
+     {
+     .sizeA
+     {
+      width: 120vw;
+     }    
+    }
+     @media only screen
+    and (max-device-width : 600px)
+    and (min-device-width : 450px)
+     {
+     .sizeA
+     {
+      width: 65vw;
+     }    
+    }
+             </style>
   <!-- Dashboard -->
   <div id="dashboard"> 
 @include('layouts.back.menu')
@@ -204,7 +240,7 @@
 
 			
         <div class="row" >
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sizeA ">
 			<h4>Dernières Réservations</h4>
 				<div style="overflow-x: auto !important;">
 			  <table class="table table-responsive table-striped table-hover" >
