@@ -181,6 +181,7 @@ background-color:lightgrey;
 
    <!-- Dashboard -->
 <div id="dashboard"> 
+  
 @include('layouts.back.menu')
  <style>
  table{background-color:white;border:none!important;;width:100%!important;}
@@ -222,79 +223,63 @@ background-color:lightgrey;
 <?php Session::forget('msg');  ?>
  @endif 
 
-    	  {{--<a href="{{route('viewlisting',['id'=> $user->id] )}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a> --}}
-    	 <a href="{{$user->generate_slug()}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a>
+    	  
+    	
+      
+<!---------------------------------------------------google Map----------------------------------------------------->
+           <a href="{{$user->generate_slug()}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a>
 
-      <div class="row">
-        <div class="col-lg-12">
-          <div id="utf_add_listing_part">             
-	   
-               {{ csrf_field() }}
-			 <input type="hidden"    id="user"  value="{{$id}}" >
-
-            <div class="add_utf_listing_section margin-top-45"> 
-              <div class="utf_add_listing_part_headline_part">
-                <h3><i class="sl sl-icon-map"></i> Emplacement</h3>
+<div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-map"></i> Emplacement</h3>
+                </div>       
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Adresse</h5>                    
+          <input type="text" class="input-text"  name="address" id="adresse" placeholder="" onchange="changing(this);" onFocus="geolocate()" value="{{ $user->adresse }}"  >
               </div>
-              <div class="utf_submit_section"> 
-                <div class="row with-forms"> 				  
-                  <div class="col-md-6">
-				      <h5>Adresse</h5>                    
-					<input type="text" class="input-text"  name="address" id="adresse" placeholder="" onchange="changing(this);" onFocus="geolocate()" value="{{ $user->adresse }}"  >
-              </div>  				  
-    	<script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
-<script>
-  /*   (function() {
-          var placesAutocomplete2 = places({
-         appId: 'plCFMZRCP0KR',
-      apiKey: 'aafa6174d8fa956cd4789056c04735e1',
-       container: document.querySelector('#ville'),
-
-    });
- //   placesAutocomplete2.on('change', function resultSelected(e) {
-  //   document.querySelector('#codep').value = e.suggestion.postcode || '';
-  //  });
-     })();	*/
-</script>	 
-                  <div class="col-md-6">
+              <div class="col-md-6">
                     <h5>Ville</h5>                    
- 					<input type="text" class="input-text" name="ville" id="ville" placeholder=""      value="{{ $user->ville }}"  onchange="changing(this)">
+          <input type="text" class="input-text" name="ville" id="ville" placeholder=""      value="{{ $user->ville }}"  onchange="changing(this)">
                  
-                 </div>                   
-                  <div class="col-md-12">
-	                  <h5>Fuseau horaire (Obligatoire)</h5> 
-	                  <div class="row with-forms">
-	                  	<div class="col-md-6">
-							  <select  name="fhoraire" id="fhoraire" title="Selectionnez votre fuseau horaire" onchange="changing(this);location.reload();">
-								<option value="America/Martinique" default <?php if($user->fhoraire=='America/Martinique'){echo 'selected="selected"';}?> >Martinique</option>
-								<option value="America/Guadeloupe"  <?php if($user->fhoraire=='America/Guadeloupe'){echo 'selected="selected"';}?> >Guadeloupe</option>
-								<option value="Europe/Paris"  <?php if($user->fhoraire=='Europe/Paris'){echo 'selected="selected"';}?> >France</option>
-								<option value="America/Cayenne"  <?php if($user->fhoraire=='America/Cayenne'){echo 'selected="selected"';}?> >Guyane française</option>	
-							  </select>
-						</div>
-	                  </div>
-                  </div>                 
-                  <div class="col-md-12">
-                  <h5>Map</h5>                    
-				  <div class="row with-forms">
-					<div class="col-md-6">
-						<input type="text" class="input-text" name="latitude" id="latitude" placeholder="Latitude" onchange="changing(this)"  value="{{ $user->latitude }}">
-					</div>
-					<div class="col-md-6">                    
-						<input type="text" class="input-text" name="longitude" id="longitude" placeholder="Longitude" onchange="changing(this)"  value="{{ $user->longitude }}">
-					</div> 
-				  </div> 	
-                  </div>				  				  
-				  <div id="utf_listing_location" class="col-md-12 utf_listing_section">
-					  <div id="utf_single_listing_map_block">
-						<div id="utf_single_listingmap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}" data-map-icon="im im-icon-Marker"></div>
-						<a href="#" id="utf_street_view_btn">Vue de rue</a> 
-					  </div>
-				  </div>
-                </div>
-              </div>
+                 </div>
+                 <div class="col-md-12">
+                    <h5>Fuseau horaire (Obligatoire)</h5> 
+                    
+                <select  name="fhoraire" id="fhoraire" title="Selectionnez votre fuseau horaire" onchange="changing(this);location.reload();">
+                <option value="America/Martinique" default <?php if($user->fhoraire=='America/Martinique'){echo 'selected="selected"';}?> >Martinique</option>
+                <option value="America/Guadeloupe"  <?php if($user->fhoraire=='America/Guadeloupe'){echo 'selected="selected"';}?> >Guadeloupe</option>
+                <option value="Europe/Paris"  <?php if($user->fhoraire=='Europe/Paris'){echo 'selected="selected"';}?> >France</option>
+                <option value="America/Cayenne"  <?php if($user->fhoraire=='America/Cayenne'){echo 'selected="selected"';}?> >Guyane française</option> 
+                </select>
             </div>
+            <div class="col-md-12">
+                  <h5>Map</h5>                    
+          
+            <input type="text" class="input-text" name="latitude" id="latitude" placeholder="Latitude" onchange="changing(this)"  value="{{ $user->latitude }}">
+                             
+            <input type="text" class="input-text" name="longitude" id="longitude" placeholder="Longitude" onchange="changing(this)"  value="{{ $user->longitude }}">
+          </div> 
+          <div id="utf_listing_location" class="col-md-12 utf_listing_section">
+            <div id="utf_single_listing_map_block">
+            <div id="utf_single_listingmap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}" data-map-icon="im im-icon-Marker"></div>
+            <a href="#" id="utf_street_view_btn">Vue de rue</a> 
+            </div>
+          </div>
+       <div class="col-md-12" >
 
+        
+      </div>
+          <div class="col-md-12" >
+            
+          </div>
+        
+
+            </div>  </div>
+
+
+<!-------------------------------------------------------------------------------------------------------->
+<!-------------------------------------Configuration de paiement--------------------------------------->
 
 <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
@@ -332,9 +317,9 @@ background-color:lightgrey;
 
 </form>
 
-            </div>  </div>
+            </div> 
 
-
+<!-------------------------------------------------------------------------------------------------------->
 
 
 
@@ -493,6 +478,7 @@ function geocodeAddress(geocoder, resultsMap) {
       }
 
  </script>
+ <!-------------------------------------------------------------------------------------------------------->
 
            <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
@@ -534,6 +520,13 @@ function geocodeAddress(geocoder, resultsMap) {
 				<!--  https://www.webslesson.info/2018/07/dropzonejs-with-php-for-upload-file.html--> 
 				    
 			  </div>
+
+
+
+<!-------------------------------------------------------------------------------------------------------->
+
+
+
 			  <style>
 	.gallery img,#img-couverture,#img-logo{
 		max-width:300px;
@@ -585,54 +578,57 @@ function geocodeAddress(geocoder, resultsMap) {
 
  
 	  </div>
+
+    <!---------------------------------------------probleme------------------------------------------>
   
        <div class="add_utf_listing_section margin-top-45"> 
+
               <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-film"></i> Vidéo - Télécharger une vidéo ou copier un code de vidéo depuis youtube ..</h3>
-              </div>			  
-              <div class="row with-forms">    
-			  
-			  	  <div class="row">
-			  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
-					<h4 id="images">Télécharger une vidéo en format mp4</h4>
-					<div class="row" >	<a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>	</div>	  
+              </div>		
 
-					<form action="{{ route('users.ajoutvideo') }}" class="dropzone" id="dropvideo">
-					 {{ csrf_field() }}
-					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
-					</form>
-			 </div>
-				 <div class="col-md-5">
-	
-					<?php if($user->video!=''){?>
-					<video width="450" height="320" controls>
-					<source src="<?php echo  URL::asset('storage/images/'.$user->video);?>" type="video/mp4">
-					Votre navigateur ne supporte pas l'affichage de cette video.
-					</video>
-					 <a  class="button" style="padding:5px 8px"  onclick="return confirm('Êtes-vous sûrs de vouloir supprimer cette video ?')"  href="{{action('UsersController@removevideo', [  'user'=> $user->id  ])}}"title="supprimer"><i class="sl sl-icon-trash"></i> Supprimer</a></span>
-					<?php } ?>
-			    </div>
-			  </div>
-			  <div class="row" style="margin-top:20px">
+                <div class="row">
+                  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
+                    <h4 id="images">Télécharger une vidéo en format mp4</h4>
+                    <a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>
+                    <form action="{{ route('users.ajoutvideo') }}" class="dropzone" id="dropvideo">
+				             {{ csrf_field() }}
+				              <input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+                    </form>
+                  </div>
 
-			   <div class="  col-md-5" style="margin-right:20px;padding:50px 50px 50px 50px">
-			   Coller le Code d'intégration depuis youtube, vimeo ..
-				<section><textarea  id="codevideo"  onchange="changing(this)" >{{ $user->codevideo }}</textarea></section>
-					
-			   </div>
-			   <div class="  col-md-5">
-			   <?php if($user->codevideo!=''){
-				
-				echo $user->codevideo ;
-					}  ?>
+                  <div class="col-md-5">
+                    <?php if($user->video!=''){?>
+                      <video width="450" height="320" controls>
+                        <source src="<?php echo  URL::asset('storage/images/'.$user->video);?>" type="video/mp4">
+                        Votre navigateur ne supporte pas l'affichage de cette video.
+                      </video>
+                      <a  class="button" style="padding:5px 8px"  onclick="return confirm('Êtes-vous sûrs de vouloir supprimer cette video ?')"  href="{{action('UsersController@removevideo', [  'user'=> $user->id  ])}}"title="supprimer"><i class="sl sl-icon-trash"></i> Supprimer</a>
+                    <?php } ?>
+                  </div>
 
-			   </div>
-			   
-			   </div>
-			   
-			  </div>
-		</div>	  
+                  <div class="  col-md-5" style="margin-right:20px;padding:50px 50px 50px 50px">
+                        Coller le Code d'intégration depuis youtube, vimeo ..
+                        <section><textarea  id="codevideo"  onchange="changing(this)" >{{ $user->codevideo }}</textarea></section>
+                  </div>
+
+                  <div class="  col-md-5">
+                        <?php if($user->codevideo!=''){
+                          echo $user->codevideo ;
+                        }  ?>
+                          
+                  </div>
+
+                
+            </div>	</div>  
  	
+<!-------------------------------------------------------------------------------------------------------->
+
+
+
+
+
+
             <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-list"></i> Titre & Description de votre entreprise</h3>
@@ -748,7 +744,6 @@ function geocodeAddress(geocoder, resultsMap) {
                 </div>
               </div>                            
             </div>
-
            
 
              <!-- deb  heures indisponibilité  v2 -->
@@ -1481,7 +1476,7 @@ input:checked + .slider:before {
 
 			</form>				
 		 </div>		  
-		 </div>		  
+		 		  
 			 
 		<!-- fin modal pour ajouter une indisponibilté -->	
 
