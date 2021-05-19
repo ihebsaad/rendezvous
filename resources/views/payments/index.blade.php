@@ -4,6 +4,43 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
+<style type="text/css">
+ 
+      @media only screen
+    and (min-device-width : 0px)
+    and (max-device-width : 480px) {
+     .sizeA
+     {
+      width: 86vw;
+     }    
+    }
+    @media only screen
+    and (min-device-width : 1024px)
+     {
+     .sizeA
+     {
+      width: 100%;
+     }    
+    }
+    @media only screen
+    and (max-device-width : 1023px)
+    and (min-device-width : 600px)
+     {
+     .sizeA
+     {
+      width: 100vw;
+     }    
+    }
+     @media only screen
+    and (max-device-width : 600px)
+    and (min-device-width : 450px)
+     {
+     .sizeA
+     {
+      width: 50vw;
+     }    
+    }
+             </style>
 {{--@include('layouts.back.menu')--}} 
 @section('content')
 
@@ -34,11 +71,20 @@
  @endif
  
 <!--	<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
- 
-     <table class="table table-striped table-hover" id="mytable" style="width:100%">
+  <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-present"></i>Paiements</h3>
+                </div>       
+        <div class="row">
+           <div class="col-md-12 sizeA" >
+        
+          </div>
+          <div class="col-md-12 sizeA" >
+            <div style="overflow-x: auto;">
+            <table class="table table-striped table-hover" id="mytable" >
         <thead>
         <tr id="headtable">
-		      <th  >Date </th>
+              <th  >Date </th>
              <th>Par</th>
              <th>Bénéficiaire</th>
             <th>Détails</th>
@@ -49,13 +95,13 @@
                 <th>Par</th>
                 <th>Bénéficiaire</th>
                 <th>Détails</th>
- 				 <th></th>
+                 <th></th>
                </tr>
             </thead>
             <tbody>
             @foreach($payments as $payment)
                 <tr> 
-					<td><?php echo   date('d/m/Y H:i', strtotime($payment->created_at ))  ;?></td>
+                    <td><?php echo   date('d/m/Y H:i', strtotime($payment->created_at ))  ;?></td>
                      <td> <?php echo UsersController::ChampById('name',$payment->user).' '.UsersController::ChampById('lastname',$payment->user)  ;?> </td>
                      <td> <?php echo $payment->beneficiaire ;?> </td>
                      <td> <?php echo $payment->details;?>   </td>
@@ -67,6 +113,12 @@
             @endforeach
             </tbody>
         </table>
+            </div>
+</div>
+         
+
+            </div> 
+     
   
  
  	

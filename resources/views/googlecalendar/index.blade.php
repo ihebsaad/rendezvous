@@ -134,7 +134,43 @@
 
 
 </style>
-
+<style type="text/css">
+ 
+      @media only screen
+    and (min-device-width : 0px)
+    and (max-device-width : 480px) {
+     .sizeA
+     {
+      width: 86vw;
+     }    
+    }
+    @media only screen
+    and (min-device-width : 1024px)
+     {
+     .sizeA
+     {
+      width: 100%;
+     }    
+    }
+    @media only screen
+    and (max-device-width : 1023px)
+    and (min-device-width : 600px)
+     {
+     .sizeA
+     {
+      width: 100vw;
+     }    
+    }
+     @media only screen
+    and (max-device-width : 600px)
+    and (min-device-width : 450px)
+     {
+     .sizeA
+     {
+      width: 50vw;
+     }    
+    }
+             </style>
   <?php 
   use \App\Http\Controllers\CategoriesController;
 
@@ -166,13 +202,14 @@
                     <h3><i class="sl sl-icon-basket-loaded"></i>Comment connectez-vous à votre google Agenda ?</h3>
                 </div>              
                 <div class="row">
-                  <div class="col-md-12 col-sm-4">
+                  <div class="col-md-12 col-sm-4 sizeA">
+                    <div style="overflow-x: auto;">
                    <center> <h3><b>Vous devez suivre les étapes décrites dans le document suivant</b></h3> </center>
                      <br>
-                         <iframe src="{{ asset('public/enregistrement_auprès_google_agenda.pdf')}}" width="100%" height="800px">
+                         <iframe src="{{ asset('public/enregistrement_auprès_google_agenda.pdf')}}" height="800px">
                          </iframe>
                     <br>
-                    
+                    </div>
                 </div>                          
             </div>
 
@@ -187,8 +224,8 @@
                 <div class="row">
                 <center> <h3><b>Vous devez sélectionner le fichier .json téléchargé depuis google</b></h3> </center>
                  
-                  <div class="col-md-12 col-sm-4">
-                   
+                  <div class="col-md-12 col-sm-4 sizeA">
+                   <div style="overflow-x: auto;">
                      <br>
                      <center> 
                      <form action="{{route('savejsonfile')}}" method="post" enctype="multipart/form-data">
@@ -218,7 +255,7 @@
                     <br> 
                     <br> 
                       <center> <span <?php if(! $prestataire->google_path_json){ echo "class='isDisabled'" ;} ?> > <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="javascript:void(0)"  href="{{route('enregistrergooglecalendar',$prestataire->id)}}"><i class="fa fa-check"></i> S'enregistrer auprès Google Agenda</a></span></center>
-
+</div>
                 </div> 
                                        
             </div>

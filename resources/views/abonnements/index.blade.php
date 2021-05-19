@@ -4,6 +4,43 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
+<style type="text/css">
+ 
+      @media only screen
+    and (min-device-width : 0px)
+    and (max-device-width : 480px) {
+     .sizeA
+     {
+      width: 95vw;
+     }    
+    }
+    @media only screen
+    and (min-device-width : 1024px)
+     {
+     .sizeA
+     {
+      width: 100%;
+     }    
+    }
+    @media only screen
+    and (max-device-width : 1023px)
+    and (min-device-width : 600px)
+     {
+     .sizeA
+     {
+      width: 120vw;
+     }    
+    }
+     @media only screen
+    and (max-device-width : 600px)
+    and (min-device-width : 450px)
+     {
+     .sizeA
+     {
+      width: 65vw;
+     }    
+    }
+             </style>
 {{--@include('layouts.back.menu')--}} 
 @section('content')
 
@@ -37,15 +74,24 @@
             <a class="close" href="#"></a> 
 		  </div>
  @endif
- <a href="{{route('pricing')}}" class="pull-right button ">S'abonner / Prolonger</a> 
- 
- 
-     <table class="table table-striped table-hover" id="mytable" style="width:100%">
+  
+  <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-present"></i>Abonnements</h3>
+                </div>       
+        <div class="row">
+           <div class="col-md-12 " >
+        <a href="{{route('pricing')}}" class="pull-right button ">S'abonner / Prolonger</a>
+        <br><br><br>
+          </div>
+          <div class="col-md-12 sizeA" >
+            <div style="overflow: auto;">
+            <table class="table table-striped table-hover" id="mytable" >
         <thead>
         <tr id="headtable">
-		      <th >Date </th>
+              <th >Date </th>
   <?php     if($user_type=='admin' ){  ?> 
-			<th>Prestataire</th> <?php } ?>
+            <th>Prestataire</th> <?php } ?>
              <th>Expiration</th>
             <th>Détails</th>
       <th class="no-sort">Actions</th> 
@@ -53,7 +99,7 @@
             <tr>
                 <th>Date</th>
         <?php     if($user_type=='admin' ){  ?> 
-		<th>Prestataire</th>   <?php } ?>
+        <th>Prestataire</th>   <?php } ?>
                 <th>Expiration</th>
                 <th>Détails</th>
                 <th> </th>
@@ -62,11 +108,11 @@
             <tbody>
             @foreach($abonnements as $abonnement)
                 <tr> 
-					<td><?php echo   date('d/m/Y H:i', strtotime($abonnement->created_at ))  ;?></td>
+                    <td><?php echo   date('d/m/Y H:i', strtotime($abonnement->created_at ))  ;?></td>
   <?php if($user_type=='admin' ){  ?>
-					<td> <?php echo UsersController::ChampById('name',$abonnement->user).' '.UsersController::ChampById('lastname',$abonnement->user) ;?> </td>
+                    <td> <?php echo UsersController::ChampById('name',$abonnement->user).' '.UsersController::ChampById('lastname',$abonnement->user) ;?> </td>
                    <?php } ?>
-				   <td> <?php echo date('d/m/Y H:i', strtotime($abonnement->expire ))  ;?> </td>
+                   <td> <?php echo date('d/m/Y H:i', strtotime($abonnement->expire ))  ;?> </td>
                      <td> <?php echo $abonnement->details;?> </td>
                      <td>  
            <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('AbonnementsController@remove', $abonnement->id)}}"><i class="fa fa-remove"></i></a>
@@ -76,6 +122,13 @@
             @endforeach
             </tbody>
         </table>
+            </div>
+</div>
+         
+
+            </div> 
+ 
+     
   
   
   
