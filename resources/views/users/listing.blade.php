@@ -580,24 +580,23 @@ function geocodeAddress(geocoder, resultsMap) {
 	  </div>
 
     <!---------------------------------------------probleme------------------------------------------>
-  
-       <div class="add_utf_listing_section margin-top-45"> 
-
-              <div class="utf_add_listing_part_headline_part">
+  <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
                 <h3><i class="sl sl-icon-film"></i> Vidéo - Télécharger une vidéo ou copier un code de vidéo depuis youtube ..</h3>
-              </div>		
-
-                <div class="row">
-                  <div class="utf_submit_section col-md-5" id="videos" style="margin-right:20px;">
+                </div>       
+        <div class="row">
+       <div class="col-md-12" >
+        <div class="utf_submit_section " id="videos" style="margin-right:20px;">
                     <h4 id="images">Télécharger une vidéo en format mp4</h4>
                     <a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>
                     <form action="{{ route('users.ajoutvideo') }}" class="dropzone" id="dropvideo">
-				             {{ csrf_field() }}
-				              <input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+                     {{ csrf_field() }}
+                      <input type="hidden" name="user"  value="<?php echo $user->id; ?>">
                     </form>
                   </div>
-
-                  <div class="col-md-5">
+      </div>
+          <div class="col-md-12" >
+            <div >
                     <?php if($user->video!=''){?>
                       <video width="450" height="320" controls>
                         <source src="<?php echo  URL::asset('storage/images/'.$user->video);?>" type="video/mp4">
@@ -606,22 +605,26 @@ function geocodeAddress(geocoder, resultsMap) {
                       <a  class="button" style="padding:5px 8px"  onclick="return confirm('Êtes-vous sûrs de vouloir supprimer cette video ?')"  href="{{action('UsersController@removevideo', [  'user'=> $user->id  ])}}"title="supprimer"><i class="sl sl-icon-trash"></i> Supprimer</a>
                     <?php } ?>
                   </div>
-
-                  <div class="  col-md-5" style="margin-right:20px;padding:50px 50px 50px 50px">
+</div>
+          <div class="  col-md-4" style="margin-right:20px;padding:50px 50px 50px 50px">
                         Coller le Code d'intégration depuis youtube, vimeo ..
                         <section><textarea  id="codevideo"  onchange="changing(this)" >{{ $user->codevideo }}</textarea></section>
                   </div>
 
-                  <div class="  col-md-5">
+                  <div class="  col-md-4" >
+
+                    <div class="sizeA" style="overflow-x: auto;">
                         <?php if($user->codevideo!=''){
-                          echo $user->codevideo ;
-                        }  ?>
                           
+                          echo $user->codevideo ;
+                            }  ?> 
+                          </div>
                   </div>
 
-                
-            </div>	</div>  
- 	
+            </div> </div>
+
+
+
 <!-------------------------------------------------------------------------------------------------------->
 
 
@@ -796,6 +799,47 @@ function geocodeAddress(geocoder, resultsMap) {
              <!-- fin  heures indisponibilité  v2 -->
 
              <!-- deb  heures indisponibilité  v3 -->
+             <style type="text/css">
+              .fc .fc-button-group {
+    position: relative;
+    display: block;
+    text-align: right;
+}
+               @media only screen
+    and (min-device-width : 0px)
+    and (max-device-width : 480px) {
+     .sizeA
+     {
+      width: 81vw;
+     }    
+    }
+    @media only screen
+    and (min-device-width : 1025px)
+     {
+     .sizeA
+     {
+      width: 100%;
+     }    
+    }
+    @media only screen
+    and (max-device-width : 1024px)
+    and (min-device-width : 600px)
+     {
+     .sizeA
+     {
+      width: 100vw;
+     }    
+    }
+     @media only screen
+    and (max-device-width : 600px)
+    and (min-device-width : 450px)
+     {
+     .sizeA
+     {
+      width: 50vw;
+     }    
+    }
+             </style>
              <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
               <div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -820,16 +864,19 @@ function geocodeAddress(geocoder, resultsMap) {
 					</div>
         </div>  
         <br>
+
             <div class="row">
-          <div class="col-md-12 ">	
-         <div id='calendar'></div>
+          <div class="col-md-12" >	
+            <div class="sizeA" >
+              <div id='calendar' style="overflow-x: auto;"></div> 
+            </div>
+          
 				</div>
 				</div>                          
             </div>
 
              <!-- fin  heures indisponibilité  v3 -->
-         <?php } ?>
-			
+         <?php } ?>			
 			<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
 					<h3><i class="sl sl-icon-basket-loaded"></i>Services </h3>
@@ -1036,7 +1083,7 @@ function geocodeAddress(geocoder, resultsMap) {
           <input data-unit="%"  type="number" value="{{ $Scode->reduction }}" onchange="changeReductionCode(this)" id="p{{ $Scode->id }}">
           </div>
         </div>
-              <div class="col-md-2"  style="margin-left: 100px">
+              <div class="col-md-2" >
                 <label>Code promo :</label>
                 <output >{{$Scode->code}} </output>
               </div>
@@ -1252,7 +1299,7 @@ input:checked + .slider:before {
         </div></form> 
 
       </div>
-      <div style="max-height: 200px; overflow-y: auto;">
+      <div class="sizeA" style="max-height: 200px; overflow-y: auto;overflow-x: scroll;">
     <table class="table" style="font-size: 150%; "  >
   <thead>
     <tr>
@@ -1771,7 +1818,7 @@ input:checked + .slider:before {
 				  </div>	
                
 			</div>
-			 
+			 </div>
 		<!---	
 			 <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
