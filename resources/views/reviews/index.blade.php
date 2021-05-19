@@ -4,6 +4,43 @@
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
+<style type="text/css">
+ 
+      @media only screen
+    and (min-device-width : 0px)
+    and (max-device-width : 480px) {
+     .sizeA
+     {
+      width: 85vw;
+     }    
+    }
+    @media only screen
+    and (min-device-width : 1024px)
+     {
+     .sizeA
+     {
+      width: 100%;
+     }    
+    }
+    @media only screen
+    and (max-device-width : 1023px)
+    and (min-device-width : 600px)
+     {
+     .sizeA
+     {
+      width: 100vw;
+     }    
+    }
+     @media only screen
+    and (max-device-width : 600px)
+    and (min-device-width : 450px)
+     {
+     .sizeA
+     {
+      width: 55vw;
+     }    
+    }
+             </style>
 {{--@include('layouts.back.menu')--}}
  
 @section('content')
@@ -33,13 +70,23 @@
             <a class="close" href="#"></a> 
 		  </div>
  @endif
-     <table class="table table-striped table-hover" id="mytable" style="width:100%">
+ <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-present"></i>Avis</h3>
+                </div>       
+        <div class="row">
+           <div class="col-md-12 sizeA" >
+        
+          </div>
+          <div class="col-md-12 sizeA" >
+            <div style="overflow-x: auto;">
+            <table class="table table-striped table-hover " id="mytable" >
         <thead>
         <tr id="headtable">
              <th>Client</th>
             <th>Avis</th>
              <th  >Commentaire </th>
-			   <th>Notes </th>
+               <th>Notes </th>
            <th class="no-sort">Actions</th> 
         </tr>
             <tr>
@@ -47,21 +94,21 @@
                 <th>Avis</th>
                 <th>Commentaire</th>
                  <th>Notes </th>
-				 <th></th>
+                 <th></th>
                </tr>
             </thead>
             <tbody>
             @foreach($reviews as $review)
                 <tr> 
-				<?php 
-				$stars='';
-				if($review->note ==1){$stars='<i class="sl sl-icon-star" ></i>';} 
-				if($review->note ==2){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
-				if($review->note ==3){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
-				if($review->note ==4){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
-				if($review->note ==5){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
-				
-				?>
+                <?php 
+                $stars='';
+                if($review->note ==1){$stars='<i class="sl sl-icon-star" ></i>';} 
+                if($review->note ==2){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
+                if($review->note ==3){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
+                if($review->note ==4){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
+                if($review->note ==5){$stars='<i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i> <i class="sl sl-icon-star" ></i>';} 
+                
+                ?>
                     <td><?php echo UsersController::ChampById('name',$review->client).' '.UsersController::ChampById('lastname',$review->client) ;?></td>
                      <td> <?php echo $stars?> </td>
                     <td>{{$review->commentaire}}</td>
@@ -74,7 +121,15 @@
             @endforeach
             </tbody>
         </table>
-  
+            </div>
+</div>
+         
+
+            </div> 
+
+
+
+
  
  
  	        <div id="small-dialog" class=" zoom-anim-dialog mfp-hide">
@@ -131,7 +186,6 @@
 
 
    
-    <style>.searchfield{width:100px;}</style>
 <script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" type="text/javascript"></script> 
 
 <br><script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
