@@ -142,6 +142,10 @@
      .sizeA
      {
       width: 86vw;
+     } 
+     .sizeB
+     {
+      height: 100px;
      }    
     }
     @media only screen
@@ -150,6 +154,10 @@
      .sizeA
      {
       width: 100%;
+     } 
+     .sizeB
+     {
+      height:  800px;
      }    
     }
     @media only screen
@@ -159,6 +167,10 @@
      .sizeA
      {
       width: 100vw;
+     } 
+     .sizeB
+     {
+      height:  800px;
      }    
     }
      @media only screen
@@ -168,7 +180,11 @@
      .sizeA
      {
       width: 50vw;
-     }    
+     }  
+     .sizeB
+     {
+      height: 100px;
+     }   
     }
              </style>
   <?php 
@@ -206,7 +222,7 @@
                     <div style="overflow-x: auto;">
                    <center> <h3><b>Vous devez suivre les étapes décrites dans le document suivant</b></h3> </center>
                      <br>
-                         <iframe src="{{ asset('public/enregistrement_auprès_google_agenda.pdf')}}" height="800px">
+                         <iframe src="{{ asset('public/enregistrement_auprès_google_agenda.pdf')}}" width="100%" class="sizeB">
                          </iframe>
                     <br>
                     </div>
