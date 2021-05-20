@@ -711,6 +711,8 @@ class ReservationsController extends Controller
          
         $reservation->save();
         $idres = $reservation->id ;
+        if ($produitslist != null ) {
+        
         for ($i=0; $i < sizeof($produitslist) ; $i++) { 
     
     $client_product  = new Client_product([
@@ -721,6 +723,7 @@ class ReservationsController extends Controller
               
             ]);
     $client_product->save();
+    }
     }
     $test=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->exists();
     if ($test=='true') {
