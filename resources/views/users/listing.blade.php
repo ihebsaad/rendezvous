@@ -187,7 +187,7 @@ background-color:lightgrey;
  table{background-color:white;border:none!important;;width:100%!important;}
  </style>
 
-
+<?php use App\Service; use App\Produit ;use App\ServiceSupp; ?>
     <!-- Content -->
     <div class="utf_dashboard_content">  
 <!-- Session errors -->
@@ -1327,7 +1327,10 @@ input:checked + .slider:before {
 </table></div>  
 </div>
  <?php } ?>
-  <!--<div class="add_utf_listing_section margin-top-45"> 
+
+ <?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+  <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-question"></i>Services Supplémentaires</h3>
         </div>      
@@ -1345,7 +1348,7 @@ input:checked + .slider:before {
                   </tr>
                 </thead>
                 <tbody>
-                  <?php use App\ServiceSupp; $regle_ser_supp=ServiceSupp::where('prestataire',$user->id)->get();?>
+                  <?php  $regle_ser_supp=ServiceSupp::where('prestataire',$user->id)->get();?>
                   <?php foreach($regle_ser_supp as $rss) {
                   //dd($rss->re) 
                      $res=explode('=', $rss->regle);
@@ -1374,8 +1377,15 @@ input:checked + .slider:before {
       <?php if($nbcomm<3){?>
        <div class="row">
              <div class="col-md-10">
+
+              <?php  $services_pres=Service::where('user',$user->id )->get(['id','nom']);?>
        
-            <select name="cars" class="cars"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage interne">lavage interne</option></select>
+            <select name="cars" class="cars">
+            <option value=""></option>
+              @foreach ($services_pres as $sp)
+            <option value="{{$sp->nom}}">{{$sp->nom}}</option>
+            @endforeach
+            </select>
 
           </div>
 
@@ -1383,6 +1393,9 @@ input:checked + .slider:before {
       </div> 
     <?php } ?>
     </div>
+    <?php  $produits_pres=Produit::where('user',$user->id )->get(['id','nom_produit']);
+     
+    ?>
     <div class="col-xs-1" style="width: 5px !important;" >
     </div>
      <div class="col-md-6" style="border-style: dotted; ">
@@ -1392,7 +1405,16 @@ input:checked + .slider:before {
       <center><label>Service ou produit offert (résultat): </label></center>
       </div>
       <div class="col-md-6" >
-    <center> <select name="cars" id="resser1" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
+    <center> <select name="cars" id="resser1" class="Resservice" style="width:100%;">
+    <option value=""></option>
+     @foreach($services_pres as $sp)
+     <option value="{{$sp->nom}}">{{$sp->nom}}</option>
+     @endforeach
+     @foreach($produits_pres as $sp)
+     <option value="{{$sp->nom_produit}}">{{$sp->nom_produit}}</option>
+     @endforeach
+
+    </select></center><br>
      </div>
       <div class="col-md-1" >
         avec quatité 
@@ -1407,7 +1429,12 @@ input:checked + .slider:before {
       <center><label>Service ou produit offert (résultat): </label></center>
       </div>
       <div class="col-md-6" >
-    <center> <select name="cars" id="resser2" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
+    <center> <select name="cars" id="resser2" class="Resservice" style="width:100%;"><option value=""></option>  @foreach($services_pres as $sp)
+     <option value="{{$sp->nom}}">{{$sp->nom}}</option>
+     @endforeach
+     @foreach($produits_pres as $sp)
+     <option value="{{$sp->nom_produit}}">{{$sp->nom_produit}}</option>
+     @endforeach</select></center><br>
      </div>
       <div class="col-md-1" >
         avec quatité 
@@ -1422,7 +1449,12 @@ input:checked + .slider:before {
       <center><label>Service ou produit offert (résultat): </label></center>
       </div>
       <div class="col-md-6" >
-    <center> <select name="cars" id="resser3" class="Resservice" style="width:100%;"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option><option value="lavage externe">produit de brillance des jantes</option></select></center><br>
+    <center> <select name="cars" id="resser3" class="Resservice" style="width:100%;"><option value=""></option> @foreach($services_pres as $sp)
+     <option value="{{$sp->nom}}">{{$sp->nom}}</option>
+     @endforeach
+     @foreach($produits_pres as $sp)
+     <option value="{{$sp->nom_produit}}">{{$sp->nom_produit}}</option>
+     @endforeach</select></center><br>
      </div>
       <div class="col-md-1" >
         avec quatité 
@@ -1459,7 +1491,9 @@ input:checked + .slider:before {
    </div> 
      </div> 
    </div> 
- </div>-->
+ </div>
+
+ <?php } ?>
 
 		<div class="add_utf_listing_section margin-top-45"> 
 				<div class="utf_add_listing_part_headline_part">
@@ -2730,12 +2764,15 @@ var obj={
    });
 </script>
 <!-- <input autocomplete="off"  style="width:100% ;" size="50" type="text" onkeyup="changing(this)" id="field_name[]"  name="field_name[]" value=""/> -->
+<?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
 <script type="text/javascript">
      $(document).ready(function(){
-    var maxField = <?php echo (5-$nbcomm) ?>; //Input fields increment limitation
+    var maxField = <?php echo (5-$nbcomm); ?>; //Input fields increment limitation
     var comButton = $('.com_button'); //Add button selector
     var comwrapper = $('.com_wrapper'); //Input field wrapper
-    var comfieldHTML = '<div class="row"><br><center><img width="26" height="26"  src="{{ asset('public/img/plus.png') }}"/></center><br><div class="col-md-10"> <select name="cars" class="cars"><option value=""></option><option value="pizza">pizza</option><option value="coiffure">coiffure</option><option value="massage">massage</option><option value="lavage externe">lavage externe</option><option value="lavage externe">lavage interne</option></select></div> <div class="col-md-2"> <a href="javascript:void(0);" class="comremove_button"> <img width="26" height="26" style="float:left " src="{{ asset('public/img/moin.png') }}"/></a><br></div>  </div>'; //New input field html
+    var comfieldHTML = '<div class="row"><br><center><img width="26" height="26"  src="{{ asset('public/img/plus.png') }}"/></center><br><div class="col-md-10"> <select name="cars" class="cars"><option value=""></option><?php foreach ($services_pres as $sp) { ?>
+            <option value="{{$sp->nom}}">{{$sp->nom}}</option> <?php } ?> </select></div> <div class="col-md-2"> <a href="javascript:void(0);" class="comremove_button"> <img width="26" height="26" style="float:left " src="{{ asset('public/img/moin.png') }}"/></a><br></div>  </div>'; //New input field html
     var x = 1; //Initial field counter is 1
     
     //Once add button is clicked
@@ -2760,6 +2797,7 @@ var obj={
 
 });
 </script>
+<?php } ?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 

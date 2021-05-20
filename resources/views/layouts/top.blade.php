@@ -209,6 +209,7 @@ $plogo= $parametres->logo;
                                 </div>
                                 <p id="erro9" style="color: red;"></p>
                     </div>
+                    <!-- <div>< input email paypal</div> -->
                     </div>   <!-- fin type essai abonnement -->
                   <p class="utf_row_form utf_form_wide_block">
                     <label for="username2">
