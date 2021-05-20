@@ -233,8 +233,8 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                       <?php  foreach ($reservation->services_reserves as $servicesres) {
                        // echo $servicesres;
                         echo  DB::table('services')->where('id', $servicesres )->value('nom');
-                       echo "(".DB::table('services')->where('id', $servicesres )->value('prix').")";
-                       echo "€ , ";
+                       echo " ( ".DB::table('services')->where('id', $servicesres )->value('prix')."€ )";
+                       echo ", ";
                        if ($reservation->recurrent==1) {
                       echo " <b>abonnement</b>" ;
                     }
