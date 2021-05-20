@@ -1615,7 +1615,7 @@ function viewproduit(){
     // {
     	 var suppl_res="";
     	 <?php 
-     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type1" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type1" ))) { ?>
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
      	$( document ).ready(function() {
          var res='';
          var equation="";
