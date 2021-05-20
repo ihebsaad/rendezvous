@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 use DB;
+use File;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
@@ -80,6 +81,43 @@ class CategoriesController extends Controller
 
 
  	}
+  public function Edit(Request $request)
+  {
+
+    
+    Categorie::where('id', $request->get('id_categorie'))->update(array('nom' => $request->get('nomEdit'),'description' => $request->get('descriptionEdit'),'parent' => $request->get('parentEdit')));
+    
+ 
+    if($request->file('imageEdit')!=null)
+    {
+      $image_name = Categorie::where('id', $request->get('id_categorie'))->value('image');
+      $image_path = storage_path()."/categories/".$image_name;
+      if(File::exists($image_path)) {
+    File::delete($image_path);
+}
+
+
+      $image=$request->file('imageEdit');
+     $filenamewithextension =  $image->getClientOriginalName();
+    //get filename without extension
+    $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    //get file extension
+    $extension = $request->file('imageEdit')->getClientOriginalExtension();
+    //filename to store
+    $filenametostore = $filename.'_'.time().'.'.$extension;
+      $path = storage_path()."/categories/";
+    
+         $image->move($path,  $filenametostore );
+         Categorie::where('id', $request->get('id_categorie'))->update(array('image' => $filenametostore));
+    }
+   
+     
+    return back();
+    //  return back();
+    //  return redirect('/listing/'.$user)->with('success', ' ajouté  ');
+
+
+  }
 
     public function updating(Request $request)
     {

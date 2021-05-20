@@ -57,11 +57,11 @@
                 <tr> 
                     <td>{{$categorie->id}}</td>
                     <td><img  src="<?php echo  URL::asset('storage/categories/'.$categorie->image);?>" style="max-width:80px" /></td>
-                     <td> {{$categorie->nom  }} </td>
-                    <td>{{$categorie->description}}</td>
-                   <td><?php echo CategoriesController::champById('nom',$categorie->parent);?> </td>
+                     <td id="n{{ $categorie->id}}"> {{$categorie->nom  }} </td>
+                    <td id="p{{ $categorie->id}}">{{$categorie->description}}</td>
+                   <td id="l{{ $categorie->id}}" attr="{{$categorie->parent}}"><?php echo CategoriesController::champById('nom',$categorie->parent);?> </td>
                   <td>  
-           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('CategoriesController@remove', $categorie->id)}}"><i class="fa fa-remove"></i></a>
+           <a  class="delete fm-close button"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('CategoriesController@remove', $categorie->id)}}"><i class="fa fa-remove"></i></a> <a  id="t{{ $categorie->id}}"  href="#Modifier" class="pull-right button popup-with-zoom-anim edit"  ><i class="fa fa-edit"></i></a>
 
                       </td> 
                 </tr>
@@ -131,12 +131,78 @@
 </div>
 
 
+
+
+
+
+
+            <div id="Modifier" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Modifier la catégorie</h3>
+          </div>
+         <div class="utf_signin_form style_one">
+            <form  action="{{url('/')}}/categories/Edit" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+
+            <div class="fm-input ">
+                <label>Laissez-le vide si vous ne voulez pas le modifier</label>
+                              <input type="file" id="image" name="imageEdit" />
+                            </div>
+            
+         <div class="fm-input ">
+            <input type="" name="id_categorie" hidden="hidden" id="id_categorie" value="">
+            <label>Nom</label>
+                              <input type="text" placeholder="nom *" name="nomEdit" id="nomEdit">
+                            </div>
+                            <div class="fm-input  ">
+                                <label>Description</label>
+                              <input type="text"   placeholder="description"  id="descriptionEdit" name="descriptionEdit">
+                            </div>
+
+                         <div class="fm-input  "> 
+                             <label>Catégorie mère</label>
+                                <select type="text" value="" id="parentEdit" name="parentEdit"  >
+                              <option></option>
+                              <?php foreach ($categories as $cat){ 
+                               echo '<option value="'.$cat->id.'">'.$cat->nom.'</option>';
+
+                                }?>
+                              </select>
+                            </div><br>
+                            <input type="submit" value="Enregistrer" name="" >
+    </form>
+         </div>       
+         </div> 
+
+
+
+
    
     <style>.searchfield{width:100px;}</style>
 <script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" type="text/javascript"></script> 
 
 <br><script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
     <script type="text/javascript">
+         $(document).on('click','.edit', function() {
+            //alert("ko");
+            var idwd=$(this).attr("id");
+      idwd=idwd.substring(1) ;
+     
+      var n = $('#n'.concat(idwd)).text();
+      var p = $('#p'.concat(idwd)).text();
+      var l = $('#l'+idwd+'').attr('attr');
+
+     $('#id_categorie').val(idwd);
+      $('#nomEdit').val(n);
+      $('#descriptionEdit').val(p);
+      $('#parentEdit option[value='+l+']').attr('selected','selected');
+     
+      
+
+      
+
+ 
+});
         $(document).ready(function() {
 
 

@@ -183,7 +183,8 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
 	Route::post('/categories/updating','CategoriesController@updating')->name('categories.updating'); 
 	Route::get('/categories/remove/{id}', 'CategoriesController@remove');
 	Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser'); 
-
+	
+	Route::post('/categories/Edit','CategoriesController@Edit')->name('categories.Edit');
 	Route::post('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
