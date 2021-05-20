@@ -162,8 +162,9 @@ background-color:#a0d468;
           <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
             <th style="width:10%">Date</th>
 
-             <th>Service</th>
-             <th>Prix</th>       
+             <th>Service</th>             
+             <th>Prix</th>  
+             <th> Services/produits supplémentaires (cadeaux)</th>     
              <th>Réduction</th>
              <th>Statut</th>
            <th class="no-sort" >Actions</th> 
@@ -174,7 +175,9 @@ background-color:#a0d468;
  <?php if($User->user_type!='prestataire') {?>  <th>Prestataire</th><?php }?>
                   <th style="width:10%">Date</th>
                  <th>Service</th>
+                
                  <th>Prix</th>
+                 <th> Services/produits supplémentaires  (cadeaux) </th>
                  <th>Réduction</th>
          <th>Statut</th> 
          <th></th>
@@ -220,7 +223,9 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                     <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> € <?php if ($reservation->recurrent==1) {
                       echo ", <b>abonnement</b>" ;
                     } ?>)<small></td>
+
                       <td style="font-weight:bold">{{$reservation->Net  }}  €</td>
+                      <td> {{$reservation->serv_suppl  }}</td>
                       <td>{{$reservation->reduction  }}</td>
   <td>
     <?php  if($reservation->statut==0){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-danger" >En attente</span>';}  ?>

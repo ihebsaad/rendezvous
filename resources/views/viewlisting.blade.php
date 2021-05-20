@@ -42,7 +42,7 @@ font-size: 15px;
 }
    </style>
 
-  <?php 
+  <?php //dd($user->id);
   $images = \App\Image::where('user',$user->id)->get();
   $nbimages =count($images );
   if( $nbimages>0){
@@ -1613,8 +1613,15 @@ function viewproduit(){
 
    // function get_liste_regles_services_suppl()
     // {
+    	 var suppl_res="";
+    	 <?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type1" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type1" ))) { ?>
      	$( document ).ready(function() {
-
+         var res='';
+         var equation="";
+         var member_equation="";
+       
+         var exist="";
      		$('#service').on('change', function(evt, params) { 
      		 //alert("sel "+params.selected);
             // alert("des "+params.deselected);
@@ -1622,7 +1629,43 @@ function viewproduit(){
                  return $(this).text();
              }).get();
 
-          //  alert(items);
+          // alert(items);
+          // alert(res);
+           suppl_res="";
+           for(var i=0; i<res.length ; i++) // parcourir les règles
+            {
+            	equation=res[i].split("=");
+            	for(var j=0 ; j<equation.length ; j++) // parcourir les membres equation d'une règle
+            	{
+            		//alert(equation[j]);
+
+            		if(j%2==0) // juste le membre d'une equation 
+            		{
+                       //alert(equation[j]);
+                       member_equation=equation[j].split("+");
+
+                       exist=true;
+                       for(var k=0; k<member_equation.length; k++)
+                       {
+                        //  alert(member_equation[k]);
+
+                             if(!items.includes(member_equation[k].trim()))
+                             {
+                             	exist=false; 
+                             	k=member_equation.length;
+                             }
+                       }
+                      if(exist==true) // tous les membre d'eaquation exwit
+                      {
+                        suppl_res+=equation[j+1]+','; 
+
+                      }
+
+            		}
+            	}
+            }
+
+           // alert(suppl_res);
            //var selected_value = $(this).toArray().map(x => $(x).val());
             // alert(selected_value)
          });
@@ -1631,17 +1674,17 @@ function viewproduit(){
         url:"{{url('/')}}/get_liste_regles_services_suppl/<?php echo $user->id; ?>",
         method:"get",
         success:function(data){			
-            //alert(data);	
-            var res = data.split(";");
+            //alert(data);
+           // alert(items);	
+            res = data.split(";");
             res.splice(0,1);
-            for(var i=0; i<res.length ; i++)
-            {
-            	//alert(res[1]);
-            }
+            
             }
           });
 
           });
+
+     <?php } ?>
 
     // }
     function visibilityFunction(element){
@@ -1936,6 +1979,11 @@ function viewproduit(){
             });
 	 
 	 			$('#reserver').click(function( ){
+
+	 				if(suppl_res)
+	 				{
+	 				Swal.fire ("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
+	 				}
                 
 			      /*  var inputs = $(".dtpks");
 			        for(var i = 0; i < inputs.length; i++){
@@ -1950,7 +1998,7 @@ function viewproduit(){
                    
                     var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
                     var happyhour = $('#myhappyhoursId').val();
-                     
+                    var serv_supp=suppl_res;
 
                     var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
                     var Remise = parseFloat(document.getElementById('RemiseReservation').value);
@@ -1971,7 +2019,7 @@ function viewproduit(){
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
                         method:"POST",
-                        data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo , _token:_token},
+                        data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,remarques:remarques ,date_reservation:dateStr ,services_reserves:service, adultes:adultes, enfants:enfants,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
                         success:function(data){
                         //alert(JSON.stringify(data));
 						location.href= "{{ route('reservations') }}";
