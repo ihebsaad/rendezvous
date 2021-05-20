@@ -195,14 +195,14 @@ background-color:#a0d468;
               </tr>
           </thead>
           <tbody>
-            <?php // dd($reservations);
+            <?php  //dd($reservations);
 
             $reservations=$reservations->sortBy(function($t)
                                         {
                                             return $t->created_at;
                                         })->reverse(); //dd($reservations);?>
             @foreach($reservations as $reservation)
-         <?php   
+         <?php   //dd(json_decode($reservation->services_reserves));
        /*  $service_name='';
          $service_prix=0;
 
@@ -230,7 +230,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
                     <td style="width:10%">{{$reservation->date_reservation  }} </td>
                     <td>
-                      <?php  foreach ($reservation->services_reserves as $servicesres) {
+                      <?php  foreach (json_decode($reservation->services_reserves) as $servicesres) {
                        // echo $servicesres;
                         echo  DB::table('services')->where('id', $servicesres )->value('nom');
                        echo " ( ".DB::table('services')->where('id', $servicesres )->value('prix')."€ )";
