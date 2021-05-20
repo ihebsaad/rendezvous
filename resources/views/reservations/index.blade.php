@@ -229,9 +229,17 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
                     <td style="width:10%">{{$reservation->date_reservation  }} </td>
-                    <td><?php echo $description;  //echo $service_name ;//echo ServicesController::ChampById('nom',$reservation->service); ?> <small>(<?php /*echo $service_prix; */ echo $montant; ?> € <?php if ($reservation->recurrent==1) {
-                      echo ", <b>abonnement</b>" ;
-                    } ?>)<small></td>
+                    <td>
+                      <?php  foreach ($reservation->services_reserves as $servicesres) {
+                       // echo $servicesres;
+                        echo  DB::table('services')->where('id', $servicesres )->value('nom');
+                       echo "(".DB::table('services')->where('id', $servicesres )->value('prix').")";
+                       echo "€ , ";
+                       if ($reservation->recurrent==1) {
+                      echo " <b>abonnement</b>" ;
+                    }
+                      } ?>
+                    </td>
                       <td><?php $idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservation->id+'" ) );
                       foreach ($idproduits as $idp) {
 
