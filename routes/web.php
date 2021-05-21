@@ -31,6 +31,7 @@ Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name
 
 Route::get('/reservations/AnnulerReservation/{id}','ReservationsController@AnnulerReservation')->name('reservations.AnnulerReservation');
 Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif');
+Route::get('/reservations/facture/{id}','InvoiceController@Facture')->name('facture');
 Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter');
 Route::get('/reservations.annule/{id}','MyPaypalController@PaymentDetails')->name('reservations.annule');
 Route::get('/reservations/deletenewdate','ReservationsController@deletenewdate')->name('reservations.deletenewdate');
@@ -45,10 +46,12 @@ Route::get('/ok', function () {
 });
 /*
 Route::get('/dashboard', function () {
+Route::get('/test', function () {
     return view('dashboard');
 });
 */
 Route::get('/test',function(){return view('test');});
+Route::get('/test',function(){return view('Invoice.index');});
 Route::post('/users/Firstservice','UsersController@FirstService')->name('users.FirstService');
 
 
