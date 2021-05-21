@@ -231,22 +231,23 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                     <td style="width:10%">{{$reservation->date_reservation  }} </td>
                     <td>
                       <?php //dd(is_array($reservation->services_reserves)); 
+                      $servicesres = array();
                       if (is_array($reservation->services_reserves)) {
                         $servicesres = $reservation->services_reserves;
                       }else {
                         $servicesres = json_encode($reservation->services_reserves);
                       }
 
-
+                     $servicesres=(array)$servicesres;
 
                       foreach ($servicesres as $servicesre) {
-                       // echo $servicesres;
+                      
                         echo  DB::table('services')->where('id', $servicesre )->value('nom');
                        echo " ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
                        echo ", ";
                        if ($reservation->recurrent==1) {
                       echo " <b>abonnement</b>" ;
-                    }
+                    } //dd( $servicesre);
                       } ?>
                     </td>
                       <td><?php $idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservation->id+'" ) );
