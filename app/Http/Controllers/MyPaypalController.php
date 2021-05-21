@@ -68,7 +68,7 @@ class MyPaypalController extends Controller
             if(file_exists('storage/googlecalendar/'.$prest->google_path_json))
             {
 
-            dd("exist");
+            //dd("exist");
             $client = new Google_Client();
             $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
             $client->addScope(Google_Service_Calendar::CALENDAR);
