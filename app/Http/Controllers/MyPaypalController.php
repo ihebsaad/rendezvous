@@ -65,14 +65,19 @@ class MyPaypalController extends Controller
          //dd($prest->google_path_json);
         if($prest->google_path_json)
         {
-        $client = new Google_Client();
-        $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
-        $client->addScope(Google_Service_Calendar::CALENDAR);
-        $client->setAccessType('offline');
+            if(file_exists('storage/googlecalendar/'.$prest->google_path_json))
+            {
 
-        $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
-        $client->setHttpClient($guzzleClient);
-        $this->client = $client;
+            dd("exist");
+            $client = new Google_Client();
+            $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
+            $client->addScope(Google_Service_Calendar::CALENDAR);
+            $client->setAccessType('offline');
+
+            $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
+            $client->setHttpClient($guzzleClient);
+            $this->client = $client;
+             }
         }
 
       //  dd( $this->client);
