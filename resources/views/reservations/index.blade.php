@@ -305,7 +305,9 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
         <?php $emailpaypal= UsersController::ChampById('emailPaypal',$reservation->prestataire); if($emailpaypal) {?>
+        @if($reservation->Net != 0 || $reservation->Net)
         <button class="button ">Payer l'acompte</button> 
+        @endif
          <?php } else{ ?>
         <button class="button " disabled>Email paypal prestataire inexistant! <br> Contactez le pour payer l'acompte</button> 
         <?php }  ?>
