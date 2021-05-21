@@ -773,10 +773,10 @@ function geocodeAddress(geocoder, resultsMap) {
 							</div>
 							
 							<div class="fm-input pricing-ingredients" style="min-width:30%;">
-							  D:<input type="text" value="<?php echo $pi->date_debut;?>" >
+							  D:<input type="text" value="<?php $date=new DateTime($pi->date_debut) ;echo $date->format('d/m/yy H:i');?>" >
 							</div>
 							<div class="fm-input pricing-price" style="max-width:30%;" ><i class="data-unit"></i>
-							  F:<input type="text" data-unit=""  value="<?php echo $pi->date_fin;?> " > 
+							  F:<input type="text" data-unit=""  value="<?php $date=new DateTime($pi->date_fin) ;echo $date->format('d/m/yy H:i');?> " > 
 							</div>
 						 	<div class="fm-close">
 							<a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('CalendrierController@remove', [ 'id'=>$pi->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a>

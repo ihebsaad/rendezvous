@@ -139,8 +139,8 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 	
 
 Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
-Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove');
-Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire');
+Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove')->name('remove_indisp');
+Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')->name('ouv_ferm_hor');
 
 
 	Route::post('/faqs/saving','FaqsController@store')->name('faqs.saving');
