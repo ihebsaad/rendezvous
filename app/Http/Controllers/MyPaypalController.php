@@ -384,14 +384,50 @@ public function successpay2(Request $request)
 				$date = $date->format('d-m-Y');
 				$heure = new DateTime($Reservation->date_reservation);
 				$heure = $heure->format('H:i');
+
+$idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      }       
+
+
 				//dd($heure);
 				// Email au client
 				$message='Bonjour,<br>';
 				$message.='Réservation('.$titre.') payée avec succès <br>';
 				$message.='Votre rendez-vous  est confirmé le <b>'.$date .'</b> à <b>'.$heure .'</b> avec le prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
-				$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
-					
-				$message.='<b>ATTENTION :</b> <br>';	
+				$message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='<br><b>Produits :</b>  ';
+					foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( qty:'.$idp->qty.',';
+               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $message.='<br><b>Cadeaux :</b>  '.$Reservation->serv_suppl.'';
+              }
+              
+
+              
+        $message.='<br><br>Vous pouvez consulter votre facture à partir de ce lien. 
+        (<a href="https://prenezunrendezvous.com/reservations/facture/'.$Reservation->id.'" > Lien </a>). <br><br><br>';
+
+				$message.='<b>ATTENTION :</b> <br>';	 
 				$message.='-Vous avez le droit d`annuler ou de reporter le rendez-vous 5 jours avant le rdv. 
 				(<a href="https://prenezunrendezvous.com/reservations/modifier/'.$Reservation->id.'" > Lien </a>). <br>';
 				$message.='-Au delà des 5 jours avant le rendez vous votre accompte ne sera pas remboursé.  <br>';
@@ -439,12 +475,46 @@ public function successpay2(Request $request)
              'details' => $message,
          ]);	
 		 $alerte->save();
- 
+ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      }  
 		// Email au prestataire
 		$message='Bonjour,<br>';
 		$message.='Réservation payée('.$titre.')<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-		$message.='<b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+
+		//$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+    $message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='<br><b>Produits :</b>  ';
+          foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( qty:'.$idp->qty.',';
+               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $message.='<br><b>Cadeaux :</b>  '.$Reservation->serv_suppl.'';
+              }
+              
+
+       
+
+
+		$message.='<br><b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		

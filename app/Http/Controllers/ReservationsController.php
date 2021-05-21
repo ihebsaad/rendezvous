@@ -137,11 +137,42 @@ class ReservationsController extends Controller
 		$heure = new DateTime($Reservation->date_reservation);
 		$heure = $heure->format('H:i');
 		$prestataire=User::find($Reservation->prestataire);
-
+$idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      }  
 		// Email au prest
 		$message='Bonjour,<br>';
 		$message.='Votre client '.$client->name.' '.$client->lastname.' veut reporter son rdv .<br>';
-		$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br>';
+		//$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br>';
+    $message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='<br><b>Produits :</b>  ';
+          foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( qty:'.$idp->qty.',';
+               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $message.='<br><b>Cadeaux :</b>  '.$Reservation->serv_suppl.'';
+              }
+
+
+
 		$message.='<b>Date :</b> '.$date .' Heure : '.$heure .'<br>';
 		$message.='Merci de proposer maximum 15 dates avec des horaires qui vous conviennent. 
 		(<a href="https://prenezunrendezvous.com/reservations/newDate/'.$Reservation->id.'" > Lien </a>). <br>';
@@ -228,11 +259,40 @@ class ReservationsController extends Controller
 		$heure = new DateTime($Reservation->date_reservation);
 		$heure = $heure->format('H:i');
 		$prestataire=User::find($Reservation->prestataire);
-
+$idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      }  
 		// Email au client
 		$message='Bonjour,<br>';
-		$message.='Pour le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) .<br>';
-		$message.='votre prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a> a vous proposé des nouvelles dates. <br>';
+		$message.='Pour le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: ';
+    //$message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='et les Produits :  ';
+          foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( qty:'.$idp->qty.',';
+               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $message.='( <b>Cadeaux :</b>  '.$Reservation->serv_suppl.'):';
+              }
+    $message.=' <b>Total :</b> '.$Reservation->Net.'';
+		$message.='<br>votre prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a> a vous proposé des nouvelles dates. <br>';
 		$message.='Merci de choisir une seule date :  
 		(<a href="https://prenezunrendezvous.com/reservations/selectdate/'.$Reservation->id.'" > Lien </a>). <br>';
 		
@@ -297,12 +357,46 @@ class ReservationsController extends Controller
 		
  	    $this->sendMail(trim($prestataire->email),'Rendez-vous reporté',$message)	;
 
+$idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      } 
 
  	    // Email au client
 		$message='Bonjour,<br>';
 		//$message.='Réservation('.$titre.') payée avec succès <br>';
 		$message.='Votre rendez-vous  est confirmé le <b>'.$date .'</b> à <b>'.$heure .'</b> avec le prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
-		$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
+		//$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
+    $message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='<br><b>Produits :</b>  ';
+          foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( qty:'.$idp->qty.',';
+               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $message.='<br><b>Cadeaux :</b>  '.$Reservation->serv_suppl.'';
+              }
+              
+
+              
+        $message.='<br><br>Vous pouvez consulter votre facture à partir de ce lien. 
+        (<a href="https://prenezunrendezvous.com/reservations/facture/'.$Reservation->id.'" > Lien </a>). <br><br><br>';
 			
 		$message.='<b>ATTENTION :</b> <br>';	
 		$message.='-Vous avez le droit d`annuler ou de reporter le rendez-vous 5 jours avant le rdv. 
@@ -406,9 +500,39 @@ class ReservationsController extends Controller
 		$heure = $heure->format('H:i');
 		$prestataire=User::find($Reservation->prestataire);
    	//dd("ok");
+    $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      }  
    	// Email au client
 		$message='Bonjour,<br>';
-		$message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé par votre client '.$client->name.' '.$client->lastname.' .<br>';
+		$message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services:';
+      foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='et les Produits :  ';
+          foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( qty:'.$idp->qty.',';
+               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $message.='( <b>Cadeaux :</b>  '.$Reservation->serv_suppl.'):';
+              }
+    $message.=' <b>Total :</b> '.$Reservation->Net.'';
+    $message.='a été annulé par votre client '.$client->name.' '.$client->lastname.' .<br>';
 			
 		$message.='Merci de lui remettre l`acompte. (<a href="https://prenezunrendezvous.com/reservations/AnnulerReservation/'.$Reservation->id.'" > Lien </a>) <br>';	
 		
