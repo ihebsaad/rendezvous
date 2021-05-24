@@ -439,7 +439,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 				$message.='-Au delà des 5 jours, Il vous sera impossible d`annuler ou de reporter le rendez-vous.  <br>';
 				$message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
 				$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
- 	
+ 	  dd(($client->email));
 		 	    $this->sendMail(trim($client->email),'Réservation('.$titre.') payé',$message)	;	
 
         
