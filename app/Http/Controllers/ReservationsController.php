@@ -1150,8 +1150,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 	public function sendMail($to,$sujet,$contenu){
 
 		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
-        $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
-        $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+        $swiftTransport->setUsername(\Config::get('mail.username2')); //adresse email
+        $swiftTransport->setPassword(\Config::get('mail.password2')); // mot de passe email
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);
