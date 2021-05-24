@@ -645,7 +645,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
             ->update(['id_event_google_cal' => $idres]);
 
    }
-  dd($liste_rec);
+  //dd($liste_rec);
        $startDateTime=$debut;
           $endDateTime= $fin;
           $param=User::where('id',$prestataire->id)->first();
