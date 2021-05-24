@@ -50,7 +50,7 @@ class InvoiceController extends Controller
     $cuser = auth()->user();
    
     $reservation = Reservation::where('id',$id)->first();
-       dd($reservation->client);
+       dd($id);
     if($cuser->id!=$reservation->client){
       Session::put('msgs', 'E2');
       return redirect('/');
