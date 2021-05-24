@@ -645,7 +645,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
             ->update(['id_event_google_cal' => $idres]);
 
    }
-
+  dd($liste_rec[]);
        $startDateTime=$debut;
           $endDateTime= $fin;
           $param=User::where('id',$prestataire->id)->first();
@@ -672,8 +672,12 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
                 'start' => ['dateTime' => $lr['startDateTime'], 'timeZone' => 'Africa/Tunis',],
                 'end' => ['dateTime' => $lr['endDateTime'] , 'timeZone' => 'Africa/Tunis',],
               ]);
-              
+            
+             $results='';
+             if($lr['startDateTime'] &&  $lr['endDateTime']  )
+             {
              $results = $service->events->insert($calendarId, $event);
+             }
             }
 
 
