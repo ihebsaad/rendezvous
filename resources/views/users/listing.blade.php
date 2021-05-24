@@ -1065,7 +1065,7 @@ function geocodeAddress(geocoder, resultsMap) {
           <table id="utf_pricing_list_section">
             <tbody class="ui-sortable"  id="services">
            <?php foreach($serviceWithCode as $Scode){ ?>
-            <?php $ser =  $services->find($Scode->id_service);  ?>
+            <?php $ser =  $services->find($Scode->id_service); if($ser) {?>
             <tr class="pricing-list-item pattern ui-sortable-handle">
               <td> 
               <div class="col-md-2">
@@ -1096,7 +1096,7 @@ function geocodeAddress(geocoder, resultsMap) {
               </td>
               
             </tr>
-<?php } ?>
+<?php } }?>
             </tbody>
           </table>
           <br>

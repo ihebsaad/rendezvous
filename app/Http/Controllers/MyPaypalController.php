@@ -384,7 +384,7 @@ public function successpay2(Request $request)
 		
 		$service = \App\Service::find( $serviceid) ;
 		if($type=='acompte'){
-				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste));	
+				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'statut'=>1));	
 				$date = new DateTime($Reservation->date_reservation);
 				$date = $date->format('d-m-Y');
 				$heure = new DateTime($Reservation->date_reservation);

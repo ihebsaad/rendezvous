@@ -335,7 +335,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     {
     	$idReservation = $request->get('idres');
     	$date = $request->get('date');
-    	Reservation::where('id', $idReservation)->update(array('date_reservation' => $date ));
+    	Reservation::where('id', $idReservation)->update(array('date_reservation' => $date ,'statut'=>1));
 
     	$Reservation = Reservation::where('id',$idReservation)->first();
     	//dd($Reservation);

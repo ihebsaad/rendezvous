@@ -318,6 +318,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
     $type_abonn_essai = UsersController::ChampById('type_abonn_essai',$reservation->prestataire) ; 
     $type_abonn = UsersController::ChampById('type_abonn',$reservation->prestataire);
     $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
+   // dd( $type_abonn_essai.' '. $type_abonn);
    
      if(($type_abonn_essai && ($type_abonn_essai=="type2" || $type_abonn_essai=="type3" ))|| ($type_abonn && ($type_abonn=="type2" || $type_abonn=="type3" ))) { 
     
@@ -392,7 +393,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
           <?php } ?> 
                   <?php } ?> 
         <a  class="button button-danger" style="margin:5px 5px 5px 5px"  href="{{action('ReservationsController@newDate', $reservation->id)}}"><i class="fa fa-close"></i>  Proposer des dates</a>
-       <a  class="button button-danger popup-with-zoom-anim" style="margin:5px 5px 5px 5px"  onclick="insert_id_res('{{$reservation->id}}')" href="#updatestatut-dialog "><i class="fa fa-close"></i>  Changer Statut</a>
+       <!--<a  class="button button-danger popup-with-zoom-anim" style="margin:5px 5px 5px 5px"  onclick="insert_id_res('{{$reservation->id}}')" href="#updatestatut-dialog "><i class="fa fa-close"></i>  Changer Statut</a>-->
        <?php }//affiche_model(this,$reservation->id)} ?> 
  
       </td>
