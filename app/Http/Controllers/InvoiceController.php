@@ -48,6 +48,7 @@ class InvoiceController extends Controller
             return redirect('/');
       }
     $cuser = auth()->user();
+    dd($cuser);
     $reservation = Reservation::where('id',$id)->first();
       
     if($cuser->id!=$reservation->client){
