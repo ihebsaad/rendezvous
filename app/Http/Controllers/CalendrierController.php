@@ -1206,6 +1206,8 @@ class CalendrierController extends Controller
     $debut=$ss->date_reservation;
      foreach ($ss->services_reserves as $sr) {
        $ser=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+       if($ser) 
+       {
        //$pos1 = stripos($ser->duree,":");
       // $pos2 = strripos($ser->duree,":");
       $nbResvalide=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->whereNotNull('date_reservation')->where('date_reservation','>',$datecourante)->where('statut',1)->WhereJsonContains('services_reserves',$sr)->where('recurrent',0)->whereNull('id_recc')->count();
@@ -1245,6 +1247,7 @@ class CalendrierController extends Controller
        }
       }
      //dd($debut.' '.$fin);
+      }
      }
      }
   // $idservicesreccurent=Service::where('recurrent','like','on')->pluck('id')->toArray();*/
@@ -1255,6 +1258,8 @@ class CalendrierController extends Controller
      foreach ($servicesreccurents as $srec) {
          $u= $srec->services_reserves;
          $ser=Service::where('id',$u)->first(["nom","duree","NbrService"]);
+         if($ser)
+         {
          $debut=$srec->date_reservation;
 
          //$ser->$u;
@@ -1299,7 +1304,7 @@ class CalendrierController extends Controller
           $i++;
        }
      }
-     
+     }
      }
 
      // envoi happy hours au full calendar
