@@ -519,7 +519,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
        
 
 
-		$message.='<br><b>Date :</b> '.$Reservation->date .' Heure : '.$Reservation->heure .'<br>';
+		$message.='<br><b>Date :</b> '.$date .' Heure : '.$heure .'<br>';
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
