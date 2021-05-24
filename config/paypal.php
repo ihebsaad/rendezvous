@@ -2,10 +2,10 @@
 return [ 
     'client_id' => // test 'AalCYOUCLECAZi8JkWpRCQB6FDP1acLmsSWC0dKnF3R6dVORwWfo2YExwJFdwZI3qd8mS8ZIXvrvzYy6', //env('PAYPAL_CLIENT_ID',''),
    // 'AQhBOI4hV00Ad1KVimAgdA6uelgGBuRMAGmOhfJ9ETDZKsDATzwwKKnCjjnSCAfqb7fjfEFk4cisbp6_',
-    'Ac_hrdkc-iaC0wlYLqYaPdN0Fol7qOui6e8Q21_L48T846h-v21Z9C7BPLAfpGstbppJeyQ2pyKnTzWM',
+    'AalCYOUCLECAZi8JkWpRCQB6FDP1acLmsSWC0dKnF3R6dVORwWfo2YExwJFdwZI3qd8mS8ZIXvrvzYy6',
     'secret' => // test 'ENHh0jbRemqhawfb7LvSjAfV3bPuJ4s1f0dzdvI37FvjIf-tUnOFatwMwSsNw50k7rbGuThAgSsQ-aSi', //env('PAYPAL_SECRET',''),
   //  'EKIQ0nFX0aqJ4L4kodsY1FMAr6g3PH3TNc9fJ8IGyvcBoFAOw5XL1CPpk886lYQtnivgbaVWTC-WWb2-',
-    'EHJ3LOHuI_lKLSjCg0YgvZqUGQb4pD17AqYvhC4Ei7J4hO3jipy1Ul8XgXWFtNFI9hfpbwFdXzNYtbZw',
+    'ENHh0jbRemqhawfb7LvSjAfV3bPuJ4s1f0dzdvI37FvjIf-tUnOFatwMwSsNw50k7rbGuThAgSsQ-aSi',
     'settings' => array(
          'mode' => 'sandbox', 
        // 'mode' => 'live',
