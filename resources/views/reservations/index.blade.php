@@ -315,13 +315,13 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
           
     <?php  } ?> 
     <?php if( $reservation->paiement ==1 ) { 
-    $type_abonn_essai = UsersController::ChampById('$type_abonn_essai',$reservation->prestataire) ; 
-    $type_abonn = UsersController::ChampById('$type_abonn',$reservation->prestataire);
+    $type_abonn_essai = UsersController::ChampById('type_abonn_essai',$reservation->prestataire) ; 
+    $type_abonn = UsersController::ChampById('type_abonn',$reservation->prestataire);
     $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
    
-     //if(($type_abonn_essai && ($type_abonn_essai=="type2" || $type_abonn_essai=="type3" ))|| ($type_abonn && ($type_abonn=="type2" || $type_abonn=="type3" ))) { 
+     if(($type_abonn_essai && ($type_abonn_essai=="type2" || $type_abonn_essai=="type3" ))|| ($type_abonn && ($type_abonn=="type2" || $type_abonn=="type3" ))) { 
     
-  //if( $reservation->Net >= 200  &&  $allow_slices ){
+  if( $reservation->Net >= 200  &&  $allow_slices ){
   // paiement sur tranches
   ?>
            <form class="  " method="POST" id="payment-form"    action="{{ route('getpreapproved') }}" >
@@ -334,7 +334,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
         <button class="button"  >Payer Tranche (1/4  de <?php echo $reservation->reste ; ?>€) </button>
         </form> 
   <?php     
-  //}else{
+  }else{
      
     // payer reste
     ?>  
@@ -350,8 +350,8 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
         </form>
         <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservation->id)}}" >Annuler/Reporter</a>
     <?php
-    //} // paiement sans tranches
-    // }// fin if type 2 ou type 3 abonneùent
+    } // paiement sans tranches
+     }// fin if type 2 ou type 3 abonneùent
 
      //if type 1 abonnement donc payer dire ctement le reste
      if(($type_abonn_essai && $type_abonn_essai=="type1" )||($type_abonn && $type_abonn=="type1")) { ?>
