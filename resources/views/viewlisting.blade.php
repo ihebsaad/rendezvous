@@ -1723,7 +1723,7 @@ function viewproduit(){
         });
       }
     }
-
+ //  alert(document.getElementById('k5.').value);
  
 		
                 
@@ -1749,6 +1749,13 @@ function viewproduit(){
 			document.getElementById('MontantReservation').value = montant;
 			document.getElementById('totalReservation').value = montant;
 		}
+
+    for (var i = 0; i < produitslist.length; i++) {
+      //ach
+      montant = parseFloat(document.getElementById('k'+produitslist[i]).value * document.getElementById('k'+produitslist[i]).getAttribute('prix')) + parseFloat(document.getElementById('MontantReservation').value) ;
+      document.getElementById('MontantReservation').value =montant;
+    }
+
 		var reductioncarte = document.getElementById('catrefideliteVal').value ;
 		if (reductioncarte!=0) {
 		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
