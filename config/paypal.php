@@ -2,10 +2,10 @@
 return [ 
     'client_id' => // test 'AalCYOUCLECAZi8JkWpRCQB6FDP1acLmsSWC0dKnF3R6dVORwWfo2YExwJFdwZI3qd8mS8ZIXvrvzYy6', //env('PAYPAL_CLIENT_ID',''),
    // 'AQhBOI4hV00Ad1KVimAgdA6uelgGBuRMAGmOhfJ9ETDZKsDATzwwKKnCjjnSCAfqb7fjfEFk4cisbp6_',
-    'AThjz56X69vxz_voqkSvfOaCPslWkDa6mwdZF4Pe7jqKG_qN9iA8L09Kapl1fpUVVfpnjM5b06qttYY-',
+    'Ac_hrdkc-iaC0wlYLqYaPdN0Fol7qOui6e8Q21_L48T846h-v21Z9C7BPLAfpGstbppJeyQ2pyKnTzWM',
     'secret' => // test 'ENHh0jbRemqhawfb7LvSjAfV3bPuJ4s1f0dzdvI37FvjIf-tUnOFatwMwSsNw50k7rbGuThAgSsQ-aSi', //env('PAYPAL_SECRET',''),
   //  'EKIQ0nFX0aqJ4L4kodsY1FMAr6g3PH3TNc9fJ8IGyvcBoFAOw5XL1CPpk886lYQtnivgbaVWTC-WWb2-',
-    'EM10ylTG8nI5JGyMQKkADrS_ZRg0lTYNdJVPJrTuPLrb_91X0R4cASKrYZSnwLKQ-tGrEuO3A5vqVGfx',
+    'EHJ3LOHuI_lKLSjCg0YgvZqUGQb4pD17AqYvhC4Ei7J4hO3jipy1Ul8XgXWFtNFI9hfpbwFdXzNYtbZw',
     'settings' => array(
          'mode' => 'sandbox', 
        // 'mode' => 'live',
