@@ -163,8 +163,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
           foreach ($idproduits as $idp) {
 
                $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
-               $message.=  '( qty:'.$idp->qty.',';
-               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.=  '( Quantité:'.$idp->qty.',';
+               $message.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
                $message.= ", ";
               } 
               if ($Reservation->serv_suppl != null) {
@@ -284,8 +284,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
           foreach ($idproduits as $idp) {
 
                $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
-               $message.=  '( qty:'.$idp->qty.',';
-               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.=  '( Quantité:'.$idp->qty.',';
+               $message.= ' Prix'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
                $message.= ", ";
               } 
               if ($Reservation->serv_suppl != null) {
@@ -385,8 +385,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
           foreach ($idproduits as $idp) {
 
                $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
-               $message.=  '( qty:'.$idp->qty.',';
-               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.=  '( Quantité:'.$idp->qty.',';
+               $message.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
                $message.= ", ";
               } 
               if ($Reservation->serv_suppl != null) {
@@ -524,8 +524,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
           foreach ($idproduits as $idp) {
 
                $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
-               $message.=  '( qty:'.$idp->qty.',';
-               $message.= ' '.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.=  '( Quantité:'.$idp->qty.',';
+               $message.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
                $message.= ", ";
               } 
               if ($Reservation->serv_suppl != null) {
