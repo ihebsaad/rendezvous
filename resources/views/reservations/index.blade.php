@@ -235,10 +235,10 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                       if (is_array($reservation->services_reserves)) {
                         $servicesres = $reservation->services_reserves;
                       }else {
-                        $servicesres = json_encode($reservation->services_reserves);
+                        $servicesres = json_decode($reservation->services_reserves);
                       }
 
-                     $servicesres=(array)$servicesres;
+                     $servicesres=$servicesres;
                     dd($servicesres);
                       foreach ($servicesres as $servicesre) {
                       // dd($servicesre);
