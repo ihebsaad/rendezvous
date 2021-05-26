@@ -339,7 +339,7 @@ class ServicesController extends Controller
     {$Fichier=$request->file('Fichier');
       
      $nameF =  $Fichier->getClientOriginalName();
-     dd($namef);
+     dd($nameF);
                  $pathF = storage_path()."/images/";
       $date=date('d-m-Y-H-i-s');
     //$name=$name.'-service-'.$date ;
