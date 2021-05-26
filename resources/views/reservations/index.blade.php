@@ -239,7 +239,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                       }
 
                      $servicesres=$servicesres;
-                    dd($servicesres);
+                   // dd($servicesres);
                       foreach ($servicesres as $servicesre) {
                       // dd($servicesre);
                         echo  DB::table('services')->where('id', $servicesre )->value('nom');
