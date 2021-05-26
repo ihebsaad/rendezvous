@@ -238,7 +238,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                         $servicesres = json_encode($reservation->services_reserves);
                       }
 
-                     $servicesres=(array)$servicesres;
+                     $servicesres=$servicesres;
 
                       foreach ($servicesres as $servicesre) {
                       
