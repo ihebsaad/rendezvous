@@ -386,7 +386,7 @@ class ServicesController extends Controller
        // suppresion d'un produit affecté depuis la table Services
 
        $user= auth()->user()->id;
-       dd($user); 
+       //dd($user); 
        $services=Service::where('user', $user)->get();
 
        foreach ($services as $ser) {
@@ -398,6 +398,7 @@ class ServicesController extends Controller
                 $arr=$ser->produits_id;
                 $key = array_search($prod, $arr); 
                 unset($arr[$key]);
+                dd($arr);
               }
            }
         }
