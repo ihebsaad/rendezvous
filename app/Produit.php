@@ -10,7 +10,7 @@ class Produit extends Model
     protected $primaryKey='id';
 
 
-    protected $fillable = ['id','nom_produit','prix_unité','description','image','type','user'];
+    protected $fillable = ['id','nom_produit','prix_unité','description','image','type','user','Fichier','URL_telechargement'];
      //setting the manyToMany relationship
 
     public function service(){
