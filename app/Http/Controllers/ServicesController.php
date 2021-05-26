@@ -381,7 +381,7 @@ class ServicesController extends Controller
  */     public function ProductRemove($k)
      {
       //suppression d'un produit
-      // DB::table('produits')->where('id', $k)->delete();
+       DB::table('produits')->where('id', $k)->delete();
        
        // suppresion d'un produit affecté depuis la table Services
 
