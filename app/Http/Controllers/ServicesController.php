@@ -398,7 +398,9 @@ class ServicesController extends Controller
                 $arr=$ser->produits_id;
                 $key = array_search($prod, $arr); 
                 unset($arr[$key]);
-                dd($arr);
+                $ser->update(['produits_id'=>$arr]);
+                $ser->save();
+                //dd($arr);
               }
            }
         }
