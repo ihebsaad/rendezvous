@@ -380,9 +380,28 @@ class ServicesController extends Controller
 /*      happyhour example
  */     public function ProductRemove($k)
      {
-       DB::table('produits')->where('id', $k)->delete();
+      //suppression d'un produit
+      // DB::table('produits')->where('id', $k)->delete();
        
-       
+       // suppresion d'un produit affecté depuis la table Services
+
+       $user= auth()->user()->id;
+       dd($user); 
+       $services=Service::where('user', $user)->get();
+
+       foreach ($services as $ser) {
+        if($ser->produits_id)
+        {
+           foreach ($ser->produits_id as $prod) {
+              if($prod==$k)
+              {
+                $arr=$ser->produits_id;
+                $key = array_search($prod, $arr); 
+                unset($arr[$key]);
+              }
+           }
+        }
+       }
       
       return back();
      }
