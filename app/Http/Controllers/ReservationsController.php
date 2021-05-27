@@ -273,7 +273,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
          $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
          
-         if ($reservation->recurrent==1) {
+         if ($Reservation->recurrent==1) {
         $message.= " <b>abonnement</b>" ;
       }
       $message.= ", ";
@@ -374,7 +374,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
          $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
          
-         if ($reservation->recurrent==1) {
+         if ($Reservation->recurrent==1) {
         $message.= " <b>abonnement</b>" ;
       }
       $message.= ", ";
