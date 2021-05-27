@@ -431,7 +431,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
                  
                }
                 $message.= "), ";
-                }
+                
               } 
 
 
