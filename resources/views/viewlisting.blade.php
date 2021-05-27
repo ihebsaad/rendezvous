@@ -371,7 +371,7 @@ font-size: 15px;
 
 				</select>
 			</div>
-			<?php echo json_encode($mab); ?>
+			<?php //echo json_encode($mab); ?>
 		  </div>		  
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
