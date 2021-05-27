@@ -286,7 +286,7 @@ class ServicesController extends Controller
   
     public function addP(Request $request)
   {
-
+    //($request);
     $nameF='';
      if($request->file('Fichier')!=null)
     {$Fichier=$request->file('Fichier');
@@ -294,7 +294,7 @@ class ServicesController extends Controller
      $nameF = str_replace(' ', '', $Fichier->getClientOriginalName()); 
 
                  $pathF = public_path()."/Fichiers/";
-                 dd($pathF);
+                 //dd($pathF);
       $date=date('d-m-Y-H-i-s');
     //$name=$name.'-service-'.$date ;
     
@@ -340,9 +340,9 @@ class ServicesController extends Controller
      if($request->file('Fichier')!=null)
     {$Fichier=$request->file('Fichier');
       
-     $nameF =  $Fichier->getClientOriginalName();
-     //dd($nameF);
-                 $pathF = storage_path()."/images/";
+     $nameF = str_replace(' ', '', $Fichier->getClientOriginalName()); 
+
+                 $pathF = public_path()."/Fichiers/";
       $date=date('d-m-Y-H-i-s');
     //$name=$name.'-service-'.$date ;
     
