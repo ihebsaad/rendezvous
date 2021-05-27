@@ -327,7 +327,7 @@ font-size: 15px;
 
 		  <?php if(($user->type_abonn_essai && $user->type_abonn_essai!="type3" ) || ($user->type_abonn &&  $user->type_abonn!="type3" )) { $myhappyhours = null; } ?>
 
-		  <?php if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
+		  <?php dd($myhappyhours) ; if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
 		  else {  echo '<input type="number" happyhourid="0" value="0" id="myhappyhoursId" name="" hidden>'; } ?>
 		  <!----------------------------------- Nav tabs --------------------------------------------->
 		  <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
