@@ -207,10 +207,8 @@ font-size: 15px;
       $x=0; foreach($happyhours as $happyhour){ $x=$x+1 ; 
       $dateF = new DateTime($happyhour->dateFin);
       $aujour= new DateTime();
-     // dd($dateF);
-      if($aujour<$dateF)
-      {
-    	?>
+     // dd($dateF);} ?>
+      
     <tr>
       <th scope="row">{{$x}}</th>
       <td>{{$happyhour->reduction}}%</td>
@@ -218,7 +216,7 @@ font-size: 15px;
       <td width="50%"><b>De</b> <?php $dateDebut = new DateTime($happyhour->dateDebut); echo $dateDebut->format('d-m-Y H:i') ; ?> <b>à</b> <?php $dateFin = new DateTime($happyhour->dateFin); echo $dateFin->format('d-m-Y H:i') ; ?></td>
       
     </tr>
-  <?php }} ?>
+  <?php } ?>
    
   </tbody>
 </table></div>
