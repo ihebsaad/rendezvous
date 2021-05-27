@@ -371,7 +371,7 @@ font-size: 15px;
 
 				</select>
 			</div>
-			
+			<?php echo $mab; ?>
 		  </div>		  
           <div class="row with-forms margin-top-0">
           <div class="col-lg-12 col-md-12 select_date_box">
@@ -1705,7 +1705,7 @@ function viewproduit(){
  		var remiseCarte  =0 ;
 		var montant = 0 ;
 		var service = $('#service').val();
-    var test = <?php echo json_decode($mab) ; ?> ;
+    var test = <?php echo json_encode($mab) ; ?> ;
     //alert(test[8][0]);
     if (service.length != 0) {
       for (var i = 0; i < service.length; i++) {
