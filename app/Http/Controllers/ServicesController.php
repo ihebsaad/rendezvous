@@ -292,7 +292,9 @@ class ServicesController extends Controller
     {$Fichier=$request->file('Fichier');
       
      $nameF = str_replace(' ', '', $Fichier->getClientOriginalName()); 
+
                  $pathF = public_path()."/Fichiers/";
+                 dd($pathF);
       $date=date('d-m-Y-H-i-s');
     //$name=$name.'-service-'.$date ;
     
