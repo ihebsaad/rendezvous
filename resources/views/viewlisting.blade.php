@@ -325,7 +325,7 @@ font-size: 15px;
 		  <h3 style="color: red"><i class="sl sl-icon-present"></i> Félicitation!<br> Vous bénéficierez pour la prochaine réservation d'une réduction de {{$reduction}}%</h3>
 		  <?php } ?>
 
-		  <?php if(($user->type_abonn_essai && $user->type_abonn_essai!=="type3" ) || ($user->type_abonn &&  $user->type_abonn!=="type3" )) {} ?>
+		  <?php // if(($user->type_abonn_essai && $user->type_abonn_essai!=="type3" ) || ($user->type_abonn &&  $user->type_abonn!=="type3" )) { $myhappyhours = null; } ?>
 
 		  <?php if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
 		  else {  echo '<input type="number" happyhourid="0" value="0" id="myhappyhoursId" name="" hidden>'; } ?>
