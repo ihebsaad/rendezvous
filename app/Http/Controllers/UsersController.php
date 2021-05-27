@@ -262,7 +262,7 @@ class UsersController extends Controller
         $reduction=0;
         $user = User::find($id);
         $today= new DateTime();
-        $happyhours = Happyhour::where('id_user',$id)->where('dateFin','<=',$today)->get();
+        $happyhours = Happyhour::where('id_user',$id)->where('dateFin','>=',$today)->get();
         
         $produit= Produit::where('user',$id)->get();
          //dd($today);
