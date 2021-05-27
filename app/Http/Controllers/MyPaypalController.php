@@ -420,9 +420,21 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
                $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
                $message.=  '( Quantité:'.$idp->qty.',';
-               $message.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
-               $message.= ", ";
+               $message.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ ";
+              
+               if (DB::table('produits')->where('id', $idp->ids )->value('type')=='Numérique') {
+                if (DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement')==Null) {
+                  $message.=', <a href="https://prenezunrendezvous.com/storage/Fichiers/'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'" > Lien de téléchargement </a>';
+                } else {
+                  $message.=', <a href="'.DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement').'" > Lien de téléchargement </a>';
+                }
+                 
+               }
+                $message.= "), ";
+                }
               } 
+
+
               if ($Reservation->serv_suppl != null) {
                $message.='<br><b>Cadeaux :</b>  '.$Reservation->serv_suppl.'';
               }
