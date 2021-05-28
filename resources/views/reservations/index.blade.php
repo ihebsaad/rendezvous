@@ -234,7 +234,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                       <?php  if ($reservation->recurrent==1) {
                            echo " <b>,abonnement</b>" ;
                          } 
-                      } ?
+                      } ?>
                       {{--<?php 
                       $servicesres = array();
                       if (is_array($reservation->services_reserves)) {
