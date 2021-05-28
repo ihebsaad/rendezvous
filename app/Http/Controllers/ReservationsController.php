@@ -796,6 +796,9 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
   {
     //client_products
     //dd($request);
+    $reservation  = new Reservation($request->all());
+         
+        $reservation->save();
     $produitslist=$request->get('produitslist');
     $qtyproduits=$request->get('qtyproduits');
     
@@ -812,12 +815,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $serviceNom = $service->nom ;
         $reducPromo = $code->reduction ;
         $Allreduction = $Allreduction."Code promo : ".$reducPromo."% (".$serviceNom.") / " ;
+        $reservation->update(array('reduction'=>$Allreduction));
     }
     }
-    if ($request->get('happyhour') != "0") { 
+    if ($request->get('happyhour') != 0) { 
       $Allreduction = $Allreduction."Happy hours : ".$request->get('happyhour')."% / " ;
       $B=Happyhour::where('id',$request->get('happyhourid'))->value('Beneficiaries');
       Happyhour::where('id', $request->get('happyhourid'))->update(array("Beneficiaries"=> $B + 1));
+      $reservation->update(array('reduction'=>$Allreduction));
     }
     
     $user=$request->get('user');
@@ -832,9 +837,9 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
               'remarques' => $request->get('remarques'),
               'rappel' => $request->get('rappel'),
             ]);*/
-         $reservation  = new Reservation($request->all());
          
-        $reservation->save();
+        
+
         $idres = $reservation->id ;
         if ($produitslist != null ) {
         $pch="";
