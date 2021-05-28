@@ -201,47 +201,28 @@ background-color:#a0d468;
                                         {
                                             return $t->date_reservation;
                                         })->reverse(); $lock=true;//dd($reservations);?>
-          <?php if($lock){?>
-            @foreach($reservations as  $key => $reservation ) 
-         <?php   //dd(json_decode($reservation->services_reserves));
-       /*  $service_name='';
-         $service_prix=0;
+          <?php if($lock){ for($ii=0; $ii<count($reservations) ; $ii++){?>
+            
 
-            foreach ($reservation->services_reserves as $s ) {
-              $service=\App\Service::find($s);
-              $service_name.=$service->nom.", ";
-              $service_prix+= floatval($service->prix);
-            }*/
-
-/*
-$allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
-  if(   $reservation->reste >= 200  &&  $allow_slices     ){
-  // paiement sur tranches
-  }else{
-    
-    
-  }
-*/
-           ?>
-      <?php  $montant=$reservation->Net; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
-      <?php $description=$reservation->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservation->service);?>
+      <?php  $montant=$reservations[$ii]->Net; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
+      <?php $description=$reservations[$ii]->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservations[$ii]->service);?>
             <tr > 
- <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client);?></td><?php }?>
-  <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
-                     {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
-                    <td style="width:10%"><?php $dateres = new DateTime($reservation->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?> </td>
+ <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservations[$ii]->client).' '.UsersController::ChampById('lastname',$reservations[$ii]->client);?></td><?php }?>
+  <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservations[$ii]->prestataire).' '.UsersController::ChampById('lastname',$reservations[$ii]->prestataire) ;?></td><?php }?>
+                     {{--<td style="width:10%">{{$reservations[$ii]->date  }}<br>{{$reservations[$ii]->heure  }} </td>--}}
+                    <td style="width:10%"><?php $dateres = new DateTime($reservations[$ii]->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?> </td>
                     <td>
-                      {{$reservation->nom_serv_res}}
-                      <?php  if ($reservation->recurrent==1) {
+                      {{$reservations[$ii]->nom_serv_res}}
+                      <?php  if ($reservations[$ii]->recurrent==1) {
                            echo " <b>,abonnement</b>" ;
                          } 
                        ?>
                       <?php /*
                       $servicesres = array();
-                      if (is_array($reservation->services_reserves)) {
-                        $servicesres = $reservation->services_reserves;
+                      if (is_array($reservations[$ii]->services_reserves)) {
+                        $servicesres = $reservations[$ii]->services_reserves;
                       }else {
-                        $servicesres = json_decode($reservation->services_reserves);
+                        $servicesres = json_decode($reservations[$ii]->services_reserves);
                       }
 
                      $servicesres=$servicesres;
@@ -251,41 +232,41 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                         echo  DB::table('services')->where('id', $servicesre )->value('nom');
                        echo " ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
                        echo ", ";
-                       if ($reservation->recurrent==1) {
+                       if ($reservations[$ii]->recurrent==1) {
                       echo " <b>abonnement</b>" ;
                          } 
                       } */?>
                     </td>
                       <td>
-                        {{$reservation->nom_prod_res}}
-                       <?php /*$idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservation->id+'" ) );
+                        {{$reservations[$ii]->nom_prod_res}}
+                       <?php /*$idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservations[$ii]->id+'" ) );
                       foreach ($idproduits as $idp) {
 
                        echo  DB::table('produits')->where('id', $idp->ids )->value('nom_produit');
                        echo "(".DB::table('produits')->where('id', $idp->ids )->value('prix_unité').")";
                        echo ", ";
                       }*/?></td>
-                       <td>{{$reservation->reduction  }}</td>
-                      <td style="font-weight:bold">{{$reservation->Net  }}  €</td>
+                       <td>{{$reservations[$ii]->reduction  }}</td>
+                      <td style="font-weight:bold">{{$reservations[$ii]->Net  }}  €</td>
                       
 
 
                       
-                      <td> {{$reservation->serv_suppl  }}</td>
+                      <td> {{$reservations[$ii]->serv_suppl  }}</td>
   <td>
-    <?php  if($reservation->statut==0){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-danger" >En attente</span>';}  ?>
-      <?php  if($reservation->statut==1){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-primary  " >Validée</span>';}  ?>
-      <?php  if($reservation->statut==2){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-canceled ">Annulée</span>';}  ?>
+    <?php  if($reservations[$ii]->statut==0){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-danger" >En attente</span>';}  ?>
+      <?php  if($reservations[$ii]->statut==1){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-primary  " >Validée</span>';}  ?>
+      <?php  if($reservations[$ii]->statut==2){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-canceled ">Annulée</span>';}  ?>
       <?php 
       
-        if( $reservation->paiement==1) {
+        if( $reservations[$ii]->paiement==1) {
           $statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;display: inline-block; " class="success statut">Acompte Payé</span>';
         }
-        if( $reservation->paiement==2) {
+        if( $reservations[$ii]->paiement==2) {
           $statut.= '  <span style="margin:8px 5px 5px 5px;color:black!important;font-weight:blod;padding:7px 15px 7px 15px!important;display: inline-block; " class="success statut">Total Payée</span>';
         }
-        if( $reservation->paiement==3) {
-          $retraits=\App\Retrait::where('reservation',$reservation->id)->where('statut',1)->count();
+        if( $reservations[$ii]->paiement==3) {
+          $retraits=\App\Retrait::where('reservation',$reservations[$ii]->id)->where('statut',1)->count();
           $statut.= '  <span style="margin:12px 12px 12px 12px;color:black!important;font-weight:blod;padding:3px 3px 3px 3px!important;display: inline-block; " class="success statut">Paiement par tranches : acompte + ('.$retraits.'/4) tranches payées</span>';
         }         
         echo $statut;  
@@ -294,22 +275,22 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
      
       <td style="overflow-y: auto">
          <?php if($User->user_type =='client' ) {?>   
-            <?php if( $reservation->paiement<2) {?> 
+            <?php if( $reservations[$ii]->paiement<2) {?> 
          
 <?php // paiement= 0 : acompte non payé ?>        
 <?php // paiement= 1 : acompte payé ?>        
 <?php // paiement= 2 : acompte et reste payés ?>        
-    <?php if( $reservation->paiement ==0 ) { ?>   
+    <?php if( $reservations[$ii]->paiement ==0 ) { ?>   
     
         <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
         {{ csrf_field() }}
-                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservations[$ii]->prestataire ; ?>"  >
         
-        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservations[$ii]->id ; ?>"  >
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
-        <?php $emailpaypal= UsersController::ChampById('emailPaypal',$reservation->prestataire); if($emailpaypal) {?>
-        @if($reservation->Net != 0 || $reservation->Net)
+        <?php $emailpaypal= UsersController::ChampById('emailPaypal',$reservations[$ii]->prestataire); if($emailpaypal) {?>
+        @if($reservations[$ii]->Net != 0 || $reservations[$ii]->Net)
         <button class="button ">Payer l'acompte</button> 
         @endif
          <?php } else{ ?>
@@ -318,25 +299,25 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
         </form> 
           
     <?php  } ?> 
-    <?php if( $reservation->paiement ==1 ) { 
-    $type_abonn_essai = UsersController::ChampById('type_abonn_essai',$reservation->prestataire) ; 
-    $type_abonn = UsersController::ChampById('type_abonn',$reservation->prestataire);
-    $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestataire);
+    <?php if( $reservations[$ii]->paiement ==1 ) { 
+    $type_abonn_essai = UsersController::ChampById('type_abonn_essai',$reservations[$ii]->prestataire) ; 
+    $type_abonn = UsersController::ChampById('type_abonn',$reservations[$ii]->prestataire);
+    $allow_slices = UsersController::ChampById('allow_slices',$reservations[$ii]->prestataire);
    // dd( $type_abonn_essai.' '. $type_abonn);
    
      if(($type_abonn_essai && ($type_abonn_essai=="type2" || $type_abonn_essai=="type3" ))|| ($type_abonn && ($type_abonn=="type2" || $type_abonn=="type3" ))) { 
     
-  if( $reservation->Net >= 200  &&  $allow_slices ){
+  if( $reservations[$ii]->Net >= 200  &&  $allow_slices ){
   // paiement sur tranches
   ?>
            <form class="  " method="POST" id="payment-form"    action="{{ route('getpreapproved') }}" >
         {{ csrf_field() }}
-                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservations[$ii]->prestataire ; ?>"  >
         
-        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
-        <input class="form-control " name="montant" type="hidden" value="<?php echo  $reservation->reste ; ?>"  >       
+        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservations[$ii]->id ; ?>"  >
+        <input class="form-control " name="montant" type="hidden" value="<?php echo  $reservations[$ii]->reste ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >
-        <button class="button"  >Payer Tranche (1/4  de <?php echo $reservation->reste ; ?>€) </button>
+        <button class="button"  >Payer Tranche (1/4  de <?php echo $reservations[$ii]->reste ; ?>€) </button>
         </form> 
   <?php     
   }else{
@@ -345,15 +326,15 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
     ?>  
         <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
         {{ csrf_field() }}
-                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservations[$ii]->prestataire ; ?>"  >
         
-        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservations[$ii]->id ; ?>"  >
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
     
-        <button class="button ">Payer le reste : <?php echo $reservation->reste;?> €</button> 
+        <button class="button ">Payer le reste : <?php echo $reservations[$ii]->reste;?> €</button> 
         </form>
-        <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservation->id)}}" >Annuler/Reporter</a>
+        <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservations[$ii]->id)}}" >Annuler/Reporter</a>
     <?php
     } // paiement sans tranches
      }// fin if type 2 ou type 3 abonneùent
@@ -363,15 +344,15 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 
       <form class="  " method="POST" id="payment-form"    action="{{ route('payreservation') }}" >
         {{ csrf_field() }}
-                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservation->prestataire ; ?>"  >
+                <input class="form-control " name="prest" type="hidden" value="<?php echo $reservations[$ii]->prestataire ; ?>"  >
         
-        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservation->id ; ?>"  >
+        <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservations[$ii]->id ; ?>"  >
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
     
-        <button class="button ">Payer le reste : <?php echo $reservation->reste;?> €</button> 
+        <button class="button ">Payer le reste : <?php echo $reservations[$ii]->reste;?> €</button> 
         </form>
-        <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservation->id)}}" >Annuler/Reporter</a>
+        <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservations[$ii]->id)}}" >Annuler/Reporter</a>
     
     
     <?php }
@@ -385,31 +366,31 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
       <?php } ?> 
        <?php if($User->user_type =='prestataire' ) {    
 
-      if($reservation->statut==0){  ?> 
+      if($reservations[$ii]->statut==0){  ?> 
 
           
        
-      <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservation->id)}}"><i class="fa fa-check"></i>  Valider</a>
-      <?php if ($reservation->paiement==0) { ?>
-       <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler</a>
+      <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservations[$ii]->id)}}"><i class="fa fa-check"></i>  Valider</a>
+      <?php if ($reservations[$ii]->paiement==0) { ?>
+       <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', $reservations[$ii]->id)}}"><i class="fa fa-close"></i>  Annuler</a>
         <?php } else { ?>
-          <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@AnnulerReservation', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler</a>
+          <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@AnnulerReservation', $reservations[$ii]->id)}}"><i class="fa fa-close"></i>  Annuler</a>
           <?php } ?> 
                   <?php } ?> 
-        <a  class="button button-danger" style="margin:5px 5px 5px 5px"  href="{{action('ReservationsController@newDate', $reservation->id)}}"><i class="fa fa-close"></i>  Proposer des dates</a>
-       <!--<a  class="button button-danger popup-with-zoom-anim" style="margin:5px 5px 5px 5px"  onclick="insert_id_res('{{$reservation->id}}')" href="#updatestatut-dialog "><i class="fa fa-close"></i>  Changer Statut</a>-->
-       <?php }//affiche_model(this,$reservation->id)} ?> 
+        <a  class="button button-danger" style="margin:5px 5px 5px 5px"  href="{{action('ReservationsController@newDate', $reservations[$ii]->id)}}"><i class="fa fa-close"></i>  Proposer des dates</a>
+       <!--<a  class="button button-danger popup-with-zoom-anim" style="margin:5px 5px 5px 5px"  onclick="insert_id_res('{{$reservations[$ii]->id}}')" href="#updatestatut-dialog "><i class="fa fa-close"></i>  Changer Statut</a>-->
+       <?php }//affiche_model(this,$reservations[$ii]->id)} ?> 
  
       </td>
       
 
     <!--    <td>  
-           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@remove', $reservation->id)}}"><i class="fa fa-remove"></i></a>
+           <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@remove', $reservations[$ii]->id)}}"><i class="fa fa-remove"></i></a>
 
                       </td> -->
                 </tr>
-            @endforeach
-             <?php }?>
+    
+             <?php }}?>
             </tbody>
         </table>
             </div>
@@ -521,7 +502,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
 
       </form> 
       <br><hr><br>
-       <center><a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', $reservation->id)}}"><i class="fa fa-close"></i>  Annuler le Statut personnalisé</a></center>
+       <center><a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', 5)}}"><i class="fa fa-close"></i>  Annuler le Statut personnalisé</a></center>
 
      </div>     
      </div>   
