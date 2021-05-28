@@ -10,6 +10,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
+use \App\Produit;
 use \App\Reservation;
 use \App\Payment;
 use \App\Alerte;
