@@ -814,7 +814,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $Allreduction = $Allreduction."Code promo : ".$reducPromo."% (".$serviceNom.") / " ;
     }
     }
-    if ($request->get('happyhour') != 0) {
+    if ($request->get('happyhour') != "0") { 
       $Allreduction = $Allreduction."Happy hours : ".$request->get('happyhour')."% / " ;
       $B=Happyhour::where('id',$request->get('happyhourid'))->value('Beneficiaries');
       Happyhour::where('id', $request->get('happyhourid'))->update(array("Beneficiaries"=> $B + 1));
