@@ -202,7 +202,7 @@ background-color:#a0d468;
                                             return $t->date_reservation;
                                         })->reverse(); $lock=true;//dd($reservations);?>
           <?php if($lock){?>
-            @foreach($reservations as $reservation)
+            @foreach($reservations as $reservation => $key) 
          <?php   //dd(json_decode($reservation->services_reserves));
        /*  $service_name='';
          $service_prix=0;
