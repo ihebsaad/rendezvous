@@ -228,9 +228,14 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client);?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
-                    <td style="width:10%">{{$reservation->date_reservation  }} </td>
+                    <td style="width:10%">{{$reservation->date_reservation }} </td>
                     <td>
-                      <?php //dd(is_array($reservation->services_reserves)); 
+                      {{$reservation->nom_serv_res}}
+                      <?php  if ($reservation->recurrent==1) {
+                           echo " <b>,abonnement</b>" ;
+                         } 
+                      } ?
+                      {{--<?php 
                       $servicesres = array();
                       if (is_array($reservation->services_reserves)) {
                         $servicesres = $reservation->services_reserves;
@@ -239,28 +244,26 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                       }
 
                      $servicesres=$servicesres;
-                   // dd($servicesres);
+              
                       foreach ($servicesres as $servicesre) {
-                      // dd($servicesre);
+                     
                         echo  DB::table('services')->where('id', $servicesre )->value('nom');
                        echo " ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
                        echo ", ";
                        if ($reservation->recurrent==1) {
                       echo " <b>abonnement</b>" ;
-                    } //dd( $servicesre);
-                      } ?>
+                         } 
+                      } ?>--}}
                     </td>
-                      <td><?php $idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservation->id+'" ) );
+                      <td>
+                        {{$reservation->nom_prod_res}}
+                        {{--<?php $idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservation->id+'" ) );
                       foreach ($idproduits as $idp) {
 
                        echo  DB::table('produits')->where('id', $idp->ids )->value('nom_produit');
                        echo "(".DB::table('produits')->where('id', $idp->ids )->value('prix_unité').")";
                        echo ", ";
-                      }
-
-
-
-                       ?></td>
+                      }?>--}}</td>
                        <td>{{$reservation->reduction  }}</td>
                       <td style="font-weight:bold">{{$reservation->Net  }}  €</td>
                       
