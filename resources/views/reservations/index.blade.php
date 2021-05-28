@@ -234,8 +234,8 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                       <?php  if ($reservation->recurrent==1) {
                            echo " <b>,abonnement</b>" ;
                          } 
-                      } ?>
-                      {{--<?php 
+                       ?>
+                      <?php /*
                       $servicesres = array();
                       if (is_array($reservation->services_reserves)) {
                         $servicesres = $reservation->services_reserves;
@@ -253,17 +253,17 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                        if ($reservation->recurrent==1) {
                       echo " <b>abonnement</b>" ;
                          } 
-                      } ?>--}}
+                      } */?>
                     </td>
                       <td>
                         {{$reservation->nom_prod_res}}
-                        {{--<?php $idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservation->id+'" ) );
+                       <?php /*$idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservation->id+'" ) );
                       foreach ($idproduits as $idp) {
 
                        echo  DB::table('produits')->where('id', $idp->ids )->value('nom_produit');
                        echo "(".DB::table('produits')->where('id', $idp->ids )->value('prix_unité').")";
                        echo ", ";
-                      }?>--}}</td>
+                      }*/?></td>
                        <td>{{$reservation->reduction  }}</td>
                       <td style="font-weight:bold">{{$reservation->Net  }}  €</td>
                       
