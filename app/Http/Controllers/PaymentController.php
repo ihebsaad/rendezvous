@@ -1248,9 +1248,9 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
               
                if (DB::table('produits')->where('id', $idp->ids )->value('type')=='Numérique') {
                 if (DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement')==Null) {
-                  $message.=', <a href="https://prenezunrendezvous.com/public/Fichiers/'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'" download="'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'"> Lien de téléchargement2 </a>';
+                  $message.=', <a href="https://prenezunrendezvous.com/public/Fichiers/'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'" download="'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'"> Télécharger mon produit </a>';
                 } else {
-                  $message.=', <a href="'.DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement').'" > Lien de téléchargement </a>';
+                  $message.=', <a href="'.DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement').'" > Télécharger mon produit </a>';
                 }
                  
                }
