@@ -717,11 +717,14 @@ class PaymentController extends Controller
 	
 	
 	
-	public function sendMail($to,$sujet,$contenu){
+public function sendMail($to,$sujet,$contenu){
 
 		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
-        $swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
-        $swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+    //$swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+    //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+    $swiftTransport->setUsername('prestataire222@gmail.com'); //adresse email
+    $swiftTransport->setPassword('123prestataire'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);
@@ -738,7 +741,6 @@ class PaymentController extends Controller
 			});
 	  
 	}
-	
 	
 	
 	
