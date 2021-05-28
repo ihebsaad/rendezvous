@@ -229,7 +229,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
  <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client);?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire) ;?></td><?php }?>
                      {{--<td style="width:10%">{{$reservation->date  }}<br>{{$reservation->heure  }} </td>--}}
-                    <td style="width:10%">{{$reservation->date_reservation }} </td>
+                    <td style="width:10%"><?php $dateres = new DateTime($reservation->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?> </td>
                     <td>
                       {{$reservation->nom_serv_res}}
                       <?php  if ($reservation->recurrent==1) {
