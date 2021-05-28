@@ -196,11 +196,12 @@ background-color:#a0d468;
           </thead>
           <tbody>
             <?php  //dd($reservations);
-
+            $lock=false;
             $reservations=$reservations->sortBy(function($t)
                                         {
                                             return $t->date_reservation;
-                                        })->reverse(); dd($reservations);?>
+                                        })->reverse(); $lock=true;//dd($reservations);?>
+          <?php if($lock){?>
             @foreach($reservations as $reservation)
          <?php   //dd(json_decode($reservation->services_reserves));
        /*  $service_name='';
@@ -408,6 +409,7 @@ $allow_slices = UsersController::ChampById('allow_slices',$reservation->prestata
                       </td> -->
                 </tr>
             @endforeach
+             <?php }?>
             </tbody>
         </table>
             </div>
