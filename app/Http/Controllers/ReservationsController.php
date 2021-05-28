@@ -880,7 +880,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     {
             foreach ($ser as $s ) {
               $service=\App\Service::find($s);
-              $service_name.=$service->nom.", ";
+              $service_name.=$service->nom."(".$service->prix." €), ";
               $service_prix+= floatval($service->prix);
             }
 
