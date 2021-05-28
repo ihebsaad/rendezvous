@@ -839,9 +839,12 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         if ($produitslist != null ) {
         $pch="";
         for ($i=0; $i < sizeof($produitslist) ; $i++) { 
-        
-        $produ=Produit::where('id',$produitslist[$i])->first(['nom_produit']);
-        $pch.= $qtyproduits[$i].' '.$produ->nom_produit.', ';
+
+        if($qtyproduits[$i]!=0)
+        {
+        $produ=Produit::where('id',$produitslist[$i])->first(['nom_produit','prix_unité']);
+        $pch.= $qtyproduits[$i].' '.$produ->nom_produit.'('.(intval($qtyproduits[$i])*intval($produ->prix_unité) ).'), ';
+        }
 
     $client_product  = new Client_product([
               'id_client' => $request->get('client'),
