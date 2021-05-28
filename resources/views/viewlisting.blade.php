@@ -2020,6 +2020,7 @@ function viewproduit(){
                     //alert(dateStr);
                     var service = $('#service').val();
                     var rappel = $('#rappel').val();
+                    alert(happyhour);
 					//alert(JSON.stringify(service));
                     $.ajax({
                         url:"{{ route('reservations.add') }}",
