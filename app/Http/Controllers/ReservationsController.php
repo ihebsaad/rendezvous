@@ -836,9 +836,12 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $reservation->save();
         $idres = $reservation->id ;
         if ($produitslist != null ) {
-        
+        $pch="";
         for ($i=0; $i < sizeof($produitslist) ; $i++) { 
-    
+        
+        $produ=Produit::where('id',$produitslist[$i])->first(['nom_produit']);
+        $pch.= $qtyproduits[$i].' '.$produ->nom_produit.', ';
+
     $client_product  = new Client_product([
               'id_client' => $request->get('client'),
               'id_products' => $produitslist[$i],
@@ -848,6 +851,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
             ]);
     $client_product->save();
     }
+    $reservation->update(['nom_prod_res'=>$pch]);
+    $reservation->save();
     }
     $test=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->exists();
     if ($test=='true') {
