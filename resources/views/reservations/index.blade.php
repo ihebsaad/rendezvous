@@ -200,7 +200,7 @@ background-color:#a0d468;
             $reservations=$reservations->sortBy(function($t)
                                         {
                                             return $t->date_reservation;
-                                        })->reverse(); //dd($reservations);?>
+                                        })->reverse(); dd($reservations);?>
             @foreach($reservations as $reservation)
          <?php   //dd(json_decode($reservation->services_reserves));
        /*  $service_name='';
