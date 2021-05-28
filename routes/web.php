@@ -17,6 +17,25 @@ Route::get('/', function () {
 });
 */
 Auth::routes();
+Route::get('/testpaypal','PaymentController@testpay');
+	Route::get('/testr','PaymentController@okk')->name('testr');
+	Route::get('/payreservation','PaymentController@payreservationwithemail')->name('payreservation');
+		Route::post('/payreservation','PaymentController@payreservationwithemail')->name('payreservation');
+
+		Route::get('/statuspayreservationwithemail','PaymentController@statuspayreservationwithemail')->name('statuspayreservationwithemail');
+			Route::get('/cancelpay','MyPaypalController@cancelpay')->name('cancelpay');
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -201,8 +220,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 //	Route::get('/payreservation','PaymentController@payreservation')->name('payreservation');
  //   Route::post('/payreservation','PaymentController@payreservation')->name('payreservation');
 
-     Route::get('/payreservation','MyPaypalController@payReservation')->name('payreservation');
-    Route::post('/payreservation','MyPaypalController@payReservation')->name('payreservation');
+    //Route::post('/payreservation','MyPaypalController@payReservation')->name('payreservation');
    // Route::get('/successPayAcompteReservation','PayPalController@successPay');
     Route::get('/check/paypal','MyPaypalController@CheckEmail')->name('check.paypal');
 
@@ -212,7 +230,6 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::post('/statusres','PaymentController@getPaymentStatusRes')->name('statusres');
 
 	
-	Route::get('/successpay','MyPaypalController@successpay')->name('successpay');
 	Route::get('/cancelpay','MyPaypalController@cancelpay')->name('cancelpay');
 	Route::get('/successpay2','MyPaypalController@successpay2')->name('successpay2');
 	Route::get('/cancelpay2','MyPaypalController@cancelpay2')->name('cancelpay2');

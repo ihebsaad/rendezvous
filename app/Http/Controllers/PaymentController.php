@@ -1,5 +1,11 @@
 <?php
 namespace App\Http\Controllers;
+use PayPal\Api\Details;
+use PayPal\Api\Payee;
+use PayPal\Exception\PayPalConnectionException;
+use PHPUnit\TextUI\ResultPrinter;
+
+use Route;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,7 +20,7 @@ use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
-use PayPal\Api\RedirectUrls;
+use PayPal\Api\RedirectUrls; 
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use Illuminate\Support\Facades\Input;
@@ -38,12 +44,31 @@ use PayPal\Api\PatchRequest;
 use PayPal\Common\PayPalModel;
 use PayPal\Api\ShippingAddress;
  
+use PayPal\Api\BillingInfo;
+use PayPal\Api\Invoice;
+use PayPal\Api\InvoiceAddress;
+use PayPal\Api\InvoiceItem;
+use PayPal\Api\MerchantInfo;
+use PayPal\Api\PaymentTerm;
+use PayPal\Api\ShippingInfo;
+
+use Illuminate\Support\Facades\Log;
+use App\IPNStatus;
+use App\Retrait;
+use App\Service;
 
 
- 
+  use DateTime;
  use Swift_Mailer;
  use Mail;
  
+
+
+
+use Google_Client;
+use Google_Service_Calendar;
+use Google_Service_Calendar_Event;
+use Google_Service_Calendar_EventDateTime;
 class PaymentController extends Controller
 {
 	public function payAcompteReservation()
@@ -82,6 +107,45 @@ class PaymentController extends Controller
 	
 	public function __construct()
     {
+
+       if(Route::current()->action['as']=='payreservationwithemail' || Route::current()->action['as']=='statuspayreservationwithemail' || Route::current()->action['as']=='oauthCallback' || Route::current()->action['as']=='successpay2')
+       {
+        if(Route::current()->action['as']=='payreservationwithemail' || Route::current()->action['as']=='statuspayreservationwithemail' || Route::current()->action['as']=='successpay2' )
+        {
+           $id = Input::get('reservation');
+           Session::put('idres', $id);
+          
+        }
+        else
+        {
+          $id = Session::get('idres');
+         // dd($id);
+        }
+
+       
+       
+         $idprest=Reservation::find($id)->prestataire;
+         $prest=User::find($idprest);
+         //dd($prest->google_path_json);
+        if($prest->google_path_json)
+        {
+            if(file_exists('storage/googlecalendar/'.$prest->google_path_json))
+            {
+
+            //dd("exist");
+            $client = new Google_Client();
+            $client->setAuthConfig('storage/googlecalendar/'.$prest->google_path_json);
+            $client->addScope(Google_Service_Calendar::CALENDAR);
+            $client->setAccessType('offline');
+
+            $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false)));
+            $client->setHttpClient($guzzleClient);
+            $this->client = $client;
+             }
+        }
+
+      //  dd( $this->client);
+        }
 
 	/** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
@@ -765,7 +829,7 @@ try {
         ->setValue($value);
     $patchRequest = new PatchRequest();
     $patchRequest->addPatch($patch);
-    $createdPlan->update($patchRequest, $apiContext);
+    $createdPlan->update($patchRequest, $this->_api_context);
  	
    // $patchedPlan = Plan::get($createdPlan->getId(), $apiContext);
   $patchedPlan =  $plan->setId($createdPlan->getId());
@@ -811,7 +875,7 @@ $agreement->setShippingAddress($shippingAddress);
 
 try {
     // Create agreement
-    $agreement = $agreement->create($apiContext);
+    $agreement = $agreement->create($this->_api_context);
     
     // Extract approval URL to redirect user
     $approvalUrl = $agreement->getApprovalLink();
@@ -868,7 +932,7 @@ if (!empty($_GET['status'])) {
         
         try {
             // Execute agreement
-            $agreement->execute($token, $apiContext);
+            $agreement->execute($token, $this->_api_context);
 			 \Session::put('success', 'Paiement tranche avec succès');
         //    return Redirect::route('/pay');
 		  return redirect('/pay/')->with('success', ' Paiement avec succès  ');
@@ -893,8 +957,628 @@ if (!empty($_GET['status'])) {
  }
  	
 	
+ public function payreservationwithemail(Request $request)
+ 	{
+ 		//dd($request);
+ 		$montant=$request->get('montant');
+
+       // dd($request->get('reservation'));
+        $desc=$request->get('description');
+        $reservation=$request->get('reservation');
+        $prestId=$request->get('prest'); 
+        $email=User::where('id',$prestId)->value('emailPaypal');
+		$Reservation=Reservation::find( $reservation);
+		// Paiement d'acompte		
+		if($Reservation->paiement==0 || $Reservation->paiement ==null){
+		$abonnement=User::where('id',$prestId)->value('abonnement');
+        if ($abonnement==3) {
+            $k=60 ;
+        }elseif ($abonnement==2) {
+            $k=50 ;
+        }elseif ($abonnement==1) {
+            $k=30 ;
+        }
+        $acompte=($montant*$k)/100 ;
+		$reste=$montant-$acompte;
+
+
+
+		
+		$payee = new Payee();
+		$payee->setEmail($email);
+		 
+		//$reservation=$request->get('reservation');
+		$payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+		$item_1 = new Item();
+		$item_1->setName('Item 1') /** item name **/
+            ->setCurrency('EUR')
+            ->setQuantity(1)
+            ->setPrice($acompte); /** unit price **/
+		$item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+		$amount = new Amount();
+        $amount->setCurrency('EUR')
+            ->setTotal($acompte);
+		$transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($item_list)
+            ->setDescription('Abonnement '. $desc )
+            ->setInvoiceNumber(uniqid())
+            ->setPayee($payee);
+		$redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('statuspayreservationwithemail',['reservation'=>$reservation,'type'=>'acompte','reste'=>$reste])) /** Specify return URL **/
+            ->setCancelUrl(URL::route('cancelpay',['reservation'=>$reservation]));
+		$payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+        /** dd($payment->create($this->_api_context));exit; **/
+        try {
+		$payment->create($this->_api_context);
+		} catch (\PayPal\Exception\PayPalConnectionException $ex) {
+		if (\Config::get('app.debug')) {
+	 	\Session::put('error', 'Session expirée');
+     //           return Redirect::route('pay');
+				return redirect('/pricing')->with('error', ' Session expirée  ');
+
+		} else {
+		// \Session::put('error', 'erreur survenue');
+        //        return Redirect::route('pay');
+			 return redirect('/pricing')->with('error', ' erreur survenue  ');
+
+		}
+		}
+		foreach ($payment->getLinks() as $link) {
+		if ($link->getRel() == 'approval_url') {
+		$redirect_url = $link->getHref();
+                break;
+		}
+		}
+		/** add payment ID to session **/
+        Session::put('paypal_payment_id', $payment->getId());
+		if (isset($redirect_url)) {
+		/** redirect to paypal **/
+            return Redirect::away($redirect_url);
+		}
+	//	\Session::put('error', 'Erreur survenue');
+    //    return Redirect::route('pay');
+	 return redirect('/pricing')->with('error', ' erreur survenue  ');
+
+	}// end acompte
+
+	// paiement reste
+	if($Reservation->paiement==1){
+		
+        $reste=$Reservation->reste;
+
+
+
+		
+		$payee = new Payee();
+		$payee->setEmail($email);
+		 
+		//$reservation=$request->get('reservation');
+		$payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+		$item_1 = new Item();
+		$item_1->setName('Item 1') /** item name **/
+            ->setCurrency('EUR')
+            ->setQuantity(1)
+            ->setPrice($reste); /** unit price **/
+		$item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+		$amount = new Amount();
+        $amount->setCurrency('EUR')
+            ->setTotal($reste);
+		$transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($item_list)
+            ->setDescription('Abonnement '. $desc )
+            ->setInvoiceNumber(uniqid())
+            ->setPayee($payee);
+		$redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('statuspayreservationwithemail',['reservation'=>$reservation,'type'=>'reste','reste'=>0])) /** Specify return URL **/
+            ->setCancelUrl(URL::route('cancelpay',['reservation'=>$reservation]));
+		$payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+        /** dd($payment->create($this->_api_context));exit; **/
+        try {
+		$payment->create($this->_api_context);
+		} catch (\PayPal\Exception\PayPalConnectionException $ex) {
+		if (\Config::get('app.debug')) {
+	 	\Session::put('error', 'Session expirée');
+     //           return Redirect::route('pay');
+				return redirect('/pricing')->with('error', ' Session expirée  ');
+
+		} else {
+		// \Session::put('error', 'erreur survenue');
+        //        return Redirect::route('pay');
+			 return redirect('/pricing')->with('error', ' erreur survenue  ');
+
+		}
+		}
+		foreach ($payment->getLinks() as $link) {
+		if ($link->getRel() == 'approval_url') {
+		$redirect_url = $link->getHref();
+                break;
+		}
+		}
+		/** add payment ID to session **/
+        Session::put('paypal_payment_id', $payment->getId());
+		if (isset($redirect_url)) {
+		/** redirect to paypal **/
+            return Redirect::away($redirect_url);
+		}
+	//	\Session::put('error', 'Erreur survenue');
+    //    return Redirect::route('pay');
+	 return redirect('/pricing')->with('error', ' erreur survenue  ');
+
+	}// end pay rest
+
+
+
+
+
+
+
+}
+	//---------------------------------------------------------------------------------------------------------------------------
 	
+ //---------------------------------------------------------------------------------------------------------------------------	
+	 public function statuspayreservationwithemail(Request $request)
+    {
+ 			
+ 			/** Get the payment ID before session clear **/
+        $payment_id = Session::get('paypal_payment_id');
+ 			//dd($payment_id);
+
+		/** clear the session payment ID **/
+        Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+		 \Session::put('error', 'Paiement échouée');
+       //     return Redirect::route('/pay');
+	     return redirect('/pay')->with('error', ' Paiement échouée  ');
+
+		} 
+		$payment = Payment::get($payment_id, $this->_api_context);
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+		/**Execute the payment **/
+        $result = $payment->execute($execution, $this->_api_context);
+		if ($result->getState() == 'approved') {
+		 \Session::put('success', 'Paiement avec succès');
+        //    return Redirect::route('/pay');
+		 $reservation=$request->get('reservation');
+         $type=$request->get('type');
+         $reste=$request->get('reste');
+		 if($type=='acompte'){$titre='Acompte';}else
+		 {$titre='Montant Restant'; }
+
+	// verifier success ..
 	
+		 \Session::put('success', 'Paiement avec succès');
+        //    return Redirect::route('/pay');
+
+		 // ajouter +1 au carte fidelite --------------------------------------------------------------
+ 		$idclient=Reservation::where('id',$reservation)->value('client');
+     	$idprestataire=Reservation::where('id',$reservation)->value('prestataire');
+    	$test=Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->exists();
+    	if ($test=='true') {
+     		$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation');
+    		if ($val==9) {
+
+    			$val =0;
+    			$nbr_fois = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_fois') +1;
+    			Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_fois' => $nbr_fois));
+    		}else {
+    			//dd('ok');
+    			$val = Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->value('nbr_reservation') +1;
+    			//dd($val);
+
+    		}
+    		Cartefidelite::where('id_client',$idclient)->where('id_prest',$idprestataire)->update(array('nbr_reservation' => $val));
+    		
+    	}else{
+    		//dd('ok');
+    		$newCarte = new Cartefidelite([
+              'id_client' => $idclient,
+              'id_prest' => $idprestataire,
+              'nbr_reservation' => 1,
+              'nbr_fois' => 0
+              
+           ]);
+
+        $newCarte->save();
+
+    	}
+    	//-----------------------------------------------------------------------------------------------------
+		 // Email
+		$Reservation = \App\Reservation::find( $reservation);
+		
+ 		$client =  \App\User::find($Reservation->client);
+		$prestataire =  \App\User::find($Reservation->prestataire);
+		$serviceid = $Reservation->service;
+		
+		$service = \App\Service::find( $serviceid) ;
+		if($type=='acompte'){
+				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'statut'=>1));	
+				$date = new DateTime($Reservation->date_reservation);
+				$date = $date->format('d-m-Y');
+				$heure = new DateTime($Reservation->date_reservation);
+				$heure = $heure->format('H:i');
+
+$idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      }       
+
+
+				//dd($heure);
+				// Email au client
+				$message='Bonjour,<br>';
+				$message.='Réservation('.$titre.') payée avec succès <br>';
+				$message.='Votre rendez-vous  est confirmé le <b>'.$date .'</b> à <b>'.$heure .'</b> avec le prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
+				$message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='<br><b>Produits :</b>  ';
+					foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( Quantité:'.$idp->qty.',';
+               $message.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ ";
+              
+               if (DB::table('produits')->where('id', $idp->ids )->value('type')=='Numérique') {
+                if (DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement')==Null) {
+                  $message.=', <a href="https://prenezunrendezvous.com/public/Fichiers/'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'" download="'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'"> Lien de téléchargement2 </a>';
+                } else {
+                  $message.=', <a href="'.DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement').'" > Lien de téléchargement </a>';
+                }
+                 
+               }
+                $message.= "), ";
+                
+              } 
+
+
+              if ($Reservation->serv_suppl != null) {
+               $message.='<br><b>Cadeaux :</b>  '.$Reservation->serv_suppl.'';
+              }
+              
+
+              
+        $message.='<br><br>Vous pouvez consulter votre facture à partir de ce lien. 
+        (<a href="https://prenezunrendezvous.com/reservations/facture/'.$Reservation->id.'" > Lien </a>). <br><br><br>';
+
+				$message.='<b>ATTENTION :</b> <br>';	 
+				$message.='-Vous avez le droit d`annuler ou de reporter le rendez-vous 5 jours avant le rdv. 
+				(<a href="https://prenezunrendezvous.com/reservations/modifier/'.$Reservation->id.'" > Lien </a>). <br>';
+				$message.='-Au delà des 5 jours avant le rendez vous votre accompte ne sera pas remboursé.  <br>';
+				$message.='-Au delà des 5 jours, Il vous sera impossible d`annuler ou de reporter le rendez-vous.  <br>';
+				$message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
+				$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+ 	  //dd(($client->email));
+		 	    $this->sendMail(trim($client->email),'Réservation('.$titre.') payé',$message)	;	
+
+        
+
+		} // fin if type == acompte
+		if($type=='reste'){
+			 Reservation::where('id',$reservation)->update(array('paiement' => 2,'reste'=>0));	
+			 
+ 				$date = new DateTime($Reservation->date_reservation);
+				$date = $date->format('d-m-Y');
+				$heure = new DateTime($Reservation->date_reservation);
+				$heure = $heure->format('H:i');
+				//dd($heure);
+				// Email au client
+				$message='Bonjour,<br>';
+				$message.='Réservation('.$titre.') payée avec succès <br>';
+				$message.='Votre rendez-vous  est confirmé le <b>'.$date .'</b> à <b>'.$heure .'</b> avec le prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
+				$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
+					
+				$message.='<b>ATTENTION :</b> <br>';	
+				$message.='-Vous avez le droit d`annuler ou de reporter le rendez-vous 5 jours avant le rdv. 
+				(<a href="https://prenezunrendezvous.com/reservations/modifier/'.$Reservation->id.'" > Lien </a>). <br>';
+				$message.='-Au delà des 5 jours avant le rendez vous votre accompte ne sera pas remboursé.  <br>';
+				$message.='-Au delà des 5 jours, Il vous sera impossible d`annuler ou de reporter le rendez-vous.  <br>';
+				$message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
+				$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+ 	 
+			 
+		}
+  		
+				
+		
+    	
+		//enregistrement alerte
+    	$alerte = new Alerte([
+             'user' => $client->id,
+			 'titre'=>'Réservation payée('.$titre.')',						 
+             'details' => $message,
+         ]);	
+		 $alerte->save();
+ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
+                        $servicesres = $Reservation->services_reserves;
+                      }else {
+                        $servicesres = json_encode($Reservation->services_reserves);
+                      }  
+		// Email au prestataire
+		$message='Bonjour,<br>';
+		$message.='Réservation payée('.$titre.')<br>';
+
+		//$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
+    $message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $message.= " <b>abonnement</b>" ;
+      }
+      $message.= ", ";
+      }
+
+
+        $message.='<br><b>Produits :</b>  ';
+          foreach ($idproduits as $idp) {
+
+               $message.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $message.=  '( Quantité:'.$idp->qty.',';
+               $message.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $message.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $message.='<br><b>Cadeaux :</b>  '.$Reservation->serv_suppl.'';
+              }
+              
+
+       
+
+
+		$message.='<br><b>Date :</b> '.$date .' Heure : '.$heure .'<br>';
+		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+		
+        $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)    ;
+    	//enregistrement alerte
+		$alerte = new Alerte([
+             'user' => $prestataire->id,
+			 'titre'=>'Réservation payée('.$titre.')',						 
+             'details' => $message,
+         ]);	
+		 $alerte->save();		
+		
+		// enregistrement payment dans la base
+		$paiement  =  new \App\Payment([
+             'payer_id' => Input::get('PayerID'),
+			 'payment_id'=>Input::get('payment_id') ,						 
+             'user' => $client->id,
+             'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
+             'beneficiaire_id' => $prestataire->id ,
+             'details' => 'paiement de réservation('.$titre.') pour : '.$prestataire->name. ' '.$prestataire->lastname,
+         ]);	
+		 
+		 $paiement->save();
+
+     // avant la redirection on va sauvgarder l'évenement dans google Agenda si le type est acompte
+
+    if($type=='acompte')
+     {
+
+    // ------------------sauvgarder l'évenement dans google calendar------------------------------------
+
+  if($prestataire->google_path_json && $prestataire->google_access_token && $prestataire->google_refresh_token)
+    {
+      //voir si la réservation est récurrente ou non
+        $liste_rec= array();
+     if($Reservation->recurrent==1)
+     {
+       $idres=$Reservation->id.'reccuring'.$Reservation->id;
+       $hour=0;
+       $minutes=0;
+      //$idcount=0;
+      /*$format="Y-m-d H:i:s";
+      $datecourante=new DateTime();
+      $datecourante=$datecourante->format($format);
+      $datecourante=str_replace(' ','',$datecourante);*/
+      $debut=$Reservation->date_reservation;
+        $debut=str_replace(' ','T',$debut);
+        //dd($debut);
+      foreach ($Reservation->services_reserves as $sr) { 
+      $serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+          $hour=substr($serv->duree, 0, 2);
+         // dd($hour);
+          $minutes=substr($serv->duree,3,2);
+       
+          }
+          $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+          $fin=str_replace(' ','T', $fin);
+            $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin, 'summary' =>$Reservation->nom_serv_res , 'description'=>'service récurrent (séance de début)' );
+            $liste_rec[]= $un_service_res ;
+
+            //$Reservation->update(array('id_event_google_cal'=> $idres));
+            DB::table('reservations')
+            ->where('id', $Reservation->id)
+            ->update(['id_event_google_cal' => $idres]);
+        
+     // get recurring reserved services
+     $recs=Reservation::whereNotNull('id_recc')->whereNotNull('date_reservation')->where('id_recc',$Reservation->id)->get();
+
+        // browse recurring reserved services
+     foreach ($recs as $rec) {
+             
+            //create id reserved reccuring service to save in google calendar
+      $idres=$Reservation->id.'reccuring'.$rec->id;
+
+      // calculate the start of the reservation
+      $debut=$rec->date_reservation;
+        $debut=str_replace(' ','T',$debut);
+            
+          //calculate the end of reserved service
+          $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+          $fin=str_replace(' ','T', $fin);
+          /*foreach ($rec->services_reserves as $sr) { 
+      $serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+          $hour=substr($serv->duree, 0, 2);
+          $minutes=substr($serv->duree,3,2);
+           }*/
+
+            $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin,'summary' =>$Reservation->nom_serv_res, 'description'=>'service récurrent '.$Reservation->nom_serv_res );
+             $liste_rec[]= $un_service_res;
+             //$rec->update(array('id_event_google_cal'=> $idres));
+             DB::table('reservations')
+            ->where('id',  $rec->id)
+            ->update(['id_event_google_cal' => $idres]);
+      
+     }
+      
+   }
+   else // service simple (non récurrent)
+   {
+        $idres=$Reservation->id.'simple'.$Reservation->id;
+    $debut=$Reservation->date_reservation;
+    $debut=str_replace(' ','T',$debut);
+    //dd($debut);
+    foreach ($Reservation->services_reserves as $sr) { 
+    $serv=Service::where('id',$sr)->first(["nom","duree","NbrService"]);
+        $hour=substr($serv->duree, 0, 2);
+       // dd($hour);
+        $minutes=substr($serv->duree,3,2);
+       // dd($minutes);
+        //$fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+        //$fin=str_replace(' ','T', $fin);
+   
+        }
+
+        $fin=date('Y-m-d H:i:s',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+        $fin=str_replace(' ','T', $fin);
+        $un_service_res= array('id'=>$idres,'startDateTime'=>$debut,'endDateTime'=>$fin, 'summary' =>$Reservation->nom_serv_res , 'description'=>'service simple' );
+            $liste_rec[]= $un_service_res ;
+
+         //$Reservation->update(array('id_event_google_cal'=> $idres));
+         DB::table('reservations')
+            ->where('id',$Reservation->id)
+            ->update(['id_event_google_cal' => $idres]);
+
+   }
+  //dd($liste_rec);
+       $startDateTime=$debut;
+          $endDateTime= $fin;
+          $param=User::where('id',$prestataire->id)->first();
+          $access_token=$param->google_access_token;
+         // dd($this->client);
+        if (isset($access_token) && $access_token) {
+            //dd($access_token);
+             $this->client->setAccessToken($access_token);
+              if ($this->client->isAccessTokenExpired()) {
+              $this->client->refreshToken($param->google_refresh_token);
+              }
+
+            $service = new Google_Service_Calendar($this->client);
+           //  'recurrence' => array('RRULE:FREQ=DAILY;COUNT=2'), 
+            $calendarId = 'primary';
+           //'id'=> $lr['id'],
+
+            foreach ($liste_rec as $lr ) {
+
+               $event = new Google_Service_Calendar_Event([
+                'id'=> $lr['id'],
+                'summary' => $lr['summary'],
+                'description' =>$lr['description'],
+                'start' => ['dateTime' => $lr['startDateTime'], 'timeZone' => 'Africa/Tunis',],
+                'end' => ['dateTime' => $lr['endDateTime'] , 'timeZone' => 'Africa/Tunis',],
+              ]);
+            
+             $results='';
+             if($lr['startDateTime'] &&  $lr['endDateTime']  )
+             {
+             $results = $service->events->insert($calendarId, $event);
+             }
+            }
+
+
+            if (!$results) {
+                return response()->json(['status' => 'error', 'message' => 'Something went wrong']);
+            }
+            //return response()->json(['status' => 'success', 'message' => 'Event Created']);
+             return redirect('/reservations')->with('success', 'Réservation Validée et l\'évenement est enregestré dans google agenda avec succès ');
+        } else {
+            return redirect()->route('oauthCallback');
+        }
+    }// fin if ( file json et les tokens existe)
+
+   // --------------------fin sauvgarde au google calendar ----------------------------------------------------
+  
+
+     }// fin if $type=acompte
+		 
+		  return redirect('/reservations/')->with('success', ' Paiement ('.$titre.') effectué avec succès  ');
+		// dd("uoi");
+		 // return redirect('/pay/')->with('success', ' Paiement avec succès  ');
+
+		}
+		\Session::put('error', 'Paiement échoué');
+      //  return Redirect::route('/pay');
+
+
+		dd("no");
+	    return redirect('/pay/')->with('error', ' Paiement échoué  ');
+
+
+	}
+	public function oauth()
+    {
+        //session_start();
+    //  DB::table('payments')
+      $prestataire = auth()->user();
+        $rurl = action('MyPaypalController@oauth');
+        //dd($this->client);
+        $this->client->setRedirectUri($rurl);
+        if (!isset($_GET['code'])) {
+            $auth_url = $this->client->createAuthUrl();
+            $filtered_url = filter_var($auth_url, FILTER_SANITIZE_URL);
+           // dd( $filtered_url );
+            return redirect($filtered_url);
+        } else {
+          
+             $this->client->authenticate($_GET['code']);
+
+
+             $access_token =  $this->client->getAccessToken();
+             //dd( $access_token);
+             //$tokens_decoded = json_decode($access_token);
+             $refreshToken =  $access_token['refresh_token'];
+
+             $param=User::where('id', $prestataire->id)->first();
+             $param->google_access_token=$access_token;
+             $param->google_refresh_token=$refreshToken;
+             $param->save();
+
+            // dd( $refreshToken);
+           // $_SESSION['access_token'] = $this->client->getAccessToken();
+            //return redirect()->route('cal.index');
+           return redirect('/reservations')->with('success', 'Réservation Validée et l\'évenement est enregestré dans google agenda avec succès ');
+
+        }
+    }
 	
 	
 }
