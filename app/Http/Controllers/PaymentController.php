@@ -1077,9 +1077,7 @@ if (!empty($_GET['status'])) {
 		$transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
-            ->setDescription('Abonnement '. $desc )
-            ->setInvoiceNumber(uniqid())
-            ->setPayee($payee);
+            ->setDescription('Abonnement '. $desc );
 		$redirect_urls = new RedirectUrls();
         $redirect_urls->setReturnUrl(URL::route('statuspayreservationwithemail',['reservation'=>$reservation,'type'=>'reste','reste'=>0])) /** Specify return URL **/
             ->setCancelUrl(URL::route('cancelpay',['reservation'=>$reservation]));
