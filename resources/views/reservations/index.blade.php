@@ -211,8 +211,8 @@ background-color:#a0d468;
  <?php if($User->user_type!='client') {?>  <td><?php $clt=User::where('id',$reservations[$ii]->client)->first();if($clt) {if($clt->name && $clt->lastname){ echo $clt->name.' '.$clt->lastname ; }else{echo 'jjj ';}}else{ echo 'jjj ';}?></td><?php }?>
   <?php if($User->user_type!='prestataire') {?><td><?php $prest=User::where('id',$reservations[$ii]->prestataire)->first();if($prest) {if($prest->name && $prest->lastname){ echo $prest->name.' '.$prest->lastname ; }else{echo 'jjj ';}}else{ echo 'jjj ';}?></td><?php }?>
                    
-                    <td style="width:10%"><?php //echo( $reservations[$ii]->date_reservation ); 
-                    $dateres = new DateTime($reservations[$ii]->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?> </td>
+                    <td style="width:10%"><?php echo( $reservations[$ii]->date_reservation ); 
+                    //$dateres = new DateTime($reservations[$ii]->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?> </td>
                     <td>
                       {{$reservations[$ii]->nom_serv_res}}
                       <?php  if ($reservations[$ii]->recurrent==1) {
