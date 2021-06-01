@@ -201,7 +201,7 @@ background-color:#a0d468;
             $reservations=$reservations->sortBy(function($t)
                                         {
                                             return $t->date_reservation;
-                                        })->reverse()->values()->all(); $lock=true; //dd($reservations);?>
+                                        })->reverse()->values()->all(); $lock=true; dd($reservations);?>
           <?php if($lock){ for($ii=0; $ii<count($reservations) ; $ii++){?>
             
 
