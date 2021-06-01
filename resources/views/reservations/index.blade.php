@@ -58,6 +58,7 @@ background-color:#a0d468;
   
   use \App\Http\Controllers\ReservationsController;
   use \App\Http\Controllers\UsersController;
+  use \App\User;
   use \App\Http\Controllers\ServicesController;
   use \App\Http\Controllers\MyPaypalController;
   
@@ -194,65 +195,39 @@ background-color:#a0d468;
 
               </tr>
           </thead>
-          <tbody>
+         <tbody>
             <?php  //dd($reservations);
             $lock=false;
             $reservations=$reservations->sortBy(function($t)
                                         {
                                             return $t->date_reservation;
-                                        })->reverse(); $lock=true;//dd($reservations);?>
+                                        })->reverse()->values()->all(); $lock=true; //dd($reservations);?>
           <?php if($lock){ for($ii=0; $ii<count($reservations) ; $ii++){?>
             
 
-      <?php  $montant=$reservations[$ii]->Net; //$montant=ServicesController::ChampById('prix',$reservation->service); $montant=floatval($montant)+1;?>
-      <?php $description=$reservations[$ii]->nom_serv_res; //$description=ServicesController::ChampById('nom',$reservations[$ii]->service);?>
-            <tr > 
- <?php if($User->user_type!='client') {?>        <td><?php echo UsersController::ChampById('name',$reservations[$ii]->client).' '.UsersController::ChampById('lastname',$reservations[$ii]->client);?></td><?php }?>
-  <?php if($User->user_type!='prestataire') {?> <td><?php echo UsersController::ChampById('name',$reservations[$ii]->prestataire).' '.UsersController::ChampById('lastname',$reservations[$ii]->prestataire) ;?></td><?php }?>
-                     {{--<td style="width:10%">{{$reservations[$ii]->date  }}<br>{{$reservations[$ii]->heure  }} </td>--}}
-                    <td style="width:10%"><?php $dateres = new DateTime($reservations[$ii]->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?> </td>
+      <?php  $montant=$reservations[$ii]->Net;?>
+      <?php $description=$reservations[$ii]->nom_serv_res; ?>
+            <tr> 
+ <?php if($User->user_type!='client') {?>  <td><?php $clt=User::where('id',$reservations[$ii]->client)->first();if($clt) {if($clt->name && $clt->lastname){ echo $clt->name.' '.$clt->lastname ; }else{echo 'jjj ';}}else{ echo 'jjj ';}?></td><?php }?>
+  <?php if($User->user_type!='prestataire') {?><td><?php $prest=User::where('id',$reservations[$ii]->prestataire)->first();if($prest) {if($prest->name && $prest->lastname){ echo $prest->name.' '.$prest->lastname ; }else{echo 'jjj ';}}else{ echo 'jjj ';}?></td><?php }?>
+                   
+                    <td style="width:10%"><?php //echo( $reservations[$ii]->date_reservation ); 
+                    $dateres = new DateTime($reservations[$ii]->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?> </td>
                     <td>
                       {{$reservations[$ii]->nom_serv_res}}
                       <?php  if ($reservations[$ii]->recurrent==1) {
                            echo " <b>,abonnement</b>" ;
                          } 
                        ?>
-                      <?php /*
-                      $servicesres = array();
-                      if (is_array($reservations[$ii]->services_reserves)) {
-                        $servicesres = $reservations[$ii]->services_reserves;
-                      }else {
-                        $servicesres = json_decode($reservations[$ii]->services_reserves);
-                      }
-
-                     $servicesres=$servicesres;
-              
-                      foreach ($servicesres as $servicesre) {
                      
-                        echo  DB::table('services')->where('id', $servicesre )->value('nom');
-                       echo " ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
-                       echo ", ";
-                       if ($reservations[$ii]->recurrent==1) {
-                      echo " <b>abonnement</b>" ;
-                         } 
-                      } */?>
                     </td>
                       <td>
-                        {{$reservations[$ii]->nom_prod_res}}
-                       <?php /*$idproduits = DB::select( DB::raw("SELECT id_products as ids FROM client_products s WHERE s.id_reservation='+$reservations[$ii]->id+'" ) );
-                      foreach ($idproduits as $idp) {
-
-                       echo  DB::table('produits')->where('id', $idp->ids )->value('nom_produit');
-                       echo "(".DB::table('produits')->where('id', $idp->ids )->value('prix_unité').")";
-                       echo ", ";
-                      }*/?></td>
+                        <?php if($reservations[$ii]->nom_prod_res) { echo $reservations[$ii]->nom_prod_res; }else{ echo ' ';} ?>
+                      </td>
                        <td>{{$reservations[$ii]->reduction  }}</td>
                       <td style="font-weight:bold">{{$reservations[$ii]->Net  }}  €</td>
-                      
-
-
-                      
-                      <td> {{$reservations[$ii]->serv_suppl  }}</td>
+                  
+                      <td><?php if($reservations[$ii]->serv_suppl){ echo $reservations[$ii]->serv_suppl ; }else{ echo ' ';} ?></td>
   <td>
     <?php  if($reservations[$ii]->statut==0){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-danger" >En attente</span>';}  ?>
       <?php  if($reservations[$ii]->statut==1){$statut='<span style="padding:7px 10px 7px 10px!important;" class="badge badge-pill badge-primary  " >Validée</span>';}  ?>
@@ -303,8 +278,7 @@ background-color:#a0d468;
     $type_abonn_essai = UsersController::ChampById('type_abonn_essai',$reservations[$ii]->prestataire) ; 
     $type_abonn = UsersController::ChampById('type_abonn',$reservations[$ii]->prestataire);
     $allow_slices = UsersController::ChampById('allow_slices',$reservations[$ii]->prestataire);
-   // dd( $type_abonn_essai.' '. $type_abonn);
-   
+     
      if(($type_abonn_essai && ($type_abonn_essai=="type2" || $type_abonn_essai=="type3" ))|| ($type_abonn && ($type_abonn=="type2" || $type_abonn=="type3" ))) { 
     
   if( $reservations[$ii]->Net >= 200  &&  $allow_slices ){
@@ -358,17 +332,13 @@ background-color:#a0d468;
     <?php }
     } // acompte payé ?> 
         
-        
-  
-        
+             
       <?php } ?> 
     
       <?php } ?> 
        <?php if($User->user_type =='prestataire' ) {    
 
-      if($reservations[$ii]->statut==0){  ?> 
-
-          
+      if($reservations[$ii]->statut==0){  ?>           
        
       <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservations[$ii]->id)}}"><i class="fa fa-check"></i>  Valider</a>
       <?php if ($reservations[$ii]->paiement==0) { ?>
@@ -383,7 +353,6 @@ background-color:#a0d468;
  
       </td>
       
-
     <!--    <td>  
            <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('ReservationsController@remove', $reservations[$ii]->id)}}"><i class="fa fa-remove"></i></a>
 

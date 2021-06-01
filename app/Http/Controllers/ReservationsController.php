@@ -578,11 +578,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
        $reservations = DB::table('reservations')->where('prestataire',$cuser->id)->whereNull('id_recc')->get();
 		}
 		if($cuser->user_type=='client' ){
-        $reservations = Reservation::where('client',$cuser->id)->whereNull('id_recc')->get();
+        $reservations = DB::table('reservations')->where('client',$cuser->id)->whereNull('id_recc')->get();
 		}
 		
 		if($cuser->user_type=='admin' ){
-        $reservations = Reservation::whereNull('id_recc')->get();
+        $reservations = DB::table('reservations')->whereNull('id_recc')->get();
 		}	
 		 /*$reservations=$reservations->sortBy(function($t)
                                         {
