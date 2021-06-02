@@ -498,7 +498,7 @@ background-color:#a0d468;
             } );
 
             var table = $('#mytable').DataTable({
-               "order": [[ 2, "asc" ]],
+               "order": [[ 3, "asc" ]],
                 orderCellsTop: true,
                // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
                 dom: 'Blfrtip',
