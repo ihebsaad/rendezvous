@@ -201,7 +201,7 @@ background-color:#a0d468;
             $reservations=$reservations->sortBy(function($t)
                                         {
                                             return $t->date_reservation;
-                                        })->reverse()->values()->all(); $lock=true;   //dd($reservations);?>
+                                        })->reverse()->values()->all(); $lock=true;  //dd($reservations);?>
           <?php if($lock){ for($ii=0; $ii<count($reservations) ; $ii++){?>
             
 
@@ -478,6 +478,7 @@ background-color:#a0d468;
        
     <!-- fin modal pour mettre à jour un statut -->
 </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -485,7 +486,8 @@ background-color:#a0d468;
     <style>.searchfield{width:100px;}</style>
 <script src="{{  URL::asset('public/scripts/jquery-3.4.1.min.js') }}" type="text/javascript"></script> 
 
-<br><script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
+<script src = "https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -496,6 +498,7 @@ background-color:#a0d468;
             } );
 
             var table = $('#mytable').DataTable({
+               "order": [[ 2, "asc" ]],
                 orderCellsTop: true,
                // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
                 dom: 'Blfrtip',
