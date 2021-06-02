@@ -190,7 +190,7 @@ background-color:#a0d468;
                  <th> Services/produits supplémentaires  (cadeaux) </th>
                  
          <th>Statut</th> 
-         <th></th>
+         <th>Actions</th>
    
 
               </tr>
