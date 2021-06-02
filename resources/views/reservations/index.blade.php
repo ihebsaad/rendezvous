@@ -498,7 +498,7 @@ background-color:#a0d468;
             } );
 
             var table = $('#mytable').DataTable({
-               "order": [[ 3, "asc" ]],
+               "order": [[ 2, "asc" ]],
                // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
                 dom: 'Blfrtip',
 				responsive:true,
