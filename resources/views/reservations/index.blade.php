@@ -499,7 +499,6 @@ background-color:#a0d468;
 
             var table = $('#mytable').DataTable({
                "order": [[ 3, "asc" ]],
-                orderCellsTop: true,
                // dom : '<"top"flp<"clear">>rt<"bottom"ip<"clear">>',
                 dom: 'Blfrtip',
 				responsive:true,
@@ -509,7 +508,6 @@ background-color:#a0d468;
                 ],
                 "columnDefs": [ {
                     "targets": 'no-sort',
-                    "orderable": false,
                 } ]
                 ,
                 "language":
