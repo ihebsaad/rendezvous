@@ -338,7 +338,7 @@ background-color:#a0d468;
       <?php } ?> 
        <?php if($User->user_type =='prestataire' ) {    
 
-      if($reservations[$ii]->statut==0){  ?>           
+      if($reservations[$ii]->statut==2){  ?>           
        
       <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservations[$ii]->id)}}"><i class="fa fa-check"></i>  Valider</a>
       <?php if ($reservations[$ii]->paiement==0) { ?>
