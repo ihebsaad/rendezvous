@@ -1672,7 +1672,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
             ->setPayee($payee);
 		$redirect_urls = new RedirectUrls();
         $redirect_urls->setReturnUrl(URL::route('successpay2',['reservation'=>$id])) /** Specify return URL **/
-            ->setCancelUrl(URL::route('cancelpay2',['reservation'=>$reservation]));
+            ->setCancelUrl(URL::route('cancelpay2',['reservation'=>$id]));
 		$payment = new Payment();
         $payment->setIntent('Sale')
             ->setPayer($payer)
