@@ -1662,7 +1662,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $item_list->setItems(array($item_1));
 		$amount = new Amount();
         $amount->setCurrency('EUR')
-            ->setTotal($amount);
+            ->setTotal((string)$amount);
 		$transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
