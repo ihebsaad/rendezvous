@@ -1643,7 +1643,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     	$Reservation=Reservation::find($id);
     	$amount = $Reservation->Net - $Reservation->reste ;
     	//dd();
-    	$amount =strval($amount);
+    	$amount1 =strval($amount);
 
     	$email=User::where('id',$Reservation->client)->value('emailPaypal');
 
@@ -1658,12 +1658,12 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$item_1->setName('Item 1') /** item name **/
             ->setCurrency('EUR')
             ->setQuantity(1)
-            ->setPrice($amount); /** unit price **/
+            ->setPrice($amount1); /** unit price **/
 		$item_list = new ItemList();
         $item_list->setItems(array($item_1));
 		$amount = new Amount();
         $amount->setCurrency('EUR')
-            ->setTotal($amount);
+            ->setTotal($amount1);
 		$transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
