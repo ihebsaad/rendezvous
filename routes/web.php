@@ -17,13 +17,19 @@ Route::get('/', function () {
 });
 */
 Auth::routes();
-Route::get('/testpaypal','PaymentController@testpay');
+Route::get('/testpaypal','PaymentController@createplan')->name('testrdsq');
+Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
+
 	Route::get('/testr','PaymentController@okk')->name('testr');
 	Route::get('/payreservation','PaymentController@payreservationwithemail')->name('payreservation');
 		Route::post('/payreservation','PaymentController@payreservationwithemail')->name('payreservation');
 
 		Route::get('/statuspayreservationwithemail','PaymentController@statuspayreservationwithemail')->name('statuspayreservationwithemail');
 			Route::get('/cancelpay','MyPaypalController@cancelpay')->name('cancelpay');
+						Route::get('/statusagreement','PaymentController@statusagreement')->name('statusagreement');
+Route::get('/successpay2','PaymentController@successpay2')->name('successpay2');
+	Route::get('/cancelpay2','MyPaypalController@cancelpay2')->name('cancelpay2');
+Route::get('/reservations.annule/{id}','PaymentController@PaymentDetails')->name('reservations.annule');
 
 
 
@@ -52,7 +58,6 @@ Route::get('/reservations/AnnulerReservation/{id}','ReservationsController@Annul
 Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif');
 Route::get('/reservations/facture/{id}','InvoiceController@Facture')->name('facture');
 Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter');
-Route::get('/reservations.annule/{id}','MyPaypalController@PaymentDetails')->name('reservations.annule');
 Route::get('/reservations/deletenewdate','ReservationsController@deletenewdate')->name('reservations.deletenewdate');
 
 
@@ -231,8 +236,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 
 	
 	Route::get('/cancelpay','MyPaypalController@cancelpay')->name('cancelpay');
-	Route::get('/successpay2','MyPaypalController@successpay2')->name('successpay2');
-	Route::get('/cancelpay2','MyPaypalController@cancelpay2')->name('cancelpay2');
+	
 	
 	 Route::get('/preapproved','MyPaypalController@preapproved')->name('preapproved');
 	 Route::get('/approved','MyPaypalController@approved')->name('approved');

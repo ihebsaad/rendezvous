@@ -755,96 +755,146 @@ public function sendMail($to,$sujet,$contenu){
 
 public function createplan(Request $request)
 {	
-$plan_name=$request->get('plan_name');
-$plan_description=$request->get('plan_description');
-$amount=$request->get('amount');
-	// Create a new billing plan
-//if (! empty($_POST["plan_name"]) && ! empty($_POST["plan_description"]))  
-    $plan = new Plan();
-    $plan->setName($plan_name )
-        ->setDescription($plan_description);
 
-    // Set billing plan definitions
-    $paymentDefinition = new PaymentDefinition();
-    $paymentDefinition->setName('Regular Payments')
-        ->setType('REGULAR')
-        ->setFrequency('DAY')
-        ->setFrequencyInterval('1')
-        ->setCycles('4')
-        ->setAmount(new Currency(array(
-        'value' => $amount,
-        'currency' => 'EUR'
-    )));
-$tranche=$amount/4;
-$tranche=200;
+	//------------------------------------------------------------------------------------------------------
+$plan = new Plan();
+$plan->setName('T-Shirt of the Month Club Plan')
+  ->setDescription('Template creation.')
+  ->setType('FIXED');
 
-    // Set charge models
-    $chargeModel = new ChargeModel();
-    $chargeModel->setType('SHIPPING')->setAmount(new Currency(array(
-        'value' => $tranche,
-        'currency' => 'EUR'
-    )));
-    $paymentDefinition->setChargeModels(array(
-        $chargeModel
-    ));
+// Set billing plan definitions
+$paymentDefinition = new PaymentDefinition();
+$paymentDefinition->setName('Regular Payments')
+  ->setType('REGULAR')
+  ->setFrequency('Month')
+  ->setFrequencyInterval('2')
+  ->setCycles('12')
+  ->setAmount(new Currency(array('value' => 800, 'currency' => 'USD')));
 
-    // Set merchant preferences
-    $merchantPreferences = new MerchantPreferences();
-	
-    $merchantPreferences
-		->setReturnUrl(URL::route('statusplan'))
-		//->setReturnUrl('http://<host>/how-to-manage-recurring-payments-using-paypal-subscriptions-in-php/index.php?status=success')
-        ->setCancelUrl('https://prenezunrendezvous.com/')
-        ->setAutoBillAmount('yes')
-        ->setInitialFailAmountAction('CONTINUE')
-        ->setMaxFailAttempts('3')
-         ->setSetupFee(new Currency(array(
-        'value' => 0,
-        'currency' => 'EUR'
-    ))) ;
+// Set charge models
+$chargeModel = new ChargeModel();
+$chargeModel->setType('SHIPPING')
+  ->setAmount(new Currency(array('value' => 10, 'currency' => 'USD')));
+$paymentDefinition->setChargeModels(array($chargeModel));
 
-    $plan->setPaymentDefinitions(array(
-        $paymentDefinition
-    ));
-    $plan->setMerchantPreferences($merchantPreferences);
+// Set merchant preferences
+$merchantPreferences = new MerchantPreferences();
+$merchantPreferences->setReturnUrl(URL::route('statusagreement'))
+  ->setCancelUrl('http://localhost:3000/cancel')
+  ->setAutoBillAmount('yes')
+  ->setInitialFailAmountAction('CONTINUE')
+  ->setMaxFailAttempts('0')
+  ->setSetupFee(new Currency(array('value' => 1, 'currency' => 'USD')));
 
-    try {
-     //   $createdPlan = $plan->create($apiContext);
-        $createdPlan = $plan->create($this->_api_context);
-    } catch (PayPal\Exception\PayPalConnectionException $ex) {
-        echo $ex->getCode();
-        echo $ex->getData();
-        die($ex);
-    } catch (Exception $ex) {
-        die($ex);
-    }
-	
-	
-	
-/***** activate Plan ***/	
-	
+$plan->setPaymentDefinitions(array($paymentDefinition));
+$plan->setMerchantPreferences($merchantPreferences);
+//dd($plan);
+
+
+$request = clone $plan;
+try {
+    $output = $plan->create($this->_api_context);
+} catch (Exception $ex) {
+	dd("Erreur");
+	//ResultPrinter::printError("Created Plan", "Plan", null, $request, $ex);
+    exit(1);
+}
+
+//dd($output->getid());
+
+//return $output;
+
+
 try {
     $patch = new Patch();
-    $value = new PayPalModel('{"state":"ACTIVE"}');
+
+    $value = new PayPalModel('{
+	       "state":"ACTIVE"
+	     }');
+
     $patch->setOp('replace')
         ->setPath('/')
         ->setValue($value);
     $patchRequest = new PatchRequest();
     $patchRequest->addPatch($patch);
-    $createdPlan->update($patchRequest, $this->_api_context);
- 	
-   // $patchedPlan = Plan::get($createdPlan->getId(), $apiContext);
-  $patchedPlan =  $plan->setId($createdPlan->getId());
-  //  require_once "createPHPTutorialSubscriptionAgreement.php";
-} catch (PayPal\Exception\PayPalConnectionException $ex) {
-    echo $ex->getCode();
-    echo $ex->getData();
-    die($ex);
+
+    $output->update($patchRequest, $this->_api_context);
+
+    $plan1 = Plan::get($output->getId(),  $this->_api_context);
 } catch (Exception $ex) {
-    die($ex);
+	dd("Erreur");
+    //ResultPrinter::printError("Updated the Plan to Active State", "Plan", null, $patchRequest, $ex);
+    exit(1);
 }
+
+ //ResultPrinter::printResult("Updated the Plan to Active State", "Plan", $plan->getId(), $patchRequest, $plan);
+
+//dd($plan1->getId());
+
+ // return redirect($response['paypal_link']);
+
+
+// Create new agreement
+$startDate = date('c', time() + 3600);
+$given = new DateTime("now");
+$st = $given->format("Y-m-d") . "T00:00:00Z";
+//dd($startDate);
+$agreement = new Agreement();
+$agreement->setName('test1 ')
+  ->setDescription('test2 ')
+  ->setStartDate('2021-06-29T00:00:00Z');
+
+// Set plan id
+$plan = new Plan();
+$plan->setId($plan1->getId());
+//dd($plan);
+
+$agreement->setPlan($plan);
+
+// Add payer type
+$payer = new Payer();
+$payer->setPaymentMethod('paypal');
+$agreement->setPayer($payer);
+//dd($agreement);
+// Adding shipping details
+$shippingAddress = new ShippingAddress();
+$shippingAddress->setLine1('111 First Street')
+  ->setCity('Saratoga')
+  ->setState('CA')
+  ->setPostalCode('95070')
+  ->setCountryCode('US');
+  
+$agreement->setShippingAddress($shippingAddress);
+/*$payee = new Payee();
+$payee->setEmail("mohamed.achraf.besbes@gmail.com");
+$agreement->setInvoiceNumber(uniqid())
+            ->setPayee($payee);*/
+$request = clone $agreement;
+try {
+		$agreement->create($this->_api_context);
+		$approvalUrl = $agreement->getApprovalLink();
+		Session::put('status', 'success');
+		return redirect($approvalUrl);
+
+		dd($approvalUrl);
+		} catch (\PayPal\Exception\PayPalConnectionException $ex) {
+		if (\Config::get('app.debug')) {
+	 	\Session::put('error', 'Session expirée');
+     //           return Redirect::route('pay');
+	 	dd($ex->getData());
+				return redirect('/pricing')->with('error', ' Session expirée  ');
+
+		} else {
+		// \Session::put('error', 'erreur survenue');
+        //        return Redirect::route('pay');
+			 return redirect('/pricing')->with('error', ' erreur survenue  ');
+
+		}
+		}
+
 	
-/*********/	
+	
+
 
 
 
@@ -902,7 +952,8 @@ try {
  	
 	
 	
-public function	statusplan(){
+public function	statusagreement(Request $request){
+	//dd(Session::get('status'));
 		/*
         $payment_id = Session::get('paypal_payment_id');
          Session::forget('paypal_payment_id');
@@ -927,9 +978,11 @@ public function	statusplan(){
 	    return redirect('/pay/')->with('error', ' Paiement échoué  ');
 		*/
 		
-if (!empty($_GET['status'])) {
-    if($_GET['status'] == "success") {
+if (!empty(Session::get('status'))) {
+    if(Session::get('status') == "success") {
+    	
         $token = $_GET['token'];
+        //dd($token);
         $agreement = new \PayPal\Api\Agreement();
         
         try {
@@ -947,8 +1000,10 @@ if (!empty($_GET['status'])) {
             die($ex);
         }
     } else {
+    	dd("no");
         echo "user canceled agreement";
     }
+    dd("ooo");
     	\Session::put('error', 'Paiement plan échoué');
       //  return Redirect::route('/pay');
 	    return redirect('/pay/')->with('error', ' Paiement échoué  ');
@@ -1150,6 +1205,7 @@ if (!empty($_GET['status'])) {
         $execution->setPayerId(Input::get('PayerID'));
 		/**Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
+        
 		if ($result->getState() == 'approved') {
 		 \Session::put('success', 'Paiement avec succès');
         //    return Redirect::route('/pay');
@@ -1205,8 +1261,11 @@ if (!empty($_GET['status'])) {
 		$serviceid = $Reservation->service;
 		
 		$service = \App\Service::find( $serviceid) ;
+		User::where('id',$Reservation->client)->update(array('emailPaypal' => ((($result->getpayer())->getPayerInfo())->getemail('email'))));
+
 		if($type=='acompte'){
-				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'statut'=>1));	
+				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'statut'=>1));
+					
 				$date = new DateTime($Reservation->date_reservation);
 				$date = $date->format('d-m-Y');
 				$heure = new DateTime($Reservation->date_reservation);
@@ -1579,7 +1638,147 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
         }
     }
+	 public function PaymentDetails($id)
+    {
+    	$Reservation=Reservation::find($id);
+    	$amount = $Reservation->Net - $Reservation->reste ;
+    	$email=User::where('id',$Reservation->client)->value('emailPaypal');
+
+		
+		$payee = new Payee();
+		$payee->setEmail($email);
+		 
+		//$reservation=$request->get('reservation');
+		$payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+		$item_1 = new Item();
+		$item_1->setName('Item 1') /** item name **/
+            ->setCurrency('EUR')
+            ->setQuantity(1)
+            ->setPrice($acompte); /** unit price **/
+		$item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+		$amount = new Amount();
+        $amount->setCurrency('EUR')
+            ->setTotal($acompte);
+		$transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($item_list)
+            ->setDescription('Abonnement '. $desc )
+            ->setInvoiceNumber(uniqid())
+            ->setPayee($payee);
+		$redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('successpay2',['reservation'=>$id])) /** Specify return URL **/
+            ->setCancelUrl(URL::route('cancelpay2',['reservation'=>$reservation]));
+		$payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+        /** dd($payment->create($this->_api_context));exit; **/
+        try {
+		$payment->create($this->_api_context);
+		} catch (\PayPal\Exception\PayPalConnectionException $ex) {
+		if (\Config::get('app.debug')) {
+	 	\Session::put('error', 'Session expirée');
+     //           return Redirect::route('pay');
+				return redirect('/pricing')->with('error', ' Session expirée  ');
+
+		} else {
+		// \Session::put('error', 'erreur survenue');
+        //        return Redirect::route('pay');
+			 return redirect('/pricing')->with('error', ' erreur survenue  ');
+
+		}
+		}
+		foreach ($payment->getLinks() as $link) {
+		if ($link->getRel() == 'approval_url') {
+		$redirect_url = $link->getHref();
+                break;
+		}
+		}
+		/** add payment ID to session **/
+        Session::put('paypal_payment_id', $payment->getId());
+		if (isset($redirect_url)) {
+		/** redirect to paypal **/
+            return Redirect::away($redirect_url);
+		}
+	//	\Session::put('error', 'Erreur survenue');
+    //    return Redirect::route('pay');
+	 return redirect('/pricing')->with('error', ' erreur survenue  ');
+
 	
+
+    }
+    public function successpay2(Request $request)
+    {
+      Reservation::where('id', $request->get('reservation'))->update(array('statut' => 2 ));
+      $Reservation = Reservation::where('id',$request->get('reservation'))->first();
+      //dd($Reservation);
+      $client=User::find($Reservation->client);
+      $date = new DateTime($Reservation->date_reservation);
+    $date = $date->format('d-m-Y');
+    $heure = new DateTime($Reservation->date_reservation);
+    $heure = $heure->format('H:i');
+    $prestataire=User::find($Reservation->prestataire);
+
+    // Email au prest
+    $message='Bonjour,<br>';
+    $message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé.';
+    $message.='Votre Prestataire '.$prestataire->name.' '.$prestataire->lastname.'a remboursé votre montant payé.<br>';
+   
+    
+    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+    
+      $this->sendMail(trim($client->email),'Réservation annulée _ Remboursement',$message) ;
+      $alerte = new Alerte([
+             'user' => $client->id,
+       'titre'=>'Réservation annulée',       
+             'details' => $message,
+         ]);  
+     $alerte->save();
+
+      // ------------------delete l'évenement dans google calendar------------------------------------
+
+  if($prestataire->google_path_json && $prestataire->google_access_token && $prestataire->google_refresh_token)
+   {
+      //voir si la réservation est récurrente ou non
+       
+        $reservation=$Reservation;
+        $idevent=$reservation->id_event_google_cal;
+
+        if($idevent)
+        {
+
+           $param=User::where('id',$prestataire->id)->first();
+             $access_token=$param->google_access_token;
+
+           if(isset($access_token) && $access_token)
+            {   
+
+              $this->client->setAccessToken($access_token);
+              if ($this->client->isAccessTokenExpired()) {
+              $this->client->refreshToken($param->google_refresh_token);
+              }
+
+            $service = new Google_Service_Calendar($this->client);
+            $service->events->delete('primary', $idevent);
+            Reservation::where('id', $reservation->id)->update(['id_event_google_cal' => null]);
+
+          }
+          //
+        }// fin test idevent
+
+
+    }// fin if ( file json et les tokens existe)
+
+   // --------------------fin delete event from google calendar----------------------------------------------------
+
+     return redirect('/reservations/')->with('success', ' Paiement  effectué avec succès  ');
+    }
+
 	
 }
 
