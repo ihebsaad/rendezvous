@@ -1642,7 +1642,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     {
     	$Reservation=Reservation::find($id);
     	$amount = $Reservation->Net - $Reservation->reste ;
-    	dd($amount);
+    	//dd($amount);
+
     	$email=User::where('id',$Reservation->client)->value('emailPaypal');
 
 		
