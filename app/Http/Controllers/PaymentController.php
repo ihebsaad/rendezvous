@@ -1667,7 +1667,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
-            ->setDescription('Abonnement '. $desc )
+            ->setDescription('remettre l`acompte' )
             ->setInvoiceNumber(uniqid())
             ->setPayee($payee);
 		$redirect_urls = new RedirectUrls();
