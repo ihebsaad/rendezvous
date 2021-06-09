@@ -1,4 +1,20 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GWK570BFG3"></script>
+
+<script>
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
  
+
+  gtag('config', 'G-GWK570BFG3');
+
+</script> 
 <meta name="author" content="eSolutions">
 <meta name="description" content="">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
