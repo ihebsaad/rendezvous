@@ -19,6 +19,7 @@
         "simplesoftwareio/simple-qrcode": "^4.2",
         "smsfactor/smsfactor-laravel": "1.0",
         "srmklive/paypal": "~1.0",
+        "stripe/stripe-php": "^7.83",
         "symfony/translation-contracts": "^1.1.6",
         "twilio/sdk": "^6.15"
     },
