@@ -32,18 +32,6 @@ Route::get('/successpay2','PaymentController@successpay2')->name('successpay2');
 Route::get('/reservations.annule/{id}','PaymentController@PaymentDetails')->name('reservations.annule');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -103,6 +91,19 @@ Route::get('/get_liste_regles_services_suppl/{id}', 'ServicesController@get_list
 
 
 Route::group(['middleware' => 'auth'], function(){
+
+	//services  récurrent à abonnement
+
+    Route::get('/servicesrec/annulerPprestataire/{id}','ServicesController@annulerPprestataire')->name('annulerPprestataire');
+    Route::get('/servicesrec/annulerPclient/{id}','ServicesController@annulerPclient')->name('annulerPclient');
+    Route::get('/servicesrec/accepterPropDates/{id}','ServicesController@accepterPropDates')->name('accepterPropDates');
+    Route::post('/servicesrec/insererDatesfinales/','ServicesController@insererDatesfinales')->name('insererDatesfinales'); 
+    Route::post('/servicesrec/rendezvousTel/','ServicesController@rendezvousTel')->name('rendezvousTel');    
+    Route::post('/servicesrec/proposerDates/','ServicesController@proposerDates')->name('proposerDates'); 
+    
+
+
+
 
 	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));

@@ -1010,23 +1010,25 @@ function geocodeAddress(geocoder, resultsMap) {
                       
                   } 
                   </script>
-								
-							
+
+              <div class="fm-input " style="display: none;" id="h<?php echo $service->id;?>">
+                <label for="periode">Période :</label>
+
+                <select  onchange="changeService(this)" id="x<?php echo $service->id;?>" name="periode">
+                  <option  hidden><?php echo $service->periode;?></option>
+                  <option >Jour</option>
+                  <option >Semaine</option>
+                  <option >Mois</option>
+                  <option >toute les 3 semaines</option>
+                  <option >1 semaine sur 2</option>
+                </select> 
+              </div>
+						
 							<div class="fm-input " style="display: none;" id="f<?php echo $service->id;?>">
-								<label>Nbr de fois :</label>
+								<label>Nbr de fois dans la période:</label>
 							  <input type="number" onchange="changeService(this)" id="q<?php echo $service->id;?>" name="Nfois" value="<?php echo $service->Nfois;?>"   > 
 							</div>
-							<div class="fm-input " style="display: none;" id="h<?php echo $service->id;?>">
-							  <label for="frequence">Fréquence :</label>
-
-								<select  onchange="changeService(this)" id="x<?php echo $service->id;?>" name="frequence">
-									<option  hidden><?php echo $service->frequence;?></option>
-								  <option >Journalière</option>
-								  <option >Hebdomadaire</option>
-								  <option >Mensuelle</option>
-								</select> 
-							</div>
-							<div class="fm-input  " style="display: none;" id="p<?php echo $service->id;?>">
+							<!--<div class="fm-input  " style="display: none;" id="p<?php echo $service->id;?>">
 								<?php if($service->frequence=='Journalière'){?>
 								<label id="labelperiode2">Période (N° jours) :</label>
 								<?php }?>
@@ -1037,7 +1039,7 @@ function geocodeAddress(geocoder, resultsMap) {
 								<label id="labelperiode2">Période (N° mois) :</label>
 								<?php }?>
 							  <input type="number"  onchange="changeService(this)" id="w<?php echo $service->id;?>" name="periode" value="<?php echo $service->periode;?>" >
-							</div>
+							</div>-->
 							
 							</td>
 							
@@ -1734,7 +1736,22 @@ input:checked + .slider:before {
 							</label>
 							<div id="reccurent" style="display: none;" >
 							<div class="fm-input " >
-								<label>Nombre de fois :</label>
+              
+                <label for="mySelect">Période :</label>
+
+                <select id="mySelect" name="mySelect" onchange="myFunctionSelect()">
+                  <option >Jour</option>
+                  <option >Semaine</option>
+                  <option >Mois</option>
+                  <option >toute les 3 semaines</option>
+                  <option >1 semaine sur 2</option>
+                </select> </div>
+             <br>
+              <div class="fm-input " >
+             <label>Nombre de fois dans la période :</label>
+                <input type="number"  min=1 value="1" id="Nfois" name="Nfois"  > 
+              </div><br>
+								<!--<label>Nombre de fois :</label>
 							  <input type="number"  value="1" id="Nfois" name="Nfois"  > 
 							</div>
 							<div class="fm-input ">
@@ -1749,9 +1766,9 @@ input:checked + .slider:before {
 							<div class="fm-input  ">
 								<label id="labelperiode">Période (N° de jours) :</label>
 							  <input type="number" id="periode"  placeholder="nombre de jours"   name="periode">
-							</div><br></div>
+							</div><br>--></div>
 							<div class="fm-input  "> 
-							  <input type="text"      placeholder="prix de service*" name="prix" id="prix" required> 
+							  <input type="text"  placeholder="prix de service*" name="prix" id="prix" required> 
 							</div>
 					  <input type="submit" id="add" style="text-align:center;color:white;" value="Ajouter"></input>
 
@@ -2248,15 +2265,15 @@ if (x=="Numérique") {
 // alert(idwd);
    var x = document.getElementById("f"+idwd);
    var y = document.getElementById("h"+idwd);
-   var z = document.getElementById("p"+idwd);
+   //var z = document.getElementById("p"+idwd);
   if (x.style.display === "none") {
     x.style.display = "block";
     y.style.display = "block";
-    z.style.display = "block";
+   // z.style.display = "block";
   } else {
     x.style.display = "none";
     y.style.display = "none";
-    z.style.display = "none";
+   //z.style.display = "none";
   }
    	};
     var input = document.getElementById('toggleswitch');

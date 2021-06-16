@@ -21,6 +21,7 @@ use \App\Happyhour;
 use \App\ServiceSupp;
 use \App\Newdate;
 use \App\Client_product;
+use \App\PropositionDatesServicesAbn;
 use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
@@ -575,14 +576,18 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		//dd($cuser->id);
 		 //$reservations = Reservation::orderBy('id', 'DESC')->where('prestataire',$cuser->id)->whereNull('id_recc')
         //->get();
-       $reservations = DB::table('reservations')->where('prestataire',$cuser->id)->whereNull('id_recc')->get();
+       $reservations = DB::table('reservations')->where('prestataire',$cuser->id)->whereNotNull('date_reservation')->whereNull('id_recc')->where(function($q){ $q->where('recurrent',0)
+         ->orwhere('recurrent',1)->where('visible',true);
+          })->get();
 		}
 		if($cuser->user_type=='client' ){
-        $reservations = DB::table('reservations')->where('client',$cuser->id)->whereNull('id_recc')->get();
+        $reservations = DB::table('reservations')->whereNotNull('date_reservation')->where('client',$cuser->id)->whereNull('id_recc')->where(function($q){ $q->where('recurrent',0)
+         ->orwhere('recurrent',1)->where('visible',true);
+          })->get();
 		}
 		
 		if($cuser->user_type=='admin' ){
-        $reservations = DB::table('reservations')->whereNull('id_recc')->get();
+        $reservations = DB::table('reservations')->whereNotNull('date_reservation')->whereNull('id_recc')->get();
 		}	
 		 /*$reservations=$reservations->sortBy(function($t)
                                         {
@@ -661,11 +666,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 			Happyhour::where('id', $request->get('happyhourid'))->update(array("Beneficiaries"=> $B + 1));
 		}
 		$periode =  $request->get('periode');
+
+		 $servicerecc = Service::where('id',$request->get('services_reserves'))->first();
+        $nbr_fois=$servicerecc->Nfois;
+
 		$reservation  = new Reservation([
               'client' => $request->get('client'),
               'prestataire' => $request->get('prestataire'),
-              'services_reserves' => [$request->get('services_reserves')],
-              'date_reservation' =>$request->date_reservation[0],
+              'services_reserves' => [$request->get('services_reserves')],          
               'remarques' => $request->get('remarques'),
               'rappel' => $request->get('rappel'),
               'happyhour' => $request->get('happyhour'),
@@ -674,10 +682,27 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
               'Net' => $request->get('Net'),
               'listcodepromo' => $request->get('listcodepromo'),
               'recurrent' => 1,
+              'ordre_recc'=>1,
             ]);
 		$reservation->save();
 		$id_recc = $reservation->id ;
-		for ($i=1; $i < $request->get('nbrService') ; $i++) { 
+		$id_recc2=$id_recc;
+		for ($i=1; $i < $nbr_fois ; $i++) { 
+			
+			$reservation  = new Reservation([
+              'client' => $request->get('client'),
+              'prestataire' => $request->get('prestataire'),
+              'services_reserves' => [$request->get('services_reserves')],              
+              'remarques' => $request->get('remarques'),
+              'rappel' => $request->get('rappel'),
+              'id_recc' => $id_recc ,
+              'recurrent' => 1,
+               'ordre_recc'=>($i+1),
+            ]);
+		$reservation->save();
+		}
+
+		/*for ($i=1; $i < $request->get('nbrService') ; $i++) { 
 			
 			$reservation  = new Reservation([
               'client' => $request->get('client'),
@@ -690,8 +715,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
               'recurrent' => 1,
             ]);
 		$reservation->save();
-		}
-		if ($request->get('frq')=="Journalière") {
+		}*/
+		/*if ($request->get('frq')=="Journalière") {
 			$frq = 1 ;
 
 		}
@@ -701,8 +726,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		else if ($request->get('frq')=="Mensuelle") {
 			$frq = 28 ;
 		}
-		
-		for ($t=1; $t < $request->get('periode') ; $t++) { 
+		*/
+		/*for ($t=1; $t < $request->get('periode') ; $t++) { 
 			$days = ' + '.$frq*$t.' days' ;
 			for ($i=0; $i < $request->get('nbrService') ; $i++) { 
 			
@@ -719,8 +744,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 			$reservation->save();
 			
 		}
-		}
-		//return $request->get('services_reserves');
+		}*/
 		$test=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->exists();
 		if ($test=='true') {
 			$nbrRes=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->value('nbr_reservation');
@@ -738,7 +762,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $ser=[$request->get('services_reserves')];
         $service_name='';
         $service_prix=1;
-        //return($service_prix);
+      
 		if(isset($ser))
 		{
             foreach ($ser as $s ) {
@@ -750,7 +774,17 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		}
 		Reservation::where('id', $id_recc)->orwhere('id_recc', $id_recc)->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix));
 
-		return($service_prix); 
+		//inseration dans la table propostion de dates
+		$Proposition  = new PropositionDatesServicesAbn([
+              'client' => $request->get('client'),
+              'prestataire' => $request->get('prestataire'),
+              'service_rec' => $request->get('services_reserves'),
+              'id_reservation'=>$id_recc2,
+            
+            ]);
+			$Proposition->save(); 
+
+        //dd('test');
 		$service = \App\Service::find($request->get('services_reserves'));
 		
 		// Email prestataire

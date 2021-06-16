@@ -1912,7 +1912,9 @@ function viewproduit(){
  		periode=a.options[a.selectedIndex].getAttribute('periode');
  		nbr=a.options[a.selectedIndex].getAttribute('ndate');
  		frq=a.options[a.selectedIndex].getAttribute('frq');
- 		if (frq=="Journalière") {
+
+ 		document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
+ 		/*if (frq=="Journalière") {
    				//alert("oui");
     		document.getElementById("msgRec").innerHTML = "NB: c'est un service Journalière (sur "+periode+" jours) vous devez choisir "+nbr+" dates par jour.";
     		//document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
@@ -1924,16 +1926,16 @@ function viewproduit(){
     	else if (frq=="Mensuelle") {
     		document.getElementById("msgRec").innerHTML = "NB: c'est un service Mensuelle (sur "+periode+" mois) vous devez choisir "+nbr+" dates par mois.";
     	
-    	}
+    	}*/
  		//alert(frq);
     	
-    	document.getElementById("nbrServiceRec").value = nbr;
+    	/*document.getElementById("nbrServiceRec").value = nbr;
     	var y = '<label>Date de rendez vous:</label>';
     	
     	for (var i = 0; i < nbr; i++) {
     		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
-    	}
-    	document.getElementById("dateRec").innerHTML = y;
+    	}*/
+    	//document.getElementById("dateRec").innerHTML = y;
     	var reductioncarte = document.getElementById('catrefideliteVal').value ;
 		if (reductioncarte!=0) {
 		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
@@ -1951,7 +1953,7 @@ function viewproduit(){
 		document.getElementById('totalReservationRec').value = total;
 		//alert(remiseCarte);
 		}
-        document.getElementById("dateRec").innerHTML = y;
+        //document.getElementById("dateRec").innerHTML = y;
     	//$("#dateRec").append(y);
     	
     }
