@@ -684,7 +684,7 @@ background-color:#a0d468;
        <div class="utf_signin_form style_one" id="DaterendezvousTelmodal">                 
        </div> 
       <br>
-           <center><input id="brendezvousTel" type="submit" style="text-align:center;color:white;" value="Envoyer au client"></input></center>
+           <center><input id="brendezvousTel" type="submit" style="text-align:center;color:white;" value="Envoyer au prestataire"></input></center>
        
       </form> 
       <br><hr><br>
