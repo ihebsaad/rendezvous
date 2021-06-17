@@ -527,7 +527,7 @@ class ServicesController extends Controller
          
             $message=''; 
            
-           $message.='<br>Bonjour Cher client<br>Le prestataire  '.$nom_prestataire.' a annulé votre pré-réservation de service récurrent: '.$nom_service.' <br> Cordialement';
+           $message.='<br>Bonjour,<br>Le prestataire  '.$nom_prestataire.' a annulé votre pré-réservation de service récurrent: '.$nom_service.' <br> Cordialement';
            // envoi mail au prestataire 
            $this->sendMail(trim($mail_client),'Annulation de la pré-réservation de service par le prestataire  '.$nom_prestataire.'  ',$message) ; 
 
@@ -674,7 +674,7 @@ class ServicesController extends Controller
            $message='';
            $message.='<br>Bonjour <br>Le client a accepté les dates de séances ('. $dateresprop.') pour le service récurrent '.$nom_service.'<br> Cordialement';
            // envoi mail au prestataire 
-           $this->sendMail(trim($mail_prest),'Acceptation des dates de séances par le client : ('.$nom_client.')',$message) ; 
+           $this->sendMail(trim($mail_prest),'Acceptation des dates de séances par le client '.$nom_client.' ',$message) ; 
 
 
       return('ok');
@@ -738,9 +738,9 @@ class ServicesController extends Controller
            }
 
            $message='';
-           $message.='<br><br>Ce client vous propose la date suivante '.$dateres->format('d/m/Y H:i').' pour faire une communication téléphonique pour se mettre d\'accord sur les dates de séances de service récurrent '.$nom_service;
+           $message.='<br>Bonjour, <br>Ce client vous propose la date suivante '.$dateres->format('d/m/Y H:i').' pour faire une communication téléphonique pour se mettre d\'accord sur les dates de séances de service récurrent '.$nom_service.'<br> Cordialement';
            // envoi mail au prestataire 
-           $this->sendMail(trim($mail_prest),'Rendez-vous téléphonique pour confirmer les dates de séances avec le client : ('.$nom_client.')',$message) ; 
+           $this->sendMail(trim($mail_prest),'Rendez-vous téléphonique pour confirmer les dates de séances avec le client '.$nom_client.' ',$message) ; 
 
            return 'ok';
 
@@ -857,9 +857,9 @@ class ServicesController extends Controller
          
             $message=''; 
            
-           $message.='<br><br>Les dates de séances confirmées avec le prestataire '.$nom_prestataire.' pour le service récurrent: '.$nom_service.' sont les suivantes : '.$dateres.' SVP soyez à l\'heure';
+           $message.='<br>Bonjour, <br>Les dates de séances confirmées avec le prestataire '.$nom_prestataire.' pour le service récurrent: '.$nom_service.' sont les suivantes : '.$dateres.' SVP soyez à l\'heure <br> Cordialement';
            // envoi mail au prestataire 
-           $this->sendMail(trim($mail_client),'Rendez-vous confirmées pour les dates de séances avec le prestataire : ('.$nom_prestataire.')',$message) ; 
+           $this->sendMail(trim($mail_client),'Rendez-vous confirmées pour les dates de séances avec le prestataire  '.$nom_prestataire.' ',$message) ; 
 
              return "ok" ; 
 
@@ -943,7 +943,7 @@ class ServicesController extends Controller
            }
 
            $message='';
-           $message.='<br><br>Les dates de séances proposées par le prestataire '.$nom_prestataire.' pour le service récurrent: '.$nom_service.' sont les suivantes : '.$dateres.' SVP soyez à l\'heure et n\'oubliez pas d\'accepter ces dates dans votre panneau admin (Cliquez le bouton accepter dans la ligne de pré-réservation dans la table "Dates de réservation de services à abonnement proposées par le prestataire" ), si ces dates ne vous conviennent pas, alors, dans ce cas, vous pouvez proposer un rendez-vous pour une communication téléphonique afin de confirmer les dates de séances que vous conviennent (appuyez sur le bouton "Rendez-vous avec le prestataire")';
+           $message.='<br>Bonjour, <br>Les dates de séances proposées par le prestataire '.$nom_prestataire.' pour le service récurrent: '.$nom_service.' sont les suivantes : '.$dateres.' SVP soyez à l\'heure et n\'oubliez pas d\'accepter ces dates dans votre panneau admin (Cliquez le bouton accepter dans la ligne de pré-réservation dans la table "Dates de réservation de services à abonnement proposées par le prestataire" ), si ces dates ne vous conviennent pas, alors, dans ce cas, vous pouvez proposer un rendez-vous pour une communication téléphonique afin de confirmer les dates de séances que vous conviennent (appuyez sur le bouton "Rendez-vous avec le prestataire")<br> Cordialement';
            // envoi mail au prestataire 
            $this->sendMail(trim($mail_client),'Les dates de séances proposées par le prestataire : '.$nom_prestataire.'',$message) ; 
 
