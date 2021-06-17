@@ -856,8 +856,10 @@ class ServicesController extends Controller
            $dateres = $proprendezvous->datesConfirmees ;
            }
    
-            $proprendezvous->delete();
-            $proprendezvous->save();
+           // $proprendezvous->delete();
+
+            DB::table('proposition_dates_serv_abn')->where('id',$req->get('id_prop_date'))->delete();
+            //$proprendezvous->save();
          
             $message=''; 
            
