@@ -1116,7 +1116,7 @@ background-color:#a0d468;
                 success:function(data){
                // alert(JSON.stringify(data));
                  // location.href= "{{ route('reservations') }}";
-              swal("Un email est envoyé au client contenant les dates fonales pour mes séances");
+              swal("Un email est envoyé au client contenant les dates finales pour les séances de service récurrent");
 
                 }
             });

@@ -770,6 +770,9 @@ class ServicesController extends Controller
          //  ici à la place de sauvgarder directement les dates confirmés dans la base , on remplace la pré-réservation par une préservation directe 
          $proprendezvous=PropositionDatesServicesAbn::where('id',$req->get('id_prop_date'))->first();
          $id_recc=$proprendezvous->id_reservation;
+         $proprendezvous->update(['datesConfirmees'=> $ch]);
+         $proprendezvous->save();
+
 
       $seances = explode(";", $ch);
 
@@ -800,8 +803,7 @@ class ServicesController extends Controller
         }
 
       }
-      $proprendezvous->delete();
-      $proprendezvous->save();
+     
 
 
          //return $ch; 
@@ -853,7 +855,9 @@ class ServicesController extends Controller
            {
            $dateres = $proprendezvous->datesConfirmees ;
            }
-
+   
+            $proprendezvous->delete();
+            $proprendezvous->save();
          
             $message=''; 
            
