@@ -224,9 +224,10 @@ background-color:#a0d468;
                       <td>{{ $serv->Nfois}}</td>                  
                       <td>{{ $pc->datesProposees}} </td> 
                       <td><input type="button" style="width: 100px !important; color: white !important; padding:7px 10px 7px 10px!important; margin: 5px;" value="Annuler " onclick="annulerPclient(<?php echo $pc->id ; ?>  )">
-                       <input type="button" style="width: 100px !important; color: white !important;padding:7px 10px 7px 10px !important;  margin: 5px;" value="Accepter " onclick="accepter(<?php echo $pc->id ; ?> )">
-                     
-                     <a  href="#rendezvousTel" class="button popup-with-zoom-anim clickDates"  style="margin:5px 5px 5px 5px " onclick="rendezvousTel(<?php echo $pc->id ; ?> )"><i class="fa fa-calendar"></i>Rendez-vous avec le prestataire</a> 
+                      <?php if($pc->datesProposees){ ?>
+                       <input type="button" style="width: 100px !important; color: white !important;padding:7px 10px 7px 10px !important;  margin: 5px;" value="Accepter " onclick="accepter(<?php echo $pc->id ; ?> )">                     
+                       <a  href="#rendezvousTel" class="button popup-with-zoom-anim clickDates"  style="margin:5px 5px 5px 5px " onclick="rendezvousTel(<?php echo $pc->id ; ?> )"><i class="fa fa-calendar"></i>Rendez-vous avec le prestataire</a> 
+                        <?php } ?>
 
                       </td>
                       </tr>            
@@ -1148,7 +1149,7 @@ background-color:#a0d468;
                 data:{id_prop_date:id_prop_date2,nbr_dates:nbr_dates2,datesProposees:datesProposees, _token:_token},
                 success:function(data){
                 //alert(JSON.stringify(data));
-                 swal("Un email est envoyé au clientcpntenant les dates proposées");
+                 swal("Un email est envoyé au client contenant les dates proposées");
                  // location.href= "{{ route('reservations') }}";
                 }
             });
