@@ -68,6 +68,7 @@ Route::post('/users/Firstservice','UsersController@FirstService')->name('users.F
 
 
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
+Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));

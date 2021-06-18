@@ -17,3 +17,5 @@ yarn-error.log
 storage/images/big3.png
 storage/images/big00.png
 storage/images/big.png
+/composer.lock
+/imp.rtf

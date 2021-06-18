@@ -225,6 +225,13 @@ class UsersController extends Controller
       return view('home' );       
 
     }
+
+          public function accueil()
+    {
+         
+      return view('accueil' );       
+
+    }
     
        public function pricing()
     {
