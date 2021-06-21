@@ -11,7 +11,7 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
         ->select('categorie', DB::raw('COUNT(categorie) as ccat'))
         ->groupBy('categorie')
         ->orderBy(DB::raw('COUNT(categorie)'), 'DESC')
-        ->take(5)
+        ->take(6)
         ->get();
 
 ?>
