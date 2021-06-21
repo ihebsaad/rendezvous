@@ -43,5 +43,5 @@
 </div>	
 
 @include('layouts.footerv2')
-{{-- @include('layouts.footerv2-scripts') --}}
+@include('layouts.footerv2-scripts')
 </html> 

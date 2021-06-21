@@ -53,6 +53,7 @@ $plogo= $parametres->logo;
                 <div class="header-widget">
                      @guest
                     <a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i>Connexion</a>
+                    <a href="dashboard-add-listing.html" class="button border with-icon">Vous êtes prestataire de service ?</a>
                     @else
                     <?php $user = auth()->user();
                           $iduser = $user->id;
@@ -103,7 +104,7 @@ $plogo= $parametres->logo;
                         </ul>
                     </div>-->
 
-                    <a href="dashboard-add-listing.html" class="button border with-icon">Vous êtes prestataire de service ?</a>
+                    
                 </div>
             </div>
             <!-- Right Side Content / End -->

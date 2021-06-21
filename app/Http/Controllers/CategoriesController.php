@@ -53,6 +53,7 @@ class CategoriesController extends Controller
 	{
     $categorie  = new Categorie([
                'nom' => $request->get('nom'),
+               'icone' => $request->get('icone'),
               'description' => $request->get('description'),
               'parent' => $request->get('parent'),
            ]);
@@ -85,7 +86,7 @@ class CategoriesController extends Controller
   {
 
     
-    Categorie::where('id', $request->get('id_categorie'))->update(array('nom' => $request->get('nomEdit'),'description' => $request->get('descriptionEdit'),'parent' => $request->get('parentEdit')));
+    Categorie::where('id', $request->get('id_categorie'))->update(array('nom' => $request->get('nomEdit'),'icone' => $request->get('iconeEdit'),'description' => $request->get('descriptionEdit'),'parent' => $request->get('parentEdit')));
     
  
     if($request->file('imageEdit')!=null)
