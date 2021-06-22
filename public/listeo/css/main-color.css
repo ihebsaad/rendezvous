@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------- */
-/* Color #f91942 - rgb(249, 25, 66)
+/* Color #ffd700 - rgb(249, 25, 66)
 ---------------------------------------------------------------------- */
 #booking-date-range span:after,
 .time-slot label:hover span,
@@ -7,7 +7,7 @@
 .time-slot input ~ label:hover,
 .booking-estimated-cost span,
 .time-slot label:hover span {
-    color: #f91942;
+    color: #ffd700;
 }
 
 .daterangepicker td.in-range,
@@ -22,7 +22,7 @@
 .time-slot input:checked ~ label,
 .daterangepicker td.active, .daterangepicker td.active:hover,
 .daterangepicker .drp-buttons button.applyBtn {
-    background-color: #f91942;
+    background-color: #ffd700;
 }
 
 .comment-by-listing a:hover,
@@ -78,7 +78,7 @@ a.button.border,
 .agent .social-icons li a:hover i,
 #footer .social-icons li a:hover i,
 .headline span i {
-    color: #f91942;
+    color: #ffd700;
 }
 
 .daterangepicker td.active.end-date.in-range.available,
@@ -122,7 +122,7 @@ input:checked + .slider,
 #mapnav-buttons a:hover,
 #sign-in-dialog .mfp-close:hover,
 #small-dialog .mfp-close:hover {
-    background-color: #f91942;
+    background-color: #ffd700;
 }
 
 
@@ -132,20 +132,20 @@ span.blog-item-tag ,
 .listing-item-container.list-layout span.tag,
 .tip,
 .mfp-arrow:hover {
-    background: #f91942;
+    background: #ffd700;
 }
 
 
-.rangeslider__handle { border-color: #f91942; }
+.rangeslider__handle { border-color: #ffd700; }
 
 .layout-switcher a.active {
-    color: #f91942;
-    border-color: #f91942;
+    color: #ffd700;
+    border-color: #ffd700;
 }
 
 #titlebar.listing-titlebar span.listing-tag {
-    border-color: #f91942;
-    color: #f91942;
+    border-color: #ffd700;
+    color: #ffd700;
 }
 
 
@@ -153,7 +153,7 @@ span.blog-item-tag ,
 .listing-slider-small .slick-prev:hover,
 .listing-slider .slick-next:hover,
 .listing-slider .slick-prev:hover {
-    background-color: #f91942;
+    background-color: #ffd700;
 }
 
 
@@ -162,118 +162,118 @@ span.blog-item-tag ,
 .listing-nav li:first-child a,
 .listing-nav li a.active,
 .listing-nav li a:hover {
-    border-color: #f91942;
-    color: #f91942;
+    border-color: #ffd700;
+    color: #ffd700;
 }
 
 .pricing-list-container h4 {
-    color: #f91942;
-    border-color: #f91942;
+    color: #ffd700;
+    border-color: #ffd700;
 }
 
-.sidebar-textbox ul.contact-details li a { color: #f91942; }
+.sidebar-textbox ul.contact-details li a { color: #ffd700; }
 
 a.button.border {
-    color: #f91942;
-    border-color: #f91942;
+    color: #ffd700;
+    border-color: #ffd700;
 }
 
 .trigger.active a,
 .ui-accordion .ui-accordion-header-active:hover,
 .ui-accordion .ui-accordion-header-active {
-    background-color: #f91942;
-    border-color: #f91942;
+    background-color: #ffd700;
+    border-color: #ffd700;
 }
 
 .numbered.color ol > li::before {
-    border-color: #f91942;;
-    color: #f91942;
+    border-color: #ffd700;;
+    color: #ffd700;
 }
 
 .numbered.color.filled ol > li::before {
-    border-color: #f91942;
-    background-color: #f91942;
+    border-color: #ffd700;
+    background-color: #ffd700;
 }
 
 .info-box {
-    border-top: 2px solid #f91942;
+    border-top: 2px solid #ffd700;
     background: linear-gradient(to bottom, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-    background-color: #f91942;
-    color: #f91942;
+    background-color: #ffd700;
+    color: #ffd700;
 }
 
 .info-box.no-border {
     background: linear-gradient(to bottom, rgba(255,255,255,0.96), rgba(255,255,255,0.93));
-    background-color: #f91942;
+    background-color: #ffd700;
 }
 
-.tabs-nav li a:hover { border-color: #f91942; }
+.tabs-nav li a:hover { border-color: #ffd700; }
 
 .tabs-nav li a:hover,
 .tabs-nav li.active a {
-    border-color: #f91942;
-    color: #f91942;
+    border-color: #ffd700;
+    color: #ffd700;
 }
 
 .style-3 .tabs-nav li a:hover,
 .style-3 .tabs-nav li.active a {
-    border-color: #f91942;
-    background-color: #f91942;
+    border-color: #ffd700;
+    background-color: #ffd700;
 }
 
 .checkboxes input[type=checkbox]:checked + label:before {
-    background-color: #f91942;
-    border-color: #f91942;
+    background-color: #ffd700;
+    border-color: #ffd700;
 }
 
-.listing-item-container.compact .listing-item-content span.tag { background-color: #f91942; }
+.listing-item-container.compact .listing-item-content span.tag { background-color: #ffd700; }
 
 .dashboard-nav ul li.active,
-.dashboard-nav ul li:hover { border-color: #f91942; }
+.dashboard-nav ul li:hover { border-color: #ffd700; }
 
-.dashboard-list-box .comment-by-listing a:hover { color: #f91942; }
+.dashboard-list-box .comment-by-listing a:hover { color: #ffd700; }
 
-.opening-day:hover h5 { color: #f91942 !important; }
+.opening-day:hover h5 { color: #ffd700 !important; }
 
-.map-box h4 a:hover { color: #f91942; }
+.map-box h4 a:hover { color: #ffd700; }
 .infoBox-close:hover {
-    background-color: #f91942;
-    -webkit-text-stroke: 1px #f91942;
+    background-color: #ffd700;
+    -webkit-text-stroke: 1px #ffd700;
 }
 
 .cluster-visible {
-    background-color: #f91942;
+    background-color: #ffd700;
 }
 
 .cluster-visible:before {
-    border: 7px solid #f91942;
-    box-shadow: inset 0 0 0 4px #f91942;
+    border: 7px solid #ffd700;
+    box-shadow: inset 0 0 0 4px #ffd700;
 }
 
 .marker-arrow {
-    border-color: #f91942 transparent transparent;
+    border-color: #ffd700 transparent transparent;
 }
 
 .face.front {
-    border-color: #f91942;
-    color: #f91942;
+    border-color: #ffd700;
+    color: #ffd700;
 }
 
 .face.back {
-    background: #f91942;
-    border-color: #f91942;
+    background: #ffd700;
+    border-color: #ffd700;
 }
 
 .custom-zoom-in:hover:before,
-.custom-zoom-out:hover:before  { -webkit-text-stroke: 1px #f91942;  }
+.custom-zoom-out:hover:before  { -webkit-text-stroke: 1px #ffd700;  }
 
 .category-box-btn:hover {
-    background-color: #f91942;
-    border-color: #f91942;
+    background-color: #ffd700;
+    border-color: #ffd700;
 } 
 
 .message-bubble.me .message-text {
-    color: #f91942;
+    color: #ffd700;
     background-color: rgba(249,25,66,0.05);
 }
 
@@ -294,19 +294,19 @@ body #navigation.style-1 ul li:hover ul li:hover li:hover li:hover a,
 body #navigation.style-1 ul ul li:hover a:after,
 body #navigation.style-1 ul ul li:hover ul li a:hover,
 body .user-menu ul li a:hover {
-    color: #f91942
+    color: #ffd700
 }
 
 #navigation.style-1>ul>li:hover>a,
 #navigation.style-1>ul>li>a.current {
-    background: rgba(249, 25, 66, .06);
-    color: #f91942
+    background: rgba(240, 204, 0, 0.16);
+    color: #ffd700
 }
 
 .category-box:hover .category-box-content span,
 .radio input[type=radio]+label .radio-label:after,
 .uploadButton .uploadButton-button:hover {
-    background-color: #f91942
+    background-color: #ffd700
 }
 
 .headline-with-separator:after,
@@ -316,12 +316,12 @@ body .user-menu ul li a:hover {
 .transparent-header #header:not(.cloned) #navigation.style-1>ul>li>a.current,
 .transparent-header #header:not(.cloned) .header-widget .button.border:hover,
 .transparent-header #header:not(.cloned) .header-widget .button:hover {
-    background: #f91942
+    background: #ffd700
 }
 
 .radio input[type=radio]:checked+label .radio-label {
-    background-color: #f91942;
-    border-color: #f91942
+    background-color: #ffd700;
+    border-color: #ffd700
 }
 
 .uploadButton .uploadButton-button:hover {
@@ -330,7 +330,7 @@ body .user-menu ul li a:hover {
 
 .category-small-box i,
 .uploadButton .uploadButton-button:before {
-    color: #f91942
+    color: #ffd700
 }
 
 .daterangepicker td.in-range,
@@ -344,5 +344,5 @@ section.fullwidth .icon-box-2 i {
 
 .slick-current .testimonial-author h4 span {
     background: rgba(249, 25, 66, .06);
-    color: #f91942
+    color: #ffd700
 }

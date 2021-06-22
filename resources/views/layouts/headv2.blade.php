@@ -27,3 +27,12 @@
 <!-- Style CSS -->
 <link rel="stylesheet" href="{{ asset('public/listeo/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('public/listeo/css/main-color.css') }}" id="colors">
+<style type="text/css">
+/* black menu background */
+header#header-container {
+    background-color: black;
+}
+a.button.border:hover {
+  color: black;
+}
+</style>

@@ -272,7 +272,7 @@ img.footer-logo { max-height: 38px; width: auto; }
 
 .header-widget .sign-in {
 	position: relative;
-	color: #333;
+	color: #fff;
 	margin-right: 25px;
 	top: 10px;
 	display: inline-block;
@@ -336,7 +336,7 @@ header.fullwidth .container {
 	z-index: 999;
 }
 
-#header.cloned { background-color: #fff; }
+#header.cloned { background-color: #000; }
 
 /* Sticky header styles */
 #header.cloned #logo img { transform: translate3d(0,0,0); max-width: 120px; margin-top: 1px; }
@@ -696,7 +696,7 @@ body #navigation ul ul {
 	transition: all 0.25s;
 }
 
-#navigation.style-1 ul li a { color: #444; cursor: pointer; }
+#navigation.style-1 ul li a { color: #fff; cursor: pointer; }
 body .user-menu ul li a:hover,
 #navigation.style-1 ul li:hover a { color: #66676b; }
 
@@ -2659,7 +2659,7 @@ body .alt-search-box .main-search-input-item .chosen-container-active.chosen-wit
     height: 42px;
     display: inline-block;
     margin-top: 20px;
-    color: #f91942;
+    color: #ffd700;
     transition: 0.3s;
     z-index: 11;
     position: relative;
@@ -2699,8 +2699,8 @@ body .alt-search-box .main-search-input-item .chosen-container-active.chosen-wit
 }
  
 .category-small-box-alt:hover .category-box-counter-alt { 
-    color: #fff;  
-    background-color: #f91942;
+    color: #000;  
+    background-color: #ffd700;
 }
  
 .category-small-box-alt img {
@@ -4488,7 +4488,7 @@ button.fs-map-btn.button {
 }
 
 .code-button:hover {
-	background-color: #f91942;
+	background-color: #ffd700;
 	color: #fff;
 }
 
@@ -8568,7 +8568,7 @@ a.button {
 	background-color: #66676b;
 	top: 0;
 	padding: 9px 20px;
-	color: #fff;
+	color: #000;
 	position: relative;
 	font-size: 15px;
 	font-weight: 600;
@@ -14319,8 +14319,8 @@ body #submit_map {
 
 .leaflet-control-zoom-in:hover,
 .leaflet-control-zoom-out:hover {
-    background-color: #f91942;
-    -webkit-text-stroke: 1px #f91942;
+    background-color: #ffd700;
+    -webkit-text-stroke: 1px #ffd700;
     color: #fff;
 }
 
@@ -14479,8 +14479,8 @@ body #submit_map {
 	
 .leaflet-container a.leaflet-popup-close-button:hover {
 	color: #fff;
-	background-color: #f91942;
-	-webkit-text-stroke: 1px #f91942;
+	background-color: #ffd700;
+	-webkit-text-stroke: 1px #ffd700;
 }
 
 .leaflet-container a.leaflet-popup-close-button:before {
@@ -14660,13 +14660,13 @@ body #submit_map {
 .marker-cluster-small div,
 .marker-cluster-medium div,
 .marker-cluster-large div {
-	background-color: #f91942;
+	background-color: #ffd700;
 }
 
 .marker-cluster div:before {
-	border: 7px solid #f91942;
+	border: 7px solid #ffd700;
 	opacity: 0.2;
-	box-shadow: inset 0 0 0 4px #f91942;
+	box-shadow: inset 0 0 0 4px #ffd700;
 	content: '';
 	position:absolute;
 	border-radius: 50%;

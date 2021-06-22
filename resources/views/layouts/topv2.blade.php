@@ -14,8 +14,8 @@ $plogo= $parametres->logo;
             <div class="left-side">
                 
                 <!-- Logo -->
-                <div id="logo">
-                    <a href="{{route('home')}}"><img src="<?php echo  URL::asset('storage/images/'.$plogo);?>" alt=""></a>
+                <div id="logo" style="margin-right: 10px;">
+                    <a href="{{route('home')}}"><img src="<?php //echo  URL::asset('storage/images/'.$plogo);?><?php echo  URL::asset('storage/images/logoprv.png');?>" alt=""></a>
                 </div>
 
                 <!-- Mobile Navigation -->

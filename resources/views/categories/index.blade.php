@@ -210,7 +210,8 @@
       $('#nomEdit').val(n);
       $('#iconeEdit').val(i);
       $('#descriptionEdit').val(p);
-      $('#parentEdit option[value='+l+']').attr('selected','selected');
+      if (l != "")
+      {$('#parentEdit option[value='+l+']').attr('selected','selected');}
      
       
 
@@ -219,7 +220,18 @@
  
 });
         $(document).ready(function() {
-
+            
+            $('.popup-with-zoom-anim').magnificPopup({
+                   type: 'inline',
+                   fixedContentPos: false,
+                   fixedBgPos: true,
+                   overflowY: 'auto',
+                   closeBtnInside: true,
+                   preloader: false,
+                   midClick: true,
+                   removalDelay: 300,
+                   mainClass: 'my-mfp-zoom-in'
+               });  
 
             $('#mytable thead tr:eq(1) th').each( function () {
                 var title = $('#mytable thead tr:eq(0) th').eq( $(this).index() ).text();
@@ -316,7 +328,6 @@
  
         });
 
-		
 		
 
 			
