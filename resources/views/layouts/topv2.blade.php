@@ -113,46 +113,47 @@ $plogo= $parametres->logo;
             <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 
                 <div class="small-dialog-header">
-                    <h3>Sign In</h3>
+                    <h3>Connexion</h3>
                 </div>
 
                 <!--Tabs -->
                 <div class="sign-in-form style-1">
 
                     <ul class="tabs-nav">
-                        <li class=""><a href="#tab1">Log In</a></li>
-                        <li><a href="#tab2">Register</a></li>
+                        <li class=""><a href="#tab1">Connexion</a></li>
+                        <li><a href="#tab2">Inscription</a></li>
                     </ul>
 
                     <div class="tabs-container alt">
 
                         <!-- Login -->
                         <div class="tab-content" id="tab1" style="display: none;">
-                            <form method="post" class="login">
-
+                            <form method="POST" action="{{ route('login') }}" class="login">
+                            @csrf
                                 <p class="form-row form-row-wide">
-                                    <label for="username">Username:
+                                    <label for="username">Email:
                                         <i class="im im-icon-Male"></i>
-                                        <input type="text" class="input-text" name="username" id="username" value="" />
+                                        <input type="text" class="input-text" name="email" id="username" value="" />
                                     </label>
                                 </p>
 
                                 <p class="form-row form-row-wide">
-                                    <label for="password">Password:
+                                    <label for="password">Mot de passe:
                                         <i class="im im-icon-Lock-2"></i>
                                         <input class="input-text" type="password" name="password" id="password"/>
                                     </label>
                                     <span class="lost_password">
-                                        <a href="#" >Lost Your Password?</a>
+                                        <a  href="{{ route('password.request') }}" >Mot de passe oublié? </a>
                                     </span>
                                 </p>
 
                                 <div class="form-row">
-                                    <input type="submit" class="button border margin-top-5" name="login" value="Login" />
-                                    <div class="checkboxes margin-top-10">
+                                    <input type="submit" class="button border margin-top-5" name="login" value="Connexion" />
+                                    <!--<input type="submit" class="button border margin-top-5" name="login" value="Login" />-->
+                                    <!--<div class="checkboxes margin-top-10">
                                         <input id="remember-me" type="checkbox" name="check">
                                         <label for="remember-me">Remember Me</label>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 
                             </form>
@@ -164,14 +165,14 @@ $plogo= $parametres->logo;
                             <form method="post" class="register">
                                 
                             <p class="form-row form-row-wide">
-                                <label for="username2">Username:
+                                <label for="username2">Nom d'utilisateur:
                                     <i class="im im-icon-Male"></i>
                                     <input type="text" class="input-text" name="username" id="username2" value="" />
                                 </label>
                             </p>
                                 
                             <p class="form-row form-row-wide">
-                                <label for="email2">Email Address:
+                                <label for="email2">Email:
                                     <i class="im im-icon-Mail"></i>
                                     <input type="text" class="input-text" name="email" id="email2" value="" />
                                 </label>

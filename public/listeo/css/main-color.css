@@ -343,6 +343,6 @@ section.fullwidth .icon-box-2 i {
 }
 
 .slick-current .testimonial-author h4 span {
-    background: rgba(249, 25, 66, .06);
+    background: rgba(0, 0, 0, 0.7);
     color: #ffd700
 }

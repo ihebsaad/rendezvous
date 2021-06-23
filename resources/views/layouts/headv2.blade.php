@@ -23,7 +23,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{ asset('public/listeo/images/favicon.png') }}"  >
+<link rel="shortcut icon" href="{{ asset('public/images/favicon.png') }}"  >
 <!-- Style CSS -->
 <link rel="stylesheet" href="{{ asset('public/listeo/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('public/listeo/css/main-color.css') }}" id="colors">
@@ -33,6 +33,12 @@ header#header-container {
     background-color: black;
 }
 a.button.border:hover {
+  color: black;
+}
+#cattitle:after {
+    background: #585858;
+}
+.listing-item-content span.tag {
   color: black;
 }
 </style>

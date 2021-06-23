@@ -43,8 +43,13 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 style="    font-size: 40px;">{{$parametres->hometext}}</h2>
-                    <!--<h4>Expolore top-rated attractions, activities and more</h4>-->
+                    <!--<h2 style="    font-size: 40px;"></h2>-->
+                    <h2>
+                        Trouvez près de vous des 
+                            <!-- Typed words can be configured in script settings at the bottom of this HTML file -->
+                            <span class="typed-words"></span>
+                    </h2>
+                    <h4>{{$parametres->hometext}}</h4>
                     <form action="{{route('search.prestataires')}}" method="post">
                      @csrf
 
@@ -87,15 +92,15 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 
 </div>
 
-<!-- Content
+<!-- Content categories populaires
 ================================================== -->
-<section class="fullwidth margin-top-0 padding-top-0 padding-bottom-40" data-background-color="#fcfcfc">
+<section class="fullwidth margin-top-0 padding-top-0 padding-bottom-40" data-background-color="#ffd700">
 <div class="container">
     <div class="row">
 
         <div class="col-md-12">
-            <h3 class="headline margin-top-75">
-                <strong class="headline-with-separator">Catégories populaires</strong>
+            <h3 class="headline centered margin-top-75">
+                <strong class="headline-with-separator" id="cattitle">Catégories populaires</strong>
             </h3>
         </div>
 
@@ -122,30 +127,6 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                     <h4>Hotels</h4>
                     <span class="category-box-counter-alt">32</span>
                     <img src="images/category-box-02.jpg">
-                </a>
-
-                
-                <a href="listings-list-with-sidebar.html" class="category-small-box-alt">
-                    <i class="im im-icon-Shopping-Bag"></i>
-                    <h4>Shops</h4>
-                    <span class="category-box-counter-alt">11</span>
-                    <img src="images/category-box-03.jpg">
-                </a>
-
-                
-                <a href="listings-list-with-sidebar.html" class="category-small-box-alt">
-                    <i class="im im-icon-Cocktail"></i>
-                    <h4>Nightlife</h4>
-                    <span class="category-box-counter-alt">15</span>
-                    <img src="images/category-box-04.jpg">
-                </a>
-
-                
-                <a href="listings-list-with-sidebar.html" class="category-small-box-alt">
-                    <i class="im im-icon-Electric-Guitar"></i>
-                    <h4>Events</h4>
-                    <span class="category-box-counter-alt">21</span>
-                    <img src="images/category-box-05.jpg">
                 </a>-->
 
             </div>
@@ -154,5 +135,254 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 </div>
 </section>
 <!-- Category Boxes / End -->
+<!-- Listings -->
+<div class="container margin-top-70 margin-bottom-30">
+    <div class="row">
 
+        <div class="col-md-12">
+            <h3 class="headline centered margin-bottom-45">
+                    <strong class="headline-with-separator">Nos Prestataires</strong>
+                <span>Découvrez les entreprises locales les mieux notées</span>
+            </h3>
+        </div>
+
+        <div class="col-md-12">
+            <div class="simple-slick-carousel dots-nav">
+            <?php  $User= auth()->user();  ?>
+                <?php
+                $listings=\App\User::where('user_type','prestataire')->get();
+                 $format = "Y-m-d H:i:s";
+                    $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
+                    $date_15j=\DateTime::createFromFormat($format, $date_15j);
+                  
+                foreach ($listings as $listing)
+                 {
+                  $date_inscription=  $listing->date_inscription;
+                    $date_inscription=\DateTime::createFromFormat($format, $date_inscription);            
+                    $nbjours = $date_inscription->diff($date_15j);
+                    $nbjours =intval($nbjours->format('%R%a'));
+                     $date_exp='';
+                    if($listing->expire)
+                    {
+                      $date_exp=\DateTime::createFromFormat($format,$listing->expire);
+                    }
+                
+                if ( $nbjours<=15 || ($nbjours> 15 && $listing->expire &&  $date_exp >= $date_15j))
+                {
+                            $categories_user = \DB::table('categories_user')->where('user',$listing->id)->get();
+                            $services =\App\Service::where('user',$listing->id)->get();
+                            
+          $reviews= \App\Review::where('prestataire',$listing->id)->get();
+                $countrev= count($reviews);
+
+                  $moy=$moy_qualite=$moy_service=$moy_prix=$moy_emplacement=$moy_espace=0;
+                $total=0;  
+                if($countrev>0){
+                
+                foreach( $reviews as $review)
+                {
+                    $total=$total+($review->note);
+              
+                }
+                
+                $moy=$total/$countrev; 
+                }       
+                ?>    
+            <!-- Listing Item -->
+            <div class="carousel-item">
+                <a href="listings-single-page.html" class="listing-item-container">
+                    <div class="listing-item">
+                        <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="">
+
+                        <div class="listing-badge now-open">Ouvert</div>
+                        
+                        <div class="listing-item-content">
+                            <!-- categories tag -->
+                            <?php $top=15; $i=0;?>
+                            <?php foreach($categories_user as $cat){ 
+                            $categorie =\App\Categorie::find( $cat->categorie); 
+                            
+                            if($categorie !=null){
+                            if($i<5){
+                            if($categorie->parent==null){   
+                            $i++;   ?>
+                            <span class="tag" style="top:<?php echo $top;?>px!important"><?php echo  $categorie->nom; ?></span>   
+                            <?php $top=$top+30; 
+                            } 
+                            }
+                            }
+                            
+                            }
+                            ?>
+                            <h3>{{$listing->titre}} <?php if ($listing->approved ==1) {;?> <i class="verified-icon"></i><?php }?></h3>
+                            <span>{{$listing->adresse}}</span>
+                        </div>
+                        <!-- icon favori -->
+                        <?php if (isset($User)){?>  
+
+                        <?php if($User->user_type=='client'){  ?>  
+                        <?php $countf= DB::table('favoris')->where('prestataire',$listing->id)->where('client',$User->id)->count(); if($countf==0) {?>  
+                         <span id="fav-<?php echo $listing->id;?>" onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon"></span>  
+                        <?php }else{?>
+                         <span id="fav-<?php echo $listing->id;?>"  onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon liked"></span>   
+                        <?php } ?>
+                         <?php } ?>
+             
+                        <?php }?>
+                        
+                    </div>
+                    <?php if ($countrev >0){?>  
+                    <div class="star-rating" data-rating="<?php echo $moy;?>">
+                        <div class="rating-counter">(<?php echo $countrev; ?> avis)</div>
+                    </div>
+                    <?php }else{ ?>
+                    <div class="star-rating"  style="height:57px" >
+                    </div>
+                    <?php } ?>
+                </a>
+            </div>
+            <!-- Listing Item / End -->
+             <?php }}  //foreach $listings  ?>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+<!-- Listings / End -->
+<!-- Parallax prestataires -->
+<div class="parallax"
+    data-background="<?php echo  URL::asset('public/listeo/images/slider-prestataires.jpg');?>"
+    data-color="#36383e"
+    data-color-opacity="0.6"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-10 col-sm-10">
+                    <h2>Vous êtes prestataire de services sur rendez-vous ?</h2>
+                    <p>Profitez d'une solution simple, intuitive et rapide pour vous connecter à vos clients et optimiser votre temps. Découvrez notre plateforme innovante et notre nouvelle offre sans commissions, ni engagement, conçue spécialement pour les prestataires de services qui travaillent uniquement sur rendez-vous !</p>
+                    <p>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</p>
+                    <a href="#" class="button margin-top-15">Commencer</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+
+</div>
+<!-- Parallax prestataires / End -->
+
+<!-- Parallax clients -->
+<div class="parallax"
+    data-background="<?php // echo  URL::asset('public/listeo/images/slider-prestataires.jpg');?>"
+    data-color="#404040"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="padding: 80px 0px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <img src="<?php echo  URL::asset('storage/images/clientsrdv.png');?>">
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <h2>Je trouve mon prestataire de services sur rendez-vous ?</h2>
+                    <p>Prenez rendez-vous en ligne avec votre prestataire de services en quelques clics !</p>
+                    <p>C'est simple, sécurisé et depuis n'importe quel appareil.</br>
+                    Un large répertoire des prestataires dans plusieurs catégories.</p>
+                    <a href="#" class="button margin-top-15">Commencer</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+
+</div>
+<!-- Parallax clients / End -->
+<!-- Témoinages clients / End -->
+<section class="fullwidth padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
+    <!-- Info Section -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3 class="headline centered">
+                    Ce que disent nos clients
+                    <span class="margin-top-25">Nous recueillons les avis de nos utilisateurs afin que vous puissiez avoir une opinion honnête de ce à quoi ressemble vraiment une expérience avec notre site Web!</span>
+                </h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- Info Section / End -->
+
+    <!-- Categories Carousel -->
+    <div class="fullwidth-carousel-container margin-top-20">
+        <div class="testimonial-carousel testimonials">
+
+            <!-- Item -->
+            <div class="fw-carousel-review">
+                <div class="testimonial-box">
+                    <div class="testimonial">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation is on the runway heading towards a streamlined cloud solution user generated content.</div>
+                </div>
+                <div class="testimonial-author">
+                    <img src="images/happy-client-01.jpg" alt="">
+                    <h4>Jennie Smith <span>Coffee Shop Owner</span></h4>
+                </div>
+            </div>
+            
+            <!-- Item -->
+            <div class="fw-carousel-review">
+                <div class="testimonial-box">
+                    <div class="testimonial">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop.</div>
+                </div>
+                <div class="testimonial-author">
+                    <img src="images/happy-client-02.jpg" alt="">
+                    <h4>Tom Baker <span>Clothing Store Owner</span></h4>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="fw-carousel-review">
+                <div class="testimonial-box">
+                    <div class="testimonial">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view.</div>
+                </div>
+                <div class="testimonial-author">
+                    <img src="images/happy-client-03.jpg" alt="">
+                    <h4>Jack Paden <span>Restaurant Owner</span></h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Témoinages / End -->
+
+</section>
+
+
+<!-- Typed Script -->
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/typed.js') }}"></script>
+<script>
+var typed = new Typed('.typed-words', {
+strings: ["Coiffeuses"," Restaurants"," Hotels"],
+    typeSpeed: 80,
+    backSpeed: 80,
+    backDelay: 4000,
+    startDelay: 1000,
+    loop: true,
+    showCursor: true
+});
+</script>
 @endsection('content')

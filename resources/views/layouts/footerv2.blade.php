@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-6">
-                <img class="footer-logo" src="images/logo.png" alt="">
+                <img src="<?php //echo  URL::asset('storage/images/'.$plogo);?><?php echo  URL::asset('storage/images/logoprvb.png');?>" alt="">
                 <br><br>
                 <p><?php echo $apropos;?></p>
             </div>
