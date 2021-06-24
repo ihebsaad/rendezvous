@@ -194,7 +194,56 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                     <div class="listing-item">
                         <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="">
 
-                        <div class="listing-badge now-open">Ouvert</div>
+                        
+                        <?php 
+                            $fhoraire = $listing->fhoraire;
+                            date_default_timezone_set($fhoraire);
+
+                            $currenttime = date('H:i');
+                            $dayname = date("l");
+                            // lundi
+                            if ($dayname === "Monday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($listing->lundi_o)) && (strtotime($currenttime) <= strtotime($listing->lundi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // mardi
+                            if ($dayname === "Tuesday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($listing->mardi_o)) && (strtotime($currenttime) <= strtotime($listing->mardi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // mercredi
+                            if ($dayname === "Wednesday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($listing->mercredi_o)) && (strtotime($currenttime) <= strtotime($listing->mercredi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // jeudi
+                            if ($dayname === "Thursday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($listing->jeudi_o)) && (strtotime($currenttime) <= strtotime($listing->jeudi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // vendredi
+                            if ($dayname === "Friday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($listing->vendredi_o)) && (strtotime($currenttime) <= strtotime($listing->vendredi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // samedi
+                            if ($dayname === "Saturday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($listing->samedi_o)) && (strtotime($currenttime) <= strtotime($listing->samedi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // dimanche
+                            if ($dayname === "Sunday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($listing->dimanche_o)) && (strtotime($currenttime) <= strtotime($listing->dimanche_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                        ?>
                         
                         <div class="listing-item-content">
                             <!-- categories tag -->

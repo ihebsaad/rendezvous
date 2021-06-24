@@ -19,29 +19,29 @@ $plogo= $parametres->logo;
                 </div>
 
                 <!-- Mobile Navigation -->
-                <div class="mmenu-trigger">
+                <!--<div class="mmenu-trigger">
                     <button class="hamburger hamburger--collapse" type="button">
                         <span class="hamburger-box">
                             <span class="hamburger-inner"></span>
                         </span>
                     </button>
-                </div>
+                </div>-->
 
                 <!-- Main Navigation -->
-                <nav id="navigation" class="style-1">
+                <!--<nav id="navigation" class="style-1">
                     <ul id="responsive">
 
-                        <li><a class="<?php if ($view_name == 'home'){echo 'current';} ?>" href="{{route('home')}}">Accueil</a></li>
+                        <li><a class="<?php //if ($view_name == 'home'){echo 'current';} ?>" href="{{route('home')}}">Accueil</a></li>
 
-                        <li><a class="<?php if ($view_name == 'listings'){echo 'currentcurrent';} ?>" href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
+                        <li><a class="<?php //if ($view_name == 'listings'){echo 'currentcurrent';} ?>" href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
                         
-                        <li><a class="<?php if ($view_name == 'faqs'){echo 'active';} ?>" href="{{route('faqs')}}">FAQs </a></li>
+                        <li><a class="<?php //if ($view_name == 'faqs'){echo 'active';} ?>" href="{{route('faqs')}}">FAQs </a></li>
                         
-                        <li><a class="<?php if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contact')}}" >Contact</a>
+                        <li><a class="<?php //if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contact')}}" >Contact</a>
                         
                     </ul>
-                </nav>
-                <div class="clearfix"></div>
+                </nav>-->
+                <!--<div class="clearfix"></div>-->
                 <!-- Main Navigation / End -->
                 
             </div>
@@ -52,8 +52,8 @@ $plogo= $parametres->logo;
             <div class="right-side">
                 <div class="header-widget">
                      @guest
-                    <a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i>Connexion</a>
                     <a href="dashboard-add-listing.html" class="button border with-icon">Vous êtes prestataire de service ?</a>
+                    <a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim button border with-icon"><!--<i class="sl sl-icon-login"></i>-->Je suis un client</a>
                     @else
                     <?php $user = auth()->user();
                           $iduser = $user->id;
@@ -162,13 +162,15 @@ $plogo= $parametres->logo;
                         <!-- Register -->
                         <div class="tab-content" id="tab2" style="display: none;">
 
-                            <form method="post" class="register">
-                                
+                            <form name="inscription" method="post" class="register"  action="{{ route('register') }}" onsubmit="return validateForm()" >
+                            @csrf
+                            <input type="hidden" name="user_type" id="client" value="client" >   
                             <p class="form-row form-row-wide">
                                 <label for="username2">Nom d'utilisateur:
                                     <i class="im im-icon-Male"></i>
                                     <input type="text" class="input-text" name="username" id="username2" value="" />
                                 </label>
+                                <p id="erro1" style="color: red; font-size: 12px; font-weight: 700;"></p>
                             </p>
                                 
                             <p class="form-row form-row-wide">
@@ -176,23 +178,80 @@ $plogo= $parametres->logo;
                                     <i class="im im-icon-Mail"></i>
                                     <input type="text" class="input-text" name="email" id="email2" value="" />
                                 </label>
+                                <p id="erro5" style="color: red; font-size: 12px; font-weight: 700;"></p> 
+                                @if ($errors->has('email'))
+                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                @endif
                             </p>
 
                             <p class="form-row form-row-wide">
-                                <label for="password1">Password:
-                                    <i class="im im-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password1" id="password1"/>
+                                <label for="name">Prénom:
+                                    <i class="im im-icon-Checked-User"></i>
+                                    <input type="text" class="input-text" name="name" id="name" value="" />
                                 </label>
+                                <p id="erro2" style="color: red; font-size: 12px; font-weight: 700;"></p> 
+                                @if ($errors->has('name'))
+                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                </span>
+                                @endif
                             </p>
 
                             <p class="form-row form-row-wide">
-                                <label for="password2">Repeat Password:
-                                    <i class="im im-icon-Lock-2"></i>
-                                    <input class="input-text" type="password" name="password2" id="password2"/>
+                                <label for="lastname">Nom:
+                                    <i class="im im-icon-Checked-User"></i>
+                                    <input type="text" class="input-text" name="lastname" id="lastname" value="" />
                                 </label>
+                                <p id="erro3" style="color: red; font-size: 12px; font-weight: 700;"></p> 
+                                @if ($errors->has('lastname'))
+                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('lastname') }}</strong>
+                                                </span>
+                                @endif
                             </p>
 
-                            <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+                            <p class="form-row form-row-wide">
+                                <label for="phone">Num mobile (pour les rappels SMS de vos réservations):
+                                    <i class="im im-icon-Phone-SMS"></i>
+                                    <input type="phone" class="input-text" name="phone" id="phone" value="" />
+                                </label>
+                                <p id="erro4" style="color: red; font-size: 12px; font-weight: 700;"></p> 
+                                @if ($errors->has('phone'))
+                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('phone') }}</strong>
+                                                </span>
+                                @endif
+                            </p>
+
+                            <p class="form-row form-row-wide">
+                                <label for="password1">Mot de passe:
+                                    <i class="im im-icon-Lock-2"></i>
+                                    <input class="input-text" type="password" name="password" id="password1"/>
+                                </label>
+                                <p id="erro6" style="color: red; font-size: 12px; font-weight: 700;"></p> 
+                                @if ($errors->has('password'))
+                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                @endif
+                            </p>
+
+                            <p class="form-row form-row-wide">
+                                <label for="password2">Confirmation de mot de passe:
+                                    <i class="im im-icon-Lock-2"></i>
+                                    <input class="input-text" type="password" name="password_confirmation" id="password2"/>
+                                </label>
+                                <p id="erro7" style="color: red; font-size: 12px; font-weight: 700;"></p> 
+                                @if ($errors->has('password_confirmation'))
+                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                                </span>
+                                @endif
+                            </p>
+
+                            <input type="submit" class="button border fw margin-top-10" name="register" value="Inscription" />
     
                             </form>
                         </div>
@@ -209,3 +268,73 @@ $plogo= $parametres->logo;
 </header>
 <div class="clearfix"></div>
 <!-- Header Container / End -->
+  <script>
+function validateForm() {
+  var username = document.forms["inscription"]["username"].value;
+  var name = document.forms["inscription"]["name"].value;
+  var lastname = document.forms["inscription"]["lastname"].value;
+  var phone = document.forms["inscription"]["phone"].value;
+  var email = document.forms["inscription"]["email"].value;
+  var password = document.forms["inscription"]["password"].value;
+  var password_confirmation = document.forms["inscription"]["password_confirmation"].value;
+  var username = document.forms["inscription"]["username"].value;
+  //var atLeastOneIsChecked = $('input[name="user_type"]:checked').length;
+ // var atLeastOneIsChecked2 = $('input[name="typeabonn"]:checked').attr("id");
+  //alert(atLeastOneIsChecked2);
+  var  text;
+  if (username == "") {
+    document.getElementById("erro1").innerHTML =" Vous devez remplir le champ Nom d'utilisateur";
+    return false;
+  }
+  else
+  {
+    document.getElementById("erro1").innerHTML ="";
+  }
+   if (email == "") {
+    document.getElementById("erro5").innerHTML =" Vous devez saisir votre adresse e-mail";
+    return false;
+  }
+  if (name == "") {
+    document.getElementById("erro2").innerHTML =" Vous devez saisir votre Prénom";
+    return false;
+  }
+
+   if (lastname == "") {
+    document.getElementById("erro3").innerHTML =" Vous devez saisir votre Nom";
+    return false;
+  }
+
+  if (phone == "") {
+    document.getElementById("erro4").innerHTML =" Vous devez saisir votre numéro de mobile afin de recevoir des rappels de réservation";
+    return false;
+  }
+
+  if (password == "") {
+    document.getElementById("erro6").innerHTML =" Vous devez saisir un mot de passe";
+    return false;
+  }
+
+  if (password_confirmation == "") {
+    document.getElementById("erro7").innerHTML =" Vous devez confirmer votre mot de passe";
+    return false;
+  }
+
+  /*if (atLeastOneIsChecked == 0) {
+    document.getElementById("erro8").innerHTML =" Vous devez choisir un type d'utilisateur (client ou prestataire)";
+   
+
+    return false;
+  }*/
+  /*if(document.getElementById('prestataire').checked==true)
+    {
+      if (atLeastOneIsChecked2 == 0) {
+
+       document.getElementById("erro9").innerHTML =" Vous devez choisir un type d'abonnement à tester";
+         return false;
+       }
+
+    }*/
+        
+  
+}
+</script>
