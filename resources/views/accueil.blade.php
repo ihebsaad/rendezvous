@@ -136,13 +136,13 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 </section>
 <!-- Category Boxes / End -->
 <!-- Listings -->
-<div class="container margin-top-70 margin-bottom-30">
-    <div class="row">
+<div class="container padding-top-70 padding-bottom-30" style="background: black;">
+    <div class="row" style="background: black;">
 
         <div class="col-md-12">
             <h3 class="headline centered margin-bottom-45">
-                    <strong class="headline-with-separator">Nos Prestataires</strong>
-                <span>Découvrez les entreprises locales les mieux notées</span>
+                    <strong class="headline-with-separator" style="color:white">Nos Prestataires</strong>
+                <span style="color:white">Découvrez les entreprises locales les mieux notées</span>
             </h3>
         </div>
 
@@ -301,9 +301,9 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 <!-- Listings / End -->
 <!-- Parallax prestataires -->
 <div class="parallax"
-    data-background="<?php echo  URL::asset('public/listeo/images/slider-prestataires.jpg');?>"
-    data-color="#36383e"
-    data-color-opacity="0.6"
+    data-background="<?php //echo  URL::asset('public/listeo/images/slider-prestataires.jpg');?>"
+    data-color="#ffd700"
+    data-color-opacity="1"
     data-img-width="800"
     data-img-height="505">
 
@@ -312,11 +312,14 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-10 col-sm-10">
-                    <h2>Vous êtes prestataire de services sur rendez-vous ?</h2>
+                <div class="col-lg-6 col-sm-6" style="color:black;">
+                    <h2 style="color:black;">Vous êtes prestataire de services sur rendez-vous ?</h2>
                     <p>Profitez d'une solution simple, intuitive et rapide pour vous connecter à vos clients et optimiser votre temps. Découvrez notre plateforme innovante et notre nouvelle offre sans commissions, ni engagement, conçue spécialement pour les prestataires de services qui travaillent uniquement sur rendez-vous !</p>
                     <p>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</p>
-                    <a href="#" class="button margin-top-15">Commencer</a>
+                    <a href="#" class="button margin-top-15 btn-ybg">Commencer</a>
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <img src="<?php echo  URL::asset('storage/images/prestatairesrdv.png');?>">
                 </div>
             </div>
 
@@ -331,13 +334,13 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 <!-- Parallax clients -->
 <div class="parallax"
     data-background="<?php // echo  URL::asset('public/listeo/images/slider-prestataires.jpg');?>"
-    data-color="#404040"
+    data-color="#000"
     data-color-opacity="1"
     data-img-width="800"
     data-img-height="505">
 
     <!-- Infobox -->
-    <div class="text-content white-font" style="padding: 80px 0px;">
+    <div class="text-content white-font" >
         <div class="container">
 
             <div class="row">

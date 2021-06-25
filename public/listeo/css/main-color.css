@@ -132,7 +132,7 @@ span.blog-item-tag ,
 .listing-item-container.list-layout span.tag,
 .tip,
 .mfp-arrow:hover {
-    background: #ffd700;
+    background: #000;
 }
 
 
@@ -343,6 +343,6 @@ section.fullwidth .icon-box-2 i {
 }
 
 .slick-current .testimonial-author h4 span {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 1);
     color: #ffd700
 }

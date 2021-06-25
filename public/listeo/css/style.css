@@ -365,7 +365,7 @@ header.fullwidth .container {
 ------------------------------------- */
 #footer {
 	padding: 70px 0 0 0;
-	background-color: #fff;
+	background-color: #ffd700;
 	border-top: 1px solid rgba(0,0,0,0.09);
 	font-size: 16px;
 }
@@ -417,13 +417,13 @@ header.fullwidth .container {
 	-o-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
-	color: #707070;
+	color: #585858;
 	line-height: 21px;
 }
 
 #footer .footer-links li a:hover {
 	padding-left:22px;
-	color: #66676b;
+	color: #000;
 }
 
 #footer .footer-links li:before {
@@ -434,13 +434,13 @@ header.fullwidth .container {
 	left: 0;
 	top: -2px;
 	padding: 0 7px 0 0;
-	color: #ccc;
+	color: #000;
 }
 
 
 /* Footer Bottom */
 .copyrights {
-	color: #707070;
+	color: #353535;
 	border-top: 1px solid rgba(0,0,0,0.09);
 	margin-top: 60px;
 	text-align: center;
@@ -9804,7 +9804,7 @@ body .notification strong { border: none; }
 
 .testimonial-carousel .slick-slide.slick-active .testimonial-box {
 	background: #66676b;
-	color: #a58d0b;
+	color: #fff;
 }
 
 .testimonial-carousel .slick-slide.slick-active .testimonial:before {
@@ -17432,7 +17432,7 @@ body .category-box-btn:hover {
 
 	body p { font-size: 16px; line-height: 29px; }
 
-	#wrapper { background-color: #fff; }
+	#wrapper { background-color: #000; }
 
 	/* Main Font */
 	body, h1, h2, h3, h4, h5, h6,  input[type="text"], input[type="password"], input[type="email"],

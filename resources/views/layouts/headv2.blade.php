@@ -41,4 +41,24 @@ a.button.border:hover {
 .listing-item-content span.tag {
   color: black;
 }
+.btn-ybg {
+  background-color: white!important;
+ /* color: white!important;*/
+}
+.btn-ybg:hover {
+  background-color: black!important;
+  color: white!important; 
+}
+.testimonial-carousel .slick-slide.slick-active .testimonial:before {
+  color: #000;
+}
+.testimonial:after {color: #fff;}
+#footer .container {color: black;}
+#footer .footer-links li a:hover {
+  padding-left:22px;
+  color: #000;
+}
+#footer a {
+  color: #000;
+}
 </style>
