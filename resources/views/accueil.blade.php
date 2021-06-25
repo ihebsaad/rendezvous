@@ -84,7 +84,7 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
     </div>
     
     <!-- Video -->
-    <div class="video-container">
+    <div class="video-container text-center">
         <video loop autoplay muted>
             <source   src="<?php echo  URL::asset('storage/images/'.$pvideo);?>" type="video/mp4">
         </video>

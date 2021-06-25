@@ -12,7 +12,7 @@
             <div class="col-md-4 col-sm-6">
                 <img src="<?php //echo  URL::asset('storage/images/'.$plogo);?><?php echo  URL::asset('storage/images/logoprvb.png');?>" alt="">
                 <br><br>
-                <p><?php echo $apropos;?></p>
+                <p style="    text-align: justify;"><?php echo $apropos;?></p>
             </div>
             <div class="col-md-1 col-sm-1 "></div>
             <div class="col-md-5 col-sm-5 ">
