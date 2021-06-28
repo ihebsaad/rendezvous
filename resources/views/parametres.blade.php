@@ -247,22 +247,55 @@ $commission_abonnement3= $parametres->commission_abonnement3;
     <!-----------------------------text ---------------------------------------->
     <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
-                <h3><i class="sl sl-icon-screen-desktop"></i>Textes du vidéo d'accueil</h3>
+                <h3><i class="sl sl-icon-folder-alt"></i> Textes du vidéo d'accueil</h3>
               </div>  
+            <div class="row with-forms">
            <div class="row">
 
           <div class="col-md-12">
             <label>Texte :</label>           
             <input id="idtext" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->hometext}}" />
           </div>
-          <div class="col-md-6">
+          
+          </div>
+          
+          
+           <div class="row">
+          
+          <div class="col-md-2">
+            <label>Textes animés :</label>           
+            <input id="texta1" name="texta1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->texta1}}" />
+          </div>                    
+          <div class="col-md-2">
+            <label> </label>
+            <input id="texta2" name="texta2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->texta2}}" />          
+          </div>                   
+          <div class="col-md-2">
+            <label> </label>
+            <input id="texta3" name="texta3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->texta3}}" />          
+          </div>                   
+          <div class="col-md-2">
+            <label> </label>
+            <input id="texta4" name="texta4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->texta4}}" />          
+          </div>                   
+          <div class="col-md-2">
+            <label> </label>
+            <input id="texta5" name="texta5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "text" maxlength = "106" value="{{$parametres->texta5}}" />          
+          </div>
+          
+          </div>
+
+           <div class="row">
+           
+           <div class="col-md-6">
             <input type="submit" onclick="savetext()" style="text-align:center;color:white;" value="Enregistrer"></input>
+          </div>         
+          
           </div>
           
           </div>  
           
-     </div>   
-    <!-------------------------------------------------------------------------->  
+     </div> 
     <!-----------------------------boxes ---------------------------------------->
     <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
@@ -741,12 +774,17 @@ figcaption {
   function savetext(){
    
     var val = document.getElementById("idtext").value;
+    var valta1 = document.getElementById("texta1").value;
+    var valta2 = document.getElementById("texta2").value;
+    var valta3 = document.getElementById("texta3").value;
+    var valta4 = document.getElementById("texta4").value;
+    var valta5 = document.getElementById("texta5").value;
      //alert(val);
     var _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "{{ route('users.changehometext') }}",
                     method: "POST",
-                    data: {val: val, _token: _token},
+                    data: {val: val,valta1: valta1,valta2: valta2,valta3: valta3,valta4: valta4,valta5: valta5, _token: _token},
                     success: function (data) {
                                      
                     swal({

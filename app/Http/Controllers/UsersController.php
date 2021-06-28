@@ -127,7 +127,12 @@ class UsersController extends Controller
     public static function changetext(Request $request)
     {
         $val=$request->get('val');
-        DB::table('parametres')->where('id', 1)->update(array('hometext'=> $val));
+        $valta1=$request->get('valta1');
+        $valta2=$request->get('valta2');
+        $valta3=$request->get('valta3');
+        $valta4=$request->get('valta4');
+        $valta5=$request->get('valta5');
+        DB::table('parametres')->where('id', 1)->update(array('hometext'=> $val,'texta1'=> $valta1,'texta2'=> $valta2,'texta3'=> $valta3,'texta4'=> $valta4,'texta5'=> $valta5));
         
         return "ok";
     }

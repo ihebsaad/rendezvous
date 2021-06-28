@@ -428,7 +428,7 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/typed.js') }}"></script>
 <script>
 var typed = new Typed('.typed-words', {
-strings: ["Coiffeuses"," Restaurants"," Hotels"],
+strings: ["<?php echo $parametres->texta1; ?>","<?php echo $parametres->texta2; ?>","<?php echo $parametres->texta3; ?>","<?php echo $parametres->texta4; ?>","<?php echo $parametres->texta5; ?>"],
     typeSpeed: 80,
     backSpeed: 80,
     backDelay: 4000,
