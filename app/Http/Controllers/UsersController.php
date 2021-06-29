@@ -411,7 +411,7 @@ class UsersController extends Controller
         }
 
         // mise à jour qr code
-        if($champ=='titre')
+        if($champ=='titre' && $id)
         {
            $valkbs= trim($request->get('val'));
            if($valkbs)
@@ -419,7 +419,10 @@ class UsersController extends Controller
              $nouv_slug=Str::slug($valkbs,'-');
              $nouv_qrcode=$nouv_slug.'-'.$id.'.png';
             // $ancien_qrcode=User::where('id',$id)->first()->qr_code;
-             $ancien_qrcode=User::where('id',$id)->first()->titre;
+             $ancien_qrcode=User::where('id',$id)->first();
+             if($ancien_qrcode)
+             {
+              $ancien_qrcode= $ancien_qrcode->titre;
              $ancien_qrcode=Str::slug($ancien_qrcode,'-');
              $ancien_qrcode=$ancien_qrcode.'-'.$id.'.png';
 
@@ -432,7 +435,8 @@ class UsersController extends Controller
 
               QrCode::size(200)->format('png')->generate($baseurl.'/'.$nouv_slug.'/'.$id,storage_path().'/qrcodes/'.$nouv_qrcode);
 
-              User::where('id', $id)->update(array("qr_code"=> $nouv_qrcode));            
+              User::where('id', $id)->update(array("qr_code"=> $nouv_qrcode));
+              }            
 
            }
 
