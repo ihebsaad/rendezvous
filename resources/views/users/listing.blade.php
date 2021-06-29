@@ -489,7 +489,7 @@ function geocodeAddress(geocoder, resultsMap) {
 				    <h4>Logo</h4>
 					<form action="{{ route('users.ajoutimage') }}" class="dropzone"  id="dropzoneFrom"  >
 					  {{ csrf_field() }}
-					<input type="hidden" name="user"  value="<?php echo $user->id; ?>">
+					<input type="hidden" id="user" name="user"  value="<?php echo $user->id; ?>">
 					</form>
 					<!---<span id="submit-logo">Envoyer</span>-->
 					<?php if($user->logo!=''){  ?>
