@@ -2320,7 +2320,7 @@ if (x=="Numérique") {
          {val=1;}else{val=0;} 
 	 }
                 var user = $('#user').val();
-                alert("user="+user);
+               // alert("user="+user);
                 //if ( (val != '')) {
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
