@@ -12,8 +12,10 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
         ->groupBy('categorie')
         ->orderBy(DB::raw('COUNT(categorie)'), 'DESC')
         ->orderBy('categorie', 'DESC')
-        ->take(6)
+        ->take(7)
         ->get();
+
+$temoinages=DB::table('temoinages')->get();
 
 ?>
 
@@ -106,19 +108,21 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 
         <div class="col-md-12">
             <div class="categories-boxes-container-alt margin-top-5 margin-bottom-30">
+                <?php $i= 1; ?>
                 @foreach($top_categories as $tcc)
                 <?php
                 $catinfo=DB::table('categories')->where('id', $tcc->categorie)->get();
                 ?>
                      @foreach($catinfo as $cat)
                         <!-- Box -->
-                        <a href="listings-list-with-sidebar.html" class="category-small-box-alt">
+                        <a href="listings-list-with-sidebar.html" class="category-small-box-alt" <?php if ($i ==7) { echo "id='catn7'"; } ?> >
                             <i class="im <?php print_r($cat->icone) ?>"></i>
                             <h4><?php print_r($cat->nom) ?></h4>
                             <span class="category-box-counter-alt">{{$tcc->ccat}}</span>
                             <img src="<?php echo  URL::asset('storage/categories/'.$cat->image);?>" >
                         </a>
                     @endforeach
+                        <?php $i=$i+1; ?>
                 @endforeach
 
                 <!-- Box -->
@@ -383,40 +387,18 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
     <!-- Categories Carousel -->
     <div class="fullwidth-carousel-container margin-top-20">
         <div class="testimonial-carousel testimonials">
-
+            @foreach($temoinages as $tem)
             <!-- Item -->
             <div class="fw-carousel-review">
                 <div class="testimonial-box">
-                    <div class="testimonial">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation is on the runway heading towards a streamlined cloud solution user generated content.</div>
+                    <div class="testimonial">{{$tem->texte}}</div>
                 </div>
                 <div class="testimonial-author">
-                    <img src="images/happy-client-01.jpg" alt="">
-                    <h4>Jennie Smith <span>Coffee Shop Owner</span></h4>
+                    <!--<img src="images/happy-client-01.jpg" alt="">-->
+                    <h4>{{$tem->nom}} <span>{{$tem->poste}}</span></h4>
                 </div>
             </div>
-            
-            <!-- Item -->
-            <div class="fw-carousel-review">
-                <div class="testimonial-box">
-                    <div class="testimonial">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop.</div>
-                </div>
-                <div class="testimonial-author">
-                    <img src="images/happy-client-02.jpg" alt="">
-                    <h4>Tom Baker <span>Clothing Store Owner</span></h4>
-                </div>
-            </div>
-
-            <!-- Item -->
-            <div class="fw-carousel-review">
-                <div class="testimonial-box">
-                    <div class="testimonial">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view.</div>
-                </div>
-                <div class="testimonial-author">
-                    <img src="images/happy-client-03.jpg" alt="">
-                    <h4>Jack Paden <span>Restaurant Owner</span></h4>
-                </div>
-            </div>
-
+            @endforeach
         </div>
     </div>
     <!-- Témoinages / End -->

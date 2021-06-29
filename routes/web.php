@@ -181,6 +181,11 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::get('/pagefaqs/remove_question_response/{id}', 'FaqsController@remove_question_response');
 	Route::post('/pagefaqs/store_question_reponse','FaqsController@store_question_reponse')->name('pagefaqs.store_question_reponse');
 	Route::post('/pagefaqs/update_question_reponse','FaqsController@update_question_reponse')->name('pagefaqs.update_question_reponse');
+
+
+	Route::post('/temoinages/store_temoinage','TemoinagesController@store_temoinage')->name('temoinages.store_temoinage');
+	Route::get('/temoinages/remove_temoinage/{id}', 'TemoinagesController@remove_temoinage');
+	Route::post('/temoinages/update_temoinage','TemoinagesController@update_temoinage')->name('temoinages.update_temoinage');
 	
 	
 

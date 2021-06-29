@@ -296,6 +296,57 @@ $commission_abonnement3= $parametres->commission_abonnement3;
           </div>  
           
      </div> 
+
+     <!-- deb  temoinages clients  designv3 -->
+
+      <div class="add_utf_listing_section margin-top-45"> 
+        <div class="utf_add_listing_part_headline_part">
+          <h3><i class="sl sl-icon-people"></i>Gestion des témoinages des clients</h3>
+                </div>              
+        <div class="row">
+          <div class="col-md-12 col-sm-4">
+            <h4></h4>
+          <table id="utf_pricing_list_section">
+            <tbody class="ui-sortable"  id="indispo">
+            <br>
+          <?php use App\Temoinage; $temoinages=Temoinage::orderBy('id')->get();
+            foreach($temoinages as $tem){
+            ?>
+              <tr class="pricing-list-item pattern ui-sortable-handle">
+              <td> 
+              
+              <div class="fm-input pricing-name" style="min-width:50%;">
+               Client: 
+                <input  type="text" idtem="<?php echo $tem->id; ?>" name="nom" placeholder="Nom du client" id="qp{{$tem->nom}}"  onchange="changing_tem(this)" required  value="<?php echo $tem->nom; ?>" />
+                <input  type="text"  idtem="<?php echo $tem->id; ?>" name="poste" placeholder="Poste du client" id="qp{{$tem->poste}}"  onchange="changing_tem(this)" required  value="<?php echo $tem->poste; ?>" />
+              </div>
+              
+              <div class="fm-input pricing-ingredients" style="min-width:30%;">
+                Témoinage:<!-- <input type="text" value="<?php //echo $pi->date_debut;?>" > -->
+                <textarea  type="text"  idtem="<?php echo $tem->id; ?>" class="textarea tex-com" placeholder="Contenu " name="texte" id="rp{{$tem->texte}}" onchange="changing_tem(this)" required><?php echo $tem->texte; ?></textarea>
+              </div>
+             
+              <div class="fm-close" style="top:20px; right: 20px;">
+              <a  class="delete fm-close"  onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('TemoinagesController@remove_temoinage', [ 'id'=>$tem->id ])}}"><i class="fa fa-remove"></i></a>
+              </div>
+              
+              </td>
+            </tr>
+            
+            <?php } ?>
+            </tbody>
+          </table>
+          <br>
+            <center>
+          <a href="#ajout-temoinage" class="button popup-with-zoom-anim">Ajouter</a> </center>
+          <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
+        </div>                          
+            </div>
+
+
+             <!-- fin  temoinages clients  designv3 -->
+
+
     <!-----------------------------boxes ---------------------------------------->
     <div class="add_utf_listing_section margin-top-45"> 
               <div class="utf_add_listing_part_headline_part">
@@ -662,6 +713,39 @@ figcaption {
      </div>     
        
     <!-- fin modal pour ajouter une indisponibilté -->  
+
+      <!--  modal pour ajouter un témoinage -->
+
+       <div id="ajout-temoinage" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small_dialog_header">
+            <h3>Ajouter un témoinage</h3>
+          </div>
+  <form  method="post" enctype="multipart/form-data" action="{{ route('temoinages.store_temoinage') }}" >
+      {{ csrf_field() }}
+      
+       <div class="utf_signin_form style_one">
+        <label>Nom du client *: </label>
+        <div class="fm-input">
+        <input  type="text" id="nom_client" name="nom" required  />
+      </div>
+        <label>Poste du client *: </label>
+      <div class="fm-input">
+       <input  type="text" id="poste_client" name="poste" required  />
+      </div>
+
+       <label>Témoinage *: </label>
+      <div class="fm-input">
+       <textarea  type="text"  class="textarea tex-com"   id="texte_client" name="texte" required  ></textarea>
+      </div>
+         
+      <br>
+           <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+
+      </form>       
+     </div>     
+     </div>     
+       
+    <!-- fin modal pour ajouter une indisponibilté -->  
   
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  <script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
@@ -815,6 +899,40 @@ figcaption {
                     url: "{{ route('pagefaqs.update_question_reponse') }}",
                     method: "POST",
                     data: { id:id, type:type, champ: champ, val: val, _token: _token},
+                    success: function (data) {
+                        $('#' + champ).animate({
+                            opacity: '0.3',
+                        });
+                        $('#' + champ).animate({
+                            opacity: '1',
+                        });
+             
+                    swal({
+                        type: 'success',
+                        title: 'Modifié ...',
+                        text: 'Contenu modifié avec succès'
+          //  icon: "success",
+                    }); 
+          
+                     }
+          
+                });
+
+            }
+
+// changing_tem
+    function changing_tem(elm) {
+                var id = elm.getAttribute("idtem"); 
+                var champ = elm.name;
+              // alert(type);
+                var val = elm.value;
+                
+                //if ( (val != '')) {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ route('temoinages.update_temoinage') }}",
+                    method: "POST",
+                    data: { id:id, champ: champ, val: val, _token: _token},
                     success: function (data) {
                         $('#' + champ).animate({
                             opacity: '0.3',

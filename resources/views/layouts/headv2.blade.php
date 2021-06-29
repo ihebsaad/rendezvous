@@ -61,4 +61,9 @@ a.button.border:hover {
 #footer a {
   color: #000;
 }
+
+#catn7 {display: none}
+@media (max-width: 1024px) {
+  #catn7 {display: flex}
+}
 </style>
