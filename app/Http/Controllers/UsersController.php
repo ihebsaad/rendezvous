@@ -127,7 +127,12 @@ class UsersController extends Controller
     public static function changetext(Request $request)
     {
         $val=$request->get('val');
-        DB::table('parametres')->where('id', 1)->update(array('hometext'=> $val));
+        $valta1=$request->get('valta1');
+        $valta2=$request->get('valta2');
+        $valta3=$request->get('valta3');
+        $valta4=$request->get('valta4');
+        $valta5=$request->get('valta5');
+        DB::table('parametres')->where('id', 1)->update(array('hometext'=> $val,'texta1'=> $valta1,'texta2'=> $valta2,'texta3'=> $valta3,'texta4'=> $valta4,'texta5'=> $valta5));
         
         return "ok";
     }
@@ -223,6 +228,13 @@ class UsersController extends Controller
     {
          
       return view('home' );       
+
+    }
+
+          public function accueil()
+    {
+         
+      return view('accueil' );       
 
     }
     
@@ -399,7 +411,7 @@ class UsersController extends Controller
         }
 
         // mise à jour qr code
-        if($champ=='titre')
+        if($champ=='titre' && $id)
         {
            $valkbs= trim($request->get('val'));
            if($valkbs)
@@ -407,7 +419,10 @@ class UsersController extends Controller
              $nouv_slug=Str::slug($valkbs,'-');
              $nouv_qrcode=$nouv_slug.'-'.$id.'.png';
             // $ancien_qrcode=User::where('id',$id)->first()->qr_code;
-             $ancien_qrcode=User::where('id',$id)->first()->titre;
+             $ancien_qrcode=User::where('id',$id)->first();
+             if($ancien_qrcode)
+             {
+              $ancien_qrcode= $ancien_qrcode->titre;
              $ancien_qrcode=Str::slug($ancien_qrcode,'-');
              $ancien_qrcode=$ancien_qrcode.'-'.$id.'.png';
 
@@ -420,7 +435,8 @@ class UsersController extends Controller
 
               QrCode::size(200)->format('png')->generate($baseurl.'/'.$nouv_slug.'/'.$id,storage_path().'/qrcodes/'.$nouv_qrcode);
 
-              User::where('id', $id)->update(array("qr_code"=> $nouv_qrcode));            
+              User::where('id', $id)->update(array("qr_code"=> $nouv_qrcode));
+              }            
 
            }
 

@@ -40,6 +40,7 @@
             <th>ID</th>
             <th>Image</th>
             <th>Nom</th>
+            <th>Icone</th>
             <th>Description</th>
              <th  >Mère </th>
            <th class="no-sort">Actions</th> 
@@ -48,6 +49,7 @@
                 <th>ID</th>
                 <th>Image</th>
                 <th>Nom</th>
+                <th>Icone</th>
                 <th>Description</th>
                  <th> </th><th> </th> 
               </tr>
@@ -58,6 +60,7 @@
                     <td>{{$categorie->id}}</td>
                     <td><img  src="<?php echo  URL::asset('storage/categories/'.$categorie->image);?>" style="max-width:80px" /></td>
                      <td id="n{{ $categorie->id}}"> {{$categorie->nom  }} </td>
+                     <td id="i{{ $categorie->id}}"> {{$categorie->icone  }} </td>
                     <td id="p{{ $categorie->id}}">{{$categorie->description}}</td>
                    <td id="l{{ $categorie->id}}" attr="{{$categorie->parent}}"><?php echo CategoriesController::champById('nom',$categorie->parent);?> </td>
                   <td>  
@@ -84,8 +87,13 @@
                             </div><br>
 			
 		 <div class="fm-input ">
-							  <input type="text" placeholder="nom *" name="nom" id="nom">
-							</div>
+			<input type="text" placeholder="nom *" name="nom" id="nom">
+		</div>
+        <div class="fm-input ">
+            <label>Icone</label>
+            <p style="font-size:12px">Copier le nom de l'icone à partir de <a href="https://fliphome.mx/icons-list/">cette page</a></p>
+            <input type="text" placeholder="Icone *" name="icone" id="icone">
+         </div>
 							<div class="fm-input  ">
 							  <input type="text"   placeholder="description"  id="description" name="description">
 							</div>
@@ -153,7 +161,12 @@
             <input type="" name="id_categorie" hidden="hidden" id="id_categorie" value="">
             <label>Nom</label>
                               <input type="text" placeholder="nom *" name="nomEdit" id="nomEdit">
-                            </div>
+         </div>
+         <div class="fm-input ">
+            <label>Icone</label>
+            <p style="font-size:12px">Copier le nom de l'icone à partir de <a href="https://fliphome.mx/icons-list/">cette page</a></p>
+            <input type="text" placeholder="Icone *" name="iconeEdit" id="iconeEdit">
+         </div>
                             <div class="fm-input  ">
                                 <label>Description</label>
                               <input type="text"   placeholder="description"  id="descriptionEdit" name="descriptionEdit">
@@ -189,13 +202,16 @@
       idwd=idwd.substring(1) ;
      
       var n = $('#n'.concat(idwd)).text();
+      var i = $('#i'.concat(idwd)).text();
       var p = $('#p'.concat(idwd)).text();
       var l = $('#l'+idwd+'').attr('attr');
 
      $('#id_categorie').val(idwd);
       $('#nomEdit').val(n);
+      $('#iconeEdit').val(i);
       $('#descriptionEdit').val(p);
-      $('#parentEdit option[value='+l+']').attr('selected','selected');
+      if (l != "")
+      {$('#parentEdit option[value='+l+']').attr('selected','selected');}
      
       
 
@@ -204,7 +220,18 @@
  
 });
         $(document).ready(function() {
-
+            
+            $('.popup-with-zoom-anim').magnificPopup({
+                   type: 'inline',
+                   fixedContentPos: false,
+                   fixedBgPos: true,
+                   overflowY: 'auto',
+                   closeBtnInside: true,
+                   preloader: false,
+                   midClick: true,
+                   removalDelay: 300,
+                   mainClass: 'my-mfp-zoom-in'
+               });  
 
             $('#mytable thead tr:eq(1) th').each( function () {
                 var title = $('#mytable thead tr:eq(0) th').eq( $(this).index() ).text();
@@ -301,7 +328,6 @@
  
         });
 
-		
 		
 
 			

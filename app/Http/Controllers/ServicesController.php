@@ -15,6 +15,11 @@ use \App\Service;
 use \App\Codepromo;
 use \App\Happyhour;
 use \App\ServiceSupp;
+use \App\PropositionDatesServicesAbn;
+use \App\Reservation;
+use Swift_Mailer;
+use Mail;
+use DateTime;
 
 class ServicesController extends Controller
 {
@@ -101,7 +106,7 @@ class ServicesController extends Controller
            if ($request->get('toggleswitch')=='on') {
             $rec=$request->get('toggleswitch');
           }
-         $service  = new Service([
+        /* $service  = new Service([
 
               'user' => $request->get('user'),
               'nom' => $request->get('nom'),
@@ -111,6 +116,20 @@ class ServicesController extends Controller
               'Nfois' => $request->get('Nfois'),
               'frequence' => $request->get('mySelect'),
               'periode' => $request->get('periode'),
+              'nbrService' => $request->get('nbrService'),
+              'recurrent' => $rec,
+              'thumb' => $name,
+           ]);*/
+            $service  = new Service([
+
+              'user' => $request->get('user'),
+              'nom' => $request->get('nom'),
+              'description' => $request->get('description'),
+              'prix' => $request->get('prix'),
+              'duree' => $request->get('duree'),
+              'Nfois' => $request->get('Nfois'),
+              
+              'periode' => $request->get('mySelect'),
               'nbrService' => $request->get('nbrService'),
               'recurrent' => $rec,
               'thumb' => $name,
@@ -456,8 +475,520 @@ class ServicesController extends Controller
 
     }
 
+
+    // services à abonnement récurrent  nouvelle version
+
+     //exécuté par prestataire
+    public function annulerPprestataire($id)
+    {
+
+      $proprendezvous=PropositionDatesServicesAbn::where('id',$id)->first();
+      $proprendezvous->delete();
+      $proprendezvous->save();
+
+      //  envoi un mail pour le client en lui informant que le prestataire a annulé la préservation.
+
+       // envoi mail au client pour confirmer les dates finales de seances 
+
+           $prestataire=User::where('id',$proprendezvous->prestataire)->first();
+           $client=User::where('id',$proprendezvous->client)->first();
+           $service =Service::where('id',$proprendezvous->service_rec)->first();
+           $mail_client="mail inexistant";
+           $nom_prestataire="client inexistant";
+           $nom_service="service inexistant";
+           if($client)
+           {
+            if($client->email)
+            {
+               $mail_client= $client->email;
+            }
+           }
+            if($prestataire)
+           {
+             if($prestataire->name && $prestataire->lastname)
+             {
+             $nom_prestataire= $prestataire->name." ".$prestataire->lastname;
+             } 
+           }
+            if($service)
+           {
+             if($service->nom)
+             { 
+                $nom_service=$service->nom;
+              }
+            
+           }
+           $dateres="--";
+           if($proprendezvous->datesConfirmees)
+           {
+           $dateres = $proprendezvous->datesConfirmees ;
+           }
+
+         
+            $message=''; 
+           
+           $message.='<br>Bonjour,<br>Le prestataire  '.$nom_prestataire.' a annulé votre pré-réservation de service récurrent: '.$nom_service.' <br> Cordialement';
+           // envoi mail au prestataire 
+           $this->sendMail(trim($mail_client),'Annulation de la pré-réservation de service par le prestataire  '.$nom_prestataire.'  ',$message) ; 
+
+             return "ok" ; 
+
+     //   return($id);
+
+    }
+
+    //exécuté  par client
+    public function annulerPclient($id)
+    {
+      
+      $proprendezvous=PropositionDatesServicesAbn::where('id',$id)->first();
+      $proprendezvous->delete();
+      $proprendezvous->save();
+
+      //  envoi un mail pour le prestataire  en lui informant que le client a annulé la préservation.
+
+       $prestataire=User::where('id',$proprendezvous->prestataire)->first();
+           $client=User::where('id',$proprendezvous->client)->first();
+           $service =Service::where('id',$proprendezvous->service_rec)->first();
+           $mail_prest="mail inexistant";
+           $nom_client="client inexistant";
+           $nom_service="service inexistant";
+           if($prestataire)
+           {
+            if($prestataire->email)
+            {
+               $mail_prest= $prestataire->email;
+            }
+           }
+            if($client)
+           {
+             if($client->name && $client->lastname)
+            {
+             $nom_client= $client->name." ".$client->lastname;
+            }
+           }
+            if($service)
+           {
+             if($service->nom)
+              { 
+                $nom_service=$service->nom;
+              }
+            
+           }
+           //return 'ok';
+          
+           
+           $message='';
+           $message.='<br>Bonjour <br>Le client a annulé la pré-réservation concernant le service récurrent '.$nom_service.'<br> Cordialement';
+           // envoi mail au prestataire 
+           $this->sendMail(trim($mail_prest),'Annulation de la pré-réservation de service par le client  '.$nom_client.' ',$message) ; 
+
+
+      return('ok');
+
+
+
+    // return($id);
+
+    }
     
-	
+    //exécuté   par client
+    public function  accepterPropDates($id)
+    {
+      $proprendezvous=PropositionDatesServicesAbn::where('id',$id)->first();
+      $id_recc=$proprendezvous->id_reservation;
+      /*$proprendezvous->update(['decision_clt'=>'accepter']);
+      $proprendezvous->save();*/
+
+      // déplacer la préservation à la table de réservation en supprimant aaisn la préservation 
+
+      $seances = explode(";", $proprendezvous->datesProposees);
+
+      unset($seances[0]);
+
+      $res=array();
+
+      for($i=1; $i<=count($seances); $i++)
+      {
+          $res[]=explode("à" ,$seances[$i]);         
+      }
+      for($j=0 ; $j<count($res); $j++)
+      {
+        if($j!=0)
+        {
+         $reservation=Reservation::whereNotNull('id_recc')->where('id_recc',$id_recc)->where('ordre_recc', $j+1)->first();
+          $date=DateTime::createFromFormat("d/m/Y H:i", trim($res[$j][1]));
+          $reservation->update(['date_reservation'=>$date,'visible'=>1,'statut'=>1]);
+          $reservation->save(); 
+        }
+        else
+        {
+          $reservation=Reservation::where('id',$id_recc)->first();  
+          $date=DateTime::createFromFormat("d/m/Y H:i", trim($res[0][1])); 
+          $reservation->update(['date_reservation'=>$date,'visible'=>1,'statut'=>1]);
+          $reservation->save();
+         //  return($date->format('Y-m-d H:i'));
+        }
+
+      }
+      $proprendezvous->delete();
+      $proprendezvous->save();
+
+      // envoi un mail au prestataire en lui informant que le client a accepté les dates proposé par le client
+
+       $prestataire=User::where('id',$proprendezvous->prestataire)->first();
+           $client=User::where('id',$proprendezvous->client)->first();
+           $service =Service::where('id',$proprendezvous->service_rec)->first();
+           $mail_prest="mail inexistant";
+           $nom_client="client inexistant";
+           $nom_service="service inexistant";
+           if($prestataire)
+           {
+            if($prestataire->email)
+            {
+               $mail_prest= $prestataire->email;
+            }
+           }
+            if($client)
+           {
+             if($client->name && $client->lastname)
+            {
+             $nom_client= $client->name." ".$client->lastname;
+            }
+           }
+            if($service)
+           {
+             if($service->nom)
+              { 
+                $nom_service=$service->nom;
+              }
+            
+           }
+           //return 'ok';
+           $dateresprop=" ";
+           if($proprendezvous->datesProposees)
+           {
+           $dateresprop = $proprendezvous->datesProposees;
+           }
+           
+           $message='';
+           $message.='<br>Bonjour <br>Le client a accepté les dates de séances ('. $dateresprop.') pour le service récurrent '.$nom_service.'<br> Cordialement';
+           // envoi mail au prestataire 
+           $this->sendMail(trim($mail_prest),'Acceptation des dates de séances par le client '.$nom_client.' ',$message) ; 
+
+
+      return('ok');
+
+      //  envoi un mail pour le prestataire en lui informant que le client a accepté la proposition de dates dee seances 
+
+
+
+    // inseration dans les calendriers 
+
+
+      //return($id);
+
+    }
+
+    //exécuté par client si les dates proposées par le prestataire ne convient pas au 
+
+     public function rendezvousTel(Request $req)
+     {
+        // return($req->get('id_prop_date').' '.$req->get('DaterendezvousTel'));
+         if($req->get('id_prop_date') && $req->get('DaterendezvousTel') )
+         {
+
+           $proprendezvous=PropositionDatesServicesAbn::where('id',$req->get('id_prop_date'))->first();
+           $proprendezvous->update(['rendezvoustel'=> trim($req->get('DaterendezvousTel'))]);
+           $proprendezvous->save();
+
+           $prestataire=User::where('id',$proprendezvous->prestataire)->first();
+           $client=User::where('id',$proprendezvous->client)->first();
+           $service =Service::where('id',$proprendezvous->service_rec)->first();
+           $mail_prest="mail inexistant";
+           $nom_client="client inexistant";
+           $nom_service="service inexistant";
+           if($prestataire)
+           {
+            if($prestataire->email)
+            {
+               $mail_prest= $prestataire->email;
+            }
+           }
+            if($client)
+           {
+             if($client->name && $client->lastname)
+            {
+             $nom_client= $client->name." ".$client->lastname;
+            }
+           }
+            if($service)
+           {
+             if($service->nom)
+             { 
+                $nom_service=$service->nom;
+              }
+            
+           }
+           //return 'ok';
+           $dateres="--";
+           if($proprendezvous->rendezvoustel)
+           {
+           $dateres = new DateTime($proprendezvous->rendezvoustel);  $dateres->format('d/m/Y H:i') ;
+           }
+
+           $message='';
+           $message.='<br>Bonjour, <br>Ce client vous propose la date suivante '.$dateres->format('d/m/Y H:i').' pour faire une communication téléphonique pour se mettre d\'accord sur les dates de séances de service récurrent '.$nom_service.'<br> Cordialement';
+           // envoi mail au prestataire 
+           $this->sendMail(trim($mail_prest),'Rendez-vous téléphonique pour confirmer les dates de séances avec le client '.$nom_client.' ',$message) ; 
+
+           return 'ok';
+
+           //return back();
+
+         }
+       
+     }
+
+     //exécuté par prestataire
+      public function insererDatesfinales (Request $req)
+      {
+
+
+         //$req->get('id_prop_date')
+         $nbr=intval(trim( $req->get('nbr_dates')));
+         $ch='';
+
+         for($i=0; $i< $nbr ; $i++)
+         {
+           $date=str_replace("T"," ",$req->Datesfinales[$i]);
+           $dateres = new DateTime($date);  
+           $ch.=' ; Séance '.($i+1).' à '.$dateres->format('d/m/Y H:i') ;
+
+         }
+
+         //  ici à la place de sauvgarder directement les dates confirmés dans la base , on remplace la pré-réservation par une préservation directe 
+         $proprendezvous=PropositionDatesServicesAbn::where('id',$req->get('id_prop_date'))->first();
+         $id_recc=$proprendezvous->id_reservation;
+         $proprendezvous->update(['datesConfirmees'=> $ch]);
+         $proprendezvous->save();
+
+
+      $seances = explode(";", $ch);
+
+      unset($seances[0]);
+
+      $res=array();
+
+      for($i=1; $i<=count($seances); $i++)
+      {
+          $res[]=explode("à" ,$seances[$i]);         
+      }
+      for($j=0 ; $j<count($res); $j++)
+      {
+        if($j!=0)
+        {
+         $reservation=Reservation::whereNotNull('id_recc')->where('id_recc',$id_recc)->where('ordre_recc', $j+1)->first();
+          $date=DateTime::createFromFormat("d/m/Y H:i", trim($res[$j][1]));
+          $reservation->update(['date_reservation'=>$date,'visible'=>1,'statut'=>1]);
+          $reservation->save(); 
+        }
+        else
+        {
+          $reservation=Reservation::where('id',$id_recc)->first();  
+          $date=DateTime::createFromFormat("d/m/Y H:i", trim($res[0][1])); 
+          $reservation->update(['date_reservation'=>$date,'visible'=>1,'statut'=>1]);
+          $reservation->save();
+         //  return($date->format('Y-m-d H:i'));
+        }
+
+      }
+     
+
+
+         //return $ch; 
+  
+         /*for($i=0; $i< $nbr ; $i++)
+         {
+           $date=str_replace("T"," ",$req->get('Datesfinales'.$i));
+           $dateres = new DateTime($date);  
+           $ch.=' ; Séance '.($i+1).' à '.$dateres->format('d/m/Y H:i') ;
+
+         }*/
+
+           
+           /*$proprendezvous->update(['datesConfirmees'=> $ch]);
+           $proprendezvous->save();*/
+
+           // envoi mail au client pour confirmer les dates finales de seances 
+
+           $prestataire=User::where('id',$proprendezvous->prestataire)->first();
+           $client=User::where('id',$proprendezvous->client)->first();
+           $service =Service::where('id',$proprendezvous->service_rec)->first();
+           $mail_client="mail inexistant";
+           $nom_prestataire="client inexistant";
+           $nom_service="service inexistant";
+           if($client)
+           {
+            if($client->email)
+            {
+               $mail_client= $client->email;
+            }
+           }
+            if($prestataire)
+           {
+             if($prestataire->name && $prestataire->lastname)
+             {
+             $nom_prestataire= $prestataire->name." ".$prestataire->lastname;
+             } 
+           }
+            if($service)
+           {
+             if($service->nom)
+             { 
+                $nom_service=$service->nom;
+              }
+            
+           }
+           $dateres="--";
+           if($proprendezvous->datesConfirmees)
+           {
+           $dateres = $proprendezvous->datesConfirmees ;
+           }
+   
+           // $proprendezvous->delete();
+
+            DB::table('proposition_dates_serv_abn')->where('id',$req->get('id_prop_date'))->delete();
+            //$proprendezvous->save();
+         
+            $message=''; 
+           
+           $message.='<br>Bonjour, <br>Les dates de séances confirmées avec le prestataire '.$nom_prestataire.' pour le service récurrent: '.$nom_service.' sont les suivantes : '.$dateres.' SVP soyez à l\'heure <br> Cordialement';
+           // envoi mail au prestataire 
+           $this->sendMail(trim($mail_client),'Rendez-vous confirmées pour les dates de séances avec le prestataire  '.$nom_prestataire.' ',$message) ; 
+
+             return "ok" ; 
+
+           // inseration dans les calendriers 
+
+          // déplacer la préservation à la table de réservation en supprimant aaisn la préservation 
+
+
+
+
+         //$ch= str_replace("T"," ",$ch);
+         //dd($ch); 
+          
+
+      }
+
+     //exécuté par prestataire
+       public function proposerDates (Request $req)
+      {
+        //dd($req->all());
+         //$req->get('id_prop_date')
+         $nbr=intval(trim( $req->get('nbr_dates')));
+         $ch='';
+         
+
+          for($i=0; $i< $nbr ; $i++)
+         {
+           $date=str_replace("T"," ",$req->datesProposees[$i]);
+           $dateres = new DateTime($date);  
+           $ch.=' ; Séance '.($i+1).' à '.$dateres->format('d/m/Y H:i') ;
+
+         }
+         //return $ch; 
+
+         /*for($i=0; $i< $nbr ; $i++)
+         {
+           $date=str_replace("T"," ",$req->get('proposerDates'.$i));
+           $dateres = new DateTime($date);  
+           $ch.=' ; Séance '.($i+1).' à '.$dateres->format('d/m/Y H:i') ;
+
+         }*/
+
+           $proprendezvous=PropositionDatesServicesAbn::where('id',$req->get('id_prop_date'))->first();
+           $proprendezvous->update(['datesProposees'=> $ch]);
+           $proprendezvous->save();
+
+           // envoi mail au client pour confirmer les dates finales de seances 
+
+           $prestataire=User::where('id',$proprendezvous->prestataire)->first();
+           $client=User::where('id',$proprendezvous->client)->first();
+           $service =Service::where('id',$proprendezvous->service_rec)->first();
+           $mail_client="mail inexistant";
+           $nom_prestataire="client inexistant";
+           $nom_service="service inexistant";
+           if($client)
+           {
+            if($client->email)
+            {
+               $mail_client= $client->email;
+            }
+           }
+            if($prestataire)
+           {
+             if($prestataire->name && $prestataire->lastname)
+             {
+             $nom_prestataire= $prestataire->name." ".$prestataire->lastname;
+             } 
+           }
+            if($service)
+           {
+             if($service->nom)
+             { 
+                $nom_service=$service->nom;
+              }
+            
+           }
+           $dateres="--";
+           if($proprendezvous->datesProposees)
+           {
+           $dateres = $proprendezvous->datesProposees ;
+           }
+
+           $message='';
+           $message.='<br>Bonjour, <br>Les dates de séances proposées par le prestataire '.$nom_prestataire.' pour le service récurrent: '.$nom_service.' sont les suivantes : '.$dateres.' SVP soyez à l\'heure et n\'oubliez pas d\'accepter ces dates dans votre panneau admin (Cliquez le bouton accepter dans la ligne de pré-réservation dans la table "Dates de réservation de services à abonnement proposées par le prestataire" ), si ces dates ne vous conviennent pas, alors, dans ce cas, vous pouvez proposer un rendez-vous pour une communication téléphonique afin de confirmer les dates de séances que vous conviennent (appuyez sur le bouton "Rendez-vous avec le prestataire")<br> Cordialement';
+           // envoi mail au prestataire 
+           $this->sendMail(trim($mail_client),'Les dates de séances proposées par le prestataire : '.$nom_prestataire.'',$message) ; 
+
+           return "ok";
+
+           // inseration dans les calendriers 
+
+         //$ch= str_replace("T"," ",$ch);
+         //dd($ch); 
+        
+
+      }
+
+      public function sendMail($to,$sujet,$contenu){
+
+    $swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
+    //$swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+    //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+    $swiftTransport->setUsername('prestataire222@gmail.com'); //adresse email
+    $swiftTransport->setPassword('123prestataire'); // mot de passe email eSolutions2020*
+
+        $swiftMailer = new Swift_Mailer($swiftTransport);
+    Mail::setSwiftMailer($swiftMailer);
+    $from=\Config::get('mail.from.address') ;
+    $fromname=\Config::get('mail.from.name') ;
+    
+    Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
+         $message
+                 ->to($to)
+                    ->subject($sujet)
+                       ->setBody($contenu, 'text/html')
+                    ->setFrom([$from => $fromname]);         
+
+      });
+    
+  }
+
+
 	
 
  }
