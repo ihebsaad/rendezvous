@@ -180,6 +180,7 @@ $intent = PaymentIntent::create([
             'amount' => $reste*100,
             'currency' => 'eur',
         ], ['stripe_account' => $idaccount]);
+dd($intent);
  $clientSecret = Arr::get($intent, 'client_secret');
 return view('payments.pay', [
             'clientSecret' => $clientSecret , 'idaccount' => $idaccount , 'Res' => $k
