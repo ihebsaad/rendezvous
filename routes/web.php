@@ -33,16 +33,25 @@ Route::get('/reservations.annule/{id}','PaymentController@PaymentDetails')->name
 
 
 
+//------------------------Stripe-----------------------//
+
+
+
+Route::get('/ConnectWithStripe','PaymentStripeController@connect')->name('ConnectWithStripe');
+Route::get('/reauth','PaymentStripeController@reauth')->name('reauth');
+
+Route::get('/return','PaymentStripeController@return')->name('return');
+Route::get('/PayWithStripe/{k}','PaymentStripeController@pay')->name('PayWithStripe');
+Route::get('/Pay4WithStripe/{k}','PaymentStripeController@pay4')->name('Pay4WithStripe');
+
+Route::get('/success/pay/{k}','PaymentStripeController@successpayStripe')->name('success.pay');
+Route::get('/save/customer','PaymentStripeController@addcustomerStripe')->name('save.customer');
 
 
 
 
 
-
-
-
-
-
+//------------------------fin Stripe-----------------------//
 
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');

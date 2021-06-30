@@ -267,6 +267,8 @@ background-color:#a0d468;
         <?php $emailpaypal= UsersController::ChampById('emailPaypal',$reservations[$ii]->prestataire); if($emailpaypal) {?>
         @if($reservations[$ii]->Net != 0 || $reservations[$ii]->Net)
         <button class="button ">Payer l'acompte</button> 
+        <!-- <button class="button ">Payer l'acompte </button>  -->
+        <a href="{{url('PayWithStripe/'.$reservations[$ii]->id)}}"  class="button  "> Payer l'acompte (Stripe)</a>
         @endif
          <?php } else{ ?>
         <button class="button " disabled>Email paypal prestataire inexistant! <br> Contactez le pour payer l'acompte</button> 
@@ -292,6 +294,8 @@ background-color:#a0d468;
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $reservations[$ii]->reste ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >
         <button class="button"  >Payer Tranche (1/4  de <?php echo $reservations[$ii]->reste ; ?>€) </button>
+<!--         <button class="button"  >Payer Tranche (1/4  de <?php echo $reservations[$ii]->reste ; ?>€ (Stripe)) </button>
+ -->         <a href="{{url('Pay4WithStripe/'.$reservations[$ii]->id)}}"  class="button  "> Payer le reste sur 4 mois : <?php echo $reservations[$ii]->reste;?> € (Stripe)</a>
         </form> 
   <?php     
   }else{
@@ -307,6 +311,8 @@ background-color:#a0d468;
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
     
         <button class="button ">Payer le reste : <?php echo $reservations[$ii]->reste;?> €</button> 
+<!--         <button class="button ">Payer le reste : <?php echo $reservations[$ii]->reste;?> €</button> 
+ -->        <a href="{{url('PayWithStripe/'.$reservations[$ii]->id)}}"  class="button  "> Payer le reste : <?php echo $reservations[$ii]->reste;?> € (Stripe)</a>
         </form>
         <a  class="button button-danger" style="margin:5px 5px 5px 5px" href="{{url('reservations/modifier/'.$reservations[$ii]->id)}}" >Annuler/Reporter</a>
     <?php
@@ -339,6 +345,7 @@ background-color:#a0d468;
        <?php if($User->user_type =='prestataire' ) {    
 
       if($reservations[$ii]->statut==1){  ?>           
+      if($reservations[$ii]->statut==0){  ?>           
        
       <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservations[$ii]->id)}}"><i class="fa fa-check"></i>  Valider</a>
       <?php if ($reservations[$ii]->paiement==0) { ?>

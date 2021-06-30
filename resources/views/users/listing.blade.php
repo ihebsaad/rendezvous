@@ -225,6 +225,7 @@ background-color:lightgrey;
 
     	  
     	
+    	<input type="hidden" id="user" name="" value="{{$user->id}}">
       
 <!---------------------------------------------------google Map----------------------------------------------------->
            <a href="{{$user->generate_slug()}}" target="_blank" class="button pull-right "><i class="sl sl-icon-eye"> </i>Visualiser</a>
@@ -281,12 +282,39 @@ background-color:lightgrey;
 <!-------------------------------------------------------------------------------------------------------->
 <!-------------------------------------Configuration de paiement--------------------------------------->
 
+<style type="text/css">
+  a.disabled {
+  pointer-events: none;
+  cursor: default;
+  background-color: #61b2db ;
+}
+</style>
 <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-present"></i>Configuration de paiement</h3>
                 </div>       
         <div class="row">
 		   <div class="col-md-12" >
+          <div class="col-md-12" >
+            <h2><b> Connecter votre compte stripe (Obligatoire pour que les clients paient les acomptes et les restes).</b></h2>
+            <br>
+          </div>
+          <div class="col-md-12" >
+            <a href="{{url('ConnectWithStripe')}}"  class="button  <?php if($user->id_stripe!=null){echo 'disabled';}?>" > </i>Connecter Avec Stripe</a>
+
+            
+        </div>
+        <br>
+        <div class="col-md-12" >
+        <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?> 
+       <?php  if($user->allow_slices){$checked='checked';} else{$checked='';}  ?>
+       <label style="font-weight:normal;font-size:22px"> 
+                <input style="width:20px;height:20px"  id="allow_slices"  type="checkbox"   <?php echo $checked; ?>   onchange="changing(this)"     >
+        Permettre le paiement en 4 tranches pour les réservations de 200€ ou plus </label> 
+          <br><br>
+      </div><?php }?>
+
+		   <!-- <div class="col-md-12" >
         <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?> 
 			 <?php if($user->allow_slices){$checked='checked';} else{$checked='';}  ?>
  			 <label style="font-weight:normal;font-size:22px"> 
@@ -316,6 +344,7 @@ background-color:lightgrey;
         </div>  
 
 </form>
+</form> -->
 
             </div> 
 

@@ -39,6 +39,7 @@ use Google_Service_Calendar_EventDateTime;
 class MyPaypalController extends Controller
 {
 	protected $provider;
+	protected $provider; 
 
     public function __construct()
     {

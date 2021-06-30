@@ -769,6 +769,8 @@ $paymentDefinition->setName('Regular Payments')
   ->setFrequency('Month')
   ->setFrequencyInterval('2')
   ->setCycles('12')
+  ->setFrequencyInterval('1')
+  ->setCycles('2')
   ->setAmount(new Currency(array('value' => 800, 'currency' => 'USD')));
 
 // Set charge models
@@ -781,7 +783,6 @@ $paymentDefinition->setChargeModels(array($chargeModel));
 $merchantPreferences = new MerchantPreferences();
 $merchantPreferences->setReturnUrl(URL::route('statusagreement'))
   ->setCancelUrl('http://localhost:3000/cancel')
-  ->setAutoBillAmount('yes')
   ->setInitialFailAmountAction('CONTINUE')
   ->setMaxFailAttempts('0')
   ->setSetupFee(new Currency(array('value' => 1, 'currency' => 'USD')));
@@ -1264,7 +1265,6 @@ if (!empty(Session::get('status'))) {
 		User::where('id',$Reservation->client)->update(array('emailPaypal' => ((($result->getpayer())->getPayerInfo())->getemail('email'))));
 
 		if($type=='acompte'){
-				Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'statut'=>1));
 					
 				$date = new DateTime($Reservation->date_reservation);
 				$date = $date->format('d-m-Y');
