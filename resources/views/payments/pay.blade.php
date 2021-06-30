@@ -124,10 +124,14 @@ background-color:#a0d468;
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
+                  var paymentIntent = result.paymentIntent.id;
+                 alert(paymentIntent);
+                   var _token = $('input[name="_token"]').val();
                   $.ajax({
 
-                   url:"{{url('/')}}/success/pay/{{ $Res }}",
+                   url:"{{url('/')}}/success/pay/{{ $Res }}", 
                    type : 'get',
+                   data:{paymentIntent:paymentIntent, _token:_token},
                    
                    success: function(data){ 
                     //alert(data);
