@@ -30,7 +30,7 @@ class PaymentStripeController extends Controller
   public function addcustomerStripe(Request $request){
     $today = new DateTime();
     $today = $today->getTimestamp();
-    $fin = strtotime('+125 day', $today);
+    $fin = strtotime('+95 day', $today);
     
     
     
