@@ -160,7 +160,7 @@ $intent = PaymentIntent::create([
             'amount' => $acompte*100,
             'currency' => 'eur',
         ], ['stripe_account' => $idaccount]);
-//dd($intent);
+dd($intent);
         $clientSecret = Arr::get($intent, 'client_secret');
 
 return view('payments.pay', [
