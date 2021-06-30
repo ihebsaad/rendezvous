@@ -480,7 +480,6 @@ public function Remboursement()
 
      $refund = \Stripe\Refund::create([
   'charge' => 'ch_1J83nwPwmhIqVjlH5hOHuCFf',
-  'refund_application_fee' => true,
 ], ['stripe_account' => 'acct_1J3HDTPwmhIqVjlH']);
 
 
