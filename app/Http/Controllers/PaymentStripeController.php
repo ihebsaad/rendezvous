@@ -474,16 +474,18 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
 
   }
-public function Remboursement($resId)
+public function Remboursement()
     {
        Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
-     
-        $re = \Stripe\Refund::create([
-        'payment_intent' => 'pi_1J83nlPwmhIqVjlHA9debBKA',
-        ['stripe_account' => 'acct_1J3HDTPwmhIqVjlH']
-      ]);
-        dd($re);
+     $refund = \Stripe\Refund::create([
+  'charge' => 'ch_1J83nwPwmhIqVjlH5hOHuCFf',
+  'refund_application_fee' => true,
+], ['stripe_account' => 'acct_1J3HDTPwmhIqVjlH']);
+
+
+
+        dd($refund);
 
     }
 
