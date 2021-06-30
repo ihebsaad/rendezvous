@@ -180,7 +180,6 @@ $intent = PaymentIntent::create([
             'amount' => $reste*100,
             'currency' => 'eur',
         ], ['stripe_account' => $idaccount]);
-//dd($intent);
  $clientSecret = Arr::get($intent, 'client_secret');
 return view('payments.pay', [
             'clientSecret' => $clientSecret , 'idaccount' => $idaccount , 'Res' => $k
@@ -504,11 +503,8 @@ public function sendMail($to,$sujet,$contenu){
     //$swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
-    //$swiftTransport->setUsername('contact.prenezunrendezvous@gmail.com'); //adresse email
-    //$swiftTransport->setPassword('davemarco97232'); // mot de passe email eSolutions2020*
-
-$swiftTransport->setUsername('contact.prenezunrendezvous@gmail.com '); //adresse email
-       $swiftTransport->setPassword('davemarco97232'); // mot de passe email
+    $swiftTransport->setUsername('prestataire222@gmail.com'); //adresse email
+    $swiftTransport->setPassword('123prestataire'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);
