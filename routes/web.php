@@ -29,7 +29,7 @@ Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
 						Route::get('/statusagreement','PaymentController@statusagreement')->name('statusagreement');
 Route::get('/successpay2','PaymentController@successpay2')->name('successpay2');
 	Route::get('/cancelpay2','MyPaypalController@cancelpay2')->name('cancelpay2');
-Route::get('/reservations.annule/{id}','PaymentController@PaymentDetails')->name('reservations.annule');
+
 
 
 
@@ -47,7 +47,7 @@ Route::get('/Pay4WithStripe/{k}','PaymentStripeController@pay4')->name('Pay4With
 Route::get('/success/pay/{k}','PaymentStripeController@successpayStripe')->name('success.pay');
 Route::get('/save/customer','PaymentStripeController@addcustomerStripe')->name('save.customer');
 
-
+Route::get('/reservations.annule/{id}','PaymentStripeController@Remboursement')->name('reservations.annule');
 
 
 

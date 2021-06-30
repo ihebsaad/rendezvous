@@ -474,6 +474,17 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
 
   }
+public function Remboursement($resId)
+    {
+       Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+
+     
+        $re = \Stripe\Refund::create([
+        'payment_intent' => 'pi_1J83vSPwmhIqVjlHDLE6bjXw',
+      ]);
+
+
+    }
 
 public function pay4($resId)
     {
