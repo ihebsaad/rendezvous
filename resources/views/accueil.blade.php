@@ -194,7 +194,7 @@ $temoinages=DB::table('temoinages')->get();
                 ?>    
             <!-- Listing Item -->
             <div class="carousel-item">
-                <a href="listings-single-page.html" class="listing-item-container">
+                <a href="{{$listing->generate_slug()}}" class="listing-item-container">
                     <div class="listing-item">
                         <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="">
 
