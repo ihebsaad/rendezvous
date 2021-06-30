@@ -38,6 +38,7 @@ class PaymentStripeController extends Controller
     //dd($request);nom_serv_res
     $resId = $request->get('resId');
     $Reservation=Reservation::where('id',$resId)->first();
+
     $client = User::where('id',$Reservation->client)->first();
     $account = User::where('id',$Reservation->prestataire)->value('id_stripe');
     Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
@@ -81,6 +82,7 @@ $pm = \Stripe\PaymentMethod::retrieve($request->get('valpaymentMethod'));
     "destination" => $account,
   ],
   ]);
+  Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
     return $fin;
   }
     public function connect()

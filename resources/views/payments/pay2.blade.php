@@ -104,11 +104,11 @@ ev.preventDefault();
                         method:"get",
             data:{valpaymentMethod:valpaymentMethod, resId:resId , customerid:customerid , _token:_token},
                         success:function(data){
-                          alert(data);
+                          window.location.replace("https://prenezunrendezvous.com/reservations");
                         }
                     });
       
-      resultContainer.textContent = "Created payment method: " + result.paymentMethod.id;
+      /*resultContainer.textContent = "Created payment method: " + result.paymentMethod.id;*/
 
     }
 
