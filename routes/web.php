@@ -89,6 +89,7 @@ Route::post('/users/Firstservice','UsersController@FirstService')->name('users.F
 
 
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
+Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
@@ -112,6 +113,19 @@ Route::get('/get_liste_regles_services_suppl/{id}', 'ServicesController@get_list
 
 
 Route::group(['middleware' => 'auth'], function(){
+
+	//services  récurrent à abonnement
+
+    Route::get('/servicesrec/annulerPprestataire/{id}','ServicesController@annulerPprestataire')->name('annulerPprestataire');
+    Route::get('/servicesrec/annulerPclient/{id}','ServicesController@annulerPclient')->name('annulerPclient');
+    Route::get('/servicesrec/accepterPropDates/{id}','ServicesController@accepterPropDates')->name('accepterPropDates');
+    Route::post('/servicesrec/insererDatesfinales/','ServicesController@insererDatesfinales')->name('insererDatesfinales'); 
+    Route::post('/servicesrec/rendezvousTel/','ServicesController@rendezvousTel')->name('rendezvousTel');     
+    Route::post('/servicesrec/proposerDates/','ServicesController@proposerDates')->name('proposerDates'); 
+    
+
+
+
 
 	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
@@ -188,6 +202,11 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::get('/pagefaqs/remove_question_response/{id}', 'FaqsController@remove_question_response');
 	Route::post('/pagefaqs/store_question_reponse','FaqsController@store_question_reponse')->name('pagefaqs.store_question_reponse');
 	Route::post('/pagefaqs/update_question_reponse','FaqsController@update_question_reponse')->name('pagefaqs.update_question_reponse');
+
+
+	Route::post('/temoinages/store_temoinage','TemoinagesController@store_temoinage')->name('temoinages.store_temoinage');
+	Route::get('/temoinages/remove_temoinage/{id}', 'TemoinagesController@remove_temoinage');
+	Route::post('/temoinages/update_temoinage','TemoinagesController@update_temoinage')->name('temoinages.update_temoinage');
 	
 	
 
