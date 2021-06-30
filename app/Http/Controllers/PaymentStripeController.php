@@ -199,7 +199,7 @@ return view('payments.pay', [
 
   
 
-    public function successpayStripe($k)
+    public function successpayStripe($k , Request $request)
     {
       //return $k ;
 
@@ -281,7 +281,7 @@ return view('payments.pay', [
     $service = \App\Service::find( $serviceid) ;
 
     if($type=='acompte'){
-        Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste));
+        Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'stripe_id'=>$request->paymentIntent));
           
         $date = new DateTime($Reservation->date_reservation);
         $date = $date->format('d-m-Y');

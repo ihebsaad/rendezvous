@@ -125,7 +125,7 @@ background-color:#a0d468;
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
                   var paymentIntent = result.paymentIntent.id;
-                 alert(paymentIntent);
+                 //alert(paymentIntent);
                    var _token = $('input[name="_token"]').val();
                   $.ajax({
 
