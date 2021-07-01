@@ -218,7 +218,7 @@ return view('payments.pay', [
         $clientSecret = Arr::get($intent, 'client_secret');
 
 return view('payments.payAbn', [
-            'clientSecret' => $clientSecret , 'user' => $user
+            'clientSecret' => $clientSecret , 'usr' => $user
         ]);
 
 
