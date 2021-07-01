@@ -52,6 +52,13 @@ Route::get('/reservations.annule/{id}','PaymentStripeController@Remboursement')-
 
 Route::post('/payabn','PaymentStripeController@payabn')->name('payabn');
 	Route::get('/payabn','PaymentStripeController@payabn')->name('payabn');
+	
+Route::get('/success/payAbn/{k}','PaymentStripeController@successpayAbnStripe')->name('success.payAbn');
+
+
+
+
+
 //------------------------fin Stripe-----------------------//
 
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');

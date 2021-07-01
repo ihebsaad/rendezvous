@@ -224,6 +224,165 @@ return view('payments.payAbn', [
 
 
   }
+   public function successpayAbnStripe($k , Request $request)
+    {
+    $user=$request->get('usr');
+   
+     
+  
+
+  \Session::put('success', 'Paiement avec succès');
+        //    return Redirect::route('/pay');
+    
+     $prestataire =  \App\User::find($user);
+ 
+    // calcul expiration
+     $format = "Y-m-d H:i:s";
+     $today = (new \DateTime())->format($format);
+
+     $expiration= $prestataire->expire;
+     
+     
+     // aucun abonnement fait
+     if($expiration==''){
+       // today + abonnement
+    if($abn!=3){$datee = (new \DateTime())->modify('+31 days')->format($format);}
+    else{
+      //$datee = (new \DateTime())->modify('+366 days')->format($format);
+      $datee = (new \DateTime())->modify('+31 days')->format($format);
+
+    }
+    
+     }else{
+       
+
+     
+     // abonnement fait expiré
+      if($expiration< $today){
+       // today + abonnement
+    if($abn!=3){$datee = (new \DateTime())->modify('+31 days')->format($format);}
+    else{
+      //$datee = (new \DateTime())->modify('+366 days')->format($format);
+      $datee = (new \DateTime())->modify('+31 days')->format($format);
+
+    }
+     }
+     
+     // abonnement fait et non expiré
+      if($expiration> $today){
+       // expiration + abonnement
+
+      // $datee=$prestataire->expire->addDays(31);
+      /// $prestataire->expire->addDays(31);
+    /* $datee = ($expiration)->format($format);
+
+     $datee = (new \DateTime())->modify('+366 days')->format($format);
+*/
+     $newdate = Carbon::createFromFormat('Y-m-d H:i:s', $prestataire->expire);
+     if($abn!=3){$daysToAdd = 31;}
+    else{//$daysToAdd = 365;
+           $daysToAdd = 31;
+    }
+     
+     $newdate = $newdate->addDays($daysToAdd);
+     $datee =  $newdate;
+ 
+     }
+           
+     }
+     
+      //  $date1 = (new \DateTime())->format('Y-m-d H:i:s');
+
+       // $dtc = (new \DateTime())->modify('+31 days')->format($format);
+
+      
+    User::where('id',$user)->update(array('expire' => $datee,'abonnement'=>$abn));
+    if($abn==1){
+    User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type1'));
+    }
+    if($abn==2){
+    User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type2'));
+    }
+    if($abn==3){
+    User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type3'));
+    }
+    
+     // Email
+     $typeabn='';
+       $parametres=DB::table('parametres')->where('id', 1)->first();
+      if($abn==1){
+        $abonnement='N°: 1 | ' .$parametres->abonnement1.' (mensuel)';
+      }
+      if($abn==2){
+        $abonnement='N°: 2 | ' .$parametres->abonnement2.' (mensuel)';
+      }
+      if($abn==3){
+        $abonnement='N°: 3 | ' .$parametres->abonnement3.' (annuel)';
+      }
+    
+    // Email au prestataire
+    $message='Bonjour,<br>';
+    $message.='Votre abonnement est payé avec succès <br>';
+    $message.='Abonnement : '.$abonnement.'<br>';
+    $message.="La date d'expiration de votre abonnement est : ". date('d/m/Y H:i', strtotime($datee))." <br>";
+    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
+    
+      $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+      
+    //enregistrement alerte
+      $alerte = new Alerte([
+             'user' => $user,
+       'titre'=>'Abonnement payé',             
+             'details' => $message,
+         ]);  
+     $alerte->save();
+ 
+    // Email à l'admin
+    $message='Bonjour,<br>';
+    $message.='Abonnement payé : '.$abonnement.'<br>';
+      $message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
+    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
+    
+      $this->sendMail('mohamed.achraf.besbes@gmail.com' ,'Abonnement payée',$message)  ;
+      //enregistrement alerte
+    $alerte = new Alerte([
+             'user' => 1,
+       'titre'=>'Abonnement payé',             
+             'details' => $message,
+         ]);  
+     $alerte->save();   
+    
+    // enregistrement payment dans la base
+    $paiement  =  new \App\Payment([
+             'payer_id' => Input::get('PayerID'),
+       'payment_id'=>$payment_id,            
+             'user' => $user,
+             'beneficiaire' => 'prenezunrendezvous.com',
+             'beneficiaire_id' => 1 ,
+             'details' => 'paiement  de l\'abonnement : '.$abonnement,
+         ]);  
+     
+     $paiement->save();
+     
+     // ajout abonnement
+        $abonnement  =  new \App\Abonnement([
+       'abonnement'=>$abn,             
+             'user' => $user,
+              'details' =>  $abonnement,
+              'expire' =>  $datee,
+         ]);  
+     
+     $abonnement->save();
+     
+      return "ok";
+    
+
+
+ 
+
+
+
+  }
 
   
 

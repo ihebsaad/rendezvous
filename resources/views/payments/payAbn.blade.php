@@ -123,13 +123,14 @@ background-color:#a0d468;
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
                   var paymentIntent = result.paymentIntent.id;
+                  var usr = "{{ $usr }}";
                  //alert(paymentIntent);
                    var _token = $('input[name="_token"]').val();
                   $.ajax({
 
-                   url:"{{url('/')}}/success/pay/{{ $usr }}", 
+                   url:"{{url('/')}}/success/payAbn/{{ $usr }}", 
                    type : 'get',
-                   data:{paymentIntent:paymentIntent, _token:_token},
+                   data:{paymentIntent:paymentIntent, usr:usr , _token:_token},
                    
                    success: function(data){ 
                     //alert(data);
@@ -150,39 +151,7 @@ background-color:#a0d468;
         });
     });
 </script>
-	<script type="text/javascript">
 
-function functionEnvoyer() {
-   var date = document.getElementById("mydate").value ;
-  // var date2 = moment(date).format('YYYY-MM-DD HH:mm');
-   //alert(date2);
-var _token = $('input[name="_token"]').val();
- 
- var idres = $('input[name="idres"]').val();
-
-//alert(dateStr);
- $.ajax({
-            url: "{{ route('reservations.changeDate') }}",
-            method: "get",
-            data: {idres:idres, date:date , _token: _token},
-            success: function (data) {
-              Swal.fire(
-                'Proposition envoyée',
-                '',
-                'success'
-              ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/reservations");
-                })
-             
-               }
-             });
-
-
-
-    
-};
-  
-  </script>
  @endsection
 
  
