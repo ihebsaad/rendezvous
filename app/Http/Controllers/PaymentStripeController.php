@@ -195,7 +195,35 @@ return view('payments.pay', [
 
     }
 
+ public function payabn(Request $request)
+    {
+    $montant=$request->get('amount');
+    $user=$request->get('user');
+    $abn=$request->get('abonnement');
+    $desc=$request->get('description');
+     
+  
+    
 
+
+      Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+
+
+
+    $intent = PaymentIntent::create([
+            'amount' => $montant*100,
+            'currency' => 'eur',
+        ]);
+
+        $clientSecret = Arr::get($intent, 'client_secret');
+
+return view('payments.payAbn', [
+            'clientSecret' => $clientSecret , 'user' => $user
+        ]);
+
+
+
+  }
 
   
 

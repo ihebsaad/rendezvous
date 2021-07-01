@@ -50,7 +50,8 @@ Route::get('/save/customer','PaymentStripeController@addcustomerStripe')->name('
 Route::get('/reservations.annule/{id}','PaymentStripeController@Remboursement')->name('reservations.annule');
 
 
-
+Route::post('/payabn','PaymentStripeController@payabn')->name('payabn');
+	Route::get('/payabn','PaymentStripeController@payabn')->name('payabn');
 //------------------------fin Stripe-----------------------//
 
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -241,8 +242,8 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser'); 
 	
 	Route::post('/categories/Edit','CategoriesController@Edit')->name('categories.Edit');
-	Route::post('/payabn','PaymentController@payabn')->name('payabn');
-	Route::get('/payabn','PaymentController@payabn')->name('payabn');
+	//Route::post('/payabn','PaymentController@payabn')->name('payabn');
+	//Route::get('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
 // Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
 
