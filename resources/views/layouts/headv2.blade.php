@@ -74,9 +74,9 @@ a.button.border:hover {
 @media (max-width: 1024px) {
   #catn7 {display: flex}
   img.impub {
-    max-width: 122%;
+    max-width: 105%;
     height: auto;
-    margin-left: -38px;
+    /*margin-left: -38px;*/
 }
 }
 </style>
