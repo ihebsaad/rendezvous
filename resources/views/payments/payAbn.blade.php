@@ -40,7 +40,7 @@ background-color:#a0d468;
            
       <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
-          <h3><i class="sl sl-icon-refresh"></i>Paiement de la reservation </h3>
+          <h3><i class="sl sl-icon-refresh"></i>Paiement de l'abonnement </h3>
                 </div>       
         <div class="row">
           <div class="col-md-12" >
