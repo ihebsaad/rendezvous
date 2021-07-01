@@ -49,6 +49,14 @@ a.button.border:hover {
   background-color: black!important;
   color: white!important; 
 }
+.btn-black {
+  background-color: black!important;
+  color: white!important; 
+}
+.btn-black:hover {
+  background-color: white!important;
+  color: black!important; 
+}
 .testimonial-carousel .slick-slide.slick-active .testimonial:before {
   color: #000;
 }
@@ -65,5 +73,10 @@ a.button.border:hover {
 #catn7 {display: none}
 @media (max-width: 1024px) {
   #catn7 {display: flex}
+  img.impub {
+    max-width: 122%;
+    height: auto;
+    margin-left: -38px;
+}
 }
 </style>

@@ -11,7 +11,7 @@ $temoinages=DB::table('temoinages')->get();
 ?>
 
 @section('content')
-<div class="container">
+<div class="container" id="inscriptionsection">
     <div class="row margin-top-60 " style="position: relative;">
         <div class="col-lg-7 col-md-12 padding-right-50">
             <h2 style="color:white;margin-top: 0px;font-weight:900">Connectez-vous à vos clients ! </h2>
@@ -42,7 +42,7 @@ $temoinages=DB::table('temoinages')->get();
         </div>
         <div class="col-lg-5 col-md-12">
             <div class="dashboard-list-box margin-top-0">
-                <form method="post" action="contact.php" name="contactform" id="contactform" autocomplete="on">
+                <form method="post" action="contact.php" name="inscriptionform" id="inscriptionform" autocomplete="on">
                     <h4>Inscrivez-vous en 2 minutes seulement</h4>
                             <div class="row padding-top-20">
                                 <div class="col-md-6">
@@ -192,13 +192,12 @@ $temoinages=DB::table('temoinages')->get();
             <div class="row">
 
                 <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/prestatairesrdv.png');?>">
+                    <img src="<?php echo  URL::asset('storage/images/developez.png');?>">
                 </div>
-                <div class="col-lg-7 col-sm-7 padding-left-30" style="color:black;">
-                    <h2 style="color:black;">Vous êtes prestataire de services sur rendez-vous ?</h2>
-                    <p>Profitez d'une solution simple, intuitive et rapide pour vous connecter à vos clients et optimiser votre temps. Découvrez notre plateforme innovante et notre nouvelle offre sans commissions, ni engagement, conçue spécialement pour les prestataires de services qui travaillent uniquement sur rendez-vous !</p>
-                    <p>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</p>
-                    <a href="#" class="button margin-top-15 btn-ybg">Commencer</a>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <h2 style="color:black;">Développez votre activité</h2>
+                    <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
+                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Inscrivez-vous !</a>
                 </div>
             </div>
 
