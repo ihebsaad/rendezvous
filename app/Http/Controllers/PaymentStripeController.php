@@ -226,7 +226,7 @@ return view('payments.payAbn', [
   }
    public function successpayAbnStripe($k , Request $request)
     {
-    $user=$request->get('usr');
+    $user=$k;
    
      
   
