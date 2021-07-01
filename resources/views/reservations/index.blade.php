@@ -429,14 +429,13 @@ background-color:#a0d468;
         <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservations[$ii]->id ; ?>"  >
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
-        <?php $emailpaypal= UsersController::ChampById('emailPaypal',$reservations[$ii]->prestataire); if($emailpaypal) {?>
+        <?php $id_stripe= UsersController::ChampById('id_stripe',$reservations[$ii]->prestataire); if($id_stripe) {?>
         @if($reservations[$ii]->Net != 0 || $reservations[$ii]->Net)
-        <button class="button ">Payer l'acompte</button> 
         <!-- <button class="button ">Payer l'acompte </button>  -->
         <a href="{{url('PayWithStripe/'.$reservations[$ii]->id)}}"  class="button  "> Payer l'acompte (Stripe)</a>
         @endif
          <?php } else{ ?>
-        <button class="button " disabled>Email paypal prestataire inexistant! <br> Contactez le pour payer l'acompte</button> 
+        <button class="button " disabled>Prestataire Non connecté! <br> Contactez le pour payer l'acompte</button> 
         <?php }  ?>
         </form> 
           
@@ -458,7 +457,6 @@ background-color:#a0d468;
         <input class="form-control " name="reservation" type="hidden" value="<?php echo $reservations[$ii]->id ; ?>"  >
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $reservations[$ii]->reste ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >
-        <button class="button"  >Payer Tranche (1/4  de <?php echo $reservations[$ii]->reste ; ?>€) </button>
 <!--         <button class="button"  >Payer Tranche (1/4  de <?php echo $reservations[$ii]->reste ; ?>€ (Stripe)) </button>
  -->         <a href="{{url('Pay4WithStripe/'.$reservations[$ii]->id)}}"  class="button  "> Payer le reste sur 4 mois : <?php echo $reservations[$ii]->reste;?> € (Stripe)</a>
         </form> 
@@ -475,7 +473,6 @@ background-color:#a0d468;
         <input class="form-control " name="montant" type="hidden" value="<?php echo  $montant ; ?>"  >       
         <input class="form-control " name="description" type="hidden" value="<?php echo $description ; ?>"  >     
     
-        <button class="button ">Payer le reste : <?php echo $reservations[$ii]->reste;?> €</button> 
 <!--         <button class="button ">Payer le reste : <?php echo $reservations[$ii]->reste;?> €</button> 
  -->        <a href="{{url('PayWithStripe/'.$reservations[$ii]->id)}}"  class="button  "> Payer le reste : <?php echo $reservations[$ii]->reste;?> € (Stripe)</a>
         </form>
