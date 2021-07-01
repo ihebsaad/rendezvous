@@ -124,7 +124,7 @@ background-color:#a0d468;
                   //alert("ok");
                   var paymentIntent = result.paymentIntent.id;
                   var abn = "{{ $abn }}";
-                 //alert(paymentIntent);
+                 alert(abn);
                    var _token = $('input[name="_token"]').val();
                   $.ajax({
 
