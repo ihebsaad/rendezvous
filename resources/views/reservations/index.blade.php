@@ -510,12 +510,13 @@ background-color:#a0d468;
                
        
       <a  class="button button-success" style="margin:5px 5px 5px 5px " onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $reservations[$ii]->id)}}"><i class="fa fa-check"></i>  Valider</a>
+      <?php } ?> 
       <?php if ($reservations[$ii]->paiement==0) { ?>
        <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@annuler', $reservations[$ii]->id)}}"><i class="fa fa-close"></i>  Annuler</a>
         <?php } else { ?>
           <a  class="button button-danger" style="margin:5px 5px 5px 5px"  onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@AnnulerReservation', $reservations[$ii]->id)}}"><i class="fa fa-close"></i>  Annuler</a>
           <?php } ?> 
-                  <?php } ?> 
+                  
         <a  class="button button-danger" style="margin:5px 5px 5px 5px"  href="{{action('ReservationsController@newDate', $reservations[$ii]->id)}}"><i class="fa fa-close"></i>  Proposer des dates</a>
        <!--<a  class="button button-danger popup-with-zoom-anim" style="margin:5px 5px 5px 5px"  onclick="insert_id_res('{{$reservations[$ii]->id}}')" href="#updatestatut-dialog "><i class="fa fa-close"></i>  Changer Statut</a>-->
        <?php }//affiche_model(this,$reservations[$ii]->id)} ?> 
