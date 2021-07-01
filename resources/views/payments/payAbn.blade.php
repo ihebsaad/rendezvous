@@ -123,14 +123,14 @@ background-color:#a0d468;
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
                   var paymentIntent = result.paymentIntent.id;
-                  var usr = "{{ $usr }}";
+                  var abn = "{{ $abn }}";
                  //alert(paymentIntent);
                    var _token = $('input[name="_token"]').val();
                   $.ajax({
 
                    url:"{{url('/')}}/success/payAbn/{{ $usr }}", 
                    type : 'get',
-                   data:{paymentIntent:paymentIntent, usr:usr , _token:_token},
+                   data:{paymentIntent:paymentIntent, abn:abn , _token:_token},
                    
                    success: function(data){ 
                     //alert(data);

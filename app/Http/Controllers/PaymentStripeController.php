@@ -218,7 +218,7 @@ return view('payments.pay', [
         $clientSecret = Arr::get($intent, 'client_secret');
 
 return view('payments.payAbn', [
-            'clientSecret' => $clientSecret , 'usr' => $user
+            'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn
         ]);
 
 
@@ -227,6 +227,7 @@ return view('payments.payAbn', [
    public function successpayAbnStripe($k , Request $request)
     {
     $user=$k;
+    $abn=$request->get('abn');
    
      
   
