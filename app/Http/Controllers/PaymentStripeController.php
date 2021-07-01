@@ -15,7 +15,8 @@ use Stripe\Price;
 use Stripe\AccountLink;
 use Stripe\PaymentIntent;
 use Illuminate\Support\Arr;
-use \App\Cartefidelite;
+use \App\Cartefidelite
+use \App\Alerte;;
 use DB;
 use Route;
 
@@ -487,7 +488,35 @@ public function Remboursement($k)
 ], ['stripe_account' => $account]);
 
 
+    Reservation::where('id', $k)->update(array('statut' => 2 ));
+      $Reservation = Reservation::where('id',$k)->first();
+      //dd($Reservation);
+      $client=User::find($Reservation->client);
+      $date = new DateTime($Reservation->date_reservation);
+    $date = $date->format('d-m-Y');
+    $heure = new DateTime($Reservation->date_reservation);
+    $heure = $heure->format('H:i');
+    $prestataire=User::find($Reservation->prestataire);
 
+    // Email au prest
+    $message='Bonjour,<br>';
+    $message.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé.';
+    $message.='Votre Prestataire '.$prestataire->name.' '.$prestataire->lastname.'a remboursé votre montant payé.<br>';
+   
+    
+    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+    
+      $this->sendMail(trim($client->email),'Réservation annulée _ Remboursement',$message) ;
+      $alerte = new Alerte([
+             'user' => $client->id,
+       'titre'=>'Réservation annulée',       
+             'details' => $message,
+         ]);  
+     $alerte->save();
+
+     return redirect('/reservations/');
         dd($refund);
 
     }
