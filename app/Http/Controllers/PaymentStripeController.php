@@ -16,7 +16,7 @@ use Stripe\AccountLink;
 use Stripe\PaymentIntent;
 use Illuminate\Support\Arr;
 use \App\Cartefidelite
-use \App\Alerte;;
+use \App\Alerte;
 use DB;
 use Route;
 
