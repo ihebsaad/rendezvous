@@ -228,7 +228,7 @@ return view('payments.payAbn', [
     {
     $user=$k;
     $abn=$request->get('abn');
-    return $abn ;
+ 
    
      
   
