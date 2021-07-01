@@ -177,16 +177,15 @@ $temoinages=DB::table('temoinages')->get();
 
 </div>
 <div id="wrapper" class="mm-page mm-slideout" >
-<!-- Parallax prestataires -->
+<!-- Parallax 1 Développez votre activité -->
 <div class="parallax padding-top-20"
-    data-background="<?php //echo  URL::asset('public/listeo/images/slider-prestataires.jpg');?>"
     data-color="#ffd700"
     data-color-opacity="1"
     data-img-width="800"
     data-img-height="505">
 
     <!-- Infobox -->
-    <div class="text-content white-font">
+    <div class="text-content white-font" style="padding-bottom: 20px;">
         <div class="container">
 
             <div class="row">
@@ -198,6 +197,35 @@ $temoinages=DB::table('temoinages')->get();
                     <h2 style="color:black;">Développez votre activité</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
                     <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Inscrivez-vous !</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+</div>
+<!-- Parallax 2 Optimisez et gérez votre temps efficacement -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="    padding: 20px 0px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <h2 style="color:black;">Optimisez et gérez votre temps efficacement</h2>
+                    <center><img src="<?php echo  URL::asset('storage/images/orgtempstexte.png');?>" class="impub"></center>
+                    <p style="margin: 0px; margin-top: 10px; font-weight: 500!important;">*Cela est possible uniquement avec l'offre Diamond</p>
+                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Oui je veux avoir mon agenda en ligne !</a>
+                </div>
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/orgtemps.png');?>">
                 </div>
             </div>
 
