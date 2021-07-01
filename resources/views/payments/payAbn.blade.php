@@ -134,7 +134,7 @@ background-color:#a0d468;
                    
                    success: function(data){ 
                     //alert(data);
-                    location.href= "{{ route('reservations') }}";
+                    location.href= "{{ route('abonnements') }}";
 
                           
                 }
