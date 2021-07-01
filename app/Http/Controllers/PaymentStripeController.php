@@ -228,7 +228,7 @@ return view('payments.payAbn', [
     {
     $user=$k;
     $abn=$request->get('abn');
- 
+
    
      
   
@@ -356,8 +356,8 @@ return view('payments.payAbn', [
     
     // enregistrement payment dans la base
     $paiement  =  new \App\Payment([
-             'payer_id' => Input::get('PayerID'),
-       'payment_id'=>$payment_id,            
+             'payer_id' => ' ',
+       'payment_id'=>$request->get('paymentIntent'),            
              'user' => $user,
              'beneficiaire' => 'prenezunrendezvous.com',
              'beneficiaire_id' => 1 ,
