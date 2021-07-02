@@ -235,5 +235,62 @@ $temoinages=DB::table('temoinages')->get();
     <!-- Infobox / End -->
 
 </div>
+<!-- Parallax 3 Garder le contact avec vos clients -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="padding: 0px 20px;">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/contactclient.png');?>">
+                </div>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <h2 style="color:black;">Garder le contact avec vos clients</h2>
+                    <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
+                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Échanger avec vos clients </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+</div>
+<!-- Parallax 4 Offrez une expérience unique à vos clients -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="    padding: 20px 0px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <h2 style="color:black;">Offrez une expérience unique à vos clients</h2>
+                    <center><img src="<?php echo  URL::asset('storage/images/expclientstexte.png');?>" class="impub"></center>
+                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Différenciez-vous !</a>
+                </div>
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/expclients.png');?>">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+
+</div>
 </div>
 @endsection('content')
