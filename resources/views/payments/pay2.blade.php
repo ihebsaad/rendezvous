@@ -74,6 +74,9 @@ background-color:#a0d468;
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
 
+
+
+
     var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
     var elements = stripe.elements();
 var cardElement = elements.create('card');
@@ -85,11 +88,11 @@ var resultContainer = document.getElementById('card-result');
 cardButton.addEventListener('click', function(ev){
     //alert('1');
 ev.preventDefault();
-  stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      
-    }).then(function(result) {
+  stripe.confirmCardPayment("{{ $clientSecret }}", {
+        payment_method: {
+            card: card
+        }
+        }).then(function(result) {
     if (result.error) {
       // Display error.message in your UI
       resultContainer.textContent = result.error.message;
@@ -119,39 +122,7 @@ ev.preventDefault();
 
     
 </script>
-	<script type="text/javascript">
 
-function functionEnvoyer() {
-   var date = document.getElementById("mydate").value ;
-  // var date2 = moment(date).format('YYYY-MM-DD HH:mm');
-   //alert(date2);
-var _token = $('input[name="_token"]').val();
- 
- var idres = $('input[name="idres"]').val();
-
-//alert(dateStr);
- $.ajax({
-            url: "{{ route('reservations.changeDate') }}",
-            method: "get",
-            data: {idres:idres, date:date , _token: _token},
-            success: function (data) {
-              Swal.fire(
-                'Proposition envoyée',
-                '',
-                'success'
-              ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/reservations");
-                })
-             
-               }
-             });
-
-
-
-    
-};
-  
-  </script>
  @endsection
 
  
