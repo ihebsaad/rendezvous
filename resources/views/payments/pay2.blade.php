@@ -90,7 +90,7 @@ cardButton.addEventListener('click', function(ev){
 ev.preventDefault();
   stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
-            card: card
+            card: 'card'
         }
         }).then(function(result) {
     if (result.error) {
