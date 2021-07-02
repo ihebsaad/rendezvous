@@ -85,12 +85,11 @@ var resultContainer = document.getElementById('card-result');
 cardButton.addEventListener('click', function(ev){
     //alert('1');
 ev.preventDefault();
-  stripe.confirmCardPayment("{{ $clientSecret }}", {
-        payment_method: {
-            type: 'card',
+  stripe.createPaymentMethod({
+      type: 'card',
       card: cardElement,
-        }
-        }).then(function(result) {
+      
+    }).then(function(result) {
     if (result.error) {
       // Display error.message in your UI
       resultContainer.textContent = result.error.message;
