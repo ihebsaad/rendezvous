@@ -74,9 +74,6 @@ background-color:#a0d468;
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
 
-
-
-
     var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
     var elements = stripe.elements();
 var cardElement = elements.create('card');
@@ -90,7 +87,8 @@ cardButton.addEventListener('click', function(ev){
 ev.preventDefault();
   stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
-            card: 'card'
+            type: 'card',
+      card: cardElement,
         }
         }).then(function(result) {
     if (result.error) {
