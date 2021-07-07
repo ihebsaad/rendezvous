@@ -111,10 +111,10 @@ background-color:#a0d468;
 
       var submitButton = document.getElementById('submit2');
 
-    submitButton.addEventListener('click', function(e) {
+    submitButton.addEventListener('click', function(ev) {
       
     ev.preventDefault();
-    
+
       const nameInput = document.getElementById('name');
 alert("ok");
       // Create payment method and confirm payment intent.
