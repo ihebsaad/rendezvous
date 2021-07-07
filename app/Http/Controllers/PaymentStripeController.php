@@ -713,7 +713,10 @@ $customer = \Stripe\Customer::create();
   ]);
   $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
   $subscriptionId = Arr::get($Subscription, 'id');
-  dd($subscriptionId);
+  //dd($subscriptionId);
+  return view('payments.pay2', [
+            'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'customerid' => $customer->id , 'resId' => $resId
+        ]);
   //Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
 
 

@@ -51,13 +51,15 @@ background-color:#a0d468;
         <h1>Page de paiement</h1>
         <div class="row">
             <div class="col-md-6">
-                <form action="#" class="my-4">
-<!-- placeholder for Elements -->
-<div id="card-element"></div>
-<div id="card-result"></div>
-<br>
-<button id="card-button">Payer</button>
-                </form>
+                <form id="payment-form">
+    <div id="card-element">
+      <!-- Elements will create input elements here -->
+    </div>
+
+    <!-- We'll put the error messages in this element -->
+    <div id="card-element-errors" role="alert"></div>
+    <button type="submit">Subscribe</button>
+  </form>
             </div>
         </div>
     </div>
@@ -74,48 +76,65 @@ background-color:#a0d468;
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
 
-    var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
+    var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L', {
+  stripeAccount: "{{ $idaccount }}"
+});
     var elements = stripe.elements();
-var cardElement = elements.create('card');
-cardElement.mount('#card-element');
-    var cardholderName = document.getElementById('cardholder-name');
-var cardButton = document.getElementById('card-button');
-var resultContainer = document.getElementById('card-result');
-
-cardButton.addEventListener('click', function(ev){
-    //alert('1');
-ev.preventDefault();
-  stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      
-    }).then(function(result) {
-    if (result.error) {
-      // Display error.message in your UI
-      resultContainer.textContent = result.error.message;
-    } else {
-      // You have successfully created a new PaymentMethod
-      var valpaymentMethod = result.paymentMethod.id;
-      var customerid = "{{$customerid}}";
-      var resId = "{{$resId}}";
-       var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url:"{{ route('save.customer') }}",
-                        method:"get",
-            data:{valpaymentMethod:valpaymentMethod, resId:resId , customerid:customerid , _token:_token},
-                        success:function(data){
-                          window.location.replace("https://prenezunrendezvous.com/reservations");
-                        }
-                    });
-      
-      /*resultContainer.textContent = "Created payment method: " + result.paymentMethod.id;*/
-
+    var style = {
+        base: {
+        color: "#32325d",
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: "antialiased",
+        fontSize: "16px",
+        "::placeholder": {
+            color: "#aab7c4"
+        }
+        },
+        invalid: {
+        color: "#fa755a",
+        iconColor: "#fa755a"
+        }
+    };
+    let card = elements.create('card', { style: style });
+    card.mount('#card-element');
+    card.on('change', function (event) {
+      displayError(event);
+    });
+    function displayError(event) {
+      changeLoadingStatePrices(false);
+      let displayError = document.getElementById('card-element-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
     }
+    const btn = document.querySelector('#submit-payment-btn');
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById('name');
+
+      // Create payment method and confirm payment intent.
+      stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name: nameInput.value,
+          },
+        }
+      }).then((result) => {
+        if(result.error) {
+          alert(result.error.message);
+        } else {
+          // Successful subscription payment
+        }
+      });
+    });
 
 
-  });
-}
-);
+
+
+
 
     
 </script>
