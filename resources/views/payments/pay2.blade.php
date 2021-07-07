@@ -109,11 +109,13 @@ background-color:#a0d468;
         displayError.textContent = '';
       }
     }
-    const btn = document.querySelector('#submit-payment-btn');
+    
 
-    btn.addEventListener('click', async (e) => {
+      var submitButton = document.getElementById('submit');
+
+    submitButton.addEventListener('click', function(e) {
       alert("ok");
-      e.preventDefault();
+    ev.preventDefault();
       const nameInput = document.getElementById('name');
 
       // Create payment method and confirm payment intent.
