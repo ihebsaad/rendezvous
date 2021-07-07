@@ -713,7 +713,7 @@ $customer = \Stripe\Customer::create();
   ]);
   $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
   $subscriptionId = Arr::get($Subscription, 'id');
-  //dd($subscriptionId);
+  dd($clientSecret);
   return view('payments.pay2', [
             'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'idaccount' => $account , 'customerid' => $customer->id , 'resId' => $resId
         ]);
