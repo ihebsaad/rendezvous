@@ -715,7 +715,7 @@ $customer = \Stripe\Customer::create();
   $subscriptionId = Arr::get($Subscription, 'id');
   //dd($subscriptionId);
   return view('payments.pay2', [
-            'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'customerid' => $customer->id , 'resId' => $resId
+            'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'idaccount' => $account , 'customerid' => $customer->id , 'resId' => $resId
         ]);
   //Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
 
