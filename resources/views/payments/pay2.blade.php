@@ -118,7 +118,7 @@ background-color:#a0d468;
       const nameInput = document.getElementById('name');
 alert("ok");
       // Create payment method and confirm payment intent.
-      stripe.confirmCardPayment(clientSecret, {
+      stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
           card: cardElement,
           billing_details: {
