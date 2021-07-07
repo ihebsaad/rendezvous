@@ -120,7 +120,7 @@ alert("ok");
       // Create payment method and confirm payment intent.
       stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
-          card: cardElement,
+          card: card,
           billing_details: {
             name: nameInput.value,
           },
