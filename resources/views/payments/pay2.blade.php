@@ -51,7 +51,7 @@ background-color:#a0d468;
         <h1>Page de paiement</h1>
         <div class="row">
             <div class="col-md-6">
-                <form id="payment-form">
+                <form id="#">
     <div id="card-element">
       <!-- Elements will create input elements here -->
     </div>
