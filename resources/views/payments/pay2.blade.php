@@ -58,7 +58,7 @@ background-color:#a0d468;
 
     <!-- We'll put the error messages in this element -->
     <div id="card-element-errors" role="alert"></div>
-    <button type="submit">Subscribe</button>
+    <button type="submit2">Subscribe</button>
   </form>
             </div>
         </div>
@@ -76,9 +76,7 @@ background-color:#a0d468;
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
 
-    var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L', {
-  stripeAccount: "{{ $idaccount }}"
-});
+    var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
     var elements = stripe.elements();
     var style = {
         base: {
@@ -95,14 +93,14 @@ background-color:#a0d468;
         iconColor: "#fa755a"
         }
     };
-    let card = elements.create('card', { style: style });
+    var card = elements.create('card', { style: style });
     card.mount('#card-element');
     card.on('change', function (event) {
       displayError(event);
     });
     function displayError(event) {
       changeLoadingStatePrices(false);
-      let displayError = document.getElementById('card-element-errors');
+      var displayError = document.getElementById('card-element-errors');
       if (event.error) {
         displayError.textContent = event.error.message;
       } else {
@@ -111,7 +109,7 @@ background-color:#a0d468;
     }
     
 
-      var submitButton = document.getElementById('submit');
+      var submitButton = document.getElementById('submit2');
 
     submitButton.addEventListener('click', function(e) {
       alert("ok");
