@@ -121,9 +121,7 @@ alert("ok");
       stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
           card: card,
-          billing_details: {
-            name: nameInput.value,
-          },
+          
         }
       }).then((result) => {
         if(result.error) {
