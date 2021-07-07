@@ -98,7 +98,7 @@ background-color:#a0d468;
     card.on('change', function (event) {
       displayError(event);
     });
-    function displayError(event) {
+   /* function displayError(event) {
       changeLoadingStatePrices(false);
       var displayError = document.getElementById('card-element-errors');
       if (event.error) {
@@ -106,7 +106,7 @@ background-color:#a0d468;
       } else {
         displayError.textContent = '';
       }
-    }
+    }*/
     
 
       var submitButton = document.getElementById('submit2');
