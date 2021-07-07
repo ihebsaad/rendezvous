@@ -58,7 +58,7 @@ background-color:#a0d468;
 
     <!-- We'll put the error messages in this element -->
     <div id="card-element-errors" role="alert"></div>
-    <button type="submit2">Subscribe</button>
+    <button id="submit2">Subscribe</button>
   </form>
             </div>
         </div>
