@@ -28,62 +28,8 @@ use URL;
 class PaymentStripeController extends Controller
 {
   public function addcustomerStripe(Request $request){
-    $today = new DateTime();
-    $today = $today->getTimestamp();
-    $fin = strtotime('+95 day', $today);
     
-    
-    
-    
-    //dd($request);nom_serv_res
-    $resId = $request->get('resId');
-    $Reservation=Reservation::where('id',$resId)->first();
-
-    $client = User::where('id',$Reservation->client)->first();
-    $account = User::where('id',$Reservation->prestataire)->value('id_stripe');
-    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
-
-$pm = \Stripe\PaymentMethod::retrieve($request->get('valpaymentMethod'));
-    $pm->attach(['customer' => $request->get('customerid')]);
-    \Stripe\Customer::update(
-        $request->get('customerid'),
-        [
-            'email' => $client->email,
-            'invoice_settings' => [
-              'default_payment_method' => $request->get('valpaymentMethod'),
-            ],
-        ]
-    );
-
-
-    
-    $produit = Product::create([
-    'name' => $Reservation->nom_serv_res,
-    'type' => 'service',
-  ]);
-              $price = \Stripe\Price::create([
-    'product' => $produit->id,
-    'unit_amount' => ($Reservation->reste/4) *100,
-    'currency' => 'usd',
-    'recurring' => ['interval' => 'month'],
-  ]);
-             
-  $Subscription = \Stripe\Subscription::create([
-    'customer' => $request->get('customerid'),
-    'cancel_at' => $fin ,
-   
-    'items' => [
-      [
-        'price' => $price->id ,
-        'quantity' => 1,
-      ],
-    ],
-    "transfer_data" => [
-    "destination" => $account,
-  ],
-  ]);
-  Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
-    return $fin;
+    return "ok";
   }
     public function connect()
     {
@@ -711,7 +657,94 @@ public function Remboursement($k)
 
 public function pay4($resId)
     {
-       Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+       //Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+       $today = new DateTime();
+    $today = $today->getTimestamp();
+    $fin = strtotime('+95 day', $today);
+    
+    
+    
+    
+    //dd($request);nom_serv_res
+    
+    $Reservation=Reservation::where('id',$resId)->first();
+
+    $client = User::where('id',$Reservation->client)->first();
+    $account = User::where('id',$Reservation->prestataire)->value('id_stripe');
+    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+
+$customer = \Stripe\Customer::create();
+    \Stripe\Customer::update(
+        $customer->id,
+        [
+            'email' => $client->email,
+            
+        ]
+    );
+
+
+    
+    $produit = Product::create([
+    'name' => $Reservation->nom_serv_res,
+    'type' => 'service',
+  ]);
+    $price = \Stripe\Price::create([
+    'product' => $produit->id,
+    'unit_amount' => ($Reservation->reste/4) *100,
+    'currency' => 'usd',
+    'recurring' => ['interval' => 'month'],
+  ]);
+             
+  $Subscription = \Stripe\Subscription::create([
+    'customer' => $customer->id,
+    'cancel_at' => $fin ,
+   
+    'items' => [
+      [
+        'price' => $price->id ,
+        'quantity' => 1,
+      ],
+    ],
+    'payment_behavior' => 'default_incomplete',
+    'expand' => ['latest_invoice.payment_intent'],
+    "transfer_data" => [
+    "destination" => $account,
+  ],
+  ]);
+  dd($Subscription);
+  //Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
          $customer = \Stripe\Customer::create();
 
