@@ -711,7 +711,8 @@ $customer = \Stripe\Customer::create();
     "destination" => $account,
   ],
   ]);
-  dd($Subscription);
+  $clientSecret = Arr::get($Subscription, 'client_secret');
+  dd($clientSecret);
   //Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
 
 
