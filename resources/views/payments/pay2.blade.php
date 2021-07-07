@@ -110,7 +110,9 @@ background-color:#a0d468;
       }
     }
     const btn = document.querySelector('#submit-payment-btn');
+
     btn.addEventListener('click', async (e) => {
+      alert("ok");
       e.preventDefault();
       const nameInput = document.getElementById('name');
 
