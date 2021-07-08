@@ -695,7 +695,7 @@ $customer = \Stripe\Customer::create();
     'product' => $produit->id,
     'unit_amount' => ($Reservation->reste/4) *100,
     'currency' => 'usd',
-    'recurring' => ['interval' => 'month'],
+    'recurring' => ['interval' => 'day'],
   ]);
              
   $Subscription = \Stripe\Subscription::create([
@@ -720,52 +720,6 @@ $customer = \Stripe\Customer::create();
   return view('payments.pay2', [
             'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'idaccount' => $account , 'customerid' => $customer->id , 'resId' => $resId
         ]);
-  //Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         $customer = \Stripe\Customer::create();
-
-    $setupIntent = \Stripe\SetupIntent::create([
-      'customer' => $customer->id
-    ]);
-     $clientSecret = Arr::get($setupIntent, 'client_secret');
-//dd($setupIntent);
-        return view('payments.pay2', [
-            'clientSecret' => $clientSecret , 'customerid' => $customer->id , 'resId' => $resId
-        ]);
-    dd($setupIntent);
-
 
     }
 
