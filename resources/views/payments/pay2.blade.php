@@ -115,7 +115,7 @@ background-color:#a0d468;
     ev.preventDefault();
 
       const nameInput = document.getElementById('name');
-alert("ok");
+//alert("ok");
       // Create payment method and confirm payment intent.
       stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
@@ -127,6 +127,17 @@ alert("ok");
           alert(result.error.message);
         } else {
           // Successful subscription payment
+      var customerid = "{{$customerid}}";
+      var resId = "{{$resId}}";
+       var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('save.customer') }}",
+                        method:"get",
+            data:{resId:resId , customerid:customerid , _token:_token},
+                        success:function(data){
+                          window.location.replace("https://prenezunrendezvous.com/reservations");
+                        }
+                    });
         }
       });
     });

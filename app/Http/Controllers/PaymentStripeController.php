@@ -28,6 +28,8 @@ use URL;
 class PaymentStripeController extends Controller
 {
   public function addcustomerStripe(Request $request){
+    \Session::put('success', 'Paiement avec succès');
+    Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
     
     return "ok";
   }
