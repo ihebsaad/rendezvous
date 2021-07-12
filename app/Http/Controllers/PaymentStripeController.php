@@ -28,14 +28,14 @@ use URL;
 class PaymentStripeController extends Controller
 {
   public function addcustomerStripe(Request $request){
-    dd($request->get('res'));
+    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
     $subscription_id = $request->get('subscriptionId'); 
-    $payment_method = "ok";
-      $stripe->subscriptions->update(
+    $payment_method = $request->get('res');
+      $stripeSub = Subscription::update(
     $subscription_id,
     ['default_payment_method' => $payment_method],
   );
-
+dd($stripeSub);
     $resId = $request->get('resId');
     \Session::put('success', 'Paiement avec succès');
     Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
