@@ -31,7 +31,7 @@ class PaymentStripeController extends Controller
     Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
     $subscription_id = $request->get('subscriptionId'); 
     $payment_method = $request->get('res');
-      $stripeSub = Subscription::update(
+      $stripeSub = \Stripe\Subscription::update(
     $subscription_id,
     ['default_payment_method' => $payment_method],
   );
