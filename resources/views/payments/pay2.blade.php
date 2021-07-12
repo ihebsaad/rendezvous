@@ -127,7 +127,7 @@ background-color:#a0d468;
           alert(result.error.message);
         } else {
           // Successful subscription payment
-          var res = result ;
+          var res = result.paymentIntent.payment_method ;
           var subscriptionId = "{{$subscriptionId}}";
       var customerid = "{{$customerid}}";
       var resId = "{{$resId}}";
