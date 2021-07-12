@@ -128,13 +128,14 @@ background-color:#a0d468;
         } else {
           // Successful subscription payment
           var res = result ;
+          var subscriptionId = "{{$subscriptionId}}";
       var customerid = "{{$customerid}}";
       var resId = "{{$resId}}";
        var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('save.customer') }}",
                         method:"get",
-            data:{resId:resId , customerid:customerid , res:res , _token:_token},
+            data:{resId:resId , customerid:customerid , res:res ,subscriptionId:subscriptionId , _token:_token},
                         success:function(data){
                           //window.location.replace("https://prenezunrendezvous.com/reservations");
                         }
