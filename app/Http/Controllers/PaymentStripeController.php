@@ -703,7 +703,7 @@ $customer = \Stripe\Customer::create();
     'product' => $produit->id,
     'unit_amount' => ($Reservation->reste/4) *100,
     'currency' => 'usd',
-    'recurring' => ['interval' => 'month'],
+    'recurring' => ['interval' => 'day'],
   ]);
              
   $Subscription = \Stripe\Subscription::create([
