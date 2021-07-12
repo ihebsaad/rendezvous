@@ -136,7 +136,7 @@ background-color:#a0d468;
                         method:"get",
             data:{resId:resId , customerid:customerid , res:res , _token:_token},
                         success:function(data){
-                          window.location.replace("https://prenezunrendezvous.com/reservations");
+                          //window.location.replace("https://prenezunrendezvous.com/reservations");
                         }
                     });
         }
