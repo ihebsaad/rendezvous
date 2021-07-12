@@ -28,7 +28,14 @@ use URL;
 class PaymentStripeController extends Controller
 {
   public function addcustomerStripe(Request $request){
-    dd($request->get('subscriptionId'));
+    dd($request->get('res'));
+    $subscription_id = $request->get('subscriptionId'); 
+    $payment_method = "ok";
+      $stripe->subscriptions->update(
+    $subscription_id,
+    ['default_payment_method' => $payment_method],
+  );
+
     $resId = $request->get('resId');
     \Session::put('success', 'Paiement avec succès');
     Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
