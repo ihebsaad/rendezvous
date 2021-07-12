@@ -165,21 +165,50 @@ return view('payments.pay', [
 
       Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
+$customer = \Stripe\Customer::create();
+    \Stripe\Customer::update(
+        $customer->id,
+        [
+            'email' => $user->email,
+            
+        ]
+    );
 
 
-    $intent = PaymentIntent::create([
-            'amount' => $montant*100,
-            'currency' => 'eur',
+    
+    $produit = Product::create([
+    'name' => $desc,
+    'type' => 'service',
+  ]);
+    $price = \Stripe\Price::create([
+    'product' => $produit->id,
+    'unit_amount' => ($montant) *100,
+    'currency' => 'usd',
+    'recurring' => ['interval' => 'month'],
+  ]);
+             
+  $Subscription = \Stripe\Subscription::create([
+    'customer' => $customer->id,
+   
+    'items' => [
+      [
+        'price' => $price->id ,
+        'quantity' => 1,
+      ],
+    ],
+    'payment_behavior' => 'default_incomplete',
+    'expand' => ['latest_invoice.payment_intent'],
+    
+  ]);
+  $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
+  $subscriptionId = Arr::get($Subscription, 'id');
+  //dd($clientSecret);
+  return view('payments.payAbn', [
+            'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'customerid' => $customer->id , 'usr' => $user , 'abn' => $abn
         ]);
 
-        $clientSecret = Arr::get($intent, 'client_secret');
 
-return view('payments.payAbn', [
-            'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn
-        ]);
-
-
-
+   
   }
    public function successpayAbnStripe($k , Request $request)
     {
