@@ -81,6 +81,22 @@ class RegisterController extends Controller
          $typeabonn=$data['typeabonn'];
          }
          
+       } 
+
+       // username creation
+       if(isset($data['username']))
+        {
+         if( $data['username'])
+         {
+            $username=$data['username'];
+         } else
+           {
+            $username = $data['name'];
+           }
+         
+       } else
+       {
+        $username = $data['name'];
        }
        //gestion qr code 
        //get last id 
@@ -108,7 +124,7 @@ class RegisterController extends Controller
         $format = "Y-m-d H:i:s";
         $date_inscription = (new \DateTime())->format('Y-m-d H:i:s');
         return User::create([
-            'username' => $data['username'],
+            'username' => $username,
             'name' => $data['name'],
             'lastname' => $data['lastname'],
             'phone' => $data['phone'],
