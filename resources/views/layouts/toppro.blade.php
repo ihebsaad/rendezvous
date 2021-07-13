@@ -26,22 +26,22 @@ $plogo= $parametres->logo;
             <div class="right-side">
                 <div class="header-widget">
                      @guest
-                    <a href="dashboard-add-listing.html" class="button border with-icon prest-in ">Connexion</a>
+                    <a id="btnconn" href="#" class="button border with-icon prest-in "  onclick="switchci()">Connexion</a>
                     @endguest
-
+                    <a id="btnins" href="#" class="button border with-icon prest-in " style="display:none" onclick="switchci()">Inscription</a>
                     
                 </div>
             </div>
             <!-- Right Side Content / End -->
 
             <!-- Sign In Popup -->
-            <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+            <!--<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 
                 <div class="small-dialog-header">
                     <h3>Connexion</h3>
                 </div>
 
-        </div>
+            </div>-->
     </div>
     <!-- Header / End -->
 
