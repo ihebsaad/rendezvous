@@ -142,7 +142,7 @@ $temoinages=DB::table('temoinages')->get();
             <center><h1>Découvrez comment cela se passe chez nous en 7 étapes !</h1></center>
            
         </div>
-    </div>
+    
 </div>
 
 </div>
@@ -222,7 +222,7 @@ $temoinages=DB::table('temoinages')->get();
                     <img src="<?php echo  URL::asset('storage/images/contactclient.png');?>">
                 </div>
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <h2 style="color:black;">Garder le contact avec vos clients</h2>
+                    <h2 style="color:black;"> Comparez les avis et notes des prestataires de services près de chez vous.</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
                     <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Échanger avec vos clients </a>
                 </div>
@@ -246,7 +246,7 @@ $temoinages=DB::table('temoinages')->get();
 
             <div class="row">
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <h2 style="color:black;">Offrez une expérience unique à vos clients</h2>
+                    <h2 style="color:black;">Sélectionnez les prestataires de service avec qui vous souhaitez prendre rendez-vous</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/expclientstexte.png');?>" class="impub"></center>
                     <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Différenciez-vous !</a>
                 </div>
