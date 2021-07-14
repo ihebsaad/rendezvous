@@ -244,7 +244,12 @@ class UsersController extends Controller
       return view('inscriptionpro' );       
 
     }
-    
+              public function inscriptionClient()
+    {
+         
+      return view('inscriptionclient' );       
+
+    }
        public function pricing()
     {
         $abonnementA =  Contenu_plan::where('abonnement',1)->get();

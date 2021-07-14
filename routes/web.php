@@ -95,6 +95,7 @@ Route::get('/test',function(){return view('test');});
 Route::get('/test',function(){return view('Invoice.index');});
 Route::post('/users/Firstservice','UsersController@FirstService')->name('users.FirstService');
 
+Route::get('/inscription', 'UsersController@inscriptionClient');
 
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
