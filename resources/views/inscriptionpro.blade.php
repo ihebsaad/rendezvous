@@ -50,6 +50,7 @@ $temoinages=DB::table('temoinages')->get();
                                     <div>
                                         @csrf
                                         <input type="hidden" name="user_type" id="prestataire" value="prestataire" >
+                                        <input type="hidden" name="username" id="username" value="jhondoe" >
                                         <input name="lastname" type="text" id="lastname" placeholder="Nom *" required="required" class="error">
                                     </div>
                                 </div>
@@ -63,7 +64,7 @@ $temoinages=DB::table('temoinages')->get();
                             <div class="row">
                                 <div class="col-md-12">
                                     <div>
-                                        <input name="email" type="email" id="email" placeholder="Email *" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required">
+                                        <input name="email" type="email" id="email" placeholder="Email *" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required"  onfocusout="cusername()">
                                     </div>
                                 </div>
                             </div>
@@ -396,6 +397,14 @@ function my_func() {
     document.getElementById("inscriptionform").submit();
   }
 
+}
+
+
+function cusername() {
+  var x = document.getElementById("email").value;
+  var name= x.substr(0, x.indexOf('@')); 
+  document.getElementById("username").value = name;
+  //alert(name);
 }
 
 </script>
