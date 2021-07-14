@@ -751,7 +751,7 @@ $customer = \Stripe\Customer::create();
     "destination" => $account,
   ],
   ]);
-  dd($Subscription);
+  //dd($Subscription);
   $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
   $subscriptionId = Arr::get($Subscription, 'id');
   //dd($clientSecret);
