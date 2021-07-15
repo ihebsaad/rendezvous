@@ -99,6 +99,100 @@ class RegisterController extends Controller
        {
         $username = $data['name'];
        }
+
+       // nom entreprise creation
+       if(isset($data['titre']))
+        {
+         if( $data['titre'])
+         {
+            $titre=$data['titre'];
+         } else
+           {
+            $titre = "titre de prestataire";
+           }
+         
+       } else
+       {
+        $titre = "titre de prestataire";
+       }
+
+       // siren/siret entreprise creation
+       if(isset($data['siren']))
+        {
+         if( $data['siren'])
+         {
+            $siren=$data['siren'];
+         } else
+           {
+            $siren = "";
+           }
+         
+       } else
+       {
+        $siren = "";
+       }
+
+       // adresse entreprise creation
+       if(isset($data['adresse']))
+        {
+         if( $data['adresse'])
+         {
+            $adresse=$data['adresse'];
+         } else
+           {
+            $adresse = "";
+           }
+         
+       } else
+       {
+        $adresse = "";
+       }
+     // codepostal entreprise creation
+       if(isset($data['codep']))
+        {
+         if( $data['codep'])
+         {
+            $codep=$data['codep'];
+         } else
+           {
+            $codep = "";
+           }
+         
+       } else
+       {
+        $codep = "";
+       }
+
+       // ville entreprise creation
+       if(isset($data['ville']))
+        {
+         if( $data['ville'])
+         {
+            $ville=$data['ville'];
+         } else
+           {
+            $ville = "";
+           }
+         
+       } else
+       {
+        $ville = "";
+       }
+       // fhoraire entreprise creation
+       if(isset($data['fhoraire']))
+        {
+         if( $data['fhoraire'])
+         {
+            $fhoraire=$data['fhoraire'];
+         } else
+           {
+            $fhoraire = "America/Martinique";
+           }
+         
+       } else
+       {
+        $fhoraire = "America/Martinique";
+       }
        //gestion qr code 
        //get last id 
        $urlqrcode="";
@@ -130,6 +224,12 @@ class RegisterController extends Controller
             'lastname' => $data['lastname'],
             'phone' => $data['phone'],
             'email' => $data['email'],
+            'titre' => $titre,
+            'siren' => $siren,
+            'adresse' => $adresse,
+            'ville' => $ville,
+            'codep' => $codep,
+            'fhoraire' => $fhoraire,
             'date_inscription' => $date_inscription,
             'type_abonn_essai' =>  $typeabonn,
             'qr_code'=> $urlqrcode,
