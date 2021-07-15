@@ -70,7 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
+        //dd($data);
 
         //\QrCode::size(200)->format('png')->generate('webnersolutions.com', public_path('qrcode1.png'));
         
