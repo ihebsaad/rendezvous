@@ -9,39 +9,19 @@ $pvideo= $parametres->video;
 $temoinages=DB::table('temoinages')->get();
 
 ?>
-
+<style type="text/css">
+    .text-content h2 {
+    line-height: 36px!important;
+    font-size: 26px!important;
+}
+</style>
 @section('content')
 <div id="inscriptionsec">
 <div class="container" id="inscriptionsection">
     <div class="row margin-top-60 " style="position: relative;">
-        <div class="col-lg-7 col-md-12 padding-right-50">
-            <h2 style="color:white;margin-top: 0px;font-weight:900">Connectez-vous à vos clients ! </h2>
-            <div class="row padding-top-30">
-                <div class="col-md-2">
-                    <img src="<?php echo  URL::asset('storage/images/icone1.png');?>" width="80px">
-                </div>
-                <div class="col-md-10 padding-top-10">
-                    <p style="color:white;margin-top: 0px;font-weight:600">Avec le contexte actuel <b style="font-weight:900">2 personne sur 3</b> souhaitent pouvoir <b style="font-weight:900">prendre RDV en ligne et pour gagner du temps</b></p>
-                </div>
-            </div>
-            <div class="row padding-top-10">
-                <div class="col-md-2">
-                    <img src="<?php echo  URL::asset('storage/images/icone2.png');?>" width="80px">
-                </div>
-                <div class="col-md-10 padding-top-20">
-                    <p style="color:white;margin-top: 0px;font-weight:600"><b style="font-weight:900">50% des RDV client</b> sont pris hors ouvertures</p>
-                </div>
-            </div>
-            <div class="row padding-top-10">
-                <div class="col-md-2">
-                    <img src="<?php echo  URL::asset('storage/images/icone3.png');?>" width="80px">
-                </div>
-                <div class="col-md-10 padding-top-20">
-                    <p style="color:white;margin-top: 0px;font-weight:600"><b style="font-weight:900">80% de réduction des RDV</b> non honorés </p>
-                </div>
-            </div>
+        <div class="col-lg-2 col-md-12 padding-right-50">
         </div>
-        <div class="col-lg-5 col-md-12">
+        <div class="col-lg-8 col-md-12">
             <div class="dashboard-list-box margin-top-0">
                 <form method="post" action="{{ route('register') }}" name="inscriptionform" id="inscriptionform" autocomplete="on">
                     <h4>Inscrivez-vous en 2 minutes seulement</h4>
@@ -122,6 +102,8 @@ $temoinages=DB::table('temoinages')->get();
                     </form>
             </div>
         </div>
+        <div class="col-lg-2 col-md-12 "></div>
+        </div>
     </div>
     <!--<div class="row" style="background: white;     position: absolute;
     left: 50%;
@@ -138,14 +120,13 @@ $temoinages=DB::table('temoinages')->get();
     </div>-->
     <div class="container white " style="background-color:white;padding-left:0px;padding: 30px;border-radius: 20px;top: 90px;position: relative;z-index: 100;">
        
-        <div class="d-flex flex-column align-center col-md-12 col-12" style="background-color: #ffd700;border-radius: 20px;position: relative;z-index: 100;">
-            <center><h1>Découvrez comment cela se passe chez nous en 7 étapes !</h1></center>
+        <div class="d-flex flex-column align-center col-md-12 col-12">
+            <center><h1 style=" margin-top: 10px; font-weight:600;">Découvrez comment cela se passe chez nous en 7 étapes !</h1></center>
            
         </div>
     
 </div>
 
-</div>
 <div id="wrapper" class="mm-page mm-slideout" >
 <!-- Parallax 1 Développez votre activité -->
 <div class="parallax padding-top-20"
@@ -161,12 +142,12 @@ $temoinages=DB::table('temoinages')->get();
             <div class="row">
 
                 <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/developez.png');?>">
+                    <img src="<?php echo  URL::asset('storage/images/connexion.png');?>">
                 </div>
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <h2 style="color:black;"> Inscrivez vous et connectez vous </h2>
-                    <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Inscrivez-vous !</a>
+                    <center><img src="<?php echo  URL::asset('storage/images/n1.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Inscrivez vous et connectez vous </h2>
+                    <!--<a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Inscrivez-vous !</a>-->
                 </div>
             </div>
 
@@ -188,14 +169,12 @@ $temoinages=DB::table('temoinages')->get();
 
             <div class="row">
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <h2 style="color:black;"> Recherchez une prestation ou prestataire de service sur rendez-vous parmi nos différentes catégories</h2>
-                    <center><img src="<?php echo  URL::asset('storage/images/orgtempstexte.png');?>" class="impub"></center>
-                    <p style="margin: 0px; margin-top: 10px; font-weight: 500!important;">*Cela est possible uniquement avec l'offre Diamond</p>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Oui je veux avoir mon agenda en ligne !</a>
+                    <center><img src="<?php echo  URL::asset('storage/images/n2.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Recherchez une prestation ou prestataire de service sur rendez-vous parmi nos différentes catégories</h2>
                 </div>
 
                 <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/orgtemps.png');?>">
+                    <img src="<?php echo  URL::asset('storage/images/recherche.png');?>">
                 </div>
             </div>
 
@@ -205,7 +184,7 @@ $temoinages=DB::table('temoinages')->get();
     <!-- Infobox / End -->
 
 </div>
-<!-- Parallax 3 Garder le contact avec vos clients -->
+<!-- Parallax 3  -->
 <div class="parallax "
     data-color="#ffd700"
     data-color-opacity="1"
@@ -219,12 +198,11 @@ $temoinages=DB::table('temoinages')->get();
             <div class="row">
 
                 <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/contactclient.png');?>">
+                    <img src="<?php echo  URL::asset('storage/images/avis.png');?>">
                 </div>
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <h2 style="color:black;"> Comparez les avis et notes des prestataires de services près de chez vous.</h2>
-                    <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Échanger avec vos clients </a>
+                    <center><img src="<?php echo  URL::asset('storage/images/n3.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Comparez les avis et notes des prestataires de services près de chez vous.</h2>
                 </div>
             </div>
 
@@ -233,7 +211,7 @@ $temoinages=DB::table('temoinages')->get();
 
     <!-- Infobox / End -->
 </div>
-<!-- Parallax 4 Offrez une expérience unique à vos clients -->
+<!-- Parallax 4  -->
 <div class="parallax "
     data-color="#ffd700"
     data-color-opacity="1"
@@ -246,13 +224,12 @@ $temoinages=DB::table('temoinages')->get();
 
             <div class="row">
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n4.png');?>" class="impub"></center>
                     <h2 style="color:black;">Sélectionnez les prestataires de service avec qui vous souhaitez prendre rendez-vous</h2>
-                    <center><img src="<?php echo  URL::asset('storage/images/expclientstexte.png');?>" class="impub"></center>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Différenciez-vous !</a>
                 </div>
 
                 <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/expclients.png');?>">
+                    <img src="<?php echo  URL::asset('storage/images/selectionnerprestataire.png');?>">
                 </div>
             </div>
 
@@ -262,7 +239,93 @@ $temoinages=DB::table('temoinages')->get();
     <!-- Infobox / End -->
 
 </div>
+<!-- Parallax 5  -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="padding: 0px 20px;">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/reserver.png');?>">
+                </div>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n5.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Réservez une/des prestations de services et payez partiellement (sous forme d'acompte), totalement ou en plusieurs fois la/les prestations de services en ligne en toute sécurité.</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
 </div>
+<!-- Parallax 6  -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="    padding: 20px 0px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n6.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Une fois la prestation terminez, nous vous invitons à laissez un avis sincère et constructif sur la page du prestataire de service qui vous à reçu pour la prestation de service.</h2>
+                </div>
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/avisprestataire.png');?>">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+
+</div>
+
+<!-- Parallax 7  -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="padding: 0px 20px;">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/equipe.png');?>">
+                </div>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n7.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Toutes l'équipe de Prenezunrendezvous.com et son directeur vous souhaite la bienvenue et un bon rendez-vous avec l'un de nos prestataire de services présent sur cette plateforme. </h2>
+                    <h4 style=" color: #565656; line-height: 1.5;margin-bottom: 20px;">Si vous avez une question, ou une remarque n'hésitez pas <a href="mailto:contact@prenezunrendezvous.com">nous contacter par mail</a>. Nous nous ferons un plaisir de vous y répondre dans les plus brefs délais.</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+</div>
+</div>
+</div>
+
 </div>
 <!-- End inscriptionsec -->
 <div id='connexionsec' style="display: none;">

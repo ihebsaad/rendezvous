@@ -53,7 +53,7 @@ $plogo= $parametres->logo;
                 <div class="header-widget">
                      @guest
                     <a href="{{route('inscription')}}" class="button border with-icon prest-in ">Vous êtes prestataire de service ?</a>
-                    <a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim button border with-icon"><!--<i class="sl sl-icon-login"></i>-->Je suis un client</a>
+                    <a href="{{route('inscriptionclient')}}" class="button border with-icon"><!--<i class="sl sl-icon-login"></i>-->Je suis un client</a>
                     @else
                     <?php $user = auth()->user();
                           $iduser = $user->id;
