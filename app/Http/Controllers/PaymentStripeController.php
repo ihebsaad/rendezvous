@@ -183,7 +183,7 @@ $customer = \Stripe\Customer::create();
     $price = \Stripe\Price::create([
     'product' => $produit->id,
     'unit_amount' => ($montant) *100,
-    'currency' => 'usd',
+    'currency' => 'eur',
     'recurring' => ['interval' => 'month'],
   ]);
              
@@ -731,7 +731,7 @@ $customer = \Stripe\Customer::create();
     $price = \Stripe\Price::create([
     'product' => $produit->id,
     'unit_amount' => ($Reservation->reste/4) *100,
-    'currency' => 'usd',
+    'currency' => 'eur',
     'recurring' => ['interval' => 'day'],
   ]);
              
