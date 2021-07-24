@@ -766,6 +766,7 @@ $customer = \Stripe\Customer::create();
 
 
 
+
 public function sendMail($to,$sujet,$contenu){
 
     $swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
