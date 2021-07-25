@@ -86,7 +86,7 @@ return [
 
 
 
-    'username' => env('MAIL_USERNAME','prestataire.client@gmail.comcom'),
+    'username' => env('MAIL_USERNAME','prestataire.client@gmail.com'),
 
 
 
