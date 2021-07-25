@@ -782,7 +782,7 @@ public function sendMail($to,$sujet,$contenu){
     $fromname=\Config::get('mail.from.name') ;
     
     Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
-      dd($to);
+      dd($contenu);
 
          $message
                  ->to($to)
