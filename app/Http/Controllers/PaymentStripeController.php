@@ -114,7 +114,7 @@ dd($stripeSub);
         $acompte=($montant*$x)/100 ;
     $reste=$montant-$acompte;
 
-dd($idaccount);
+//dd($idaccount);
 $intent = PaymentIntent::create([
             'amount' => $acompte*100,
             'currency' => 'eur',
