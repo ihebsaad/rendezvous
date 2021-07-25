@@ -22,20 +22,14 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
 
+
     public function boot()
-{
-    /**
-     * Somehow PHP is not able to write in default /tmp directory and SwiftMailer was failing.
-     * To overcome this situation, we set the TMPDIR environment variable to a new value.
-     */
-    if (class_exists('Swift_Preferences')) {
+    {
+        if (class_exists('Swift_Preferences')) {
         \Swift_Preferences::getInstance()->setTempDir(storage_path().'/tmp');
     } else {
         \Log::warning('Class Swift_Preferences does not exists');
     }
-}
-/*    public function boot()
-    {
 
 		view()->composer('*', function($view){
             $view_name = str_replace('.', '-', $view->getName());
@@ -45,4 +39,3 @@ class AppServiceProvider extends ServiceProvider
         
 		}
 }
-*/
