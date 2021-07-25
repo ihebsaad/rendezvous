@@ -134,8 +134,8 @@ background-color:#a0d468;
                    data:{paymentIntent:paymentIntent, _token:_token},
                    
                    success: function(data){ 
-                    //alert(data);
-                    location.href= "{{ route('reservations') }}";
+                    alert(data);
+                    //location.href= "{{ route('reservations') }}";
 
                           
                 }
