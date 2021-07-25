@@ -86,12 +86,12 @@ return [
 
 
 
-    'username' => env('MAIL_USERNAME','prestataire222@gmail.com'),
+    'username' => env('MAIL_USERNAME','prestataire.client@gmail.comcom'),
 
 
 
 
-    'password' => env('MAIL_PASSWORD','123prestataire'),
+    'password' => env('MAIL_PASSWORD','prestataire1998'),
 
     /*
     |--------------------------------------------------------------------------
