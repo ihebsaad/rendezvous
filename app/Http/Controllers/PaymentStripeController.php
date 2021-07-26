@@ -46,7 +46,7 @@ dd($stripeSub);
     {
     	//dd("ok");
       $cuser = auth()->user();
-    	Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    	Stripe::setApiKey('pk_live_51Hbt14Go3M3y9uW5wKqzuQN968NPlPtwzB5UZFzLqTtNAZxoU43qINNnPR7cAO8j1XKoZZ1QZyGkYLHvQjOc5U3c00K0ZoDEMa');
 
             /*$account = Account::create([
               'country' => 'CA',
