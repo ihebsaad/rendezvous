@@ -112,6 +112,7 @@ Route::get('/faqs', 'UsersController@faqs')->name('faqs');
 Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->name('ConditionsUtilisation');
 
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
+Route::get('/recherche', array('as' => 'recherche','uses' => 'UsersController@pageprestataires'));
 Route::get('/googlecalendar', 'CalendrierController@saveEventGoogleCalendar')->name('googlecalendar');
 Route::get('/cal.index', 'CalendrierController@index')->name('cal.index');
 Route::get('/oauthcallback', 'CalendrierController@oauth')->name('oauthCallback');

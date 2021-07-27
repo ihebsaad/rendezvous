@@ -223,6 +223,12 @@ class UsersController extends Controller
       return view('listings' );       
 
     }
+    public function pageprestataires()
+    {
+         
+      return view('pageprestataires' );       
+
+    }
     
       public function home()
     {

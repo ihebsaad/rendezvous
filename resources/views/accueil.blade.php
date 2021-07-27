@@ -419,4 +419,31 @@ strings: ["<?php echo $parametres->texta1; ?>","<?php echo $parametres->texta2; 
     showCursor: true
 });
 </script>
+  <?php if (isset($User)){?> 
+ <script>
+            
+            function addfavoris(prestataire){
+                
+                        var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('reviews.addfavoris') }}",
+                        method:"POST",
+                        data:{prestataire:prestataire,client:<?php echo $User->id;?>  , _token:_token},
+                        success:function(data){
+ 
+                     if(parseInt(data)==0) { 
+                     $(this).addClass('liked');
+                     }
+                     else{
+                      $(this).removeClass('liked');
+                     }
+ 
+                        }
+                    });
+               
+            } 
+      
+            
+ </script>
+ <?php }?> 
 @endsection('content')
