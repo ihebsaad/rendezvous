@@ -363,11 +363,6 @@ $customer = \Stripe\Customer::create();
      $abonnement->save();
      
       return "ok";
-    
-
-
- 
-
 
 
   }
@@ -456,7 +451,7 @@ $customer = \Stripe\Customer::create();
     $service = \App\Service::find( $serviceid) ;
 
     if($type=='acompte'){
-        //Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'stripe_id'=>$request->paymentIntent));
+        Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'stripe_id'=>$request->paymentIntent));
           
         $date = new DateTime($Reservation->date_reservation);
         $date = $date->format('d-m-Y');
@@ -531,7 +526,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
     } // fin if type == acompte
     if($type=='reste'){
-      // Reservation::where('id',$reservation)->update(array('paiement' => 2,'reste'=>0));  
+       Reservation::where('id',$reservation)->update(array('paiement' => 2,'reste'=>0));  
        
         $date = new DateTime($Reservation->date_reservation);
         $date = $date->format('d-m-Y');
