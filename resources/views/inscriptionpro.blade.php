@@ -62,6 +62,12 @@ h2#h2offre {font-size: 45px;}
 i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block;}
 .slick-slide { 
     height: 70%!important;}
+#cta1, #cta2 {width: 80%!important;}
+#dialogheader {text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+    padding-right: 47px;}
+
 }
 
 </style>
@@ -269,7 +275,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
                     <h2 style="color:black;">Développez votre activité</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
-                    <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">Je développe mon activité</a>
+                    <a id="cta1" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">Je développe mon activité</a>
                 </div>
             </div>
 
@@ -294,7 +300,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                     <h2 style="color:black;">Optimisez votre temps</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/orgtempstexte.png');?>" class="impub"></center>
                     <!--<p style="margin: 0px; margin-top: 10px; font-weight: 500!important;">*Cela est possible uniquement avec l'offre Diamond</p>-->
-                    <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">j'optimise mon temps</a>
+                    <a  id="cta2" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">j'optimise mon temps</a>
                 </div>
 
                 <div class="col-lg-5 col-sm-5">
