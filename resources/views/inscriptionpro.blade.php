@@ -61,7 +61,7 @@ h3.onelh3 {line-height: 50px!important;}
 h2#h2offre {font-size: 45px;}
 i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block;}
 .slick-slide { 
-    height: 70%!important;}
+    height: 75%!important;}
 #cta1, #cta2 {width: 80%!important;}
 #dialogheader {text-align: left;
     font-size: 18px;
@@ -543,7 +543,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <a href="#inscriptionsection" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Réservez une démo</a>
+                                <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Réservez une démo</a>
                             </div>
                         </div>
                         <!-- Search Section / End -->
