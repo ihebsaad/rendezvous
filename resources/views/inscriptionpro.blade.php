@@ -29,7 +29,7 @@ h3.onelh3 {line-height: 50px!important;}
 }
 
 .slick-slide { 
-    height: 28%!important;}
+    height: 38%!important;}
 
 .testimonial-box { 
     color: #000!important;}
