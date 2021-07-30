@@ -34,19 +34,135 @@ $plogo= $parametres->logo;
             </div>
             <!-- Right Side Content / End -->
 
-            <!-- Sign In Popup -->
-            <!--<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+                            <!-- Sign In Popup -->
+            <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 
                 <div class="small-dialog-header">
-                    <h3>Connexion</h3>
+                    <h3 style="text-align:center;">Inscrivez-vous en 2 minutes seulement</h3>
                 </div>
 
-            </div>-->
+
+                        <!-- Register -->
+                        <div >
+
+                            <form method="post" action="{{ route('register') }}" name="inscriptionform" id="inscriptionform" autocomplete="on">
+                                        <div class="row ">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    @csrf
+                                                    <input type="hidden" name="user_type" id="prestataire" value="prestataire" >
+                                                    <input type="hidden" name="username" id="username" value="jhondoe" >
+                                                    <input name="lastname" type="text" id="lastname" placeholder="Nom *" required="required" class="error">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input name="name" type="text" id="name" placeholder="Prénom *" required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="email" type="email" id="email" placeholder="Email *" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required"  onfocusout="cusername()">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input class="error" type="password" name="password" id="password1" placeholder="Mot de passe *"  required="required" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input class="error" type="password" name="password_confirmation" id="password2" placeholder="Confirmation de mot de passe*" required="required"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="titre" type="text" id="titre" placeholder="Nom de votre entreprise  *" required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="siren" type="text" id="siren" placeholder="Numéro siret/siren de votre entreprise"  class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="phone" type="phone" id="phone" placeholder="Téléphone *"  required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="adresse" type="text" id="adresse" placeholder="Adresse *"  required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input name="codep" type="text" id="codep" placeholder="Code postal *" required="required" class="error">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input name="ville" type="text" id="ville" placeholder="Ville *"  required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <select name="fhoraire" id="fhoraire" title="Selectionnez votre pays">
+                                                        <option value="America/Martinique" default="" selected="selected">Martinique</option>
+                                                        <option value="America/Guadeloupe">Guadeloupe</option>
+                                                        <option value="Europe/Paris">France</option>
+                                                        <option value="America/Cayenne">Guyane française</option> 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-md-12">
+                                                <input type="submit" class="submit button" id="btnSubmit" value="Je m'inscris !" style="    width: -webkit-fill-available;" onclick="my_func()">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="font-size: 12px; color: black;text-align: center; ">
+                                                    En m'inscrivant sur ce site j'accepte <a href="#" style=" font-weight: 600;">les cgv et cgu</a> ainsi que <a href="#" style=" font-weight: 600;">la politique de confidentialité</a> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row sform">
+                                            <div class="col-md-12">
+                                                <div style="font-size: 12px; color: black; text-align: center; ">
+                                                    Déjà inscrits ? <a  style=" font-weight: 600;" href="#"  onclick="switchci()">Connectez vous !</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </form>
+                        </div>
+            </div>
+            <!-- Sign In Popup / End -->
     </div>
     <!-- Header / End -->
-
+</div>
 </header>
-<div class="clearfix"></div>
 <!-- Header Container / End -->
   <script>
 

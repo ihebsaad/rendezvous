@@ -527,7 +527,7 @@ header.fullwidth .container {
     font-size: 26px
 }
 
-body #backtotop a { color: #fff; }
+body #backtotop a { color: #000; }
 
 #backtotop a:after {
 	content: "\f106";
@@ -16626,7 +16626,7 @@ button.mfp-close {
 
 
 #sign-in-dialog {
-	max-width: 500px;
+	max-width: 700px;
 }
 
 
