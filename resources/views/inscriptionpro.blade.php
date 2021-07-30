@@ -61,7 +61,7 @@ h3.onelh3 {line-height: 50px!important;}
 h2#h2offre {font-size: 45px;}
 i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block;}
 .slick-slide { 
-    height: 60%!important;}
+    height: 70%!important;}
 }
 
 </style>
