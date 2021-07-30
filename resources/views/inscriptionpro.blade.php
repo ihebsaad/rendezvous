@@ -56,6 +56,14 @@ h3.onelh3 {line-height: 50px!important;}
   left: 0;
   width: 100%;
   height: 100%!important;}
+
+@media (max-width: 1024px) {
+h2#h2offre {font-size: 45px;}
+i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block;}
+.slick-slide { 
+    height: 60%!important;}
+}
+
 </style>
 @section('content')
 <div id="inscriptionsec">
@@ -493,7 +501,7 @@ h3.onelh3 {line-height: 50px!important;}
         <div class="row">
                 <div class="col-md-12">
                     <section id="offre-lancement" class="center margin-bottom-50">
-                        <h2>OFFRE DE BIENVENUE <i class="im im-icon-Gift-Box" style="font-size:90px;"></i></h2>
+                        <h2 id="h2offre">OFFRE DE BIENVENUE <i class="im im-icon-Gift-Box" style="font-size:90px;"></i></h2>
                         <h3 style="text-align: center;margin-top: 0px;font-size:30px" >La première année à seulement</h3>
                         <h2 style="font-size: 40px; color: #3e3d3d;margin-top: 30px;">449€ TTC soit 37.41€/mois*</h2>
                         <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 21px;">au lieu de <b>889€</b></br>soit plus de <b>50%</b> de réduction</p>
