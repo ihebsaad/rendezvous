@@ -6,7 +6,7 @@
 $pvideo= $parametres->video;
 
 
-$temoinages=DB::table('temoinages')->get();
+$temoinages=DB::table('temoinages_prest')->get();
 
 ?>
 <style type="text/css">
@@ -441,7 +441,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
         <div class="col-md-4">
             <div class="icon-box-2 with-line">
                 <i class="im im-icon-Support"></i>
-                <h3 class="onelh3">Support dédié 6/7j</h3>
+                <h3 class="onelh3">Support dédié 5/7j</h3>
             </div>
         </div>
 
@@ -534,12 +534,20 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                         <h2 style="text-align: center;font-size: 42px;color: #fff;">VOUS N'ÊTES PAS ENTIÈREMENT CONVAINCU ?</h2>
                         <h2 style="text-align: center;font-size: 33px; color: #fff;margin-top: 30px;">Réservez maintenant une démo</h2>
                         <p style="text-align: center;margin-top: 0px;color: #fff; line-height: 21px;font-size: 18px;"><b>Réservez un appel</b> et découvrez comment :</p>
-                        <ul style="text-align: center;list-style-position: inside;color: #fff;">
-                            <li>Attirer de nouveaux clients</li>
-                            <li>Fidéliser ses clients</li>
-                            <li>Gérer son entreprise</li>
-                            <li>Et développer ses revenus </li>
-                        </ul>
+                        <div class="row">
+                            <div class="col-lg-2 ">
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-2 text-center">
+                                <ul style="text-align: left;list-style-position: inside;color: #fff;">
+                                    <li>Attirer de nouveaux clients</li>
+                                    <li>Fidéliser ses clients</li>
+                                    <li>Gérer son entreprise</li>
+                                    <li>Et développer ses revenus </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4 ">
+                            </div>
+                        </div>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -608,7 +616,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                             <a href="#sign-in-dialog" class="button margin-top-15  sign-in popup-with-zoom-anim" style="    width: 90%;">Je profite de l'offre</a>
                         </div>
                         <div class="col-lg-6 col-sm-6 text-center" >
-                            <a href="#inscriptionsection" class="button margin-top-15 btn-ybg" style="    width: 90%;">Je réserve une démo</a>
+                            <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" target="_blank" class="button margin-top-15 btn-ybg" style="    width: 90%;">Je réserve une démo</a>
                         </div>
                     </div>
                 </div>
@@ -623,6 +631,45 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 
 
 </div>
+<!-- section FAQ prestataires -->
+<section class="fullwidth padding-top-40 padding-bottom-50 " data-background-color="#fff">
+    <!-- Info Section -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3 class="headline centered" style="font-size:34px; font-weight: 500;">
+                    Foire aux questions
+                </h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- Info Section / End -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="style-2 ">
+                    <?php use App\PageFaq;$PageFaq=PageFaq::where('type','prest')->orderBy('id')->get();?>
+
+                    @foreach($PageFaq as $pfp)
+                    <!-- Toggle 1 -->
+                    <div class="toggle-wrap">
+                        <span class="trigger"><a href="#">{{$pfp->question}}<i class="sl sl-icon-plus"></i></a></span>
+                        <div class="toggle-container" style="display: none;">
+                            <p>{{$pfp->reponse}}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- FAQ / End -->
+
+</section>
+
 </div>
 </div>
 <!-- End inscriptionsec -->
@@ -673,12 +720,17 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 </div>
 @endsection('content')
 <script>
-function switchci() {
+function switchci(n) {
   var ins = document.getElementById("inscriptionsec");
   var conn = document.getElementById("connexionsec");
 
   var btnins = document.getElementById("btnconn");
   var btnconn = document.getElementById("btnins");
+  if (n == '1') 
+  {  var magnificPopup = $.magnificPopup.instance; 
+    // save instance in magnificPopup variable
+    magnificPopup.close(); 
+  }
   if (btnins.style.display === "none") {
 
     btnconn.style.display = "none";

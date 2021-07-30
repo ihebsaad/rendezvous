@@ -151,7 +151,7 @@ $plogo= $parametres->logo;
                                         <div class="row sform">
                                             <div class="col-md-12">
                                                 <div style="font-size: 12px; color: black; text-align: center; ">
-                                                    Déjà inscrits ? <a  style=" font-weight: 600;" href="#"  onclick="switchci()">Connectez vous !</a>
+                                                    Déjà inscrits ? <a  style=" font-weight: 600;" href="#"  onclick="switchci('1')">Connectez vous !</a>
                                                 </div>
                                             </div>
                                         </div>
