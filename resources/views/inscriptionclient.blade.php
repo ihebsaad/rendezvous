@@ -160,7 +160,7 @@ $temoinages=DB::table('temoinages')->get();
     data-img-height="505">
 
     <!-- Infobox -->
-    <div class="text-content white-font" style="padding: 0px 20px;">
+    <div class="text-content white-font padding-bottom-30 " style="padding: 0px 20px;">
         <div class="container">
 
             <div class="row">
@@ -168,7 +168,7 @@ $temoinages=DB::table('temoinages')->get();
                 <div class="col-lg-5 col-sm-5">
                     <img src="<?php echo  URL::asset('storage/images/equipe.png');?>">
                 </div>
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                <div class="col-lg-7 col-sm-7 padding-left-30text-center" style="color:black;">
                     <center><img src="<?php echo  URL::asset('storage/images/n5.png');?>" class="impub"></center>
                     <h2 style="color:black;">Voila ! Il ne vous reste plus qu’à profiter !</h2>
                 </div>
@@ -233,7 +233,7 @@ $temoinages=DB::table('temoinages')->get();
 
 
 <div class="container" id="inscriptionsection">
-    <div class="row margin-top-60 " style="position: relative;">
+    <div class="row margin-top-60 margin-bottom-30 " style="position: relative;">
         <div class="col-lg-2 col-md-12 padding-right-50">
         </div>
         <div class="col-lg-8 col-md-12">

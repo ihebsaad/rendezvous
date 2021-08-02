@@ -75,12 +75,12 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 <div id="inscriptionsec">
 <div class="container" id="inscriptionsection">
     <div class="row margin-top-60 " style="position: relative;">
-        <div class="col-lg-12 col-md-12 padding-right-50">
-            <h2 style="color:white;margin-top: 0px;font-weight:900;">La solution tout en un pour les prestataires de services sur RDV</h2>
+        <div class="col-lg-12 col-md-12 padding-right-50 justify-center">
+            <h2 style="color:white;margin-top: 0px;font-weight:900; text-align: center;">SOLUTION TOUT-EN-UN POUR PRESTATAIRE DE SERVICE SUR RDV</h2>
             <!--<h4 style="color:white;margin-top: 0px;font-weight:500">La solution tout en un pour les prestataires de services sur RDV</h4>-->
-            <div class="row padding-top-30">
+            <!--<div class="row padding-top-30">
                 <div class="col-md-1">
-                    <img src="<?php echo  URL::asset('storage/images/icone1.png');?>" width="70px">
+                    <img src="<?php //echo  URL::asset('storage/images/icone1.png');?>" width="70px">
                 </div>
                 <div class="col-md-11 padding-top-20">
                     <p style="color:white;margin-top: 0px;font-weight:400; font-size: 18px;">Moins de temps perdu</p>
@@ -88,7 +88,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
             </div>
             <div class="row padding-top-20">
                 <div class="col-md-1">
-                    <img src="<?php echo  URL::asset('storage/images/icone2.png');?>" width="70px">
+                    <img src="<?php //echo  URL::asset('storage/images/icone2.png');?>" width="70px">
                 </div>
                 <div class="col-md-11 padding-top-20">
                     <p style="color:white;margin-top: 0px;font-weight:400; font-size: 18px;">Plus de clients</p>
@@ -96,12 +96,12 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
             </div>
             <div class="row padding-top-20">
                 <div class="col-md-1">
-                    <img src="<?php echo  URL::asset('storage/images/icone3.png');?>" width="70px">
+                    <img src="<?php //echo  URL::asset('storage/images/icone3.png');?>" width="70px">
                 </div>
                 <div class="col-md-11 padding-top-20">
                     <p style="color:white;margin-top: 0px;font-weight:400; font-size: 18px;">Plus de revenus</p>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="col-lg-5 col-md-12">
             <!--<div class="dashboard-list-box margin-top-0">
@@ -236,21 +236,22 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
     </div>-->
     <div class="container white " style="background-color:white;padding-left:0px;padding: 10px;border-radius: 20px;top: 80px;position: relative;z-index: 100;">
         <div  class="row no-gutters justify-center">
-            <div  class="d-flex flex-column justify-center align-center col-md-4 col-4">
-                <center><img src="<?php echo  URL::asset('storage/images/develop.png');?>" width="90px" style="padding-bottom: 15px;"></center>
-                <div class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#devact">Développez votre activité</a> 
-             </div>
-         </div>
+
          <div class="d-flex flex-column justify-center align-center col-md-4 col-4">
             <center><img   src="<?php echo  URL::asset('storage/images/temps.png');?>" width="90px" style="padding-bottom: 15px;"></center>
-            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#opttem">Optimisez votre temps </a>
+            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#opttem">Moins de temps perdu</a>
             </div>
         </div>
         <div class="d-flex flex-column align-center col-md-4 col-4">
             <center><img  class="align-center"  src="<?php echo  URL::asset('storage/images/clientssa.png');?>"  width="90px" style="padding-bottom: 15px;"></center>
-            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#attclt">Attirez et fidélisez de nouveaux clients </a>
+            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#attclt">Plus de clients</a>
             </div>
         </div>
+        <div  class="d-flex flex-column justify-center align-center col-md-4 col-4">
+                <center><img src="<?php echo  URL::asset('storage/images/develop.png');?>" width="90px" style="padding-bottom: 15px;"></center>
+                <div class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#devact">Plus de revenus</a> 
+             </div>
+         </div>
     </div>
 </div>
 
@@ -331,7 +332,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                     <img src="<?php echo  URL::asset('storage/images/contactclient.png');?>">
                 </div>
                 <div class="col-lg-7 col-sm-7 padding-left-30 padding-bottom-50 text-center" style="color:black;">
-                    <h2 style="color:black;">Garder le contact avec vos clients</h2>
+                    <h2 style="color:black;">Attirez et fidélisez de nouveaux clients</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/contactclienttxt.png');?>" class="impub"></center>
                     <!--<a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Échanger avec vos clients </a>-->
                 </div>
@@ -508,14 +509,14 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                 <div class="col-md-12">
                     <section id="offre-lancement" class="center margin-bottom-50">
                         <h2 id="h2offre">OFFRE DE BIENVENUE <i class="im im-icon-Gift-Box" style="font-size:90px;"></i></h2>
-                        <h3 style="text-align: center;margin-top: 0px;font-size:30px" >La première année à seulement</h3>
-                        <h2 style="font-size: 40px; color: #3e3d3d;margin-top: 30px;">449€ TTC soit 37.41€/mois*</h2>
-                        <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 21px;">au lieu de <b>889€</b></br>soit plus de <b>50%</b> de réduction</p>
+                        <h2 style="font-size: 40px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #6b6b6b;">889€</span> 449€</h2>
+                        <h3 style="text-align: center;margin-top: 0px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >La première année*</h3>
+                        <p style="text-align: center;margin-top: 0px;color: #525252; ">(soit 37.41€/mois)</p>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
                                 <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Profiter de l'offre</a>
-                                <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;"><b>*</b>Puis 889€ TTC/an, soit 74€/mois</p>
+                                <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;"><b>*</b>Puis 889€/an, soit 74€/mois</p>
                             </div>
                         </div>
                         <!-- Search Section / End -->
@@ -532,26 +533,26 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                 <div class="col-md-12">
                     <section id="demande-demo" class="center margin-bottom-50">
                         <h2 style="text-align: center;font-size: 42px;color: #fff;">VOUS N'ÊTES PAS ENTIÈREMENT CONVAINCU ?</h2>
-                        <h2 style="text-align: center;font-size: 33px; color: #fff;margin-top: 30px;">Réservez maintenant une démo</h2>
-                        <p style="text-align: center;margin-top: 0px;color: #fff; line-height: 21px;font-size: 18px;"><b>Réservez un appel</b> et découvrez comment :</p>
+                        <h2 style="text-align: center;font-size: 33px; color: #fff;margin-top: 30px;margin-bottom: 20px;">Demandez une démo et découvrez comment:</h2>
                         <div class="row">
-                            <div class="col-lg-2 ">
+                            <div class="col-lg-3 ">
                             </div>
                             <div class="col-lg-6 col-lg-offset-2 text-center">
                                 <ul style="text-align: left;list-style-position: inside;color: #fff;">
                                     <li>Attirer de nouveaux clients</li>
                                     <li>Fidéliser ses clients</li>
                                     <li>Gérer son entreprise</li>
-                                    <li>Et développer ses revenus </li>
+                                    <li>Développer ses revenus</li>
                                 </ul>
+                                <p style="text-align: left;color: #fff;padding-left: 13px;">Grâce à notre plateforme</p>
                             </div>
-                            <div class="col-lg-4 ">
+                            <div class="col-lg-3 ">
                             </div>
                         </div>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" target="_blank" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Réservez une démo</a>
+                                <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070000&text_color=ffffff&primary_color=fff600" target="_blank" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Réservez une démo</a>
                             </div>
                         </div>
                         <!-- Search Section / End -->
@@ -613,10 +614,10 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                     <center><img src="<?php  echo  URL::asset('storage/images/expclientstexte.png');?>" class="impub"></center>
                     <div class="row">
                         <div class="col-lg-6 col-sm-6 text-center" >
-                            <a href="#sign-in-dialog" class="button margin-top-15  sign-in popup-with-zoom-anim" style="    width: 90%;">Je profite de l'offre</a>
+                            <a href="#sign-in-dialog" class="button margin-top-15  sign-in popup-with-zoom-anim" style="    width: 90%;">Profiter de l'offre</a>
                         </div>
                         <div class="col-lg-6 col-sm-6 text-center" >
-                            <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" target="_blank" class="button margin-top-15 btn-ybg" style="    width: 90%;">Je réserve une démo</a>
+                            <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" target="_blank" class="button margin-top-15 btn-ybg" style="    width: 90%;">Réserver une démo</a>
                         </div>
                     </div>
                 </div>
