@@ -17,6 +17,221 @@ $temoinages=DB::table('temoinages')->get();
 </style>
 @section('content')
 <div id="inscriptionsec">
+
+    <!--<div class="row" style="background: white;     position: absolute;
+    left: 50%;
+    bottom: 0;
+    -webkit-transform: translate(-50%,50%);
+    transform: translate(-50%,50%);
+    padding: 20px;
+    border-radius: 35px;
+    max-width: calc(100vw - 24px);
+    font-size: 12px;">
+        <div class="col-md-12 col-lg-12" style="">
+            <h5>tesrrrr</h5>
+        </div>
+    </div>-->
+    <div class="container white " style="background-color:white;padding-left:0px;padding: 30px;border-radius: 20px;top: 60px;position: relative;z-index: 100;">
+       
+        <div class="d-flex flex-column align-center col-md-12 col-12">
+            <center><h1 style=" margin-top: 10px; font-weight:600;">Rejoignez notre communauté en 5 étapes !</h1></center>
+           
+        </div>
+    
+    </div>
+
+<div id="wrapper" class="mm-page mm-slideout" >
+<!-- Parallax 1 Développez votre activité -->
+<div class="parallax padding-top-20"
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="padding-bottom: 20px;">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/connexion.png');?>">
+                </div>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n1.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Inscrivez-vous en quelques clics.</h2>
+                    <!--<a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Inscrivez-vous !</a>-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+</div>
+<!-- Parallax 2  Recherchez une prestation ou prestataire de service sur rendez-vous parmi nos différentes catégories -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="    padding: 20px 0px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n2.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Recherchez un prestataire près de chez vous parmi nos différentes catégories.</h2>
+                </div>
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/recherche.png');?>">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+
+</div>
+<!-- Parallax 3  -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="padding: 0px 20px;">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/avis.png');?>">
+                </div>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n3.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Comparez les avis et les notes pour sélectionner le prestataire idéal.</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+</div>
+<!-- Parallax 4  -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="    padding: 20px 0px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n4.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Réservez la prestation en ligne en toute sécurité.</h2>
+                </div>
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/reserver.png');?>">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+
+</div>
+<!-- Parallax 5  -->
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <!-- Infobox -->
+    <div class="text-content white-font" style="padding: 0px 20px;">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php echo  URL::asset('storage/images/equipe.png');?>">
+                </div>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php echo  URL::asset('storage/images/n5.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Voila ! Il ne vous reste plus qu’à profiter !</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+</div>
+<!-- Parallax 6  -->
+<!--<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+
+    <div class="text-content white-font" style="    padding: 20px 0px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php //echo  URL::asset('storage/images/n6.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Une fois la prestation terminez, nous vous invitons à laissez un avis sincère et constructif sur la page du prestataire de service qui vous à reçu pour la prestation de service.</h2>
+                </div>
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php //echo  URL::asset('storage/images/avisprestataire.png');?>">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="parallax "
+    data-color="#ffd700"
+    data-color-opacity="1"
+    data-img-width="800"
+    data-img-height="505">
+    <div class="text-content white-font" style="padding: 0px 20px;">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-5">
+                    <img src="<?php //echo  URL::asset('storage/images/equipe.png');?>">
+                </div>
+                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                    <center><img src="<?php //echo  URL::asset('storage/images/n7.png');?>" class="impub"></center>
+                    <h2 style="color:black;">Toutes l'équipe de Prenezunrendezvous.com et son directeur vous souhaite la bienvenue et un bon rendez-vous avec l'un de nos prestataire de services présent sur cette plateforme. </h2>
+                    <h4 style=" color: #565656; line-height: 1.5;margin-bottom: 20px;">Si vous avez une question, ou une remarque n'hésitez pas <a href="mailto:contact@prenezunrendezvous.com">nous contacter par mail</a>. Nous nous ferons un plaisir de vous y répondre dans les plus brefs délais.</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>-->
+</div>
+
+
 <div class="container" id="inscriptionsection">
     <div class="row margin-top-60 " style="position: relative;">
         <div class="col-lg-2 col-md-12 padding-right-50">
@@ -105,225 +320,6 @@ $temoinages=DB::table('temoinages')->get();
         <div class="col-lg-2 col-md-12 "></div>
         </div>
     </div>
-    <!--<div class="row" style="background: white;     position: absolute;
-    left: 50%;
-    bottom: 0;
-    -webkit-transform: translate(-50%,50%);
-    transform: translate(-50%,50%);
-    padding: 20px;
-    border-radius: 35px;
-    max-width: calc(100vw - 24px);
-    font-size: 12px;">
-        <div class="col-md-12 col-lg-12" style="">
-            <h5>tesrrrr</h5>
-        </div>
-    </div>-->
-    <div class="container white " style="background-color:white;padding-left:0px;padding: 30px;border-radius: 20px;top: 90px;position: relative;z-index: 100;">
-       
-        <div class="d-flex flex-column align-center col-md-12 col-12">
-            <center><h1 style=" margin-top: 10px; font-weight:600;">Découvrez comment cela se passe chez nous en 7 étapes !</h1></center>
-           
-        </div>
-    
-</div>
-
-<div id="wrapper" class="mm-page mm-slideout" >
-<!-- Parallax 1 Développez votre activité -->
-<div class="parallax padding-top-20"
-    data-color="#ffd700"
-    data-color-opacity="1"
-    data-img-width="800"
-    data-img-height="505">
-
-    <!-- Infobox -->
-    <div class="text-content white-font" style="padding-bottom: 20px;">
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/connexion.png');?>">
-                </div>
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <center><img src="<?php echo  URL::asset('storage/images/n1.png');?>" class="impub"></center>
-                    <h2 style="color:black;">Inscrivez vous et connectez vous </h2>
-                    <!--<a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Inscrivez-vous !</a>-->
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Infobox / End -->
-</div>
-<!-- Parallax 2  Recherchez une prestation ou prestataire de service sur rendez-vous parmi nos différentes catégories -->
-<div class="parallax "
-    data-color="#ffd700"
-    data-color-opacity="1"
-    data-img-width="800"
-    data-img-height="505">
-
-    <!-- Infobox -->
-    <div class="text-content white-font" style="    padding: 20px 0px;">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <center><img src="<?php echo  URL::asset('storage/images/n2.png');?>" class="impub"></center>
-                    <h2 style="color:black;">Recherchez une prestation ou prestataire de service sur rendez-vous parmi nos différentes catégories</h2>
-                </div>
-
-                <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/recherche.png');?>">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Infobox / End -->
-
-</div>
-<!-- Parallax 3  -->
-<div class="parallax "
-    data-color="#ffd700"
-    data-color-opacity="1"
-    data-img-width="800"
-    data-img-height="505">
-
-    <!-- Infobox -->
-    <div class="text-content white-font" style="padding: 0px 20px;">
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/avis.png');?>">
-                </div>
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <center><img src="<?php echo  URL::asset('storage/images/n3.png');?>" class="impub"></center>
-                    <h2 style="color:black;">Comparez les avis et notes des prestataires de services près de chez vous.</h2>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Infobox / End -->
-</div>
-<!-- Parallax 4  -->
-<div class="parallax "
-    data-color="#ffd700"
-    data-color-opacity="1"
-    data-img-width="800"
-    data-img-height="505">
-
-    <!-- Infobox -->
-    <div class="text-content white-font" style="    padding: 20px 0px;">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <center><img src="<?php echo  URL::asset('storage/images/n4.png');?>" class="impub"></center>
-                    <h2 style="color:black;">Sélectionnez les prestataires de service avec qui vous souhaitez prendre rendez-vous</h2>
-                </div>
-
-                <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/selectionnerprestataire.png');?>">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Infobox / End -->
-
-</div>
-<!-- Parallax 5  -->
-<div class="parallax "
-    data-color="#ffd700"
-    data-color-opacity="1"
-    data-img-width="800"
-    data-img-height="505">
-
-    <!-- Infobox -->
-    <div class="text-content white-font" style="padding: 0px 20px;">
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/reserver.png');?>">
-                </div>
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <center><img src="<?php echo  URL::asset('storage/images/n5.png');?>" class="impub"></center>
-                    <h2 style="color:black;">Réservez une/des prestations de services et payez partiellement (sous forme d'acompte), totalement ou en plusieurs fois la/les prestations de services en ligne en toute sécurité.</h2>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Infobox / End -->
-</div>
-<!-- Parallax 6  -->
-<div class="parallax "
-    data-color="#ffd700"
-    data-color-opacity="1"
-    data-img-width="800"
-    data-img-height="505">
-
-    <!-- Infobox -->
-    <div class="text-content white-font" style="    padding: 20px 0px;">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <center><img src="<?php echo  URL::asset('storage/images/n6.png');?>" class="impub"></center>
-                    <h2 style="color:black;">Une fois la prestation terminez, nous vous invitons à laissez un avis sincère et constructif sur la page du prestataire de service qui vous à reçu pour la prestation de service.</h2>
-                </div>
-
-                <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/avisprestataire.png');?>">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Infobox / End -->
-
-</div>
-
-<!-- Parallax 7  -->
-<div class="parallax "
-    data-color="#ffd700"
-    data-color-opacity="1"
-    data-img-width="800"
-    data-img-height="505">
-
-    <!-- Infobox -->
-    <div class="text-content white-font" style="padding: 0px 20px;">
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-lg-5 col-sm-5">
-                    <img src="<?php echo  URL::asset('storage/images/equipe.png');?>">
-                </div>
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <center><img src="<?php echo  URL::asset('storage/images/n7.png');?>" class="impub"></center>
-                    <h2 style="color:black;">Toutes l'équipe de Prenezunrendezvous.com et son directeur vous souhaite la bienvenue et un bon rendez-vous avec l'un de nos prestataire de services présent sur cette plateforme. </h2>
-                    <h4 style=" color: #565656; line-height: 1.5;margin-bottom: 20px;">Si vous avez une question, ou une remarque n'hésitez pas <a href="mailto:contact@prenezunrendezvous.com">nous contacter par mail</a>. Nous nous ferons un plaisir de vous y répondre dans les plus brefs délais.</h4>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Infobox / End -->
-</div>
-</div>
 </div>
 
 </div>

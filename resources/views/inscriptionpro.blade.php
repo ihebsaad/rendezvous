@@ -658,7 +658,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                     <div class="toggle-wrap">
                         <span class="trigger"><a href="#">{{$pfp->question}}<i class="sl sl-icon-plus"></i></a></span>
                         <div class="toggle-container" style="display: none;">
-                            <p>{{$pfp->reponse}}</p>
+                            <p><?php echo $pfp->reponse; ?></p>
                         </div>
                     </div>
                     @endforeach
