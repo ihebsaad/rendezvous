@@ -6,43 +6,105 @@
 $pvideo= $parametres->video;
 
 
-$temoinages=DB::table('temoinages')->get();
+$temoinages=DB::table('temoinages_prest')->get();
 
 ?>
+<style type="text/css">
+section.fullwidth .icon-box-2 i {
+    background-color: rgb(255 215 0)!important;
+    color: #826d00!important;
+}
+section.fullwidth .icon-box-2 {
+    padding: 15px!important; }
 
+h3.onelh3 {line-height: 50px!important;}
+
+
+#offre-lancement h2 {
+    text-align: center;
+    font-size: 60px;
+    line-height: 40px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.slick-slide { 
+    height: 38%!important;}
+
+.testimonial-box { 
+    color: #000!important;}
+
+    .testimonial-carousel .slick-slide.slick-active .testimonial-box {background: white!important;}
+    .testimonial-carousel .slick-slide.slick-active .testimonial:before {
+  color: #fff!important;
+}
+.testimonial:after {color: #000!important;}
+
+.slick-dots li {
+    box-shadow: inset 0 0 0 2px #000!important; }
+
+.slick-dots li.slick-active {
+    box-shadow: inset 0 0 0 6px #000!important;
+}
+
+.slick-dots li:after {
+    background-color: #000!important;
+}
+
+.mfp-wrap {
+  top: 0!important;
+  left: 0;
+  width: 100%;
+  height: 100%!important;}
+
+@media (max-width: 1024px) {
+h2#h2offre {font-size: 45px;}
+i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block;}
+.slick-slide { 
+    height: 80%!important;}
+#cta1, #cta2 {width: 80%!important;}
+#dialogheader {text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+    padding-right: 47px;}
+
+}
+
+</style>
 @section('content')
 <div id="inscriptionsec">
 <div class="container" id="inscriptionsection">
     <div class="row margin-top-60 " style="position: relative;">
-        <div class="col-lg-7 col-md-12 padding-right-50">
-            <h2 style="color:white;margin-top: 0px;font-weight:900">Connectez-vous à vos clients ! </h2>
+        <div class="col-lg-12 col-md-12 padding-right-50">
+            <h2 style="color:white;margin-top: 0px;font-weight:900;">La solution tout en un pour les prestataires de services sur RDV</h2>
+            <!--<h4 style="color:white;margin-top: 0px;font-weight:500">La solution tout en un pour les prestataires de services sur RDV</h4>-->
             <div class="row padding-top-30">
-                <div class="col-md-2">
-                    <img src="<?php echo  URL::asset('storage/images/icone1.png');?>" width="80px">
+                <div class="col-md-1">
+                    <img src="<?php echo  URL::asset('storage/images/icone1.png');?>" width="70px">
                 </div>
-                <div class="col-md-10 padding-top-10">
-                    <p style="color:white;margin-top: 0px;font-weight:600">Avec le contexte actuel <b style="font-weight:900">2 personne sur 3</b> souhaitent pouvoir <b style="font-weight:900">prendre RDV en ligne et pour gagner du temps</b></p>
-                </div>
-            </div>
-            <div class="row padding-top-10">
-                <div class="col-md-2">
-                    <img src="<?php echo  URL::asset('storage/images/icone2.png');?>" width="80px">
-                </div>
-                <div class="col-md-10 padding-top-20">
-                    <p style="color:white;margin-top: 0px;font-weight:600"><b style="font-weight:900">50% des RDV client</b> sont pris hors ouvertures</p>
+                <div class="col-md-11 padding-top-20">
+                    <p style="color:white;margin-top: 0px;font-weight:400; font-size: 18px;">Moins de temps perdu</p>
                 </div>
             </div>
-            <div class="row padding-top-10">
-                <div class="col-md-2">
-                    <img src="<?php echo  URL::asset('storage/images/icone3.png');?>" width="80px">
+            <div class="row padding-top-20">
+                <div class="col-md-1">
+                    <img src="<?php echo  URL::asset('storage/images/icone2.png');?>" width="70px">
                 </div>
-                <div class="col-md-10 padding-top-20">
-                    <p style="color:white;margin-top: 0px;font-weight:600"><b style="font-weight:900">80% de réduction des RDV</b> non honorés </p>
+                <div class="col-md-11 padding-top-20">
+                    <p style="color:white;margin-top: 0px;font-weight:400; font-size: 18px;">Plus de clients</p>
+                </div>
+            </div>
+            <div class="row padding-top-20">
+                <div class="col-md-1">
+                    <img src="<?php echo  URL::asset('storage/images/icone3.png');?>" width="70px">
+                </div>
+                <div class="col-md-11 padding-top-20">
+                    <p style="color:white;margin-top: 0px;font-weight:400; font-size: 18px;">Plus de revenus</p>
                 </div>
             </div>
         </div>
         <div class="col-lg-5 col-md-12">
-            <div class="dashboard-list-box margin-top-0">
+            <!--<div class="dashboard-list-box margin-top-0">
                 <form method="post" action="{{ route('register') }}" name="inscriptionform" id="inscriptionform" autocomplete="on">
                     <h4>Inscrivez-vous en 2 minutes seulement</h4>
                             <div class="row padding-top-20">
@@ -155,9 +217,10 @@ $temoinages=DB::table('temoinages')->get();
                                 </div>
                             </div>
                     </form>
-            </div>
+            </div>-->
         </div>
     </div>
+
     <!--<div class="row" style="background: white;     position: absolute;
     left: 50%;
     bottom: 0;
@@ -171,22 +234,21 @@ $temoinages=DB::table('temoinages')->get();
             <h5>tesrrrr</h5>
         </div>
     </div>-->
-    <div class="container white " style="background-color:white;padding-left:0px;padding: 10px;border-radius: 20px;top: 90px;position: relative;z-index: 100;">
+    <div class="container white " style="background-color:white;padding-left:0px;padding: 10px;border-radius: 20px;top: 80px;position: relative;z-index: 100;">
         <div  class="row no-gutters justify-center">
             <div  class="d-flex flex-column justify-center align-center col-md-4 col-4">
                 <center><img src="<?php echo  URL::asset('storage/images/develop.png');?>" width="90px" style="padding-bottom: 15px;"></center>
-                <div class="text-center mt-4 floating-features-text" style=" font-weight:600">
-                 Développez l'activité <br > de votre entreprise 
+                <div class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#devact">Développez votre activité</a> 
              </div>
          </div>
          <div class="d-flex flex-column justify-center align-center col-md-4 col-4">
             <center><img   src="<?php echo  URL::asset('storage/images/temps.png');?>" width="90px" style="padding-bottom: 15px;"></center>
-            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"> Optimisez et gérez votre <br > temps autrement 
+            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#opttem">Optimisez votre temps </a>
             </div>
         </div>
         <div class="d-flex flex-column align-center col-md-4 col-4">
             <center><img  class="align-center"  src="<?php echo  URL::asset('storage/images/clientssa.png');?>"  width="90px" style="padding-bottom: 15px;"></center>
-            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"> Gardez le contact avec vos clients<br  > entre les rendez-vous 
+            <div  class="text-center mt-4 floating-features-text" style=" font-weight:600"><a href="#attclt">Attirez et fidélisez de nouveaux clients </a>
             </div>
         </div>
     </div>
@@ -199,13 +261,13 @@ $temoinages=DB::table('temoinages')->get();
     data-color="#ffd700"
     data-color-opacity="1"
     data-img-width="800"
-    data-img-height="505">
+    data-img-height="505" id="devact">
 
     <!-- Infobox -->
     <div class="text-content white-font" style="padding-bottom: 20px;">
         <div class="container">
 
-            <div class="row">
+            <div class="row" >
 
                 <div class="col-lg-5 col-sm-5">
                     <img src="<?php echo  URL::asset('storage/images/developez.png');?>">
@@ -213,7 +275,7 @@ $temoinages=DB::table('temoinages')->get();
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
                     <h2 style="color:black;">Développez votre activité</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Inscrivez-vous !</a>
+                    <a id="cta1" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">Je développe mon activité</a>
                 </div>
             </div>
 
@@ -227,7 +289,7 @@ $temoinages=DB::table('temoinages')->get();
     data-color="#ffd700"
     data-color-opacity="1"
     data-img-width="800"
-    data-img-height="505">
+    data-img-height="505" id="opttem">
 
     <!-- Infobox -->
     <div class="text-content white-font" style="    padding: 20px 0px;">
@@ -235,10 +297,10 @@ $temoinages=DB::table('temoinages')->get();
 
             <div class="row">
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <h2 style="color:black;">Optimisez et gérez votre temps efficacement</h2>
+                    <h2 style="color:black;">Optimisez votre temps</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/orgtempstexte.png');?>" class="impub"></center>
-                    <p style="margin: 0px; margin-top: 10px; font-weight: 500!important;">*Cela est possible uniquement avec l'offre Diamond</p>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Oui je veux avoir mon agenda en ligne !</a>
+                    <!--<p style="margin: 0px; margin-top: 10px; font-weight: 500!important;">*Cela est possible uniquement avec l'offre Diamond</p>-->
+                    <a  id="cta2" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">j'optimise mon temps</a>
                 </div>
 
                 <div class="col-lg-5 col-sm-5">
@@ -257,7 +319,7 @@ $temoinages=DB::table('temoinages')->get();
     data-color="#ffd700"
     data-color-opacity="1"
     data-img-width="800"
-    data-img-height="505">
+    data-img-height="505" id="attclt">
 
     <!-- Infobox -->
     <div class="text-content white-font" style="padding: 0px 20px;">
@@ -265,13 +327,13 @@ $temoinages=DB::table('temoinages')->get();
 
             <div class="row">
 
-                <div class="col-lg-5 col-sm-5">
+                <div class="col-lg-5 col-sm-5 padding-top-50" >
                     <img src="<?php echo  URL::asset('storage/images/contactclient.png');?>">
                 </div>
-                <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
+                <div class="col-lg-7 col-sm-7 padding-left-30 padding-bottom-50 text-center" style="color:black;">
                     <h2 style="color:black;">Garder le contact avec vos clients</h2>
-                    <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Échanger avec vos clients </a>
+                    <center><img src="<?php echo  URL::asset('storage/images/contactclienttxt.png');?>" class="impub"></center>
+                    <!--<a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Échanger avec vos clients </a>-->
                 </div>
             </div>
 
@@ -280,22 +342,283 @@ $temoinages=DB::table('temoinages')->get();
 
     <!-- Infobox / End -->
 </div>
+
+<!-- fonctionnalités Section -->
+<section class="fullwidth padding-top-50 padding-bottom-30" data-background-color="#000">
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2 class="headline centered headline-extra-spacing">
+                <strong class="headline-with-separator" style="color:white">Les fonctionnalités</strong>
+                <span class="margin-top-25" style="color:white;max-width: 750px;font-size: 21px;">Nous proposons un éventail de fonctionnalités indispensables à votre réussite</span>
+            </h2>
+        </div>
+    </div>
+
+    <div class="row icons-container">
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Calendar-4"></i>
+                <h3 class="onelh3">Agenda en ligne</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Notepad"></i>
+                <h3 class="onelh3">Réservation en ligne</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2">
+                <i class="im im-icon-Money"></i>
+                <h3 class="onelh3">Acomptes en ligne obligatoire</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row icons-container">
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-ID-Card"></i>
+                <h3 class="onelh3">Carte de fidélité digitale</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Phone-SMS"></i>
+                <h3 class="onelh3">Rappel SMS</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2">
+                <i class="im im-icon-Mail-Send"></i>
+                <h3>SMS Marketing</h3>
+                <p style="margin-top:0px; line-height: 25px;">(très bientôt disponible)</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row icons-container">
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Money-2"></i>
+                <h3 class="onelh3">Paiement en plusieurs fois</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Ticket"></i>
+                <h3 class="onelh3">Code Promos</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2">
+                <i class="im im-icon-Statistic"></i>
+                <h3 class="onelh3">Statistiques</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row icons-container">
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Support"></i>
+                <h3 class="onelh3">Support dédié 5/7j</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Shop-3"></i>
+                <h3>Vente d’abonnement et de produits en cross-sell</h3>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2">
+                <i class="im im-icon-Hour"></i>
+                <h3>Gestion des heures creuses avec promotions flash</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row icons-container">
+        <!-- Stage -->
+        <div class="col-md-2">
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-People-onCloud"></i>
+                <h3>Système de parrainage</h3>
+                <p style="margin-top:0px; line-height: 25px;">(très bientôt disponible)</p>
+            </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2">
+                <i class="im im-icon-Sharethis"></i>
+                <h3>Partage récompensé</h3>
+                <p style="margin-top:0px; line-height: 25px;">(très bientôt disponible)</p>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2 class="headline centered headline-extra-spacing">
+                <span class="" style="color:white;max-width: 750px;font-size: 21px;">Et bien d’autres à venir...</span>
+            </h2>
+        </div>
+    </div>
+
+</div>
+</section>
+<!-- fonctionnalités Section / End -->
+<!-- offre lancement Section -->
+<section class="fullwidth padding-top-40 " data-background-color="#fed600">
+    <div class="container">
+        <div class="row">
+                <div class="col-md-12">
+                    <section id="offre-lancement" class="center margin-bottom-50">
+                        <h2 id="h2offre">OFFRE DE BIENVENUE <i class="im im-icon-Gift-Box" style="font-size:90px;"></i></h2>
+                        <h3 style="text-align: center;margin-top: 0px;font-size:30px" >La première année à seulement</h3>
+                        <h2 style="font-size: 40px; color: #3e3d3d;margin-top: 30px;">449€ TTC soit 37.41€/mois*</h2>
+                        <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 21px;">au lieu de <b>889€</b></br>soit plus de <b>50%</b> de réduction</p>
+                        <!-- Search -->
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Profiter de l'offre</a>
+                                <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;"><b>*</b>Puis 889€ TTC/an, soit 74€/mois</p>
+                            </div>
+                        </div>
+                        <!-- Search Section / End -->
+                    </section>
+                </div>
+            </div>
+    </div>
+</section>
+<!-- offre lancement -->
+<!--  demande demo Section -->
+<section class="fullwidth padding-top-40 " data-background-color="#000">
+    <div class="container">
+        <div class="row">
+                <div class="col-md-12">
+                    <section id="demande-demo" class="center margin-bottom-50">
+                        <h2 style="text-align: center;font-size: 42px;color: #fff;">VOUS N'ÊTES PAS ENTIÈREMENT CONVAINCU ?</h2>
+                        <h2 style="text-align: center;font-size: 33px; color: #fff;margin-top: 30px;">Réservez maintenant une démo</h2>
+                        <p style="text-align: center;margin-top: 0px;color: #fff; line-height: 21px;font-size: 18px;"><b>Réservez un appel</b> et découvrez comment :</p>
+                        <div class="row">
+                            <div class="col-lg-2 ">
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-2 text-center">
+                                <ul style="text-align: left;list-style-position: inside;color: #fff;">
+                                    <li>Attirer de nouveaux clients</li>
+                                    <li>Fidéliser ses clients</li>
+                                    <li>Gérer son entreprise</li>
+                                    <li>Et développer ses revenus </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4 ">
+                            </div>
+                        </div>
+                        <!-- Search -->
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" target="_blank" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Réservez une démo</a>
+                            </div>
+                        </div>
+                        <!-- Search Section / End -->
+                    </section>
+                </div>
+            </div>
+    </div>
+</section>
+<!-- demande demo lancement -->
+<!-- Témoinages partenaires / End -->
+<section class="fullwidth padding-top-40 padding-bottom-40 " data-background-color="#fed600">
+    <!-- Info Section -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3 class="headline centered">
+                    L'avis de nos partenaires
+                </h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- Info Section / End -->
+
+    <!-- Categories Carousel -->
+    <div class="fullwidth-carousel-container margin-top-20">
+        <div class="testimonial-carousel testimonials">
+            @foreach($temoinages as $tem)
+            <!-- Item -->
+            <div class="fw-carousel-review">
+                <div class="testimonial-box">
+                    <div class="testimonial">{{$tem->texte}}</div>
+                </div>
+                <div class="testimonial-author">
+                    <!--<img src="images/happy-client-01.jpg" alt="">-->
+                    <h4>{{$tem->nom}} <span>{{$tem->poste}}</span></h4>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <!-- Témoinages / End -->
+
+</section>
 <!-- Parallax 4 Offrez une expérience unique à vos clients -->
-<div class="parallax "
-    data-color="#ffd700"
+<div class="parallax  padding-bottom-20"
+    data-color="#000"
     data-color-opacity="1"
     data-img-width="800"
     data-img-height="505">
 
-    <!-- Infobox -->
     <div class="text-content white-font" style="    padding: 20px 0px;">
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
-                    <h2 style="color:black;">Offrez une expérience unique à vos clients</h2>
-                    <center><img src="<?php echo  URL::asset('storage/images/expclientstexte.png');?>" class="impub"></center>
-                    <a href="#inscriptionsection" class="button margin-top-15 btn-black" style="    width: 55%;">Différenciez-vous !</a>
+                    <h2 style="color:white; font-size: 34px;">Pourquoi nous?</h2>
+                    <center><img src="<?php  echo  URL::asset('storage/images/expclientstexte.png');?>" class="impub"></center>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 text-center" >
+                            <a href="#sign-in-dialog" class="button margin-top-15  sign-in popup-with-zoom-anim" style="    width: 90%;">Je profite de l'offre</a>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 text-center" >
+                            <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" target="_blank" class="button margin-top-15 btn-ybg" style="    width: 90%;">Je réserve une démo</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-lg-5 col-sm-5">
@@ -306,9 +629,47 @@ $temoinages=DB::table('temoinages')->get();
         </div>
     </div>
 
-    <!-- Infobox / End -->
 
 </div>
+<!-- section FAQ prestataires -->
+<section class="fullwidth padding-top-40 padding-bottom-50 " data-background-color="#fff">
+    <!-- Info Section -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3 class="headline centered" style="font-size:34px; font-weight: 500;">
+                    Foire aux questions
+                </h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- Info Section / End -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="style-2 ">
+                    <?php use App\PageFaq;$PageFaq=PageFaq::where('type','prest')->orderBy('id')->get();?>
+
+                    @foreach($PageFaq as $pfp)
+                    <!-- Toggle 1 -->
+                    <div class="toggle-wrap">
+                        <span class="trigger"><a href="#">{{$pfp->question}}<i class="sl sl-icon-plus"></i></a></span>
+                        <div class="toggle-container" style="display: none;">
+                            <p>{{$pfp->reponse}}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- FAQ / End -->
+
+</section>
+
 </div>
 </div>
 <!-- End inscriptionsec -->
@@ -359,12 +720,17 @@ $temoinages=DB::table('temoinages')->get();
 </div>
 @endsection('content')
 <script>
-function switchci() {
+function switchci(n) {
   var ins = document.getElementById("inscriptionsec");
   var conn = document.getElementById("connexionsec");
 
   var btnins = document.getElementById("btnconn");
   var btnconn = document.getElementById("btnins");
+  if (n == '1') 
+  {  var magnificPopup = $.magnificPopup.instance; 
+    // save instance in magnificPopup variable
+    magnificPopup.close(); 
+  }
   if (btnins.style.display === "none") {
 
     btnconn.style.display = "none";

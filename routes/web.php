@@ -219,6 +219,9 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::get('/temoinages/remove_temoinage/{id}', 'TemoinagesController@remove_temoinage');
 	Route::post('/temoinages/update_temoinage','TemoinagesController@update_temoinage')->name('temoinages.update_temoinage');
 	
+	Route::post('/temoinagesprest/store_temoinage','TemoinagesPrestController@store_temoinage')->name('temoinagesprest.store_temoinage');
+	Route::get('/temoinagesprest/remove_temoinage/{id}', 'TemoinagesPrestController@remove_temoinage');
+	Route::post('/temoinagesprest/update_temoinage','TemoinagesPrestController@update_temoinage')->name('temoinagesprest.update_temoinage');
 	
 
 	Route::get('/reviews', array('as' => 'reviews','uses' => 'ReviewsController@index'));
