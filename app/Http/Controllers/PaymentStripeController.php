@@ -158,6 +158,7 @@ return view('payments.pay', [
     $user=$request->get('user');
     $abn=$request->get('abonnement');
     $desc=$request->get('description');
+    //dd($montant);
      
   
     
@@ -165,46 +166,15 @@ return view('payments.pay', [
 
       Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
-$customer = \Stripe\Customer::create();
-    \Stripe\Customer::update(
-        $customer->id,
-        [
-            'email' => $user->email,
-            
-        ]
-    );
 
-
-    
-    $produit = Product::create([
-    'name' => $desc,
-    'type' => 'service',
-  ]);
-    $price = \Stripe\Price::create([
-    'product' => $produit->id,
-    'unit_amount' => ($montant) *100,
-    'currency' => 'eur',
-    'recurring' => ['interval' => 'month'],
-  ]);
-             
-  $Subscription = \Stripe\Subscription::create([
-    'customer' => $customer->id,
-   
-    'items' => [
-      [
-        'price' => $price->id ,
-        'quantity' => 1,
-      ],
-    ],
-    'payment_behavior' => 'default_incomplete',
-    'expand' => ['latest_invoice.payment_intent'],
-    
-  ]);
-  $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
-  $subscriptionId = Arr::get($Subscription, 'id');
-  //dd($clientSecret);
-  return view('payments.payAbn', [
-            'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'customerid' => $customer->id , 'usr' => $user , 'abn' => $abn
+  $intent = PaymentIntent::create([
+            'amount' => $montant*100,
+            'currency' => 'eur',
+        ]);
+ // dd($intent);
+ $clientSecret = Arr::get($intent, 'client_secret');
+return view('payments.payAbn', [
+            'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn
         ]);
 
 
@@ -234,10 +204,10 @@ $customer = \Stripe\Customer::create();
      // aucun abonnement fait
      if($expiration==''){
        // today + abonnement
-    if($abn!=3){$datee = (new \DateTime())->modify('+31 days')->format($format);}
+    if($abn!=3){$datee = (new \DateTime())->modify('+366 days')->format($format);}
     else{
       //$datee = (new \DateTime())->modify('+366 days')->format($format);
-      $datee = (new \DateTime())->modify('+31 days')->format($format);
+      $datee = (new \DateTime())->modify('+366 days')->format($format);
 
     }
     
@@ -251,7 +221,7 @@ $customer = \Stripe\Customer::create();
     if($abn!=3){$datee = (new \DateTime())->modify('+31 days')->format($format);}
     else{
       //$datee = (new \DateTime())->modify('+366 days')->format($format);
-      $datee = (new \DateTime())->modify('+31 days')->format($format);
+      $datee = (new \DateTime())->modify('+366 days')->format($format);
 
     }
      }
@@ -267,9 +237,9 @@ $customer = \Stripe\Customer::create();
      $datee = (new \DateTime())->modify('+366 days')->format($format);
 */
      $newdate = Carbon::createFromFormat('Y-m-d H:i:s', $prestataire->expire);
-     if($abn!=3){$daysToAdd = 31;}
+     if($abn!=3){$daysToAdd = 366;}
     else{//$daysToAdd = 365;
-           $daysToAdd = 31;
+           $daysToAdd = 366;
     }
      
      $newdate = $newdate->addDays($daysToAdd);
@@ -299,10 +269,10 @@ $customer = \Stripe\Customer::create();
      $typeabn='';
        $parametres=DB::table('parametres')->where('id', 1)->first();
       if($abn==1){
-        $abonnement='N°: 1 | ' .$parametres->abonnement1.' (mensuel)';
+        $abonnement='N°: 1 | ' .$parametres->abonnement1.' (annuel)';
       }
       if($abn==2){
-        $abonnement='N°: 2 | ' .$parametres->abonnement2.' (mensuel)';
+        $abonnement='N°: 2 | ' .$parametres->abonnement2.' (annuel)';
       }
       if($abn==3){
         $abonnement='N°: 3 | ' .$parametres->abonnement3.' (annuel)';
@@ -315,8 +285,8 @@ $customer = \Stripe\Customer::create();
     $message.="La date d'expiration de votre abonnement est : ". date('d/m/Y H:i', strtotime($datee))." <br>";
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
-      $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-      
+     // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+      $this->sendMail('mohamed.achraf.besbes@gmail.com','Abonnement payé',$message) ;
     //enregistrement alerte
       $alerte = new Alerte([
              'user' => $user,
