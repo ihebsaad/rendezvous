@@ -54,7 +54,7 @@ dd($stripeSub);
             ]);*/
             
             $account = Account::create([
-              'country' => 'CA',
+              
               'type' => 'express',
               'capabilities' => [
                 'card_payments' => [
