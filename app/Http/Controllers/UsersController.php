@@ -26,6 +26,7 @@ use \App\Cartefidelite;
 use \App\Codepromo;
 use \App\Happyhour;
 use \App\Contenu_plan;    
+use \App\Emailslist;    
 
 use Illuminate\Support\Str;
 
@@ -729,6 +730,22 @@ class UsersController extends Controller
                 test du site: prenezunrendezvous.com !'
         ]);
         print_r($response->getJson());
+    }
+
+    public function addemail(Request $request)
+    {
+        //dd($request->emailprest);
+        if ($request->addemail!=="") {
+
+            $a= new Emailslist([
+                 'email' => $request->emailprest
+             ]);
+            $a->save();  
+        } 
+        return redirect()->route('comingsoon')->with([
+            'smessage' => ' successfully'
+        ]);
+         
     }
     
  }
