@@ -124,12 +124,13 @@ background-color:#a0d468;
                   var paymentIntent = result.paymentIntent.id;
                  //alert(paymentIntent);
                    var _token = $('input[name="_token"]').val();
-                   var abn = "{{ $abn }}";
+                   var abn = "{{ $abn }}"
+                   var nature_abonn="{{ $nature_abonn }}"
                   $.ajax({
 
                    url:"{{url('/')}}/success/payAbn/{{ $usr }}", 
                    type : 'get',
-                   data:{paymentIntent:paymentIntent, abn:abn , _token:_token},
+                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn, abn:abn , _token:_token},
                    
                    success: function(data){ 
                     //alert(data);

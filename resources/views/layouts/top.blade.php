@@ -72,16 +72,20 @@ $plogo= $parametres->logo;
           $date_exp=\DateTime::createFromFormat($format,$user->expire);
         }
 
-          if (($nbjours>15 && $expire && $date_exp >= $date_15j)  || $nbjours<=15 ) {
+
+         // if (($nbjours>15 && $expire && $date_exp >= $date_15j)  || $nbjours<=15 ) {
+
+        if ($expire && $date_exp >= $date_15j ) {
 
         ?>
-       
+          
+
 		  <a href="{{route('dashboard')}}" class="button border with-icon"><i class="sl sl-icon-equalizer"></i> Mon Compte</a>
        <?php }else{?>
 
-         <a href="{{ route('logout') }}" class="button border with-icon"><i class="sl sl-icon-equalizer"></i> Déconnexion</a>
+          <a href="{{ route('logout') }}" class="button border with-icon"><i class="sl sl-icon-equalizer"></i> Déconnexion</a> 
 
-       <?php } } else { ?>
+       <?php }} else { ?>
 
          <a href="{{route('dashboard')}}" class="button border with-icon"><i class="sl sl-icon-equalizer"></i> Mon Compte</a>
 

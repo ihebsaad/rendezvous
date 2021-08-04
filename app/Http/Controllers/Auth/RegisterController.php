@@ -34,6 +34,28 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/dashboard';
+    protected function redirectTo()
+    {
+       
+        if(auth()->user()->user_type=='prestataire')
+         {
+          
+            $nbprest=User::where('user_type','prestataire')->count();
+
+            if( $nbprest > 100)
+            {
+             
+             return '/abonnements';
+            }
+            else
+            {
+             
+             return '/offrelancement';
+
+            }
+        
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -74,7 +96,7 @@ class RegisterController extends Controller
 
         //\QrCode::size(200)->format('png')->generate('webnersolutions.com', public_path('qrcode1.png'));
         
-        $typeabonn="type1";
+       /* $typeabonn="type1";
         if(isset($data['typeabonn']))
         {
          if( $data['typeabonn'])
@@ -82,7 +104,7 @@ class RegisterController extends Controller
          $typeabonn=$data['typeabonn'];
          }
          
-       } 
+       } */
 
        // username creation
        if(isset($data['username']))
@@ -214,6 +236,28 @@ class RegisterController extends Controller
         //dd(public_path());
 
        }
+
+          /*if($data['user_type']=='prestataire')
+         {
+
+          
+            $nbprest=User::where('user_type','prestataire')->count();
+
+            if( $nbprest > 100)
+            {
+              dd("ok1");
+              $redirectTo='/abonnements';
+            }
+            else
+            {
+              dd("ok2");
+              $redirectTo='/offrelancement';
+
+            }
+
+        
+        }*/
+
       
       // dd($typeabonn);
         $format = "Y-m-d H:i:s";
@@ -231,12 +275,17 @@ class RegisterController extends Controller
             'codep' => $codep,
             'fhoraire' => $fhoraire,
             'date_inscription' => $date_inscription,
-            'type_abonn_essai' =>  $typeabonn,
+           
             'qr_code'=> $urlqrcode,
             'user_type' => $data['user_type'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        
 
+         //'type_abonn_essai' =>  $typeabonn,
+        
+       
 
         
 

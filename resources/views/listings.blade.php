@@ -33,8 +33,8 @@
 		        	$date_exp=\DateTime::createFromFormat($format,$listing->expire);
 		        }
 				
-				if ( $nbjours<=15 || ($nbjours> 15 && $listing->expire &&  $date_exp >= $date_15j))
-				{
+				//if ( $nbjours<=15 || ($nbjours> 15 && $listing->expire &&  $date_exp >= $date_15j))
+				//{
                     $categories_user = \DB::table('categories_user')->where('user',$listing->id)->get();
 					$services =\App\Service::where('user',$listing->id)->get();
 					
@@ -110,7 +110,7 @@
 					</div>
 					</div> 
 				  </div>
-		<?php }  //end if periodde essai ou payement reglée  ?>
+		<?php //}  //end if periodde essai ou payement reglée  ?>
 		 <?php }  //foreach $listings  ?>
 				  
 				  

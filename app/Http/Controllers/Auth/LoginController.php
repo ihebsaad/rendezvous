@@ -47,16 +47,94 @@ class LoginController extends Controller
 		$user = auth()->user();
         $iduser = $user->id;
         $type = $user->user_type;
+
+         $format = "Y-m-d H:i:s";
+        $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
+        $date_15j=\DateTime::createFromFormat($format, $date_15j);
+        $date_inscription= $user->date_inscription;
+        $date_inscription=\DateTime::createFromFormat($format, $date_inscription);
+       
+        $nbjours = $date_inscription->diff($date_15j);
+        $nbjours =intval($nbjours->format('%R%a'));
+        $date_exp='';
+        if($user->expire)
+        {
+          $date_exp=\DateTime::createFromFormat($format,$user->expire);
+        }
+
+        if ($type == 'prestataire' ) {
+
+            if(!$user->nature_abonn && $date_exp=='' ) // non abonné
+            {
+              // vers la page d'abonnemnt
+              // calcul nombre de prestataire 
+                $nbprest=User::where('user_type','prestataire')->count();
+
+                    if( $nbprest > 100)
+                    {
+                     return redirect ('/abonnements');
+                    }
+                    else
+                    {
+                      return redirect ('/offrelancement');
+                    }
+
+            }
+            else // abonné  offre_lance_ann1 ; offre_lance_ann2 ; normal    
+            {
+               
+              if($user->expire &&  $date_exp >= $date_15j )
+              {
+                return redirect ('/dashboard');
+              }
+              
+
+                if($user->nature_abonn=='offre_lance_ann1' && ($user->expire &&  $date_exp < $date_15j ) )
+                {
+                   //calcul si la periode a dépassé un an ou non
+
+                    $format = "Y-m-d H:i:s";
+                    $date_courante = (new \DateTime())->format('Y-m-d H:i:s');
+                    $date_courante =\DateTime::createFromFormat($format, $date_courante);
+                    $date_inscription= $user->date_inscription;
+                    $date_inscription=\DateTime::createFromFormat($format, $date_inscription);
+                    
+                    $nbjours = $date_inscription->diff($date_courante);
+                    $nbjours =intval($nbjours->format('%R%a'));
+
+                     if($nbjours>365)
+                      { 
+                       //return redirect ('/offrelancement_anne2');
+
+                        return redirect ('/abonnements');
+                      }
+
+                    
+                    //si oui on passe vers la payement de deuxième tranche 
+
+                   //redirect vers offre de lancement
+                }
+
+                 return redirect ('/abonnements');
+
+            }
+
+             
+        
+        } else {// admin ou client
+            return redirect('/dashboard');
+        }
 		
-		if ($type == 'prestataire') {
+         /*$date_inscription=$date_inscription->format('Y-m-d');
+        $date_15j=$date_15j->format('Y-m-d');*/
+		/*if ($type == 'prestataire') {
 
         $format = "Y-m-d H:i:s";
         $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
         $date_15j=\DateTime::createFromFormat($format, $date_15j);
         $date_inscription= $user->date_inscription;
         $date_inscription=\DateTime::createFromFormat($format, $date_inscription);
-        /*$date_inscription=$date_inscription->format('Y-m-d');
-        $date_15j=$date_15j->format('Y-m-d');*/
+       
         $nbjours = $date_inscription->diff($date_15j);
         $nbjours =intval($nbjours->format('%R%a'));
         $date_exp='';
@@ -86,7 +164,7 @@ class LoginController extends Controller
 		}	 
         } else {// admin ou client
             return redirect('/dashboard');
-        }
+        }*/
 		
 	}
 	 

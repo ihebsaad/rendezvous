@@ -505,6 +505,9 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 </section>
 <!-- fonctionnalités Section / End -->
 <!-- offre lancement Section -->
+<?php use App\User; $nbpres=User::where('user_type','prestataire')->count(); 
+
+if( $nbpres <= 100 ) {?>
 <section class="fullwidth padding-top-40 " data-background-color="#fed600">
     <div class="container">
         <div class="row">
@@ -527,6 +530,31 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
             </div>
     </div>
 </section>
+<?php }else {?>
+ <section class="fullwidth padding-top-40 " data-background-color="#fed600">
+    <div class="container">
+        <div class="row">
+                <div class="col-md-12">
+                    <section id="offre-lancement" class="center margin-bottom-50">
+                        <h2 id="h2offre">Inscription <!-- <i class="im im-icon-Gift-Box" style="font-size:90px;"></i> --></h2><br>
+                        <h3 style="text-align: center;margin-top: 0px;font-size:30px" >Inscrivez vous sur notre  plateforme</h3>
+                        <h2 style="font-size: 40px; color: #3e3d3d;margin-top: 30px;"></h2>
+                        <!-- <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 21px;">au lieu de <b>889€</b></br>soit plus de <b>50%</b> de réduction</p> -->
+                        <!-- Search -->
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">S'inscrire</a>
+                                <!-- <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;"><b>*</b>Puis 889€ TTC/an, soit 74€/mois</p> -->
+                            </div>
+                        </div>
+                        <!-- Search Section / End -->
+                    </section>
+                </div>
+            </div>
+    </div>
+</section>
+
+<?php } ?>
 <!-- offre lancement -->
 <!--  demande demo Section -->
 <section class="fullwidth padding-top-40 " data-background-color="#000">

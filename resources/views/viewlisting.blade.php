@@ -301,8 +301,9 @@ font-size: 15px;
         	$date_exp=\DateTime::createFromFormat($format,$user->expire);
         }
         $nbjours = $date_inscription->diff($date_15j);
-        $nbjours =intval($nbjours->format('%R%a')); if ( $nbjours<=15 || ($nbjours> 15 && $user->expire && $date_exp >= $date_15j))
-				{ ?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }}?>
+        $nbjours =intval($nbjours->format('%R%a')); if ($user->expire && $date_exp >= $date_15j)
+        { //if ( $nbjours<=15 || ($nbjours> 15 && $user->expire && $date_exp >= $date_15j))
+				//{ ?>   <a href="{{route('listing',['id'=> $user->id] )}}" target="_blank" class="button   "><i class="sl sl-icon-settings"> </i>Modifier</a> <?php }}?>
 
       <?php if($user->statut==1){?>  <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-check"></i> Disponible</div><?php  } else{ ?>
      <div class="unavailable-badge with-tip margin-bottom-30" data-tip-content="Prestataire disponible pour des réservations"> <i class="sl sl-icon-close"></i> Non Disponible</div>

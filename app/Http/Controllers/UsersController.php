@@ -274,12 +274,32 @@ class UsersController extends Controller
 
     }
     
-       public function abonnements()
+    public function abonnements()
     {
-         
+       
       return view('abonnements' );       
 
     }
+  public function offrelancement()
+    {
+    	$abonnementA =  Contenu_plan::where('abonnement',1)->get();
+        $abonnementB =  Contenu_plan::where('abonnement',2)->get();
+        $abonnementC =  Contenu_plan::where('abonnement',3)->get();
+         
+      return view('offrelancement' , compact('abonnementA','abonnementB','abonnementC')); 
+      
+    
+    }
+    public function OffreLancement_anne2()
+    {
+    	$abonnementA =  Contenu_plan::where('abonnement',1)->get();
+        $abonnementB =  Contenu_plan::where('abonnement',2)->get();
+        $abonnementC =  Contenu_plan::where('abonnement',3)->get();
+         
+      return view('OffreLancement_anne2' , compact('abonnementA','abonnementB','abonnementC'));     
+    
+    }
+    
     
       public function apropos()
     {

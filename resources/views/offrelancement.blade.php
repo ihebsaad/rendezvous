@@ -7,7 +7,13 @@
 
  ?>
  <style type="text/css">
- /* highlight PLAN 2*/
+ 
+ @media only screen and (min-width: 600px) {
+ .centredplan{
+  margin-left: 200px;
+  }
+}
+/* highlight PLAN 2*/
 .brilliant::before {
   width: 0;
   height: 0;
@@ -152,21 +158,22 @@
         <span class="switch"></span>
       </p>
     </div> -->
-          <h3 class="headline_part centered margin-bottom-20">Choisissez votre Plan<span></span></h3>
+          <h3 class="headline_part centered margin-bottom-20">Offre de Lancement : Vous êtes le visiteur numéro :<?php use App\User; $nbprest=User::where('user_type','prestataire')->count();
+             echo $nbprest;?></h3> <span></span></h3>
         </div>
       </div>
       <div class="row">        
-      <div class="utf_pricing_container_block margin-top-30 margin-bottom-30"> 
+        
 
         <!-- plan 3 - start -->             
-      <div class="plan featured col-md-4 col-sm-6 col-xs-12">
+      <div class="plan featured col-md-8 col-sm-6 col-xs-12 centredplan">
         <div class="utf_price_plan">
-          <h3><?php echo $parametres->abonnement3;?></h3>
-          <span class="value" id="prixC"><?php echo $parametres->cout_abonnement3 * 12;?>€<span id="uniteC">TTC / Par an</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
+          <h3>Offre de Lancement<?php //echo $parametres->abonnement3;?></h3>
+          <span class="value" id="prixC"><?php echo $parametres->cout_offrelancement3;?>€<span id="uniteC">TTC / Par an</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> 
         </div>
         
               <div class="utf_price_plan_features">
-              	<input type="checkbox" class="read-more-state" id="post-3" />
+                <input type="checkbox" class="read-more-state" id="post-3" />
                 <ul class="read-more-wrap">
                   <?php $x=0; foreach($abonnementC as $ab) { 
                     if ($x<5) {
@@ -187,7 +194,7 @@
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
         <input   name="abonnement" type="hidden"  value="3">     
         <input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
-        <input   name="nature_abonn" type="hidden"  value="normal">    
+        <input   name="nature_abonn" type="hidden"  value="offre_lanc">      
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
@@ -196,82 +203,6 @@
       </div>
  <!-- plan 3 - end -->  
 
-      
-      <!-- plan 2 - start -->        
-      <div class="plan featured brilliant col-md-4 col-sm-6 col-xs-12 active">
-        <div class="utf_price_plan" style="background-color: #3d92e0;">
-          <h3><?php echo $parametres->abonnement2;?></h3>
-          <span class="value" id="prixB"><?php echo $parametres->cout_abonnement2 * 12;?>€<span id="uniteB">TTC / Par an</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
-		</div>
-              <div class="utf_price_plan_features">
-              	<input type="checkbox" class="read-more-state" id="post-2" />
-                <ul class="read-more-wrap">
-                  <?php $x=0; foreach($abonnementB as $ab) { 
-                    if ($x<5) {
-                      echo  '<li>'.$ab->contenu.'</li>' ;
-                    } else {
-                      echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
-                    }
-                      $x=$x+1;  
-                     
-                  
-                   } ?>
-                 </ul>
-                 <label for="post-2" class="read-more-trigger"></label></br>
-                @guest <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');" ><i class="sl sl-icon-basket"></i> Acheter</a> 
-			 @else
-			 <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
-				{{ csrf_field() }}
- 				<input   name="description" type="hidden"  value="<?php echo $parametres->abonnement2;?>">     				
- 				<input   name="abonnement" type="hidden"  value="2">     				
- 				<input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
-        <input   name="nature_abonn" type="hidden"  value="normal">    
- 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement2;?>">     
-				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
-				</form>
-				@endguest
-			 </div>
-      </div>
- <!-- plan 2 - end -->  
- <!-- plan 1 - start -->  
-      <div class="plan featured col-md-4 col-sm-6 col-xs-12">
-        
-       <div class="utf_price_plan">
-          <h3> <?php echo $parametres->abonnement1;?></h3>
-          <span class="value" id="prixA"><?php echo $parametres->cout_abonnement1 * 12;?>€<span>TTC / Par an</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement1;?></span> 
-        </div>
-        
-              <div class="utf_price_plan_features">
-                <input type="checkbox" class="read-more-state" id="post-1" />
-                <ul class="read-more-wrap">
-                  <?php $x=0; foreach($abonnementA as $ab) { 
-                    if ($x<5) {
-                      echo  '<li>'.$ab->contenu.'</li>' ;
-                    } else {
-                      echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
-                    }
-                      $x=$x+1;  
-                     
-                  
-                   } ?>
-                 </ul>
-                 <label for="post-1" class="read-more-trigger"></label></br>
-               @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
-      @else
-        <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
-        {{ csrf_field() }}
-        <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement1;?>">            
-        <input   name="abonnement" type="hidden"  value="1">            
-        <input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
-         <input   name="nature_abonn" type="hidden"  value="normal">   
-        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
-        <button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
-        </form>
-        @endguest
-        </div>
-      </div>
-      <!-- plan 1 - end -->  
- 
           </div>        
       </div> 
     </div>    
