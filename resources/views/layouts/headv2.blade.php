@@ -71,6 +71,9 @@ a.button.border:hover {
 }
 
 #catn7 {display: none}
+
+
+
 @media (max-width: 1024px) {
   #catn7 {display: flex}
   img.impub {

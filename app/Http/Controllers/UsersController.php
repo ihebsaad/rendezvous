@@ -230,6 +230,13 @@ class UsersController extends Controller
 
     }
     
+    public function comingsoon()
+    {
+         
+      return view('comingsoon' );       
+
+    }
+
       public function home()
     {
          

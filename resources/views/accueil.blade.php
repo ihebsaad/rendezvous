@@ -36,7 +36,28 @@ $temoinages=DB::table('temoinages')->get();
 @endif 
 <?php Session::forget('msgs'); ?>
  @endif 
+<style type="text/css">
+section.fullwidth .icon-box-2 i {
+    background-color: rgb(0 0 0 / 100%);
+}
 
+
+section.fullwidth .icon-box-2 {
+    padding: 20px;
+    min-height: 310px;}
+
+    .style-2 .trigger a:hover  { color: #000; }
+    .style-2 .ui-accordion .ui-accordion-header, .style-2 .ui-accordion .ui-accordion-content, .style-2 .toggle-wrap {
+    border-bottom: 1px solid #5a5a5a;
+}
+
+.style-2 .trigger.active a,
+.style-2 .ui-accordion .ui-accordion-header-active:hover,
+.style-2 .ui-accordion .ui-accordion-header-active {
+    color: #000;
+    font-weight: 600;
+}
+</style>
  <!-- Banner
 ================================================== -->
 <div class="main-search-container dark-overlay">
@@ -61,19 +82,19 @@ $temoinages=DB::table('temoinages')->get();
                             <input  id="prest_tag" name="prest_tag" type="text" placeholder="Que cherchez-vous ?" value=""/>
                         </div>
 
-                        <div class="main-search-input-item location">
-                            <div id="autocomplete-container">
-                                <input name="prest_emplacement" id="autocomplete-input" type="text" placeholder="Emplacement...">
-                            </div>
-                            <a href="#"><i class="fa fa-map-marker"></i></a>
-                        </div>
-
                         <div class="main-search-input-item">
                             <select data-placeholder="All Categories" class="chosen-select" name="toutes_categories" id="toutes_categories">
                                 @foreach($toutes_categories as $tc)
                                   <option val="{{$tc->id}}">{{$tc->nom}}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="main-search-input-item location">
+                            <div id="autocomplete-container">
+                                <input name="prest_emplacement" id="autocomplete-input" type="text" placeholder="Emplacement...">
+                            </div>
+                            <a href="#"><i class="fa fa-map-marker"></i></a>
                         </div>
 
                         <button class="button" type="submit">Rechercher</button>
@@ -96,43 +117,72 @@ $temoinages=DB::table('temoinages')->get();
 
 <!-- Content categories populaires
 ================================================== -->
-<section class="fullwidth margin-top-0 padding-top-0 padding-bottom-40" data-background-color="#ffd700">
+<section class="fullwidth margin-top-0 padding-top-0 padding-bottom-40 padding-top-40" data-background-color="#ffd700">
 <div class="container">
     <div class="row">
 
-        <div class="col-md-12">
+        <!--<div class="col-md-12">
             <h3 class="headline centered margin-top-75">
                 <strong class="headline-with-separator" id="cattitle">Catégories populaires</strong>
             </h3>
-        </div>
+        </div>-->
 
-        <div class="col-md-12">
+        <!--<div class="col-md-12">
             <div class="categories-boxes-container-alt margin-top-5 margin-bottom-30">
-                <?php $i= 1; ?>
-                @foreach($top_categories as $tcc)
+                <?php //$i= 1; ?>
+                {{--@foreach($top_categories as $tcc)--}}
                 <?php
-                $catinfo=DB::table('categories')->where('id', $tcc->categorie)->get();
+                //$catinfo=DB::table('categories')->where('id', $tcc->categorie)->get();
                 ?>
-                     @foreach($catinfo as $cat)
-                        <!-- Box -->
-                        <a href="listings-list-with-sidebar.html" class="category-small-box-alt" <?php if ($i ==7) { echo "id='catn7'"; } ?> >
-                            <i class="im <?php print_r($cat->icone) ?>"></i>
-                            <h4><?php print_r($cat->nom) ?></h4>
-                            <span class="category-box-counter-alt">{{$tcc->ccat}}</span>
-                            <img src="<?php echo  URL::asset('storage/categories/'.$cat->image);?>" >
+                     {{--@foreach($catinfo as $cat)--}}
+
+                        <a href="listings-list-with-sidebar.html" class="category-small-box-alt" <?php //if ($i ==7) { echo "id='catn7'"; } ?> >
+                            <i class="im <?php //print_r($cat->icone) ?>"></i>
+                            <h4><?php //print_r($cat->nom) ?></h4>
+                            <span class="category-box-counter-alt">{{--$tcc->ccat--}}</span>
+                            <img src="<?php // echo  URL::asset('storage/categories/'.$cat->image);?>" >
                         </a>
-                    @endforeach
-                        <?php $i=$i+1; ?>
-                @endforeach
+                    {{--@endforeach--}}
+                        <?php //$i=$i+1; ?>
+                {{--@endforeach--}}
 
-                <!-- Box -->
-                <!--<a href="listings-list-with-sidebar.html" class="category-small-box-alt">
-                    <i class="im  im-icon-Sleeping"></i>
-                    <h4>Hotels</h4>
-                    <span class="category-box-counter-alt">32</span>
-                    <img src="images/category-box-02.jpg">
-                </a>-->
+            </div>
+        </div>-->
+        <div class="row icons-container">
+            <!-- Stage -->
+            <div class="col-md-3">
+                <div class="icon-box-2 with-line">
+                    <i class="im im-icon-Timer"></i>
+                    <h3 class="onelh3">{{$parametres->Box1a}}</h3>
+                    <p style="text-align:justify-all;">{{$parametres->Box1b}}</p>
+                </div>
+            </div>
 
+            <!-- Stage -->
+            <div class="col-md-3">
+                <div class="icon-box-2 with-line">
+                    <i class="im im-icon-Geo-Star"></i>
+                    <h3 class="onelh3">{{$parametres->Box2a}}</h3>
+                    <p style="text-align:justify-all;">{{$parametres->Box2b}}</p>
+                </div>
+            </div>
+
+            <!-- Stage -->
+            <div class="col-md-3">
+                <div class="icon-box-2">
+                    <i class="im im-icon-King-2"></i>
+                    <h3 class="onelh3">{{$parametres->Box3a}}</h3>
+                    <p style="text-align:justify-all;">{{$parametres->Box3b}}</p>
+                </div>
+            </div>
+
+            <!-- Stage -->
+            <div class="col-md-3">
+                <div class="icon-box-2">
+                    <i class="im im-icon-Security-Check"></i>
+                    <h3 class="onelh3">{{$parametres->Box4a}}</h3>
+                    <p style="text-align:justify-all;">{{$parametres->Box4b}}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -319,8 +369,7 @@ $temoinages=DB::table('temoinages')->get();
                 <div class="col-lg-6 col-sm-6" style="color:black;">
                     <h2 style="color:black;">Vous êtes prestataire de services sur rendez-vous ?</h2>
                     <p>Profitez d'une solution simple, intuitive et rapide pour vous connecter à vos clients et optimiser votre temps. Découvrez notre plateforme innovante et notre nouvelle offre sans commissions, ni engagement, conçue spécialement pour les prestataires de services qui travaillent uniquement sur rendez-vous !</p>
-                    <p>Inscrivez-vous et testez gratuitement notre site pendant 15 jours.</p>
-                    <a href="#" class="button margin-top-15 btn-ybg">Commencer</a>
+                    <a href="{{ route('inscription') }}" class="button margin-top-15 btn-ybg">Découvrir notre solution</a>
                 </div>
                 <div class="col-lg-6 col-sm-6">
                     <img src="<?php echo  URL::asset('storage/images/prestatairesrdv.png');?>">
@@ -352,11 +401,10 @@ $temoinages=DB::table('temoinages')->get();
                     <img src="<?php echo  URL::asset('storage/images/clientsrdv.png');?>">
                 </div>
                 <div class="col-lg-6 col-sm-6">
-                    <h2>Je trouve mon prestataire de services sur rendez-vous ?</h2>
-                    <p>Prenez rendez-vous en ligne avec votre prestataire de services en quelques clics !</p>
-                    <p>C'est simple, sécurisé et depuis n'importe quel appareil.</br>
-                    Un large répertoire des prestataires dans plusieurs catégories.</p>
-                    <a href="#" class="button margin-top-15">Commencer</a>
+                    <h2>Prenez un rendez-vous</h2>
+                    <p>Tout ce dont vous avez besoin, à portée de main, demain ou après-demain</p>
+                    <p>Prenez rendez-vous avec votre prestataire de services en quelques clics !</p>
+                    <a href="{{ route('inscriptionclient') }}" class="button margin-top-15">Je trouve un rendez-vous</a>
                 </div>
             </div>
 
@@ -367,6 +415,44 @@ $temoinages=DB::table('temoinages')->get();
 
 </div>
 <!-- Parallax clients / End -->
+<!-- section FAQ prestataires -->
+<section class="fullwidth padding-top-40 padding-bottom-50 " data-background-color="#ffd700">
+    <!-- Info Section -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3 class="headline centered" style="font-size:34px; font-weight: 500;">
+                    Foire aux questions
+                </h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- Info Section / End -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="style-2 ">
+                    <?php use App\PageFaq; $PageFaq=PageFaq::where('type','client')->orderBy('id')->get();?>
+
+                    @foreach($PageFaq as $pfp)
+                    <!-- Toggle 1 -->
+                    <div class="toggle-wrap">
+                        <span class="trigger"><a href="#">{{$pfp->question}}<i class="sl sl-icon-plus"></i></a></span>
+                        <div class="toggle-container" style="display: none;">
+                            <p><?php echo $pfp->reponse; ?></p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- FAQ / End -->
+
+</section>
 <!-- Témoinages clients / End -->
 <section class="fullwidth padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
     <!-- Info Section -->

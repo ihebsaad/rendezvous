@@ -97,6 +97,7 @@ Route::post('/users/Firstservice','UsersController@FirstService')->name('users.F
 
 Route::get('/inscription', array('as' => 'inscriptionclient','uses' => 'UsersController@inscriptionClient'));
 
+Route::get('/comingsoon', array('as' => 'comingsoon','uses' => 'UsersController@comingsoon'));
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
 Route::get('/pro', array('as' => 'inscription','uses' => 'UsersController@inscriptionpro'));

@@ -57,8 +57,10 @@ h3.onelh3 {line-height: 50px!important;}
   width: 100%;
   height: 100%!important;}
 
+h2#h2offre {font-size: 40px;}
+
 @media (max-width: 1024px) {
-h2#h2offre {font-size: 45px;}
+h2#h2offre {font-size: 35px;}
 i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block;}
 .slick-slide { 
     height: 80%!important;}
@@ -75,8 +77,8 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 <div id="inscriptionsec">
 <div class="container" id="inscriptionsection">
     <div class="row margin-top-60 " style="position: relative;">
-        <div class="col-lg-12 col-md-12 padding-right-50 justify-center">
-            <h2 style="color:white;margin-top: 0px;font-weight:900; text-align: center;">SOLUTION TOUT-EN-UN POUR PRESTATAIRE DE SERVICE SUR RDV</h2>
+        <div class="col-lg-12 col-md-12 justify-center">
+            <h2 style="color:white;margin-top: 0px;font-weight:900; text-align: center;line-height: 1.5;">SOLUTION TOUT-EN-UN</br>POUR PRESTATAIRE DE SERVICE SUR RDV</h2>
             <!--<h4 style="color:white;margin-top: 0px;font-weight:500">La solution tout en un pour les prestataires de services sur RDV</h4>-->
             <!--<div class="row padding-top-30">
                 <div class="col-md-1">
@@ -103,8 +105,8 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                 </div>
             </div>-->
         </div>
-        <div class="col-lg-5 col-md-12">
-            <!--<div class="dashboard-list-box margin-top-0">
+        <!--<div class="col-lg-5 col-md-12">
+            <div class="dashboard-list-box margin-top-0">
                 <form method="post" action="{{ route('register') }}" name="inscriptionform" id="inscriptionform" autocomplete="on">
                     <h4>Inscrivez-vous en 2 minutes seulement</h4>
                             <div class="row padding-top-20">
@@ -217,8 +219,8 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                                 </div>
                             </div>
                     </form>
-            </div>-->
-        </div>
+            </div>
+        </div>-->
     </div>
 
     <!--<div class="row" style="background: white;     position: absolute;
@@ -508,14 +510,14 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
         <div class="row">
                 <div class="col-md-12">
                     <section id="offre-lancement" class="center margin-bottom-50">
-                        <h2 id="h2offre">OFFRE DE BIENVENUE <i class="im im-icon-Gift-Box" style="font-size:90px;"></i></h2>
-                        <h2 style="font-size: 40px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #6b6b6b;">889€</span> 449€</h2>
-                        <h3 style="text-align: center;margin-top: 0px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >La première année*</h3>
+                        <h2 id="h2offre">OFFRE DE BIENVENUE<!-- <i class="im im-icon-Gift-Box" style="font-size:90px;"></i>--></h2>
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #6b6b6b;">889€</span> 449€</h2>
+                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >La première année*</h3>
                         <p style="text-align: center;margin-top: 0px;color: #525252; ">(soit 37.41€/mois)</p>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Profiter de l'offre</a>
+                                <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
                                 <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;"><b>*</b>Puis 889€/an, soit 74€/mois</p>
                             </div>
                         </div>
@@ -533,26 +535,26 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                 <div class="col-md-12">
                     <section id="demande-demo" class="center margin-bottom-50">
                         <h2 style="text-align: center;font-size: 42px;color: #fff;">VOUS N'ÊTES PAS ENTIÈREMENT CONVAINCU ?</h2>
-                        <h2 style="text-align: center;font-size: 33px; color: #fff;margin-top: 30px;margin-bottom: 20px;">Demandez une démo et découvrez comment:</h2>
+                        <h2 style="text-align: center;font-size: 28px; color: #fff;margin-top: 30px;margin-bottom: 20px;">Réservez une démo et découvrez comment:</h2>
                         <div class="row">
-                            <div class="col-lg-3 ">
+                            <div class="col-lg-2 ">
                             </div>
-                            <div class="col-lg-6 col-lg-offset-2 text-center">
-                                <ul style="text-align: left;list-style-position: inside;color: #fff;">
+                            <div class="col-lg-8 col-lg-offset-1 text-center">
+                                <ul style="text-align: left;list-style-position: inside;color: #fff;font-size: 28px;line-height: 1.5;">
                                     <li>Attirer de nouveaux clients</li>
                                     <li>Fidéliser ses clients</li>
                                     <li>Gérer son entreprise</li>
-                                    <li>Développer ses revenus</li>
+                                    <li>Développer ses revenus grâce à notre plateforme</li>
                                 </ul>
-                                <p style="text-align: left;color: #fff;padding-left: 13px;">Grâce à notre plateforme</p>
+                                <!--<p style="text-align: left;color: #fff;padding-left: 13px;">Grâce à notre plateforme</p>-->
                             </div>
-                            <div class="col-lg-3 ">
+                            <div class="col-lg-2 ">
                             </div>
                         </div>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070000&text_color=ffffff&primary_color=fff600" target="_blank" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">Réservez une démo</a>
+                                <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070000&text_color=ffffff&primary_color=fff600" target="_blank" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform:uppercase;">Réserver une démo</a>
                             </div>
                         </div>
                         <!-- Search Section / End -->
@@ -569,7 +571,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <h3 class="headline centered">
+                <h3 class="headline centered" style="font-size: 34px; font-weight: 400;">
                     L'avis de nos partenaires
                 </h3>
             </div>
@@ -614,10 +616,10 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                     <center><img src="<?php  echo  URL::asset('storage/images/expclientstexte.png');?>" class="impub"></center>
                     <div class="row">
                         <div class="col-lg-6 col-sm-6 text-center" >
-                            <a href="#sign-in-dialog" class="button margin-top-15  sign-in popup-with-zoom-anim" style="    width: 90%;">Profiter de l'offre</a>
+                            <a href="#sign-in-dialog" class="button margin-top-15  sign-in popup-with-zoom-anim" style="    width: 90%;text-transform:uppercase;">Profiter de l'offre</a>
                         </div>
                         <div class="col-lg-6 col-sm-6 text-center" >
-                            <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=fffe00" target="_blank" class="button margin-top-15 btn-ybg" style="    width: 90%;">Réserver une démo</a>
+                            <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070000&text_color=ffffff&primary_color=fff600" target="_blank" class="button margin-top-15 btn-ybg" style="    width: 90%;text-transform:uppercase;">Réserver une démo</a>
                         </div>
                     </div>
                 </div>
