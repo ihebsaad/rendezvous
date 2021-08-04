@@ -44,10 +44,18 @@ section.fullwidth .icon-box-2 i {
 
 section.fullwidth .icon-box-2 {
     padding: 20px;
-    min-height: 310px;}
+    min-height: 310px;
+    box-shadow: none;
+    background: #ffd700;
+    }
 
-    .style-2 .trigger a:hover  { color: #000; }
-    .style-2 .ui-accordion .ui-accordion-header, .style-2 .ui-accordion .ui-accordion-content, .style-2 .toggle-wrap {
+.icon-box-2 p {
+    color: #424242;
+}
+
+
+.style-2 .trigger a:hover  { color: #000; }
+.style-2 .ui-accordion .ui-accordion-header, .style-2 .ui-accordion .ui-accordion-content, .style-2 .toggle-wrap {
     border-bottom: 1px solid #5a5a5a;
 }
 
@@ -416,7 +424,7 @@ section.fullwidth .icon-box-2 {
 </div>
 <!-- Parallax clients / End -->
 <!-- section FAQ prestataires -->
-<section class="fullwidth padding-top-40 padding-bottom-50 " data-background-color="#ffd700">
+<section class="fullwidth padding-top-40 padding-bottom-50 " data-background-color="#fff">
     <!-- Info Section -->
     <div class="container">
 
@@ -454,13 +462,13 @@ section.fullwidth .icon-box-2 {
 
 </section>
 <!-- Témoinages clients / End -->
-<section class="fullwidth padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
+<section class="fullwidth padding-top-75 padding-bottom-70" data-background-color="#fff">
     <!-- Info Section -->
     <div class="container">
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <h3 class="headline centered">
+                <h3 class="headline centered" style="font-size:34px; font-weight: 500;">
                     Ce que disent nos clients
                     <span class="margin-top-25">Nous recueillons les avis de nos utilisateurs afin que vous puissiez avoir une opinion honnête de ce à quoi ressemble vraiment une expérience avec notre site Web!</span>
                 </h3>
