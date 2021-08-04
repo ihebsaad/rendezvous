@@ -253,10 +253,10 @@ return view('payments.payAbn', [
       //  $date1 = (new \DateTime())->format('Y-m-d H:i:s');
 
        // $dtc = (new \DateTime())->modify('+31 days')->format($format);
-    if($type_abonn=="normal"){
+    if($nature_abonn=="normal"){
     User::where('id',$user)->update(array('nature_abonn' =>'normal'));
     }
-    if($type_abonn=="offre_lanc"){
+    if($nature_abonn=="offre_lanc"){
     User::where('id',$user)->update(array('nature_abonn' => 'offre_lance_ann1'));
     }
 
