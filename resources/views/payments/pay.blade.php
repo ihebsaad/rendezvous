@@ -77,7 +77,7 @@ background-color:#a0d468;
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
   //alert("{{ $Res }}");
-    var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L', {
+    var stripe = Stripe('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', {
   stripeAccount: "{{ $idaccount }}"
 });
     var elements = stripe.elements();
