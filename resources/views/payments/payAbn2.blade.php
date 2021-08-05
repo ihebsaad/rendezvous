@@ -1,4 +1,4 @@
-@extends('layouts.backlayout')
+@extends('layouts.frontv2layout')
  
 <script src="https://js.stripe.com/v3/"></script>
 
@@ -9,13 +9,31 @@
  
 @section('content')
 <style>
-.success{
+.success{}
  
 .button-success{
 background-color:#a0d468; 
 }
 .statut{
   color:black!important;font-weight:blod;padding:10px 20px 10px 20px!important;margin-top:8px;
+}
+
+.dashboard-list-box h4 {
+    font-size: 26px;
+    background-color: #ffd700;}
+
+.dashboard-list-box.with-icons ul li {
+       padding-left: 30px;
+       padding-top: 50px;
+}
+
+.dashboard-list-box .button {
+    padding: 20px;
+    line-height: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    margin-top: 30px;
 }
 </style>
   <?php 
@@ -27,52 +45,30 @@ background-color:#a0d468;
           $User = auth()->user();
 
   ?>
- <div id="dashboard"> 
-
- 
-  <div class="utf_dashboard_content"> 
-
- 
-  <!--<div class="row"> <a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
- 
-     
-
+  <section class="fullwidth_block margin-top-0 padding-top-100 padding-bottom-100" data-background-color="#fff"> 
+    <div class="container">
+        <div class="row">        
+            <div class="col-md-8 col-md-offset-2">
            
-      <div class="add_utf_listing_section margin-top-45"> 
-        <div class="utf_add_listing_part_headline_part">
-          <h3><i class="sl sl-icon-refresh"></i>Paiement de la reservation </h3>
-                </div>       
-        <div class="row">
-          <div class="col-md-12" >
-            <br>
-          </div>
-          
-          <div class="col-md-12">
-        <h1>Paiement</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <form action="#" class="my-4">
-                    <div id="card-element">
-                    <!-- Elements will create input elements here -->
-                    </div>
+              <div class="dashboard-list-box with-icons margin-top-20">
+                  <h4>Paiement de votre abonnement </h4>      
+                <ul>
+                               <li> <form action="#" class="my-4">
+                                    <div id="card-element">
+                                    <!-- Elements will create input elements here -->
+                                    </div>
 
-                    <!-- We'll put the error messages in this element -->
-                    <div id="card-errors" role="alert"></div>
-                    <br>
-                    <button class="btn btn-success mt-3" id="submit">Procéder au paiement</button>
-                </form>
+                                    <!-- We'll put the error messages in this element -->
+                                    <div id="card-errors" role="alert"></div>
+                                    <br>
+                                    <button class="button border with-icon" id="submit">Procéder au paiement</button>
+                                </form></li></ul>
+                </div>
             </div>
         </div>
     </div>
-        
+</section>
 
-      </div>
-    
-<div class="col-md-12">
-         
-<br>
-        </div>   
-</div> </div></div>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
