@@ -218,6 +218,13 @@ class UsersController extends Controller
            
     }
     
+       public function monespace()
+    {
+        
+      return view('monespace' );   
+           
+    }
+    
        public function listings()
     {
          

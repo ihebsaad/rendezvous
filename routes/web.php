@@ -105,6 +105,8 @@ Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
 Route::get('/pro', array('as' => 'inscription','uses' => 'UsersController@inscriptionpro'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
+Route::get('/monespace', array('as' => 'monespace','uses' => 'UsersController@monespace'));
+
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
 Route::get('/prestataires', 'UsersController@prestataires')->name('prestataires');

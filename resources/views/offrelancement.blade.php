@@ -1,4 +1,4 @@
-@extends('layouts.frontlayout')
+@extends('layouts.frontv2layout')
  
  @section('content')
   <?php  $User= auth()->user();
@@ -54,7 +54,7 @@
   opacity: 1;
   font-size: inherit;
   max-height: 999em;
-  padding: 6px 0!important;
+  padding: 16px 0!important;
 }
 
 .read-more-state ~ .read-more-trigger:before {
@@ -70,110 +70,54 @@
   display: inline-block;
   text-transform: uppercase;
   font-weight: 700;
-  color: #006ed2;
+  color: #ffd700;
   line-height: 2;
-}
- </style>
- <style type="text/css">
-   .pricing-container {
-  width: 90%;
-  max-width: 1170px;
-  margin: 4em auto;
+  margin-top: 15px;
+    margin-bottom: 20px;
 }
 
-.pricing-container {
-    margin: 6em auto;
-}
-.pricing-container.full-width {
-    width: 100%;
-    max-width: none;
-}
+.dashboard-list-box h4 {
+    font-size: 26px;
+    background-color: #ffd700;}
 
-.pricing-switcher {
-  text-align: center;
-}
-
-.pricing-switcher .fieldset {
-  display: inline-block;
-  position: relative;
-  padding: 2px;
-  border-radius: 50em;
-  border: 2px solid #fc346c;
+    .booking-requests-filter {
+    top: 25px;
+    font-size: 18px;
+    font-weight: 400;
+    background: #ffd700;
 }
 
-.pricing-switcher input[type="radio"] {
-  position: absolute;
-  opacity: 0;
+.dashboard-list-box.with-icons ul li {
+    padding-left: 0px!important;
 }
 
-.pricing-switcher label {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  float: left;
-  width: 90px;
-  height: 32px;
-  line-height: 40px;
-  cursor: pointer;
-  font-size: 1.4rem;
-  
+.dashboard-list-box ul li {
+    padding: 16px 0px;
 }
-
-.pricing-switcher .switch {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  height: 40px;
-  width: 90px;
-  background-color: #fc346c;
-  border-radius: 50em;
-  -webkit-transition: -webkit-transform 0.5s;
-  -moz-transition: -moz-transform 0.5s;
-  transition: transform 0.5s;
-}
-
-.pricing-switcher input[type="radio"]:checked + label + .switch,
-.pricing-switcher input[type="radio"]:checked + label:nth-of-type(n) + .switch {
-  -webkit-transform: translateX(90px);
-  -moz-transform: translateX(90px);
-  -ms-transform: translateX(90px);
-  -o-transform: translateX(90px);
-  transform: translateX(90px);
-}
-
-
 
  </style>
+
 <br>
   <section class="fullwidth_block margin-top-0 padding-top-0 padding-bottom-50" data-background-color="#fff"> 
     <div class="container">
-      <div class="row">
+      <div class="row" style="display:none">
         <div class="col-md-12">
-          <!-- <div class="pricing-switcher">
-      <p class="fieldset">
-        <input type="radio" name="duration-1" value="Mensuel" id="monthly-1" checked>
-        <label for="monthly-1" style="color: #fff;font-size: 16px" id="monthlylabel"><b>Mensuel</b></label>
-        <input type="radio" name="duration-1" value="Annuel" id="yearly-1">
-        <label for="yearly-1" style="color: #fc346c;font-size: 16px" id="yearlylabel"><b>Annuel</b></label>
-        <span class="switch"></span>
-      </p>
-    </div> -->
           <h3 class="headline_part centered margin-bottom-20">Offre de Lancement : Vous êtes le visiteur numéro :<?php use App\User; $nbprest=User::where('user_type','prestataire')->count();
              echo $nbprest;?></h3> <span></span></h3>
         </div>
       </div>
       <div class="row">        
-        
+        <div class="col-md-8 col-md-offset-2">
 
         <!-- plan 3 - start -->             
-      <div class="plan featured col-md-8 col-sm-6 col-xs-12 centredplan">
-        <div class="utf_price_plan">
-          <h3>Offre de Lancement<?php //echo $parametres->abonnement3;?></h3>
-          <span class="value" id="prixC"><?php echo $parametres->cout_offrelancement3;?>€<span id="uniteC">TTC / Par an</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> 
-        </div>
+        <div class="dashboard-list-box with-icons margin-top-20">
+          <div class="booking-requests-filter">
+            <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_offrelancement3;?>€<span id="uniteC">TTC / Par an</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> </div>
+          <h4>Offre de Lancement<?php //echo $parametres->abonnement3;?>
+          </h4>
+          
         
-              <div class="utf_price_plan_features">
-                <input type="checkbox" class="read-more-state" id="post-3" />
+                <center><input type="checkbox" class="read-more-state" id="post-3" />
                 <ul class="read-more-wrap">
                   <?php $x=0; foreach($abonnementC as $ab) { 
                     if ($x<5) {
@@ -199,11 +143,9 @@
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
         @endguest
-       </div>
+      </center>
       </div>
- <!-- plan 3 - end -->  
-
-          </div>        
+     
       </div> 
     </div>    
   </section>

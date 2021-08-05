@@ -12028,7 +12028,7 @@ header.fullwidth.dashboard .container { padding-left: 285px; }
 .dashboard #logo a img {
 	top: 50%;
 	position: relative;
-	transform: translate3d(0,-50%,0);
+	transform: translate3d(-6%,-50%,0);
 }
 
 
@@ -12144,7 +12144,7 @@ a.dashboard-responsive-nav-trigger { display: none; }
 	padding: 0 0 15px 0;
 	line-height: 24px;
 	opacity: 1;
-	max-height: 300px;
+	max-height: 600px;
 }
 
 .dashboard-nav ul li ul li {
@@ -17883,7 +17883,7 @@ body .category-box-btn:hover {
 
 	/* Dashboard Logo */
 	.dashboard #logo {
-		background-color: #fff;
+		background-color: #616161;
 		position: relative;
 		height: 100%;
 		left: 0;
@@ -18041,13 +18041,14 @@ body .category-box-btn:hover {
 	.dashboard-nav.active ul li.active ul {
 	    visibility: visible;
 	    opacity: 1;
-	    max-height: 300px;
+	    max-height: 600px;
 	}
 
 	#header-container.fixed {
 	    position: relative;
 	    top: 0;
 	    width: 100%;
+	    background-color: #616161;
 	}
 
 	.dashboard-content {
