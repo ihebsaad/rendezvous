@@ -110,6 +110,7 @@ Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
 Route::get('/prestataires', 'UsersController@prestataires')->name('prestataires');
 Route::get('/pricing', 'UsersController@pricing')->name('pricing');
 Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
+Route::get('/remerciments', 'UsersController@remerciments')->name('remerciments');
 Route::get('/offrelancement', 'UsersController@offrelancement')->name('offrelancement');
 Route::get('/offrelancement_anne2', 'UsersController@OffreLancement_anne2')->name('OffreLancement_anne2');
 

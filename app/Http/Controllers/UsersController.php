@@ -280,6 +280,14 @@ class UsersController extends Controller
       return view('abonnements' );       
 
     }
+    
+    public function remerciments()
+    {
+       
+      return view('remerciments');       
+
+    }
+    
   public function offrelancement()
     {
     	$abonnementA =  Contenu_plan::where('abonnement',1)->get();

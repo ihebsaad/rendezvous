@@ -174,7 +174,11 @@ return view('payments.pay', [
         ]);
  // dd($intent);
  $clientSecret = Arr::get($intent, 'client_secret');
-return view('payments.payAbn', [
+/*return view('payments.payAbn', [
+            'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn
+        ]);*/
+
+return view('payments.payAbn2', [
             'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn
         ]);
 
