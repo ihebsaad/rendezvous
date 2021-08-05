@@ -296,8 +296,9 @@ return view('payments.payAbn2', [
     $message.="La date d'expiration de votre abonnement est : ". date('d/m/Y H:i', strtotime($datee))." <br>";
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
+    //mohamed.achraf.besbes@gmail.com
      // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-      $this->sendMail('mohamed.achraf.besbes@gmail.com','Abonnement payé',$message) ;
+      $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
     //enregistrement alerte
       $alerte = new Alerte([
              'user' => $user,
@@ -312,7 +313,7 @@ return view('payments.payAbn2', [
       $message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
-      $this->sendMail('mohamed.achraf.besbes@gmail.com' ,'Abonnement payée',$message)  ;
+      $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée',$message)  ;
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => 1,
