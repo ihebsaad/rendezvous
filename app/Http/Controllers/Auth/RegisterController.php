@@ -45,7 +45,7 @@ class RegisterController extends Controller
             if( $nbprest > 100)
             {
              
-             return '/abonnements';
+             return '/pricing';
             }
             else
             {

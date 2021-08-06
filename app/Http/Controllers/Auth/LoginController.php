@@ -72,7 +72,7 @@ class LoginController extends Controller
 
                     if( $nbprest > 100)
                     {
-                     return redirect ('/abonnements');
+                     return redirect ('/pricing');
                     }
                     else
                     {
@@ -106,7 +106,7 @@ class LoginController extends Controller
                       { 
                        //return redirect ('/offrelancement_anne2');
 
-                        return redirect ('/abonnements');
+                        return redirect ('/pricing');
                       }
 
                     
@@ -115,7 +115,7 @@ class LoginController extends Controller
                    //redirect vers offre de lancement
                 }
 
-                 return redirect ('/abonnements');
+                 return redirect ('/pricing');
 
             }
 

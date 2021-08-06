@@ -293,7 +293,7 @@ return view('payments.payAbn2', [
       else
       {
 
-        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3.'/ an';
+        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3.' euros / an';
       }
     // Email au prestataire
     $message='Bonjour,<br>';
@@ -303,8 +303,8 @@ return view('payments.payAbn2', [
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
     //mohamed.achraf.besbes@gmail.com
-     // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-      $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
+      $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+     // $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
     //enregistrement alerte
       $alerte = new Alerte([
              'user' => $user,
