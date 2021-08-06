@@ -303,8 +303,8 @@ return view('payments.payAbn2', [
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
     //mohamed.achraf.besbes@gmail.com
-      $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-     // $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
+     // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+     $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
     //enregistrement alerte
       $alerte = new Alerte([
              'user' => $user,
