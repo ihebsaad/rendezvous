@@ -120,6 +120,13 @@ background-color:#a0d468;
             if (result.error) {
             // Show error to your customer (e.g., insufficient funds)
             console.log(result.error.message);
+            Swal.fire(
+                ''+result.error.message+'',
+                '',
+                'error'
+              ).then((result) => {
+                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                })
             } else {
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
