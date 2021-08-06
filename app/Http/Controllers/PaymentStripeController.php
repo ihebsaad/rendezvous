@@ -279,6 +279,7 @@ return view('payments.payAbn2', [
      // Email
      $typeabn='';
        $parametres=DB::table('parametres')->where('id', 1)->first();
+      if($nature_abonn=="normal"){ 
       if($abn==1){
         $abonnement='N°: 1 | ' .$parametres->abonnement1.' (annuel)';
       }
@@ -288,7 +289,12 @@ return view('payments.payAbn2', [
       if($abn==3){
         $abonnement='N°: 3 | ' .$parametres->abonnement3.' (annuel)';
       }
-    
+      }
+      else
+      {
+
+        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3.'/ an';
+      }
     // Email au prestataire
     $message='Bonjour,<br>';
     $message.='Votre abonnement est payé avec succès <br>';
