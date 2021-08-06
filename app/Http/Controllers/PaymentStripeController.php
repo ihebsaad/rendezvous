@@ -316,7 +316,7 @@ return view('payments.payAbn2', [
     // Email à l'admin
     $message='Bonjour,<br>';
     $message.='Abonnement payé : '.$abonnement.'<br>';
-      $message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
+      $message.='<b>Prestataire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
       $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée',$message)  ;
