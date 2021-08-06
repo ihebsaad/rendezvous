@@ -49,6 +49,7 @@ $plogo= $parametres->logo;
 
 
             <!-- Right Side Content / End -->
+            <?php if (($view_name !== 'payabn') && ($view_name !== 'offrelancement') && ($view_name !== 'remerciments')){ ?>
             <div class="right-side">
                 <div class="header-widget">
                      @guest
@@ -107,6 +108,7 @@ $plogo= $parametres->logo;
                     
                 </div>
             </div>
+            <?php } ?>
             <!-- Right Side Content / End -->
 
             <!-- Sign In Popup -->
