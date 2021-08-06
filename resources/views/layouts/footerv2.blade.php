@@ -29,7 +29,7 @@
             <div class="col-md-2  col-sm-12">
                 <h4>Compte</h4>
                 <ul class="footer-links">
-                    <li><a href="{{route('pricing')}}">Abonnements</a></li>       
+                    <!--<li><a href="{{-- route('pricing') --}}">Abonnements</a></li>  -->     
                     @guest <li><a class="sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');">Inscription</a></li>
                     <li><a class="sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab1').trigger('click');">Connexion</a></li> 
                     @else
