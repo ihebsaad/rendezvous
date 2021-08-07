@@ -447,7 +447,7 @@ background-color:#a0d468;
      
      if(($type_abonn_essai && ($type_abonn_essai=="type2" || $type_abonn_essai=="type3" ))|| ($type_abonn && ($type_abonn=="type2" || $type_abonn=="type3" ))) { 
     
-  if( $reservations[$ii]->Net >= 200  &&  $allow_slices ){
+  if( $reservations[$ii]->Net >= 2  &&  $allow_slices ){
   // paiement sur tranches
   ?>
            <form class="  " method="POST" id="payment-form"    action="{{ route('getpreapproved') }}" >
