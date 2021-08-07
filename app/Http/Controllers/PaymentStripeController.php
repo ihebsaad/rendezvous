@@ -35,7 +35,7 @@ class PaymentStripeController extends Controller
     $subscription_id,
     ['default_payment_method' => $payment_method],
   );
-dd($stripeSub);
+//dd($stripeSub);
     $resId = $request->get('resId');
     \Session::put('success', 'Paiement avec succès');
     Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
