@@ -1,6 +1,7 @@
 @extends('layouts.frontv2layout')
  
 <script src="https://js.stripe.com/v3/"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
@@ -105,6 +106,7 @@ background-color:#a0d468;
 
     submitButton.addEventListener('click', function(ev) {
     ev.preventDefault();
+    $('#submit').html('<i class="fa fa-spinner fa-spin"></i> Loading...').attr('disabled', true);
     stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
             card: card
