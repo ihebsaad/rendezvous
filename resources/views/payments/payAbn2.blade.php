@@ -46,7 +46,6 @@ background-color:#a0d468;
 
   ?>
   <section class="fullwidth_block margin-top-0 padding-top-100 padding-bottom-100" data-background-color="#fff"> 
-    <button type="button" class="btn btn-primary btn-lg " id="load1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Submit Order</button>
     <div class="container">
         <div class="row">        
             <div class="col-md-8 col-md-offset-2">
@@ -62,7 +61,6 @@ background-color:#a0d468;
                                     <!-- We'll put the error messages in this element -->
                                     <div id="card-errors" role="alert"></div>
                                     <br>
-                                    
                                     <button class="button border with-icon" id="submit">Procéder au paiement</button>
                                 </form></li></ul>
                 </div>
@@ -74,13 +72,6 @@ background-color:#a0d468;
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
-  $('.btn').on('click', function() {
-    var $this = $(this);
-  $this.button('loading');
-    setTimeout(function() {
-       $this.button('reset');
-   }, 8000);
-});
     var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
     var elements = stripe.elements();
     var style = {
