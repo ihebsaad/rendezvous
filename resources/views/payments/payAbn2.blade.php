@@ -114,6 +114,7 @@ background-color:#a0d468;
         }).then(function(result) {
             if (result.error) {
               alert("olk");
+              $('#submit').html('Procéder au paiement').attr('disabled', false);
             // Show error to your customer (e.g., insufficient funds)
             console.log(result.error.message);
             } else {
