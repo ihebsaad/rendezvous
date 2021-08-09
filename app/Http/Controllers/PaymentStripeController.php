@@ -159,7 +159,7 @@ return view('payments.pay', [
     $abn=$request->get('abonnement');
     $desc=$request->get('description');
     $nature_abonn=$request->get('nature_abonn');
-    dd($montant);
+    //dd($montant);
      
   
     
