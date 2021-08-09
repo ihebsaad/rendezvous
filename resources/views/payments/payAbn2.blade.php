@@ -1,7 +1,7 @@
 @extends('layouts.frontv2layout')
  
 <script src="https://js.stripe.com/v3/"></script>
-<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
@@ -56,7 +56,7 @@ background-color:#a0d468;
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                  <h4><i class="sl sl-icon-location"></i>Paiement de votre abonnement </h4>      
+                  <h4><i class="fa fa-refresh fa-spin"></i>Paiement de votre abonnement </h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
                                     <div id="card-element">
