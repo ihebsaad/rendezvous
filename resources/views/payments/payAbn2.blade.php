@@ -113,12 +113,18 @@ background-color:#a0d468;
         }
         }).then(function(result) {
             if (result.error) {
-              alert("olk");
+              //alert("olk");
               $('#submit').html('Procéder au paiement').attr('disabled', false);
+              Swal.fire(
+                ''+result.error.message+'',
+                '',
+                'error'
+              );
             // Show error to your customer (e.g., insufficient funds)
             console.log(result.error.message);
             } else {
-              alert("ok");
+              //alert("ok");
+              $('#submit').html('Procéder au paiement').attr('disabled', false);
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
