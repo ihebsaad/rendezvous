@@ -139,7 +139,7 @@
         <input   name="abonnement" type="hidden"  value="3">     
         <input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
         <input   name="nature_abonn" type="hidden"  value="offre_lanc">      
-        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
+        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_offrelancement3;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
         @endguest

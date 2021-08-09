@@ -159,7 +159,7 @@ return view('payments.pay', [
     $abn=$request->get('abonnement');
     $desc=$request->get('description');
     $nature_abonn=$request->get('nature_abonn');
-    //dd($montant);
+    dd($montant);
      
   
     
@@ -293,7 +293,7 @@ return view('payments.payAbn2', [
       else
       {
 
-        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3.' euros / an';
+        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3.' euros pour la première année';
       }
     // Email au prestataire
     $message='Bonjour,<br>';
@@ -316,7 +316,8 @@ return view('payments.payAbn2', [
     // Email à l'admin
     $message='Bonjour,<br>';
     $message.='Abonnement payé : '.$abonnement.'<br>';
-      $message.='<b>Prestataire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
+    $message.='<b>Prestataire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
+    $message.='<b>Téléphone Prestataire :</b> '.$prestataire->phone .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
       $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée',$message)  ;
