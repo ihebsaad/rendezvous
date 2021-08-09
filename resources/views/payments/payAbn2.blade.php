@@ -1,7 +1,6 @@
 @extends('layouts.frontv2layout')
  
 <script src="https://js.stripe.com/v3/"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
  <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
@@ -47,16 +46,12 @@ background-color:#a0d468;
 
   ?>
   <section class="fullwidth_block margin-top-0 padding-top-100 padding-bottom-100" data-background-color="#fff"> 
-    <button type="button" class="btn btn-primary btn-lg " id="load1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"><i class="fa fa-address-book" aria-hidden="true"></i>Submit Order</button>
-    <div class="spinner-border" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
     <div class="container">
         <div class="row">        
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                  <h4><i class="fa fa-refresh fa-spin"></i>Paiement de votre abonnement </h4>      
+                  <h4>Paiement de votre abonnement </h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
                                     <div id="card-element">
@@ -66,7 +61,6 @@ background-color:#a0d468;
                                     <!-- We'll put the error messages in this element -->
                                     <div id="card-errors" role="alert"></div>
                                     <br>
-                                    
                                     <button class="button border with-icon" id="submit">Procéder au paiement</button>
                                 </form></li></ul>
                 </div>
@@ -77,17 +71,7 @@ background-color:#a0d468;
 
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 <script>
-  $('.btn').on('click', function() {
-    var $this = $(this);
-  $this.button('loading');
-    setTimeout(function() {
-       $this.button('reset');
-   }, 8000);
-});
     var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
     var elements = stripe.elements();
     var style = {
@@ -121,17 +105,17 @@ background-color:#a0d468;
 
     submitButton.addEventListener('click', function(ev) {
     ev.preventDefault();
-    $('#submit').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true);
-    
     stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
             card: card
         }
         }).then(function(result) {
             if (result.error) {
+              alert("olk");
             // Show error to your customer (e.g., insufficient funds)
             console.log(result.error.message);
             } else {
+              alert("ok");
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
