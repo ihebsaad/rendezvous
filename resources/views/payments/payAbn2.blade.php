@@ -47,6 +47,9 @@ background-color:#a0d468;
   ?>
   <section class="fullwidth_block margin-top-0 padding-top-100 padding-bottom-100" data-background-color="#fff"> 
     <button type="button" class="btn btn-primary btn-lg " id="load1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Submit Order</button>
+    <div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
     <div class="container">
         <div class="row">        
             <div class="col-md-8 col-md-offset-2">
