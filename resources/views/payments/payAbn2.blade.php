@@ -47,7 +47,7 @@ background-color:#a0d468;
 
   ?>
   <section class="fullwidth_block margin-top-0 padding-top-100 padding-bottom-100" data-background-color="#fff"> 
-    <button type="button" class="btn btn-primary btn-lg " id="load1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Submit Order</button>
+    <button type="button" class="btn btn-primary btn-lg " id="load1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"><i class="fa fa-address-book" aria-hidden="true"></i>Submit Order</button>
     <div class="spinner-border" role="status">
   <span class="sr-only">Loading...</span>
 </div>
@@ -56,7 +56,7 @@ background-color:#a0d468;
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                  <h4>Paiement de votre abonnement </h4>      
+                  <h4><i class="fa fa-address-book" aria-hidden="true"></i>Paiement de votre abonnement </h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
                                     <div id="card-element">
