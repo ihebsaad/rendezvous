@@ -120,6 +120,8 @@ background-color:#a0d468;
 
     submitButton.addEventListener('click', function(ev) {
     ev.preventDefault();
+    $('#submit').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true);
+    
     stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
             card: card
