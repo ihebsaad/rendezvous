@@ -63,8 +63,8 @@ $plogo= $parametres->logo;
                          $format = "Y-m-d H:i:s";
                         $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
                         $date_15j=\DateTime::createFromFormat($format, $date_15j);
-
-
+                        $septembre_limite= new \DateTime('2021-10-04 00:00:00');
+                       // dd($septembre_limite);
                         /*$date_inscription=$date_inscription->format('Y-m-d');
                         $date_15j=$date_15j->format('Y-m-d');*/
                        
@@ -81,14 +81,20 @@ $plogo= $parametres->logo;
                         }
 
                          /// if (($nbjours>15 && $expire && $date_exp >= $date_15j)  || $nbjours<=15 ) {
+                         if ($expire && $date_exp >= $date_15j ) {
+                         // &&  $date_15j >$septembre_limite
+                            if ($view_name !== 'remerciments'  ){
 
-                        ?>
+                         ?>
+
                         <a href="{{route('dashboard')}}" class="button border with-icon"><i class="sl sl-icon-settings"></i> Mon Compte</a>
-                       <?php //}else{?>
+                       <?php }}else{
 
-                         <!-- <a href="{{ route('logout') }}" class="button border with-icon"><i class="sl sl-icon-power"></i> Déconnexion</a> -->
+                        if ($view_name !== 'remerciments'  ){?>
 
-                       <?php } else { ?>
+                        <a href="{{ route('logout') }}" class="button border with-icon"><i class="sl sl-icon-power"></i> Déconnexion</a> 
+
+                       <?php } }} else { ?>
 
                          <a href="{{route('dashboard')}}" class="button border with-icon"><i class="sl sl-icon-settings"></i> Mon Compte</a>
 

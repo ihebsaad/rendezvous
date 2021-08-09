@@ -68,7 +68,7 @@ class LoginController extends Controller
             {
               // vers la page d'abonnemnt
               // calcul nombre de prestataire 
-                $nbprest=User::where('user_type','prestataire')->count();
+                $nbprest=User::where('user_type','prestataire')->whereNotNull('expire')->count();
 
                     if( $nbprest > 100)
                     {

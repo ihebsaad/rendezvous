@@ -40,7 +40,7 @@ class RegisterController extends Controller
         if(auth()->user()->user_type=='prestataire')
          {
           
-            $nbprest=User::where('user_type','prestataire')->count();
+            $nbprest=User::where('user_type','prestataire')->whereNotNull('expire')->count();
 
             if( $nbprest > 100)
             {
