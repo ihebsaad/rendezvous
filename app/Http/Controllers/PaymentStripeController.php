@@ -223,7 +223,7 @@ return view('payments.payAbn2', [
      // abonnement fait expiré
       if($expiration< $today){
        // today + abonnement
-    if($abn!=3){$datee = (new \DateTime())->modify('+31 days')->format($format);}
+    if($abn!=3){$datee = (new \DateTime())->modify('+366 days')->format($format);}
     else{
       //$datee = (new \DateTime())->modify('+366 days')->format($format);
       $datee = (new \DateTime())->modify('+366 days')->format($format);
@@ -312,15 +312,25 @@ return view('payments.payAbn2', [
              'details' => $message,
          ]);  
      $alerte->save();
+     $nom_p='';
+     $prenom_p='';
+     if($prestataire->name)
+     {
+        $nom_p=$prestataire->name;
+     }
+      if($prestataire->lastname)
+     {
+       $prenom_p=$prestataire->lastname; 
+     }
  
     // Email à l'admin
     $message='Bonjour,<br>';
     $message.='Abonnement payé : '.$abonnement.'<br>';
-    $message.='<b>Prestataire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
-    $message.='<b>Téléphone Prestataire :</b> '.$prestataire->phone .'<br><br>';
+    $message.='<b>Prestataire :</b> '.$nom_p.' '.$prenom_p.'<br><br>';
+    $message.='<b>Téléphone Prestataire :</b> '.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
-      $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée',$message)  ;
+  $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p .,$message)  ;
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => 1,
