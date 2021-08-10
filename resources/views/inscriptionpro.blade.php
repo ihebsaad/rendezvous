@@ -278,7 +278,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                 <div class="col-lg-7 col-sm-7 padding-left-30 text-center" style="color:black;">
                     <h2 style="color:black;">Développez votre activité</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/developeztexte.png');?>" class="impub"></center>
-                    <a id="cta1" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">Je développe mon activité</a>
+                    <!--<a id="cta1" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">Je développe mon activité</a>-->
                 </div>
             </div>
 
@@ -303,7 +303,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
                     <h2 style="color:black;">Optimisez votre temps</h2>
                     <center><img src="<?php echo  URL::asset('storage/images/orgtempstexte.png');?>" class="impub"></center>
                     <!--<p style="margin: 0px; margin-top: 10px; font-weight: 500!important;">*Cela est possible uniquement avec l'offre Diamond</p>-->
-                    <a  id="cta2" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">j'optimise mon temps</a>
+                    <!--<a  id="cta2" href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style="    width: 55%;">j'optimise mon temps</a>-->
                 </div>
 
                 <div class="col-lg-5 col-sm-5">
@@ -354,7 +354,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
         <div class="col-md-8 col-md-offset-2">
             <h2 class="headline centered headline-extra-spacing">
                 <strong class="headline-with-separator" style="color:white">Les fonctionnalités</strong>
-                <span class="margin-top-25" style="color:white;max-width: 750px;font-size: 21px;">Nous proposons un éventail de fonctionnalités indispensables à votre réussite</span>
+                <span class="margin-top-25" style="color:white;max-width: 750px;font-size: 21px;">Accédez à un éventail de fonctionnalités indispensables à votre réussite</span>
             </h2>
         </div>
     </div>
@@ -514,14 +514,14 @@ if( $nbpres <= 100 ) {?>
                 <div class="col-md-12">
                     <section id="offre-lancement" class="center margin-bottom-50">
                         <h2 id="h2offre">OFFRE DE BIENVENUE<!-- <i class="im im-icon-Gift-Box" style="font-size:90px;"></i>--></h2>
-                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #6b6b6b;">889€</span> 449€</h2>
-                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >La première année*</h3>
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€</span> 449€</h2>
+                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >La première année</h3>
                         <p style="text-align: center;margin-top: 0px;color: #525252; ">(soit 37.41€/mois)</p>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
                                 <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
-                                <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;"><b>*</b>Puis 889€/an, soit 74€/mois</p>
+                                <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;display: none;"><b>*</b>Puis 889€/an, soit 74€/mois</p>
                             </div>
                         </div>
                         <!-- Search Section / End -->
@@ -562,7 +562,7 @@ if( $nbpres <= 100 ) {?>
         <div class="row">
                 <div class="col-md-12">
                     <section id="demande-demo" class="center margin-bottom-50">
-                        <h2 style="text-align: center;font-size: 42px;color: #fff;">VOUS N'ÊTES PAS ENTIÈREMENT CONVAINCU ?</h2>
+                        <h2 style="text-align: center;font-size: 42px;color: #fff;text-transform: uppercase;">Vous hésitez ? </h2>
                         <h2 style="text-align: center;font-size: 28px; color: #fff;margin-top: 30px;margin-bottom: 20px;">Réservez une démo et découvrez comment:</h2>
                         <div class="row">
                             <div class="col-lg-2 ">
@@ -570,9 +570,9 @@ if( $nbpres <= 100 ) {?>
                             <div class="col-lg-8 col-lg-offset-1 text-center">
                                 <ul style="text-align: left;list-style-position: inside;color: #fff;font-size: 28px;line-height: 1.5;">
                                     <li>Attirer de nouveaux clients</li>
-                                    <li>Fidéliser ses clients</li>
-                                    <li>Gérer son entreprise</li>
-                                    <li>Développer ses revenus grâce à notre plateforme</li>
+                                    <li>Fidéliser vos clients</li>
+                                    <li>Gérer votre entreprise</li>
+                                    <li>Développer vos revenus grâce à notre plateforme</li>
                                 </ul>
                                 <!--<p style="text-align: left;color: #fff;padding-left: 13px;">Grâce à notre plateforme</p>-->
                             </div>

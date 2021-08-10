@@ -19,9 +19,9 @@
         $user_type=$cuser->user_type;
         if($user_type=='client')
         {
-            $reservations= \App\Reservation::where('client',$cuser->id)->orderBy('id','desc')->limit(10)->get();
-            $payments= \App\Payment::where('user',$cuser->id)->orderBy('id','desc')->limit(10)->get(); 
-            $alertes= \App\Alerte::where('user',$cuser->id)->limit(8)->get();
+            $reservations= \App\Reservation::where('client',$cuser->id)->orderBy('id','desc')->limit(8)->get();
+            $payments= \App\Payment::where('user',$cuser->id)->orderBy('id','desc')->limit(8)->get(); 
+            $alertes= \App\Alerte::where('user',$cuser->id)->limit(9)->get();
             $countpay=count($payments);
             $countres=count($reservations);
             $countreviews= \App\Review::where('client',$cuser->id)->count();
@@ -30,7 +30,7 @@
         }
         if($user_type=='prestataire')
         {
-            $reservations= \App\Reservation::where('prestataire',$cuser->id)->orderBy('id','desc')->limit(10)->get(); 
+            $reservations= \App\Reservation::where('prestataire',$cuser->id)->orderBy('id','desc')->limit(8)->get(); 
             $payments = DB::table('payments')
            ->where(function ($query) use($cuser) {
                $query->where('user', $cuser->id)
@@ -38,7 +38,7 @@
            })
            ->orderBy('id','desc')->get();
            
-            $alertes= \App\Alerte::where('user',$cuser->id)->limit(8)->get();
+            $alertes= \App\Alerte::where('user',$cuser->id)->limit(9)->get();
             $countpay=count($payments);
             $countres=count($reservations);
             $countservices = \App\Service::where('user',$cuser->id)->count();
@@ -50,9 +50,9 @@
         if( $user_type=='admin' )
         {
             
-            $reservations= \App\Reservation::orderBy('id','desc')->limit(10)->get();
-            $payments= \App\Payment::orderBy('id','desc')->limit(10)->get();
-            $alertes= \App\Alerte::where('user',$cuser->id)->limit(8)->get();
+            $reservations= \App\Reservation::orderBy('id','desc')->limit(8)->get();
+            $payments= \App\Payment::orderBy('id','desc')->limit(8)->get();
+            $alertes= \App\Alerte::where('user',$cuser->id)->limit(9)->get();
             
             $countpay=count($payments);
             $countres=count($reservations);
@@ -66,7 +66,7 @@
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Bonjour, {{$cuser->username}}</h2>
+                    <h2>Bonjour {{$cuser->username}}, </h2>
                     <!-- Breadcrumbs 
                     <nav id="breadcrumbs">
                         <ul>
@@ -106,31 +106,57 @@
                     <div class="dashboard-stat-icon"><i class="fa fa-cart-arrow-down"></i></div>
                 </div>
             </div>
-
+        <?php 
+            if( $user_type=='admin' )
+            { ?>
             
             <!-- Item -->
             <div class="col-lg-2 col-md-6">
                 <div class="dashboard-stat color-1">
-                    <div class="dashboard-stat-content"><h4>95</h4> <span>Total Reviews</span></div>
-                    <div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
+                    <div class="dashboard-stat-content"><h4><?php echo $countprestataires;?></h4> <span>Prestataires</span></div>
+                    <div class="dashboard-stat-icon"><i class="im im-icon-User"></i></div>
                 </div>
             </div>
 
             <!-- Item -->
             <div class="col-lg-2 col-md-6">
                 <div class="dashboard-stat color-4">
-                    <div class="dashboard-stat-content"><h4>126</h4> <span>Times Bookmarked</span></div>
-                    <div class="dashboard-stat-icon"><i class="im im-icon-Heart"></i></div>
+                    <div class="dashboard-stat-content"><h4><?php echo $countclients;?></h4> <span>Clients</span></div>
+                    <div class="dashboard-stat-icon"><i class="im im-icon-Conference"></i></div>
                 </div>
             </div>
 
             <!-- Item -->
             <div class="col-lg-2 col-md-6">
                 <div class="dashboard-stat color-5">
-                    <div class="dashboard-stat-content"><h4>726</h4> <span>Total Views</span></div>
-                    <div class="dashboard-stat-icon"><i class="im im-icon-Line-Chart"></i></div>
+                    <div class="dashboard-stat-content"><h4><?php echo $countcategories;?></h4> <span>Catégories</span></div>
+                    <div class="dashboard-stat-icon"><i class="im im-icon-Tag-3"></i></div>
                 </div>
             </div>
+
+        <?php } ?>
+        <?php 
+        if ($user_type=='client' || $user_type=='prestataire'   )
+            { ?>
+            
+            <!-- Item -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-stat color-4">
+                    <div class="dashboard-stat-content"><h4><?php echo $countfavoris;?></h4> <span><?php if ($user_type=='client'){echo 'Favoris'; }else{ echo 'Ajouté en Favoris';  } ?></span></div>
+                    <div class="dashboard-stat-icon"><i class="im im-icon-Geo-Love"></i></div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-stat color-1">
+                    <div class="dashboard-stat-content"><h4><?php echo $countreviews;?></h4> <span>Avis</span></div>
+                    <div class="dashboard-stat-icon"><i class="im im-icon-Geo-Star"></i></div>
+                </div>
+            </div>
+
+        <?php } ?>
+
         </div>
 
 
@@ -139,110 +165,112 @@
             <!-- Recent Activity -->
             <div class="col-lg-6 col-md-12">
                 <div class="dashboard-list-box with-icons margin-top-20">
-                    <h4>Recent Activities</h4>
+                    <h4>Dernières Notifications</h4>
                     <ul>
-                        <li>
-                            <i class="list-box-icon sl sl-icon-layers"></i> Your listing <strong><a href="#">Hotel Govendor</a></strong> has been approved!
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
+                        <?php foreach($alertes as $alerte) {
 
-                        <li>
-                            <i class="list-box-icon sl sl-icon-star"></i> Kathy Brown left a review <div class="numerical-rating" data-rating="5.0"></div> on <strong><a href="#">Burger House</a></strong>
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
+                                $aicon= 'fa fa-bell-o';
 
-                        <li>
-                            <i class="list-box-icon sl sl-icon-heart"></i> Someone bookmarked your <strong><a href="#">Burger House</a></strong> listing!
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
+                                if (strpos($alerte->titre, 'Réservation validée') !== false) {
+                                    $aicon= 'fa fa-calendar-check-o';
+                                }
 
-                        <li>
-                            <i class="list-box-icon sl sl-icon-star"></i> Kathy Brown left a review <div class="numerical-rating" data-rating="3.0"></div> on <strong><a href="#">Airport</a></strong>
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
+                                if (strpos($alerte->titre, 'Réservation annulée') !== false) {
+                                    $aicon= 'fa fa-calendar-times-o';
+                                }
 
-                        <li>
-                            <i class="list-box-icon sl sl-icon-heart"></i> Someone bookmarked your <strong><a href="#">Burger House</a></strong> listing!
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
+                                if (strpos($alerte->titre, 'Nouvelle Réservation') !== false) {
+                                    $aicon= 'fa fa-calendar-plus-o';
+                                }
+                                
+                                if (strpos($alerte->titre, 'payé') !== false) {
+                                    $aicon= 'fa fa-cart-arrow-down';
+                                }
 
-                        <li>
-                            <i class="list-box-icon sl sl-icon-star"></i> John Doe left a review <div class="numerical-rating" data-rating="4.0"></div> on <strong><a href="#">Burger House</a></strong>
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
-
-                        <li>
-                            <i class="list-box-icon sl sl-icon-star"></i> Jack Perry left a review <div class="numerical-rating" data-rating="2.5"></div> on <strong><a href="#">Tom's Restaurant</a></strong>
-                            <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-                        </li>
+                            ?>
+                            <li>
+                                <i class="list-box-icon <?php echo $aicon ; ?>"></i><strong><a href="#"> <?php echo $alerte->titre ; ?>: </a></strong> <?php echo   date('d/m/Y H:i', strtotime($alerte->created_at )) ; ?>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
             
-            <!-- Invoices -->
+            <!-- Dernières Réservations -->
             <div class="col-lg-6 col-md-12">
                 <div class="dashboard-list-box invoices with-icons margin-top-20">
-                    <h4>Invoices</h4>
+                    <h4>Dernières Réservations</h4>
                     <ul>
-                        
-                        <li><i class="list-box-icon sl sl-icon-doc"></i>
-                            <strong>Professional Plan</strong>
-                            <ul>
-                                <li class="unpaid">Unpaid</li>
-                                <li>Order: #00124</li>
-                                <li>Date: 20/07/2019</li>
-                            </ul>
-                            <div class="buttons-to-right">
-                                <a href="dashboard-invoice.html" class="button gray">View Invoice</a>
-                            </div>
-                        </li>
-                        
-                        <li><i class="list-box-icon sl sl-icon-doc"></i>
-                            <strong>Extended Plan</strong>
-                            <ul>
-                                <li class="paid">Paid</li>
-                                <li>Order: #00108</li>
-                                <li>Date: 14/07/2019</li>
-                            </ul>
-                            <div class="buttons-to-right">
-                                <a href="dashboard-invoice.html" class="button gray">View Invoice</a>
-                            </div>
-                        </li>
+                        <?php foreach($reservations as $reservation) {?>
 
-                        <li><i class="list-box-icon sl sl-icon-doc"></i>
-                            <strong>Extended Plan</strong>
-                            <ul>
-                                <li class="paid">Paid</li>
-                                <li>Order: #00097</li>
-                                <li>Date: 10/07/2019</li>
-                            </ul>
-                            <div class="buttons-to-right">
-                                <a href="dashboard-invoice.html" class="button gray">View Invoice</a>
-                            </div>
-                        </li>
-                        
-                        <li><i class="list-box-icon sl sl-icon-doc"></i>
-                            <strong>Basic Plan</strong>
-                            <ul>
-                                <li class="paid">Paid</li>
-                                <li>Order: #00091</li>
-                                <li>Date: 30/06/2019</li>
-                            </ul>
-                            <div class="buttons-to-right">
-                                <a href="dashboard-invoice.html" class="button gray">View Invoice</a>
-                            </div>
-                        </li>
+                            <li>
+                                <?php   
+
+                                        if($reservation->statut==2){//Annulée
+                                            echo '<i class="list-box-icon fa fa-calendar-times-o"></i>';}   
+                                        elseif($reservation->statut==1){//validée
+                                            echo '<i class="list-box-icon fa fa-calendar-check-o"></i>';}   
+                                        else {echo '<i class="list-box-icon fa fa-calendar-o"></i>';}   
+                                ?>
+                                
+                                <strong><?php  
+                                if( $user_type=='client' ) { 
+                                    echo UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire); 
+                                }
+                                if( $user_type=='prestataire' ) { 
+                                    echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client); 
+                                }
+
+                                if( $user_type=='admin' ) { 
+                                    echo UsersController::ChampById('name',$reservation->client).' '.UsersController::ChampById('lastname',$reservation->client).' => '.UsersController::ChampById('name',$reservation->prestataire).' '.UsersController::ChampById('lastname',$reservation->prestataire); 
+                                }
+
+                                 ?>
+                                </strong>
+                                <ul>
+                                    <?php   
+
+                                        if($reservation->statut==0){echo '<li class="paid" style="color:#fb9700;font-weight:bold" >En Attente</li>';}   
+                                        if($reservation->statut==1){echo '<li class="paid" style=" font-weight:bold"  >Validée</li>';}   
+                                        if($reservation->statut==2){echo '<li class="unpaid" style=" font-weight:bold">Annulée</li>';}   
+                                    ?>
+
+                                    <?php 
+                                     if($reservation->paiement==0){
+                                         echo '<li class="unpaid">Non payée</li>';
+                                         }
+                                    if($reservation->paiement==1){
+                                         echo '<li class="paid">Acompte payé</li>';
+                                     } 
+                                     if($reservation->paiement==2){
+                                         echo '<li class="paid">Payée</li>';
+                                     } 
+                                     if($reservation->paiement==3){
+                                        $retraits=\App\Retrait::where('reservation',$reservations[$ii]->id)->where('statut',1)->count();
+                                         echo '<li class="paid">Acompte + ('.$retraits.'/4) tranches payées</li>';
+                                     } 
+                                    ?>
+                                    <li><?php //echo( $reservations[$ii]->date_reservation ); 
+                                        $dateres = new DateTime($reservation->date_reservation); echo $dateres->format('d/m/Y H:i') ; 
+                                    ?></li>
+                                </ul>
+                                <!--<div class="buttons-to-right">
+                                    <a href="dashboard-invoice.html" class="button gray">View Invoice</a>
+                                </div>-->
+                            </li>
+
+                        <?php } ?> 
 
                     </ul>
                 </div>
             </div>
 
-
-            <!-- Copyrights -->
-            <div class="col-md-12">
-                <div class="copyrights">© 2019 Listeo. All Rights Reserved.</div>
-            </div>
         </div>
+        <div class="row">
+        <div class="col-md-12">
+          <div class="footer_copyright_part">Copyright © Prenezunrendezvous.com </div>
+        </div>
+      </div>
 
     </div>
     <!-- Content / End -->

@@ -446,6 +446,23 @@ class UsersController extends Controller
         }
         
     }
+
+        public function titredescription($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.titredescription',  compact('user','id')); 
+        
+        }
+        
+    }
     
     
         public function parametring(Request $request)
@@ -782,6 +799,21 @@ class UsersController extends Controller
             'smessage' => ' successfully'
         ]);
          
+    }
+
+    // change titre description entreprise
+        public static function changetitredescription(Request $request)
+    {
+        $id=$request->get('id');
+        $valta1=$request->get('titre');
+        $valta2=$request->get('responsable');
+        $valta3=$request->get('description');
+        $valta4=$request->get('keywords');
+        DB::table('users')->where('id', $id)->update(array('titre'=> $valta1,'responsable'=> $valta2,'description'=> $valta3,'keywords'=> $valta4));
+        
+        
+        Session::flash("message", "Special message goes here");
+        return back();
     }
     
  }
