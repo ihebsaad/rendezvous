@@ -303,8 +303,8 @@ return view('payments.payAbn2', [
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
     //mohamed.achraf.besbes@gmail.com
-    // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-     $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
+     $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+    // $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
     //enregistrement alerte
       $alerte = new Alerte([
              'user' => $user,
@@ -326,11 +326,12 @@ return view('payments.payAbn2', [
     // Email à l'admin
     $message='Bonjour,<br>';
     $message.='Abonnement payé : '.$abonnement.'<br>';
-    $message.='<b>Prestataire :</b> '.$nom_p.' '.$prenom_p.'<br><br>';
+    $message.='<b>Prestataire :</b> '.$nom_p.' '.$prenom_p.'<br>';
     $message.='<b>Téléphone Prestataire :</b> '.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
-    
-  $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
+  //trouvezunprestataire@gmail.com
+  //kbskhaledfb@gmail.com  
+$this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => 1,
