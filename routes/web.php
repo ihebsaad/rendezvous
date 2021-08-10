@@ -164,6 +164,8 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 	// les pages entreprise
 	Route::get('/titredescription/{id}', 'UsersController@titredescription')->name('titredescription');
 	Route::post('/changetitredescription','UsersController@changetitredescription')->name('changetitredescription');
+	Route::get('/emplacement/{id}', 'UsersController@emplacement')->name('emplacement');
+	Route::post('/changeemplacement','UsersController@changeemplacement')->name('changeemplacement');
 	//Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
 	Route::post('/users/updating','UsersController@updating')->name('users.updating');
 	Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage');

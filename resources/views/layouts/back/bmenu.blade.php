@@ -71,7 +71,7 @@
         <li class="<?php if ($view_name == 'users-listing'){echo 'active';} ?>  "><a href="# {{-- route('listing', ['id'=>$user->id]) --}}"><i class="sl sl-icon-briefcase"></i> Mon Entreprise </a>
             <ul>
               <li><a href="{{ route('titredescription', ['id'=>$user->id]) }}">Titre & Description</a></li>
-              <li><a href="dashboard-my-listings.html">Emplacement</a></li>
+              <li><a href="{{ route('emplacement', ['id'=>$user->id]) }}"">Emplacement</a></li>
               <li><a href="dashboard-my-listings.html">Infos de contact</a></li>
               <li><a href="dashboard-my-listings.html">Catégories</a></li>
               <li><a href="dashboard-my-listings.html">Images & vidéo</a></li>

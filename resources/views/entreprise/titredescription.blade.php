@@ -28,9 +28,9 @@
                 </div>
             </div>
         </div>
-        @if (Session::has('message'))
+        @if ($live_message = Session::get('ttmessage'))
            <div class="notification success closeable">
-                <p>{{ Session::get('message') }}</p>
+                <p>{{ $live_message }}</p>
                 <a class="close" href="#"></a>
             </div>
         @endif

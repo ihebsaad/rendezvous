@@ -447,22 +447,7 @@ class UsersController extends Controller
         
     }
 
-        public function titredescription($id)
-    {
-        $cuser = auth()->user();
-        $user_type=$cuser->user_type;
-        $user_id=$cuser->id;
-        
-        if(  $user_id == $id || $user_type=='admin' )
-        {   
-        $user = User::find($id);
 
-
-        return view('entreprise.titredescription',  compact('user','id')); 
-        
-        }
-        
-    }
     
     
         public function parametring(Request $request)
@@ -801,6 +786,23 @@ class UsersController extends Controller
          
     }
 
+            public function titredescription($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.titredescription',  compact('user','id')); 
+        
+        }
+        
+    }
+
     // change titre description entreprise
         public static function changetitredescription(Request $request)
     {
@@ -811,8 +813,41 @@ class UsersController extends Controller
         $valta4=$request->get('keywords');
         DB::table('users')->where('id', $id)->update(array('titre'=> $valta1,'responsable'=> $valta2,'description'=> $valta3,'keywords'=> $valta4));
         
+        Session::put('ttmessage', 'Enregistré avec succès');
+        return back();
+    }
+
+
+            public function emplacement($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
         
-        Session::flash("message", "Special message goes here");
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.emplacement',  compact('user','id')); 
+        
+        }
+        
+    }
+
+    // change titre description entreprise
+        public static function changeemplacement(Request $request)
+    {
+        $id=$request->get('id');
+        $valta1=$request->get('adresse');
+        $valta2=$request->get('ville');
+        $valta3=$request->get('fhoraire');
+        $valta4=$request->get('latitude');
+        $valta5=$request->get('longitude');
+        DB::table('users')->where('id', $id)->update(array('adresse'=> $valta1,'ville'=> $valta2,'fhoraire'=> $valta3,'latitude'=> $valta4,'longitude'=> $valta5));
+        
+        
+        Session::put('empmessage', 'Enregistré avec succès');
         return back();
     }
     
