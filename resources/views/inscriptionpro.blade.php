@@ -507,7 +507,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 <!-- offre lancement Section -->
 <?php use App\User; $nbpres=User::where('user_type','prestataire')->whereNotNull('expire')->count(); 
 
-if( $nbpres > 100 ) {?>
+if( $nbpres <= 100 ) {?>
 <section class="fullwidth padding-top-40 " data-background-color="#fed600">
     <div class="container">
         <div class="row">
