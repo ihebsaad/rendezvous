@@ -68,7 +68,7 @@
                             <div class="col-md-12">
                                     <h5>Fuseau horaire (Obligatoire)</h5>
                                     <select class="chosen-select-no-single" name="fhoraire" id="fhoraire" title="Selectionnez votre fuseau horaire" >
-                                        <option  default <?php if($user->fhoraire=='America/Martinique'){echo 'selected="selected"';}?> >Martinique</option>  
+                                        <option  value="America/Martinique"  default <?php if($user->fhoraire=='America/Martinique'){echo 'selected="selected"';}?> >Martinique</option>  
                                         <option value="America/Guadeloupe"  <?php if($user->fhoraire=='America/Guadeloupe'){echo 'selected="selected"';}?> >Guadeloupe</option>
                                         <option value="Europe/Paris"  <?php if($user->fhoraire=='Europe/Paris'){echo 'selected="selected"';}?> >France</option>
                                         <option value="America/Cayenne"  <?php if($user->fhoraire=='America/Cayenne'){echo 'selected="selected"';}?> >Guyane française</option> 
