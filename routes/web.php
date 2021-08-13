@@ -30,7 +30,7 @@ Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
 Route::get('/successpay2','PaymentController@successpay2')->name('successpay2');
 	Route::get('/cancelpay2','MyPaypalController@cancelpay2')->name('cancelpay2');
 
-
+Route::post('/existanceemail','UsersController@existance_email')->name('existance.email');
 
 
 //------------------------Stripe-----------------------//

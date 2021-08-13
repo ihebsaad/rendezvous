@@ -26,7 +26,9 @@ use \App\Cartefidelite;
 use \App\Codepromo;
 use \App\Happyhour;
 use \App\Contenu_plan;    
-use \App\Emailslist;    
+use \App\Emailslist;  
+ use Swift_Mailer;
+ use Mail;  
 
 use Illuminate\Support\Str;
 
@@ -850,5 +852,85 @@ class UsersController extends Controller
         Session::put('empmessage', 'Enregistré avec succès');
         return back();
     }
+
+   public function existance_email (Request $request)
+   {
+   	 $email=$request->get('email');
+
+   	 $existe=User::where('email',$email)->first();
+   
+      if($existe)
+      {
+        return "existe";
+      }
+      else
+      {
+        return "nonexiste";
+      }
+
+   	  
+   }
+
+   public function send_email_to_all_subcribers()
+   {
+
+   	$users_offre_lancement=Emailslist::get(["email"]);
+
+   	$destinataires = array();
+
+        if ($users_offre_lancement && count($users_offre_lancement)>0) {
+            foreach ($users_offre_lancement as $uol) {
+                array_push($destinataires, $uol);
+
+            }
+        }
+
+     $chunks = array_chunk($destinataires, 50);
+
+        // parcours divisions
+        foreach ($chunks as $chunk)
+        {
+
+        	 $message='Bonjour,<br>';
+             $message.='Notre plateforme est maitenant lancée <br>';
+             $message.="Veuillez visiter le lien suivant : <br>";
+             $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
+    
+    //mohamed.achraf.besbes@gmail.com
+     $this->sendMail($chunk,'Invitation',$message) ;
+   
+
+
+         }
+
+
+   }
+
+   public function sendMail($to,$sujet,$contenu){
+
+    $swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
+    //$swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+    //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+    $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
+    $swiftTransport->setPassword('prestataire1998'); // mot de passe email eSolutions2020*
+
+        $swiftMailer = new Swift_Mailer($swiftTransport);
+    Mail::setSwiftMailer($swiftMailer);
+    $from=\Config::get('mail.from.address') ;
+    $fromname=\Config::get('mail.from.name') ;
+    
+    Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
+      //dd($contenu);
+
+         $message
+                 ->to($to)
+                    ->subject($sujet)
+                       ->setBody($contenu, 'text/html')
+                    ->setFrom([$from => $fromname]);         
+
+      });
+    
+  }
     
  }
