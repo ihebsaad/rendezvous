@@ -164,7 +164,22 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 	// les pages entreprise
 	Route::get('/titredescription/{id}', 'UsersController@titredescription')->name('titredescription');
 	Route::post('/changetitredescription','UsersController@changetitredescription')->name('changetitredescription');
+	Route::post('/changeInfosContact','UsersController@changeInfosContact')->name('changeInfosContact');
+	Route::post('/changeHeuresOuverture','UsersController@changeHeuresOuverture')->name('changeHeuresOuverture');
 	Route::get('/emplacement/{id}', 'UsersController@emplacement')->name('emplacement');
+	Route::get('/InfosContact/{id}', 'UsersController@InfosContact')->name('InfosContact');
+	Route::get('/HoraireOuverture/{id}', 'UsersController@HoraireOuverture')->name('HoraireOuverture');
+	Route::get('/Categories/{id}', 'UsersController@Categories')->name('Categories');
+	Route::get('/ImagesVideo/{id}', 'UsersController@ImagesVideo')->name('ImagesVideo');
+Route::get('/HeuresIndisponibilite/{id}', 'UsersController@HeuresIndisponibilite')->name('HeuresIndisponibilite');
+Route::get('/Services/{id}', 'UsersController@Services')->name('Services');
+Route::get('/ServicesSupplementaires/{id}', 'UsersController@ServicesSupplementaires')->name('ServicesSupplementaires');
+Route::get('/Produits/{id}', 'UsersController@Produits')->name('Produits');
+Route::get('/CodesPromo/{id}', 'UsersController@CodesPromo')->name('CodesPromo');
+
+Route::get('/CarteFidelite/{id}', 'UsersController@CarteFidelite')->name('CarteFidelite');
+Route::get('/HappyHours/{id}', 'UsersController@HappyHours')->name('HappyHours');
+Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ');
 	Route::post('/changeemplacement','UsersController@changeemplacement')->name('changeemplacement');
 	//Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
 	Route::post('/users/updating','UsersController@updating')->name('users.updating');
