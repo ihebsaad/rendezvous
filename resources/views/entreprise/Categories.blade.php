@@ -41,96 +41,119 @@
 
                     <!-- Section -->
                     <div class="add-listing-section">
-
+<form method="post" action="{{ route('changeCategories') }}" name="changeCategories" >
+                        @csrf
+                        <input type="hidden" name="id" id="iduser" value="{{ $user->id }}" >
                         <!-- Headline -->
                         <div class="add-listing-headline">
-                            <h3><i class="fa fa-info"></i> Titre & Description</h3>
+                            <h3><i class="sl sl-icon-tag"></i>Catégories</h3>
                         </div>
                         <!-- Checkboxes -->
-                        <h5 class="margin-top-30 margin-bottom-10">Amenities <span>(optional)</span></h5>
-                        <div class="checkboxes in-row margin-bottom-20">
+                        <div class="checkboxes in-row margin-bottom-20 ">
+
+                            <?php foreach($categories as $categ)
+                            {
+                                $cats_user = $categories_user->toArray();
+                                $idcat= $categ->id;
+                                if( in_array($idcat,$cats_user) ){
+                                    $check='checked';
+                                }else{
+                                $check='';
+                                }
+                         echo ' <div  class="col-lg-4 margin-bottom-20 ">
+                                    <input id="cat-'.$categ->id.'" type="checkbox" name="check" '.$check.' onchange="changefunction(this)"   >
+                                    <label for="cat-'.$categ->id.'"   >'.$categ->nom.' </label>
+                                </div>';                  
+                                
+                            }
+                            
+                            ?> 
+
+<script type="text/javascript">
+    function changefunction(a){
+        idelemt = a.id;
+        cat= idelemt.slice(4);
+        var user = $('#iduser').val();
+                 var _token = $('input[name="_token"]').val();
+                    var checked=false;
+                    if($(a).prop("checked") == true){
+              checked=true;
+            }
+            else{
+
+                if($(this).prop("checked") == false){
+                       checked=false;
+                   }
+
+                }
+        //alert(checked);
+        if( checked ){
+                    $.ajax({
+                        url:"{{ route('categories.insert') }}",
+                        method:"POST",
+                        data:{user:user,categorie:cat, _token:_token},
+                        success:function(data){
+                          //alert(checked);  
+                            
+                     $.notify({
+                    message: 'Catégorie ajoutée avec succès',
+                    icon: 'glyphicon glyphicon-check'
+                    },{
+                    type: 'success',
+                    delay: 3000,
+                    timer: 1000,    
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                        },                  
+                    }); 
+                        }
+                        
+                    });
+                  
+                    }else{
+                      $.ajax({
+                        url:"{{ route('categories.removecatuser') }}",
+                        method:"POST",
+                        data:{user:user,categorie:cat, _token:_token},
+                        success:function(data){
+                           
                     
-                            <input id="check-a" type="checkbox" name="check">
-                            <label for="check-a">Elevator in building</label>
+                    $.notify({
+                    message: 'Catégorie supprimée avec succès',
+                    icon: 'glyphicon glyphicon-check'
+                    },{
+                    type: 'success',
+                    delay: 3000,
+                    timer: 1000,    
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                        },                  
+                    });     
+                        }
+                        
+                    });
+                     
 
-                            <input id="check-b" type="checkbox" name="check">
-                            <label for="check-b">Friendly workspace</label>
+                    }
+              
+                  //    
 
-                            <input id="check-c" type="checkbox" name="check">
-                            <label for="check-c">Instant Book</label>
 
-                            <input id="check-d" type="checkbox" name="check">
-                            <label for="check-d">Wireless Internet</label>
-
-                            <input id="check-e" type="checkbox" name="check" >
-                            <label for="check-e">Free parking on premises</label>
-
-                            <input id="check-f" type="checkbox" name="check" >
-                            <label for="check-f">Free parking on street</label>
-
-                            <input id="check-g" type="checkbox" name="check">
-                            <label for="check-g">Smoking allowed</label>    
-
-                            <input id="check-h" type="checkbox" name="check">
-                            <label for="check-h">Events</label>
+             
+    }
+</script>                            
+                            
                     
                         </div>
                         <!-- Checkboxes / End -->
 
-                        <form method="post" action="{{ route('changetitredescription') }}" name="changetitredescription" >
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $user->id }}">
-                        <!-- Title -->
-                        <div class="row with-forms">
-                            <div class="col-md-12">
+                        
+                        
 
-                                <div class="checkboxes in-row amenities_checkbox">
-                <ul>
+                        
 
-                
-                <?php foreach($categories as $categ)
-                {
-                    $cats_user = $categories_user->toArray();
-                    $idcat= $categ->id;
-                    if( in_array($idcat,$cats_user) ){
-                        $check='checked';
-                    }else{
-                    $check='';
-                    }
-             echo ' <li id="li-'.$categ->id.'" class="categories" >
-                        <input id="cat-'.$categ->id.'" type="checkbox" name="check" '.$check.'   >
-                        <label for="cat-'.$categ->id.'"   >'.$categ->nom.' </label>
-                    </li>';                  
-                    
-                }
-                
-                ?>          
-                </ul>               
-              </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>Responsable</h5>
-                                <input class="search-field" type="text"  placeholder="Responsable Commercial"  name="responsable"  id="responsable" value="{{ $user->responsable }}" >
-                            </div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="form">
-                            <h5>Description</h5>
-                            <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="description" placeholder="Description..."  spellcheck="true">{{ $user->description }}</textarea>
-                        </div>
-
-                        <!-- Row -->
-                        <div class="row with-forms">
-
-                            <!-- Type -->
-                            <div class="col-md-12">
-                                <h5>Mots-clés <i class="tip" data-tip-content="Maximum de 15 mots-clés liés à votre entreprise"></i></h5>
-                                <input type="text" value="{{ $user->keywords }}" name="keywords" id="keywords" placeholder="Insérez des mots clés, séparées par des virgules">
-                            </div>
-
-                        </div>
-                        <!-- Row / End -->
                         <!-- Row -->
                         <div class="row with-forms">
 
@@ -152,4 +175,88 @@
     ================================================== -->
 </div>
 </div>
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+            
+
+            
+            // $('.categories').click(function(event ){
+                $(document).on('change', '.categories', function() {
+                    alert("");
+                        idelemt = (this).id;
+                cat= idelemt.slice(3);
+            ///here
+               var checked =document.getElementById('cat-'+cat).checked  ;
+              // var checked =$(this).prop("checked");
+               var user = $('#user').val();
+                 var _token = $('input[name="_token"]').val();
+                    var loading=false;
+                    if($(this).prop("checked") == true){
+              checked=true;
+            }
+            else{
+
+                if($(this).prop("checked") == false){
+                       checked=false;
+                   }
+
+                }
+             // alert(checked);
+                if( checked ){
+                    $.ajax({
+                        url:"{{ route('categories.insert') }}",
+                        method:"POST",
+                        data:{user:user,categorie:cat, _token:_token},
+                        success:function(data){
+                            changed=true;
+                            
+                     $.notify({
+                    message: 'Catégorie ajoutée avec succès',
+                    icon: 'glyphicon glyphicon-check'
+                    },{
+                    type: 'success',
+                    delay: 3000,
+                    timer: 1000,    
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                        },                  
+                    }); 
+                        }
+                        
+                    });
+                  
+                    }else{
+                      $.ajax({
+                        url:"{{ route('categories.removecatuser') }}",
+                        method:"POST",
+                        data:{user:user,categorie:cat, _token:_token},
+                        success:function(data){
+                            changed=true;
+                    
+                    $.notify({
+                    message: 'Catégorie supprimée avec succès',
+                    icon: 'glyphicon glyphicon-check'
+                    },{
+                    type: 'success',
+                    delay: 3000,
+                    timer: 1000,    
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                        },                  
+                    });     
+                        }
+                        
+                    });
+                     
+
+                    }
+              
+                  //    
+
+
+             });
+</script>
 @endsection('content')

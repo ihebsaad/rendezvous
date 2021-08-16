@@ -181,6 +181,7 @@ Route::get('/CarteFidelite/{id}', 'UsersController@CarteFidelite')->name('CarteF
 Route::get('/HappyHours/{id}', 'UsersController@HappyHours')->name('HappyHours');
 Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ');
 	Route::post('/changeemplacement','UsersController@changeemplacement')->name('changeemplacement');
+	Route::post('/changeCategories', 'UsersController@changeCategories')->name('changeCategories');
 	//Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
 	Route::post('/users/updating','UsersController@updating')->name('users.updating');
 	Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage');

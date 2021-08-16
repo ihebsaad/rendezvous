@@ -942,6 +942,10 @@ class UsersController extends Controller
         
         }
     }
+    public function changeCategories()
+    {
+        dd("okkkkkkkk");
+    }
     public function ImagesVideo($id)
     {
         $cuser = auth()->user();
