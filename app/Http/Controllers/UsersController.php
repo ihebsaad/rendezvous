@@ -851,5 +851,230 @@ class UsersController extends Controller
         Session::put('empmessage', 'Enregistré avec succès');
         return back();
     }
+
+        public function InfosContact($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.InfosContact',  compact('user','id')); 
+        
+        }
+    }
+    // change Infos de Contact entreprise
+        public static function changeInfosContact(Request $request)
+    {
+        $id=$request->get('id');
+        
+        DB::table('users')->where('id', $id)->update(array(
+          'tel'=> $request->get('Phone'),
+          'email'=> $request->get('email'),
+          'linkedin'=> $request->get('linkedin'),
+          'twitter'=> $request->get('twitter'),
+          'instagram'=> $request->get('instagram'),
+          'fb'=> $request->get('fb')));
+        
+        Session::put('ttmessage', 'Enregistré avec succès');
+        return back();
+    }
+     public function HoraireOuverture($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.HoraireOuverture',  compact('user','id')); 
+        
+        }
+    }
+    public function changeHeuresOuverture(Request $request)
+    {
+        //dd($request);
+        $id=$request->get('id');
+        
+        DB::table('users')->where('id', $id)->update(array(
+          'lundi_o'=> $request->get('lundi_o'),
+          'lundi_f'=> $request->get('lundi_f'),
+          'mardi_o'=> $request->get('mardi_o'),
+          'mardi_f'=> $request->get('mardi_f'),
+          'mercredi_o'=> $request->get('mercredi_o'),
+          'mercredi_f'=> $request->get('mercredi_f'),
+          'jeudi_o'=> $request->get('jeudi_o'),
+          'jeudi_f'=> $request->get('jeudi_f'),
+          'vendredi_o'=> $request->get('vendredi_o'),
+          'vendredi_f'=> $request->get('vendredi_f'),
+          'samedi_o'=> $request->get('samedi_o'),
+          'samedi_f'=> $request->get('samedi_f'),
+          'dimanche_o'=> $request->get('dimanche_o'),
+          'dimanche_f'=> $request->get('dimanche_f')));
+        
+        Session::put('ttmessage', 'Enregistré avec succès');
+        return back();
+    }
+     public function Categories($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+        $categories = Categorie::orderBy('nom', 'asc')->get();
+        $categories_user =  DB::table('categories_user')->where('user',$id)->pluck('categorie');
+
+
+        return view('entreprise.Categories',  compact('user','id','categories' ,'categories_user')); 
+        
+        }
+    }
+    public function ImagesVideo($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.ImagesVideo',  compact('user','id')); 
+        
+        }
+    }
+    public function HeuresIndisponibilite($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.HeuresIndisponibilite',  compact('user','id')); 
+        
+        }
+    }
     
+
+public function Services($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.Services',  compact('user','id')); 
+        
+        }
+    }
+    public function ServicesSupplementaires($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.ServicesSupplementaires',  compact('user','id')); 
+        
+        }
+    }
+    public function Produits($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.Produits',  compact('user','id')); 
+        
+        }
+    }
+    public function CodesPromo($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.CodesPromo',  compact('user','id')); 
+        
+        }
+    }
+    public function CarteFidelite($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.CarteFidelite',  compact('user','id')); 
+        
+        }
+    }
+    public function HappyHours($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.HappyHours',  compact('user','id')); 
+        
+        }
+    }
+    public function FAQ($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+
+
+        return view('entreprise.FAQ',  compact('user','id')); 
+        
+        }
+    }
+
  }
