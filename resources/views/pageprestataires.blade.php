@@ -4,6 +4,23 @@
 $toutes_categories=DB::table('categories')->get();
 $meres_categories=DB::table('categories')->whereNull('parent')->get();
 
+// extraire les parametres du filter de l'url
+$jlist = $listings->toArray();
+$url = $jlist["first_page_url"];
+$parts = parse_url($url);
+parse_str($parts['query'], $query);
+
+$filtercat =""; $filtertag = ""; $filteremp = "";
+
+if (isset($query['catsearch']) && !empty($query['catsearch']))
+{$filtercat = $query['catsearch'];}
+
+if (isset($query['tagsearch']) && !empty($query['tagsearch']))
+{$filtertag = $query['tagsearch'];}
+
+if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
+{$filteremp = $query['emplacementsearch'];}
+
 ?>
 
 @section('content')
@@ -21,14 +38,63 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
               </div>
        </div>
 </div>
+<style type="text/css">
 
+#wrapper {
+    background-color: #fff;
+}
+
+.listing-item-container.list-layout {
+    background-color: #f1f1f1;
+}
+.layout-switcher a {
+    background-color: #000;
+    color: #fff;
+}
+.layout-switcher a.active {
+    color: #000;
+    border-color: #ffd700;
+    background-color: #ffd700;
+}
+
+.pagination ul li.disabled {
+       background-color: #f1f1f1;
+       color: #333;
+       border-radius: 50%;
+       width: 52px;
+       height: 52px;
+       padding: 0;
+       line-height: 52px;
+       font-weight: bold;
+}
+.pagination ul li.active {
+       background-color: #ffd700;
+       color: #000;
+       border-radius: 50%;
+       width: 52px;
+       height: 52px;
+       padding: 0;
+       line-height: 52px;
+       font-weight: bold;
+}
+
+.pagination ul li a, .pagination-next-prev ul li a {
+    color: #fff;
+    background-color: #000;
+    }
+
+    .btn-black:hover {
+    background-color: black!important;
+    color: white!important;
+}
+</style>
 <!-- Content
 ================================================== -->
 <div class="container">
        <div class="row">
 
               <div class="col-lg-9 col-md-8 padding-right-30">
-
+                     <?php if (count($listings) >= 1) { ?>
                      <!-- Sorting / Layout Switcher -->
                      <div class="row margin-bottom-25">
 
@@ -56,12 +122,13 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                             </div>
                      </div>
                      <!-- Sorting / Layout Switcher / End -->
-
-
+                     <?php } ?>
+              <?php if (count($listings) >= 1) { ?>
                      <div class="row">
                      <?php  $User= auth()->user();  ?>
                        <?php
-                       $listings=\App\User::where('user_type','prestataire')->get();
+                       if (!isset($listings) && empty($listings))
+                       {$listings=\App\User::where('user_type','prestataire')->get();}
                         $format = "Y-m-d H:i:s";
                            $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
                            $date_15j=\DateTime::createFromFormat($format, $date_15j);
@@ -102,11 +169,11 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                             <!-- Listing Item -->
                             <div class="col-lg-12 col-md-12">
                                    <div class="listing-item-container list-layout">
-                                          <a href="listings-single-page.html" class="listing-item">
+                                          <a href="#entreprisepage" class="listing-item">
                                                  
                                                  <!-- Image -->
                                                  <div class="listing-item-image">
-                                                        <img src="<?php echo  URL::asset('storage/images/'.$listing->couverture);?>" alt="">
+                                                        <img src="<?php if (empty($listing->couverture)) {echo  URL::asset('storage/images/listing.jpg');} else {echo  URL::asset('storage/images/'.$listing->couverture);}?>" alt="">
                                                         <?php $top=15; $i=0;?>
                                                         <?php foreach($categories_user as $cat){ 
                                                         $categorie =\App\Categorie::find( $cat->categorie); 
@@ -211,12 +278,30 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                             <?php }}  //foreach $listings  ?>
 
                      </div>
-
+              <?php } else { ?>
+                     <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                   <h3>Aucun résultat trouvé</h3>
+                                   <p>Désolé, aucun prestataire de service ne correspond à vos critères de recherche. Veuillez s’il vous plaît changer vos paramètres de recherche.</p>
+                            </div>
+                     </div>
+                     <?php } ?>
                      <!-- Pagination -->
                      <div class="clearfix"></div>
                      <div class="row">
                             <div class="col-md-12">
-                                   <!-- Pagination -->
+                                   <div class="pagination-container margin-top-20 margin-bottom-40">
+                                          <nav class="pagination"><ul>
+                                          {!! $listings->links() !!}
+                                          <?php //echo $page_links; ?>
+                                          </ul></nav>
+                                   </div>
+                            </div>
+                     </div>
+                     <!-- Pagination -->
+                     <!--
+                     <div class="row">
+                            <div class="col-md-12">
                                    <div class="pagination-container margin-top-20 margin-bottom-40">
                                           <nav class="pagination">
                                                  <ul>
@@ -228,7 +313,7 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                                           </nav>
                                    </div>
                             </div>
-                     </div>
+                     </div>-->
                      <!-- Pagination / End -->
 
               </div>
@@ -240,14 +325,15 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                      <div class="sidebar">
 
                             <!-- Widget -->
-                            <div class="widget margin-bottom-40">
-                                   <h3 class="margin-top-0 margin-bottom-30" style="color:white">Filtres</h3>
-
+                            <div class="widget margin-bottom-40 margin-top-20">
+                                   <h3 class="margin-top-0 margin-bottom-30" >Filtres</h3>
+                                   <form action="{{route('recherche.prestataires')}}" method="post">
+                                    @csrf
                                    <!-- Row -->
                                    <div class="row with-forms">
                                           <!-- Cities -->
                                           <div class="col-md-12">
-                                                 <input type="text" placeholder="Que cherchez-vous ?" value=""/>
+                                                 <input  id="prest_tag" name="prest_tag" type="text" placeholder="Que cherchez-vous ?" value="<?php if (!empty($filtertag)){ echo $filtertag; } ?>"/>
                                           </div>
                                    </div>
                                    <!-- Row / End -->
@@ -257,10 +343,10 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                                    <div class="row with-forms">
                                           <!-- Type -->
                                           <div class="col-md-12">
-                                                 <select data-placeholder="All Categories" class="chosen-select" >
-                                                        <option>Toutes les catégories</option>    
+                                                 <select name="toutes_categories" id="toutes_categories" data-placeholder="All Categories" class="chosen-select" >
+                                                        <option val="Toutes les catégories">Toutes les catégories</option>    
                                                         @foreach($meres_categories as $tc)
-                                                               <option val="{{$tc->id}}">{{$tc->nom}}</option>
+                                                               <option val="{{$tc->id}}" <?php if ($filtercat == $tc->nom){ echo "selected"; } ?>>{{$tc->nom}}</option>
                                                         @endforeach
                                                  </select>
                                           </div>
@@ -275,7 +361,7 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
 
                                                  <div class="input-with-icon location">
                                                         <div id="autocomplete-container">
-                                                               <input id="autocomplete-input" type="text" placeholder="Emplacement...">
+                                                               <input name="prest_emplacement"  id="autocomplete-input" type="text" placeholder="Emplacement..." value="<?php if (!empty($filteremp)){ echo $filteremp; } ?>">
                                                         </div>
                                                         <a href="#"><i class="fa fa-map-marker"></i></a>
                                                  </div>
@@ -329,8 +415,8 @@ $meres_categories=DB::table('categories')->whereNull('parent')->get();
                                    </div>-->
                                    <!-- More Search Options / End -->
 
-                                   <button class="button fullwidth margin-top-5">Update</button>
-
+                                   <button class="button fullwidth margin-top-5 btn-black" type="submit">Filtrer</button>
+                                   </form>
                             </div>
                             <!-- Widget / End -->
 
