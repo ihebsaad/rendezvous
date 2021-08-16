@@ -26,7 +26,6 @@ use \App\Cartefidelite;
 use \App\Codepromo;
 use \App\Happyhour;
 use \App\Contenu_plan;    
-use \App\Emailslist;    
 use \App\Emailslist;  
  use Swift_Mailer;
  use Mail;  
