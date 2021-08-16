@@ -1,6 +1,7 @@
 <!-- Scripts
 ================================================== -->
-
+    <!-- DropZone | Documentation: http://dropzonejs.com -->
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/dropzone.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-migrate-3.3.2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/mmenu.min.js') }}"></script>
