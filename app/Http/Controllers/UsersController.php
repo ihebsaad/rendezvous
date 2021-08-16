@@ -697,6 +697,7 @@ class UsersController extends Controller
    
     DB::table('images')->where('id', $id)->delete();
     return redirect (url('/listing/'.$user.'#images'));
+    return back();
 
     }
     
