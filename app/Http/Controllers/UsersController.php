@@ -1059,6 +1059,7 @@ class UsersController extends Controller
 
 public function Services($id)
     {
+      //dd("ok")
         $cuser = auth()->user();
         $user_type=$cuser->user_type;
         $user_id=$cuser->id;
@@ -1066,9 +1067,11 @@ public function Services($id)
         if(  $user_id == $id || $user_type=='admin' )
         {   
         $user = User::find($id);
+         $services =\App\Service::where('user',$id)->get();
 
 
-        return view('entreprise.Services',  compact('user','id')); 
+
+        return view('entreprise.Servicess',  compact('user','id','services')); 
         
         }
     }
