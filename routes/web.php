@@ -50,8 +50,8 @@ Route::get('/save/customer','PaymentStripeController@addcustomerStripe')->name('
 Route::get('/reservations.annule/{id}','PaymentStripeController@Remboursement')->name('reservations.annule');
 
 
-Route::post('/payAbn','PaymentStripeController@payabn')->name('payabn');
-	Route::get('/payAbn','PaymentStripeController@payabn')->name('payabn');
+Route::post('/payabn','PaymentStripeController@payabn')->name('payabn');
+	Route::get('/payabn','PaymentStripeController@payabn')->name('payabn');
 	
 Route::get('/success/payAbn/{k}','PaymentStripeController@successpayAbnStripe')->name('success.payAbn');
 
