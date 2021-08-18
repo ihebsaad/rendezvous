@@ -139,6 +139,70 @@ class ServicesController extends Controller
        return redirect('/listing/'.$user.'#services')->with('success', ' ajouté  ');
 
   }
+  public function addService(Request $request)
+    
+      {
+        $produits =$request->get('produit');
+        //$produits = serialize($produits);
+      //dd($produits);
+      //dd( $request);
+    
+        $name='';
+        $rec='off';
+    if($request->file('photo')!=null)
+    {$image=$request->file('photo');
+     $name =  $image->getClientOriginalName();
+                 $path = storage_path()."/images/";
+      $date=date('d-m-Y-H-i-s');
+    $name=$name.'-service-'.$date ;
+         $image->move($path,  $name );
+    }
+                 $user =  $request->get('user');
+           if ($request->get('toggleswitch')=='on') {
+            $rec=$request->get('toggleswitch');
+          }
+        /* $service  = new Service([
+
+              'user' => $request->get('user'),
+              'nom' => $request->get('nom'),
+              'description' => $request->get('description'),
+              'prix' => $request->get('prix'),
+              'duree' => $request->get('duree'),
+              'Nfois' => $request->get('Nfois'),
+              'frequence' => $request->get('mySelect'),
+              'periode' => $request->get('periode'),
+              'nbrService' => $request->get('nbrService'),
+              'recurrent' => $rec,
+              'thumb' => $name,
+           ]);*/
+            $service  = new Service([
+
+              'user' => $request->get('user'),
+              'nom' => $request->get('nom'),
+              'description' => $request->get('description'),
+              'prix' => $request->get('prix'),
+              'duree' => $request->get('duree'),
+              'Nfois' => $request->get('Nfois'),
+              
+              'periode' => $request->get('mySelect'),
+              'nbrService' => $request->get('nbrService'),
+              'recurrent' => $rec,
+              'thumb' => $name,
+           ]);
+            dd($service);
+            $service->save();
+            $id = $request->get('produit');
+
+    $idService= $service->id;
+    //dd($idService);
+    Service::where('id', $idService)->update(array('produits_id' => json_encode($id)));
+
+
+        
+       return back();      
+        
+        
+    }
   public function modif(Request $request)
     {
         $id= $request->get('idchange');

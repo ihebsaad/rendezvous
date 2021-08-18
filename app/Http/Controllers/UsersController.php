@@ -1075,6 +1075,30 @@ public function Services($id)
         
         }
     }
+    public function AjouterService(Request $request)
+    
+      {
+      //dd("ok")
+        $id=$request->get('id');
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+         $services =\App\Service::where('user',$id)->get();
+         $produit= Produit::where('user',$id)->get();
+         $service =\App\Service::where('id',5)->first();
+
+
+
+        return view('entreprise.AddService',  compact('user','id','services','produit','service')); 
+        
+        }
+    }
+    
+    
     public function ServicesSupplementaires($id)
     {
         $cuser = auth()->user();

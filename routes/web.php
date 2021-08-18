@@ -99,7 +99,7 @@ Route::get('/inscription', array('as' => 'inscriptionclient','uses' => 'UsersCon
 
 Route::get('/comingsoon', array('as' => 'comingsoon','uses' => 'UsersController@comingsoon'));
 Route::post('/users/addemail','UsersController@addemail')->name('users.addemail');
-
+Route::post('/addService','ServicesController@addService')->name('addService');
 
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
@@ -293,7 +293,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser'); 
 	
 	Route::post('/categories/Edit','CategoriesController@Edit')->name('categories.Edit');
-	//Route::post('/payabn','PaymentController@payabn')->name('payabn');
+	//
 	//Route::get('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
 // Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
