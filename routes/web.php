@@ -171,6 +171,11 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 	Route::get('/HoraireOuverture/{id}', 'UsersController@HoraireOuverture')->name('HoraireOuverture');
 	Route::get('/Categories/{id}', 'UsersController@Categories')->name('Categories');
 	Route::get('/ImagesVideo/{id}', 'UsersController@ImagesVideo')->name('ImagesVideo');
+
+	Route::post('/AjouterService','UsersController@AjouterService')->name('AjouterService');
+
+
+	
 Route::get('/HeuresIndisponibilite/{id}', 'UsersController@HeuresIndisponibilite')->name('HeuresIndisponibilite');
 Route::get('/Services/{id}', 'UsersController@Services')->name('Services');
 Route::get('/ServicesSupplementaires/{id}', 'UsersController@ServicesSupplementaires')->name('ServicesSupplementaires');
