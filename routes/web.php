@@ -50,8 +50,8 @@ Route::get('/save/customer','PaymentStripeController@addcustomerStripe')->name('
 Route::get('/reservations.annule/{id}','PaymentStripeController@Remboursement')->name('reservations.annule');
 
 
-Route::post('/payAbn','PaymentStripeController@payabn')->name('payAbn');
-	Route::get('/payAbn','PaymentStripeController@payabn')->name('payAbn');
+Route::post('/payabn','PaymentStripeController@payabn')->name('payabn');
+	Route::get('/payabn','PaymentStripeController@payabn')->name('payabn');
 	
 Route::get('/success/payAbn/{k}','PaymentStripeController@successpayAbnStripe')->name('success.payAbn');
 
@@ -163,6 +163,8 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 	Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
 	// les pages entreprise
 	Route::get('/titredescription/{id}', 'UsersController@titredescription')->name('titredescription');
+	Route::get('/portefeuilles/{id}', 'UsersController@portefeuilles')->name('portefeuilles');
+	
 	Route::post('/changetitredescription','UsersController@changetitredescription')->name('changetitredescription');
 	Route::post('/changeInfosContact','UsersController@changeInfosContact')->name('changeInfosContact');
 	Route::post('/changeHeuresOuverture','UsersController@changeHeuresOuverture')->name('changeHeuresOuverture');
