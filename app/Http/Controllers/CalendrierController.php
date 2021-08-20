@@ -1791,7 +1791,7 @@ class CalendrierController extends Controller
            ]);
 
         $periode_disp->save();
-       return redirect('/listing/'.$user.'#indispo')->with('success', ' ajouté  ');
+       return back();
 
  	}
   
@@ -1813,7 +1813,7 @@ class CalendrierController extends Controller
   
 
 	DB::table('periodes_indisp')->where('id', $id)->delete();
-	return redirect (url('/listing/'.$user.'#indispo'));
+	return back();
 	
 	}
 	

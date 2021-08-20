@@ -396,11 +396,12 @@ class UsersController extends Controller
    }
     public function SectionProd(Request $request)
     {
+      
        
       $id= $request->get('idchange');
       $val= strval($request->get('valchange'));
       User::where('id', $id)->update(array('section_product' => $val));
-  
+  return "ok";
   
   
      }
@@ -1123,9 +1124,9 @@ public function Services($id)
         if(  $user_id == $id || $user_type=='admin' )
         {   
         $user = User::find($id);
+        $produit= Produit::where('user',$id)->get();
 
-
-        return view('entreprise.Produits',  compact('user','id')); 
+        return view('entreprise.Produits',  compact('user','id','produit')); 
         
         }
     }
@@ -1138,9 +1139,11 @@ public function Services($id)
         if(  $user_id == $id || $user_type=='admin' )
         {   
         $user = User::find($id);
+        $serviceWithCode = Codepromo::where('user_id',$user_id)->get();
+        $services =\App\Service::where('user',$id)->get();
 
 
-        return view('entreprise.CodesPromo',  compact('user','id')); 
+        return view('entreprise.CodesPromo',  compact('user','id','serviceWithCode','services')); 
         
         }
     }
@@ -1168,9 +1171,10 @@ public function Services($id)
         if(  $user_id == $id || $user_type=='admin' )
         {   
         $user = User::find($id);
+        $happyhours = Happyhour::where('id_user',$user_id)->get();
 
 
-        return view('entreprise.HappyHours',  compact('user','id')); 
+        return view('entreprise.HappyHours',  compact('user','id','happyhours')); 
         
         }
     }

@@ -35,7 +35,8 @@ class FaqsController extends Controller
             ]);
  
         $faq->save();
-    return $faq->id;
+        Session::put('ttmessage', 'Ajouté avec succès');
+    return back();
 		 
 
  	}
@@ -68,7 +69,7 @@ class FaqsController extends Controller
   public function remove($id,$user)
   {  	 
 	DB::table('faqs')->where('id', $id)->delete();
-	return redirect (url('/listing/'.$user.'#faqs'));
+	return back();
 
 	}
 

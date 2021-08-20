@@ -6,7 +6,7 @@
 background-color:lightgrey;
 }
 
-</style>
+</style> 
 
  <style>
 
@@ -1213,7 +1213,7 @@ input:checked + .slider:before {
   <div class="utf_add_listing_part_headline_part">
     <h3><i class="fa fa-product-hunt"></i>Produits </h3>
     <label class="switch">
-      <input  id="toggleProd" onclick="toggle_visibility ('<?php echo $user->id;?>')" type="checkbox"  <?php if ($user->section_product== 'active'){ echo 'checked' ; } ?>   />
+      <input  id="toggleProd"  type="checkbox"  <?php if ($user->section_product== 'active'){ echo 'checked' ; } ?>   />
       <span class="slider round"></span>
     </label>
   </div>
@@ -1813,18 +1813,18 @@ input:checked + .slider:before {
           <div class="small_dialog_header">
             <h3>Ajouter FAQ </h3>
           </div>
-		 <div class="utf_signin_form style_one">
+		    <div class="utf_signin_form style_one">
 			
-		 <div class="fm-input ">
-		  <input type="text" placeholder="Question" id="question">
-		 </div>
-			 <div class="fm-input  ">
-			  <textarea   placeholder="Réponse"  id="reponse"></textarea>
-			 </div>
+		      <div class="fm-input ">
+		        <input type="text" placeholder="Question" id="question">
+		      </div>
+			     <div class="fm-input  ">
+			       <textarea   placeholder="Réponse"  id="reponse"></textarea>
+			     </div>
 	 
 							
-		 <a class="button" id="addfaq" style="text-align:center">Ajouter</a>
-		 </div>		  
+		      <a class="button" id="addfaq" style="text-align:center">Ajouter</a>
+		    </div>		  
 		 </div>	
 		 
 		 
@@ -2159,64 +2159,17 @@ if (x=="Numérique") {
 }
 </script>  
 <script>
+var input = document.getElementById('toggleProd');
 
-    function toggle_visibility(id) {
-       e = document.getElementById(id);
-       if(e.style.display == 'none' ){
-         e.style.display = 'block';
-          var namechange='section_product';
-          var valchange="active";
-          var idchange=id;
-          //alert(idchange)
-          var _token = $('input[name="_token"]').val();
-                       $.ajaxSetup({
-                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                                  });
-          $.ajax({
-                           url:"{{ route('users.ProductSection') }}",
-                          method:"POST",
-                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
-                             success:function(data){
-                               
-                               $.notify({
-                                message: 'Section activé avec succès',
-                                icon: 'glyphicon glyphicon-check'},{
-                                  type: 'success',
-          delay: 3000,
-          timer: 1000,  
-          placement: {
-            from: "bottom",
-            align: "right"
-            },          
-          }); }});}
-          
-       else {
-        e.style.display ='none'
-          var namechange='section_product';
-          var valchange="desactive";
-          var idchange=id;
-          var _token = $('input[name="_token"]').val();
-                       $.ajaxSetup({
-                          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-                                  });
-          $.ajax({
-                           url:"{{ route('users.ProductSection') }}",
-                          method:"POST",
-                          data:{valchange:valchange,idchange:idchange,namechange:namechange, _token:_token},
-                             success:function(data){$.notify({
-          message: 'section desactivé avec succès',
-          icon: 'glyphicon glyphicon-check'
-          },{
-          type: 'success',
-          delay: 3000,
-          timer: 1000,  
-          placement: {
-            from: "bottom",
-            align: "right"
-            },          
-          }); }});}
-    }
-
+    input.addEventListener('change',function(){
+        if(this.checked) {
+            
+            alert("oui"); 
+        } else {
+             alert("non");
+        }
+    });
+   
 </script>
 <script src="{{  URL::asset('public/scripts/dropzone.js') }}"></script>
 

@@ -145,8 +145,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/servicesrec/rendezvousTel/','ServicesController@rendezvousTel')->name('rendezvousTel');     
     Route::post('/servicesrec/proposerDates/','ServicesController@proposerDates')->name('proposerDates'); 
     
+    Route::get('/services/modifier/{id}','ServicesController@servicemodifier')->name('servicemodifier'); 
 
-
+ Route::post('/editService','ServicesController@editService')->name('editService'); 
 
 
 	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
@@ -204,7 +205,7 @@ Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ');
 
     Route::get('/services/remove_product/{k}','ServicesController@ProductRemove');
 
-	Route::post('/users/productSection','UsersController@SectionProd')->name('users.ProductSection');
+	Route::get('/users/productSection','UsersController@SectionProd')->name('users.ProductSection');
 
 	Route::post('/users/parametring','UsersController@parametring')->name('users.parametring');
 	Route::get('/parametres','UsersController@parametres')->name('parametres');
@@ -217,7 +218,7 @@ Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ');
 	Route::get('/services/add','ServicesController@add')->name('services.add');
 	Route::post('/services/updating','ServicesController@updating')->name('services.updating');
 	Route::post('/services/modif','ServicesController@modif')->name('services.modif'); 
-	Route::post('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction');
+	Route::get('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction');
 	Route::post('/services/AssociateProd','ServicesController@insertServiceProd')->name('services.AssociateProd');
 
 		Route::post('/services/CodePromo','ServicesController@codepromo')->name('services.CodePromo');

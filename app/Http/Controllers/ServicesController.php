@@ -142,13 +142,15 @@ class ServicesController extends Controller
   public function addService(Request $request)
     
       {
+
         $produits =$request->get('produit');
         //$produits = serialize($produits);
       //dd($produits);
       //dd( $request);
-    
+    //
         $name='';
         $rec='off';
+
     if($request->file('photo')!=null)
     {$image=$request->file('photo');
      $name =  $image->getClientOriginalName();
@@ -161,6 +163,7 @@ class ServicesController extends Controller
            if ($request->get('toggleswitch')=='on') {
             $rec=$request->get('toggleswitch');
           }
+
         /* $service  = new Service([
 
               'user' => $request->get('user'),
@@ -189,7 +192,8 @@ class ServicesController extends Controller
               'recurrent' => $rec,
               'thumb' => $name,
            ]);
-            dd($service);
+
+            //dd($service);
             $service->save();
             $id = $request->get('produit');
 
@@ -197,12 +201,85 @@ class ServicesController extends Controller
     //dd($idService);
     Service::where('id', $idService)->update(array('produits_id' => json_encode($id)));
 
+        
+       return redirect('/Services/'.$user);
+        
+        
+    }
+   public function servicemodifier($k)
+    {
+      $idservice = $k ;
+      $service =\App\Service::where('id',$idservice)->first();
+       $id=$service->user;
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
+         $produit= Produit::where('user',$id)->get();
+
+
+
+        return view('entreprise.modifService',  compact('user','id','produit','service')); 
+        
+        }
+    } 
+   public function editService(Request $request)
+  {
+   
+       $id =$request->get('user');
+        $produits =$request->get('produit');
+        //$produits = serialize($produits);
+      //dd($produits);
+      //dd( $request);
+    
+        $name='';
+        $rec='off';
+    if($request->file('photo')!=null)
+    {
+
+      $image=$request->file('photo');
+     $name =  $image->getClientOriginalName(); 
+                 $path = storage_path()."/images/";
+      $date=date('d-m-Y-H-i-s');
+    $name=$name.'-service-'.$date ;
+         $image->move($path,  $name );
+    }
+                 $user =  $request->get('user');
+           if ($request->get('toggleswitch')=='on') {
+            $rec=$request->get('toggleswitch');
+          }
+       
+            DB::table('services')->where('id', $id)->update(array(
+          'user' => $request->get('user'),
+              'nom' => $request->get('nom'),
+              'description' => $request->get('description'),
+              'prix' => $request->get('prix'),
+              'duree' => $request->get('duree'),
+              'Nfois' => $request->get('Nfois'),
+              
+              'periode' => $request->get('mySelect'),
+              'nbrService' => $request->get('nbrService'),
+              'recurrent' => $rec));
+            if ($name != "") {
+             Service::where('id', $id)->update(array('thumb' => $name));
+            }
+        
+        Session::put('ttmessage', 'Enregistré avec succès');
+            //dd($service);
+            $id = $request->get('produit');
+
+    $idService= $id;
+    //dd($idService);
+    Service::where('id', $idService)->update(array('produits_id' => json_encode($id)));
+
 
         
        return back();      
         
-        
-    }
+   }
   public function modif(Request $request)
     {
         $id= $request->get('idchange');
@@ -232,14 +309,17 @@ class ServicesController extends Controller
   
   if($res==0)
   {DB::table('services')->where('id', $id)->delete();
-  return redirect (url('/listing/'.$user.'#services'));
+Session::put('ttmessage', 'Supprimé avec succès');
+        return back();
   }else{
-       return redirect('/listing/'.$user.'#services')->with('error', ' Service rélié aux réservations  ');
+    Session::put('tterror', 'Service rélié aux réservations');
+        return back();
   }
   }
   public function reductionUpdate(Request $request)
 
     {
+      //dd("kjo");
       $cuser = auth()->user();
         $val= $request->get('valchange');
       //dd($val);
@@ -459,7 +539,7 @@ class ServicesController extends Controller
            ]);
 
         $produit->save();
-       return redirect('/listing/'.$user.'#produit')->with('success', ' ajouté  ');
+       return back();
 
   }
 /*      happyhour example

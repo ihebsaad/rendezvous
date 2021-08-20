@@ -33,55 +33,74 @@
                 <p>{{ $live_message }}</p>
                 <a class="close" href="#"></a>
             </div>
+            <?php Session::forget('ttmessage');  ?>
         @endif
         <div class="row">
+                    <div class="row">
             <div class="col-lg-12">
 
                 <div id="add-listing">
 
                     <!-- Section -->
-                    <div class="add-listing-section ">
-                        
+                    <div class="add-listing-section">
+
                         <!-- Headline -->
                         <div class="add-listing-headline">
-                            <h3><i class="sl sl-icon-book-open"></i> Pricing</h3>
-                            <!-- Switcher -->
-                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                            <h3><i class="sl sl-icon-present"></i>Carte de fidélité </h3>
                         </div>
 
-                        <!-- Switcher ON-OFF Content -->
-                        <div class="switcher-content">
+                        <!-- Title -->
+                        <div class="row with-forms">
+                            <div class="col-md-12">
+                              <h2><i class="sl sl-icon-star"></i><b> La réduction s'applique à la 10ème reservation.</b></h2>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table id="pricing-list-container">
-                                        <tr class="pricing-list-item pattern">
-                                            <td>
-                                                <div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>
-                                                <div class="fm-input pricing-name"><input type="text" placeholder="Title" /></div>
-                                                <div class="fm-input pricing-ingredients"><input type="text" placeholder="Description" /></div>
-                                                <div class="fm-input pricing-price"><input type="text" placeholder="Price" data-unit="USD" /></div>
-                                                <div class="fm-close"><a class="delete" href="#"><i class="fa fa-remove"></i></a></div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <a href="#" class="button add-pricing-list-item">Add Item</a>
-                                    <a href="#" class="button add-pricing-submenu">Add Category</a>
-                                </div>
                             </div>
+                        </div>
+
+                        <!-- Row -->
+                        <div class="row with-forms">
+
+                          
+                          <div class="fm-input pricing-price col-md-6 col-sm-12"  >
+                            <h5>Pourcentage de réduction</h5>
+                            <input type="number"   data-unit="%" max="100" min="1" value="{{ $user->reduction }}" onchange="changeReduction(this)" id="reductionId" />
+                        </div>                            
 
                         </div>
-                        <!-- Switcher ON-OFF Content / End -->
+                        <!-- Row / End -->
 
                     </div>
                     <!-- Section / End -->
 
+                   
+
+
 
                 </div>
             </div>
+
+          
+        </div>
         </div>
 <!-- Content end
     ================================================== -->
+    <script type="text/javascript">
+        function changeReduction(x){
+            //alert("ok");
+        var valchange = $(x).val();
+        //alert(valchange);
+        var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.reduction') }}",
+                        method:"get",
+                        data:{valchange:valchange, _token:_token},
+                        success:function(data){
+                        //alert("ok");
+                        }
+                    });
+
+    }
+    </script>
 </div>
 </div>
 @endsection('content')

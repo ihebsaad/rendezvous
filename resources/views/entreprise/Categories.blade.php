@@ -33,6 +33,7 @@
                 <p>{{ $live_message }}</p>
                 <a class="close" href="#"></a>
             </div>
+            <?php Session::forget('ttmessage');  ?>
         @endif
         <div class="row">
             <div class="col-lg-12">
