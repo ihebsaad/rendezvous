@@ -234,7 +234,7 @@ return view('payments.payAbn2', [
     $abn=$request->get('abn');
     $nature_abonn=$request->get('nature_abonn');
 
-
+     $prestataire='';
     if($user==0)
     {
         
