@@ -258,7 +258,7 @@ return view('payments.payAbn2', [
       
     
         
-        $prestataire=new User ([
+        $prestataire= User::create ([
             'username' => $username,
             'name' => $name,
             'lastname' =>  $lastname,
@@ -277,7 +277,7 @@ return view('payments.payAbn2', [
             'password' =>$password,
         ]);
 
-        $prestataire->save();
+        //$prestataire->save();
         Auth::login($prestataire);
 
 
