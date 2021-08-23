@@ -45,7 +45,7 @@ $plogo= $parametres->logo;
                         <!-- Register -->
                         <div >
                         <!-- onsubmit="return validateFormkbs(this)" -->
-                        <form  method="post" action="{{ route('register') }}" name="inscriptionform" id="inscriptionform" autocomplete="on" >
+                        <form  method="post" action="{{ route('create') }}" name="inscriptionform" id="inscriptionform" autocomplete="on" >
                                         <div class="row ">
                                             <div class="col-md-6">
                                                 <div>

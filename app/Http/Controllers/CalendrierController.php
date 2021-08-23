@@ -180,7 +180,9 @@ class CalendrierController extends Controller
          
         $prestataire=User::find($id);
 
-        return view('googlecalendar.index', compact('prestataire')); 
+       // return view('googlecalendar.index', compact('prestataire')); 
+
+        return view('googlecalendar.index2', compact('prestataire'));
 
      }
      public function index()

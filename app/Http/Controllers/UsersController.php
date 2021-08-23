@@ -376,7 +376,8 @@ class UsersController extends Controller
         $user = User::find($id);
        
 
-        return view('users.profile',  compact('user','id')); 
+       // return view('users.profile',  compact('user','id')); 
+        return view('users.profile2',  compact('user','id')); 
         
         }
         
@@ -789,8 +790,24 @@ class UsersController extends Controller
         ]);
          
     }
+    
+    public function portefeuilles($id)
+    {
+        $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+        
+        if(  $user_id == $id || $user_type=='admin' )
+        {   
+        $user = User::find($id);
 
-            public function titredescription($id)
+        return view('users.portefeuilles',  compact('user','id')); 
+        
+        }
+        
+    }
+
+      public function titredescription($id)
     {
         $cuser = auth()->user();
         $user_type=$cuser->user_type;

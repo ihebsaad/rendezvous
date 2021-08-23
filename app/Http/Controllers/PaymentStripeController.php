@@ -21,10 +21,13 @@ use Route;
 use Carbon\Carbon;
 use Redirect;
 
+use Session;
 use URL;
- use DateTime;
- use Swift_Mailer;
- use Mail;
+use DateTime;
+use Swift_Mailer;
+use Mail;
+use Auth;
+
 class PaymentStripeController extends Controller
 {
   public function addcustomerStripe(Request $request){
@@ -159,13 +162,54 @@ return view('payments.pay', [
     $abn=$request->get('abonnement');
     $desc=$request->get('description');
     $nature_abonn=$request->get('nature_abonn');
-   // dd($montant);
-     
-  
-    
+    //dd($user);
+   // nouvelle inscription 
+       $username=0;
+       $name=0;
+       $lastname=0;
+       $phone=0;
+       $email=0;
+
+       $titre=0;
+       $siren=0;
+       $adresse=0;
+       $ville=0;
+       $codep=0;
+
+       $fhoraire=0;
+       $date_inscription=0;
+       $urlqrcode=0;
+       $user_type=0;
+       $password=0;
+
+     if($user==0)
+     {
 
 
-      Stripe::setApiKey('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');
+       $username=Session::get('username');
+       $name=Session::get('name');
+       $lastname=Session::get('lastname');
+       $phone=Session::get('phone');
+       $email=Session::get('email');
+
+       $titre=Session::get('titre');
+       $siren=Session::get('siren');
+       $adresse=Session::get('adresse');
+       $ville=Session::get('ville');
+       $codep=Session::get('codep');
+
+       $fhoraire=Session::get('fhoraire');
+       $date_inscription=Session::get('date_inscription');
+       $urlqrcode=Session::get('qr_code');
+       $user_type=Session::get('user_type');
+       $password=Session::get('password');
+
+   // dd( $urlqrcode);
+     }
+    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');    
+
+
+     // Stripe::setApiKey('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');
 
 
   $intent = PaymentIntent::create([
@@ -179,8 +223,7 @@ return view('payments.pay', [
         ]);*/
 
 return view('payments.payAbn2', [
-            'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn
-        ]);
+            'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn, 'abn' => $abn, 'username' => $username , 'name' => $name , 'lastname' => $lastname, 'phone' => $phone, 'email' => $email , 'titre' => $titre ,'siren' => $siren , 'adresse' => $adresse, 'ville' => $ville ,'codep' => $codep ,'fhoraire' => $fhoraire, 'date_inscription' => $date_inscription , 'urlqrcode' => $urlqrcode ,'user_type' => $user_type ,  'password' => $password  ]);
 
 
    
@@ -190,14 +233,69 @@ return view('payments.payAbn2', [
     $user=$k;
     $abn=$request->get('abn');
     $nature_abonn=$request->get('nature_abonn');
+
+
+    if($user==0)
+    {
+        
+       $username=$request->get('username');
+       $name=$request->get('name');
+       $lastname=$request->get('lastname');
+       $phone=$request->get('phone');
+       $email=$request->get('email');
+
+       $titre=$request->get('titre');
+       $siren=$request->get('siren');
+       $adresse=$request->get('adresse');
+       $ville=$request->get('ville');
+       $codep=$request->get('codep');
+
+       $fhoraire=$request->get('fhoraire');
+       $date_inscription=$request->get('date_inscription');
+       $urlqrcode=$request->get('urlqrcode');
+       $user_type=$request->get('user_type');
+       $password=$request->get('password');
+      
+    
+        
+        $prestataire=new User ([
+            'username' => $username,
+            'name' => $name,
+            'lastname' =>  $lastname,
+            'phone' => $phone,
+            'email' => $email,
+            'titre' => $titre,
+            'siren' => $siren,
+            'adresse' => $adresse,
+            'ville' => $ville,
+            'codep' => $codep,
+            'fhoraire' => $fhoraire,
+            'date_inscription' => $date_inscription,
+           
+            'qr_code'=> $urlqrcode,
+            'user_type' => $user_type,
+            'password' =>$password,
+        ]);
+
+        $prestataire->save();
+        Auth::login($prestataire);
+
+
+    }
+    else
+    {
+
+       $prestataire =  \App\User::find($user);
+
+    }
    
-     
+     $user=$prestataire->id;
   
 
   \Session::put('success', 'Paiement avec succès');
         //    return Redirect::route('/pay');
     
-     $prestataire =  \App\User::find($user);
+     //$prestataire =  \App\User::find($user);
  
     // calcul expiration
      $format = "Y-m-d H:i:s";
@@ -330,8 +428,8 @@ return view('payments.payAbn2', [
     $message.='<b>Téléphone Prestataire :</b> '.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
   //trouvezunprestataire@gmail.com
-  //kbskhaledfb@gmail.com  
-$this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
+  //kbskhaledfb@gmail.com  trouvezunprestataire@gmail.com
+$this->sendMail('kbskhaled@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => 1,
