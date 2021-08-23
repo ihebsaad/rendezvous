@@ -152,7 +152,7 @@ background-color:#a0d468;
                    var urlqrcode ="{{ $urlqrcode }}";
                    var user_type ="{{ $user_type }}";
                    var password ="{{ $password }}";
-                   alert(urlqrcode);
+                   //alert(urlqrcode);
 
                   $.ajax({
 
