@@ -38,7 +38,22 @@ class AbonnementsController extends Controller
 
 
     }
-   
+   public function bindex()
+    {
+		
+		  $cuser = auth()->user();
+		if($cuser->user_type=='admin')
+        {
+			$abonnements = Abonnement::orderBy('id','desc')->get();}
+		else{
+		 $abonnements = Abonnement::where('user',$cuser->id)->orderBy('id','desc')->get();
+		 }
+ 
+
+        return view('abonnements.bindex', compact('abonnements'));
+
+
+    }
 
 		
 	public function add(Request $request)

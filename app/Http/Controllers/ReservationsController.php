@@ -1220,6 +1220,46 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 			});
 	  
 	}
+
+  public function ReservezUnRdv($id)
+    {
+      $cuser = auth()->user();
+        $user_type=$cuser->user_type;
+        $user_id=$cuser->id;
+    //dd($cuser->id);
+        $user = User::find($id);
+    if($cuser->user_type=='prestataire' ){
+    //dd($cuser->id);
+     //$reservations = Reservation::orderBy('id', 'DESC')->where('prestataire',$cuser->id)->whereNull('id_recc')
+        //->get();
+       $reservations = DB::table('reservations')->where('prestataire',$cuser->id)->whereNotNull('date_reservation')->whereNull('id_recc')->where(function($q){ $q->where('recurrent',0)
+         ->orwhere('recurrent',1)->where('visible',true);
+          })->get();
+    }
+    if($cuser->user_type=='client' ){
+        $reservations = DB::table('reservations')->whereNotNull('date_reservation')->where('client',$cuser->id)->whereNull('id_recc')->where(function($q){ $q->where('recurrent',0)
+         ->orwhere('recurrent',1)->where('visible',true);
+          })->get();
+        return view('entreprise.ReservezUnRdvClient', compact('reservations','user','id'));
+    }
+    
+    if($cuser->user_type=='admin' ){
+        $reservations = DB::table('reservations')->whereNotNull('date_reservation')->whereNull('id_recc')->get();
+    } 
+    
+
+     /*$reservations=$reservations->sortBy(function($t)
+                                        {
+                                            return $t->id;
+                                        })->reverse();*/
+        //dd( $reservations);
+    //$this->sendMail('ihebsaad@gmail.com','Test','test Hello world') ;
+        return view('entreprise.ReservezUnRdv', compact('reservations','user','id'));
+
+      
+        
+       
+    }
 	
 		
 	

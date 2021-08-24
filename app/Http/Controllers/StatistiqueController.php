@@ -323,7 +323,7 @@ class StatistiqueController extends Controller
             ->color("rgb(255,0,0)")
 
             ->backgroundcolor("rgb(255,0,0)");
-        return view('statistiques', compact('topservices','basservices','basproduits','topproduits'), [ 'usersChart' => $usersChart ]);
+        return view('statistique.index', compact('topservices','basservices','basproduits','topproduits'), [ 'usersChart' => $usersChart ]);
           
 
         
@@ -331,7 +331,15 @@ class StatistiqueController extends Controller
       //dd($nbres);
 
     }
+public function index2()
+    {
+        
 
+
+        return view('statistique.index'); 
+        
+        
+    }
 		
 	
  

@@ -33,6 +33,17 @@ class ReviewsController extends Controller
 
 
     }
+    public function bindex()
+    {
+		
+		  $cuser = auth()->user();
+ 
+        $reviews = Review::where('prestataire',$cuser->id)->get();
+
+        return view('reviews.bindex', compact('reviews'));
+
+
+    }
    
 
 		
@@ -98,7 +109,7 @@ class ReviewsController extends Controller
   
 	 
 	DB::table('reviews')->where('id', $id)->delete();
-	return redirect (url('/listing/'.$user.'#reviews'));
+	return back();
 
 	}
 	
