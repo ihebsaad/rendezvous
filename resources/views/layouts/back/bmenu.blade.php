@@ -13,7 +13,7 @@
 
       <ul data-submenu-title="Essentiel">
         <li  class="<?php if ($view_name == 'monespace'){echo 'active';} ?> "><a href="{{ route('monespace') }}"><i class="sl sl-icon-home"></i> Mon espace</a></li>
-        <li class="<?php if ($view_name == 'reservations-index'){echo 'active';} ?>  "><a href="{{ route('reservations') }}"><i class="fa fa-calendar-check-o"></i> Réservations</a></li>
+       
         <li class="<?php if ($view_name == 'reservations-index'){echo 'active';} ?>  "><a href="{{ route('ReservezUnRdv', ['id'=>$user->id]) }}"><i class="fa fa-calendar-check-o"></i> Réservations</a></li>
 
     <?php if($user_type=='admin'){ ?> 
@@ -57,15 +57,14 @@
 
     <?php if( $user_type=='prestataire'  ){ ?>    
   
-      <li class="<?php if ($view_name == 'notes-index'){echo 'active';} ?>  "><a href="{{ route('reviews')}}"><i class="sl sl-icon-star"></i> Avis </a></li>       
-      <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('abonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li> 
+      
       <li class="<?php if ($view_name == 'notes-index'){echo 'active';} ?>  "><a href="{{ route('reviewsPro')}}"><i class="sl sl-icon-star"></i> Avis </a></li>       
       <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('MesAbonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li> 
        <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
       <li class="<?php if ($view_name == 'googlecalendar-index'){echo 'active';} ?>  "><a href="{{ route('googleagenda',['id'=>$user->id]) }}"><i class="sl sl-icon-notebook"></i> Google Agenda </a></li> 
        <?php } ?>
       <?php if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>  
-       <li class="<?php if ($view_name == 'statistiques'){echo 'active';} ?>  "><a href="{{ route('Statistiques') }}"><i class="sl sl-icon-chart"></i> Statistiques </a></li> 
+        
        <li class="<?php if ($view_name == 'statistiques'){echo 'active';} ?>  "><a href="{{ route('StatistiquesPro') }}"><i class="sl sl-icon-chart"></i> Statistiques </a></li> 
            <?php } ?> 
       <li><a href="{{ route('portefeuilles', ['id'=>$user->id]) }}"><i class="sl sl-icon-wallet"></i> Portefeuille</a></li>
