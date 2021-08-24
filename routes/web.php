@@ -81,6 +81,8 @@ Route::get('/reservations/deletenewdate','ReservationsController@deletenewdate')
 Route::get('/Statistiques','StatistiqueController@index')->name('Statistiques');
 
 
+Route::get('/Statistiques','StatistiqueController@index2')->name('Statistiques');
+Route::get('/StatistiquesPro','StatistiqueController@index')->name('StatistiquesPro');
 
 Route::get('/ok', function () {
     return view('statistiques');
@@ -265,6 +267,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	
 
 	Route::get('/reviews', array('as' => 'reviews','uses' => 'ReviewsController@index'));
+	Route::get('/reviewsPro', array('as' => 'reviewsPro','uses' => 'ReviewsController@bindex'));
 	Route::post('/reviews/add','ReviewsController@add')->name('reviews.add');
 	Route::post('/reviews/remove/{id}','ReviewsController@remove')->name('reviews.remove');
 	Route::post('/reviews/addfavoris','ReviewsController@addfavoris')->name('reviews.addfavoris');
@@ -277,6 +280,8 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 		Route::post('/reservations/add2','ReservationsController@addServiceRecurrent')->name('reservations.add2');
 
 	Route::get('/reservations','ReservationsController@index')->name('reservations');
+	Route::get('/ReservezUnRdv/{id}','ReservationsController@ReservezUnRdv')->name('ReservezUnRdv');
+
 	Route::get('/reservations/remove/{id}','ReservationsController@remove');
 	Route::get('/reservations/valider/{id}','ReservationsController@valider')->name('validation');
 	Route::get('/reservations/annuler/{id}','ReservationsController@annuler')->name('annul');
@@ -331,6 +336,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	
 
 	Route::get('/abonnements','AbonnementsController@index')->name('abonnements');
+	Route::get('/MesAbonnements','AbonnementsController@bindex')->name('MesAbonnements');
 	Route::get('/abonnements/remove/{id}', 'AbonnementsController@remove');
 	
 
