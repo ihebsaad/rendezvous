@@ -1,7 +1,18 @@
 @extends('layouts.frontv2layout')
  
  @section('content')
-  <?php  $User= auth()->user();
+  <?php  //$User= auth()->user();
+
+   if (auth()->guest()) {
+    //return redirect('/connexion');
+    $User=0;
+   }
+   else
+   {
+       $User= auth()->user();
+       $User=$User->id;
+
+   }
  
  $parametres=DB::table('parametres')->where('id', 1)->first();
 
@@ -131,18 +142,17 @@
                    } ?>
                 </ul>
                  <label for="post-3" class="read-more-trigger"></label></br>
-              @guest  <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
-       @else
+           
         <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
         {{ csrf_field() }}
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
         <input   name="abonnement" type="hidden"  value="3">     
-        <input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
+        <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="offre_lanc">      
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_offrelancement3;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
-        @endguest
+        
       </center>
       </div>
      
@@ -151,7 +161,7 @@
   </section>
   <script type="text/javascript">
      
-      var chkboxes = $('input[type=radio]');
+      /*var chkboxes = $('input[type=radio]');
 chkboxes.click(function() {
   
   var unite = "TTC / Par Mois";
@@ -171,8 +181,7 @@ chkboxes.click(function() {
     document.getElementById("monthlylabel").style.color = "#fff";
   }
     
-    //alert (this.value);
-    //document.getElementById("prixA").innerHTML = ;
+    
     $('#prixA').animate({'opacity': 0}, 400, function(){
         $(this).html(' '+prix1+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
     });
@@ -185,9 +194,10 @@ chkboxes.click(function() {
     
     
           
-});
+});*/
 
-   
+  //alert (this.value);
+    //document.getElementById("prixA").innerHTML = ; 
   </script>
   
   

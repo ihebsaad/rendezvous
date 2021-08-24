@@ -68,7 +68,7 @@
        <li class="<?php if ($view_name == 'statistiques'){echo 'active';} ?>  "><a href="{{ route('Statistiques') }}"><i class="sl sl-icon-chart"></i> Statistiques </a></li> 
        <li class="<?php if ($view_name == 'statistiques'){echo 'active';} ?>  "><a href="{{ route('StatistiquesPro') }}"><i class="sl sl-icon-chart"></i> Statistiques </a></li> 
            <?php } ?> 
-      <li><a href="dashboard-wallet.html"><i class="sl sl-icon-wallet"></i> Portefeuille</a></li>
+      <li><a href="{{ route('portefeuilles', ['id'=>$user->id]) }}"><i class="sl sl-icon-wallet"></i> Portefeuille</a></li>
 
       </ul>
       <ul data-submenu-title="Mon compte">

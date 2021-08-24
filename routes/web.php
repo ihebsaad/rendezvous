@@ -17,6 +17,8 @@ Route::get('/', function () {
 });
 */
 Auth::routes();
+Route::post('/create','Auth\RegisterController@create')->name('create');
+
 Route::get('/testpaypal','PaymentController@createplan')->name('testrdsq');
 Route::get('/statusplan','PaymentController@statusplan')->name('statusplan');
 

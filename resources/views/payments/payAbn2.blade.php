@@ -73,7 +73,11 @@ background-color:#a0d468;
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
-    var stripe = Stripe('pk_live_51Hbt14Go3M3y9uW5wKqzuQN968NPlPtwzB5UZFzLqTtNAZxoU43qINNnPR7cAO8j1XKoZZ1QZyGkYLHvQjOc5U3c00K0ZoDEMa');
+   // var stripe = Stripe('pk_live_51Hbt14Go3M3y9uW5wKqzuQN968NPlPtwzB5UZFzLqTtNAZxoU43qINNnPR7cAO8j1XKoZZ1QZyGkYLHvQjOc5U3c00K0ZoDEMa');
+
+   var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
+
+
     var elements = stripe.elements();
     var style = {
         base: {
@@ -131,13 +135,30 @@ background-color:#a0d468;
                   var paymentIntent = result.paymentIntent.id;
                  //alert(paymentIntent);
                    var _token = $('input[name="_token"]').val();
-                   var abn = "{{ $abn }}"
-                   var nature_abonn="{{ $nature_abonn }}"
+                   var abn = "{{ $abn }}" ;
+                   var nature_abonn="{{ $nature_abonn }}";
+                   var username="{{ $username }}";
+                   var name ="{{ $name }}";
+                   var lastname ="{{ $lastname }}";
+                   var phone ="{{ $phone }}";
+                   var email ="{{ $email }}";
+                   var titre ="{{ $titre }}";
+                   var siren ="{{ $siren }}"; 
+                   var adresse ="{{ $adresse }}";
+                   var ville ="{{ $ville }}";
+                   var codep ="{{ $codep }}";
+                   var fhoraire ="{{ $fhoraire }}";
+                   var date_inscription ="{{ $date_inscription }}";
+                   var urlqrcode ="{{ $urlqrcode }}";
+                   var user_type ="{{ $user_type }}";
+                   var password ="{{ $password }}";
+                   //alert(urlqrcode);
+
                   $.ajax({
 
                    url:"{{url('/')}}/success/payAbn/{{ $usr }}", 
                    type : 'get',
-                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn, abn:abn , _token:_token},
+                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn, abn:abn , _token:_token,username:username, name:name,lastname:lastname,phone:phone,email:email,titre:titre,siren:siren,adresse:adresse,ville:ville,codep:codep,fhoraire:fhoraire,date_inscription:date_inscription,urlqrcode:urlqrcode,user_type:user_type,password:password},
                    
                    success: function(data){ 
                     //alert(data);

@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
 
 use DB;
 use QrCode;
 use URL;
+use Session;
+use redirect;
+
 
 class RegisterController extends Controller
 {
@@ -26,7 +31,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    //use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -90,7 +95,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $req)
     {
         //dd($data);
 
@@ -107,120 +112,89 @@ class RegisterController extends Controller
        } */
 
        // username creation
-       if(isset($data['username']))
-        {
-         if( $data['username'])
+     
+         if( $req->get('username'))
          {
-            $username=$data['username'];
+            $username=$req->get('username');
          } else
            {
-            $username = $data['name'];
+            $username = $req->get('name');
            }
          
-       } else
-       {
-        $username = $data['name'];
-       }
+     
 
        // nom entreprise creation
-       if(isset($data['titre']))
-        {
-         if( $data['titre'])
+       
+         if( $req->get('titre'))
          {
-            $titre=$data['titre'];
+            $titre=$req->get('titre');
          } else
            {
             $titre = "titre de prestataire";
            }
          
-       } else
-       {
-        $titre = "titre de prestataire";
-       }
+      
 
        // siren/siret entreprise creation
-       if(isset($data['siren']))
-        {
-         if( $data['siren'])
+     
+         if( $req->get('siren'))
          {
-            $siren=$data['siren'];
+            $siren=$req->get('siren');
          } else
            {
             $siren = "";
            }
          
-       } else
-       {
-        $siren = "";
-       }
-
+      
        // adresse entreprise creation
-       if(isset($data['adresse']))
-        {
-         if( $data['adresse'])
+       
+         if( $req->get('adresse'))
          {
-            $adresse=$data['adresse'];
+            $adresse=$req->get('adresse');
          } else
            {
             $adresse = "";
            }
          
-       } else
-       {
-        $adresse = "";
-       }
+       
      // codepostal entreprise creation
-       if(isset($data['codep']))
-        {
-         if( $data['codep'])
+      
+         if( $req->get('codep'))
          {
-            $codep=$data['codep'];
+            $codep=$req->get('codep');
          } else
            {
             $codep = "";
            }
          
-       } else
-       {
-        $codep = "";
-       }
-
+      
        // ville entreprise creation
-       if(isset($data['ville']))
-        {
-         if( $data['ville'])
+      
+         if($req->get('ville'))
          {
-            $ville=$data['ville'];
+            $ville=$req->get('ville');
          } else
            {
             $ville = "";
            }
          
-       } else
-       {
-        $ville = "";
-       }
        // fhoraire entreprise creation
-       if(isset($data['fhoraire']))
-        {
-         if( $data['fhoraire'])
+      
+         if( $req->get('fhoraire'))
          {
-            $fhoraire=$data['fhoraire'];
+            $fhoraire=$req->get('fhoraire');
          } else
            {
             $fhoraire = "America/Martinique";
            }
          
-       } else
-       {
-        $fhoraire = "America/Martinique";
-       }
+      
        //gestion qr code 
        //get last id 
        $urlqrcode="";
        $chaine='';
        $baseurl='';
-       if($data['user_type']=='prestataire')
+       if($req->get('user_type')=='prestataire')
        {
         $lastid=User::orderBy('id','desc')->first(['id']);
         $lastid=intval($lastid->id);
@@ -236,31 +210,46 @@ class RegisterController extends Controller
         //dd(public_path());
 
        }
+           $format = "Y-m-d H:i:s";
+        $date_inscription = (new \DateTime())->format('Y-m-d H:i:s');
 
-          /*if($data['user_type']=='prestataire')
+        Session::put('username', $username);
+        Session::put('name' , $req->get('name'));
+        Session::put('lastname', $req->get('lastname'));
+        Session::put('phone', $req->get('phone'));
+        Session::put('email',$req->get('email'));
+        Session::put('titre', $titre);
+        Session::put('siren', $siren);
+        Session::put( 'adresse' , $adresse);
+        Session::put('ville' , $ville);
+        Session::put('codep', $codep);
+        Session::put('fhoraire', $fhoraire);
+        Session::put('date_inscription', $date_inscription);
+        Session::put('qr_code', $urlqrcode);
+        Session::put('user_type', $req->get('user_type'));
+        Session::put('password' , Hash::make($req->get('password')));
+
+         if($req->get('user_type')=='prestataire')
          {
-
           
-            $nbprest=User::where('user_type','prestataire')->count();
+            $nbprest=User::where('user_type','prestataire')->whereNotNull('expire')->count();
 
             if( $nbprest > 100)
             {
-              dd("ok1");
-              $redirectTo='/abonnements';
+             return redirect ('/pricing');
             }
             else
             {
-              dd("ok2");
-              $redirectTo='/offrelancement';
-
+             return redirect ('/offrelancement');
             }
-
         
-        }*/
+        }
 
+          
+           
       
       // dd($typeabonn);
-        $format = "Y-m-d H:i:s";
+       /* $format = "Y-m-d H:i:s";
         $date_inscription = (new \DateTime())->format('Y-m-d H:i:s');
         return User::create([
             'username' => $username,
@@ -279,7 +268,7 @@ class RegisterController extends Controller
             'qr_code'=> $urlqrcode,
             'user_type' => $data['user_type'],
             'password' => Hash::make($data['password']),
-        ]);
+        ]);*/
         
         
 
