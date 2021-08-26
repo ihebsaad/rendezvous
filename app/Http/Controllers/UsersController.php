@@ -60,6 +60,22 @@ class UsersController extends Controller
         }
         
     }
+    public function bindex()
+    {
+         $cuser = auth()->user();
+         
+        $User =\App\User::find($cuser->id);
+        $user_type=$User->user_type;
+
+        if(   $user_type=='admin' )
+        { 
+       
+       $users = User::where('user_type','client')->get();
+
+      return view('users.bindex',  compact('users') );       
+        }
+        
+    }
     public function editPlan(Request $request)
     {
         //dd($request->idligne);
@@ -82,6 +98,7 @@ class UsersController extends Controller
     }
     public static function ChangeApropos(Request $request)
     {
+
         $apropos1a=$request->get('apropos1a');
         DB::table('parametres')->where('id', 1)->update(array('apropos1a'=> $apropos1a));
         $apropos1b=$request->get('apropos1b');
@@ -183,11 +200,26 @@ class UsersController extends Controller
         }     
 
     }
+    public function prestatairesPro()
+    {   
+        $cuser = auth()->user();
+ 
+        $user_type=$cuser->user_type;
+ 
+        if(   $user_type=='admin' )
+        { 
+       
+       $users = User::where('user_type','prestataire')->get();
+
+      return view('users.prestatairesPro',  compact('users') );       
+        }     
+
+    }
     
     
         public function favoris()
     {   
- 
+        
         $cuser = auth()->user();
 
         $idusers= DB::table('favoris')->where('client',$cuser->id)->pluck('prestataire');
@@ -198,6 +230,20 @@ class UsersController extends Controller
         
 
     }
+    public function favorisPro()
+    {   
+ 
+        $cuser = auth()->user();
+
+        $idusers= DB::table('favoris')->where('client',$cuser->id)->pluck('prestataire');
+
+       $users = User::whereIn('id',$idusers)->get();
+
+      return view('users.favorisPro',  compact('users') );       
+        
+
+    }
+
     
            public function faqs()
     {
@@ -730,7 +776,7 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect('/users')->with('success', '  supprimé avec succès');
+        return back();
     }
 
     
@@ -739,7 +785,7 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect('/prestataires')->with('success', '  supprimé avec succès');
+        return back();
     }
 
     public function sendsms()

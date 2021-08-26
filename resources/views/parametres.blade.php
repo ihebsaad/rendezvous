@@ -14,7 +14,7 @@
 
 <script  src="{{ URL::asset('public/js/summernote.min.js') }}"  type="text/javascript"></script>
 <script src="{{  URL::asset('public/js/compose.js') }}" type="text/javascript"></script>
---->
+---> 
  <div class="utf_dashboard_content"> 
  
 <!-- Session errors -->

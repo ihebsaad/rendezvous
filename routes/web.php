@@ -70,6 +70,7 @@ Route::get('/reservations/newDate/{id}','ReservationsController@newDate')->name(
 Route::get('/reservations/Addnewdate','ReservationsController@Addnewdate')->name('reservations.Addnewdate');
 Route::get('/reservations/sendnewdate','ReservationsController@sendnewdate')->name('reservations.sendnewdate');
 Route::get('/reservations/selectdate/{id}','ReservationsController@selectdate')->name('reservations.selectdate');
+
 Route::get('/reservations/changeDate','ReservationsController@changeDate')->name('reservations.changeDate');
 Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name('reservations.AnnulerRes');
 
@@ -113,7 +114,9 @@ Route::get('/monespace', array('as' => 'monespace','uses' => 'UsersController@mo
 
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
+Route::get('/Clients', array('as' => 'Clients','uses' => 'UsersController@bindex'));
 Route::get('/prestataires', 'UsersController@prestataires')->name('prestataires');
+Route::get('/Prestataire', 'UsersController@prestatairesPro')->name('Prestataire');
 Route::get('/pricing', 'UsersController@pricing')->name('pricing');
 Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
 Route::get('/remerciements', 'UsersController@remerciments')->name('remerciments');
@@ -157,9 +160,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
 	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
 	Route::POST('/produit/clientProduits','UsersController@ClientProd')->name('ProductClient');
-	Route::POST('/users/changehometext','UsersController@changetext')->name('users.changehometext');
-		Route::POST('/users/ChangeBoxes','UsersController@ChangeBoxes')->name('users.ChangeBoxes');
-		Route::POST('/users/ChangeApropos','UsersController@ChangeApropos')->name('users.ChangeApropos');
+	Route::get('/users/changehometext','UsersController@changetext')->name('users.changehometext');
+		Route::get('/users/ChangeBoxes','UsersController@ChangeBoxes')->name('users.ChangeBoxes');
+		Route::get('/users/ChangeApropos','UsersController@ChangeApropos')->name('users.ChangeApropos');
 
 Route::get('/users/editPlan','UsersController@editPlan')->name('users.editPlan');
 Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.deleteLine');
@@ -276,6 +279,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris');
 	Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris');
 	Route::get('/favoris','UsersController@favoris')->name('favoris');
+	Route::get('/favorisPro','UsersController@favorisPro')->name('favorisPro');
 
 
 	Route::post('/reservations/add','ReservationsController@add')->name('reservations.add');
@@ -291,8 +295,22 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage');
 
 
+Route::get('/parametre/abonnements','parametreController@abonnements')->name('parametre.abonnements');
+
+Route::get('/parametre/Apropos','parametreController@Apropos')->name('parametre.Apropos');
+Route::get('/parametre/Fonctionnalites','parametreController@Fonctionnalites')->name('parametre.Fonctionnalites');
+Route::get('/parametre/LogoBanniere','parametreController@LogoBanniere')->name('parametre.LogoBanniere');
+Route::get('/parametre/QuestionsReponses','parametreController@QuestionsReponses')->name('parametre.QuestionsReponses');
+
+Route::get('/parametre/Temoinages','parametreController@Temoinages')->name('parametre.Temoinages');
+
+Route::get('/parametre/TemoinagesClient','parametreController@TemoinagesClient')->name('parametre.TemoinagesClient');
+Route::get('/parametre/TemoinagesPrestataire','parametreController@TemoinagesPrestataire')->name('parametre.TemoinagesPrestataire');
+
 
 	Route::get('/categories', array('as' => 'categories','uses' => 'CategoriesController@index'));
+	Route::get('/categoriesPro', array('as' => 'categoriesPro','uses' => 'CategoriesController@bindex'));
+	Route::get('/AddCategory', array('as' => 'AddCategory','uses' => 'CategoriesController@AddCategory'));
 	Route::post('/categories/insert','CategoriesController@insert')->name('categories.insert');
 	Route::post('/categories/add','CategoriesController@add')->name('categories.add');
 	Route::get('/categories/add','CategoriesController@add')->name('categories.add');
@@ -343,13 +361,14 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 	
 
 	Route::get('/carteFidelite','carteFideliteController@index')->name('carteFidelite');
-
+	Route::get('/MesCarteFidelite','carteFideliteController@bindex')->name('MesCarteFidelite');
 
 	Route::get('/alertes','AlertesController@index')->name('alertes');
 	Route::get('/alertes/remove/{id}', 'AlertesController@remove');
 
 
 	Route::get('/payments','PaymentController@index')->name('payments');
+	Route::get('/Paiements','PaymentController@bindex')->name('Paiements');
 	Route::get('/payments/remove/{id}', 'PaymentController@remove');
 
 	Route::get('/googleagenda/{id}','CalendrierController@view')->name('googleagenda');

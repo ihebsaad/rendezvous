@@ -35,7 +35,24 @@ class CategoriesController extends Controller
 
 
     }
+    public function bindex()
+    {
 
+        $categories = Categorie::orderBy('nom', 'asc')->get();
+
+        return view('categories.bindex', compact('categories'));
+
+
+    }
+public function AddCategory()
+    {
+
+        $categories = Categorie::orderBy('nom', 'asc')->get();
+
+        return view('categories.AddCategory', compact('categories'));
+
+
+    }
 		
 	public function insert(Request $request)
 	{

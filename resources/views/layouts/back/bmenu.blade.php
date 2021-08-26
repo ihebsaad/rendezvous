@@ -18,22 +18,22 @@
 
     <?php if($user_type=='admin'){ ?> 
 
-          <li class="<?php if ($view_name == 'users-index'){echo 'active';} ?> "><a href="{{ route('users') }}"><i class="sl sl-icon-people"></i> Clients </a></li>       
-          <li class="<?php if ($view_name == 'users-prestatires'){echo 'active';} ?>  "><a href="{{ route('prestataires') }}"><i class="sl sl-icon-briefcase"></i> Prestataires </a></li> 
-          <li class="<?php if ($view_name == 'categories-index'){echo 'active';} ?>  "><a href="{{ route('categories') }}"><i class="sl sl-icon-tag"></i> Catégories </a></li>       
+          <li class="<?php if ($view_name == 'users-index'){echo 'active';} ?> "><a href="{{ route('Clients') }}"><i class="sl sl-icon-people"></i> Clients </a></li>       
+          <li class="<?php if ($view_name == 'users-prestatires'){echo 'active';} ?>  "><a href="{{ route('Prestataire') }}"><i class="sl sl-icon-briefcase"></i> Prestataires </a></li> 
+          <li class="<?php if ($view_name == 'categories-index'){echo 'active';} ?>  "><a href="{{ route('categoriesPro') }}"><i class="sl sl-icon-tag"></i> Catégories </a></li>       
           <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('abonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li>      
           <li><a href="dashboard-wallet.html"><i class="sl sl-icon-wallet"></i> Wallet</a></li>
 
           </ul>
           <ul data-submenu-title="Mon compte">
-            <li class="<?php if ($view_name == 'parametres'){echo 'active';} ?>  "><a href="{{ route('parametres') }}"><i class="sl sl-icon-equalizer"></i> Paramètres </a>
+            <li class="<?php if ($view_name == 'parametres'){echo 'active';} ?>  "><a href="#"><i class="sl sl-icon-equalizer"></i> Paramètres </a>
                 <ul>
-                  <li><a href="dashboard-my-listings.html">Abonnements <span class="nav-tag green">6</span></a></li>
-                  <li><a href="dashboard-my-listings.html">Logo et banniére <span class="nav-tag yellow">1</span></a></li>
-                  <li><a href="dashboard-my-listings.html">Témoinages <span class="nav-tag red">2</span></a></li>
-                  <li><a href="dashboard-my-listings.html">Boxes des fonctionnalités <span class="nav-tag red">2</span></a></li>
-                  <li><a href="dashboard-my-listings.html">Contenus de à propos <span class="nav-tag red">2</span></a></li>
-                  <li><a href="dashboard-my-listings.html">Questions / réponses <span class="nav-tag red">2</span></a></li>
+                  <li><a href="{{ route('parametre.abonnements')}}">Abonnements <span class="nav-tag green">6</span></a></li>
+                  <li><a href="{{ route('parametre.LogoBanniere')}}">Logo et banniére <span class="nav-tag yellow">1</span></a></li>
+                  <li><a href="{{ route('parametre.Temoinages')}}">Témoinages <span class="nav-tag red">2</span></a></li>
+                  <li><a href="{{ route('parametre.Fonctionnalites')}}">Boxes des fonctionnalités <span class="nav-tag red">2</span></a></li>
+                  <li><a href="{{ route('parametre.Apropos')}}">Contenus de à propos <span class="nav-tag red">2</span></a></li>
+                  <li><a href="{{ route('parametre.QuestionsReponses')}}">Questions / réponses <span class="nav-tag red">2</span></a></li>
                 </ul> 
             </li>  
             <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon profil</a></li>
@@ -44,9 +44,9 @@
 
     <?php if( $user_type=='client'  ){ ?> 
 
-      <li class="<?php if ($view_name == 'reviews-index'){echo 'active';} ?>  "><a href="{{ route('favoris')}}"><i class="sl sl-icon-heart"></i> Mes Favoris </a></li>
-      <li class="<?php if ($view_name == 'carteFidelite-index'){echo 'active';} ?>  "><a href="{{ route('carteFidelite')}}"><i class="sl sl-icon-present"></i> Mes cartes de fidélité </a></li>
-      <li class="<?php if ($view_name == 'payments-index'){echo 'active';} ?>  "><a href="{{ route('payments')}}"><i class="sl sl-icon-wallet"></i> Paiements </a></li> 
+      <li class="<?php if ($view_name == 'reviews-index'){echo 'active';} ?>  "><a href="{{ route('favorisPro')}}"><i class="sl sl-icon-heart"></i> Mes Favoris </a></li>
+      <li class="<?php if ($view_name == 'carteFidelite-index'){echo 'active';} ?>  "><a href="{{ route('MesCarteFidelite')}}"><i class="sl sl-icon-present"></i> Mes cartes de fidélité </a></li>
+      <li class="<?php if ($view_name == 'payments-index'){echo 'active';} ?>  "><a href="{{ route('Paiements')}}"><i class="sl sl-icon-wallet"></i> Paiements </a></li> 
       </ul>
       <ul data-submenu-title="Mon compte">
         <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon profil</a></li>

@@ -721,7 +721,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       //  dd($request);
 	   $reservation=$request->get('reservation');
 
-     return view('reservations.cancel',['reservation'=>$reservation]);
+     return view('reservations.cancelPro',['reservation'=>$reservation]);
 
     }
 

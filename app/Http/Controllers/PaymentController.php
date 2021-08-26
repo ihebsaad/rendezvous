@@ -103,6 +103,32 @@ class PaymentController extends Controller
         return view('payments.index', compact('payments'));
  
 	}
+	public function bindex()
+    { 
+ 
+		 $cuser = auth()->user();
+		 
+		$User =\App\User::find($cuser->id);
+ 		$user_type=$User->user_type;
+		
+		if($user_type=='admin' ){
+        $payments = \App\Payment::orderBy('id','desc')->get();
+		}else{
+ 
+	$payments = DB::table('payments')
+        //   ->where('name', '=', 'John')
+           ->where(function ($query) use($cuser) {
+               $query->where('user', $cuser->id)
+                     ->orWhere('beneficiaire', $cuser->id);
+           })
+           ->orderBy('id','desc')->get();
+		   
+		}
+		 
+		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
+        return view('payments.bindex', compact('payments'));
+ 
+	}
 	
 	
 	public function __construct()

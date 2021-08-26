@@ -120,7 +120,7 @@ class ReservationsController extends Controller
 		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
     $nbrReport = $reservation->nbrReport;
     //dd($nbrReport);
-    	return view("reservations.modif_reservation", compact('reservation','date','heure','name','posible','nbrReport'));
+    	return view("reservations.modifReservationPro", compact('reservation','date','heure','name','posible','nbrReport'));
     }
     public function reporter(Request $request)
     {
@@ -217,7 +217,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$heure = new DateTime($reservation->date_reservation);
 		$heure = $heure->format('H:i');
 		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
-    	return view("reservations.newDateReservation", compact('reservation','date','heure','name','Newdates'));
+    	return view("reservations.newDateReservationPro", compact('reservation','date','heure','name','Newdates'));
     }
     public function Addnewdate(Request $request)
     {
@@ -330,7 +330,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$heure = new DateTime($reservation->date_reservation);
 		$heure = $heure->format('H:i');
 		$name =''.$prestataire->name.' '.$prestataire->lastname .'';
-    	return view("reservations.selectDateReservation", compact('reservation','date','heure','name','Newdates'));
+    	return view("reservations.selectDateReservationPro", compact('reservation','date','heure','name','Newdates'));
     }
     // report d'une date par le client	
     public function changeDate(Request $request)
@@ -564,8 +564,8 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     }
    	$idres=$id;
    
-    	
-    	return view('reservations.annuler_reservation', compact('idres'));
+    	//return view('reservations.annuler_reservation', compact('idres'));
+    	return view('reservations.annulerReservationPro', compact('idres'));
     }		
     public function index()
     {

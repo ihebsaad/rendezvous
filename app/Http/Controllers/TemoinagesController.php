@@ -34,7 +34,7 @@ class TemoinagesController extends Controller
 
         $tem->save();
 
-         return redirect (url('/parametres'));
+         return redirect (url('/parametre/Temoinages'));
  
   
 
@@ -44,7 +44,7 @@ class TemoinagesController extends Controller
   {
 
     DB::table('temoinages')->where('id', $id)->delete();
-    return redirect (url('/parametres'));
+    return redirect (url('/parametre/Temoinages'));
 
 
   }
