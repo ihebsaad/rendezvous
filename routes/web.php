@@ -214,7 +214,7 @@ Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ');
 
 	Route::get('/users/productSection','UsersController@SectionProd')->name('users.ProductSection');
 
-	Route::post('/users/parametring','UsersController@parametring')->name('users.parametring');
+	Route::get('/users/parametring','UsersController@parametring')->name('users.parametring');
 	Route::get('/parametres','UsersController@parametres')->name('parametres');
 	Route::post('/users/ajoutlogo','UsersController@ajoutlogo')->name('users.ajoutlogo');
 	Route::post('/users/ajoutvideoslider','UsersController@ajoutvideoslider')->name('users.ajoutvideoslider');
@@ -296,7 +296,7 @@ Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')-
 
 
 Route::get('/parametre/abonnements','parametreController@abonnements')->name('parametre.abonnements');
-
+Route::get('/parametre/ModifierAbonnements/{k}','parametreController@ModifAbonnements')->name('parametre.ModifierAbonnements');
 Route::get('/parametre/Apropos','parametreController@Apropos')->name('parametre.Apropos');
 Route::get('/parametre/Fonctionnalites','parametreController@Fonctionnalites')->name('parametre.Fonctionnalites');
 Route::get('/parametre/LogoBanniere','parametreController@LogoBanniere')->name('parametre.LogoBanniere');

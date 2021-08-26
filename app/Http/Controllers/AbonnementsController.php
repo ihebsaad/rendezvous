@@ -44,13 +44,16 @@ class AbonnementsController extends Controller
 		  $cuser = auth()->user();
 		if($cuser->user_type=='admin')
         {
-			$abonnements = Abonnement::orderBy('id','desc')->get();}
+			$abonnements = Abonnement::orderBy('id','desc')->get();
+			return view('abonnements.Aindex', compact('abonnements'));
+		}
 		else{
 		 $abonnements = Abonnement::where('user',$cuser->id)->orderBy('id','desc')->get();
+		 return view('abonnements.bindex', compact('abonnements'));
 		 }
  
 
-        return view('abonnements.bindex', compact('abonnements'));
+        
 
 
     }

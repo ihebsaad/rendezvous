@@ -1235,6 +1235,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
        $reservations = DB::table('reservations')->where('prestataire',$cuser->id)->whereNotNull('date_reservation')->whereNull('id_recc')->where(function($q){ $q->where('recurrent',0)
          ->orwhere('recurrent',1)->where('visible',true);
           })->get();
+       return view('entreprise.ReservezUnRdv', compact('reservations','user','id'));
     }
     if($cuser->user_type=='client' ){
         $reservations = DB::table('reservations')->whereNotNull('date_reservation')->where('client',$cuser->id)->whereNull('id_recc')->where(function($q){ $q->where('recurrent',0)
@@ -1245,6 +1246,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     
     if($cuser->user_type=='admin' ){
         $reservations = DB::table('reservations')->whereNotNull('date_reservation')->whereNull('id_recc')->get();
+        return view('entreprise.ReservezUnRdvAdmin', compact('reservations','user','id'));
     } 
     
 
@@ -1254,7 +1256,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
                                         })->reverse();*/
         //dd( $reservations);
     //$this->sendMail('ihebsaad@gmail.com','Test','test Hello world') ;
-        return view('entreprise.ReservezUnRdv', compact('reservations','user','id'));
+        
 
       
         

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Categorie;
+use \App\Contenu_plan;
 
 class parametreController extends Controller
 {
@@ -32,6 +33,26 @@ class parametreController extends Controller
         $categories = Categorie::orderBy('nom', 'asc')->get();
 
         return view('parametre.abonnement', compact('categories'));
+
+
+    }
+    public function ModifAbonnements($k)
+    {
+
+        $categories = Categorie::orderBy('nom', 'asc')->get();
+        if ($k==1) {
+            $abonnement =  Contenu_plan::where('abonnement',1)->get();
+        }
+        if ($k==2) {
+            $abonnement =  Contenu_plan::where('abonnement',2)->get();
+        }
+        if ($k==3) {
+            $abonnement =  Contenu_plan::where('abonnement',3)->get();
+        }
+        
+
+
+        return view('parametre.ModifAbonnement', compact('abonnement'));
 
 
     }

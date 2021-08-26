@@ -77,7 +77,7 @@ class FaqsController extends Controller
   {
 
     DB::table('page_faqs')->where('id', $id)->delete();
-    return redirect (url('/parametres'));
+    return redirect (url('/parametre/QuestionsReponses'));
 
 
   }
@@ -95,7 +95,7 @@ class FaqsController extends Controller
 
         $faq->save();
 
-         return redirect (url('/parametres'));
+         return redirect (url('/parametre/QuestionsReponses'));
  
   
 

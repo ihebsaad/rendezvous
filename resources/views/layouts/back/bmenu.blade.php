@@ -21,8 +21,8 @@
           <li class="<?php if ($view_name == 'users-index'){echo 'active';} ?> "><a href="{{ route('Clients') }}"><i class="sl sl-icon-people"></i> Clients </a></li>       
           <li class="<?php if ($view_name == 'users-prestatires'){echo 'active';} ?>  "><a href="{{ route('Prestataire') }}"><i class="sl sl-icon-briefcase"></i> Prestataires </a></li> 
           <li class="<?php if ($view_name == 'categories-index'){echo 'active';} ?>  "><a href="{{ route('categoriesPro') }}"><i class="sl sl-icon-tag"></i> Catégories </a></li>       
-          <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('abonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li>      
-          <li><a href="dashboard-wallet.html"><i class="sl sl-icon-wallet"></i> Wallet</a></li>
+          <li class="<?php if ($view_name == 'abonnements-index'){echo 'active';} ?>  "><a href="{{ route('MesAbonnements')}}"><i class="sl sl-icon-folder-alt"></i> Abonnements </a></li>      
+          <li><a href="{{ route('portefeuilles', ['id'=>$user->id]) }}"><i class="sl sl-icon-wallet"></i> Portefeuille</a></li>
 
           </ul>
           <ul data-submenu-title="Mon compte">

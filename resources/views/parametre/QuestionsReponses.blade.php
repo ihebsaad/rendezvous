@@ -1,7 +1,7 @@
 @extends('layouts.votreespacelayout')
  
  @section('content')
-
+ 
  <?php 
    use \App\Http\Controllers\UsersController;
 
@@ -81,7 +81,7 @@
           </table>
           <br>
             <center>
-          <a href="#question-reponse-prestataire" class="button popup-with-zoom-anim">Ajouter</a> </center>
+          <a href="#small-dialog" id="prest" onclick="modif(this)" class="button popup-with-zoom-anim">Ajouter</a> </center>
           <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
         </div>  
                     </div>
@@ -134,7 +134,7 @@
           </table>
           <br>
             <center>
-          <a href="#question-reponse-client" class="button popup-with-zoom-anim">Ajouter</a> </center>
+          <a href="#small-dialog" id="client" onclick="modif(this)" class="button popup-with-zoom-anim">Ajouter</a> </center>
           <!--<a href="#" class="button add-pricing-submenu">Add Category</a> --></div>
         </div> 
                     </div>
@@ -147,4 +147,41 @@
     ================================================== -->
 </div>
 </div>
+<!--  modal -->
+
+       <div id="small-dialog" class=" zoom-anim-dialog mfp-hide">
+          <div class="small-dialog-header">
+            <h3>Ajouter une question/réponse</h3>
+          </div>
+  <form  method="post" enctype="multipart/form-data" action="{{ route('pagefaqs.store_question_reponse') }}" >
+      {{ csrf_field() }}
+      
+       <div class="utf_signin_form style_one">
+       <input type="hidden" name="user" value="5"  >
+        <label>Question *: </label>
+        <div class="fm-input">
+        <textarea  type="text"  class="textarea tex-com"   id="question_client" name="question" required  ><?php //echo $pi->titre; ?></textarea>
+      </div>
+        <label>Réponse *: </label>
+      <div class="fm-input">
+       <textarea  type="text"  class="textarea tex-com"   id="question_client" name="reponse" required  ><?php //echo $pi->titre; ?></textarea>
+      </div>
+
+      <input type="hidden" id="mytype"  name="type" value="prest">
+         
+      <br>
+           <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+
+      </form>       
+     </div>     
+     </div>     
+       
+    <!-- fin  -->  
+    <script type="text/javascript">
+      function modif(a) {
+        var x= a.getAttribute("id");
+        alert(x);
+        document.getElementById("mytype").value = x ;
+      }
+    </script>
 @endsection('content')

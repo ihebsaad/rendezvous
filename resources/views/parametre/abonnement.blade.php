@@ -6,6 +6,27 @@
    use \App\Http\Controllers\UsersController;
 
   ?>
+  <?php
+$parametres=DB::table('parametres')->where('id', 1)->first();
+$apropos= $parametres->apropos;
+$apropos_footer= $parametres->apropos_footer;
+$contacter= $parametres->contacter;
+
+$abonnement1= $parametres->abonnement1;
+$cout_abonnement1= $parametres->cout_abonnement1;
+$commission_abonnement1= $parametres->commission_abonnement1;
+
+$abonnement2= $parametres->abonnement2;
+$cout_abonnement2= $parametres->cout_abonnement2;
+$commission_abonnement2= $parametres->commission_abonnement2;
+
+$abonnement3= $parametres->abonnement3;
+$cout_abonnement3= $parametres->cout_abonnement3;
+$commission_abonnement3= $parametres->commission_abonnement3;
+  
+
+?>
+
 
   <!-- Dashboard -->
 <div id="dashboard"> 
@@ -45,51 +66,56 @@
 
                         <!-- Headline -->
                         <div class="add-listing-headline">
-                            <h3><i class="fa fa-info"></i> Titre & Description</h3>
+                            <h3><i class="sl sl-icon-folder-alt"></i> Abonnements</h3>
                         </div>
-                        <form method="post" action="" name="changetitredescription" >
-                        @csrf
-                        <input type="hidden" name="id" value="">
-                        <!-- Title -->
-                        <div class="row with-forms">
-                            <div class="col-md-6">
-                                <h5>Titre de l'entreprise</h5>
-                                <input class="search-field" type="text" placeholder="Titre de l'entreprise" id="titre"   name="titre" value="">
-                            </div>
-                            <div class="col-md-6">
-                                <h5>Responsable</h5>
-                                <input class="search-field" type="text"  placeholder="Responsable Commercial"  name="responsable"  id="responsable" value="" >
-                            </div>
-                        </div>
+                        <div class="row">
 
-                        <!-- Description -->
-                        <div class="form">
-                            <h5>Description</h5>
-                            <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="description" placeholder="Description..."  spellcheck="true"></textarea>
-                        </div>
+                    <div class="col-md-6">
+                        <label>Titre Abonnement 1</label>                       
+                        <input type="text" class="input-text" id="abonnement1" placeholder="" value="<?php echo $abonnement1;?>"  onchange="changing(this)">
+                    </div>
+                    <div class="col-md-3">
+                        <label> Coût</label>                        
+                        <input type="number" class="input-text" id="cout_abonnement1" placeholder="" value="<?php echo $cout_abonnement1;?>" onchange="changing(this)">
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{url('parametre/ModifierAbonnements/1')}}" class=" button " style="margin-top: 25px">Modifier le contenu</a>
+                    </div>
+                    
+                    </div>
+                    
+                    
+                     <div class="row">
+                    
+                    <div class="col-md-6">
+                        <label>Titre Abonnement 2</label>                       
+                        <input type="text" class="input-text"  id="abonnement2" placeholder="" value="<?php echo $abonnement2;?>"  onchange="changing(this)">
+                    </div>                                      
+                    <div class="col-md-3">
+                        <label>Coût </label>
+                        <input type="number" class="input-text" id="cout_abonnement2"  placeholder="" value="<?php echo $cout_abonnement2;?>" onchange="changing(this)">                    
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{url('parametre/ModifierAbonnements/2')}}" class=" button " style="margin-top: 25px">Modifier le contenu</a>                  
+                    </div>
+                    
+                    </div>
 
-                        <!-- Row -->
-                        <div class="row with-forms">
-
-                            <!-- Type -->
-                            <div class="col-md-12">
-                                <h5>Mots-clés <i class="tip" data-tip-content="Maximum de 15 mots-clés liés à votre entreprise"></i></h5>
-                                <input type="text" value="" name="keywords" id="keywords" placeholder="Insérez des mots clés, séparées par des virgules">
-                            </div>
-
-                        </div>
-                        <!-- Row / End -->
-                        <!-- Row -->
-                        <div class="row with-forms">
-
-                            <!-- Type -->
-                            <div class="col-md-12">
-                                <input type="submit" class="button preview" value='Enregistrer' />
-                            </div>
-
-                        </div>
-                        <!-- Row / End -->
-                    </form>
+                     <div class="row">
+                     
+                     <div class="col-md-6">
+                        <label>Titre Abonnement 3</label>                       
+                        <input type="text" class="input-text"  id="abonnement3" placeholder="" value="<?php echo $abonnement3;?>"  onchange="changing(this)">
+                    </div>                                      
+                    <div class="col-md-3">
+                        <label>Coût </label>
+                        <input type="number" class="input-text" id="cout_abonnement3"  placeholder="" value="<?php echo $cout_abonnement3;?>" onchange="changing(this)">                    
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{url('parametre/ModifierAbonnements/3')}}" class=" button " style="margin-top: 25px">Modifier le contenu</a>              
+                    </div>
+                    
+                    </div>
                     </div>
                     <!-- Section / End -->
 
@@ -100,4 +126,33 @@
     ================================================== -->
 </div>
 </div>
+<script type="text/javascript">
+    function changing(elm) {
+        //alert("ok");
+         var champ= elm.id;
+         var val =document.getElementById(champ).value;
+         
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "{{ route('users.parametring') }}",
+            method: "get",
+            data: {champ: champ   ,val:val, _token: _token},
+            success: function (data) {
+                $('#'+champ).animate({
+                    opacity: '0.3',
+                });
+                $('#'+champ).animate({
+                    opacity: '1',
+                });
+                    swal({
+                        type: 'success',
+                        title: 'Modifié ...',
+                        text: 'Contenu modifié avec succès'
+                    //  icon: "success",
+                    }); 
+            }
+        });
+       
+    }
+</script>
 @endsection('content')
