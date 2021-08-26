@@ -107,14 +107,88 @@
 }
 
  </style>
+ <style type="text/css">
+   .pricing-container {
+  width: 90%;
+  max-width: 1170px;
+  margin: 4em auto;
+}
+
+.pricing-container {
+    margin: 6em auto;
+}
+.pricing-container.full-width {
+    width: 100%;
+    max-width: none;
+}
+
+.pricing-switcher {
+  text-align: center;
+}
+
+.pricing-switcher .fieldset {
+  display: inline-block;
+  position: relative;
+  padding: 2px;
+  border-radius: 50em;
+  border: 2px solid #ffd700;
+}
+
+.pricing-switcher input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.pricing-switcher label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  float: left;
+  width: 90px;
+  height: 32px;
+  line-height: 40px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  
+}
+
+.pricing-switcher .switch {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 40px;
+  width: 90px;
+  background-color: #ffd700;
+  border-radius: 50em;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  transition: transform 0.5s;
+}
+
+.pricing-switcher input[type="radio"]:checked + label + .switch,
+.pricing-switcher input[type="radio"]:checked + label:nth-of-type(n) + .switch {
+  -webkit-transform: translateX(90px);
+  -moz-transform: translateX(90px);
+  -ms-transform: translateX(90px);
+  -o-transform: translateX(90px);
+  transform: translateX(90px);
+}
+</style>
 
 <br>
   <section class="fullwidth_block margin-top-0 padding-top-0 padding-bottom-50" data-background-color="#fff"> 
     <div class="container">
-      <div class="row" style="display:none">
+      <div class="row">
         <div class="col-md-12">
-          <h3 class="headline_part centered margin-bottom-20">Offre de Lancement : Vous êtes le visiteur numéro :<?php use App\User; $nbprest=User::where('user_type','prestataire')->count();
-             echo $nbprest;?></h3> <span></span></h3>
+          <div class="pricing-switcher">
+            <p class="fieldset">
+             <input type="radio" name="duration-1" value="Mensuel" id="monthly-1" checked>
+             <label for="monthly-1" style="color: #fff;font-size: 16px" id="monthlylabel"><b>Mensuel</b></label>
+             <input type="radio" name="duration-1" value="Annuel" id="yearly-1" >
+             <label for="yearly-1" style="color: #ffd700; font-size: 16px" id="yearlylabel"><b>Annuel</b></label>
+            <span class="switch"></span>
+        </p>
+       </div>         
         </div>
       </div>
       <div class="row">        
@@ -123,7 +197,7 @@
         <!-- plan 3 - start -->             
         <div class="dashboard-list-box with-icons margin-top-20">
           <div class="booking-requests-filter">
-            <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_offrelancement3;?>€<span id="uniteC">TTC / Par an</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> </div>
+            <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_offrelancement3_mens;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> </div>
           <h4>Offre de Lancement<?php //echo $parametres->abonnement3;?>
           </h4>
           
@@ -148,8 +222,10 @@
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
         <input   name="abonnement" type="hidden"  value="3">     
         <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
-        <input   name="nature_abonn" type="hidden"  value="offre_lanc">      
-        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_offrelancement3;?>">     
+        <input   name="nature_abonn" type="hidden"  value="offre_lanc">
+        <input   name="mensuel_annuel" type="hidden"  value="mensuel">   
+      
+        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_offrelancement3_mens;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
         
@@ -159,42 +235,45 @@
       </div> 
     </div>    
   </section>
+  <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
+
   <script type="text/javascript">
      
-      /*var chkboxes = $('input[type=radio]');
+    var chkboxes = $('input[type=radio]');
 chkboxes.click(function() {
   
   var unite = "TTC / Par Mois";
-  var prix1= <?php echo $parametres->cout_abonnement1;?> ;
-  var prix2= <?php echo $parametres->cout_abonnement2;?> ;
-  var prix3= <?php echo $parametres->cout_abonnement3;?> ;
+ 
+  var prix3= <?php echo $parametres->cout_offrelancement3;?> ;
   if (this.value=="Annuel") {
 
     unite = "TTC / Par an";
-    prix1 = (prix1) * 12;
-    prix2 = (prix2) * 12;
-    prix3 = (prix3) * 12;
+   
+    prix3 =  <?php echo $parametres->cout_offrelancement3;?>;
     document.getElementById("yearlylabel").style.color = "#fff";
     document.getElementById("monthlylabel").style.color = "#fc346c";
+    $('input[name="mensuel_annuel"]').attr('value','annuel');
+    $('input[name="amount"]').attr('value',prix3);
+
   } else {
+   prix3=<?php echo $parametres->cout_offrelancement3_mens;?>;
     document.getElementById("yearlylabel").style.color = "#fc346c";
     document.getElementById("monthlylabel").style.color = "#fff";
+   $('input[name="mensuel_annuel"]').attr('value','mensuel');
+  $('input[name="amount"]').attr('value',prix3);
+
+
   }
     
     
-    $('#prixA').animate({'opacity': 0}, 400, function(){
-        $(this).html(' '+prix1+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
-    });
-    $('#prixB').animate({'opacity': 0}, 400, function(){
-        $(this).html(' '+prix2+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
-    });
+ 
     $('#prixC').animate({'opacity': 0}, 400, function(){
         $(this).html(' '+prix3+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
     });
     
     
           
-});*/
+});
 
   //alert (this.value);
     //document.getElementById("prixA").innerHTML = ; 

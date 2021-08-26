@@ -137,6 +137,7 @@ background-color:#a0d468;
                    var _token = $('input[name="_token"]').val();
                    var abn = "{{ $abn }}" ;
                    var nature_abonn="{{ $nature_abonn }}";
+                   var mensuel_annuel="{{ $mensuel_annuel }}";
                    var username="{{ $username }}";
                    var name ="{{ $name }}";
                    var lastname ="{{ $lastname }}";
@@ -158,7 +159,7 @@ background-color:#a0d468;
 
                    url:"{{url('/')}}/success/payAbn/{{ $usr }}", 
                    type : 'get',
-                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn, abn:abn , _token:_token,username:username, name:name,lastname:lastname,phone:phone,email:email,titre:titre,siren:siren,adresse:adresse,ville:ville,codep:codep,fhoraire:fhoraire,date_inscription:date_inscription,urlqrcode:urlqrcode,user_type:user_type,password:password},
+                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn,mensuel_annuel:mensuel_annuel, abn:abn , _token:_token,username:username, name:name,lastname:lastname,phone:phone,email:email,titre:titre,siren:siren,adresse:adresse,ville:ville,codep:codep,fhoraire:fhoraire,date_inscription:date_inscription,urlqrcode:urlqrcode,user_type:user_type,password:password},
                    
                    success: function(data){ 
                     //alert(data);

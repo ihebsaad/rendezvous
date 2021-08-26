@@ -19,7 +19,7 @@ class Parametre extends Authenticatable
      */
     protected $table="parametres";
     protected $fillable = [
-        'logo','video','apropos','  apropos_footer','token_google_calendar','refresh_token_calendar','texta1','texta2','texta3','texta4','texta5','cout_offrelancement3','cout_offrelancement3_anne2'
+        'logo','video','apropos','  apropos_footer','token_google_calendar','refresh_token_calendar','texta1','texta2','texta3','texta4','texta5','cout_offrelancement3','cout_offrelancement3_mens','cout_offrelancement3_anne2'
 
     ];
 
