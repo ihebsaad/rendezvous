@@ -25,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        if (class_exists('Swift_Preferences')) {
+        \Swift_Preferences::getInstance()->setTempDir(storage_path().'/tmp');
+          } else {
+        \Log::warning('Class Swift_Preferences does not exists');
+          }
         
 
 		view()->composer('*', function($view){

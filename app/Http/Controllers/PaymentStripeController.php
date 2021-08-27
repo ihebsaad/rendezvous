@@ -352,7 +352,25 @@ return view('payments.payAbn2', [
     if($abn!=3){$datee = (new \DateTime())->modify('+366 days')->format($format);}
     else{
       //$datee = (new \DateTime())->modify('+366 days')->format($format);
-      $datee = (new \DateTime())->modify('+366 days')->format($format);
+       if($nature_abonn=="offre_lanc"){
+
+        if($mensuel_annuel=='mensuel')
+        {
+          
+          $datee = (new \DateTime())->modify('+31 days')->format($format);
+        }
+        else
+        {
+
+          $datee = (new \DateTime())->modify('+366 days')->format($format);
+        }
+
+      }
+      else
+      {
+       $datee = (new \DateTime())->modify('+366 days')->format($format);
+      }
+      //$datee = (new \DateTime())->modify('+366 days')->format($format);
 
     }
      }
@@ -366,11 +384,31 @@ return view('payments.payAbn2', [
     /* $datee = ($expiration)->format($format);
 
      $datee = (new \DateTime())->modify('+366 days')->format($format);
-*/
+*/  
+     $daysToAdd='';
      $newdate = Carbon::createFromFormat('Y-m-d H:i:s', $prestataire->expire);
      if($abn!=3){$daysToAdd = 366;}
     else{//$daysToAdd = 365;
-           $daysToAdd = 366;
+
+        if($nature_abonn=="offre_lanc"){
+
+        if($mensuel_annuel=='mensuel')
+        {
+          
+          $daysToAdd = 31;
+        }
+        else
+        {
+
+         $daysToAdd = 366;
+        }
+
+      }
+      else
+      {
+          $daysToAdd = 366;
+      }
+           
     }
      
      $newdate = $newdate->addDays($daysToAdd);
