@@ -17,12 +17,12 @@
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Mon entreprise</h2>
+                    <h2>Réservation</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li>Mon entreprise</li>
-                            <li>Titre & Description</li>
+                            <li>Réservation</li>
+                            <li>Reporter/Annuler rendez-vous</li>
                         </ul>
                     </nav>
                 </div>

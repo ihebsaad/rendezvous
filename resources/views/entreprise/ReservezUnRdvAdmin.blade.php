@@ -19,13 +19,12 @@ use \App\User;
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Bookings</h2>
+                    <h2>Réservations</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li>Bookings</li>
+                            
+                            <li>Réservations</li>
                         </ul>
                     </nav>
                 </div>
@@ -41,17 +40,7 @@ use \App\User;
                     <!-- Booking Requests Filters  -->
                     <div class="booking-requests-filter">
 
-                        <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
-                                <select data-placeholder="Default order" class="chosen-select-no-single">
-                                    <option>All Listings</option>   
-                                    <option>Burger House</option>
-                                    <option>Tom's Restaurant</option>
-                                    <option>Hotel Govendor</option>
-                                </select>
-                            </div>
-                        </div>
+                      
 
                         <!-- Date Range -->
                         <div id="booking-date-range">
@@ -59,18 +48,8 @@ use \App\User;
                         </div>
                     </div>
 
-                    <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
-
-                    <h4>Booking Requests</h4>
+                 
+                    <h4>Liste des réservations</h4>
                     <?php foreach($reservations as $res){ ?>
                     <ul>
 

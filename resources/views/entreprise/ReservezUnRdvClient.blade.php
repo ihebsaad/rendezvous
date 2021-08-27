@@ -25,13 +25,12 @@ $User = auth()->user();
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Bookings</h2>
+                    <h2>Réservations</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li>Bookings</li>
+                            
+                            <li>Réservations</li>
                         </ul>
                     </nav>
                 </div>
@@ -53,16 +52,6 @@ $User = auth()->user();
                         </div>
                     </div>
 
-                    <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
 
                     <h4>Services à abonnements</h4>
                     <ul>
@@ -115,7 +104,7 @@ $User = auth()->user();
                                         </div>
                                         <?php if($pc->datesProposees){ ?>
                                            
-                       <a  href="#rendezvousTel" class="button popup-with-zoom-anim clickDates"  style="margin:5px 5px 5px 5px " onclick="rendezvousTel(<?php echo $pc->id ; ?> )"><i class="fa fa-calendar"></i>Rendez-vous avec le prestataire</a> 
+                       <a  href="#small-dialog" class="button popup-with-zoom-anim clickDates"  style="margin:5px 5px 5px 5px " onclick="rendezvousTel(<?php echo $pc->id ; ?> )"><i class="fa fa-calendar"></i>Rendez-vous avec le prestataire</a> 
                         <?php } ?>    
                                         
 
@@ -154,18 +143,8 @@ $User = auth()->user();
                         </div>
                     </div>
 
-                    <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
-
-                    <h4>Booking Requests</h4>
+              
+                    <h4>Liste des réservations</h4>
                     <?php foreach($reservations as $res){ ?>
                     <ul>
 
@@ -275,4 +254,108 @@ $User = auth()->user();
 
 
 
+<div id="small-dialog" class=" zoom-anim-dialog mfp-hide" >
+          <div class="small-dialog-header">
+
+            <h3>Rendez-vous avec le prestataire<br> par téléphone</h3>
+          </div>
+      <form  method="post" enctype="multipart/form-data"  action="javascript:void(0)"   >
+      {{ csrf_field() }}
+
+       <input type="hidden" value="" >      
+       <div class="utf_signin_form style_one" id="DaterendezvousTelmodal">                 
+       </div> 
+      <br>
+           <input id="brendezvousTel" onclick="brendezvousTelF()" type="submit" style="text-align:center;color:white;" value="Envoyer au prestataire"></input>
+       
+      </form> 
+      <br><hr><br>
+     
+
+     </div>     
+     </div>  
+<script type="text/javascript">
+    function annulerPprestataire( $id_prop_date)
+      {
+
+       // sans modal
+           var _token = $('input[name="_token"]').val();
+            $.ajax({
+            url:'{{ url('/') }}'+'/servicesrec/annulerPprestataire/'+ $id_prop_date,
+            method:"get",
+            success:function(data){
+            alert(data);
+            
+              location.reload();
+  
+                        }
+                    });
+      }
+
+  // fonction exécuté par le client
+
+    function annulerPclient( $id_prop_date)
+      {
+
+         // sans modal
+          var _token = $('input[name="_token"]').val();
+            $.ajax({
+            url:'{{ url('/') }}'+'/servicesrec/annulerPclient/'+$id_prop_date,
+            method:"get",
+            success:function(data){
+              alert(data);
+  
+              }
+               });
+
+      }
+    function accepter($id_prop_date)
+      {
+
+        //  sans modal
+           var _token = $('input[name="_token"]').val();
+            $.ajax({
+            url:'{{ url('/') }}'+'/servicesrec/accepterPropDates/'+$id_prop_date,
+            method:"get",           
+            success:function(data){
+              swal("Vous avez accepté les dates proposées par le prestataire ! ");
+              location.reload();  
+              }
+               });
+
+      }
+    function rendezvousTel($id_prop_date )
+      {
+          // avec modal
+          var y='<input type="hidden" id="id_prop_date_id" value="'+$id_prop_date+'" name="id_prop_date">'; 
+          y+=' <div class="fm-input"> <label>Obtenir un rendez-vous avec le prestataire pour lui parler en téléphone à la date :</label> <br><input type="datetime-local" id="DaterendezvousTel" name="DaterendezvousTel"></div>';
+           document.getElementById("DaterendezvousTelmodal").innerHTML = y;
+      }
+      function brendezvousTelF( ){
+
+         
+          //alert("exist");          
+          var id_prop_date_id = $('#id_prop_date_id').val();
+          var DaterendezvousTel = $('#DaterendezvousTel').val();
+          var _token = $('input[name="_token"]').val();
+         
+          // alert(id_prop_date_id+' '+DaterendezvousTel);
+    
+            $.ajax({
+                url:"{{route('rendezvousTel')}}",
+                method:"get",
+               data:{id_prop_date:id_prop_date_id,DaterendezvousTel: DaterendezvousTel, _token:_token},
+                success:function(data){
+
+               //alert(JSON.stringify(data));
+                 // location.href= "{{ route('reservations') }}";
+          swal("Un email est envoyé au prestataire contenant le rendez-vous pour effectuer une communication téléphonique afin de se mettre d'accord sur les dates des séances");
+
+          location.reload();
+
+                }
+            });
+               
+            };
+</script>
 @endsection('content')

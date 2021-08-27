@@ -17,12 +17,12 @@
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Mon entreprise</h2>
+                    <h2>Paramètres</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li>Mon entreprise</li>
-                            <li>Titre & Description</li>
+                            <li>Paramètres</li>
+                            <li>Logo et banniére </li>
                         </ul>
                     </nav>
                 </div>
@@ -45,7 +45,7 @@
 
                         <!-- Headline -->
                         <div class="add-listing-headline">
-                            <h3><i class="fa fa-info"></i> Titre & Description</h3>
+                            <h3>Logo et banniére</h3>
                         </div>
                         <div class="row with-forms">    
                               <div class="row" >    <a  style="float:right;"  href='#' onclick='location.reload();'>Recharger la page</a>   

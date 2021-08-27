@@ -25,13 +25,12 @@ $User = auth()->user();
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Bookings</h2>
+                    <h2>Réservations</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li>Bookings</li>
+                            <li>Réservations</a></li>
+                           
                         </ul>
                     </nav>
                 </div>
@@ -54,15 +53,7 @@ $User = auth()->user();
                     </div>
 
                     <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
+                  
 
                     <h4>Services à abonnements</h4>
                     <ul>
@@ -120,8 +111,8 @@ $User = auth()->user();
                                             </ul>
                                         </div>
                                         
-                             <a  href="#proposer-dates" class="button popup-with-zoom-anim clickDates" onclick="proposer_dates(<?php echo $pp->id ; ?>,<?php echo  $serv->Nfois ; ?> )" style="margin:5px 5px 5px 5px " ><i class="fa fa-calendar"></i>  proposer dates</a> 
-                             <a  href="#inserer-datesFinales" class="button popup-with-zoom-anim clickDates"  style="margin:5px 5px 5px 5px " onclick="insererDatesfinales(<?php echo $pp->id; ?>,<?php echo  $serv->Nfois ; ?>)" ><i class="fa fa-calendar"></i>Inserer Dates finales</a>             
+                             <a  href="#small-dialog" class="button popup-with-zoom-anim clickDates" onclick="proposer_dates(<?php echo $pp->id ; ?>,<?php echo  $serv->Nfois ; ?> )" style="margin:5px 5px 5px 5px " ><i class="fa fa-calendar"></i>  proposer dates</a> 
+                             <a  href="#small-dialog" class="button popup-with-zoom-anim clickDates"  style="margin:5px 5px 5px 5px " onclick="insererDatesfinales(<?php echo $pp->id; ?>,<?php echo  $serv->Nfois ; ?>)" ><i class="fa fa-calendar"></i>Inserer Dates finales</a>             
                          
                                         
 
@@ -151,16 +142,7 @@ $User = auth()->user();
                     <div class="booking-requests-filter">
 
                         <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
-                                <select data-placeholder="Default order" class="chosen-select-no-single">
-                                    <option>All Listings</option>   
-                                    <option>Burger House</option>
-                                    <option>Tom's Restaurant</option>
-                                    <option>Hotel Govendor</option>
-                                </select>
-                            </div>
-                        </div>
+                      
 
                         <!-- Date Range -->
                         <div id="booking-date-range">
@@ -168,18 +150,9 @@ $User = auth()->user();
                         </div>
                     </div>
 
-                    <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
+                  
 
-                    <h4>Booking Requests</h4>
+                    <h4>Liste des réservations</h4>
                     <?php foreach($reservations as $res){ ?>
                     <ul>
 
@@ -280,4 +253,177 @@ $User = auth()->user();
 
 
 
+
+ <!--  modal pour proposer des dates aux clients -->
+
+        <div id="small-dialog" class=" zoom-anim-dialog mfp-hide" >
+          <div class="small-dialog-header" id="titleDialog">
+
+          </div>
+      <form  method="post" enctype="multipart/form-data"   action="javascript:void(0)"   >
+      {{ csrf_field() }}
+
+       <input type="hidden" value="" >      
+       <div class="utf_signin_form style_one" id="proposerDates">
+      
+             
+        
+      </div>  
+    
+        
+
+      </form> 
+      <hr><br>
+     
+
+     </div>     
+     </div>   
+       
+    <!-- fin modal pour  dates aux clients-->
+
+    <script type="text/javascript">
+        function proposer_dates($id_pre_ins,$nbfois)
+       {
+      //alert(annulerPprestataire+"kbs"+$nbfois);
+        // avec modal
+
+        var t = '<h3 >Dates à proposer au client : </h3>'
+        document.getElementById("titleDialog").innerHTML = t;
+         nbr=$nbfois;
+        
+         var y='<input type="hidden" id="id_prop_date_id3" value="'+$id_pre_ins+'" name="id_prop_date">';
+         y+='<input type="hidden" id="nbr_dates2" value="'+nbr+'" name="nbr_dates"> ';
+        for (var i = 0; i < nbr; i++) {
+        y=y+' <div class="fm-input"> <label>Séance '+(i+1)+' :</label> <input type="datetime-local" id="proposerDates'+i.toString()+'" name="proposerDates'+i.toString()+'"></div>'
+         }
+         y=y+'<input id="bproposer-dates" onclick="bproposerF()" type="submit" style="text-align:center;color:white;" value="Envoyer au client"></input>'
+         document.getElementById("proposerDates").innerHTML = y;
+
+       }
+       function insererDatesfinales ($id_pre_ins,$nbfois)
+       {
+          //avec modal
+        // $("#datesfinales").val($id_pre_ins);
+        var t = '<h3>Insération des dates finales pour les séances</h3>'
+        document.getElementById("titleDialog").innerHTML = t;
+         nbr=$nbfois;
+         var y='<input type="hidden" id="id_prop_date_id2" value="'+$id_pre_ins+'" name="id_prop_date">'; 
+         y+='<input type="hidden" id="nbr_dates_id" value="'+nbr+'" name="nbr_dates"> ';
+        for (var i = 0; i < nbr; i++) {
+        y=y+' <div class="fm-input"> <label>Séance '+(i+1)+' :</label> <input type="datetime-local" id="Datesfinales'+i.toString()+'" name="Datesfinales'+i.toString()+'"></div>'
+         }
+         y=y+'<input onclick="datesFinalesF()" type="submit" style="text-align:center;color:white;" value="Envoyer au client"></input>'
+         document.getElementById("proposerDates").innerHTML = y;
+
+       }
+       function annulerPprestataire( $id_prop_date)
+      {
+
+       // sans modal
+           var _token = $('input[name="_token"]').val();
+            $.ajax({
+            url:'{{ url('/') }}'+'/servicesrec/annulerPprestataire/'+ $id_prop_date,
+            method:"get",
+            success:function(data){
+            //alert(data);
+            
+              location.reload();
+  
+                        }
+                    });
+      }
+
+  // fonction exécuté par le client
+
+    function annulerPclient( $id_prop_date)
+      {
+
+         // sans modal
+          var _token = $('input[name="_token"]').val();
+            $.ajax({
+            url:'{{ url('/') }}'+'/servicesrec/annulerPclient/'+$id_prop_date,
+            method:"get",
+            success:function(data){
+              alert(data);
+  
+              }
+               });
+
+      }
+      function datesFinalesF( ){
+       
+         // alert("exist");  
+           /* var y='<input type="hidden" id="id_prop_date_id2" value="'+$id_pre_ins+'" name="id_prop_date">'; 
+         y+='<input type="hidden" id="nbr_dates_id" value="'+nbr+'" name="nbr_dates"> ';*/
+
+
+          var nbr_dates = $('#nbr_dates_id').val();
+          var id_prop_date= $('#id_prop_date_id2').val();
+          //alert(nbr_dates+' '+ id_prop_date+' 3zeeeeeeeeeeeee');
+          var _token = $('input[name="_token"]').val(); 
+
+          
+            var Datesfinales = [];
+            for (var i = 0; i < parseInt(nbr_dates); i++) {
+              var df= $('#Datesfinales'+((i).toString())).val();
+               //alert(df);
+              // d =moment(d ,'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+               //alert(d);
+              Datesfinales.push(df);
+              
+            }
+
+           // alert(Datesfinales);
+    
+            $.ajax({
+                url:"{{ route('insererDatesfinales') }}",
+                method:"get",
+               data:{id_prop_date:id_prop_date, nbr_dates: nbr_dates,Datesfinales:Datesfinales, _token:_token},
+                success:function(data){
+               // alert(JSON.stringify(data));
+                 // location.href= "{{ route('reservations') }}";
+              swal("Un email est envoyé au client contenant les dates finales pour les séances de service récurrent");
+
+                }
+            });
+               
+            };
+        
+            function bproposerF(){
+            //alert("plp");
+
+              
+          var nbr_dates2 = $('#nbr_dates2').val();
+          var id_prop_date2= $('#id_prop_date_id3').val();
+          //alert(nbr_dates2+' '+ id_prop_date2+' 3zeeeeeeeeeeeee');
+          var _token = $('input[name="_token"]').val(); 
+
+          
+            var datesProposees = [];
+            for (var i = 0; i < parseInt(nbr_dates2); i++) {
+              var dp= $('#proposerDates'+((i).toString())).val();
+              // alert(dp);
+              // d =moment(d ,'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+               //alert(d);
+              datesProposees.push(dp);
+              
+            }
+
+            //alert(datesProposees); 
+               //alert("plp");    
+            $.ajax({
+                url:"{{ route('proposerDates') }}",
+                method:"get",
+                data:{id_prop_date:id_prop_date2,nbr_dates:nbr_dates2,datesProposees:datesProposees, _token:_token},
+                success:function(data){
+                    //alert("plpoooooo");
+                //alert(JSON.stringify(data));
+                 swal("Un email est envoyé au client contenant les dates proposées");
+                 // location.href= "{{ route('reservations') }}";
+                }
+            });
+               
+            };
+
+    </script>
 @endsection('content')

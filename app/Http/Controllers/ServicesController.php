@@ -897,7 +897,7 @@ Session::put('ttmessage', 'Supprimé avec succès');
      //exécuté par prestataire
       public function insererDatesfinales (Request $req)
       {
-
+        //return "ok";
 
          //$req->get('id_prop_date')
          $nbr=intval(trim( $req->get('nbr_dates')));
@@ -1029,6 +1029,7 @@ Session::put('ttmessage', 'Supprimé avec succès');
      //exécuté par prestataire
        public function proposerDates (Request $req)
       {
+        //return "ok";
         //dd($req->all());
          //$req->get('id_prop_date')
          $nbr=intval(trim( $req->get('nbr_dates')));

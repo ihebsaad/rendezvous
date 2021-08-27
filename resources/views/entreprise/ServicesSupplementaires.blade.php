@@ -24,7 +24,7 @@
                     <nav id="breadcrumbs">
                         <ul>
                             <li>Mon entreprise</li>
-                            <li>Titre & Description</li>
+                            <li>Services Supplémentaires</li>
                         </ul>
                     </nav>
                 </div>
@@ -47,7 +47,7 @@
                         
                         <!-- Headline -->
                         <div class="add-listing-headline">
-                            <h3><i class="sl sl-icon-book-open"></i> Pricing</h3>
+                            <h3>Services Supplémentaires</h3>
                             <!-- Switcher -->
                             <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
                         </div>

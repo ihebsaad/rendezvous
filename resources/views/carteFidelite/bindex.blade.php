@@ -24,12 +24,11 @@
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Mon entreprise</h2>
+                    <h2>Mes cartes de fidélité </h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li>Mon entreprise</li>
-                            <li>Titre & Description</li>
+                            <li>Mes cartes de fidélité </li>
                         </ul>
                     </nav>
                 </div>

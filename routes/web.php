@@ -148,9 +148,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/servicesrec/annulerPprestataire/{id}','ServicesController@annulerPprestataire')->name('annulerPprestataire');
     Route::get('/servicesrec/annulerPclient/{id}','ServicesController@annulerPclient')->name('annulerPclient');
     Route::get('/servicesrec/accepterPropDates/{id}','ServicesController@accepterPropDates')->name('accepterPropDates');
-    Route::post('/servicesrec/insererDatesfinales/','ServicesController@insererDatesfinales')->name('insererDatesfinales'); 
-    Route::post('/servicesrec/rendezvousTel/','ServicesController@rendezvousTel')->name('rendezvousTel');     
-    Route::post('/servicesrec/proposerDates/','ServicesController@proposerDates')->name('proposerDates'); 
+    Route::get('/servicesrec/insererDatesfinales/','ServicesController@insererDatesfinales')->name('insererDatesfinales'); 
+    Route::get('/servicesrec/rendezvousTel/','ServicesController@rendezvousTel')->name('rendezvousTel');     
+    Route::get('/servicesrec/proposerDates/','ServicesController@proposerDates')->name('proposerDates'); 
     
     Route::get('/services/modifier/{id}','ServicesController@servicemodifier')->name('servicemodifier'); 
 

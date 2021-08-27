@@ -30,7 +30,8 @@
                     <nav id="breadcrumbs">
                         <ul>
                             <li>Mon entreprise</li>
-                            <li>Titre & Description</li>
+                            <li>Services</li>
+                            <li>Ajouter un service</li>
                         </ul>
                     </nav>
                 </div>

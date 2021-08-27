@@ -24,13 +24,12 @@ use \App\User;
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Bookings</h2>
+                    <h2>Avis</h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li>Bookings</li>
+                          
+                            <li>Avis</li>
                         </ul>
                     </nav>
                 </div>

@@ -42,7 +42,7 @@ font-weight: bold;
                     <nav id="breadcrumbs">
                         <ul>
                             <li>Mon entreprise</li>
-                            <li>Titre & Description</li>
+                            <li>Happy hours</li>
                         </ul>
                     </nav>
                 </div>

@@ -38,12 +38,12 @@ $commission_abonnement3= $parametres->commission_abonnement3;
         <div id="titlebar">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Mon entreprise</h2>
+                    <h2>Paramètres </h2>
                     <!-- Breadcrumbs -->
                     <nav id="breadcrumbs">
                         <ul>
-                            <li>Mon entreprise</li>
-                            <li>Titre & Description</li>
+                            <li>Paramètres </li>
+                            <li>Abonnements</li>
                         </ul>
                     </nav>
                 </div>
