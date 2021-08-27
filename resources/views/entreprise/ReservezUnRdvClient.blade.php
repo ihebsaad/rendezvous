@@ -5,6 +5,12 @@
  <?php 
    use \App\Http\Controllers\UsersController;
 use \App\User;
+$User = auth()->user();
+ use \App\Http\Controllers\ReservationsController;
+  use \App\Service;
+  use \App\PropositionDatesServicesAbn;
+  use \App\Http\Controllers\ServicesController;
+  use \App\Http\Controllers\MyPaypalController;
   ?>
 
   <!-- Dashboard -->
@@ -33,25 +39,114 @@ use \App\User;
         </div>
 
         <div class="row">
-            
-            <!-- Listings -->
             <div class="col-lg-12 col-md-12">
                 <div class="dashboard-list-box margin-top-0">
                     
                     <!-- Booking Requests Filters  -->
                     <div class="booking-requests-filter">
 
-                        <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
-                                <select data-placeholder="Default order" class="chosen-select-no-single">
-                                    <option>All Listings</option>   
-                                    <option>Burger House</option>
-                                    <option>Tom's Restaurant</option>
-                                    <option>Hotel Govendor</option>
-                                </select>
-                            </div>
+                       
+
+                        <!-- Date Range -->
+                        <div id="booking-date-range">
+                            <span></span>
                         </div>
+                    </div>
+
+                    <!-- Reply to review popup -->
+                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+                        <div class="small-dialog-header">
+                            <h3>Send Message</h3>
+                        </div>
+                        <div class="message-reply margin-top-0">
+                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
+                            <button class="button">Send</button>
+                        </div>
+                    </div>
+
+                    <h4>Services à abonnements</h4>
+                    <ul>
+          <li class="pending-booking">
+          <center> <label><h3>Dates de réservation  de services à abonnement proposées par le prestataire : </h3></label></center>
+             </li></ul>
+                    <?php   $propclient=PropositionDatesServicesAbn::where('client',$User->id)->get();?> 
+                    @foreach($propclient as $pc)
+                    <ul>
+                        <?php $pres=User::where('id',$pc->prestataire)->first(); $serv=Service::where('id',$pc->service_rec)->first();  ?>
+                        <li class="pending-booking">
+                            <div class="list-box-listing bookings">
+                                <div class="list-box-listing-img"> <img src=""   alt="Preview"> </div>
+                                <div class="list-box-listing-content">
+                                    <div class="inner">
+                                        <h3>{{ $serv->nom}}
+                                           
+
+
+                                        </h3>
+                                         
+                                        <div class="inner-booking-list">
+                                            <h5>Période:</h5>
+                                            <ul class="booking-list">
+                                                <li class="highlighted">{{ $serv->periode}}  </li>
+                                            </ul>
+                                        </div>
+                                                 
+                                        <div class="inner-booking-list">
+                                            <h5>Nombre de fois par période:</h5>
+                                            <ul class="booking-list">
+                                                <li class="highlighted">{{ $serv->Nfois}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="inner-booking-list">
+                                            <h5>Dates proposées par le prestataire:</h5>
+                                            <ul class="booking-list">
+                                                <li class="highlighted">{{ $pc->datesProposees}}</li>
+                                            </ul>
+                                        </div>       
+                                                    
+                                       
+
+                                        <div class="inner-booking-list">
+                                            <h5>Prestataire:</h5>
+                                            <ul class="booking-list">
+                                                <li>{{$pres->name}} {{$pres->lastname}}</li>
+                                               
+                                            </ul>
+                                        </div>
+                                        <?php if($pc->datesProposees){ ?>
+                                           
+                       <a  href="#rendezvousTel" class="button popup-with-zoom-anim clickDates"  style="margin:5px 5px 5px 5px " onclick="rendezvousTel(<?php echo $pc->id ; ?> )"><i class="fa fa-calendar"></i>Rendez-vous avec le prestataire</a> 
+                        <?php } ?>    
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buttons-to-right">
+                                <a href="" class="button gray" onclick="annulerPclient(<?php echo $pc->id ; ?>  )">Annuler</a>
+                                 <?php if($pc->datesProposees){ ?>
+                                <a href="" class="button gray" onclick="accepter(<?php echo $pc->id ; ?> )"  >Accepter</a>
+                                 <?php } ?>
+                                
+                            </div>
+                        </li>
+                        
+                    </ul>
+                    @endforeach 
+                </div>
+            
+
+
+         
+        </div>
+            <!-- Listings -->
+            <div class="col-lg-12 col-md-12">
+                <div class="dashboard-list-box margin-top-30">
+                    
+                    <!-- Booking Requests Filters  -->
+                    <div class="booking-requests-filter">
+
+                       
 
                         <!-- Date Range -->
                         <div id="booking-date-range">
