@@ -66,7 +66,7 @@
 
                     <h4><i class="im im-icon-Credit-Card"></i> Paiements</h4>
                     @foreach($payments as $payment)
-                    <ul>
+                    <ul class="one" attr="<?php echo   date('d/m/Y', strtotime($payment->created_at ))  ;?>">
 
                         <li class="pending-booking">
                             <div class="list-box-listing bookings">

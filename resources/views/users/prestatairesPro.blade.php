@@ -55,7 +55,7 @@
 
                     <h4>Prestataires</h4>
                     @foreach($users as $user)
-                    <ul>
+                    <ul class="one" attr="<?php $createdat=  date('d/m/Y', strtotime($user->created_at )); echo $createdat; ?>">
 
                         <li class="pending-booking">
                             <div class="list-box-listing bookings">

@@ -25,28 +25,64 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <script>
-$(function() {
 
+$(function() {
+  moment.lang('fr');
     var start = moment().subtract(29, 'days');
     var end = moment();
 
     function cb(start, end) {
-        $('#booking-date-range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        $('#booking-date-range span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
     }
     cb(start, end);
+
     $('#booking-date-range').daterangepicker({
+       "locale": {
+
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Valider",
+        "cancelLabel": "Annuler",
+        "fromLabel": "De",
+        "toLabel": "à",
+        "customRangeLabel": "Custom",
+        "daysOfWeek": [
+            "Dim",
+            "Lun",
+            "Mar",
+            "Mer",
+            "Jeu",
+            "Ven",
+            "Sam"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
+        "firstDay": 1
+    },
         "opens": "left",
         "autoUpdateInput": false,
         "alwaysShowCalendars": true,
         startDate: start,
         endDate: end,
         ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+           'Aujourd\'hui': [moment(), moment()],
+           'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Les 7 derniers jours': [moment().subtract(6, 'days'), moment()],
+           'Les 30 derniers jours': [moment().subtract(29, 'days'), moment()],
+           'Ce mois': [moment().startOf('month'), moment().endOf('month')],
+           'Le mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }
     }, cb);
 
@@ -62,6 +98,50 @@ $('#booking-date-range').on('show.daterangepicker', function(ev, picker) {
 $('#booking-date-range').on('hide.daterangepicker', function(ev, picker) {
     $('.daterangepicker').removeClass('calendar-visible');
     $('.daterangepicker').addClass('calendar-hidden');
+});
+//$("#booking-date-range").daterangepicker();
+$("#booking-date-range").on("cancel.daterangepicker", function(ev, picker) {
+  //alert("ok");
+  var lis = $('ul[class="one"] ');
+    //alert(lis[0].getAttribute("attr"));
+    for (var i = 0; i < lis.length; i++) {
+      //alert(i);
+      
+            lis[i].style.display = 'block';
+        
+           
+    
+  }
+  });
+
+
+
+
+ $("#booking-date-range").on("apply.daterangepicker", function(ev, picker) {
+  minDateFilter = Date.parse(picker.startDate);
+  //alert(moment(minDateFilter).format('DD/MM/YYYY'));
+  maxDateFilter = Date.parse(picker.endDate);
+  //alert(moment(maxDateFilter).format('DD/MM/YYYY'));
+  var min= moment((minDateFilter)).format('YYYY-MM-DD');
+  var max= moment((maxDateFilter)).format('YYYY-MM-DD');
+  //alert(max);
+  
+var lis = $('ul[class="one"] ');
+
+  
+
+
+
+    for (var i = 0; i < lis.length; i++) {
+      var b= moment(lis[i].getAttribute("attr"),"DD/MM/YYYY").format('YYYY-MM-DD');
+      if (moment(max).isAfter(b) && moment(min).isBefore(b)) {
+            lis[i].style.display = 'block';}
+        else
+            {lis[i].style.display = 'none';
+    }
+  }
+  
+
 });
 </script>
 </body>

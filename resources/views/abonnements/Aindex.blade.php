@@ -69,7 +69,7 @@ use \App\User;
 
                     <h4><i class="im im-icon-Coins"></i> Abonnements </h4>
                     <?php foreach($abonnements as $abonnement){ ?>
-                    <ul>
+                    <ul class="one" attr="<?php echo   date('d/m/Y', strtotime($abonnement->created_at ))  ;?>">
 
                         <li class="pending-booking">
                             <div class="list-box-listing bookings">

@@ -41,16 +41,7 @@ $User = auth()->user();
             <div class="col-lg-12 col-md-12">
                 <div class="dashboard-list-box margin-top-0">
                     
-                    <!-- Booking Requests Filters  -->
-                    <div class="booking-requests-filter">
-
-                       
-
-                        <!-- Date Range -->
-                        <div id="booking-date-range">
-                            <span></span>
-                        </div>
-                    </div>
+                   
 
                     <!-- Reply to review popup -->
                   
@@ -154,7 +145,8 @@ $User = auth()->user();
 
                     <h4>Liste des réservations</h4>
                     <?php foreach($reservations as $res){ ?>
-                    <ul>
+                    <ul class="one" attr="<?php  
+                    $dateres = new DateTime($res->date_reservation); echo $dateres->format('d/m/Y') ; ?>">
 
                         <li class="pending-booking">
                             <div class="list-box-listing bookings">

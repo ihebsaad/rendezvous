@@ -51,7 +51,8 @@ use \App\User;
                  
                     <h4>Liste des réservations</h4>
                     <?php foreach($reservations as $res){ ?>
-                    <ul>
+                    <ul class="one" attr="<?php  
+                    $dateres = new DateTime($res->date_reservation); echo $dateres->format('d/m/Y') ; ?>">
 
                         <li class="pending-booking">
                             <div class="list-box-listing bookings">

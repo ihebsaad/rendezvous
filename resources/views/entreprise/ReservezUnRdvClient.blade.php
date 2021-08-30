@@ -41,16 +41,6 @@ $User = auth()->user();
             <div class="col-lg-12 col-md-12">
                 <div class="dashboard-list-box margin-top-0">
                     
-                    <!-- Booking Requests Filters  -->
-                    <div class="booking-requests-filter">
-
-                       
-
-                        <!-- Date Range -->
-                        <div id="booking-date-range">
-                            <span></span>
-                        </div>
-                    </div>
 
 
                     <h4>Services à abonnements</h4>
@@ -146,9 +136,10 @@ $User = auth()->user();
               
                     <h4>Liste des réservations</h4>
                     <?php foreach($reservations as $res){ ?>
-                    <ul>
+                    <ul class="one" attr="<?php  
+                    $dateres = new DateTime($res->date_reservation); echo $dateres->format('d/m/Y') ; ?>">
 
-                        <li class="pending-booking">
+                        <li class="pending-booking" >
                             <div class="list-box-listing bookings">
                                 <div class="list-box-listing-img"><?php $clt=User::where('id',$res->prestataire)->first();if($clt) {if($clt->logo ){ ?> <img src="<?php echo  URL::asset('storage/images/'.$user->logo);?>"   alt="Preview"> <?php }else{echo '<img src="" alt="">';}}else{ echo '<img src="" alt="">';}?></div>
                                 <div class="list-box-listing-content">
@@ -191,6 +182,7 @@ $User = auth()->user();
                                                 <li class="highlighted"><?php  
                     $dateres = new DateTime($res->date_reservation); echo $dateres->format('d/m/Y H:i') ; ?></li>
                                             </ul>
+                                        
                                         </div>      
                                         <div class="inner-booking-list">
                                             <h5>Total:</h5>
@@ -274,6 +266,13 @@ $User = auth()->user();
 
      </div>     
      </div>  
+     <script type="text/javascript">
+         
+         //$('input[name="dates"]').daterangepicker();
+     </script>
+     <script>
+
+</script>
 <script type="text/javascript">
     function annulerPprestataire( $id_prop_date)
       {
