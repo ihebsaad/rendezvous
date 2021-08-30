@@ -81,7 +81,7 @@ section.fullwidth .icon-box-2 {
                             <span class="typed-words"></span>
                     </h2>
                     <h4>{{$parametres->hometext}}</h4>
-                    <form action="{{route('search.prestataires')}}" method="post">
+                    <form action="{{route('recherche.prestataires')}}" method="post">
                      @csrf
 
                     <div class="main-search-input">
@@ -92,7 +92,7 @@ section.fullwidth .icon-box-2 {
 
                         <div class="main-search-input-item">
                             <select data-placeholder="All Categories" class="chosen-select" name="toutes_categories" id="toutes_categories">
-                                @foreach($toutes_categories as $tc)
+                                @foreach($meres_categories as $tc)
                                   <option val="{{$tc->id}}">{{$tc->nom}}</option>
                                 @endforeach
                             </select>

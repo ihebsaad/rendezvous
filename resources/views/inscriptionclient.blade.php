@@ -238,8 +238,8 @@ $temoinages=DB::table('temoinages')->get();
         </div>
         <div class="col-lg-8 col-md-12">
             <div class="dashboard-list-box margin-top-0">
-                <form method="post" action="{{ route('register') }}" name="inscriptionform" id="inscriptionform" autocomplete="on">
-                    <h4>Inscrivez-vous en 2 minutes seulement</h4>
+                <form method="post" action="{{ route('create') }}" name="inscriptionform" id="inscriptionform" autocomplete="on">
+                    <h4>Inscrivez-vous en 3 minutes seulement</h4>
                             <div class="row padding-top-20">
                                 <div class="col-md-6">
                                     <div>
@@ -296,7 +296,7 @@ $temoinages=DB::table('temoinages')->get();
                             
                             <div class="row ">
                                 <div class="col-md-12">
-                                    <input type="submit" class="submit button" id="btnSubmit" value="Je m'inscris !" style="    width: -webkit-fill-available;" onclick="my_func()">
+                                    <input type="submit" class="submit button"  value="Je m'inscris !" style="    width: -webkit-fill-available;" >
                                 </div>
                             </div>
 

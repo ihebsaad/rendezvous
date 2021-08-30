@@ -16,6 +16,7 @@ use QrCode;
 use URL;
 use Session;
 use redirect;
+use Auth;
 
 
 class RegisterController extends Controller
@@ -97,7 +98,7 @@ class RegisterController extends Controller
      */
     protected function create(Request $req)
     {
-        //dd($data);
+        //dd($req->all());
 
         //\QrCode::size(200)->format('png')->generate('webnersolutions.com', public_path('qrcode1.png'));
         
@@ -112,6 +113,9 @@ class RegisterController extends Controller
        } */
 
        // username creation
+
+       if($req->get('user_type')=='prestataire')
+       {
      
          if( $req->get('username'))
          {
@@ -245,8 +249,32 @@ class RegisterController extends Controller
         
         }
 
-          
+         } 
+           else // inscripion client
+           {
+
+            $format = "Y-m-d H:i:s";
+             $date_inscription = (new \DateTime())->format('Y-m-d H:i:s');
+
+
+            $client= User::create([
+            'username' => $req->get('username'),
+            'name' => $req->get('name'),
+            'lastname' => $req->get('lastname'),
+            'phone' => $req->get('phone'),
+            'email' => $req->get('email'),
+            
+            'date_inscription' => $date_inscription,
            
+            'user_type' => $req->get('user_type'),
+            'password' => Hash::make($req->get('password')),
+           ]);
+            Auth::login($client);
+
+
+             return redirect ('/dashboard');
+
+           }
       
       // dd($typeabonn);
        /* $format = "Y-m-d H:i:s";
