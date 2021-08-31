@@ -180,8 +180,7 @@
                    } ?>
                 </ul>
                  <label for="post-3" class="read-more-trigger"></label></br>
-              @guest  <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
-       @else
+           
         <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
         {{ csrf_field() }}
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
@@ -191,7 +190,7 @@
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
-        @endguest
+       
        </div>
       </div>
  <!-- plan 3 - end -->  
@@ -218,8 +217,7 @@
                    } ?>
                  </ul>
                  <label for="post-2" class="read-more-trigger"></label></br>
-                @guest <a class="button sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');" ><i class="sl sl-icon-basket"></i> Acheter</a> 
-			 @else
+                
 			 <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
 				{{ csrf_field() }}
  				<input   name="description" type="hidden"  value="<?php echo $parametres->abonnement2;?>">     				
@@ -229,7 +227,7 @@
  				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement2;?>">     
 				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
 				</form>
-				@endguest
+			
 			 </div>
       </div>
  <!-- plan 2 - end -->  
@@ -256,8 +254,7 @@
                    } ?>
                  </ul>
                  <label for="post-1" class="read-more-trigger"></label></br>
-               @guest <a class="button border sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');"><i class="sl sl-icon-basket"></i> Acheter</a> 
-      @else
+               
         <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
         {{ csrf_field() }}
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement1;?>">            
@@ -267,7 +264,7 @@
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
         <button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>
-        @endguest
+   
         </div>
       </div>
       <!-- plan 1 - end -->  
