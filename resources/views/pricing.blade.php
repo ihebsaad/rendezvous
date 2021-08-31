@@ -1,7 +1,16 @@
 @extends('layouts.frontlayout')
  
  @section('content')
-  <?php  $User= auth()->user();
+  <?php   if (auth()->guest()) {
+    //return redirect('/connexion');
+    $User=0;
+   }
+   else
+   {
+       $User= auth()->user();
+       $User=$User->id;
+
+   }
  
  $parametres=DB::table('parametres')->where('id', 1)->first();
 
@@ -185,7 +194,7 @@
         {{ csrf_field() }}
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
         <input   name="abonnement" type="hidden"  value="3">     
-        <input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
+        <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
@@ -222,7 +231,7 @@
 				{{ csrf_field() }}
  				<input   name="description" type="hidden"  value="<?php echo $parametres->abonnement2;?>">     				
  				<input   name="abonnement" type="hidden"  value="2">     				
- 				<input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
+ 				<input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
  				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement2;?>">     
 				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
@@ -259,7 +268,7 @@
         {{ csrf_field() }}
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement1;?>">            
         <input   name="abonnement" type="hidden"  value="1">            
-        <input   name="user" type="hidden"  value="<?php echo $User->id;?>"> 
+        <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
          <input   name="nature_abonn" type="hidden"  value="normal">   
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
         <button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
