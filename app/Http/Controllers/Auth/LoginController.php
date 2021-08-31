@@ -102,12 +102,13 @@ class LoginController extends Controller
                     $nbjours = $date_inscription->diff($date_courante);
                     $nbjours =intval($nbjours->format('%R%a'));
 
-                     if($nbjours>365)
-                      { 
-                       //return redirect ('/offrelancement_anne2');
+                    return redirect ('/choixpayement');
 
-                        return redirect ('/pricing');
-                      }
+                     /*if($nbjours>365)
+                      { 
+                       
+                        return redirect ('/offrelancement');
+                      }*/
 
                     
                     //si oui on passe vers la payement de deuxième tranche 

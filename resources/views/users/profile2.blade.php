@@ -84,23 +84,22 @@
 			<!-- Change Password -->
 			<div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
-					<h4 class="gray">Change Password</h4>
+					<h4 class="gray">Changer le mot de passe</h4>
 					<div class="dashboard-list-box-static">
-
+                     <form method="POST" action="{{ route('change.password') }}">
+                        @csrf 
 						<!-- Change Password -->
 						<div class="my-profile">
-							<label class="margin-top-0">Current Password</label>
-							<input type="password">
 
-							<label>New Password</label>
-							<input type="password">
+							<label>Nouveau mot de passe</label>
+							<input id="new_password" type="password" class="form-control" name="new_password" >
 
-							<label>Confirm New Password</label>
-							<input type="password">
+							<label>Confirmer le mot de passe</label>
+							<input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
 
-							<button class="button margin-top-15">Change Password</button>
+							<button type="submit" class="button margin-top-15">Change Password</button>
 						</div>
-
+                     </form>
 					</div>
 				</div>
 			</div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator; 
 use Illuminate\Http\Request;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
 //use Illuminate\Http\PostRequest;
 use DB;
 use QrCode;
@@ -635,6 +637,12 @@ class UsersController extends Controller
        
       return view('remerciments');       
 
+    }
+
+    public function choixpayement ()
+    {
+
+    	 return view('choix_payement');
     }
     
   public function offrelancement()
@@ -1548,6 +1556,19 @@ public function Services($id)
         return view('entreprise.FAQ',  compact('user','id')); 
         
         }
+    }
+
+    public function changepassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+   
+        dd('Password change successfully.');
     }
 
  }

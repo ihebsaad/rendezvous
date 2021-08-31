@@ -121,6 +121,7 @@ Route::get('/pricing', 'UsersController@pricing')->name('pricing');
 Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
 Route::get('/remerciements', 'UsersController@remerciments')->name('remerciments');
 Route::get('/offrelancement', 'UsersController@offrelancement')->name('offrelancement');
+Route::get('/choixpayement', 'UsersController@choixpayement')->name('choixpayement');
 Route::get('/offrelancement_anne2', 'UsersController@OffreLancement_anne2')->name('OffreLancement_anne2');
 
 
@@ -143,6 +144,10 @@ Route::get('/get_liste_regles_services_suppl/{id}', 'ServicesController@get_list
 
 
 Route::group(['middleware' => 'auth'], function(){
+
+	//changer password page profile
+
+	Route::post('changepassword', 'UsersController@changepassword')->name('change.password');
 
 	//services  récurrent à abonnement
 
