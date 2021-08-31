@@ -238,7 +238,7 @@ class RegisterController extends Controller
           
             $nbprest=User::where('user_type','prestataire')->whereNotNull('expire')->count();
 
-            if( $nbprest > 100)
+            if( $nbprest < 100)
             {
              return redirect ('/pricing');
             }
