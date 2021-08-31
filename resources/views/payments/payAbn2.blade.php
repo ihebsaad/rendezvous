@@ -52,7 +52,7 @@ background-color:#a0d468;
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                  <h4>Paiement de votre abonnement ( montant à payer : {{$montant}} €)</h4>      
+                  <h4>Paiement de votre abonnement (montant à payer : {{$montant}} €)</h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
                                     <div id="card-element">
@@ -153,13 +153,14 @@ background-color:#a0d468;
                    var urlqrcode ="{{ $urlqrcode }}";
                    var user_type ="{{ $user_type }}";
                    var password ="{{ $password }}";
+                   var montant ="{{$montant}}";
                    //alert(urlqrcode);
 
                   $.ajax({
 
                    url:"{{url('/')}}/success/payAbn/{{ $usr }}", 
                    type : 'get',
-                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn,mensuel_annuel:mensuel_annuel, abn:abn , _token:_token,username:username, name:name,lastname:lastname,phone:phone,email:email,titre:titre,siren:siren,adresse:adresse,ville:ville,codep:codep,fhoraire:fhoraire,date_inscription:date_inscription,urlqrcode:urlqrcode,user_type:user_type,password:password},
+                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn,mensuel_annuel:mensuel_annuel, abn:abn , _token:_token,username:username, name:name,lastname:lastname,phone:phone,email:email,titre:titre,siren:siren,adresse:adresse,ville:ville,codep:codep,fhoraire:fhoraire,date_inscription:date_inscription,urlqrcode:urlqrcode,user_type:user_type,password:password,montant:montant},
                    
                    success: function(data){ 
                     //alert(data);

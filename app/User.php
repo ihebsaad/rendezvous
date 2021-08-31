@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $table="users";
     protected $fillable = [
-        'username', 'expire','reduction','abonnement','logo','photo_profil','couverture','video', 'email', 'password', 'name' ,'lastname','phone', 'fhoraire', 'adresse', 'ville', 'codep','user_type','date_inscription', 'lundi_o',	'lundi_f',	'mardi_o',	'mardi_f',	'mercredi_o',	'mercredi_f',	'jeudi_o' , 'jeudi_f' , 'vendredi_o' ,	'vendredi_f' ,	'samedi_o' ,	'samedi_f' ,'dimanche_o' ,	'dimanche_f' , 'type_abonn_essai','titre','siren','qr_code','google_access_token','google_refresh_token','allow_slices','type_abonn','nature_abonn', 'annuel_mensuel','id_stripe','emailPaypal' ];
+        'username', 'expire','reduction','abonnement','logo','photo_profil','couverture','video', 'email', 'password', 'name' ,'lastname','phone', 'fhoraire', 'adresse', 'ville', 'codep','user_type','date_inscription', 'lundi_o',	'lundi_f',	'mardi_o',	'mardi_f',	'mercredi_o',	'mercredi_f',	'jeudi_o' , 'jeudi_f' , 'vendredi_o' ,	'vendredi_f' ,	'samedi_o' ,	'samedi_f' ,'dimanche_o' ,	'dimanche_f' , 'type_abonn_essai','titre','siren','qr_code','google_access_token','google_refresh_token','allow_slices','type_abonn','nature_abonn', 'annuel_mensuel','dernier_montant','id_stripe','emailPaypal' ];
 
     /**
      * The attributes that should be hidden for arrays.

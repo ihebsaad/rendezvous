@@ -242,6 +242,13 @@ return view('payments.payAbn2', [
     if($nature_abonn=="offre_lanc"){
         $mensuel_annuel=$request->get('mensuel_annuel');
       }
+
+    $montant='';
+    if($request->get('montant'))
+    {
+       $montant=$request->get('montant');
+    }
+   
     
 
      $prestataire='';
@@ -329,7 +336,11 @@ return view('payments.payAbn2', [
         }
 
       }
-     
+
+      //dernier montant payé par le prestataire
+       if($montant){
+        User::where('id',$user)->update(array('dernier_montant' =>$montant));
+       }
      
      // aucun abonnement fait
      if($expiration==''){
