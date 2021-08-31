@@ -196,7 +196,7 @@
         <input   name="abonnement" type="hidden"  value="3">     
         <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
-        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3;?>">     
+        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement3*12;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
        
@@ -233,7 +233,7 @@
  				<input   name="abonnement" type="hidden"  value="2">     				
  				<input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
- 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement2;?>">     
+ 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement2*12;?>">     
 				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
 				</form>
 			
@@ -270,7 +270,7 @@
         <input   name="abonnement" type="hidden"  value="1">            
         <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
          <input   name="nature_abonn" type="hidden"  value="normal">   
-        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1;?>">     
+        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abonnement1* 12;?>">     
         <button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>
    
