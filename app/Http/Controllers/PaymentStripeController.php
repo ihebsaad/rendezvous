@@ -996,7 +996,7 @@ public function sendMail($to,$sujet,$contenu){
 
 public function stripeWebhook(Request $request)
     {
-      dd("ok");
+      //dd("ok");
 
         // You can find your endpoint's secret in your webhook settings
         $endpoint_secret = "whsec_kJ1wYb3HxPXQ5SmCvdmGsoEngJCxJ0bg";
