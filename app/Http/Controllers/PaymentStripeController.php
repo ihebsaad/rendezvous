@@ -1000,7 +1000,7 @@ public function sendMail($to,$sujet,$contenu){
 
 public function stripeWebhook(Request $request)
     {
-      //dd("ok");
+      dd("ok");
       \Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
         // You can find your endpoint's secret in your webhook settings
         $endpoint_secret = "whsec_kJ1wYb3HxPXQ5SmCvdmGsoEngJCxJ0bg";
