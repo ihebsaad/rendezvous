@@ -38,7 +38,7 @@ Route::post('/existanceemail','UsersController@existance_email')->name('existanc
 //------------------------Stripe-----------------------//
 
 
-Route::get('/testWebhooks','PaymentStripeController@stripeWebhook')->name('testWebhooks');
+Route::post('/testWebhooks','PaymentStripeController@stripeWebhook')->name('testWebhooks');
 Route::get('/ConnectWithStripe','PaymentStripeController@connect')->name('ConnectWithStripe');
 Route::get('/reauth','PaymentStripeController@reauth')->name('reauth');
 
