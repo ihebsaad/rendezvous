@@ -119,10 +119,14 @@ class PaymentStripeController extends Controller
     $reste=$montant-$acompte;
 
 //dd($idaccount);
-$intent = PaymentIntent::create([
+/*$intent = PaymentIntent::create([
             'amount' => $acompte*100,
             'currency' => 'eur',
-        ], ['stripe_account' => $idaccount]);
+        ], ['stripe_account' => $idaccount]);*/
+        $intent = PaymentIntent::create([
+            'amount' => $acompte*100,
+            'currency' => 'eur',
+        ]);
 //dd($intent);
         $clientSecret = Arr::get($intent, 'client_secret');
 
