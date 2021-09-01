@@ -148,6 +148,8 @@ Route::group(['middleware' => 'auth'], function(){
 	//changer password page profile
 
 	Route::post('changepassword', 'UsersController@changepassword')->name('change.password');
+	Route::post('/changeinfoprofile','UsersController@changeinfoprofile')->name('changeinfoprofile');
+
 
 	//services  récurrent à abonnement
 

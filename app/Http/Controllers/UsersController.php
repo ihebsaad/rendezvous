@@ -1561,15 +1561,61 @@ public function Services($id)
 
     public function changepassword(Request $request)
     {
-        $request->validate([
+       /* $request->validate([
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
-        ]);
+        ]);*/
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+       Session::put('changeprofile', 'mot de passe a été changé avec succès');
+
    
-        dd('Password change successfully.');
+       return back();
+    }
+
+     public function changeinfoprofile(Request $request)
+    {
+       /* $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);*/
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+         $name='';
+        if($request->file('photo')!=null)
+		    {
+		    	$image=$request->file('photo');
+		      $name =  $image->getClientOriginalName();
+		                 $path = storage_path()."/photo_profile/";
+		      $date=date('d-m-Y-H-i-s');
+		     $name=$date.'_pf_'.$name ;
+		         $image->move($path, $name );
+		    }
+
+
+		     User::find(auth()->user()->id)->update([
+                'name'=> $request->get('name'),
+                'lastname'=> $request->get('lastname'), 
+                'phone'=> $request->get('phone'),
+                'email'=> $request->get('email'),
+                'adresse'=> $request->get('adresse'),
+                 'ville'=> $request->get('ville'),
+                 'codep'=> $request->get('codep'),
+                 'fb'=> $request->get('fb'),
+                 'instagram'=> $request->get('instagram'),
+                 'twitter'=> $request->get('twitter'),
+                 'photo_profil'=> $name,
+
+		     	]);
+
+       Session::put('changeprofile', 'Votre profile a été mis à jour avec succès');
+
+   
+       return back();
     }
 
  }
