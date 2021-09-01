@@ -143,7 +143,7 @@ $pvideo= $parametres->video;
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery.countdown.min.js') }}"></script>
 <script type="text/javascript">
 	$("#countdown")
-		.countdown('2021/09/04', function(event) {
+		.countdown('2021/09/18', function(event) {
 			var $this = $(this).html(event.strftime(''
 			+ '<div><span>%D</span>  <i>Jours</i></div>'
 			+ '<div><span>%H</span> <i>Heures</i></div> '

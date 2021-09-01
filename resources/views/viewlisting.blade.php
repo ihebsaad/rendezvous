@@ -893,9 +893,9 @@ output {
           <div class="video-responsive">
  		  <?php echo $user->codevideo ;?>
  		  </div>
-         </div>
-	  <?php } ?>      
-		</section>
+         </div>   
+    </section>
+	  <?php } ?>   
 		<?php 
 		
 		  $faqs =\App\Faq::where('user',$id)->get();
