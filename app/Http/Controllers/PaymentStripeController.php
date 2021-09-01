@@ -1000,9 +1000,59 @@ public function sendMail($to,$sujet,$contenu){
 
 public function stripeWebhook(Request $request)
     {
-      return response()->json([
+
+        // You can find your endpoint's secret in your webhook settings
+        $endpoint_secret = config('services.stripe.webhooksecret');
+
+        $payload = @file_get_contents('php://input');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
+        $event = null;
+
+        try
+        {
+            $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
+        } 
+        catch(\UnexpectedValueException $e)
+        {
+                // Invalid payload
+                return response()->json([
+                    'message' => 'Invalid payload',
+                ], 200);
+        }
+        catch(\Stripe\Exception\SignatureVerificationException $e)
+        {
+            // Invalid signature
+            return response()->json([
                 'message' => 'Invalid signature',
             ], 200);
+        }
+
+        if ($event->type == "payment_intent.succeeded")
+        {
+            //As I understand here is where I should do things like send order info by mail and deplete stock accordingly
+
+            $intent = $event->data->object;
+
+            //$this->completeOrderInDatabase()
+            //$this->sendMail();
+
+            return response()->json([
+                'intentId' => $intent->id,
+                'message' => 'Payment succeded'
+            ], 200); 
+        } 
+        elseif ($event->type == "payment_intent.payment_failed")
+        {
+            //Payment failed to be completed
+            
+            $intent = $event->data->object;
+            $error_message = $intent->last_payment_error ? $intent->last_payment_error->message : "";
+
+            return response()->json([
+                'intentId' => $intent->id,
+                'message' => 'Payment failed: '.$error_message
+            ], 400); 
+        }
 
         
     }
