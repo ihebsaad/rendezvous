@@ -9,7 +9,7 @@
 
 
 <!-- Container -->
-<div id="wrapper" style="background-image: url(http://localhost/rendezvous/public/listeo/images/test.jpg);
+<div id="wrapper" style="    background: white;background-image: url(http://localhost/rendezvous/public/listeo/images/test1.jpg);
     background-repeat: no-repeat;
     background-size: cover;">
 <div class="container ">
@@ -17,16 +17,16 @@
    
 	<div class="row"  >
 	<div class="col-lg-6 col-md-12">
-		<br><br><br><br>
+		<br><br><br><br><br><br>
 					<img src="<?php echo  URL::asset('storage/images/logoprv.png');?>" alt="" >
 
-                        <br><br><br><br><br>
+                        <br><br><br>
                   <center> <a href="{{route('home')}}" class="submit button" ><span class="arrow"></span>Revenir à la page d'accueil</a></center> 
-					<br><br></br></div><br><br><br><br><br><br>
+					<br><br></br></div><br>
 					<div class="col-lg-6 col-md-12" >
 <center>
 					<section id="not-found" >
-						<h3 style="color: #333;
+						<h3 style="color: #353535;
 			font-size: 95px;;
 			font-family: 'Raleway';
 		">OUPS! </h3>
