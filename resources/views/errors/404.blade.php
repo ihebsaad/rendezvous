@@ -26,7 +26,7 @@
 					<div class="col-lg-6 col-md-12" >
 <center>
 					<section id="not-found" >
-						<h3 style="color: #353535;
+						<h3 style="color: #060606;;
 			font-size: 95px;;
 			font-family: 'Raleway';
 		">OUPS! </h3>
