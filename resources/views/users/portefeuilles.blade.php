@@ -44,8 +44,10 @@ use \App\User;
       <!-- Item -->
       <div class="col-lg-4 col-md-6">
         <div class="dashboard-stat color-3">
-          <div class="dashboard-stat-content wallet-totals"><h4>{{$CA[0]->somme}}</h4> <span>Chiffre d’affaire (mensuelle) <strong class="wallet-currency">EURO</strong></span></div>
+
+          <div class="dashboard-stat-content wallet-totals"><h4>{{$CA[0]->somme}}</h4> <span>Chiffre d’affaire (mensuelle) <strong class="wallet-currency">EURO</strong></span> </div>
           <div class="dashboard-stat-icon"><i class="im im-icon-Money-Bag"></i></div>
+          <div class="" style="float: right;margin:5px 15px 5px 5px ;background-color: #ffae00"><b><span><a class="button"  href="{{ route('downloadCSV') }}" style="background-color: #ffae00"><i class="fa fa-download" aria-hidden="true"></i> scv</a></span></b></div>
         </div>
       </div>
 
@@ -226,7 +228,30 @@ use \App\User;
                 });
 
             }
+
+
+
+    function downloadCSV(){
+      alert("ok");
+        //alert($(a).val());
+        var user = $('#user').val();
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+                    url: "{{ route('downloadCSV') }}",
+                    method: "get",
+                    data: {user: user, _token: _token},
+                    success: function (data) {
+                       alert("oui");
+                       
+             
+         
+          
+                     }
+          
+                });
+      }
      </script>
+    
     
  @endsection
 
