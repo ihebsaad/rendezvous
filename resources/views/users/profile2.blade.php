@@ -13,6 +13,13 @@
 <!-- Content
     ================================================== -->
 <div class="dashboard-content">
+	@if (!empty( Session::get('changeprofile') ))
+            <div class="notification success closeable margin-bottom-30">
+            <p>{{ Session::get('changeprofile') }}</p>
+            <a class="close" href="#"></a> 
+		  </div>
+     @endif
+ 
 
 		<!-- Titlebar -->
 		<div id="titlebar">
@@ -32,52 +39,74 @@
 		</div>
 
 		<div class="row">
-
+<?php $client=App\User::find(auth()->user()->id);
+if($client->photo_profil)
+{
+ $photo=asset("storage/photo_profile/$client->photo_profil");	
+}
+else
+{
+ $photo=asset("storage/photo_profile/userprofile.png");
+}
+ ?>
 			<!-- Profile -->
 			<div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
-					<h4 class="gray">Profile Details</h4>
+					<h4 class="gray">Détails de Profile </h4>
+					<form method="post" action="{{ route('changeinfoprofile') }}" enctype="multipart/form-data"  name="" >
+                        @csrf
 					<div class="dashboard-list-box-static">
 						
 						<!-- Avatar -->
 						<div class="edit-profile-photo">
-							<img src="images/user-avatar.jpg" alt="">
+							<img src="{{$photo}}" alt="">
 							<div class="change-photo-btn">
 								<div class="photoUpload">
-								    <span><i class="fa fa-upload"></i> Upload Photo</span>
-								    <input type="file" class="upload" />
+								    <span><i class="fa fa-upload"></i> Téléverser votre Photo</span>
+								    <input type="file" name="photo" class="upload" />
 								</div>
 							</div>
 						</div>
 	
 						<!-- Details -->
 						<div class="my-profile">
+   
+							<label>Nom</label>
+							<input name='name' value="{{$client->name}}" type="text">
 
-							<label>Your Name</label>
-							<input value="Tom Perrin" type="text">
+							<label>Prénom</label>
+							<input name='lastname' value="{{$client->lastname}}" type="text">
 
-							<label>Phone</label>
-							<input value="(123) 123-456" type="text">
+							<label>Téléphone</label>
+							<input name='phone' value="{{$client->phone}}" type="text">
 
 							<label>Email</label>
-							<input value="tom@example.com" type="text">
+							<input name='email' value="{{$client->email}}" type="text">
 
-							<label>Notes</label>
-							<textarea name="notes" id="notes" cols="30" rows="10">Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper</textarea>
+							<label>Adresse</label>
+							<input name='adresse' value="{{$client->adresse}}" type="text">
 
+							<label>Ville</label>
+							<input name='ville' value="{{$client->ville}}" type="text">
+
+							<label>Code postale</label>
+							<input name='codep' value="{{$client->codep}}" type="text">
+
+							
 							<label><i class="fa fa-twitter"></i> Twitter</label>
-							<input placeholder="https://www.twitter.com/" type="text">
+							<input name='twitter' value="{{$client->twitter}}" type="text">
 
 							<label><i class="fa fa-facebook-square"></i> Facebook</label>
-							<input placeholder="https://www.facebook.com/" type="text">
+							<input name='fb' value="{{$client->fb}}" type="text">
 
-							<label><i class="fa fa-google-plus"></i> Google+</label>
-							<input placeholder="https://www.google.com/" type="text">
+							<label><i class="fa fa-google-plus"></i> Instagram</label>
+							<input name='instagram' value="{{$client->instagram}}" type="text">
 						</div>
 	
-						<button class="button margin-top-15">Save Changes</button>
+						<button class="button margin-top-15">Enregistrer</button>
 
 					</div>
+				  </form>
 				</div>
 			</div>
 
@@ -97,7 +126,7 @@
 							<label>Confirmer le mot de passe</label>
 							<input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
 
-							<button type="submit" class="button margin-top-15">Change Password</button>
+							<button type="submit" class="button margin-top-15">Changer votre mot de passe </button>
 						</div>
                      </form>
 					</div>

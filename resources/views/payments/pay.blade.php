@@ -1,56 +1,62 @@
-@extends('layouts.backlayout')
+@extends('layouts.votreespacelayout')
  
-<script src="https://js.stripe.com/v3/"></script>
+ @section('content')
 
- <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/dataTables.bootstrap.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
-{{--@include('layouts.back.menu')--}}
- 
-@section('content')
-<style>
-.success{
- 
-.button-success{
-background-color:#a0d468;	
-}
-.statut{
-	color:black!important;font-weight:blod;padding:10px 20px 10px 20px!important;margin-top:8px;
-}
-</style>
-  <?php 
-  
-  use \App\Http\Controllers\ReservationsController;
-  use \App\Http\Controllers\UsersController;
-  use \App\Http\Controllers\ServicesController;
-
-          $User = auth()->user();
+ <?php 
+   use \App\Http\Controllers\UsersController;
 
   ?>
- <div id="dashboard"> 
-@include('layouts.back.menu')
- 
- 	<div class="utf_dashboard_content"> 
 
- 
-	<!--<div class="row">	<a href="#small-dialog" class="pull-right button popup-with-zoom-anim">Ajouter</a> </div>-->
- 
-     
-
-           
-      <div class="add_utf_listing_section margin-top-45"> 
-        <div class="utf_add_listing_part_headline_part">
-          <h3><i class="sl sl-icon-refresh"></i>Paiement de la reservation </h3>
-                </div>       
+  <!-- Dashboard -->
+<div id="dashboard"> 
+@include('layouts.back.bmenu')
+<!-- Content
+    ================================================== -->
+<div class="dashboard-content">
+<!-- Titlebar -->
+        <div id="titlebar">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Réservation</h2>
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li>Réservation</li>
+                            <li>Paiement</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        @if ($live_message = Session::get('ttmessage'))
+           <div class="notification success closeable">
+                <p>{{ $live_message }}</p>
+                <a class="close" href="#"></a>
+            </div>
+            <?php Session::forget('ttmessage');  ?>
+        @endif
         <div class="row">
-          <div class="col-md-12" >
-            <br>
-          </div>
+            <div class="col-lg-8 col-sm-offset-2">
+
+                <div id="add-listing">
+
+                    <!-- Section -->
+                    <div class="add-listing-section">
+
+                        <!-- Headline -->
+                        <div class="add-listing-headline">
+                            <h3><i class="im im-icon-Credit-Card"></i>Paiement de la reservation </h3>
+                        </div>
+                    
+                    
+
+        <div class="row">
+         
           
           <div class="col-md-12">
-        <h1>Paiement</h1>
+      
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <form action="#" class="my-4">
                     <div id="card-element">
                     <!-- Elements will create input elements here -->
@@ -59,31 +65,24 @@ background-color:#a0d468;
                     <!-- We'll put the error messages in this element -->
                     <div id="card-errors" role="alert"></div>
                     <br>
-                    <button class="btn btn-success mt-3" id="submit">Procéder au paiement</button>
+                    <button class="button border with-icon" id="submit">Procéder au paiement</button>
                 </form>
             </div>
         </div>
     </div>
-        
+        </div></div></div>
 
       </div>
-    
-<div class="col-md-12">
-         
-<br>
-        </div>   
-</div> </div></div>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://momentjs.com/downloads/moment.js"></script>
+ </div></div></div>
+          <script src="https://js.stripe.com/v3/"></script>
+           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
   //alert("{{ $Res }}");
    /* var stripe = Stripe('pk_live_51Hbt14Go3M3y9uW5wKqzuQN968NPlPtwzB5UZFzLqTtNAZxoU43qINNnPR7cAO8j1XKoZZ1QZyGkYLHvQjOc5U3c00K0ZoDEMa', {
   stripeAccount: "{{ $idaccount }}"
 });*/
 
-     var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L', {
-  stripeAccount: "{{ $idaccount }}"
-});
+     var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
     var elements = stripe.elements();
     var style = {
         base: {
@@ -115,6 +114,7 @@ background-color:#a0d468;
     var submitButton = document.getElementById('submit');
 
     submitButton.addEventListener('click', function(ev) {
+      $('#submit').html('<i class="fa fa-spinner fa-spin"></i> Loading...').attr('disabled', true);
     ev.preventDefault();
     stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
@@ -123,6 +123,8 @@ background-color:#a0d468;
         }).then(function(result) {
             if (result.error) {
             // Show error to your customer (e.g., insufficient funds)
+            $('#submit').html('Procéder au paiement').attr('disabled', false);
+             
             console.log(result.error.message);
             Swal.fire(
                 ''+result.error.message+'',
@@ -132,6 +134,7 @@ background-color:#a0d468;
                   window.location.replace("https://prenezunrendezvous.com/reservations");
                 })
             } else {
+              $('#submit').html('Procéder au paiement').attr('disabled', false);
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
@@ -196,11 +199,4 @@ var _token = $('input[name="_token"]').val();
 };
   
   </script>
- @endsection
-
- 
-
-@section('footer_scripts')
-
- 
-@stop
+@endsection('content')

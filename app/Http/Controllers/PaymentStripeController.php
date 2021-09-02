@@ -94,8 +94,8 @@ class PaymentStripeController extends Controller
     {
       $idprestataire=Reservation::where('id',$k)->value('prestataire');
       $idaccount = User::where('id',$idprestataire)->value('id_stripe');
-      Stripe::setApiKey('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');
-      //Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+      //Stripe::setApiKey('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');
+      Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
         //dd($request);
     $montant=Reservation::where('id',$k)->value('Net');
@@ -119,10 +119,14 @@ class PaymentStripeController extends Controller
     $reste=$montant-$acompte;
 
 //dd($idaccount);
-$intent = PaymentIntent::create([
+/*$intent = PaymentIntent::create([
             'amount' => $acompte*100,
             'currency' => 'eur',
-        ], ['stripe_account' => $idaccount]);
+        ], ['stripe_account' => $idaccount]);*/
+        $intent = PaymentIntent::create([
+            'amount' => $acompte*100,
+            'currency' => 'eur',
+        ]);
 //dd($intent);
         $clientSecret = Arr::get($intent, 'client_secret');
 
@@ -909,7 +913,8 @@ public function pay4($resId)
 
     $client = User::where('id',$Reservation->client)->first();
     $account = User::where('id',$Reservation->prestataire)->value('id_stripe');
-    Stripe::setApiKey('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');
+    //Stripe::setApiKey('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');
+    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
 $customer = \Stripe\Customer::create();
     \Stripe\Customer::update(
@@ -952,7 +957,7 @@ $customer = \Stripe\Customer::create();
   //dd($Subscription);
   $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
   $subscriptionId = Arr::get($Subscription, 'id');
-  //dd($clientSecret);
+  dd($clientSecret);
   return view('payments.pay2', [
             'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'idaccount' => $account , 'customerid' => $customer->id , 'resId' => $resId
         ]);
@@ -993,7 +998,64 @@ public function sendMail($to,$sujet,$contenu){
   }
 
 
+public function stripeWebhook(Request $request)
+    {
 
+        // You can find your endpoint's secret in your webhook settings
+        $endpoint_secret = config('services.stripe.webhooksecret');
+
+        $payload = @file_get_contents('php://input');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
+        $event = null;
+
+        try
+        {
+            $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
+        } 
+        catch(\UnexpectedValueException $e)
+        {
+                // Invalid payload
+                return response()->json([
+                    'message' => 'Invalid payload',
+                ], 200);
+        }
+        catch(\Stripe\Exception\SignatureVerificationException $e)
+        {
+            // Invalid signature
+            return response()->json([
+                'message' => 'Invalid signature',
+            ], 200);
+        }
+
+        if ($event->type == "payment_intent.succeeded")
+        {
+            //As I understand here is where I should do things like send order info by mail and deplete stock accordingly
+
+            $intent = $event->data->object;
+
+            //$this->completeOrderInDatabase()
+            //$this->sendMail();
+
+            return response()->json([
+                'intentId' => $intent->id,
+                'message' => 'Payment succeded'
+            ], 200); 
+        } 
+        elseif ($event->type == "payment_intent.payment_failed")
+        {
+            //Payment failed to be completed
+            
+            $intent = $event->data->object;
+            $error_message = $intent->last_payment_error ? $intent->last_payment_error->message : "";
+
+            return response()->json([
+                'intentId' => $intent->id,
+                'message' => 'Payment failed: '.$error_message
+            ], 400); 
+        }
+
+        
+    }
 
 
 
