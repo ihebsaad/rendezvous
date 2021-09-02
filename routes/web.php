@@ -192,7 +192,7 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 
 	Route::post('/AjouterService','UsersController@AjouterService')->name('AjouterService');
 
-
+Route::get('/changeAcompte','UsersController@changeAcompte')->name('changeAcompte');
 	
 Route::get('/HeuresIndisponibilite/{id}', 'UsersController@HeuresIndisponibilite')->name('HeuresIndisponibilite');
 Route::get('/Services/{id}', 'UsersController@Services')->name('Services');
@@ -207,6 +207,7 @@ Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ');
 	Route::post('/changeCategories', 'UsersController@changeCategories')->name('changeCategories');
 	//Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
 	Route::post('/users/updating','UsersController@updating')->name('users.updating');
+	Route::get('/users/updating','UsersController@updating')->name('users.updating');
 	Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage');
 	Route::post('/users/ajoutvideo','UsersController@ajoutvideo')->name('users.ajoutvideo');
 	Route::post('/users/ajoutimages','UsersController@ajoutimages')->name('users.ajoutimages');
