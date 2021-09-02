@@ -310,7 +310,7 @@ section.fullwidth .icon-box-2 {
                         <div class="listing-item-content">
                             <!-- categories tag -->
                             <?php $top=15; $i=0;?>
-                            <?php foreach($categories_user as $cat){ 
+                            <?php /* foreach($categories_user as $cat){ 
                             $categorie =\App\Categorie::find( $cat->categorie); 
                             
                             if($categorie !=null){
@@ -323,7 +323,7 @@ section.fullwidth .icon-box-2 {
                             }
                             }
                             
-                            }
+                            }*/
                             ?>
                             <h3>{{$listing->titre}} <?php if ($listing->approved ==1) {;?> <i class="verified-icon"></i><?php }?></h3>
                             <span>{{$listing->adresse}}</span>

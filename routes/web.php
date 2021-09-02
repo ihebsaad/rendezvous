@@ -194,7 +194,7 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 	Route::get('/HoraireOuverture/{id}', 'UsersController@HoraireOuverture')->name('HoraireOuverture');
 	Route::get('/Categories/{id}', 'UsersController@Categories')->name('Categories');
 	Route::get('/ImagesVideo/{id}', 'UsersController@ImagesVideo')->name('ImagesVideo');
-
+Route::get('/downloadCSV', 'UsersController@downloadCSV')->name('downloadCSV');
 	Route::post('/AjouterService','UsersController@AjouterService')->name('AjouterService');
 
 Route::get('/changeAcompte','UsersController@changeAcompte')->name('changeAcompte');

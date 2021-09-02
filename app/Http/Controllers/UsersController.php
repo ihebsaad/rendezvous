@@ -716,7 +716,7 @@ class UsersController extends Controller
         //dd($myhappyhours);
 
          if (Auth::guest())
-            return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
+             return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
             //return view('viewprestataire' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
         $cuser = auth()->user();
         $clientProduct= Client_product::where('id_client',$cuser->id)->get();
@@ -1167,6 +1167,39 @@ class UsersController extends Controller
         //dd($request->emailprest);
       DB::table('users')->where('id', $request->user)->update(array('acompte'=> $request->val));
         return "ok";
+         
+    }
+    public function downloadCSV(Request $request)
+    {
+        //dd($request->emailprest);
+      $cuser = auth()->user();
+      $todayy=date('Y-m-d');
+        $today= new DateTime();
+        $x = $today->format('d');
+        $m = $today->format('M');
+       $y=$x[1]-1;
+        $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
+        $fin=date('Y-m-d');
+      $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
+      $s=$CA[0]->somme ;
+      if ($s==null) {
+        $s=0;
+      }
+      $data = array();
+     $data[] ='chifre d\'affaire, mois' ;
+      $data[] = ''.$s.','.$m.'';
+      
+      header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="sample.csv"');
+//$data = array('chifre d\'affaire, mois', '1289, aout');
+
+$fp = fopen('php://output', 'wb');
+foreach ( $data as $line ) {
+    $val = explode(",", $line);
+    fputcsv($fp, $val);
+}
+fclose($fp);
+        //return "ok";
          
     }
     public function portefeuilles($id)

@@ -8,6 +8,19 @@
   ?>
 
   <!-- Dashboard -->
+  <style>
+    .legend { list-style: none; margin-left:10px;}
+    .legend li { float: left; margin-right: 15px;}
+    .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }
+  
+    /* your colors */
+    .legend .lightgrey { background-color: lightgrey;}
+    .legend .brown { background-color: brown; }
+    .legend .blue { background-color: blue; }
+    .legend .red{ background-color: red; }
+    .legend .green{ background-color:lightgreen; }
+    .legend .pink{ background-color:pink; }
+</style>
 <div id="dashboard"> 
 @include('layouts.back.bmenu')
 <!-- Content
