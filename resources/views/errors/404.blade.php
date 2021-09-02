@@ -33,7 +33,7 @@
 						<h4 style="hite-space: pre-wrap;
 			word-spacing: 12px;
 			line-height: 37px;
-			color: #353535;
+			color: black;
 			font-size: 21px;
 			font-family: 'Raleway';">	 <strong> Nous sommes désolés, mais la page que vous recherchez n’existe pas. Nous vous invitons de retourner à la page d’accueil. </h4>
 </strong> </center> 
