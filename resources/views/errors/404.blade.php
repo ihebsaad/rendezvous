@@ -9,9 +9,7 @@
 
 
 <!-- Container -->
-<div id="wrapper" style="    background:linear-gradient(
-45deg
-, black, white);;background-image: url(http://localhost/rendezvous/public/listeo/images/test1.jpg);
+<div id="wrapper" style="linear-gradient(129deg, black 19%, gold);background-image: url(http://localhost/rendezvous/public/listeo/images/test1.jpg);
     background-repeat: no-repeat;
     background-size: cover;">
 <div class="container ">
