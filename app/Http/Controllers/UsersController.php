@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator; 
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
+
 use Illuminate\Support\Facades\Hash;
 //use Illuminate\Http\PostRequest;
 use DB;
 use QrCode;
 use URL;
+use \App\Contact;
 use \App\Parametre;
 
 use Illuminate\Support\Facades\Auth;
@@ -675,8 +677,29 @@ class UsersController extends Controller
     
       public function contact()
     {
+
          
-      return view('contact' );       
+      return view('contact');       
+
+    }
+    public function contactv2(Request $request)
+    {
+     
+   $contact  = new Contact([
+        'nom' => $request->input('nom'),
+        'prenom' => $request->input('prenom'),
+        'email' => $request->input('email'),
+        'telephone' => $request->input('telephone'),
+
+        'contenu' => $request->input('contenu'),
+     ]);
+
+  $contact->save();
+
+  Session::put('sucmessage', 'Envoyer avec succès');
+
+  return redirect()->route('contactv2'); 
+          
 
     }
      

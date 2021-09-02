@@ -4150,7 +4150,10 @@ button.fs-map-btn.button {
 .with-forms .col-xs-12, .with-forms .col-sm-12, .with-forms .col-md-12, .with-forms .col-lg-12 {
 	padding: 0 10px;
 }
-
+.col-md-12.notFound{
+	margin-left: -35px;
+	padding: 0 10px;
+}
 
 /* ---------------------------------- */
 /* User Profile Page
@@ -11904,14 +11907,7 @@ span.like-icon {
 	letter-spacing: -8px;
 }
 
-#not-found p {
-	text-align: center;
-	font-size: 30px;
-	line-height: 48px;
-	display: inline-block;
-	margin-top: 10px;
-	color: #999;
-}
+
 
 #not-found i {
 	color: #e0e0e0;
