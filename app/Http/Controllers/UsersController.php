@@ -1139,17 +1139,41 @@ class UsersController extends Controller
          
     }
     
+    public function changeAcompte(Request $request)
+    {
+        //dd($request->emailprest);
+      DB::table('users')->where('id', $request->user)->update(array('acompte'=> $request->val));
+        return "ok";
+         
+    }
     public function portefeuilles($id)
     {
         $cuser = auth()->user();
         $user_type=$cuser->user_type;
+        $user_type=$cuser->user_type; 
         $user_id=$cuser->id;
         
         if(  $user_id == $id || $user_type=='admin' )
         {   
+        { 
+        $todayy=date('Y-m-d');
+        $today= new DateTime();
+        $x = $today->format('d');
+       $y=$x[1]-1;
+        $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
+        $fin=date('Y-m-d');
         $user = User::find($id);
+        $Somme = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'" ) );
+        //dd($Somme[0]);
+        
+        $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
+        $res= DB::select( DB::raw("SELECT count(Net) as nbr FROM reservations WHERE prestataire='+$cuser->id+'" ) );
+        $payment = DB::select( DB::raw("SELECT * FROM payments WHERE user='+$cuser->id+'" ) );
+        $revenues  = DB::select( DB::raw("SELECT * FROM payments WHERE beneficiaire_id  ='+$cuser->id+'" ) );
+        //dd($payment);
 
         return view('users.portefeuilles',  compact('user','id')); 
+        return view('users.portefeuilles',  compact('user','id','Somme','CA','res','payment','revenues')); 
         
         }
         
