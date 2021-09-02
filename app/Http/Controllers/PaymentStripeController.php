@@ -108,14 +108,15 @@ class PaymentStripeController extends Controller
     if($Reservation->paiement==0 || $Reservation->paiement ==null){
 
     $abonnement=User::where('id',$idprestataire)->value('abonnement');
-        if ($abonnement==3) {
+    $pcgAcompte=User::where('id',$idprestataire)->value('acompte');
+       /* if ($abonnement==3) {
             $x=60 ;
         }elseif ($abonnement==2) {
             $x=50 ;
         }elseif ($abonnement==1) {
             $x=30 ;
-        }
-        $acompte=($montant*$x)/100 ;
+        }*/
+        $acompte=($montant*$pcgAcompte)/100 ;
     $reste=$montant-$acompte;
 
 //dd($idaccount);
@@ -588,14 +589,15 @@ return view('payments.payAbn2', [
        // dd($Reservation);
       if($Reservation->paiement==0 || $Reservation->paiement ==null){
         $abonnement=User::where('id',$idprestataire)->value('abonnement');
-        if ($abonnement==3) {
+        $pcgAcompte=User::where('id',$idprestataire)->value('acompte');
+      /*  if ($abonnement==3) {
             $k=60 ;
         }elseif ($abonnement==2) {
             $k=50 ;
         }elseif ($abonnement==1) {
             $k=30 ;
-        }
-        $acompte=($montant*$k)/100 ;
+        }*/
+        $acompte=($montant*$pcgAcompte)/100 ;
         $reste=$montant-$acompte;
         $titre='Acompte';
         $type='acompte';

@@ -1172,12 +1172,11 @@ class UsersController extends Controller
     public function portefeuilles($id)
     {
         $cuser = auth()->user();
-        $user_type=$cuser->user_type;
         $user_type=$cuser->user_type; 
         $user_id=$cuser->id;
         
         if(  $user_id == $id || $user_type=='admin' )
-        {   
+           
         { 
         $todayy=date('Y-m-d');
         $today= new DateTime();
@@ -1195,7 +1194,6 @@ class UsersController extends Controller
         $revenues  = DB::select( DB::raw("SELECT * FROM payments WHERE beneficiaire_id  ='+$cuser->id+'" ) );
         //dd($payment);
 
-        return view('users.portefeuilles',  compact('user','id')); 
         return view('users.portefeuilles',  compact('user','id','Somme','CA','res','payment','revenues')); 
         
         }
