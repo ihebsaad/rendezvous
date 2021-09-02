@@ -1162,17 +1162,39 @@ class UsersController extends Controller
          
     }
     
+    public function changeAcompte(Request $request)
+    {
+        //dd($request->emailprest);
+      DB::table('users')->where('id', $request->user)->update(array('acompte'=> $request->val));
+        return "ok";
+         
+    }
     public function portefeuilles($id)
     {
         $cuser = auth()->user();
-        $user_type=$cuser->user_type;
+        $user_type=$cuser->user_type; 
         $user_id=$cuser->id;
         
         if(  $user_id == $id || $user_type=='admin' )
-        {   
+           
+        { 
+        $todayy=date('Y-m-d');
+        $today= new DateTime();
+        $x = $today->format('d');
+       $y=$x[1]-1;
+        $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
+        $fin=date('Y-m-d');
         $user = User::find($id);
+        $Somme = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'" ) );
+        //dd($Somme[0]);
+        
+        $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
+        $res= DB::select( DB::raw("SELECT count(Net) as nbr FROM reservations WHERE prestataire='+$cuser->id+'" ) );
+        $payment = DB::select( DB::raw("SELECT * FROM payments WHERE user='+$cuser->id+'" ) );
+        $revenues  = DB::select( DB::raw("SELECT * FROM payments WHERE beneficiaire_id  ='+$cuser->id+'" ) );
+        //dd($payment);
 
-        return view('users.portefeuilles',  compact('user','id')); 
+        return view('users.portefeuilles',  compact('user','id','Somme','CA','res','payment','revenues')); 
         
         }
         
@@ -1606,17 +1628,16 @@ public function Services($id)
             'new_confirm_password' => ['same:new_password'],
         ]);*/
    
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-
-         $name='';
+       
+         $photo='';
         if($request->file('photo')!=null)
 		    {
 		    	$image=$request->file('photo');
-		      $name =  $image->getClientOriginalName();
+		      $photo =  $image->getClientOriginalName();
 		                 $path = storage_path()."/photo_profile/";
 		      $date=date('d-m-Y-H-i-s');
-		     $name=$date.'_pf_'.$name ;
-		         $image->move($path, $name );
+		     $photo=$date.'_pf_'.$photo ;
+		         $image->move($path, $photo );
 		    }
 
 
@@ -1631,9 +1652,15 @@ public function Services($id)
                  'fb'=> $request->get('fb'),
                  'instagram'=> $request->get('instagram'),
                  'twitter'=> $request->get('twitter'),
-                 'photo_profil'=> $name,
+                 
 
 		     	]);
+
+		     if($photo)
+		     {
+		     	 User::find(auth()->user()->id)->update(['photo_profil'=> $photo]);
+
+		     }
 
        Session::put('changeprofile', 'Votre profile a été mis à jour avec succès');
 
