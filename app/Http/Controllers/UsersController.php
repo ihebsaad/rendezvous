@@ -716,7 +716,7 @@ class UsersController extends Controller
         //dd($myhappyhours);
 
          if (Auth::guest())
-            return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
+             return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
             //return view('viewprestataire' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
         $cuser = auth()->user();
         $clientProduct= Client_product::where('id_client',$cuser->id)->get();

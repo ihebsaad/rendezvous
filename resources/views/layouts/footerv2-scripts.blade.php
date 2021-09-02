@@ -13,6 +13,14 @@
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/tooltips.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+
+<script>
+    lightbox.option({
+      'maxWidth': 950
+    })
+</script>
 <!-- Google Autocomplete -->
 <!--<script>
   function initAutocomplete() {
