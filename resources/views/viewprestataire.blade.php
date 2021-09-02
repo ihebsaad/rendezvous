@@ -24,6 +24,11 @@ height:100%;
 width:100%;
 position:absolute;
 }
+@media (max-width: 1024px) {
+    .pricing-list-container span {
+        right: -40px!important;
+    }
+}
 </style>
  @section('content')
   <?php  //$User= auth()->user();
@@ -196,64 +201,69 @@ position:absolute;
             </div>
 
 
-            <!-- Food Menu -->
+            <!-- services Menu -->
+            <?php
+
+                    $services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
+                    $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get(); 
+                    $nbserv =count($services );
+                    $nbservrec =count($servicesreccurent );
+                    if (( $nbserv>0) || ( $nbservrec>0)){
+            ?>
             <div id="listing-pricing-list" class="listing-section">
-                <h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Pricing</h3>
+                <h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Services</h3>
 
                 <div class="show-more">
                     <div class="pricing-list-container">
-                        
-                        <!-- Food List -->
-                        <h4>Burgers</h4>
+                        <?php if ( $nbserv>0) { ?>
+                        <!-- simple List -->
                         <ul>
+                            <?php foreach ($services as $service)
+                            { ?>
                             <li>
-                                <h5>Classic Burger</h5>
-                                <p>Beef, salad, mayonnaise, spicey relish, cheese</p>
-                                <span>$6</span>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                <?php if($service->thumb!=''){ echo '<a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                <h5>{{ $service->nom }}</h5>
+                                <p>{{ $service->description }}</p>
+                                <span>{{ $service->prix }} €</span>
+                                    </div>
+                                </div>
                             </li>
-                            <li>
-                                <h5>Cheddar Burger</h5>
-                                <p>Cheddar cheese, lettuce, tomato, onion, dill pickles</p>
-                                <span>$6</span>
-                            </li>
-                            <li>
-                                <h5>Veggie Burger</h5>
-                                <p>Panko crumbed and fried, grilled peppers and mushroom</p>
-                                <span>$6</span>
-                            </li>
-                            <li>
-                                <h5>Chicken Burger</h5>
-                                <p>Cheese, chicken fillet, avocado, bacon, tomatoes, basil</p>
-                                <span>$6</span>
-                            </li>
+                            <?php } ?>
                         </ul>
+                        <?php } ?>
 
-                        <!-- Food List -->
-                        <h4>Drinks</h4>
+                        <?php if ( $nbservrec>0) { ?>
+                        <!-- abonnement List -->
+                        <h4>Services à abonnement</h4>
                         <ul>
+                            <?php foreach ($servicesreccurent as $servicerec)
+                            { ?>
                             <li>
-                                <h5>Frozen Shake</h5>
-                                <span>$4</span>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                <?php if($servicerec->thumb!=''){ echo '<a href="'. URL::asset('storage/images/'.$servicerec->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$servicerec->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                <h5>{{ $servicerec->nom }}</h5>
+                                <p>{{ $servicerec->description }}</p>
+                                <span>{{ $servicerec->prix }} €</span>
+                                    </div>
+                                </div>
                             </li>
-                            <li>
-                                <h5>Orange Juice</h5>
-                                <span>$4</span>
-                            </li>
-                            <li>
-                                <h5>Beer</h5>
-                                <span>$4</span>
-                            </li>
-                            <li>
-                                <h5>Water</h5>
-                                <span>Free</span>
-                            </li>
+                            <?php } ?>
                         </ul>
+                        <?php } ?>
 
                     </div>
                 </div>
-                <a href="#" class="show-more-button" data-more-title="Show More" data-less-title="Show Less"><i class="fa fa-angle-down"></i></a>
+                <a href="#" class="show-more-button" data-more-title="Afficher plus" data-less-title="Afficher moins"><i class="fa fa-angle-down"></i></a>
             </div>
-            <!-- Food Menu / End -->
+            <!-- services Menu / End -->
+        <?php } ?>
 
         
             <!-- Location -->
@@ -666,21 +676,24 @@ position:absolute;
             </div>
             <!-- Book Now / End -->
 
-
-            <!-- Coupon Widget -->
+             <?php if (($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
+            <!-- qr code Widget -->
             <div class="coupon-widget" style="background-image: url(http://localhost/listeo_html/images/single-listing-01.jpg);">
                 <a href="#" class="coupon-top">
-                    <span class="coupon-link-icon"></span>
+                    <?php $url1=  URL::asset('storage\qrcodes'); 
+                    $urlqrcode = $url1."/".$user->qr_code;  ?>
+                    <center><img src="{{$urlqrcode}}" alt="" width="130" height="130"></center>
+                    <!--<span class="coupon-link-icon"></span>
                     <h3>Order 1 burger and get 50% off on second!</h3>
                     <div class="coupon-valid-untill">Expires 25/10/2019</div>
-                    <div class="coupon-how-to-use"><strong>How to use?</strong> Just show us this coupon on a screen of your smartphone!</div>
+                    <div class="coupon-how-to-use"><strong>How to use?</strong> Just show us this coupon on a screen of your smartphone!</div>-->
                 </a>
                 <div class="coupon-bottom">
                     <div class="coupon-scissors-icon"></div>
-                    <div class="coupon-code">L1ST30</div>
+                    <div class="coupon-code">CODE QR</div>
                 </div>
             </div>
-
+        <?php } ?>
         
             <!-- Opening Hours -->
             <div class="boxed-widget opening-hours margin-top-35">
@@ -757,3 +770,4 @@ position:absolute;
 
 
   @endsection
+
