@@ -26,6 +26,8 @@
 <link rel="shortcut icon" href="{{ asset('public/images/favicon.png') }}"  >
 <!-- Style CSS -->
 <link rel="stylesheet" href="{{ asset('public/listeo/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('public/listeo/css/styleNotfound.css') }}">
+
 <link rel="stylesheet" href="{{ asset('public/listeo/css/main-color.css') }}" id="colors">
 <style type="text/css">
 /* black menu background */

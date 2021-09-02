@@ -18,10 +18,12 @@
         "paypal/rest-api-sdk-php": "^1.14",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "smsfactor/smsfactor-laravel": "1.0",
+        "softon/sweetalert": "^1.0",
         "srmklive/paypal": "~1.0",
         "stripe/stripe-php": "^7.83",
         "symfony/translation-contracts": "^1.1.6",
-        "twilio/sdk": "^6.15"
+        "twilio/sdk": "^6.15",
+        "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {
          "beyondcode/laravel-dump-server": "^1.0",

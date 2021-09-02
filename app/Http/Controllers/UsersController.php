@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator; 
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
+
 use Illuminate\Support\Facades\Hash;
 //use Illuminate\Http\PostRequest;
 use DB;
 use QrCode;
 use URL;
+use \App\Contact;
 use \App\Parametre;
 
 use Illuminate\Support\Facades\Auth;
@@ -675,8 +677,29 @@ class UsersController extends Controller
     
       public function contact()
     {
+
          
-      return view('contact' );       
+      return view('contact');       
+
+    }
+    public function contactv2(Request $request)
+    {
+     
+   $contact  = new Contact([
+        'nom' => $request->input('nom'),
+        'prenom' => $request->input('prenom'),
+        'email' => $request->input('email'),
+        'telephone' => $request->input('telephone'),
+
+        'contenu' => $request->input('contenu'),
+     ]);
+
+  $contact->save();
+
+  Session::put('sucmessage', 'Envoyer avec succès');
+
+  return redirect()->route('contactv2'); 
+          
 
     }
      
@@ -1607,17 +1630,16 @@ public function Services($id)
             'new_confirm_password' => ['same:new_password'],
         ]);*/
    
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-
-         $name='';
+       
+         $photo='';
         if($request->file('photo')!=null)
 		    {
 		    	$image=$request->file('photo');
-		      $name =  $image->getClientOriginalName();
+		      $photo =  $image->getClientOriginalName();
 		                 $path = storage_path()."/photo_profile/";
 		      $date=date('d-m-Y-H-i-s');
-		     $name=$date.'_pf_'.$name ;
-		         $image->move($path, $name );
+		     $photo=$date.'_pf_'.$photo ;
+		         $image->move($path, $photo );
 		    }
 
 
@@ -1632,9 +1654,15 @@ public function Services($id)
                  'fb'=> $request->get('fb'),
                  'instagram'=> $request->get('instagram'),
                  'twitter'=> $request->get('twitter'),
-                 'photo_profil'=> $name,
+                 
 
 		     	]);
+
+		     if($photo)
+		     {
+		     	 User::find(auth()->user()->id)->update(['photo_profil'=> $photo]);
+
+		     }
 
        Session::put('changeprofile', 'Votre profile a été mis à jour avec succès');
 

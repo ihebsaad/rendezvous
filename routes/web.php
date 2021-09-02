@@ -16,6 +16,11 @@ Route::get('/', function () {
     return view('home');
 });
 */
+Route::get('/contactv2',function(){return view('contactv2');})->name('contactv2');
+Route::post('/contactAdd', 'UsersController@contactv2')->name('contactAdd');
+
+Route::get('/contact', 'UsersController@contact')->name('contact');
+
 Auth::routes();
 Route::post('/create','Auth\RegisterController@create')->name('create');
 
@@ -96,6 +101,7 @@ Route::get('/test', function () {
     return view('dashboard');
 });
 */
+
 Route::get('/test',function(){return view('test');});
 Route::get('/test',function(){return view('Invoice.index');});
 Route::post('/users/Firstservice','UsersController@FirstService')->name('users.FirstService');
@@ -125,7 +131,6 @@ Route::get('/choixpayement', 'UsersController@choixpayement')->name('choixpayeme
 Route::get('/offrelancement_anne2', 'UsersController@OffreLancement_anne2')->name('OffreLancement_anne2');
 
 
-Route::get('/contact', 'UsersController@contact')->name('contact');
 Route::get('/apropos', 'UsersController@apropos')->name('apropos');
 Route::get('/faqs', 'UsersController@faqs')->name('faqs');
 Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->name('ConditionsUtilisation');
