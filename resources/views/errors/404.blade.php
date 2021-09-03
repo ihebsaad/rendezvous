@@ -9,7 +9,7 @@
 
 
 <!-- Container -->
-<div id="wrapper" style="background:#a18702;;background-image: url(<?php echo  URL::asset('public/listeo/images/test.jpg');?>);
+<div id="wrapper" style="background:#131311;
     background-repeat: no-repeat;
     background-size: cover;">
 <div class="container ">
@@ -26,7 +26,7 @@
 					<div class="col-lg-6 col-md-12" >
 <center>
 					<section id="not-found" >
-						<h3 style="color: #060606;;
+						<h3 style="color: #ffd700;;;
 			font-size: 95px;;
 			font-family: 'Raleway';
 		">OUPS! </h3>
