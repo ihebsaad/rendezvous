@@ -37,7 +37,7 @@
                                
                                 <div class="col-md-12" >
                                     <div>
-                                    <input id="email" type="email" placeholder="Email Adress" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                    <input id="email" type="email" placeholder="Email*" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
                                     @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
