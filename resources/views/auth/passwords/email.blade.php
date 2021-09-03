@@ -24,7 +24,7 @@
     font-size: 20px;
     font-weight: 800;
     text-align: center;
-    padding: 15px 30px;">{{ __('Reset Password') }}</h4>
+    padding: 15px 30px;">Réinitialiser le mot de passe</h4>
 
                         <div class="form-group row" style="padding: 5px;
     margin: 0;
@@ -56,7 +56,7 @@
     line-height: 20px;
     font-size: 13px;
     font-weight: 600;
-    margin: 0;height:52px   ;width: -webkit-fill-available;"> {{ __('Send Password Reset Link') }}</button>
+    margin: 0;height:52px   ;width: -webkit-fill-available;"> Envoyer le lien de réinitialisation du mot de passe</button>
                                 </div>
                             </div>
                       
