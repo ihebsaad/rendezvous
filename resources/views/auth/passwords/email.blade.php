@@ -1,7 +1,7 @@
 @extends('layouts.frontv2layout')
 
 @section('content')
-<div class="wrapper" style="    background: white;
+<div class="wrapper" style="    background: black;
     display: block;">
     <div class="container   padding-bottom-100" id="connexionsection">
     <div class="row margin-top-60">
@@ -28,6 +28,7 @@
 
                         <div class="form-group row" style="padding: 5px;
     margin: 0;
+    border-radius: 0px 0px 30px 30px;
     background-color: #fff;
 }
 
@@ -47,18 +48,16 @@
                                 </div>
                                 
                             </div></center>
-                        </div>
-
+                  
             
-                    <div class="row padding-top-40">
-                                <div class="col-md-12" >
+                                
                                     <button type="submit" class="submit button" id="submitc"  style="    padding: 6px 15px;
     line-height: 20px;
     font-size: 13px;
     font-weight: 600;
     margin: 0;height:52px   ;width: -webkit-fill-available;"> Envoyer le lien de réinitialisation du mot de passe</button>
                                 </div>
-                            </div>
+                            
                       
                     </form>
                    
