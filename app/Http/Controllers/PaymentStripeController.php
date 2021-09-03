@@ -1004,7 +1004,7 @@ public function stripeWebhook(Request $request)
     {
 
         // You can find your endpoint's secret in your webhook settings
-        $endpoint_secret = config('services.stripe.webhooksecret');
+        $endpoint_secret = "whsec_kJ1wYb3HxPXQ5SmCvdmGsoEngJCxJ0bg";
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
