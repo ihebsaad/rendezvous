@@ -16,8 +16,10 @@ Route::get('/', function () {
     return view('home');
 });
 */
+// those two routes for the new  contact front
 Route::get('/contactv2',function(){return view('contactv2');})->name('contactv2');
 Route::post('/contactAdd', 'UsersController@contactv2')->name('contactAdd');
+//end contact routes
 
 Route::get('/contact', 'UsersController@contact')->name('contact');
 

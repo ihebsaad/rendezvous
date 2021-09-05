@@ -1,4 +1,4 @@
-﻿@extends('layouts.frontlayout')
+﻿@extends('layouts.frontv2layout')
  
  @section('content')
  <style>
@@ -39,8 +39,8 @@ figcaption {
   text-align: center;
 }
 .divimg {
-    background-color: #f1f1f1;
-  border-left: .75rem solid #44d4f4;
+	background-color: #f1f1f1;
+    border-left: .75rem solid #ffd700;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -84,19 +84,19 @@ figcaption {
 	  </div>
 	</div>
 	<div class="row margin-bottom-50 margin-top-30">
-	  <div class="col-md-6"> 
-				<h4 class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos2a;?></h4>
-				<?php echo $parametres->apropos2b;?>
+	  <div class="col-md-6" style="color:white;"> 
+				<h4 style="color: gold;" class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos2a;?></h4>
+				<p ><?php echo $parametres->apropos2b;?></p>
 	  </div>
 	  <div class="col-md-6"> 
-			<h4 class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos3a;?></h4>
+			<h4 style="color: gold;"class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos3a;?></h4>
 			<div class="clearfix">
 			  <figure style="width:30%;margin-right:20px" class="float-left">
 				  <img src="public/images/david.jpg" alt="Mr MAXIME David Martiniquais">
 				  <figcaption>Mr MAXIME David</figcaption>
 			  </figure>
-			  <p><?php echo $parametres->apropos3b;?></p>
-			  <p style="padding-top: 10px"><?php echo $parametres->apropos3c;?>
+			  <p style="color:white;"><?php echo $parametres->apropos3b;?></p>
+			  <p style="padding-top: 10px;color:white;"><?php echo $parametres->apropos3c;?>
 		      </p>
 			</div>
 		    

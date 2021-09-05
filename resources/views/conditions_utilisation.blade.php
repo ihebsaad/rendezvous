@@ -1,4 +1,4 @@
-@extends('layouts.frontlayout')
+@extends('layouts.frontv2layout')
  
  @section('content')
 <style type="text/css">
@@ -10,17 +10,17 @@
 <br>
    
 <div class="col-md-12">
-  <h1 class="headline_part centered margin-bottom-45">Conditions d'utilisation</h1>
+ <center> <h1 style="    color: gold;" class="headline_part centered margin-bottom-45">Conditions d'utilisation</h1>
 </div>
-<br>
-<br>
-
+</center>
 <div class="container">
     <div class="row">
-      <div id="primary" class="content-area col-md-8 mx-auto">
+	<div class="col-lg-12 "></div>		
+
+      <div id="primary" class="content-area col-lg-11 mx-auto">
         <div id="content" class="site-content" role="main">
 			    <div class="entry-content">
-			        <p>Vous trouverez ci-dessous nos conditions d'utilisation, qui décrivent de nombreux avantages juridiques, mais en fin de compte, notre objectif est de toujours prendre soin de vous, en tant que client ou en tant que vendeur sur notre plate-forme. Nous avons inclus un bon nombre de ces conditions pour nous protéger légalement, mais si vous rencontrez un problème, n'hésitez pas à nous contacter sur cet e-mail: <a href="mailto:contact@prenezunrendezvous.com">contact@prenezunrendezvous.com</a> et nous ferons de notre mieux pour le résoudre de manière équitable et rapide.</p>
+			        <p>Vous trouverez ci-dessous nos conditions d'utilisation, qui décrivent de nombreux avantages juridiques, mais en fin de compte, notre objectif est de toujours prendre soin de vous, en tant que client ou en tant que vendeur sur notre plate-forme. Nous avons inclus un bon nombre de ces conditions pour nous protéger légalement, mais si vous rencontrez un problème, n'hésitez pas à nous contacter sur cet e-mail: <a  style="    color: gold;"href="mailto:contact@prenezunrendezvous.com">contact@prenezunrendezvous.com</a> et nous ferons de notre mieux pour le résoudre de manière équitable et rapide.</p>
 					<ol>
 					<li><strong>Pas de contenu ou d'utilisateurs inappropriés</strong>
 					<ol>

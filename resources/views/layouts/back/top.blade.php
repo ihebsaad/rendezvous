@@ -76,7 +76,7 @@ $plogo= $parametres->logo;
 				 <?php if($user_type=='admin' || $user_type=='client'  ){ ?> 
                 <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon profil</a></li>
 				 <?php } if($user_type=='admin' || $user_type=='prestataire'  ){ ?> 		  	
-				<li><a  href="{{ route('listing', ['id'=>$user->id]) }}"><i class="sl sl-icon-briefcase"></i> Mon entreprise</a></li>
+				<li><a  href="{{ route('titredescription', ['id'=>$user->id]) }}"><i class="sl sl-icon-briefcase"></i> Mon entreprise</a></li>
 				<?php } ?>
 		<!--		<li><a href="dashboard_messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
 				<li><a href="dashboard_bookings.html"><i class="sl sl-icon-docs"></i> Réservations</a></li>-->

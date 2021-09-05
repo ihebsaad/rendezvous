@@ -1515,7 +1515,7 @@ public function Services($id)
 
 
 
-        return view('entreprise.Servicess',  compact('user','id','services')); 
+        return view('entreprise.servicess',  compact('user','id','services')); 
         
         }
     }
