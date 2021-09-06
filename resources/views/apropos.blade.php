@@ -6,7 +6,7 @@
   margin: auto;
   padding: 5px;
 /*  background-color: lightgray;*/
-   background-color: lightblue;
+   background-color: black;
     /* background: #007bff;
      background: linear-gradient(to right, #007bff, #33AEFF);
   */
@@ -39,10 +39,11 @@ figcaption {
   text-align: center;
 }
 .divimg {
-	background-color: #f1f1f1;
+	background-color: black;
     border-left: .75rem solid #ffd700;
     padding-top: 10px;
     padding-bottom: 10px;
+	color:white;
 }
 #main_wrapper .container p {
 	text-align: justify;
@@ -79,7 +80,7 @@ figcaption {
 <div class="container">
 	<div class="row divimg margin-bottom-40 margin-top-50">
 	  <div class="col-md-12"> 
-			<h4 class="headline_part margin-top-0 margin-bottom-15"><?php echo $parametres->apropos1a;?></h4>
+			<h4 class="headline_part margin-top-0 margin-bottom-15" style="color:gold;"><?php echo $parametres->apropos1a;?></h4>
 			<p><?php echo $parametres->apropos1b;?></p>
 	  </div>
 	</div>
