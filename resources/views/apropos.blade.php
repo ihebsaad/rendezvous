@@ -12,6 +12,10 @@
   */
 }
 
+p a {
+color: gold!important;
+}
+
 .all-browsers > h1, .browser {
   margin: 15px;
   padding: 5px;
