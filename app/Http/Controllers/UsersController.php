@@ -1169,7 +1169,107 @@ class UsersController extends Controller
         return "ok";
          
     }
-    public function downloadCSV(Request $request)
+    
+
+
+
+    public function downloadCSVday(Request $request)
+    {
+        //dd($request->emailprest);
+      $cuser = auth()->user();
+      $debut=date('Y-m-d');
+       
+        $fin=date('Y-m-d');
+        $j=date('d-m-Y');
+      $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
+      $s=$CA[0]->somme ;
+      if ($s==null) {
+        $s=0;
+      }
+      $data = array();
+     $data[] ='chifre d\'affaire, jour' ;
+      $data[] = ''.$s.','.$j.'';
+      
+      header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="CA_Journalier.csv"');
+//$data = array('chifre d\'affaire, mois', '1289, aout');
+
+$fp = fopen('php://output', 'wb');
+foreach ( $data as $line ) {
+    $val = explode(",", $line);
+    fputcsv($fp, $val);
+}
+fclose($fp);
+        //return "ok";
+         
+    }
+    public function downloadCSVweek(Request $request)
+    {
+        //dd($request->emailprest);
+      $cuser = auth()->user();
+      $todayy=date('Y-m-d');
+        $today= new DateTime();
+        $x = $today->format('d');
+        $m = $today->format('M');
+       $y=$x[1]-1;
+        $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
+        $fin=date('Y-m-d');
+      $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
+      $s=$CA[0]->somme ;
+      if ($s==null) {
+        $s=0;
+      }
+      $data = array();
+     $data[] ='chifre d\'affaire, mois' ;
+      $data[] = ''.$s.','.$m.'';
+      
+      header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="sample.csv"');
+//$data = array('chifre d\'affaire, mois', '1289, aout');
+
+$fp = fopen('php://output', 'wb');
+foreach ( $data as $line ) {
+    $val = explode(",", $line);
+    fputcsv($fp, $val);
+}
+fclose($fp);
+        //return "ok";
+         
+    }
+    public function downloadCSVmonth(Request $request)
+    {
+        //dd($request->emailprest);
+      $cuser = auth()->user();
+      $todayy=date('Y-m-d');
+        $today= new DateTime();
+        $x = $today->format('d');
+        $m = $today->format('M');
+       $y=$x[1]-1;
+        $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
+        $fin=date('Y-m-d');
+      $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
+      $s=$CA[0]->somme ;
+      if ($s==null) {
+        $s=0;
+      }
+      $data = array();
+     $data[] ='chifre d\'affaire, mois' ;
+      $data[] = ''.$s.','.$m.'';
+      
+      header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="sample.csv"');
+//$data = array('chifre d\'affaire, mois', '1289, aout');
+
+$fp = fopen('php://output', 'wb');
+foreach ( $data as $line ) {
+    $val = explode(",", $line);
+    fputcsv($fp, $val);
+}
+fclose($fp);
+        //return "ok";
+         
+    }
+    public function downloadCSVyear(Request $request)
     {
         //dd($request->emailprest);
       $cuser = auth()->user();
