@@ -47,7 +47,7 @@ use \App\User;
 
           <div class="dashboard-stat-content wallet-totals"><h4>{{$CA[0]->somme}}</h4> <span>Chiffre d’affaire (mensuelle) <strong class="wallet-currency">EURO</strong></span> </div>
           <div class="dashboard-stat-icon"><i class="im im-icon-Money-Bag"></i></div>
-          <div class="" style="float: right;margin:5px 15px 5px 5px ;background-color: #ffae00"><b><span><a class="button"  href="{{ route('downloadCSV') }}" style="background-color: #ffae00"><i class="fa fa-download" aria-hidden="true"></i> scv</a></span></b></div>
+          <div class="" style="float: right;margin:5px 15px 5px 5px ;background-color: #ffae00"><b><span><a class="button"   onclick="downloadCSV()" style="background-color: #ffae00"><i class="fa fa-download" aria-hidden="true"></i> scv</a></span></b></div>
         </div>
       </div>
 
@@ -170,6 +170,7 @@ use \App\User;
         <!-- fin modal -->   
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
      <script type="text/javascript">
+
       function changeAcompte(a){
         var val = $(a).val();
         //alert($(a).val());
@@ -232,7 +233,23 @@ use \App\User;
 
 
     function downloadCSV(){
-      alert("ok");
+      Swal.fire({
+  title: 'Cliquer sur la période',
+  icon: 'info',
+  html:
+    '<a href="{{ route("downloadCSVday") }}"><b>Journalier</b></a> / <a href="{{ route("downloadCSVweek") }}"><b>Abdomadaire</b></a> / <a href="{{ route("downloadCSVmonth") }}"><b>Mensuel</b></a>/ <a href="{{ route("downloadCSVyear") }}"><b>Annuel</b></a> ' ,
+  showDenyButton: false,
+  showCancelButton: false,
+  confirmButtonText: `Annuler`,
+})
+
+     /* Swal.fire(
+
+  'sélectionner la période',
+  'That thing is still around?',
+  'question'
+)*/
+      /*alert("ok");
         //alert($(a).val());
         var user = $('#user').val();
         var _token = $('input[name="_token"]').val();
@@ -248,7 +265,7 @@ use \App\User;
           
                      }
           
-                });
+                });*/
       }
      </script>
     

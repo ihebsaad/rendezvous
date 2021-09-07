@@ -197,6 +197,13 @@ Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.delete
 	Route::get('/Categories/{id}', 'UsersController@Categories')->name('Categories');
 	Route::get('/ImagesVideo/{id}', 'UsersController@ImagesVideo')->name('ImagesVideo');
 Route::get('/downloadCSV', 'UsersController@downloadCSV')->name('downloadCSV');
+Route::get('/downloadCSVday', 'UsersController@downloadCSVday')->name('downloadCSVday');
+Route::get('/downloadCSVweek', 'UsersController@downloadCSVweek')->name('downloadCSVweek');
+Route::get('/downloadCSVmonth', 'UsersController@downloadCSVmonth')->name('downloadCSVmonth');
+
+Route::get('/downloadCSVyear', 'UsersController@downloadCSVyear')->name('downloadCSVyear');
+
+
 	Route::post('/AjouterService','UsersController@AjouterService')->name('AjouterService');
 
 Route::get('/changeAcompte','UsersController@changeAcompte')->name('changeAcompte');
