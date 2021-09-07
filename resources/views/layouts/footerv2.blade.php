@@ -30,8 +30,10 @@
                 <h4>Compte</h4>
                 <ul class="footer-links">
                     <!--<li><a href="{{-- route('pricing') --}}">Abonnements</a></li>  -->     
-                    @guest <li><a class="sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab2').trigger('click');">Inscription</a></li>
-                    <li><a class="sign-in popup-with-zoom-anim" href="#dialog_signin_part" onclick="$('#litab1').trigger('click');">Connexion</a></li> 
+                    @guest 
+             
+                    <li><a class="" href="{{route('inscriptionclient')}}" >Inscription</a></li>
+                    <li><a class="" href="{{route('inscription')}}" >Connexion</a></li> 
                     @else
                     <li><a  href="{{route('logout')}}"  >Déconnexion</a></li> 
                     @endguest

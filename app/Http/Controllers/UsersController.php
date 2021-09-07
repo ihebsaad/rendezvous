@@ -1071,7 +1071,7 @@ class UsersController extends Controller
     {
    
     DB::table('images')->where('id', $id)->delete();
-    return redirect (url('/listing/'.$user.'#images'));
+    
     return back();
 
     }
@@ -1081,7 +1081,7 @@ class UsersController extends Controller
    
       User::where('id', $id)->update(array('video' => ''));
 
-          return redirect (url('/listing/'.$id.'#videos'));
+      return back();
 
     }
     
