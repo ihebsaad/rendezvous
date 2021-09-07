@@ -1386,9 +1386,22 @@ fclose($fp);
         
         }
     }
-    public function changeCategories()
+    public function changeCategories(Request $request)
     {
-        dd("okkkkkkkk");
+      $cuser = auth()->user();
+      $user_type=$cuser->user_type;
+      $user_id=$cuser->id;    
+      $id=$request->get('id');  
+      if(  $user_id == $id || $user_type=='admin' )
+      {   
+      $user = User::find($user_id);
+      $categories = Categorie::orderBy('nom', 'asc')->get();
+      
+      $categories_user =  DB::table('categories_user')->where('user',$user_id)->pluck('categorie');
+
+
+
+      return view('entreprise.Categories',  compact('user','id','categories' ,'categories_user')); }
     }
     public function ImagesVideo($id)
     {
