@@ -15,11 +15,11 @@
   
     /* your colors */
     .legend .lightgrey { background-color: lightgrey;}
-    .legend .brown { background-color: brown; }
-    .legend .blue { background-color: blue; }
+    .legend .brown { background-color: #e5bc75; }
+    .legend .blue { background-color: #dd995c; }
     .legend .red{ background-color: #ecda78; }
-    .legend .green{ background-color:lightgreen; }
-    .legend .pink{ background-color:pink; }
+    .legend .green{ background-color:#ead831; }
+    .legend .pink{ background-color:#d3c07b; }
 </style>
 <div id="dashboard"> 
 @include('layouts.back.bmenu')

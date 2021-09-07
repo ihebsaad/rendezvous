@@ -32,10 +32,10 @@ class CalendrierController extends Controller
 {
 
    public static $fermeture_couleur="lightgrey";
-   public static $rendezvous_couleur="blue";
-   public static $rendezvous_parall_couleur="brown";
+   public static $rendezvous_couleur="#dd995c";
+   public static $rendezvous_parall_couleur="#d3c07b";
    public static $indispo_couleur="#ecda78";
-   public static $happyhours_couleur="lightgreen";
+   public static $happyhours_couleur="#ead831";
 
   // composant pour desactivation datetimepicker
   public static $tab_jours_fermeture_semaine=array();
@@ -1313,7 +1313,7 @@ class CalendrierController extends Controller
      $happyhours=Happyhour::where('id_user',$id)->get();
      foreach ($happyhours as $hh ) {
       
-  $res[]=array('title'=>'Happy hour','start'=>$hh->dateDebut, 'end'=> $hh->dateFin, 'color' => self::$happyhours_couleur);
+  $res[]=array('title'=>'Promotion flash','start'=>$hh->dateDebut, 'end'=> $hh->dateFin, 'color' => self::$happyhours_couleur);
 
      }
 
