@@ -93,12 +93,12 @@ class AbonnementsController extends Controller
 
 
 	
-     public function remove($id,$user)
+     public function remove($id)
     {
-  
+
 	 
 	DB::table('abonnements')->where('id', $id)->delete();
-	return redirect (url('/abonnements'));
+	return redirect (url('/MesAbonnements'));
 
 	}
 	 

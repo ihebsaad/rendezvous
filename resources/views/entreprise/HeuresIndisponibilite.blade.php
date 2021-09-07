@@ -17,7 +17,7 @@
     .legend .lightgrey { background-color: lightgrey;}
     .legend .brown { background-color: brown; }
     .legend .blue { background-color: blue; }
-    .legend .red{ background-color: red; }
+    .legend .red{ background-color: #ffd700ed; }
     .legend .green{ background-color:lightgreen; }
     .legend .pink{ background-color:pink; }
 </style>
