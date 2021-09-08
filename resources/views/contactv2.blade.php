@@ -67,7 +67,7 @@
 <!-- Contact Details -->
 <div class="sidebar-textbox">
 	<ul class="contact-details" style="    margin-top: -18px;">
-		<li><i class="im im-icon-Phone-2" style="color:white;"></i> <strong  style="color:white;font-weight: revert;">Tél:</strong> <span><a  href="#">+596 696 93 04 77</a> </span></li>
+		<li><i class="im im-icon-Phone-2" style="color:white;"></i> <strong  style="color:white;font-weight: revert;">Tél:</strong> <span><a  href="#">+596  08 26 38 54 00</a> </span></li>
 		<li ><i class="im im-icon-Globe" style="color:white;"></i> <strong  style="color:white;font-weight: revert;" >Site Web:</strong> <span><a href="#">www.prenezunrendezvous.com</a></span></li>
 		<li  ><i class="im im-icon-Envelope" style="color:white;"></i> <strong  style="color:white;font-weight: revert;">E-Mail:</strong> <span><a href="#">contact@prenezunrendezvous.com</a></span></li>
 	</ul>
