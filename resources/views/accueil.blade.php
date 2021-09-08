@@ -92,8 +92,9 @@ section.fullwidth .icon-box-2 {
 
                         <div class="main-search-input-item">
                             <select data-placeholder="All Categories" class="chosen-select" name="toutes_categories" id="toutes_categories">
+                                <option val="Toutes les catégories">Toutes les catégories</option>
                                 @foreach($meres_categories as $tc)
-                                  <option val="{{$tc->id}}">{{$tc->nom}}</option>
+                                  <option val="{{$tc->id}}">{{$tc->nom}}</option> 
                                 @endforeach
                             </select>
                         </div>
