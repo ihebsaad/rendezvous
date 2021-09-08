@@ -9,8 +9,28 @@
 
   <!-- Dashboard -->
   <style>
-    .legend { list-style: none; margin-left:10px;}
-    .legend li { float: left; margin-right: 15px;}
+    body{    color: #707070;
+    font-size: 15px;
+    width: fit-content;
+    line-height: 27px;
+    background-color: #fff;}
+    #dashboard{    background-color: #f7f7f7;
+    min-height: 100vh;
+    flex-wrap: wrap;
+    padding-top: 80px;}
+
+    .dashboard-content{    padding: 40px 45px;
+    padding-bottom: 0;
+    position: relative;
+    z-index: 10;
+    height: 100%;
+ }
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+    .legend { list-style: none; }
+    .legend li { float: left; }
     .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }
   
     /* your colors */
@@ -20,8 +40,9 @@
     .legend .red{ background-color: #ecda78; }
     .legend .green{ background-color:#ead831; }
     .legend .pink{ background-color:#d3c07b; }
+   
 </style>
-<div id="dashboard"> 
+<div id="dashboard" style="position:relative;  "> 
 @include('layouts.back.bmenu')
 <!-- Content
     ================================================== -->
@@ -127,7 +148,9 @@
             <div class="row">
           <div class="col-md-12" >  
             <div class="sizeA" >
-              <div id='calendar' style="overflow-x: auto;"></div> 
+              <div id='calendar' style=" overflow-x: auto;
+    overflow-y: auto;
+    "></div> 
             </div>
           
                 </div>
