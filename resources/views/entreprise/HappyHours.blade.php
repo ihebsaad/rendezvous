@@ -42,7 +42,7 @@ font-weight: bold;
                     <nav id="breadcrumbs">
                         <ul>
                             <li>Mon entreprise</li>
-                            <li>Happy hours</li>
+                            <li>Promotion flash</li>
                         </ul>
                     </nav>
                 </div>
@@ -66,7 +66,7 @@ font-weight: bold;
 
                         <!-- Headline -->
                         <div class="add-listing-headline">
-                            <h3><i class="sl sl-icon-present"></i>Happy hours </h3>
+                            <h3><i class="sl sl-icon-present"></i>Promotion flash </h3>
                         </div>
 
                         <!-- Title -->
