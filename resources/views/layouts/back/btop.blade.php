@@ -73,7 +73,7 @@ $plogo= $parametres->logo;
                             <li><a href="{{ route('monespace') }}"><i class="sl sl-icon-home"></i>Mon espace</a></li>
                             <?php if($user_type=='admin' || $user_type=='client'  ){ ?> 
                             <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon profil</a></li>
-                             <?php } if($user_type=='admin' || $user_type=='prestataire'  ){ ?>             
+                             <?php } if($user_type=='prestataire'  ){ ?>             
                             <li><a  href="{{ route('titredescription', ['id'=>$user->id]) }}"><i class="sl sl-icon-briefcase"></i> Mon entreprise</a></li>
                             <?php } ?>
                             <li><a href="{{ route('logout') }}"><i class="sl sl-icon-power"></i> Déconnexion</a></li>
