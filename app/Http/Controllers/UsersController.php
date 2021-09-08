@@ -286,15 +286,23 @@ class UsersController extends Controller
     public function pageprestataires(Request $request)
     {
       //dd($request);
-      if ($request->has('emplacementsearch')) {
-        dd("ok");
-      }
-      dd($request);
+      
       $today= new DateTime();
       
         $prest_tag= trim($request->get('prest_tag'));//tagsearch
         $prest_emplacement= trim($request->get('prest_emplacement'));//emplacementsearch
-        $Toutes_les_categories=trim($request->get('toutes_categories')); 
+        $Toutes_les_categories=trim($request->get('toutes_categories')); //catsearch
+        if ($request->has('emplacementsearch')) {
+        $prest_emplacement= trim($request->get('emplacementsearch'));
+      }
+      if ($request->has('tagsearch')) {
+        $prest_emplacement= trim($request->get('tagsearch'));
+      }
+      if ($request->has('catsearch')) {
+        $prest_emplacement= trim($request->get('catsearch'));
+      }
+
+
         if ($Toutes_les_categories=="Toutes les catégories") {
             $Toutes_les_categories=false;
         }
