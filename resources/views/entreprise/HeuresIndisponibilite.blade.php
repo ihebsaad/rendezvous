@@ -131,7 +131,7 @@
              <div id="legendcolor"  style="background-color:white; top:5px;"> 
             <ul class="legend">
               <li><span class="lightgrey" style=""></span>horaires de fermeture</li>
-             <li><span class="green"></span>Promotion flash</li>
+             <li><span class="green"></span>Promotions flash</li>
               <li><span class="red"></span>Indisponibilité de prestataire</li>
              <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
             

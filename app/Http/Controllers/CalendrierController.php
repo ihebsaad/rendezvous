@@ -1313,7 +1313,7 @@ class CalendrierController extends Controller
      $happyhours=Happyhour::where('id_user',$id)->get();
      foreach ($happyhours as $hh ) {
       
-  $res[]=array('title'=>'Promotion flash','start'=>$hh->dateDebut, 'end'=> $hh->dateFin, 'color' => self::$happyhours_couleur);
+  $res[]=array('title'=>'Promotions flash','start'=>$hh->dateDebut, 'end'=> $hh->dateFin, 'color' => self::$happyhours_couleur);
 
      }
 

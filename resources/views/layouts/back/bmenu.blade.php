@@ -85,7 +85,7 @@
               <li><a href="{{ route('Produits', ['id'=>$user->id]) }}">Produits</a></li>
               <li><a href="{{ route('CodesPromo', ['id'=>$user->id]) }}">Codes promo</a></li>
               <li><a href="{{ route('CarteFidelite', ['id'=>$user->id]) }}">Carte de fidélité</a></li>
-              <li><a href="{{ route('HappyHours', ['id'=>$user->id]) }}">Promotion flash</a></li>
+              <li><a href="{{ route('HappyHours', ['id'=>$user->id]) }}">Promotions flash</a></li>
               <li><a href="{{ route('FAQ', ['id'=>$user->id]) }}">FAQ</a></li>
             </ul> 
         </li> 
