@@ -285,7 +285,7 @@ class UsersController extends Controller
     }
     public function pageprestataires(Request $request)
     {
-      //dd($request);
+      dd($request);
       $today= new DateTime();
       
         $prest_tag= trim($request->get('tagsearch'));
