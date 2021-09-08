@@ -171,7 +171,7 @@
       <div class="plan featured col-md-4 col-sm-6 col-xs-12">
         <div class="utf_price_plan">
           <h3><?php echo $parametres->abonnement3;?></h3>
-          <span class="value" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par an</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
+          <span class="value" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
         </div>
         
               <div class="utf_price_plan_features">
@@ -209,7 +209,7 @@
       <div class="plan featured brilliant col-md-4 col-sm-6 col-xs-12 active">
         <div class="utf_price_plan" style="background-color: #3d92e0;">
           <h3><?php echo $parametres->abonnement2;?></h3>
-          <span class="value" id="prixB"><?php echo $parametres->cout_abon_annu_pricing;?>€<span id="uniteB">TTC / Par mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
+          <span class="value" id="prixB"><?php echo $parametres->cout_abon_annu_pricing;?>€<span id="uniteB">TTC / Par an</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
 		</div>
               <div class="utf_price_plan_features">
               	<input type="checkbox" class="read-more-state" id="post-2" />
