@@ -286,7 +286,7 @@ class UsersController extends Controller
     public function pageprestataires(Request $request)
     {
       //dd($request);
-      if ($request::exists('emplacementsearch')) {
+      if ($request::has('emplacementsearch')) {
         dd("ok");
       }
       dd($request);
