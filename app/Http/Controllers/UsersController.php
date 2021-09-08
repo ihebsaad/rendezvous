@@ -351,7 +351,7 @@ class UsersController extends Controller
           $result=array_unique($result);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          
           //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           $listings = DB::table('users') 
                       ->where('user_type','=', "prestataire" )   
@@ -373,7 +373,6 @@ class UsersController extends Controller
          // dd('cas 2');
           $today= new DateTime();
         $krows=\App\User::where('user_type','prestataire')->count();
-          $listings=\App\User::where('user_type','prestataire')->orderBy('id', 'asc')->paginate(5);
           //$listings=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->Where(DB::raw('DATEDIFF("2017-06-25 09:34:21", "2017-06-15 15:25:35") ','<=' ,8))->orderBy('id', 'asc')->paginate(5);
           //$listings=DB::select(DB::raw('SELECT * FROM `users` WHERE (`user_type`= "prestataire") and (( DATE_ADD(`date_inscription`, INTERVAL 10 DAY) >= NOW()) or (`expire`  >= NOW()))'))->paginate(5);
           $listings = DB::table('users') 
@@ -399,7 +398,6 @@ class UsersController extends Controller
 
           $result=array_unique($idprest_categories);
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           $listings = DB::table('users') 
                       ->where('user_type','=', "prestataire" )   
@@ -424,7 +422,6 @@ class UsersController extends Controller
 
           $result=array_unique($idprest_emplacement);
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
 
          // $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
             $listings = DB::table('users') 
@@ -458,7 +455,6 @@ class UsersController extends Controller
           $result=array_intersect($idprest_emplacement,$idprest_categories);
           $result=array_unique($result);
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           $listings = DB::table('users') 
                       ->where('user_type','=', "prestataire" )   
@@ -517,7 +513,6 @@ class UsersController extends Controller
           $result=array_unique($idprest_tag);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
          // $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           $listings = DB::table('users') 
                       ->where('user_type','=', "prestataire" )   
@@ -581,7 +576,6 @@ class UsersController extends Controller
           $result=array_unique($result);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           $listings = DB::table('users') 
                       ->where('user_type','=', "prestataire" )   
@@ -645,7 +639,6 @@ class UsersController extends Controller
           $result=array_unique($result);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
           $listings = DB::table('users') 
                       ->where('user_type','=', "prestataire" )   
@@ -1295,10 +1288,8 @@ fclose($fp);
       $cuser = auth()->user();
       $todayy=date('Y-m-d');
         $today= new DateTime();
-        $x = $today->format('d');
         $x = $today->format('N');
         $m = $today->format('M');
-       $y=$x[1]-1;
        $y=$x-1;
         $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
         $fin=date('Y-m-d');
@@ -1308,13 +1299,11 @@ fclose($fp);
         $s=0;
       }
       $data = array();
-     $data[] ='chifre d\'affaire, mois' ;
-      $data[] = ''.$s.','.$m.'';
+     
      $data[] ='chifre d\'affaire, semaine' ;
       $data[] = ''.$s.', du lundi à aujourd\'hui';
       
       header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="sample.csv"');
 header('Content-Disposition: attachment; filename="CA_Hebdomadaire.csv"');
 //$data = array('chifre d\'affaire, mois', '1289, aout');
 
@@ -1348,7 +1337,6 @@ fclose($fp);
       $data[] = ''.$s.','.$m.'';
       
       header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="sample.csv"');
 header('Content-Disposition: attachment; filename="CA_Mensuel.csv"');
 //$data = array('chifre d\'affaire, mois', '1289, aout');
 
@@ -1381,13 +1369,11 @@ fclose($fp);
         $s=0;
       }
       $data = array();
-     $data[] ='chifre d\'affaire, mois' ;
-      $data[] = ''.$s.','.$m.'';
+     
      $data[] ='chifre d\'affaire, année' ;
       $data[] = ''.$s.', cette année';
       
       header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="sample.csv"');
 header('Content-Disposition: attachment; filename="CA_Annuel.csv"');
 //$data = array('chifre d\'affaire, mois', '1289, aout');
 
