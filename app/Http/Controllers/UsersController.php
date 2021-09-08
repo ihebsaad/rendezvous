@@ -815,13 +815,12 @@ class UsersController extends Controller
     }
     
      public function profile($id)
-    {
-        $cuser = auth()->user();
-         
-        $user_type=$cuser->user_type;
+    {   
+       $cuser = auth()->user();
+      $user = User::find($id);
+        $user_type=$user->user_type;//client ou admin 
         $user_id=$cuser->id;
-
-        if(  $user_id == $id || $user_type=='admin' )
+        if(  $user_id == $id || $user_type=='admin' )//id admin
         {   
         $user = User::find($id);
        
@@ -829,8 +828,9 @@ class UsersController extends Controller
        // return view('users.profile',  compact('user','id')); 
         return view('users.profile2',  compact('user','id')); 
         
-        }
-        
+        }//else client
+        $user = User::find($id);
+        return view('users.profile2',  compact('user','id')); 
 
     }
       
@@ -1871,7 +1871,7 @@ public function Services($id)
 		    }
 
 
-		     User::find(auth()->user()->id)->update([
+		     User::find($request->get('id'))->update([
                 'name'=> $request->get('name'),
                 'lastname'=> $request->get('lastname'), 
                 'phone'=> $request->get('phone'),
@@ -1888,7 +1888,7 @@ public function Services($id)
 
 		     if($photo)
 		     {
-		     	 User::find(auth()->user()->id)->update(['photo_profil'=> $photo]);
+		     	 User::find($request->get('id'))->update(['photo_profil'=> $photo]);
 
 		     }
 

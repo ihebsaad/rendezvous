@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="row">
-<?php $client=App\User::find(auth()->user()->id);
+<?php $client=$user;
 if($client->photo_profil)
 {
  $photo=asset("storage/photo_profile/$client->photo_profil");	
@@ -70,7 +70,7 @@ else
 	
 						<!-- Details -->
 						<div class="my-profile">
-   
+						<input name='id' value="{{$client->id}}" type="text" style="display:none;">
 							<label>Nom</label>
 							<input name='name' value="{{$client->name}}" type="text">
 
