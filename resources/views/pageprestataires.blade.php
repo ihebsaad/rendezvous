@@ -68,7 +68,7 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
        font-weight: bold;
 }
 .pagination ul li.active {
-       background-color: #ffd700;
+       background-color: #ffd700; 
        color: #000;
        border-radius: 50%;
        width: 52px;
@@ -95,6 +95,7 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
 
               <div class="col-lg-9 col-md-8 padding-right-30">
                      <?php if (count($listings) >= 1) { ?>
+
                      <!-- Sorting / Layout Switcher -->
                      <div class="row margin-bottom-25">
 
@@ -124,10 +125,12 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                      <!-- Sorting / Layout Switcher / End -->
                      <?php } ?>
               <?php if (count($listings) >= 1) { ?>
+
                      <div class="row">
                      <?php  $User= auth()->user();  ?>
                        <?php
                        if (!isset($listings) && empty($listings))
+
                        {$listings=\App\User::where('user_type','prestataire')->get();}
                         $format = "Y-m-d H:i:s";
                            $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
@@ -135,6 +138,7 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                          
                        foreach ($listings as $listing)
                         {
+                          
                          $date_inscription=  $listing->date_inscription;
                            $date_inscription=\DateTime::createFromFormat($format, $date_inscription);            
                            $nbjours = $date_inscription->diff($date_15j);

@@ -285,6 +285,9 @@ class UsersController extends Controller
     }
     public function pageprestataires(Request $request)
     {
+      //dd($request);
+      $today= new DateTime();
+      
         $prest_tag= trim($request->get('prest_tag'));
         $prest_emplacement= trim($request->get('prest_emplacement'));
         $Toutes_les_categories=trim($request->get('toutes_categories')); 
@@ -348,7 +351,18 @@ class UsersController extends Controller
           $result=array_unique($result);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          
+          //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->whereIn('id',$result)
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                      ->whereIn('id',$result)
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
+          //dd($listings);
           $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories]);
 
         }
@@ -357,8 +371,19 @@ class UsersController extends Controller
        if(!$prest_tag && !$prest_emplacement && !$Toutes_les_categories)//tous les prestataires (car toutes les categories)
         {
          // dd('cas 2');
+          $today= new DateTime();
         $krows=\App\User::where('user_type','prestataire')->count();
-          $listings=\App\User::where('user_type','prestataire')->orderBy('id', 'asc')->paginate(5);
+          //$listings=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->Where(DB::raw('DATEDIFF("2017-06-25 09:34:21", "2017-06-15 15:25:35") ','<=' ,8))->orderBy('id', 'asc')->paginate(5);
+          //$listings=DB::select(DB::raw('SELECT * FROM `users` WHERE (`user_type`= "prestataire") and (( DATE_ADD(`date_inscription`, INTERVAL 10 DAY) >= NOW()) or (`expire`  >= NOW()))'))->paginate(5);
+          $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
+                     
+          //dd($users);
         }
 //----------------------------------------------------------------------------------------------------
         // cas 001
@@ -373,7 +398,16 @@ class UsersController extends Controller
 
           $result=array_unique($idprest_categories);
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->whereIn('id',$result)
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                      ->whereIn('id',$result)
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
           $listings->appends(['catsearch' => $Toutes_les_categories]);
         }
   //----------------------------------------------------------------------------------------------------
@@ -388,8 +422,17 @@ class UsersController extends Controller
 
           $result=array_unique($idprest_emplacement);
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
 
+         // $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+            $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->whereIn('id',$result)
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                      ->whereIn('id',$result)
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
           $listings->appends(['emplacementsearch' => $prest_emplacement]);
       
         }
@@ -412,7 +455,16 @@ class UsersController extends Controller
           $result=array_intersect($idprest_emplacement,$idprest_categories);
           $result=array_unique($result);
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->whereIn('id',$result)
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                      ->whereIn('id',$result)
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
           $listings->appends(['emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories]);
       
 
@@ -461,7 +513,16 @@ class UsersController extends Controller
           $result=array_unique($idprest_tag);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+         // $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->whereIn('id',$result)
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                      ->whereIn('id',$result)
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
           $listings->appends(['tagsearch' => $prest_tag]);
 
         }
@@ -515,7 +576,16 @@ class UsersController extends Controller
           $result=array_unique($result);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->whereIn('id',$result)
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                      ->whereIn('id',$result)
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
           $listings->appends(['tagsearch' => $prest_tag, 'catsearch' => $Toutes_les_categories]);
 
         }
@@ -569,7 +639,16 @@ class UsersController extends Controller
           $result=array_unique($result);
           //$result=[5,6];
         $krows=\App\User::where('user_type','prestataire')->whereIn('id',$result)->count();
-          $listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          //$listings=\App\User::where('user_type','prestataire')->whereIn('id',$result)->orderBy('id', 'asc')->paginate(5);
+          $listings = DB::table('users') 
+                      ->where('user_type','=', "prestataire" )   
+                      ->whereIn('id',$result)
+                      ->where('expire','>=',$today)                
+                      ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
+                      ->where('user_type','=', "prestataire" ) 
+                      ->whereIn('id',$result)
+                     ->orderBy('id', 'asc')
+                     ->paginate(5);
           $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement]);
 
         }
@@ -716,8 +795,8 @@ class UsersController extends Controller
         //dd($myhappyhours);
 
          if (Auth::guest())
-             return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
-            //return view('viewprestataire' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
+            // return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
+            return view('viewprestataire' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
         $cuser = auth()->user();
         $clientProduct= Client_product::where('id_client',$cuser->id)->get();
 
@@ -729,9 +808,9 @@ class UsersController extends Controller
                 $reduction=User::where('id',$id)->value('reduction');
             }
             }
-        return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
+       // return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
         
-        //return view('viewprestataire' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));     
+        return view('viewprestataire' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));     
 
     }
     
@@ -1209,9 +1288,9 @@ fclose($fp);
       $cuser = auth()->user();
       $todayy=date('Y-m-d');
         $today= new DateTime();
-        $x = $today->format('d');
+        $x = $today->format('N');
         $m = $today->format('M');
-       $y=$x[1]-1;
+       $y=$x-1;
         $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
         $fin=date('Y-m-d');
       $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
@@ -1220,11 +1299,12 @@ fclose($fp);
         $s=0;
       }
       $data = array();
-     $data[] ='chifre d\'affaire, mois' ;
-      $data[] = ''.$s.','.$m.'';
+     
+     $data[] ='chifre d\'affaire, semaine' ;
+      $data[] = ''.$s.', du lundi à aujourd\'hui';
       
       header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="sample.csv"');
+header('Content-Disposition: attachment; filename="CA_Hebdomadaire.csv"');
 //$data = array('chifre d\'affaire, mois', '1289, aout');
 
 $fp = fopen('php://output', 'wb');
@@ -1257,7 +1337,7 @@ fclose($fp);
       $data[] = ''.$s.','.$m.'';
       
       header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="sample.csv"');
+header('Content-Disposition: attachment; filename="CA_Mensuel.csv"');
 //$data = array('chifre d\'affaire, mois', '1289, aout');
 
 $fp = fopen('php://output', 'wb');
@@ -1279,6 +1359,9 @@ fclose($fp);
         $m = $today->format('M');
        $y=$x[1]-1;
         $debut = date('Y-m-d', strtotime($todayy. ' - '.$y.' days'));
+        $n = $today->format('n');
+        $u=$n-1;
+        $debut = date('Y-m-d', strtotime($todayy. ' - '.$n.' months'));
         $fin=date('Y-m-d');
       $CA = DB::select( DB::raw("SELECT sum(Net) as somme FROM reservations WHERE prestataire='+$cuser->id+'AND created_at <='$fin 23:59:59' AND created_at  >='$debut 00:00:00'" ) );
       $s=$CA[0]->somme ;
@@ -1286,11 +1369,12 @@ fclose($fp);
         $s=0;
       }
       $data = array();
-     $data[] ='chifre d\'affaire, mois' ;
-      $data[] = ''.$s.','.$m.'';
+     
+     $data[] ='chifre d\'affaire, année' ;
+      $data[] = ''.$s.', cette année';
       
       header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="sample.csv"');
+header('Content-Disposition: attachment; filename="CA_Annuel.csv"');
 //$data = array('chifre d\'affaire, mois', '1289, aout');
 
 $fp = fopen('php://output', 'wb');

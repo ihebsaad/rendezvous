@@ -51,25 +51,53 @@ class ReviewsController extends Controller
 	{
 		
      if(  $request->get('client') !=   $request->get('prestataire')){
- 		 $review  = new Review([
-              'note' => $request->get('note'),
+      $nbrenote = 0;
+     	$lesnotes = 0;
+     	if (!empty($request->get('note_qualite')))
+     	{
+     		$lesnotes = $lesnotes + $request->get('note_qualite');
+     		$nbrenote = $nbrenote + 1;
+     	}
+     	if (!empty($request->get('note_service')))
+     	{
+     		$lesnotes = $lesnotes + $request->get('note_service');
+     		$nbrenote = $nbrenote + 1;
+     	}
+     	if (!empty($request->get('note_prix')))
+     	{
+     		$lesnotes = $lesnotes + $request->get('note_prix');
+     		$nbrenote = $nbrenote + 1;
+     	}
+
+     	if (!empty($request->get('note_emplacement')))
+     	{
+     		$lesnotes = $lesnotes + $request->get('note_emplacement');
+     		$nbrenote = $nbrenote + 1;
+     	}
+
+     	if ($nbrenote > 0)
+     	{ $note = $lesnotes / $nbrenote;  
+     		$note = round($note, 1); }
+     	else {$note = 0;} 
+
+ 		 $nreview  = new Review([
               'client' => $request->get('client'),
               'prestataire' => $request->get('prestataire'),
               'commentaire' => $request->get('commentaire'),
-              'note' => $request->get('note'),
+              'note' => $note, 
               'note_qualite' => $request->get('note_qualite'),
               'note_service' => $request->get('note_service'),
               'note_prix' => $request->get('note_prix'),
-              'note_emplacement' => $request->get('note_emplacement'),
-              'note_espace' => $request->get('note_espace'),
+              'note_emplacement' => $request->get('note_emplacement')
+              /*'note_espace' => $request->get('note_espace'),*/
             ]);
  
-        $review->save();
+        $nreview->save();
 		}
 		
-    return back();
+     return back();
 		 
-
+		//dd ($request);
  	}
 	
 	public function store(Request $request)
