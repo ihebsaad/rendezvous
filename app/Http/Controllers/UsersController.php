@@ -702,7 +702,7 @@ class UsersController extends Controller
         $abonnementB =  Contenu_plan::where('abonnement',2)->get();
         $abonnementC =  Contenu_plan::where('abonnement',3)->get();
          
-      return view('pricing' , compact('abonnementA','abonnementB','abonnementC'));       
+      return view('pricing2' , compact('abonnementA','abonnementB','abonnementC'));       
 
     }
     
@@ -724,6 +724,27 @@ class UsersController extends Controller
     {
 
     	 return view('choix_payement');
+    }
+
+    public function offrelancement_mensuel()
+    {
+
+      $abonnementA =  Contenu_plan::where('abonnement',1)->get();
+      $abonnementB =  Contenu_plan::where('abonnement',2)->get();
+      $abonnementC =  Contenu_plan::where('abonnement',3)->get();
+       
+     return view('offrelancement_mensuel' , compact('abonnementA','abonnementB','abonnementC'));
+    }
+     
+     public function offrelancement_annuel()
+    {
+
+    	$abonnementA =  Contenu_plan::where('abonnement',1)->get();
+        $abonnementB =  Contenu_plan::where('abonnement',2)->get();
+        $abonnementC =  Contenu_plan::where('abonnement',3)->get();
+       
+     return view('offrelancement_annuel' , compact('abonnementA','abonnementB','abonnementC'));
+
     }
     
   public function offrelancement()

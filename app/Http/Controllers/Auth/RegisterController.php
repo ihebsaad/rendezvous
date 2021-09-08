@@ -116,7 +116,36 @@ class RegisterController extends Controller
 
        if($req->get('user_type')=='prestataire')
        {
-     
+
+        $ind_tel='';
+        $pays='';
+
+        if($req->get('pays'))
+         {
+            $pays=$req->get('pays');
+            if($pays=='martinique')
+            {
+              $pays='Martinique';
+              $ind_tel= 596; 
+            }
+            if($pays=='france')
+            {
+              $pays='France';
+              $ind_tel= 33; 
+            }
+
+            if($pays=='guadeloupe')
+            {
+              $pays='Guadeloupe';
+              $ind_tel= 590; 
+            }
+            if($pays=='guyanef')
+            {
+              $pays='Guyane française';
+              $ind_tel= 594; 
+            }
+         }
+         
          if( $req->get('username'))
          {
             $username=$req->get('username');
@@ -230,8 +259,12 @@ class RegisterController extends Controller
         Session::put('fhoraire', $fhoraire);
         Session::put('date_inscription', $date_inscription);
         Session::put('qr_code', $urlqrcode);
+        Session::put('pays', $pays);
+        Session::put('ind_tel', $ind_tel);
+
         Session::put('user_type', $req->get('user_type'));
         Session::put('password' , Hash::make($req->get('password')));
+        Session::put('mensuel_annuel' , $req->get('mensuel_annuel'));
 
          if($req->get('user_type')=='prestataire')
          {
@@ -244,7 +277,16 @@ class RegisterController extends Controller
             }
             else
             {
-             return redirect ('/offrelancement');
+
+                if($req->get('mensuel_annuel')=='mensuel'){
+
+                    return redirect('/offrelancement_mensuel');
+                }
+                else
+                {
+                    return redirect('/offrelancement_annuel');
+                }
+             // return redirect ('/offrelancement');
             }
         
         }

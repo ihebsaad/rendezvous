@@ -2,6 +2,23 @@
  $parametres=DB::table('parametres')->where('id', 1)->first();
 $plogo= $parametres->logo;
 ?>
+<style>
+#sign-in-dialog2,
+ {
+    background: #fff;
+    padding: 40px;
+    padding-top: 0;
+    text-align: left;
+    max-width: 610px;
+    margin: 40px auto;
+    position: relative;
+    box-sizing:border-box;
+    border-radius: 4px;
+}
+#sign-in-dialog2 {
+    max-width: 700px;
+}
+</style>
 <!-- Header Container
 ================================================== -->
 <header id="header-container">
@@ -51,6 +68,7 @@ $plogo= $parametres->logo;
                                                 <div>
                                                     @csrf
                                                     <input type="hidden" name="user_type" id="prestataire" value="prestataire" >
+                                                    <input   name="mensuel_annuel" type="hidden"  value="annuel">
                                                     <input type="hidden" name="username" id="username" value="jhondoe" >
                                                     <input name="lastname" type="text" id="lastname" placeholder="Nom *" required="required" class="error">
                                                 </div>
@@ -100,10 +118,26 @@ $plogo= $parametres->logo;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div>
-                                                    <input name="phone" type="phone" id="phone" placeholder="Téléphone *"  required="required" class="error">
+                                                  <div class="row">
+                                                  <div class="col-md-2">
+                                                    <label style="padding-top:10px; color:grey" for="pays">Téléphone:</label>
+                                                  </div>
+                                                 <div class="col-md-5">
+                                               <select style="color:grey" name="pays" id="pays" placeholder="Téléphone *"  required="required">
+                                                <option value="martinique">Martinique (+596)</option>
+                                                <option value="france">France (+33)</option>
+                                                <option value="guadeloupe">Guadeloupe (+590)</option>
+                                                <option value="guyane">Guyane française (+594)</option> 
+                                               </select>
+                                                </div>
+                                                  
+                                                  <div class="col-md-5">
+                                                    <input name="phone" type="phone" id="phone" placeholder="Numéro de téléphone *"  required="required" class="error">
+                                                    </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> <br>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div>
@@ -127,7 +161,7 @@ $plogo= $parametres->logo;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div>
-                                                    <select name="fhoraire" id="fhoraire" title="Selectionnez votre pays">
+                                                    <select style="color:grey" name="fhoraire" id="fhoraire" title="Selectionnez votre pays">
                                                         <option value="America/Martinique" default="" selected="selected">Martinique</option>
                                                         <option value="America/Guadeloupe">Guadeloupe</option>
                                                         <option value="Europe/Paris">France</option>
@@ -135,7 +169,151 @@ $plogo= $parametres->logo;
                                                     </select>
                                                 </div>
                                             </div>
+                                        </div> <br>
+                                        <div class="row ">
+                                            <div class="col-md-12">
+                                                <input type="submit" class="submit button"  value="Je m'inscris !" style="    width: -webkit-fill-available;" >
+                                            </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="font-size: 12px; color: black;text-align: center; ">
+                                                    En m'inscrivant sur ce site j'accepte <a href="#" style=" font-weight: 600;">les cgv et cgu</a> ainsi que <a href="#" style=" font-weight: 600;">la politique de confidentialité</a> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row sform">
+                                            <div class="col-md-12">
+                                                <div style="font-size: 12px; color: black; text-align: center; ">
+                                                    Déjà inscrits ? <a  style=" font-weight: 600;" href="#"  onclick="switchci('1')">Connectez vous !</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </form>
+                        </div>
+            </div>
+            <!-- Sign In Popup / End -->
+
+                           <!-- Sign In Popup -->
+            <div id="sign-in-dialog2" class="zoom-anim-dialog mfp-hide">
+
+                <div class="small-dialog-header">
+                    <h3  style="text-align:center;">Inscrivez-vous en 2 minutes seulement</h3>
+                </div>
+
+
+                        <!-- Register -->
+                        <div >
+                        <!-- onsubmit="return validateFormkbs(this)" -->
+                        <form  method="post" action="{{ route('create') }}" name="inscriptionform" id="inscriptionform2" autocomplete="on" >
+                                        <div class="row ">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    @csrf
+                                                    <input type="hidden" name="user_type" id="prestataire" value="prestataire" >
+                                                    <input   name="mensuel_annuel" type="hidden"  value="mensuel">
+                                                    <input type="hidden" name="username" id="username" value="jhondoe" >
+                                                    <input name="lastname" type="text" id="lastname" placeholder="Nom *" required="required" class="error">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input name="name" type="text" id="name" placeholder="Prénom *" required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="email" type="email" id="email2" placeholder="Email *" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required"  onfocusout="cusername()">
+                                                    <p id="erro5" style="color: red;"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input class="error" type="password" name="password" id="password1" placeholder="Mot de passe *"  required="required" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input class="error" type="password" name="password_confirmation" id="password2" placeholder="Confirmation de mot de passe*" required="required"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="titre" type="text" id="titre" placeholder="Nom de votre entreprise  *" required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="siren" type="text" id="siren" placeholder="Numéro siret/siren de votre entreprise"  class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                  <div class="row">
+                                                  <div class="col-md-2">
+                                                    <label style="padding-top:10px; color:grey" for="pays">Téléphone:</label>
+                                                  </div>
+                                                 <div class="col-md-5">
+                                               <select style="color:grey" name="pays" id="pays" placeholder="Téléphone *"  required="required">
+                                                <option value="martinique">Martinique (+596)</option>
+                                                <option value="france">France (+33)</option>
+                                                <option value="guadeloupe">Guadeloupe (+590)</option>
+                                                <option value="guyanef">Guyane française (+594)</option> 
+                                               </select>
+                                                </div>
+                                                  
+                                                  <div class="col-md-5">
+                                                    <input name="phone" type="phone" id="phone" placeholder="Numéro de téléphone *"  required="required" class="error">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <input name="adresse" type="text" id="adresse" placeholder="Adresse *"  required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input name="codep" type="text" id="codep" placeholder="Code postal *" required="required" class="error">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <input name="ville" type="text" id="ville" placeholder="Ville *"  required="required" class="error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <select style="color:grey" name="fhoraire" id="fhoraire" title="Selectionnez votre pays">
+                                                        <option value="America/Martinique" default="" selected="selected">Martinique</option>
+                                                        <option value="America/Guadeloupe">Guadeloupe</option>
+                                                        <option value="Europe/Paris">France</option>
+                                                        <option value="America/Cayenne">Guyane française</option> 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> <br>
                                         <div class="row ">
                                             <div class="col-md-12">
                                                 <input type="submit" class="submit button"  value="Je m'inscris !" style="    width: -webkit-fill-available;" >
@@ -290,6 +468,39 @@ $('#email').keyup(function() {
         {
            document.getElementById("erro5").innerHTML ="";
            $('#inscriptionform').find(':input[type=submit]').prop('disabled', false);
+
+        }
+      
+    }
+});
+   
+});
+
+</script>
+<script>
+$('#email2').keyup(function() {
+    var dInput = this.value;
+  // alert(dInput);
+   var _token = $('input[name="_token"]').val();
+   $.ajax({
+    url:"{{ route('existance.email') }}",
+    method:"post",
+    data:{ email:dInput, _token: _token },
+    success:function(data){
+        if(data=="existe")
+        {
+            document.getElementById("erro52").innerHTML =" Cet adresse email est déjà utilisée";
+            
+            $('#inscriptionform2').find(':input[type=submit]').prop('disabled', true);
+          
+           // alert(data);
+            //return false;
+
+        }
+        else
+        {
+           document.getElementById("erro5").innerHTML ="";
+           $('#inscriptionform2').find(':input[type=submit]').prop('disabled', false);
 
         }
       
