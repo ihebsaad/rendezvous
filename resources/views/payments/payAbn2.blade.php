@@ -154,13 +154,15 @@ background-color:#a0d468;
                    var user_type ="{{ $user_type }}";
                    var password ="{{ $password }}";
                    var montant ="{{$montant}}";
+                   var pays="{{$pays}}";
+                   var ind_tel="{{$ind_tel}}";
                    //alert(urlqrcode);
 
                   $.ajax({
 
                    url:"{{url('/')}}/success/payAbn/{{ $usr }}", 
                    type : 'get',
-                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn,mensuel_annuel:mensuel_annuel, abn:abn , _token:_token,username:username, name:name,lastname:lastname,phone:phone,email:email,titre:titre,siren:siren,adresse:adresse,ville:ville,codep:codep,fhoraire:fhoraire,date_inscription:date_inscription,urlqrcode:urlqrcode,user_type:user_type,password:password,montant:montant},
+                   data:{paymentIntent:paymentIntent,nature_abonn:nature_abonn,mensuel_annuel:mensuel_annuel, abn:abn , _token:_token,username:username, name:name,lastname:lastname,phone:phone,email:email,titre:titre,siren:siren,adresse:adresse,ville:ville,codep:codep,fhoraire:fhoraire,date_inscription:date_inscription,urlqrcode:urlqrcode,user_type:user_type,password:password,montant:montant,pays:pays,ind_tel:ind_tel},
                    
                    success: function(data){ 
                     //alert(data);

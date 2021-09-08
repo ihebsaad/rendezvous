@@ -515,7 +515,16 @@ if( $nbpres <= 100 ) {?>
                     <section id="offre-lancement" class="center margin-bottom-50">
                         <h2 id="h2offre">OFFRE DE BIENVENUE <!-- <i class="im im-icon-Gift-Box" style="font-size:90px;"></i>--></h2>
                         <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€/AN</span> 449€ TTC/An</h2>
-                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >avec Engagement</h3><h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;">OU</h2>
+                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >avec Engagement</h3>
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
+                                <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;display: none;"><b>*</b>Puis 889€/an, soit 74€/mois</p>
+                            </div>
+                        </div>
+
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;">OU</h2>
+
                         <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">249€/Mois</span> 149€ TTC/Mois</h2>
                         <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >sans Engagement</h3>
 
@@ -524,7 +533,7 @@ if( $nbpres <= 100 ) {?>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
+                                <a href="#sign-in-dialog2" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
                                 <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;display: none;"><b>*</b>Puis 889€/an, soit 74€/mois</p>
                             </div>
                         </div>

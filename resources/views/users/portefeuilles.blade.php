@@ -151,7 +151,7 @@ use \App\User;
        
       <div class="col-md-10" >
         <label>Pourcentage d'acompte:</label>
-        <input type="number" min="10" max="90" value="20" onchange="changeAcompte(this)" name="">
+        <input type="number" min="10" max="60" value="20" onchange="changeAcompte(this)" name="">
       </div>
         <div class="col-md-12" >
         <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?> 

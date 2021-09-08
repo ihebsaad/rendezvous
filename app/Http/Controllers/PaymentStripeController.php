@@ -170,9 +170,11 @@ return view('payments.pay', [
     $nature_abonn=$request->get('nature_abonn');
     $mensuel_annuel='';
     if($nature_abonn=="offre_lanc"){
-        $mensuel_annuel=$request->get('mensuel_annuel');
+        //$mensuel_annuel=$request->get('mensuel_annuel');
+       $mensuel_annuel=Session::get('mensuel_annuel');
+
       }
-    //dd($mensuel_annuel);
+     //dd($mensuel_annuel);
    // nouvelle inscription 
        $username=0;
        $name=0;
@@ -191,6 +193,8 @@ return view('payments.pay', [
        $urlqrcode=0;
        $user_type=0;
        $password=0;
+       $ind_tel=0;
+       $pays=0; 
 
      if($user==0)
      {
@@ -213,6 +217,8 @@ return view('payments.pay', [
        $urlqrcode=Session::get('qr_code');
        $user_type=Session::get('user_type');
        $password=Session::get('password');
+       $pays=Session::get('pays');
+       $ind_tel=Session::get('ind_tel');
 
    // dd( $urlqrcode);
      }
@@ -233,7 +239,7 @@ return view('payments.pay', [
         ]);*/
 
 return view('payments.payAbn2', [
-            'clientSecret' => $clientSecret ,'montant'=>$montant, 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn,'mensuel_annuel' => $mensuel_annuel, 'abn' => $abn, 'username' => $username , 'name' => $name , 'lastname' => $lastname, 'phone' => $phone, 'email' => $email , 'titre' => $titre ,'siren' => $siren , 'adresse' => $adresse, 'ville' => $ville ,'codep' => $codep ,'fhoraire' => $fhoraire, 'date_inscription' => $date_inscription , 'urlqrcode' => $urlqrcode ,'user_type' => $user_type ,  'password' => $password  ]);
+            'clientSecret' => $clientSecret ,'montant'=>$montant, 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn,'mensuel_annuel' => $mensuel_annuel, 'abn' => $abn, 'username' => $username , 'name' => $name , 'lastname' => $lastname, 'phone' => $phone, 'email' => $email , 'titre' => $titre ,'siren' => $siren , 'adresse' => $adresse, 'ville' => $ville ,'codep' => $codep ,'fhoraire' => $fhoraire, 'date_inscription' => $date_inscription , 'urlqrcode' => $urlqrcode ,'user_type' => $user_type ,  'password' => $password,'ind_tel' => $ind_tel ,  'pays' => $pays ]);
 
 
    
@@ -277,6 +283,8 @@ return view('payments.payAbn2', [
        $urlqrcode=$request->get('urlqrcode');
        $user_type=$request->get('user_type');
        $password=$request->get('password');
+       $pays=$request->get('pays');
+       $ind_tel=$request->get('ind_tel');
       
     
         
@@ -297,6 +305,8 @@ return view('payments.payAbn2', [
             'qr_code'=> $urlqrcode,
             'user_type' => $user_type,
             'password' =>$password,
+             'pays' => $pays,
+             'ind_tel' =>$ind_tel,
         ]);
 
         //$prestataire->save();
@@ -350,29 +360,14 @@ return view('payments.payAbn2', [
      // aucun abonnement fait
      if($expiration==''){
        // today + abonnement
-    if($abn!=3){$datee = (new \DateTime())->modify('+366 days')->format($format);}
+    if($abn!=3)//abon annuel
+      {$datee = (new \DateTime())->modify('+366 days')->format($format);}
     else{
-      //$datee = (new \DateTime())->modify('+366 days')->format($format);
+      //$abon 2 (mensuel)
 
-      if($nature_abonn=="offre_lanc"){
+      $datee = (new \DateTime())->modify('+31 days')->format($format);
 
-        if($mensuel_annuel=='mensuel')
-        {
-          
-          $datee = (new \DateTime())->modify('+31 days')->format($format);
-        }
-        else
-        {
-
-          $datee = (new \DateTime())->modify('+366 days')->format($format);
-        }
-
-      }
-      else
-      {
-       $datee = (new \DateTime())->modify('+366 days')->format($format);
-      }
-
+      
     }
     
      }else{
@@ -382,29 +377,10 @@ return view('payments.payAbn2', [
      // abonnement fait expiré
       if($expiration< $today){
        // today + abonnement
-    if($abn!=3){$datee = (new \DateTime())->modify('+366 days')->format($format);}
+    if($abn!=3)
+      {$datee = (new \DateTime())->modify('+366 days')->format($format);}
     else{
-      //$datee = (new \DateTime())->modify('+366 days')->format($format);
-       if($nature_abonn=="offre_lanc"){
-
-        if($mensuel_annuel=='mensuel')
-        {
-          
-          $datee = (new \DateTime())->modify('+31 days')->format($format);
-        }
-        else
-        {
-
-          $datee = (new \DateTime())->modify('+366 days')->format($format);
-        }
-
-      }
-      else
-      {
-       $datee = (new \DateTime())->modify('+366 days')->format($format);
-      }
-      //$datee = (new \DateTime())->modify('+366 days')->format($format);
-
+      $datee = (new \DateTime())->modify('+31 days')->format($format);
     }
      }
      
@@ -421,26 +397,9 @@ return view('payments.payAbn2', [
      $daysToAdd='';
      $newdate = Carbon::createFromFormat('Y-m-d H:i:s', $prestataire->expire);
      if($abn!=3){$daysToAdd = 366;}
-    else{//$daysToAdd = 365;
+    else{
 
-        if($nature_abonn=="offre_lanc"){
-
-        if($mensuel_annuel=='mensuel')
-        {
-          
-          $daysToAdd = 31;
-        }
-        else
-        {
-
-         $daysToAdd = 366;
-        }
-
-      }
-      else
-      {
-          $daysToAdd = 366;
-      }
+      $daysToAdd = 31;        
            
     }
      
@@ -481,19 +440,20 @@ return view('payments.payAbn2', [
         $abonnement='N°: 1 | ' .$parametres->abonnement1.' (annuel)';
       }
       if($abn==2){
-        $abonnement='N°: 2 | ' .$parametres->abonnement2.' (annuel)';
+        $abonnement='N°: 2 | ' .$parametres->abonnement2.' (abonnement annuel)('.$parametres->cout_abon_annu_pricing.'/ an)';
       }
       if($abn==3){
-        $abonnement='N°: 3 | ' .$parametres->abonnement3.' (annuel)';
+        $abonnement='N°: 3 | ' .$parametres->abonnement3.' (abonnement mensuel)('.$parametres->cout_abon_mens_pricing.'/ mois)';
       }
       }
+    
       else
       {
 
         if($mensuel_annuel=='mensuel')
         {
           
-        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3_mens.' euros pour le premier mois';
+        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3_mens.' euros pour chaque mois';
         }
         else
         {
@@ -535,7 +495,7 @@ return view('payments.payAbn2', [
     $message='Bonjour,<br>';
     $message.='Abonnement payé : '.$abonnement.'<br>';
     $message.='<b>Prestataire :</b> '.$nom_p.' '.$prenom_p.'<br>';
-    $message.='<b>Téléphone Prestataire :</b> '.$prestataire->phone .'<br>';
+    $message.='<b>Téléphone Prestataire :</b> (+'.$prestataire->ind_tel.') '.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
   //trouvezunprestataire@gmail.com
   //kbskhaledfb@gmail.com  trouvezunprestataire@gmail.com
