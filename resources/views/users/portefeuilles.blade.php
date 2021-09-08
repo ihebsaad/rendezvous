@@ -13,6 +13,12 @@ use \App\User;
   ?>
  <div id="dashboard"> 
 @include('layouts.back.bmenu')
+<style type="text/css">
+  .swal-wide{
+    width:600px !important;
+}
+
+</style>
 
 <div class="dashboard-content">
 <input type="hidden" id="user" name="" value="{{$user->id}}">
@@ -47,7 +53,7 @@ use \App\User;
 
           <div class="dashboard-stat-content wallet-totals"><h4>{{$CA[0]->somme}}</h4> <span>Chiffre d’affaire (mensuelle) <strong class="wallet-currency">EURO</strong></span> </div>
           <div class="dashboard-stat-icon"><i class="im im-icon-Money-Bag"></i></div>
-          <div class="" style="float: right;margin:5px 15px 5px 5px ;background-color: #ffae00"><b><span><a class="button"   onclick="downloadCSV()" style="background-color: #ffae00"><i class="fa fa-download" aria-hidden="true"></i> scv</a></span></b></div>
+          <div class="" style="float: right;margin:0px 0px 0px 0px ;background-color: #ffae00"><b><span><a class="button"   onclick="downloadCSV()" style="background-color: #ffae00"><i class="fa fa-download" aria-hidden="true"></i> Export csv</a></span></b></div>
         </div>
       </div>
 
@@ -234,10 +240,11 @@ use \App\User;
 
     function downloadCSV(){
       Swal.fire({
-  title: 'Cliquer sur la période',
+  title: 'Veuillez sélectionner parmi les options',
   icon: 'info',
+  customClass: 'swal-wide',
   html:
-    '<a href="{{ route("downloadCSVday") }}"><b>Journalier</b></a> / <a href="{{ route("downloadCSVweek") }}"><b>Abdomadaire</b></a> / <a href="{{ route("downloadCSVmonth") }}"><b>Mensuel</b></a>/ <a href="{{ route("downloadCSVyear") }}"><b>Annuel</b></a> ' ,
+    '<a class="button" href="{{ route("downloadCSVday") }}"><b>Journalier</b></a>  <a  class="button" href="{{ route("downloadCSVweek") }}"><b>Hebdomadaire</b></a>  <a class="button" href="{{ route("downloadCSVmonth") }}"><b>Mensuel</b></a> <a class="button" href="{{ route("downloadCSVyear") }}"><b>Annuel</b></a> ' ,
   showDenyButton: false,
   showCancelButton: false,
   confirmButtonText: `Annuler`,
