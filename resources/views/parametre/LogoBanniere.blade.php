@@ -97,7 +97,7 @@
             method: "POST",
             data: {_token: _token},
             success: function (data) {
-                    swal({
+                    swal({ 
                         type: 'success',
                         title: 'SMS ...',
                         text: 'SMS envoyé avec succès'
