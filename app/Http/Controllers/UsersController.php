@@ -285,11 +285,15 @@ class UsersController extends Controller
     }
     public function pageprestataires(Request $request)
     {
+      //dd($request);
+      if ($request::exists('emplacementsearch')) {
+        dd("ok");
+      }
       dd($request);
       $today= new DateTime();
       
-        $prest_tag= trim($request->get('tagsearch'));
-        $prest_emplacement= trim($request->get('prest_emplacement'));
+        $prest_tag= trim($request->get('prest_tag'));//tagsearch
+        $prest_emplacement= trim($request->get('prest_emplacement'));//emplacementsearch
         $Toutes_les_categories=trim($request->get('toutes_categories')); 
         if ($Toutes_les_categories=="Toutes les catégories") {
             $Toutes_les_categories=false;
@@ -434,7 +438,7 @@ class UsersController extends Controller
                      ->orderBy('id', 'asc')
                      ->paginate(5);
           $listings->appends(['emplacementsearch' => $prest_emplacement]);
-         // dd($listings);
+          dd($listings);
       
         }
   //------------------------------------------------------------------------------------------------------
@@ -525,7 +529,7 @@ class UsersController extends Controller
                      ->orderBy('id', 'asc')
                      ->paginate(5);
           $listings->appends(['tagsearch' => $prest_tag]);
-          //dd("ok");
+          dd("ok");
 
         }
 //-------------------------------------------------------------------------------------------
