@@ -35,9 +35,9 @@
   
     /* your colors */
     .legend .lightgrey { background-color: lightgrey;}
-    .legend .brown { background-color: #e5bc75; }
-    .legend .blue { background-color: #dd995c; }
-    .legend .red{ background-color: #ecda78; }
+    .legend .brown { background-color: #9fec9f; }
+    .legend .blue { background-color: #ecba99; }
+    .legend .red{ background-color: #ec7878; }
     .legend .green{ background-color:#ead831; }
     .legend .pink{ background-color:#d3c07b; }
    
