@@ -446,7 +446,7 @@ class UsersController extends Controller
                      ->orderBy('id', 'asc')
                      ->paginate(5);
           $listings->appends(['emplacementsearch' => $prest_emplacement]);
-          dd($listings);
+          //dd($listings);
       
         }
   //------------------------------------------------------------------------------------------------------
@@ -537,7 +537,7 @@ class UsersController extends Controller
                      ->orderBy('id', 'asc')
                      ->paginate(5);
           $listings->appends(['tagsearch' => $prest_tag]);
-          dd("ok");
+          //dd("ok");
 
         }
 //-------------------------------------------------------------------------------------------
