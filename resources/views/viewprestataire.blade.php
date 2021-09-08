@@ -24,6 +24,72 @@ height:100%;
 width:100%;
 position:absolute;
 }
+
+.listing-details-sidebar li a.instagram-profile i, .listing-details-sidebar li a.instagram-profile {
+    color: #e1306c;
+}
+
+.like-button .like-icon {
+    color: #ff0000!important;
+}
+
+table.basic-table th {
+    background-color: #f2f2f2!important;
+    color: #464646!important;    
+}
+
+ .utf_listing_section {
+    display: inline-block;
+    width: 100%;
+}
+ #utf_single_listing_map_block {
+    height: 410px;
+    position: relative;
+    padding-top: 5px;
+    display: block;
+}
+  #utf_single_listingmap {
+    height: 400px;
+    border-radius: 3px;
+}
+.gm-style {
+    font: 400 11px Roboto, Arial, sans-serif;
+    text-decoration: none;
+}
+.gm-style-pbc {
+    transition: opacity ease-in-out;
+    background-color: rgba(0,0,0,0.45);
+    text-align: center;
+}
+#utf_street_view_btn, #geoLocation, #scrollEnabling {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+    font-size: 13px;
+    line-height: 21px;
+}
+#utf_street_view_btn, #geoLocation, #scrollEnabling, #mapnav-buttons a {
+    color: #333;
+    background-color: #fff;
+    padding: 7px 18px;
+    padding-top: 9px;
+    font-weight: 500;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 4px;
+    box-shadow: 0px 1px 4px -1px rgb(0 0 0 / 20%);
+}
+
+#map {
+  height: 100%;
+}
+
+
 @media (max-width: 1024px) {
     .pricing-list-container span {
         right: -40px!important;
@@ -116,7 +182,24 @@ position:absolute;
             <div id="listing-nav" class="listing-nav-container">
                 <ul class="listing-nav">
                     <li><a href="#listing-overview" class="active">Présentation</a></li>
+                    <?php 
+
+                        $services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
+                        $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get(); 
+                        $nbserv =count($services );
+                        $nbservrec =count($servicesreccurent );
+                        if (( $nbserv>0) || ( $nbservrec>0)){
+
+                    ?>
                     <li><a href="#listing-pricing-list">Services</a></li>
+                <?php } ?>
+                    <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  
+                            $nbhh =count($happyhours );
+                            if ($nbhh > 0)
+                            {
+                    ?>
+                    <li><a href="#listing-promotion-list">Promotions flash</a></li>
+                    <?php }} ?>
                     <li><a href="#listing-location">Emplacement</a></li>
                     <li><a href="#listing-reviews">Avis</a></li>
                     <li><a href="#add-review">Ajoutez votre avis</a></li>
@@ -204,10 +287,6 @@ position:absolute;
             <!-- services Menu -->
             <?php
 
-                    $services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
-                    $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get(); 
-                    $nbserv =count($services );
-                    $nbservrec =count($servicesreccurent );
                     if (( $nbserv>0) || ( $nbservrec>0)){
             ?>
             <div id="listing-pricing-list" class="listing-section">
@@ -264,65 +343,125 @@ position:absolute;
             </div>
             <!-- services Menu / End -->
         <?php } ?>
-
+        <!-- heures creuses /happy hours Menu  -->
+        <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  
+                $nbhh =count($happyhours );
+                if ($nbhh > 0)
+                {
+            ?>
+            <div class="row"  id="listing-promotion-list">
         
+            <div class="col-md-12">
+
+                <h4 class="headline margin-top-70 margin-bottom-30">Promotions flash</h4>
+                <table class="basic-table">
+
+                    <tbody><tr>
+                        <th>Date</th>
+                        <th>Réduction</th>
+                        <th>Places</th>
+                    </tr>
+                     <?php $x=0; foreach($happyhours as $happyhour){ $x=$x+1 ; 
+                          $dateF = new DateTime($happyhour->dateFin);
+                          $aujour= new DateTime();
+                     ?>
+                    <tr>
+                        <td data-label="Date"><b>De</b> <?php $dateDebut = new DateTime($happyhour->dateDebut); echo $dateDebut->format('d-m-Y H:i') ; ?> <b>à</b> <?php $dateFin = new DateTime($happyhour->dateFin); echo $dateFin->format('d-m-Y H:i') ; ?></td>
+                        <td data-label="Réduction">{{$happyhour->reduction}}%</td>
+                        <td data-label="Places">{{$happyhour->places}}</td>
+                    </tr>
+                    <?php } ?>
+                </tbody></table>
+            </div>
+
+        </div>
+
+        <?php }} ?>
+        
+
+        <!-- heures creuses /happy hours Menu / End -->
+            <!-- FAQ prestataire -->
+            <?php 
+                    $faqs =\App\Faq::where('user',$id)->get();
+                    $countfaq = count($faqs);
+                    if ($countfaq > 0 ) {
+            ?>
+            <section>
+                <h3 class="listing-desc-headline">FAQ</h3>
+
+                            <div class="style-2 ">
+                                @foreach($faqs as $pfp)
+                                <!-- Toggle 1 -->
+                                <div class="toggle-wrap">
+                                    <span class="trigger"><a href="#">{{$pfp->question}}<i class="sl sl-icon-plus"></i></a></span>
+                                    <div class="toggle-container" style="display: none;">
+                                        <p><?php echo $pfp->reponse; ?></p>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+
+            </section>
+                    <?php } ?>
             <!-- Location -->
             <div id="listing-location" class="listing-section">
-                <h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Location</h3>
+                <h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Emplacement</h3>
 
-                <div id="singleListingMap-container">
-                    <div id="singleListingMap" data-latitude="40.70437865245596" data-longitude="-73.98674011230469" data-map-icon="im im-icon-Hamburger"></div>
-                    <a href="#" id="streetView">Street View</a>
-                </div>
+                    <div id="utf_listing_location" class="utf_listing_section">
+                        <div id="utf_single_listing_map_block">
+                        <div id="utf_single_listingmap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}" data-map-icon="im im-icon-Marker"></div>
+                        <!--<a href="#" id="utf_street_view_btn">Vue de rue</a> -->
+                        </div>
+                    </div>
             </div>
                 
             <!-- Reviews -->
             <div id="listing-reviews" class="listing-section">
-                <h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span>(12)</span></h3>
+                <h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Avis <span>(<?php echo $countrev;?>)</span></h3>
 
                 <!-- Rating Overview -->
                 <div class="rating-overview">
                     <div class="rating-overview-box">
-                        <span class="rating-overview-box-total">4.2</span>
-                        <span class="rating-overview-box-percent">out of 5.0</span>
-                        <div class="star-rating" data-rating="5"></div>
+                        <span class="rating-overview-box-total"><?php echo $moy;?></span>
+                        <span class="rating-overview-box-percent">de 5.0</span>
+                        <div class="star-rating" data-rating="<?php echo $moy;?>"></div>
                     </div>
 
                     <div class="rating-bars">
                             <div class="rating-bars-item">
-                                <span class="rating-bars-name">Service <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></span>
+                                <span class="rating-bars-name">Qualité <!--<i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i>--></span>
                                 <span class="rating-bars-inner">
-                                    <span class="rating-bars-rating" data-rating="4.2">
+                                    <span class="rating-bars-rating" data-rating="<?php echo $moy_qualite ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong>4.2</strong>
+                                    <strong><?php echo $moy_qualite ; ?></strong>
                                 </span>
                             </div>
                             <div class="rating-bars-item">
-                                <span class="rating-bars-name">Value for Money <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></span>
+                                <span class="rating-bars-name">Service <!--<i class="tip" data-tip-content="Overall experience received for the amount spent"></i>--></span>
                                 <span class="rating-bars-inner">
-                                    <span class="rating-bars-rating" data-rating="4.8">
+                                    <span class="rating-bars-rating" data-rating="<?php echo $moy_service ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong>4.8</strong>
+                                    <strong><?php echo $moy_service ; ?></strong>
                                 </span>
                             </div>
                             <div class="rating-bars-item">
-                                <span class="rating-bars-name">Location <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></span>
+                                <span class="rating-bars-name">Prix <!--<i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i>--></span>
                                 <span class="rating-bars-inner">
-                                    <span class="rating-bars-rating" data-rating="3.7">
+                                    <span class="rating-bars-rating" data-rating="<?php echo $moy_prix ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong>3.7</strong>
+                                    <strong><?php echo $moy_prix ; ?></strong>
                                 </span>
                             </div>
                             <div class="rating-bars-item">
-                                <span class="rating-bars-name">Cleanliness <i class="tip" data-tip-content="The physical condition of the business"></i></span>
+                                <span class="rating-bars-name">Emplacement <!--<i class="tip" data-tip-content="The physical condition of the business"></i>--></span>
                                 <span class="rating-bars-inner">
-                                    <span class="rating-bars-rating" data-rating="4.0">
+                                    <span class="rating-bars-rating" data-rating="<?php echo $moy_emplacement ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong>4.0</strong>
+                                    <strong><?php echo $moy_emplacement ; ?></strong>
                                 </span>
                             </div>
                     </div>
@@ -331,71 +470,38 @@ position:absolute;
 
 
                 <div class="clearfix"></div>
-
+                <?php if ($countrev > 0) { ?>
                 <!-- Reviews -->
                 <section class="comments listing-reviews">
                     <ul>
+                        <?php  foreach( $reviews as $review)
+                        { $cl =$review->client; $client=\App\User::where('id',$cl)->first();
+                            $name=$lastname='';
+                        if(isset($client->name)){$name=$client->name;}if(isset($client->lastname)){$lastname=$client->lastname;}
+                        ?>
                         <li>
-                            <div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
+                            <?php if (isset($client->logo) && $client->logo!=''){ ?>
+                                  <div class="avatar"><img src="<?php echo  URL::asset('storage/images/'.$client->logo);?>"  alt="" /></div> 
+                             <?php }else{ ?>
+                              <div class="avatar"><img   src="<?php echo  URL::asset('public/images/client-avatar1.png');?>" alt="" /></div> 
+                  
+                             <?php } ?>
                             <div class="comment-content"><div class="arrow-comment"></div>
-                                <div class="comment-by">Kathy Brown <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date">June 2019</span>
-                                    <div class="star-rating" data-rating="5"></div>
+                                <div class="comment-by"><?php  echo $name.' '.$lastname ; ?> <i class="tip" data-tip-content="La personne qui a laissé cet avis était en fait un client"></i> <span class="date"><?php $datec= date('d/m/Y H:i', strtotime($review->created_at )); echo $datec ; ?></span>
+                                    <div class="star-rating" data-rating="<?php echo intval($review->note);?>"></div>
                                 </div>
-                                <p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
-                                
-                                <div class="review-images mfp-gallery-container">
-                                    <a href="images/review-image-01.jpg" class="mfp-gallery"><img src="images/review-image-01.jpg" alt=""></a>
-                                </div>
-                                <a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>12</span></a>
+                                <p><?php echo $review->commentaire; ?></p>
                             </div>
                         </li>
-
-                        <li>
-                            <div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-                            <div class="comment-content"><div class="arrow-comment"></div>
-                                <div class="comment-by">John Doe<span class="date">May 2019</span>
-                                    <div class="star-rating" data-rating="4"></div>
-                                </div>
-                                <p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-                                <a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>2</span></a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-                            <div class="comment-content"><div class="arrow-comment"></div>
-                                <div class="comment-by">Kathy Brown<span class="date">June 2019</span>
-                                    <div class="star-rating" data-rating="5"></div>
-                                </div>
-                                <p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
-                                
-                                <div class="review-images mfp-gallery-container">
-                                    <a href="images/review-image-02.jpg" class="mfp-gallery"><img src="images/review-image-02.jpg" alt=""></a>
-                                    <a href="images/review-image-03.jpg" class="mfp-gallery"><img src="images/review-image-03.jpg" alt=""></a>
-                                </div>
-                                <a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>4</span></a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-                            <div class="comment-content"><div class="arrow-comment"></div>
-                                <div class="comment-by">John Doe<span class="date">May 2019</span>
-                                    <div class="star-rating" data-rating="5"></div>
-                                </div>
-                                <p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-                                <a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review</a>
-                            </div>
-
-                        </li>
+                        <?php } ?>
+                       
                      </ul>
                 </section>
-
-                <!-- Pagination -->
+                <?php } ?>
+                <!-- Pagination 
                 <div class="clearfix"></div>
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- Pagination -->
                         <div class="pagination-container margin-top-30">
                             <nav class="pagination">
                                 <ul>
@@ -408,36 +514,43 @@ position:absolute;
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <!-- Pagination / End -->
+                Pagination / End -->
             </div>
 
-
+            <?php if (isset($user)) { ?>
             <!-- Add Review Box -->
-            <div id="add-review" class="add-review-box">
-
+            <div id="add-review" class="add-review-box"   >
+                
                 <!-- Add Review -->
-                <h3 class="listing-desc-headline margin-bottom-10">Add Review</h3>
-                <p class="comment-notes">Your email address will not be published.</p>
-
+                <h3 class="listing-desc-headline margin-bottom-10">Ajouter votre Avis</h3>
+                <p class="comment-notes">Votre adresse email ne sera pas publiée.</p>
                 <!-- Subratings Container -->
                 <div class="sub-ratings-container">
+                    <!-- Subrating #hidden -->
+                    <div class="add-sub-rating" style="display: none;">
+                        <div class="sub-rating-title">hidden to fix style <i class="tip" data-tip-content="Quality of service"></i></div>
+                        <div class="sub-rating-stars">
+                            <!-- Leave Rating -->
+                                <input type="radio" name="rating" id="rating-001" value="1"/>
+                            </form>
+                        </div>
+                    </div>
 
                     <!-- Subrating #1 -->
                     <div class="add-sub-rating">
-                        <div class="sub-rating-title">Service <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
+                        <div class="sub-rating-title">Qualité <i class="tip" data-tip-content="Noter la qualité de votre experience"></i></div>
                         <div class="sub-rating-stars">
                             <!-- Leave Rating -->
-                            <div class="clearfix"></div>
                             <form class="leave-rating">
-                                <input type="radio" name="rating" id="rating-1" value="1"/>
+                                <input type="radio" name="rating" id="rating-1" value="1" onclick="document.getElementById('note_qualite').value='5';"/>
                                 <label for="rating-1" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-2" value="2"/>
+                                <input type="radio" name="rating" id="rating-2" value="2" onclick="document.getElementById('note_qualite').value='4';" />
                                 <label for="rating-2" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-3" value="3"/>
+                                <input type="radio" name="rating" id="rating-3" value="3" onclick="document.getElementById('note_qualite').value='3';" />
                                 <label for="rating-3" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-4" value="4"/>
+                                <input type="radio" name="rating" id="rating-4" value="4" onclick="document.getElementById('note_qualite').value='2';" />
                                 <label for="rating-4" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-5" value="5"/>
+                                <input type="radio" name="rating" id="rating-5" value="5" onclick="document.getElementById('note_qualite').value='1';" />
                                 <label for="rating-5" class="fa fa-star"></label>
                             </form>
                         </div>
@@ -445,20 +558,20 @@ position:absolute;
 
                     <!-- Subrating #2 -->
                     <div class="add-sub-rating">
-                        <div class="sub-rating-title">Value for Money <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></div>
+                        <div class="sub-rating-title">Service <i class="tip" data-tip-content="Noter la qualité du service"></i></div>
                         <div class="sub-rating-stars">
                             <!-- Leave Rating -->
                             <div class="clearfix"></div>
                             <form class="leave-rating">
-                                <input type="radio" name="rating" id="rating-11" value="1"/>
+                                <input type="radio" name="rating" id="rating-11" value="1" onclick="document.getElementById('note_service').value='5';" />
                                 <label for="rating-11" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-12" value="2"/>
+                                <input type="radio" name="rating" id="rating-12" value="2" onclick="document.getElementById('note_service').value='4';" />
                                 <label for="rating-12" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-13" value="3"/>
+                                <input type="radio" name="rating" id="rating-13" value="3" onclick="document.getElementById('note_service').value='3';" />
                                 <label for="rating-13" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-14" value="4"/>
+                                <input type="radio" name="rating" id="rating-14" value="4" onclick="document.getElementById('note_service').value='2';" />
                                 <label for="rating-14" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-15" value="5"/>
+                                <input type="radio" name="rating" id="rating-15" value="5" onclick="document.getElementById('note_service').value='1';" />
                                 <label for="rating-15" class="fa fa-star"></label>
                             </form>
                         </div>
@@ -466,20 +579,20 @@ position:absolute;
 
                     <!-- Subrating #3 -->
                     <div class="add-sub-rating">
-                        <div class="sub-rating-title">Location <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></div>
+                        <div class="sub-rating-title">Prix <i class="tip" data-tip-content="Noter les prix du prestataire"></i></div>
                         <div class="sub-rating-stars">
                             <!-- Leave Rating -->
                             <div class="clearfix"></div>
                             <form class="leave-rating">
-                                <input type="radio" name="rating" id="rating-21" value="1"/>
+                                <input type="radio" name="rating" id="rating-21" value="1" onclick="document.getElementById('note_prix').value='5';" />
                                 <label for="rating-21" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-22" value="2"/>
+                                <input type="radio" name="rating" id="rating-22" value="2" onclick="document.getElementById('note_prix').value='4';" />
                                 <label for="rating-22" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-23" value="3"/>
+                                <input type="radio" name="rating" id="rating-23" value="3" onclick="document.getElementById('note_prix').value='3';" />
                                 <label for="rating-23" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-24" value="4"/>
+                                <input type="radio" name="rating" id="rating-24" value="4" onclick="document.getElementById('note_prix').value='2';" />
                                 <label for="rating-24" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-25" value="5"/>
+                                <input type="radio" name="rating" id="rating-25" value="5" onclick="document.getElementById('note_prix').value='1';" />
                                 <label for="rating-25" class="fa fa-star"></label>
                             </form>
                         </div>
@@ -487,41 +600,39 @@ position:absolute;
                     
                     <!-- Subrating #4 -->
                     <div class="add-sub-rating">
-                        <div class="sub-rating-title">Cleanliness <i class="tip" data-tip-content="The physical condition of the business"></i></div>
+                        <div class="sub-rating-title">Emplacement <i class="tip" data-tip-content="Noter l'emplacement du prestataire"></i></div>
                         <div class="sub-rating-stars">
                             <!-- Leave Rating -->
                             <div class="clearfix"></div>
                             <form class="leave-rating">
-                                <input type="radio" name="rating" id="rating-31" value="1"/>
+                                <input type="radio" name="rating" id="rating-31" value="1" onclick="document.getElementById('note_emplacement').value='5';" />
                                 <label for="rating-31" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-32" value="2"/>
+                                <input type="radio" name="rating" id="rating-32" value="2" onclick="document.getElementById('note_emplacement').value='4';" />
                                 <label for="rating-32" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-33" value="3"/>
+                                <input type="radio" name="rating" id="rating-33" value="3" onclick="document.getElementById('note_emplacement').value='3';" />
                                 <label for="rating-33" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-34" value="4"/>
+                                <input type="radio" name="rating" id="rating-34" value="4" onclick="document.getElementById('note_emplacement').value='2';" />
                                 <label for="rating-34" class="fa fa-star"></label>
-                                <input type="radio" name="rating" id="rating-35" value="5"/>
+                                <input type="radio" name="rating" id="rating-35" value="5" onclick="document.getElementById('note_emplacement').value='1';" />
                                 <label for="rating-35" class="fa fa-star"></label>
                             </form>
                         </div>
                     </div>  
 
-                    <!-- Uplaod Photos -->
-                    <div class="uploadButton margin-top-15">
-                        <input class="uploadButton-input" type="file"  name="attachments[]" accept="image/*, application/pdf" id="upload" multiple/>
-                        <label class="uploadButton-button ripple-effect" for="upload">Add Photos</label>
-                        <span class="uploadButton-file-name"></span>
-                    </div>
-                    <!-- Uplaod Photos / End -->
 
                 </div>
                 <!-- Subratings Container / End -->
-
+                <form action="{{ route('reviews.add') }}" method="post"  >
+                      {{ csrf_field() }} 
+                      <input type="hidden" id="prestataire" name="prestataire" value="<?php echo $user->id;?>">
+                      <input type="hidden" id="note_qualite" name="note_qualite">
+                      <input type="hidden" id="note_service" name="note_service">
+                      <input type="hidden" id="note_prix" name="note_prix">
+                      <input type="hidden" id="note_emplacement" name="note_emplacement">
                 <!-- Review Comment -->
-                <form id="add-comment" class="add-comment">
                     <fieldset>
-
-                        <div class="row">
+                        <?php if (isset($user)){?>  <input type="hidden" id="client" name="client" value="<?php echo $user->id; ?>" ><?php } ?>
+                        <!--<div class="row">
                             <div class="col-md-6">
                                 <label>Name:</label>
                                 <input type="text" value=""/>
@@ -531,22 +642,22 @@ position:absolute;
                                 <label>Email:</label>
                                 <input type="text" value=""/>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div>
-                            <label>Review:</label>
-                            <textarea cols="40" rows="3"></textarea>
+                            <label>Commentaire:</label>
+                            <textarea cols="40" placeholder="Votre Commentaire..." rows="3" name="commentaire" id="commentaire"></textarea>
                         </div>
 
                     </fieldset>
 
-                    <button class="button">Submit Review</button>
+                    <button class="button"  id="sendavis" type="submit" value="Envoyer" style="margin-top: 15px;">Envoyer</button>
                     <div class="clearfix"></div>
                 </form>
 
             </div>
             <!-- Add Review Box / End -->
-
+            <?php } ?>
 
         </div>
 
@@ -557,13 +668,35 @@ position:absolute;
 
                 
             <!-- Verified Badge -->
-            <div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
-                <i class="sl sl-icon-check"></i> Verified Listing
+            <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
+                <i class="fa  fa-calendar"></i> Calendrier du prestataire
+            </div>-->
+            <div class="verified-badge "  >
+                <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>
 
             <!-- Book Now -->
             <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
-                <h3><i class="fa fa-calendar-check-o "></i> Booking</h3>
+                <a><h3><i class="fa fa-calendar-check-o "></i> Réserver un service</h3></a>
+                <div class="row with-forms margin-top-0">
+            <div class="col-lg-12 col-md-12">
+                <select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner" onchange="selectservice()"  multiple style="font-weight: 17px !important; " >
+                <option> </option>
+                    <?php 
+                    foreach($services as $service){
+                        echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
+            
+            $mab[$service->id]=$service->produits_id ;
+                    }
+                    
+                    ?>
+                    
+                    <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
+                </select>
+            </div>
+            <?php //echo json_encode($mab); ?>
+          </div>
                 <div class="row with-forms  margin-top-0">
 
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
@@ -697,16 +830,86 @@ position:absolute;
         
             <!-- Opening Hours -->
             <div class="boxed-widget opening-hours margin-top-35">
-                <div class="listing-badge now-open">Now Open</div>
-                <h3><i class="sl sl-icon-clock"></i> Opening Hours</h3>
+                
+                <?php 
+                            $fhoraire = $user->fhoraire;
+                            date_default_timezone_set($fhoraire);
+
+                            $currenttime = date('H:i');
+                            $dayname = date("l");
+                            // lundi
+                            if ($dayname === "Monday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($user->lundi_o)) && (strtotime($currenttime) <= strtotime($user->lundi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // mardi
+                            if ($dayname === "Tuesday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($user->mardi_o)) && (strtotime($currenttime) <= strtotime($user->mardi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // mercredi
+                            if ($dayname === "Wednesday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($user->mercredi_o)) && (strtotime($currenttime) <= strtotime($user->mercredi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // jeudi
+                            if ($dayname === "Thursday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($user->jeudi_o)) && (strtotime($currenttime) <= strtotime($user->jeudi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // vendredi
+                            if ($dayname === "Friday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($user->vendredi_o)) && (strtotime($currenttime) <= strtotime($user->vendredi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // samedi
+                            if ($dayname === "Saturday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($user->samedi_o)) && (strtotime($currenttime) <= strtotime($user->samedi_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                            // dimanche
+                            if ($dayname === "Sunday")
+                            {
+                                if ((strtotime($currenttime) >= strtotime($user->dimanche_o)) && (strtotime($currenttime) <= strtotime($user->dimanche_f)))
+                                    { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                            }
+                        ?>
+                <h3><i class="sl sl-icon-clock"></i> Heures d'ouverture</h3>
                 <ul>
-                    <li>Monday <span>9 AM - 5 PM</span></li>
-                    <li>Tuesday <span>9 AM - 5 PM</span></li>
-                    <li>Wednesday <span>9 AM - 5 PM</span></li>
-                    <li>Thursday <span>9 AM - 5 PM</span></li>
-                    <li>Friday <span>9 AM - 5 PM</span></li>
-                    <li>Saturday <span>9 AM - 3 PM</span></li>
-                    <li>Sunday <span>Closed</span></li>
+                    <li>Lundi <span>
+                    <?php if ($user->lundi_o !='' && $user->lundi_f  !='' ){
+                        echo  $user->lundi_o.' - '.$user->lundi_f; }else{echo 'Fermé';} ?>
+                        </span></li>
+                    <li>Mardi <span>
+                    <?php if ($user->mardi_o !='' && $user->mardi_f  !='' ){
+                        echo  $user->mardi_o.' - '.$user->mardi_f ;}else{echo 'Fermé';} ?>
+                        </span></li>
+                    <li>Mercredi <span>
+                    <?php if ($user->mercredi_o !='' && $user->mercredi_f  !='' ){
+                        echo  $user->mercredi_o.' - '.$user->mercredi_f; }else{echo 'Fermé';} ?>
+                        </span></li>
+                    <li>Jeudi <span>
+                    <?php if ($user->jeudi_o !='' && $user->jeudi_f  !='' ){
+                        echo  $user->jeudi_o.' - '.$user->jeudi_f; }else{echo 'Fermé';} ?>
+                        </span></li>
+                    <li>Vendredi <span>
+                    <?php if ($user->vendredi_o !='' && $user->vendredi_f  !='' ){
+                        echo  $user->vendredi_o.' - '.$user->vendredi_f; }else{echo 'Fermé';} ?>
+                        </span></li>
+                    <li>Samedi <span>
+                    <?php if ($user->samedi_o !='' && $user->samedi_f  !='' ){
+                        echo  $user->samedi_o.' - '.$user->samedi_f; }else{echo 'Fermé';} ?>
+                        </span></li>
+                    <li>Dimanche <span>
+                    <?php if ($user->dimanche_o !='' && $user->dimanche_f  !='' ){
+                        echo  $user->dimanche_o.' - '.$user->dimanche_f; }else{echo 'Fermé';} ?>
+                        </span></li>
                 </ul>
             </div>
             <!-- Opening Hours / End -->
@@ -714,23 +917,40 @@ position:absolute;
 
             <!-- Contact -->
             <div class="boxed-widget margin-top-35">
+                <?php if (!empty($user->responsable)) { ?>
                 <div class="hosted-by-title">
-                    <h4><span>Hosted by</span> <a href="pages-user-profile.html">Tom Perrin</a></h4>
-                    <a href="pages-user-profile.html" class="hosted-by-avatar"><img src="images/dashboard-avatar.jpg" alt=""></a>
+                    <h4><span>Responsable</span> <a href="pages-user-profile.html">{{$user->responsable}}</a></h4>
                 </div>
+                <?php } ?>
                 <ul class="listing-details-sidebar">
-                    <li><i class="sl sl-icon-phone"></i> (123) 123-456</li>
-                    <!-- <li><i class="sl sl-icon-globe"></i> <a href="#">http://example.com</a></li> -->
-                    <li><i class="fa fa-envelope-o"></i> <a href="#">tom@example.com</a></li>
+                    <?php if (!empty($user->tel)) { ?>
+                    <li><i class="sl sl-icon-phone"></i> {{$user->tel}}</li>
+                    <?php } ?>
+                    <?php if (!empty($user->email)) { ?>
+                    <li><i class="fa fa-envelope-o"></i> {{$user->email}}</li>
+                    <?php } ?>
                 </ul>
 
                 <ul class="listing-details-sidebar social-profiles">
-                    <li><a href="#" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-                    <li><a href="#" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a></li>
+                <?php if (!empty($user->fb)) { ?>
+                    <li>
+                        <a href="{{$user->fb}}" target="_blank" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a>
+                    </li>
+                <?php } ?>
+                <?php if (!empty($user->twitter)) { ?>
+                    <li>
+                        <a href="{{$user->twitter}}" target="_blank" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a>
+                    </li>
+                <?php } ?>
+                <?php if (!empty($user->instagram)) { ?>
+                    <li>
+                        <a href="{{$user->instagram}}" target="_blank" class="instagram-profile"><i class="fa fa-instagram"></i> Instagram</a>
+                    </li>
+                <?php } ?>
                     <!-- <li><a href="#" class="gplus-profile"><i class="fa fa-google-plus"></i> Google Plus</a></li> -->
                 </ul>
 
-                <!-- Reply to review popup -->
+                <!-- Reply to review popup 
                 <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
                     <div class="small-dialog-header">
                         <h3>Send Message</h3>
@@ -741,25 +961,24 @@ position:absolute;
                     </div>
                 </div>
 
-                <a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
+                <a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>-->
             </div>
             <!-- Contact / End-->
 
 
-            <!-- Share / Like -->
+            <!-- Share / Like 
             <div class="listing-share margin-top-40 margin-bottom-40 no-border">
                 <button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> 
                 <span>159 people bookmarked this place</span>
 
-                    <!-- Share Buttons -->
+                     
                     <ul class="share-buttons margin-top-40 margin-bottom-0">
                         <li><a class="fb-share" href="#"><i class="fa fa-facebook"></i> Share</a></li>
                         <li><a class="twitter-share" href="#"><i class="fa fa-twitter"></i> Tweet</a></li>
                         <li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>
-                        <!-- <li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li> -->
-                    </ul>
+                    </ul> 
                     <div class="clearfix"></div>
-            </div>
+            </div>-->
 
         </div>
         <!-- Sidebar / End -->
@@ -771,3 +990,130 @@ position:absolute;
 
   @endsection
 
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!--
+ <script   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&callback=initMap&libraries=&v=weekly" defer ></script>
+
+     <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&callback=initAutocomplete&libraries=places&v=weekly"
+      defer
+    ></script> 
+    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&libraries=places&callback=initialize" async defer></script>
+<script>
+function initialize() {
+   initMap();
+   initAutocomplete();
+}
+</script>
+
+            <script>
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("utf_single_listingmap"), {
+    zoom: 15,
+ <?php if ($user->latitude!='' && $user->longitude!='' ) {?>   center: { lat: <?php echo $user->latitude; ?>, lng: <?php echo $user->longitude; ?> },   <?php }else{?>
+     center: { lat: 48.8566, lng: 2.35222 },
+ 
+ <?php }?>
+  });
+  const geocoder = new google.maps.Geocoder();
+  document.getElementById("adresse").addEventListener("change", () => {
+    geocodeAddress(geocoder, map);
+  });
+ 
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+  const address = document.getElementById("adresse").value;
+  geocoder.geocode({ address: address }, (results, status) => {
+    if (status === "OK") {
+      resultsMap.setCenter(results[0].geometry.location);
+      new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location,
+      });
+    
+ document.getElementById("latitude").value= results[0].geometry.location.lat();
+ document.getElementById("longitude").value= results[0].geometry.location.lng();
+ changing(document.getElementById('latitude'));
+ changing(document.getElementById('longitude'));
+
+   } else {
+    //  alert("Ville non trouvée " + status);
+    }
+  });
+}
+
+ let placeSearch;
+      let autocomplete;
+      const componentForm = {
+        street_number: "short_name",
+        route: "long_name",
+        locality: "long_name",
+        administrative_area_level_1: "short_name",
+        country: "long_name",
+        postal_code: "short_name",
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search predictions to
+        // geographical location types.
+        autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById("adresse"),
+          { types: ["geocode"] }
+        );
+        // Avoid paying for data that you don't need by restricting the set of
+        // place fields that are returned to just the address components.
+        autocomplete.setFields(["address_component"]);
+        // When the user selects an address from the drop-down, populate the
+        // address fields in the form.
+        autocomplete.addListener("place_changed", fillInAddress);
+      }
+
+      function fillInAddress() {
+          
+
+        // Get the place details from the autocomplete object.
+        const place = autocomplete.getPlace();
+
+        for (const component in componentForm) {
+          document.getElementById(component).value = "";
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details,
+        // and then fill-in the corresponding field on the form.
+        for (const component of place.address_components) {
+          const addressType = component.types[0];
+
+          if (componentForm[addressType]) {
+            const val = component[componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+          document.getElementById('ville').value = document.getElementById('locality').value ;
+         
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            const circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy,
+            });
+        //   autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+
+ </script>
+ <script src="{{ asset('public/scripts/chosen.min.js') }}"></script>
+ 
