@@ -1,5 +1,49 @@
 @extends('layouts.frontv2layout')
+<link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <?php  use \App\Http\Controllers\CalendrierController; ?>
 <style type="text/css">
+.fc .fc-scroller-harness-liquid {
+    height: 100%;
+overflow-y:scroll;}
+.fc .fc-non-business {
+background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermeture_couleur ; ?>;
+}
+.fc-view-harness .fc-view-harness-active{
+        /* flex-grow: 1; */
+        position: relative;
+    height: 409px;
+
+}
+.fc-view-harness-active>.fc-view {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: lightgray;
+}
+.modal-fullscreen {
+    width: 100vw;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+}
+
+.fc .fc-view-harness {
+    flex-grow: 1;
+    position: relative;
+    height: 409px;}
+.fc .fc-scrollgrid-liquid {
+    background: lightgray;
+    
+    overflow-y: scroll;
+    height: 406px;
+}
+
+
+
 #wrapper {
     background-color: #fff!important;
 }
@@ -671,9 +715,111 @@ table.basic-table th {
             <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>-->
-            <div class="verified-badge "  >
-                <i class="fa  fa-calendar"></i> Calendrier du prestataire
-            </div>
+            <button id="kbs" type="button" class="button book-now fullwidth margin-top-5" style="    background:green;color:white;font-size: 12px;width: 329px;height: 62px;border: white;" data-toggle="modal" data-target="#calendrier_prestataire">
+                <i class="fa  fa-calendar"></i> Calendrier du prestataire </button>
+                <script>  $("#kbs").click(function(){
+    $("#calendrier_prestataire").show();
+});
+
+$( document ).ready(function() {
+       
+       var initialLocaleCode = 'fr';
+       var localeSelectorEl = document.getElementById('locale-selector');
+       var calendarEl = document.getElementById('calpres');
+       var calendar = new FullCalendar.Calendar(calendarEl, {
+         headerToolbar: {
+           left: 'prev,next today',
+           center: 'title',
+   
+           right: 'timeGridWeek,dayGridMonth,timeGridDay' //listMonth
+   
+         },
+         
+         locale: initialLocaleCode,
+         initialView:'timeGridWeek',
+         buttonIcons: false, // show the prev/next text
+         weekNumbers: true,
+         navLinks: true, // can click day/week names to navigate views
+         editable: false,
+         dayMaxEvents: true, // allow "more" link when too many events
+         businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire($user->id); ?>,
+         
+         events:<?php echo \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
+       });
+       calendar.render();
+       $('#calendrier_prestataire').on('shown.bs.modal', function () {
+        calendar.fullCalendar('render');
+
+});
+
+
+});$('#kbs').click(function() {
+        window.setTimeout(clickToday, 200);
+    });
+
+    function clickToday() {
+      $('.fc-timeGridWeek-button').click();
+    }
+</script>
+
+  <!-- The Modal -->
+  <div class="modal  fade" id="calendrier_prestataire" style="display:none;" >
+    <div class="modal-dialog modal-fullscreen" >
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header" >
+ <style>.legend { list-style: none; margin-left:10px;}
+    .legend li { float: left; margin-right: 15px;}
+    .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }</style>
+  
+<script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
+          <h4 class="modal-title" style="font-size: 17px;" >Calendrier du prestataire</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <div id="legendcolor"  style="background-color:white; top:5px;"> 
+            <ul class="legend">
+            <style>  .legend .lightgrey { background-color: lightgrey;}
+    .legend .brown { background-color: #9fec9f; }
+    .legend .blue { background-color: #ecba99; }
+    .legend .red{ background-color: #ec7878; }
+    .legend .green{ background-color:#ead831; }
+    .legend .pink{ background-color:#d3c07b; }</style>
+              <li><span class="lightgrey" ></span>horaires de fermeture</li>
+             <li><span class="green"></span>Happy hours</li>
+              <li><span class="red"></span>Indisponibilité de prestataire</li>
+             <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
+            
+             <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
+             <li><span class="pink"></span>date courante</li>
+           </ul>
+
+           </div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="border:solid ; border-color:lightgrey;    height: 484px;" >
+        	<style scoped>
+            @media (min-width: 768px) {
+                .calpresk { 
+                  font-size: 15px;
+               
+                }
+            }
+           </style>
+           
+         
+         <div id="calpres" class="calpresk"> </div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer"  style="background-color: lightgrey;">
+          <button type="button"  style="font-size: 14px;
+    width: 156px;"  class="button book-now fullwidth margin-top-5" data-dismiss="modal">Fermer</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
             <!-- Book Now -->
             <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
@@ -992,6 +1138,7 @@ table.basic-table th {
 
       <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <!--
  <script   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&callback=initMap&libraries=&v=weekly" defer ></script>
 
@@ -1022,6 +1169,10 @@ function initMap() {
     geocodeAddress(geocoder, map);
   });
  
+  function showalert() {
+        alert("you just pressed the button");
+    }
+
 }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -1115,5 +1266,11 @@ function geocodeAddress(geocoder, resultsMap) {
       }
 
  </script>
- <script src="{{ asset('public/scripts/chosen.min.js') }}"></script>
- 
+  <script src="{{ asset('public/scripts/chosen.min.js') }}"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ <script  src="{{ URL::asset('public/scripts/moment.min.js')}}"   ></script> 
+
+<script src="{{  URL::asset('public/fullcalendar/main.min.js') }}"></script>
+<script src="{{  URL::asset('public/fullcalendar/locales/fr.js') }}"></script>
+
+
