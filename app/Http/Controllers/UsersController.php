@@ -1269,6 +1269,15 @@ class UsersController extends Controller
                  'email' => $request->emailprest
              ]);
             $a->save();  
+
+       
+                  $message="<center>Bienvenue à notre site <strong> Prenezunrendezvous.com</strong></centre>,<br>";
+                    $message.="<br style='font-size:14px;color:red;'>Notre plateforme n'est pas encore lancée dés qu'elle soit disponible vous receverez un email de notification <br>";
+                    $message.="<br>Veuillez visiter ce lien suivant aprés avoir recu la notification de lancement : <br>";
+                    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
+           
+           //mohamed.achraf.besbes@gmail.com
+            $this->sendMail($request->emailprest,'Invitation',$message) ;
         } 
         return redirect()->route('comingsoon')->with([
             'smessage' => ' successfully'
