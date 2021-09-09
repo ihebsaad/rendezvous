@@ -3,6 +3,11 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
  <?php  use \App\Http\Controllers\CalendrierController; ?>
 <style type="text/css">
+.fc .fc-button-group {
+    position: relative;
+    display: initial;
+    font-size: small;
+}
 .fc .fc-scroller-harness-liquid {
     height: 100%;
 overflow-y:scroll;}
@@ -711,7 +716,7 @@ table.basic-table th {
             <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>-->
-            <button id="kbs" type="button" class="btn " style="    background:green;color:white;font-size: 12px;width: 329px;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
+            <button id="kbs" type="button" class="btn " style="    background:green;color:white;font-size: 15px;width: 329px;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire </button>
                 <script>  $("#kbs").click(function(){
     $("#calendrier_prestataire").show();
