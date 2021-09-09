@@ -55,9 +55,11 @@ Route::get('/Pay4WithStripe/{k}','PaymentStripeController@pay4')->name('Pay4With
 
 Route::get('/success/pay/{k}','PaymentStripeController@successpayStripe')->name('success.pay');
 Route::get('/save/customer','PaymentStripeController@addcustomerStripe')->name('save.customer');
+Route::get('/save/customerAbn','PaymentStripeController@addcustomerStripeAbn')->name('save.customerAbn');
+
 
 Route::get('/reservations.annule/{id}','PaymentStripeController@Remboursement')->name('reservations.annule');
-
+Route::post('/paiement_Abonnement_Mensuel','PaymentStripeController@payabnMensuel')->name('paiement_Abonnement_Mensuel');
 
 Route::post('/payabn','PaymentStripeController@payabn')->name('payabn');
 	Route::get('/payabn','PaymentStripeController@payabn')->name('payabn');

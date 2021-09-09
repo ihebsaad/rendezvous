@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Abonnement;
+use Stripe\Stripe;
+use Stripe\Subscription;
 
 class AbonnementsController extends Controller
 {
@@ -95,9 +97,17 @@ class AbonnementsController extends Controller
 	
      public function remove($id)
     {
-
+    	$idstripe=DB::table('abonnements')->where('id', $id)->value('IdStripe');
+    //dd($idstripe);
+	 Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 	 
-	DB::table('abonnements')->where('id', $id)->delete();
+
+$subscription = \Stripe\Subscription::retrieve('sub_KC84atiVrzYoyY');
+//dd($subscription);
+$subscription->cancel();
+ Abonnement::where('id', $id)->update(array('statut' => "annuler" ));
+
+	//DB::table('abonnements')->where('id', $id)->delete();
 	return redirect (url('/MesAbonnements'));
 
 	}

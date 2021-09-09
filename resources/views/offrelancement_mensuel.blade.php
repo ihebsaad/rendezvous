@@ -217,7 +217,7 @@
                 </ul>
                  <label for="post-3" class="read-more-trigger"></label></br>
            
-        <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
+        <form class="  " method="POST" id="payment-form"    action="{{ route('paiement_Abonnement_Mensuel') }}" >
         {{ csrf_field() }}
         <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement3;?>">     
         <input   name="abonnement" type="hidden"  value="3">     

@@ -1,6 +1,6 @@
 @extends('layouts.frontv2layout')
  <?php
-
+use Illuminate\Support\Str;
 $toutes_categories=DB::table('categories')->get();
 $meres_categories=DB::table('categories')->whereNull('parent')->get();
 
@@ -173,7 +173,7 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                             <!-- Listing Item -->
                             <div class="col-lg-12 col-md-12">
                                    <div class="listing-item-container list-layout">
-                                          <a href="#entreprisepage" class="listing-item">
+                                          <a href="<?php echo url("/".Str::slug($listing->titre,'-')."/{$listing->id}"); ?>" class="listing-item">
                                                  
                                                  <!-- Image -->
                                                  <div class="listing-item-image">
