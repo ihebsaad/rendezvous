@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\User;
+use \App\Abonnement;
 use \App\Alerte;
 use \App\Reservation;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -42,6 +43,20 @@ class PaymentStripeController extends Controller
     $resId = $request->get('resId');
     \Session::put('success', 'Paiement avec succès');
     Reservation::where('id',$resId)->update(array('paiement' => 2,'reste'=>0));
+    
+    return "ok";
+  }
+  public function addcustomerStripeAbn(Request $request){
+    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    $subscription_id = $request->get('subscriptionId'); 
+    $payment_method = $request->get('res');
+      $stripeSub = \Stripe\Subscription::update(
+    $subscription_id,
+    ['default_payment_method' => $payment_method],
+  );
+//dd($stripeSub);
+   
+    \Session::put('success', 'Paiement avec succès');
     
     return "ok";
   }
@@ -160,7 +175,124 @@ return view('payments.pay', [
 
 
     }
+public function payabnMensuel(Request $request)
+{
+//dd(Session::get('email'));
+       //Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+  $montant=$request->get('amount');
+  
+    $user=$request->get('user');
+    $abn=$request->get('abonnement');
+    $desc=$request->get('description');
 
+    $nature_abonn=$request->get('nature_abonn');
+
+    $mensuel_annuel='';
+    if($nature_abonn=="offre_lanc"){
+        //$mensuel_annuel=$request->get('mensuel_annuel');
+       $mensuel_annuel=Session::get('mensuel_annuel');
+
+      }
+     //dd($mensuel_annuel);
+   // nouvelle inscription 
+       $username=0;
+       $name=0;
+       $lastname=0;
+       $phone=0;
+       $email=0;
+
+       $titre=0;
+       $siren=0;
+       $adresse=0;
+       $ville=0;
+       $codep=0;
+
+       $fhoraire=0;
+       $date_inscription=0;
+       $urlqrcode=0;
+       $user_type=0;
+       $password=0;
+       $ind_tel=0;
+       $pays=0; 
+
+     if($user==0)
+     {
+
+
+       $username=Session::get('username');
+       $name=Session::get('name');
+       $lastname=Session::get('lastname');
+       $phone=Session::get('phone');
+       $email=Session::get('email');
+
+       $titre=Session::get('titre');
+       $siren=Session::get('siren');
+       $adresse=Session::get('adresse');
+       $ville=Session::get('ville');
+       $codep=Session::get('codep');
+
+       $fhoraire=Session::get('fhoraire');
+       $date_inscription=Session::get('date_inscription');
+       $urlqrcode=Session::get('qr_code');
+       $user_type=Session::get('user_type');
+       $password=Session::get('password');
+       $pays=Session::get('pays');
+       $ind_tel=Session::get('ind_tel');
+
+   // dd( $urlqrcode);
+     }
+       $today = new DateTime();
+    $today = $today->getTimestamp();
+    $fin = strtotime('+350 day', $today);
+    
+    //Stripe::setApiKey('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');
+    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+
+$customer = \Stripe\Customer::create();
+    \Stripe\Customer::update(
+        $customer->id,
+        [
+            'email' => Session::get('email'),
+            
+        ]
+    );
+
+
+    
+    $produit = Product::create([
+    'name' => 'Abonnement mensuel',
+    'type' => 'service',
+  ]);
+    $price = \Stripe\Price::create([
+    'product' => $produit->id,
+    'unit_amount' => $montant *100,
+    'currency' => 'eur',
+    'recurring' => ['interval' => 'month'],
+  ]);
+             
+  $Subscription = \Stripe\Subscription::create([
+    'customer' => $customer->id,
+    'cancel_at' => $fin ,
+   
+    'items' => [
+      [
+        'price' => $price->id ,
+        'quantity' => 1,
+      ],
+    ],
+    'payment_behavior' => 'default_incomplete',
+    'expand' => ['latest_invoice.payment_intent'],
+    
+  ]);
+  //dd($Subscription);
+  $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
+  $subscriptionId = Arr::get($Subscription, 'id');
+  //dd($clientSecret);
+  return view('payments.payAbn3', [
+            'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'customerid' => $customer->id ,'montant'=>$montant, 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn,'mensuel_annuel' => $mensuel_annuel, 'abn' => $abn, 'username' => $username , 'name' => $name , 'lastname' => $lastname, 'phone' => $phone, 'email' => $email , 'titre' => $titre ,'siren' => $siren , 'adresse' => $adresse, 'ville' => $ville ,'codep' => $codep ,'fhoraire' => $fhoraire, 'date_inscription' => $date_inscription , 'urlqrcode' => $urlqrcode ,'user_type' => $user_type ,  'password' => $password,'ind_tel' => $ind_tel ,  'pays' => $pays
+        ]);
+
+    }
  public function payabn(Request $request)
     {
     $montant=$request->get('amount');
@@ -529,6 +661,10 @@ return view('payments.payAbn2', [
          ]);  
      
      $abonnement->save();
+     if($mensuel_annuel=='mensuel')
+        {
+          Abonnement::where('id',$abonnement->id)->update(array('IdStripe' => $request->get('subscriptionId')));
+        }
      
       return "ok";
 

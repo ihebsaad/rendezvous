@@ -56,16 +56,7 @@ use \App\User;
                         </div>
                     </div>
 
-                    <!-- Reply to review popup -->
-                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-                        <div class="small-dialog-header">
-                            <h3>Send Message</h3>
-                        </div>
-                        <div class="message-reply margin-top-0">
-                            <textarea cols="40" rows="3" placeholder="Your Message to Kathy"></textarea>
-                            <button class="button">Send</button>
-                        </div>
-                    </div>
+                  
 
                     <h4><i class="im im-icon-Coins"></i> Abonnements </h4>
                     <?php foreach($abonnements as $abonnement){ ?>
@@ -78,6 +69,7 @@ use \App\User;
                             </div>
                                 <div class="list-box-listing-content">
                                     <div class="inner">
+
                                     <?php if($user_type=='admin' ){  ?>
                                      <h3><?php echo UsersController::ChampById('name',$abonnement->user).' '.UsersController::ChampById('lastname',$abonnement->user) ;?> </h3>
                                      <?php } ?>
@@ -105,6 +97,11 @@ use \App\User;
                                                 <li><?php echo $abonnement->details;?></li>
                                             </ul>
                                         </div>
+                                        <?php if($abonnement->statut=="annuler" ){  ?>
+                                        <div class="inner-booking-list">
+                                            <h3> <span class="booking-status unpaid">Abonnement  annulé</span></h3>
+                                        </div>
+                                        <?php } ?>
 
                                         <!-- <a  class="button gray" style="margin:10px 10px 10px 10px"  ><i class="fa fa-close"></i>  Proposer des dates</a> -->
 
@@ -112,8 +109,9 @@ use \App\User;
                                 </div>
                             </div>
                             <div class="buttons-to-right">
-                               
-       <a  class="button gray reject"   onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('AbonnementsController@remove', $abonnement->id)}}"><i class="sl sl-icon-close"></i>   Annuler</a>
+                               <?php if($abonnement->statut!="annuler" ){  ?>
+       <a  class="button gray reject"   onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('AbonnementsController@remove', $abonnement->id)}}"><i class="sl sl-icon-close"></i>   Annuler</a><?php } ?>
+
         
                                        
                
