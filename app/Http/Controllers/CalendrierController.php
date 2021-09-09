@@ -31,7 +31,7 @@ use Google_Service_Calendar_EventDateTime;
 class CalendrierController extends Controller
 {
 
-   public static $fermeture_couleur="lightgrey";
+   public static $fermeture_couleur="#e8e8e8";
    public static $rendezvous_couleur="#ecba99";
    public static $rendezvous_parall_couleur="#9fec9f";
    public static $indispo_couleur="#ec7878";

@@ -59,6 +59,11 @@ h3.onelh3 {line-height: 50px!important;}
 
 h2#h2offre {font-size: 40px;}
 
+.calendly-badge-widget {
+
+    bottom: 85px!important;
+}
+
 @media (max-width: 1024px) {
 h2#h2offre {font-size: 35px;}
 i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block;}
@@ -69,6 +74,11 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
     font-size: 18px;
     font-weight: 500;
     padding-right: 47px;}
+
+    .calendly-badge-widget {
+
+    bottom: 15px!important;
+}
 
 }
 
@@ -403,10 +413,9 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 
         <!-- Stage -->
         <div class="col-md-4">
-            <div class="icon-box-2">
-                <i class="im im-icon-Mail-Send"></i>
-                <h3>SMS Marketing</h3>
-                <p style="margin-top:0px; line-height: 25px;">(très bientôt disponible)</p>
+            <div class="icon-box-2 with-line">
+                <i class="im im-icon-Shopping-Cart"></i>
+                <h3 >Vente de produit physique ou numérique</h3>
             </div>
         </div>
     </div>
@@ -452,7 +461,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
         <div class="col-md-4">
             <div class="icon-box-2 with-line">
                 <i class="im im-icon-Shop-3"></i>
-                <h3>Vente d’abonnement et de produits en cross-sell</h3>
+                <h3 class="onelh3">Vente d'abonnement mensuel</h3>
             </div>
         </div>
 
@@ -467,9 +476,6 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 
 
     <div class="row icons-container">
-        <!-- Stage -->
-        <div class="col-md-2">
-        </div>
 
         <!-- Stage -->
         <div class="col-md-4">
@@ -489,7 +495,14 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
             </div>
         </div>
 
-        <div class="col-md-2">
+        
+        <!-- Stage -->
+        <div class="col-md-4">
+            <div class="icon-box-2">
+                <i class="im im-icon-Mail-Send"></i>
+                <h3>SMS Marketing</h3>
+                <p style="margin-top:0px; line-height: 25px;">(très bientôt disponible)</p>
+            </div>
         </div>
     </div>
 
@@ -523,10 +536,11 @@ if( $nbpres <= 100 ) {?>
                             </div>
                         </div>
 
-                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;">OU</h2>
+                        <h2 style="font-size: 35px; color: #3e3d3d;margin-top: 30px;">OU</h2>
+                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;" >Obtenez toutes les fonctionnalités</h3>
 
                         <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">249€/Mois</span> 149€ TTC/Mois</h2>
-                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >sans Engagement</h3>
+                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>
 
 
                         <!-- <p style="text-align: center;margin-top: 0px;color: #525252; ">(soit 37.41€/mois)</p> -->
@@ -558,6 +572,8 @@ if( $nbpres <= 100 ) {?>
                             <div class="col-lg-8 col-lg-offset-2 text-center">
                                 <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px;">S'inscrire</a>
                                 <!-- <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;"><b>*</b>Puis 889€ TTC/an, soit 74€/mois</p> -->
+                                <!-- Début de widget en ligne Calendly -->
+                                
                             </div>
                         </div>
                         <!-- Search Section / End -->
@@ -595,7 +611,10 @@ if( $nbpres <= 100 ) {?>
                         <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070000&text_color=ffffff&primary_color=fff600" target="_blank" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform:uppercase;">Réserver une démo</a>
+                                <!--<a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070000&text_color=ffffff&primary_color=fff600" target="_blank" class="button margin-top-15" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform:uppercase;">Réserver une démo</a>-->
+                                <div class="calendly-inline-widget" data-url="https://calendly.com/prenezunrendezvous/60min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=f9ff00" style="min-width:320px;height:700px;"></div>
+                                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                                <!-- Fin de widget en ligne Calendly -->
                             </div>
                         </div>
                         <!-- Search Section / End -->
@@ -762,6 +781,12 @@ if( $nbpres <= 100 ) {?>
 
 </div>
 </div>
+
+<!-- Début de widget de badge Calendly -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/prenezunrendezvous/60min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fffe00', text: 'Besoin de plus d\'information ? Prenez un rendez-vous avec notre service commercial', color: '#000103', textColor: '#ffffff', branding: false, paddingBottom:'30px' }); }</script>
+<!-- Fin de widget de badge Calendly -->
 @endsection('content')
 <script>
 function switchci(n) {
