@@ -12,7 +12,7 @@ background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermetu
 .fc-view-harness .fc-view-harness-active{
         /* flex-grow: 1; */
         position: relative;
-    height: 409px;
+    height: 409px !important;
 
 }
 .fc-view-harness-active>.fc-view {
@@ -31,16 +31,12 @@ background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermetu
     margin: 0;
 }
 
-.fc .fc-view-harness {
-    flex-grow: 1;
-    position: relative;
-    height: 409px;}
+
 .fc .fc-scrollgrid-liquid {
     background: lightgray;
     
     overflow-y: scroll;
-    height: 406px;
-}
+    height: 496px;}
 
 
 
@@ -715,7 +711,7 @@ table.basic-table th {
             <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>-->
-            <button id="kbs" type="button" class="button book-now fullwidth margin-top-5" style="    background:green;color:white;font-size: 12px;width: 329px;height: 62px;border: white;" data-toggle="modal" data-target="#calendrier_prestataire">
+            <button id="kbs" type="button" class="btn " style="    background:green;color:white;font-size: 12px;width: 329px;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire </button>
                 <script>  $("#kbs").click(function(){
     $("#calendrier_prestataire").show();
@@ -793,15 +789,19 @@ $( document ).ready(function() {
            </ul>
 
            </div>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" style="color:red;width:40px;font-size: 50px;    padding-right: 61px;" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body" style="border:solid ; border-color:lightgrey;    height: 484px;" >
+        <div class="modal-body" style="border:solid ; border-color:lightgrey;       height: 555px;
+    overflow-y: hidden;
+    overflow-x: auto;
+" >
         	<style scoped>
             @media (min-width: 768px) {
                 .calpresk { 
                   font-size: 15px;
+                  height: inherit;
                
                 }
             }
