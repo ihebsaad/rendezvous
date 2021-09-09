@@ -531,7 +531,7 @@ return view('payments.payAbn2', [
      if($abn!=3){$daysToAdd = 366;}
     else{
 
-      $daysToAdd = 31;        
+      $daysToAdd = 366;        
            
     }
      
