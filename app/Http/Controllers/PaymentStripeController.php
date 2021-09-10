@@ -369,7 +369,7 @@ $customer = \Stripe\Customer::create();
 /*return view('payments.payAbn', [
             'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn
         ]);*/
-dd($mensuel_annuel);
+dd($nature_abonn);
 return view('payments.payAbn2', [
             'clientSecret' => $clientSecret ,'montant'=>$montant, 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn,'mensuel_annuel' => $mensuel_annuel, 'abn' => $abn, 'username' => $username , 'name' => $name , 'lastname' => $lastname, 'phone' => $phone, 'email' => $email , 'titre' => $titre ,'siren' => $siren , 'adresse' => $adresse, 'ville' => $ville ,'codep' => $codep ,'fhoraire' => $fhoraire, 'date_inscription' => $date_inscription , 'urlqrcode' => $urlqrcode ,'user_type' => $user_type ,  'password' => $password,'ind_tel' => $ind_tel ,  'pays' => $pays ,'desc' => $desc]);
 
