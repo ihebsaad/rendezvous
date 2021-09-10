@@ -67,7 +67,6 @@
 
 /**show button */ 
 a.button.border {
-    color: #ffd700!important;
     border-color: #ffd700!important;
 }
 .fc .fc-button-group {
