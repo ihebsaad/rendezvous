@@ -295,15 +295,18 @@ $customer = \Stripe\Customer::create();
     }
  public function payabn(Request $request)
     { 
+      $abn=$request->get('abonnement');
+
+      $details=Abonnement::where('id',$abn)->get('details');
+      dd($details);
     $montant=$request->get('amount');
     $user=$request->get('user');
-    $abn=$request->get('abonnement');
     $desc=$request->get('description');
     $nature_abonn=$request->get('nature_abonn');
     $mensuel_annuel='';
     if($nature_abonn=="offre_lanc"){
-        $mensuel_annuel=$request->get('mensuel_annuel');
-       //$mensuel_annuel=Session::get('mensuel_annuel');
+       // $mensuel_annuel=$request->get('mensuel_annuel');
+       $mensuel_annuel=Session::get('mensuel_annuel');
 
       }
      //dd($mensuel_annuel);
@@ -369,7 +372,6 @@ $customer = \Stripe\Customer::create();
 /*return view('payments.payAbn', [
             'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn
         ]);*/
-dd($mensuel_annuel);
 return view('payments.payAbn2', [
             'clientSecret' => $clientSecret ,'montant'=>$montant, 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn,'mensuel_annuel' => $mensuel_annuel, 'abn' => $abn, 'username' => $username , 'name' => $name , 'lastname' => $lastname, 'phone' => $phone, 'email' => $email , 'titre' => $titre ,'siren' => $siren , 'adresse' => $adresse, 'ville' => $ville ,'codep' => $codep ,'fhoraire' => $fhoraire, 'date_inscription' => $date_inscription , 'urlqrcode' => $urlqrcode ,'user_type' => $user_type ,  'password' => $password,'ind_tel' => $ind_tel ,  'pays' => $pays ,'desc' => $desc]);
 
