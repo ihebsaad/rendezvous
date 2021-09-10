@@ -295,10 +295,17 @@ $customer = \Stripe\Customer::create();
     }
  public function payabn(Request $request)
     { 
+      
       $abn=$request->get('abonnement');
 
       $details=Abonnement::where('id',$abn)->first()->details;
-      dd($details);
+      if (strpos($details, 'mensuel') !== false) {
+        $mensuel_annuel='Mensuel';}
+      elseif (strpos($details, 'annuel') !== false) {
+        $mensuel_annuel='Annuel';
+
+      }
+      dd($mensuel_annuel);
     $montant=$request->get('amount');
     $user=$request->get('user');
     $desc=$request->get('description');
