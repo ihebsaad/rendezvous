@@ -54,7 +54,7 @@ background-color:#a0d468;
               <div class="dashboard-list-box with-icons margin-top-20">
                 <h4><b style="color:black">
                   Paiement de votre abonnement (montant à payer : {{$montant}} €)</b><br>
-                    Abonnement: <b></b><Strong>{{$desc}}</Strong>
+                    Abonnement: <b></b><Strong>{{$mensuel_annuel}}</Strong>
                   </h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
