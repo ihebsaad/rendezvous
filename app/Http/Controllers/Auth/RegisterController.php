@@ -119,7 +119,7 @@ class RegisterController extends Controller
 
         $ind_tel='';
         $pays='';
-
+        $phone='';
         if($req->get('pays'))
          {
             $pays=$req->get('pays');
@@ -144,7 +144,12 @@ class RegisterController extends Controller
               $pays='Guyane française';
               $ind_tel= 594; 
             }
+           
          }
+          if($req->get('phone'))
+            {
+              $phone= $ind_tel.''.$req->get('phone'); 
+            }
          
          if( $req->get('username'))
          {
@@ -249,7 +254,7 @@ class RegisterController extends Controller
         Session::put('username', $username);
         Session::put('name' , $req->get('name'));
         Session::put('lastname', $req->get('lastname'));
-        Session::put('phone', $req->get('phone'));
+        Session::put('phone', $phone);
         Session::put('email',$req->get('email'));
         Session::put('titre', $titre);
         Session::put('siren', $siren);
