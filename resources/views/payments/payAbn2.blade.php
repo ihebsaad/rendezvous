@@ -20,7 +20,7 @@ background-color:#a0d468;
 }
 
 .dashboard-list-box h4 {
-    font-size: 21px;
+    font-size: 19px;
     background-color: #ffd700;}
 
 .dashboard-list-box.with-icons ul li {
@@ -52,7 +52,7 @@ background-color:#a0d468;
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                <h4>                    Abonnement: <b></b><Strong>{{$mensuel_annuel}}</Strong>
+                <h4>                   <Strong style="font-size:21px;color:black"> Abonnement: <b></b>{{$mensuel_annuel}}</Strong>
 <br>
                     <b style="color:black">
                   Paiement de votre abonnement (montant à payer : {{$montant}} €)</b>
