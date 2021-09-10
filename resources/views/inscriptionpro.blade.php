@@ -736,7 +736,7 @@ if( $nbpres <= 100 ) {?>
 </div>
 </div>
 <!-- End inscriptionsec -->
-<div id='connexionsec' style="display: none;">
+<div id='connexionsec' style="display: none;background:black;">
     <div class="container   padding-bottom-100" id="connexionsection">
     <div class="row margin-top-60" >
         <div class="col-lg-2 col-md-12">
