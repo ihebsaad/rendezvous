@@ -12,17 +12,15 @@ $apropos= $parametres->apropos;
 $apropos_footer= $parametres->apropos_footer;
 $contacter= $parametres->contacter;
 
-$abonnement1= $parametres->abonnement1;
-$cout_abonnement1= $parametres->cout_abonnement1;
-$commission_abonnement1= $parametres->commission_abonnement1;
+
 
 $abonnement2= $parametres->abonnement2;
-$cout_abonnement2= $parametres->cout_abonnement2;
-$commission_abonnement2= $parametres->commission_abonnement2;
+$cout_abonnement_annuel_classique= $parametres->cout_abon_annu_pricing;
+$cout_abonnement_annuel_offrel= $parametres->cout_offrelancement3;
 
 $abonnement3= $parametres->abonnement3;
-$cout_abonnement3= $parametres->cout_abonnement3;
-$commission_abonnement3= $parametres->commission_abonnement3;
+$cout_abonnement_mensuel_classique= $parametres->cout_abon_mens_pricing;
+$cout_abonnement_mensuel_offrel= $parametres->cout_offrelancement3_mens;
   
 
 ?>
@@ -68,48 +66,42 @@ $commission_abonnement3= $parametres->commission_abonnement3;
                         <div class="add-listing-headline">
                             <h3><i class="sl sl-icon-folder-alt"></i> Abonnements</h3>
                         </div>
-                        <div class="row">
-
-                    <div class="col-md-6">
-                        <label>Titre Abonnement 1</label>                       
-                        <input type="text" class="input-text" id="abonnement1" placeholder="" value="<?php echo $abonnement1;?>"  onchange="changing(this)">
-                    </div>
-                    <div class="col-md-3">
-                        <label> Coût</label>                        
-                        <input type="number" class="input-text" id="cout_abonnement1" placeholder="" value="<?php echo $cout_abonnement1;?>" onchange="changing(this)">
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{{url('parametre/ModifierAbonnements/1')}}" class=" button " style="margin-top: 25px">Modifier le contenu</a>
-                    </div>
-                    
-                    </div>
+                        
                     
                     
                      <div class="row">
                     
-                    <div class="col-md-6">
-                        <label>Titre Abonnement 2</label>                       
-                        <input type="text" class="input-text"  id="abonnement2" placeholder="" value="<?php echo $abonnement2;?>"  onchange="changing(this)">
-                    </div>                                      
                     <div class="col-md-3">
-                        <label>Coût </label>
-                        <input type="number" class="input-text" id="cout_abonnement2"  placeholder="" value="<?php echo $cout_abonnement2;?>" onchange="changing(this)">                    
+                        <label>Titre Abonnement annuel</label>                       
+                        <input type="text" class="input-text"  id="abonnement2" placeholder="" value="<?php echo $abonnement2;?>"  onchange="changing(this)">
+                    </div> 
+                     <div class="col-md-3">
+                        <label>Coût Offre Lancement </label>
+                        <input type="number" class="input-text" id="cout_offrelancement3"  placeholder="" value="<?php echo $cout_abonnement_annuel_offrel;?>" onchange="changing(this)">                    
+                    </div>                                     
+                    <div class="col-md-3">
+                        <label>Coût Plan Classique</label>
+                        <input type="number" class="input-text" id="cout_abon_annu_pricing"  placeholder="" value="<?php echo $cout_abonnement_annuel_classique;?>" onchange="changing(this)">                    
                     </div>
                     <div class="col-md-3">
-                        <a href="{{url('parametre/ModifierAbonnements/2')}}" class=" button " style="margin-top: 25px">Modifier le contenu</a>                  
+                        <a href="{{url('parametre/ModifierAbonnements/2')}}" class=" button " style="margin-top: 25px">Modifier le contenu </a>                  
                     </div>
                     
                     </div>
 
                      <div class="row">
                      
-                     <div class="col-md-6">
-                        <label>Titre Abonnement 3</label>                       
+                     <div class="col-md-3">
+                        <label>Titre Abonnement mensuel</label>                       
                         <input type="text" class="input-text"  id="abonnement3" placeholder="" value="<?php echo $abonnement3;?>"  onchange="changing(this)">
-                    </div>                                      
+                    </div> 
                     <div class="col-md-3">
-                        <label>Coût </label>
-                        <input type="number" class="input-text" id="cout_abonnement3"  placeholder="" value="<?php echo $cout_abonnement3;?>" onchange="changing(this)">                    
+                        <label>Coût Offre Lancement </label>
+                        <input type="number" class="input-text" id="cout_offrelancement3_mens"  placeholder="" value="<?php echo $cout_abonnement_mensuel_offrel;?>" onchange="changing(this)">                    
+                    </div>                                     
+                    <div class="col-md-3">
+                        <label>Coût Plan Classique</label>
+                        <input type="number" class="input-text" id="cout_abon_mens_pricing"  placeholder="" value="<?php echo $cout_abonnement_mensuel_classique;?>" onchange="changing(this)">                    
                     </div>
                     <div class="col-md-3">
                         <a href="{{url('parametre/ModifierAbonnements/3')}}" class=" button " style="margin-top: 25px">Modifier le contenu</a>              
