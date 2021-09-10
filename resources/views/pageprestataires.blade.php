@@ -187,7 +187,7 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                                                         if($categorie->parent==null){   
                                                         $i++;   ?>
                                                         
-                                                        <span class="tag" style="top:<?php echo $top;?>px!important"><?php echo  $categorie->nom; ?></span>   
+                                                          
                                                         <?php $top=$top+30; 
                                                         } 
                                                         }

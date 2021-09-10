@@ -716,8 +716,8 @@ table.basic-table th {
             <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>-->
-            <button id="kbs" type="button" class="btn " style="    background:green;color:white;font-size: 15px;width: 329px;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
-                <i class="fa  fa-calendar"></i> Calendrier du prestataire </button>
+            <button id="kbs" type="button" class="btn " style="    background:black;color:white;font-size: 15px;width: 329px;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
+                <i class="fa  fa-calendar"></i> Consulter notre calendrier </button>
                 <script>  $("#kbs").click(function(){
     $("#calendrier_prestataire").show();
 });
