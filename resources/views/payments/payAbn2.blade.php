@@ -52,9 +52,10 @@ background-color:#a0d468;
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                <h4>Abonnement: <b></b><Strong>{{$desc}}</Strong><br>
-                  <b style="color:unset">
-                  Paiement de votre abonnement (montant à payer : {{$montant}} €)</b></h4>      
+                <h4><b style="color:gray">
+                  Paiement de votre abonnement (montant à payer : {{$montant}} €)</b><br>
+                    Abonnement: <b></b><Strong>{{$desc}}</Strong>
+                  </h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
                                     <div id="card-element">
