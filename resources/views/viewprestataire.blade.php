@@ -162,6 +162,13 @@ table.basic-table th {
 
  ?>
 <div class="clearfix"></div>
+@if ($live_message = Session::get('ErrorMessage'))
+           <div class="notification error closeable">
+                <p>{{ $live_message }}</p>
+                <a class="close" href="#"></a>
+            </div>
+            <?php Session::forget('ErrorMessage');  ?>
+        @endif
 <!-- Slider
 ================================================== -->
 <div class="listing-slider mfp-gallery-container margin-bottom-0">
@@ -676,7 +683,7 @@ table.basic-table th {
                       <input type="hidden" id="note_emplacement" name="note_emplacement">
                 <!-- Review Comment -->
                     <fieldset>
-                        <?php if (isset($user)){?>  <input type="hidden" id="client" name="client" value="<?php echo $user->id; ?>" ><?php } ?>
+                        <?php if (isset($user)){?>  <input type="hidden" id="client" name="client" value="<?php echo $User; ?>" ><?php } ?>
                         <!--<div class="row">
                             <div class="col-md-6">
                                 <label>Name:</label>

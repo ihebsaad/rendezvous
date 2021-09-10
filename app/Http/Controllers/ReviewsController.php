@@ -49,8 +49,15 @@ class ReviewsController extends Controller
 		
 	public function add(Request $request)
 	{
-		
+		//dd($request);
+    $avis = Review::where('client',$request->get('client'))->where('prestataire',$request->get('prestataire'))->count();
+    if ($avis) {
+      \Session::put('ErrorMessage', 'oops!... vous avez déjà ajouté un avis');
+      return back();
+    } else {
+    //dd($avis);
      if(  $request->get('client') !=   $request->get('prestataire')){
+      //dd($request);
       $nbrenote = 0;
      	$lesnotes = 0;
      	if (!empty($request->get('note_qualite')))
@@ -98,7 +105,7 @@ class ReviewsController extends Controller
      return back();
 		 
 		//dd ($request);
- 	}
+ 	}}
 	
 	public function store(Request $request)
 	{
