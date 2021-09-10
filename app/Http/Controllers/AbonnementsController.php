@@ -112,7 +112,7 @@ class AbonnementsController extends Controller
         	$y = date('Y-m-d H:i:s', strtotime($y. ' + 1 month'));
         }
         Abonnement::where('id', $id)->update(array('expire' => $y ));
-        dd($y);
+        //dd($y);
         
         
     	$idstripe=DB::table('abonnements')->where('id', $id)->value('IdStripe');
