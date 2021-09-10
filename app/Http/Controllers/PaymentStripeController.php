@@ -309,10 +309,8 @@ $customer = \Stripe\Customer::create();
     $user=$request->get('user');
     $desc=$request->get('description');
     $nature_abonn=$request->get('nature_abonn');
-    $mensuel_annuel='';
     if($nature_abonn=="offre_lanc"){
        // $mensuel_annuel=$request->get('mensuel_annuel');
-       $mensuel_annuel=Session::get('mensuel_annuel');
 
       }
      //dd($mensuel_annuel);
