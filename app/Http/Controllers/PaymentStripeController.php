@@ -295,7 +295,7 @@ $customer = \Stripe\Customer::create();
     }
  public function payabn(Request $request)
     { 
-      $details=Abonnement::where('id',$request->get('abonnement'))->get('details');
+      $details=Abonnement::where('id',$request->get('abonnement'))->first()->get('details');
       dd($details);
     $montant=$request->get('amount');
     $user=$request->get('user');
