@@ -2,8 +2,74 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
  <?php  use \App\Http\Controllers\CalendrierController; ?>
-<style type="text/css">
 
+<style type="text/css">
+/* Show more */
+.show-moreP {
+	height: 450px;
+	overflow: hidden;
+	position: relative;
+	transition: margin 0.4s;
+}
+
+.show-moreP:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 180px;
+	display: block;
+	background: linear-gradient(rgba(255,255,255,0), #fff 88%);
+	z-index: 9;
+	opacity: 1;
+	visibility: visible;
+	transition: 0.8s;
+}
+
+.show-moreP.visible { margin-bottom: 20px; }
+.show-moreP.visible:after { opacity: 0; visibility: hidden; }
+
+.show-moreP-button {
+	position: relative;
+	font-weight: 600;
+	font-size: 15px;
+	left: 0;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+	text-align: center;
+	display: inline-block;
+	opacity: 1;
+	visibility: visible;
+	transition: all 0.3s;
+	padding: 5px 20px;
+	color: #666;
+	background-color: #f2f2f2;
+	border-radius: 50px;
+	top: -10px;
+	min-width: 140px;
+}
+
+.show-moreP-button:before { content: attr(data-more-title); }
+.show-moreP-button.active:before { content: attr(data-less-title); }
+
+.show-moreP-button i {
+	margin-left: 6px;
+	color: #66676b;
+	font-weight: 500;
+	transition: 0.2s;
+}
+
+.show-moreP-button.active i {
+	transform: rotate(180deg);
+}
+
+/**show button */ 
+a.button.border {
+    color: #ffd700!important;
+    border-color: #ffd700!important;
+}
 .fc .fc-button-group {
     position: relative;
     display: initial;
@@ -353,15 +419,17 @@ table.basic-table th {
                             <?php foreach ($services as $service)
                             { ?>
                             <li>
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
+                            <div class="row" >
+                                    <div class="col-6 col-lg-6">
                                 <?php if($service->thumb!=''){ echo '<a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
                                     </div>
-                                    <div class="col-md-8 col-sm-12">
+                                    <center><div class="col-6 col-lg-6">
+                                <span style="width: 71px;margin-top: 9px;">{{ $service->prix }} €</span>
+                                    </div></center>
+                                </div>
+                                <div class="row" style="    margin-left: 0px;">
                                 <h5>{{ $service->nom }}</h5>
-                                <p>{{ $service->description }}</p>
-                                <span>{{ $service->prix }} €</span>
-                                    </div>
+                                <p style="text-align: justify;">{{ $service->description }}</p>
                                 </div>
                             </li>
                             <?php } ?>
@@ -374,17 +442,20 @@ table.basic-table th {
                         <ul>
                             <?php foreach ($servicesreccurent as $servicerec)
                             { ?>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
-                                <?php if($servicerec->thumb!=''){ echo '<a href="'. URL::asset('storage/images/'.$servicerec->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$servicerec->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
+                            <li> <div class="row" >
+                                    <div class="col-6 col-lg-6">
+                                    <?php if($servicerec->thumb!=''){ echo '<a href="'. URL::asset('storage/images/'.$servicerec->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$servicerec->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
                                     </div>
-                                    <div class="col-md-8 col-sm-12">
-                                <h5>{{ $servicerec->nom }}</h5>
-                                <p>{{ $servicerec->description }}</p>
-                                <span>{{ $servicerec->prix }} €</span>
-                                    </div>
+                                    <center><div class="col-6 col-lg-6">
+                                <span style="width: 71px;margin-top: 9px;">{{ $servicerec->prix }} €</span>
+                                    </div></center>
                                 </div>
+                                <div class="row" style="    margin-left: 0px;">
+                                <h5>{{ $servicerec->nom }}</h5>
+                                <p style="text-align: justify;">{{ $servicerec->description }}</p>
+                                </div>
+
+                               
                             </li>
                             <?php } ?>
                         </ul>
@@ -392,7 +463,7 @@ table.basic-table th {
 
                     </div>
                 </div>
-                <a href="#" class="show-more-button" data-more-title="Afficher plus" data-less-title="Afficher moins"><i class="fa fa-angle-down"></i></a>
+                <a  class="show-more-button" data-more-title="Afficher plus" data-less-title="Afficher moins"><i class="fa fa-angle-down"></i></a>
             </div>
             <!-- services Menu / End -->
         <?php } ?>
@@ -405,7 +476,7 @@ table.basic-table th {
             <div id="listing-pricing-list" class="listing-section">
                 <h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Boutique</h3>
 
-                <div class="show-more">
+                <div class="show-moreP" id="one">
                     <div class="pricing-list-container">
                         <?php if ( $nbserv>0) { ?>
                         <!-- simple List -->
@@ -413,16 +484,20 @@ table.basic-table th {
                             <?php foreach ($produit as $prod)
                             { ?>
                             <li>
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
-                                <?php if($prod->image!=''){ echo '<a href="'.URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
+                            <div class="row" >
+                                    <div class="col-6 col-lg-6">
+                                    <?php if($prod->image!=''){ echo '<a href="'.URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
                                     </div>
-                                    <div class="col-md-8 col-sm-12">
-                                <h5>{{$prod->nom_produit}}</h5>
-                                <p>{{ $prod->description }}</p>
-                                <span>{{$prod->prix_unité}} €</span>
-                                    </div>
+                                    <center><div class="col-6 col-lg-6">
+                                <span style="width: 71px;margin-top: 9px;">{{$prod->prix_unité}} €</span>
+                                    </div></center>
                                 </div>
+                                <div class="row" style="    margin-left: 0px;">
+                                <h5>{{$prod->nom_produit}}</h5>
+                                <p style="text-align: justify;">{{ $prod->description }}</p>
+                            </div>
+
+    
                             </li>
                             <?php } ?>
                         </ul>
@@ -430,7 +505,7 @@ table.basic-table th {
 
                     </div>
                 </div>
-                <a href="#" class="show-more-button" data-more-title="Afficher plus" data-less-title="Afficher moins"><i class="fa fa-angle-down"></i></a>
+                <a class="show-moreP-button" data-more-title="Afficher plus" data-less-title="Afficher moins"><i class="fa fa-angle-down"></i></a>
             </div>
             <!-- boutique Menu / End -->
         <?php }} ?>
@@ -819,7 +894,6 @@ $( document ).ready(function() {
  <style>.legend { list-style: none; margin-left:10px;}
     .legend li { float: left; margin-right: 15px;}
     .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }</style>
-  
 <script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
           <h4 class="modal-title" style="font-size: 17px;" >Calendrier du prestataire</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <div id="legendcolor"  style="background-color:white; top:5px;"> 
@@ -1185,7 +1259,28 @@ $( document ).ready(function() {
 </div>
 
 
+<script>
+        /*----------------------------------------------------*/
+        $('.show-moreP-button').on('click', function(e){
+    	e.preventDefault();
+    	$(this).toggleClass('active');
 
+		$('.show-moreP').toggleClass('visible');
+		if ( $('.show-moreP').is(".visible") ) {
+
+			var el = $('.show-moreP'),
+				curHeight = el.height(),
+				autoHeight = el.css('height', 'auto').height();
+				el.height(curHeight).animate({height: autoHeight}, 400);
+
+
+		} else { $('.show-moreP').animate({height: '450px'}, 400); }
+
+	});
+
+
+	/*----------------------------------------------------*/
+</script>
   @endsection
 @include('layouts.pageprestataire-scripts')
 
