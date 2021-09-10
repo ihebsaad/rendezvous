@@ -467,6 +467,7 @@ table.basic-table th {
             <!-- services Menu / End -->
         <?php } ?>
         <!-- boutique Menu -->
+        <?php if($user->section_product=='active'){ ?>
             <?php
             if(($user->type_abonn_essai &&  $user->type_abonn_essai=="type3" )|| ($user->type_abonn &&  $user->type_abonn=="type3" )) {
                     $nbprods = count($produit);
@@ -506,8 +507,9 @@ table.basic-table th {
                 </div>
                 <a class="show-moreP-button" data-more-title="Afficher plus" data-less-title="Afficher moins"><i class="fa fa-angle-down"></i></a>
             </div>
+           
             <!-- boutique Menu / End -->
-        <?php }} ?>
+        <?php }} ?><?php } ?>
         <!-- heures creuses /happy hours Menu  -->
         <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  
                 $nbhh =count($happyhours );
