@@ -294,7 +294,8 @@ $customer = \Stripe\Customer::create();
 
     }
  public function payabn(Request $request)
-    {
+    { dd(    $abn=$request->get('abonnement')
+    );
     $montant=$request->get('amount');
     $user=$request->get('user');
     $abn=$request->get('abonnement');
