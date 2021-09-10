@@ -114,7 +114,7 @@ background-color:#a0d468;
 
     submitButton.addEventListener('click', function(ev) {
     ev.preventDefault();
-    $('#submit').html('<i class="fa fa-spinner fa-spin"></i> Loading...').attr('disabled', true);
+    $('#submit').html('<i class="fa fa-spinner fa-spin"></i> chargement...').attr('disabled', true);
     stripe.confirmCardPayment("{{ $clientSecret }}", {
         payment_method: {
             card: card
