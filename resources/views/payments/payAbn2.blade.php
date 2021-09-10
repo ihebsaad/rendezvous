@@ -20,7 +20,7 @@ background-color:#a0d468;
 }
 
 .dashboard-list-box h4 {
-    font-size: 26px;
+    font-size: 21px;
     background-color: #ffd700;}
 
 .dashboard-list-box.with-icons ul li {
@@ -52,8 +52,8 @@ background-color:#a0d468;
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                  <h3>Abonnement choisit:{{$abn}}</h3>
-                  <h5>Paiement de votre abonnement (montant à payer : {{$montant}} €)</h5>      
+                  <h4>Abonnement choisit:{{$abn}}</h4><br>
+                  <h4>Paiement de votre abonnement (montant à payer : {{$montant}} €)</h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
                                     <div id="card-element">
