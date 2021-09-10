@@ -305,7 +305,6 @@ $customer = \Stripe\Customer::create();
         $mensuel_annuel='Annuel';
 
       }
-      dd($mensuel_annuel);
     $montant=$request->get('amount');
     $user=$request->get('user');
     $desc=$request->get('description');
