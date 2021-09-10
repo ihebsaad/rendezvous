@@ -4,12 +4,6 @@
  <?php  use \App\Http\Controllers\CalendrierController; ?>
 <style type="text/css">
 
-.modal .modal-content {
-  height: 100%;
-  border: 0;
-  border-radius: 0;
-}
-
 .fc .fc-button-group {
     position: relative;
     display: initial;
@@ -780,10 +774,10 @@ $( document ).ready(function() {
   <!-- The Modal -->
   <div class="modal  fade" id="calendrier_prestataire" style="display:none;" >
     <div class="modal-dialog modal-fullscreen" >
-      <div class="modal-content">
+      <div class="modal-content" style="height:100%;    overflow-y: auto;">
       
         <!-- Modal Header -->
-        <div class="modal-header" >
+        <div class="modal-header" style="    overflow-y: auto;" >
  <style>.legend { list-style: none; margin-left:10px;}
     .legend li { float: left; margin-right: 15px;}
     .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }</style>
@@ -813,7 +807,7 @@ $( document ).ready(function() {
         
         <!-- Modal body -->
         <div class="modal-body" style="border:solid ; border-color:lightgrey;       height: 555px;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: auto;
 " >
         	<style scoped>
@@ -821,6 +815,7 @@ $( document ).ready(function() {
                 .calpresk { 
                   font-size: 15px;
                   height: inherit;
+                  overflow-y: auto;
                
                 }
             }
