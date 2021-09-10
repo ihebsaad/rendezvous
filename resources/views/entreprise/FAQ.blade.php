@@ -47,11 +47,9 @@
                         <div class="add-listing-headline">
                             <h3><i class="sl sl-icon-question"></i>FAQ</h3>
                             <!-- Switcher -->
-                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
                         </div>
 
                         <!-- Switcher ON-OFF Content -->
-                        <div class="switcher-content">
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -74,7 +72,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        
                         <!-- Switcher ON-OFF Content / End -->
 
                     </div>
