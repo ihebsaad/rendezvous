@@ -52,10 +52,8 @@ background-color:#a0d468;
             <div class="col-md-8 col-md-offset-2">
            
               <div class="dashboard-list-box with-icons margin-top-20">
-                <h4>                   <Strong style="font-size:21px;color:black"> Abonnement: <b></b>{{$mensuel_annuel}}</Strong>
-<br>
-                    <b style="color:black">
-                  Paiement de votre abonnement (montant à payer : {{$montant}} €)</b>
+                <h4><Strong style="font-size:25px;color:black">  Paiement de votre abonnement {{$mensuel_annuel}} (montant à payer : {{$montant}} €):</Strong>
+    
                   </h4>      
                 <ul>
                                <li> <form action="#" class="my-4">
