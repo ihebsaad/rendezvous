@@ -297,7 +297,7 @@ $customer = \Stripe\Customer::create();
     { 
       $abn=$request->get('abonnement');
 
-      $details=Abonnement::where('id',$abn)->get()->first();
+      $details=Abonnement::where('id',$abn)->first()->get('details');
       dd($details);
     $montant=$request->get('amount');
     $user=$request->get('user');
