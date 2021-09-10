@@ -396,6 +396,44 @@ table.basic-table th {
             </div>
             <!-- services Menu / End -->
         <?php } ?>
+        <!-- boutique Menu -->
+            <?php
+            if(($user->type_abonn_essai &&  $user->type_abonn_essai=="type3" )|| ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+                    $nbprods = count($produit);
+                    if ( $nbprods>0){
+            ?>
+            <div id="listing-pricing-list" class="listing-section">
+                <h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Boutique</h3>
+
+                <div class="show-more">
+                    <div class="pricing-list-container">
+                        <?php if ( $nbserv>0) { ?>
+                        <!-- simple List -->
+                        <ul>
+                            <?php foreach ($produit as $prod)
+                            { ?>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                <?php if($prod->image!=''){ echo '<a href="'.URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                <h5>{{$prod->nom_produit}}</h5>
+                                <p>{{ $prod->description }}</p>
+                                <span>{{$prod->prix_unité}} €</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                        <?php } ?>
+
+                    </div>
+                </div>
+                <a href="#" class="show-more-button" data-more-title="Afficher plus" data-less-title="Afficher moins"><i class="fa fa-angle-down"></i></a>
+            </div>
+            <!-- boutique Menu / End -->
+        <?php }} ?>
         <!-- heures creuses /happy hours Menu  -->
         <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  
                 $nbhh =count($happyhours );
@@ -971,7 +1009,7 @@ $( document ).ready(function() {
 
              <?php if (($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
             <!-- qr code Widget -->
-            <div class="coupon-widget" style="background-image: url(http://localhost/listeo_html/images/single-listing-01.jpg);">
+            <div class="coupon-widget" style="">
                 <a href="#" class="coupon-top">
                     <?php $url1=  URL::asset('storage\qrcodes'); 
                     $urlqrcode = $url1."/".$user->qr_code;  ?>
@@ -1149,142 +1187,6 @@ $( document ).ready(function() {
 
 
   @endsection
-
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-<!--
- <script   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&callback=initMap&libraries=&v=weekly" defer ></script>
-
-     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&callback=initAutocomplete&libraries=places&v=weekly"
-      defer
-    ></script> 
-    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDARlwNl95VXqSs8FfoocG-gz7wG8j37hs&libraries=places&callback=initialize" async defer></script>
-<script>
-function initialize() {
-   initMap();
-   initAutocomplete();
-}
-</script>
-
-            <script>
-function initMap() {
-  const map = new google.maps.Map(document.getElementById("utf_single_listingmap"), {
-    zoom: 15,
- <?php if ($user->latitude!='' && $user->longitude!='' ) {?>   center: { lat: <?php echo $user->latitude; ?>, lng: <?php echo $user->longitude; ?> },   <?php }else{?>
-     center: { lat: 48.8566, lng: 2.35222 },
- 
- <?php }?>
-  });
-  const geocoder = new google.maps.Geocoder();
-  document.getElementById("adresse").addEventListener("change", () => {
-    geocodeAddress(geocoder, map);
-  });
- 
-  function showalert() {
-        alert("you just pressed the button");
-    }
-
-}
-
-function geocodeAddress(geocoder, resultsMap) {
-  const address = document.getElementById("adresse").value;
-  geocoder.geocode({ address: address }, (results, status) => {
-    if (status === "OK") {
-      resultsMap.setCenter(results[0].geometry.location);
-      new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location,
-      });
-    
- document.getElementById("latitude").value= results[0].geometry.location.lat();
- document.getElementById("longitude").value= results[0].geometry.location.lng();
- changing(document.getElementById('latitude'));
- changing(document.getElementById('longitude'));
-
-   } else {
-    //  alert("Ville non trouvée " + status);
-    }
-  });
-}
-
- let placeSearch;
-      let autocomplete;
-      const componentForm = {
-        street_number: "short_name",
-        route: "long_name",
-        locality: "long_name",
-        administrative_area_level_1: "short_name",
-        country: "long_name",
-        postal_code: "short_name",
-      };
-
-      function initAutocomplete() {
-        // Create the autocomplete object, restricting the search predictions to
-        // geographical location types.
-        autocomplete = new google.maps.places.Autocomplete(
-          document.getElementById("adresse"),
-          { types: ["geocode"] }
-        );
-        // Avoid paying for data that you don't need by restricting the set of
-        // place fields that are returned to just the address components.
-        autocomplete.setFields(["address_component"]);
-        // When the user selects an address from the drop-down, populate the
-        // address fields in the form.
-        autocomplete.addListener("place_changed", fillInAddress);
-      }
-
-      function fillInAddress() {
-          
-
-        // Get the place details from the autocomplete object.
-        const place = autocomplete.getPlace();
-
-        for (const component in componentForm) {
-          document.getElementById(component).value = "";
-          document.getElementById(component).disabled = false;
-        }
-
-        // Get each component of the address from the place details,
-        // and then fill-in the corresponding field on the form.
-        for (const component of place.address_components) {
-          const addressType = component.types[0];
-
-          if (componentForm[addressType]) {
-            const val = component[componentForm[addressType]];
-            document.getElementById(addressType).value = val;
-          }
-        }
-          document.getElementById('ville').value = document.getElementById('locality').value ;
-         
-      }
-
-      // Bias the autocomplete object to the user's geographical location,
-      // as supplied by the browser's 'navigator.geolocation' object.
-      function geolocate() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            const geolocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-            const circle = new google.maps.Circle({
-              center: geolocation,
-              radius: position.coords.accuracy,
-            });
-        //   autocomplete.setBounds(circle.getBounds());
-          });
-        }
-      }
-
- </script>
-  <script src="{{ asset('public/scripts/chosen.min.js') }}"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
- <script  src="{{ URL::asset('public/scripts/moment.min.js')}}"   ></script> 
-
-<script src="{{  URL::asset('public/fullcalendar/main.min.js') }}"></script>
-<script src="{{  URL::asset('public/fullcalendar/locales/fr.js') }}"></script>
+@include('layouts.pageprestataire-scripts')
 
 
