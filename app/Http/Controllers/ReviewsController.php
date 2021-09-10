@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use \App\User;
 use \App\Review;
+use \App\Reservation;
+
 
 class ReviewsController extends Controller
 {
@@ -50,6 +52,10 @@ class ReviewsController extends Controller
 	public function add(Request $request)
 	{
 		//dd($request);
+    $res = Reservation::where('client',$request->get('client'))->where('prestataire',$request->get('prestataire'))->where('paiement',2)->count();
+    if ($res) {
+      
+    
     $avis = Review::where('client',$request->get('client'))->where('prestataire',$request->get('prestataire'))->count();
     if ($avis) {
       \Session::put('ErrorMessage', 'oops!... vous avez déjà ajouté un avis');
@@ -105,7 +111,15 @@ class ReviewsController extends Controller
      return back();
 		 
 		//dd ($request);
- 	}}
+ 	}}else{
+    \Session::put('ErrorMessage', 'oops!... pour ajouter un avis, vous devez acheter une prestation.');
+      return back();
+  }
+
+
+
+
+ }
 	
 	public function store(Request $request)
 	{

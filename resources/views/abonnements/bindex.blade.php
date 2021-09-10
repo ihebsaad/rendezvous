@@ -109,7 +109,7 @@ use \App\User;
                                 </div>
                             </div>
                             <div class="buttons-to-right">
-                               <?php if($abonnement->statut!="annuler" ){  ?>
+                               <?php if($abonnement->statut!="annuler" && $abonnement->abonnement !=3 ){  ?>
        <a  class="button gray reject"   onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('AbonnementsController@remove', $abonnement->id)}}"><i class="sl sl-icon-close"></i>   Annuler</a><?php } ?>
 
         
