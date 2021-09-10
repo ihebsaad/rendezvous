@@ -300,9 +300,9 @@ $customer = \Stripe\Customer::create();
 
       $details=Abonnement::where('id',$abn)->first()->details;
       if (strpos($details, 'mensuel') !== false) {
-        $mensuel_annuel='Mensuel';}
+        $mensuel_annuel='mensuel';}
       elseif (strpos($details, 'annuel') !== false) {
-        $mensuel_annuel='Annuel';
+        $mensuel_annuel='annuel';
 
       }
     $montant=$request->get('amount');
