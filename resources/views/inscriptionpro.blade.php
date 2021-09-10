@@ -2,7 +2,10 @@
  <?php
  $parametres=DB::table('parametres')->where('id', 1)->first();
 
+$cout_abonnement_annuel_offrel= $parametres->cout_offrelancement3;
 
+$cout_abonnement_mensuel_offrel= $parametres->cout_offrelancement3_mens;
+  
 $pvideo= $parametres->video;
 
 
@@ -527,7 +530,7 @@ if( $nbpres <= 100 ) {?>
                 <div class="col-md-12">
                     <section id="offre-lancement" class="center margin-bottom-50">
                         <h2 id="h2offre">OFFRE DE BIENVENUE <!-- <i class="im im-icon-Gift-Box" style="font-size:90px;"></i>--></h2>
-                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€/AN</span> 449€ TTC/An</h2>
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€/AN</span> <?php echo $cout_abonnement_annuel_offrel;?>€ TTC/An</h2>
                         <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >avec Engagement</h3>
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -539,7 +542,7 @@ if( $nbpres <= 100 ) {?>
                         <h2 style="font-size: 35px; color: #3e3d3d;margin-top: 30px;">OU</h2>
                         <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;" >Obtenez toutes les fonctionnalités</h3>
 
-                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">249€/Mois</span> 149€ TTC/Mois</h2>
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">249€/Mois</span> <?php echo $cout_abonnement_mensuel_offrel; ?>€ TTC/Mois</h2>
                         <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>
 
 
