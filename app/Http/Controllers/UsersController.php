@@ -284,11 +284,13 @@ class UsersController extends Controller
 
     }
     public function pageprestataires(Request $request)
-    {
-      //dd($request);
+     {
+      $input = $request->all();
+
+      if($request->input('me')){$type=$request->input('me');}else{$type=Session::get('type');};
+      if(!($request->input('me')) && !(Session::get('type'))){$type="list";};//pagination cva
       
       $today= new DateTime();
-      
         $prest_tag= trim($request->get('prest_tag'));//tagsearch
         $prest_emplacement= trim($request->get('prest_emplacement'));//emplacementsearch
         $Toutes_les_categories=trim($request->get('toutes_categories')); //catsearch
@@ -373,9 +375,9 @@ class UsersController extends Controller
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
+                     ->paginate(6);
           //dd($listings);
-          $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories]);
+          $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories,'type' =>$type]);
 
         }
 //---------------------------------------------------------------------------------------------
@@ -393,7 +395,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
+                     ->paginate(6);
                      
          // dd($listings);
         }
@@ -419,7 +421,7 @@ class UsersController extends Controller
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
+                     ->paginate(6);
           $listings->appends(['catsearch' => $Toutes_les_categories]);
         }
   //----------------------------------------------------------------------------------------------------
@@ -444,8 +446,8 @@ class UsersController extends Controller
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
-          $listings->appends(['emplacementsearch' => $prest_emplacement]);
+                     ->paginate(6);
+          $listings->appends(['emplacementsearch' => $prest_emplacement,'type' =>$type]);
           //dd($listings);
       
         }
@@ -477,8 +479,8 @@ class UsersController extends Controller
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
-          $listings->appends(['emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories]);
+                     ->paginate(6);
+          $listings->appends(['emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories,'type' =>$type]);
       
 
         }
@@ -535,8 +537,8 @@ class UsersController extends Controller
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
-          $listings->appends(['tagsearch' => $prest_tag]);
+                     ->paginate(6);
+          $listings->appends(['tagsearch' => $prest_tag,'type' =>$type]);
           //dd("ok");
 
         }
@@ -599,8 +601,8 @@ class UsersController extends Controller
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
-          $listings->appends(['tagsearch' => $prest_tag, 'catsearch' => $Toutes_les_categories]);
+                     ->paginate(6);
+          $listings->appends(['tagsearch' => $prest_tag, 'catsearch' => $Toutes_les_categories,'type' =>$type]);
 
         }
 
@@ -662,15 +664,16 @@ class UsersController extends Controller
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
                      ->orderBy('id', 'asc')
-                     ->paginate(5);
-          $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement]);
+                     ->paginate(6);
+          $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement,'type' =>$type]);
 
         }
 //new \Illuminate\Pagination\LengthAwarePaginator
         //$page_links = new \Illuminate\Pagination\LengthAwarePaginator($listings , $krows, 5);
+        Session::put('type',$type);
 
-      return view('pageprestataires')->with('listings',$listings);
-      //->with('page_links',$page_links);
+      return view('pageprestataires')->with('listings',$listings)->with('type',$type);
+      //**->with('page_links',$page_links);
       //, compact('listings') );       
       //return view('pageprestataires')->with(['listings' => $listings->paginate(10)]);
 
@@ -1940,6 +1943,13 @@ public function Services($id)
 
    
        return back();
+    }
+
+    public function grid(Request $request)
+    {
+      echo $request->get('type')
+;   
+  
     }
 
  }

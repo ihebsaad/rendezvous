@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 $toutes_categories=DB::table('categories')->get();
 $meres_categories=DB::table('categories')->whereNull('parent')->get();
-
+$type=Session::get('type');
 // extraire les parametres du filter de l'url
 $jlist = $listings->toArray();
 $url = $jlist["first_page_url"];
@@ -102,11 +102,65 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                             <div class="col-md-6 col-xs-6">
                                    <!-- Layout Switcher -->
                                    <div class="layout-switcher">
-                                          <a href="listings-grid-with-sidebar-1.html" class="grid"><i class="fa fa-th"></i></a>
-                                          <a href="#" class="list active"><i class="fa fa-align-justify"></i></a>
+                                         
+             
+                                          <a href="javascript:void(0)" id="grida"<?php if($type=="grid"){echo 'class="grid active"';}else{echo 'class="grid"'; }?> onclick="listtogrid(this)"><i class="fa fa-th"></i></a>
+                                          <a href="javascript:void(0)" <?php if($type=="list"){echo 'class="list active"';}else{echo 'class="list"'; }?> id="lista" onclick="gridtolist(this)"><i class="fa fa-align-justify"></i></a>
                                    </div>
-                            </div>
 
+                            </div>    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <script>
+                            function listtogrid(elm){if(document.getElementById("grid").style.display == "none"){
+    document.getElementById("test").value = "grid";
+    elm.className = "grid active"; 
+    document.getElementById("lista").className = "list"; 
+    document.getElementById("list").style.display = "none";
+    document.getElementById("grid").style.display = "block";
+    var type = "grid";
+    var _token = $('input[name="_token"]').val();
+    alert(type);
+
+    $.ajaxSetup({
+                headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content'),
+                     cache: false }
+            });
+    $.ajax({
+           
+    method: 'POST',
+    url: "{{ route('recherche.prestataires')}}",
+
+    data: {'me':type,_token:_token},
+    success: function(data) {
+        console.log(data);
+    }
+});
+}
+};
+function gridtolist(elm){if(document.getElementById("grid").style.display == "block"){
+       elm.className = "list active"; 
+    document.getElementById("grida").className = "grid";
+       document.getElementById("test").value = "list";
+    document.getElementById("grid").style.display = "none";
+    document.getElementById("list").style.display = "block";
+    var type = "list";
+    var _token = $('input[name="_token"]').val();
+    alert(type);
+
+    $.ajaxSetup({
+                headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') ,
+                     cache: false}
+            });
+    $.ajax({
+    method: 'POST',
+    url: "{{ route('recherche.prestataires')}}",
+    data: {'me':type,_token:_token},
+    success: function(data) {
+        console.log(data);
+    }
+});
+}
+};
+</script>
                             <div class="col-md-6 col-xs-6">
                                    <!-- Sort by -->
                                    <!--<div class="sort-by">
@@ -121,10 +175,11 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                                           </div>
                                    </div>-->
                             </div>
-                     </div>
+                     </div><?php } ?>
                      <!-- Sorting / Layout Switcher / End -->
-                     <?php } ?>
-              <?php if (count($listings) >= 1) { ?>
+                     <div id="list" <?php if($type=="list"){echo 'style="display:block;"';}else{echo 'style="display:none;"'; }?>>
+                     
+                <?php if (count($listings) >= 1) { ?>
 
                      <div class="row">
                      <?php  $User= auth()->user();  ?>
@@ -280,6 +335,167 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                             </div>
                             <!-- Listing Item / End -->
                             <?php }}  //foreach $listings  ?>
+                           </div> </div>                             <?php } ?>
+
+                            <div id="grid" <?php if($type=="grid"){echo 'style="display:block"';}else{echo 'style="display:none;"'; }?> >
+
+                               <!-- Sorting / Layout Switcher / End -->
+                            <?php if (count($listings) >= 1) { ?>
+
+                       <div class="row">
+                            <?php  $User= auth()->user();  ?>
+                        <?php
+                       if (!isset($listings) && empty($listings))
+
+                       {$listings=\App\User::where('user_type','prestataire')->get();}
+                        $format = "Y-m-d H:i:s";
+                           $date_15j = (new \DateTime())->format('Y-m-d H:i:s');
+                           $date_15j=\DateTime::createFromFormat($format, $date_15j);
+                         
+                       foreach ($listings as $listing)
+                        {
+                          
+                         $date_inscription=  $listing->date_inscription;
+                           $date_inscription=\DateTime::createFromFormat($format, $date_inscription);            
+                           $nbjours = $date_inscription->diff($date_15j);
+                           $nbjours =intval($nbjours->format('%R%a'));
+                            $date_exp='';
+                           if($listing->expire)
+                           {
+                             $date_exp=\DateTime::createFromFormat($format,$listing->expire);
+                           }
+                       
+                       if ( $nbjours<=15 || ($nbjours> 15 && $listing->expire &&  $date_exp >= $date_15j))
+                       {
+                                   $categories_user = \DB::table('categories_user')->where('user',$listing->id)->get();
+                                   $services =\App\Service::where('user',$listing->id)->get();
+                                   
+                            $reviews= \App\Review::where('prestataire',$listing->id)->get();
+                            $countrev= count($reviews);
+
+                            $moy=$moy_qualite=$moy_service=$moy_prix=$moy_emplacement=$moy_espace=0;
+                            $total=0;  
+                       if($countrev>0){
+                       
+                       foreach( $reviews as $review)
+                       {
+                           $total=$total+($review->note);
+                     
+                       }
+                       
+                       $moy=$total/$countrev; 
+                       }       
+                       ?> 
+                            <!-- Listing Item -->
+                            <div class="col-lg-6 col-md-12">
+                           
+                                          <a href="<?php echo url("/".Str::slug($listing->titre,'-')."/{$listing->id}"); ?>" class="listing-item-container">
+                                          <div class="listing-item">
+
+                                                 <!-- Image -->
+                                                        <img src="<?php if (empty($listing->couverture)) {echo  URL::asset('storage/images/listing.jpg');} else {echo  URL::asset('storage/images/'.$listing->couverture);}?>" alt="">
+                                                        <?php $top=15; $i=0;?>
+                                                        <?php foreach($categories_user as $cat){ 
+                                                        $categorie =\App\Categorie::find( $cat->categorie); 
+                                                        
+                                                        if($categorie !=null){
+                                                        if($i<5){
+                                                        if($categorie->parent==null){   
+                                                        $i++;   ?>
+                                                        
+                                                          
+                                                        <?php $top=$top+30; 
+                                                        } 
+                                                        }
+                                                        }
+                                                        
+                                                        }
+                                                        ?>
+                                                  <?php 
+                                                               $fhoraire = $listing->fhoraire;
+                                                               date_default_timezone_set($fhoraire);
+
+                                                               $currenttime = date('H:i');
+                                                               $dayname = date("l");
+                                                               // lundi
+                                                               if ($dayname === "Monday")
+                                                               {
+                                                                   if ((strtotime($currenttime) >= strtotime($listing->lundi_o)) && (strtotime($currenttime) <= strtotime($listing->lundi_f)))
+                                                                       { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                                                               }
+                                                               // mardi
+                                                               if ($dayname === "Tuesday")
+                                                               {
+                                                                   if ((strtotime($currenttime) >= strtotime($listing->mardi_o)) && (strtotime($currenttime) <= strtotime($listing->mardi_f)))
+                                                                       { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                                                               }
+                                                               // mercredi
+                                                               if ($dayname === "Wednesday")
+                                                               {
+                                                                   if ((strtotime($currenttime) >= strtotime($listing->mercredi_o)) && (strtotime($currenttime) <= strtotime($listing->mercredi_f)))
+                                                                       { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                                                               }
+                                                               // jeudi
+                                                               if ($dayname === "Thursday")
+                                                               {
+                                                                   if ((strtotime($currenttime) >= strtotime($listing->jeudi_o)) && (strtotime($currenttime) <= strtotime($listing->jeudi_f)))
+                                                                       { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                                                               }
+                                                               // vendredi
+                                                               if ($dayname === "Friday")
+                                                               {
+                                                                   if ((strtotime($currenttime) >= strtotime($listing->vendredi_o)) && (strtotime($currenttime) <= strtotime($listing->vendredi_f)))
+                                                                       { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                                                               }
+                                                               // samedi
+                                                               if ($dayname === "Saturday")
+                                                               {
+                                                                   if ((strtotime($currenttime) >= strtotime($listing->samedi_o)) && (strtotime($currenttime) <= strtotime($listing->samedi_f)))
+                                                                       { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                                                               }
+                                                               // dimanche
+                                                               if ($dayname === "Sunday")
+                                                               {
+                                                                   if ((strtotime($currenttime) >= strtotime($listing->dimanche_o)) && (strtotime($currenttime) <= strtotime($listing->dimanche_f)))
+                                                                       { echo '<div class="listing-badge now-open">Ouvert</div>';}
+                                                               }
+                                                           ?>
+                                                 <!-- Content -->
+                                                 <div class="listing-item-content">
+                                                       
+
+                                                        <div class="listing-item-inner">
+                                                               <h3>{{$listing->titre}} <?php if ($listing->approved ==1) {;?> <i class="verified-icon"></i><?php }?></h3>
+                                                               <span>{{$listing->adresse}}</span>
+                                                               <?php if ($countrev >0){?> 
+                                                               <div class="star-rating" data-rating="<?php echo $moy;?>">
+                                                                      <div class="rating-counter">(<?php echo $countrev; ?> avis)</div>
+                                                               </div>
+                                                              <?php }else{ ?>
+                                                              <div class="star-rating"  style="height:57px" >
+                                                              </div>
+                                                              <?php } ?>
+                                                        </div>
+
+                                                        <!-- icon favori -->
+                                                           <?php if (isset($User)){?>  
+
+                                                           <?php if($User->user_type=='client'){  ?>  
+                                                           <?php $countf= DB::table('favoris')->where('prestataire',$listing->id)->where('client',$User->id)->count(); if($countf==0) {?>  
+                                                            <span id="fav-<?php echo $listing->id;?>" onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon"></span>  
+                                                           <?php }else{?>
+                                                            <span id="fav-<?php echo $listing->id;?>"  onclick="addfavoris(<?php echo $listing->id;?>)" class="addfavoris like-icon liked"></span>   
+                                                           <?php } ?>
+                                                            <?php } ?>
+                                                
+                                                           <?php }?>
+                                                 </div>                                                
+                                                 </div>
+
+                                          </a>
+                            </div>
+                            <!-- Listing Item / End -->
+                            <?php }}  //foreach $listings  ?></div>
 
                      </div>
               <?php } else { ?>
@@ -289,43 +505,8 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                                    <p>Désolé, aucun prestataire de service ne correspond à vos critères de recherche. Veuillez s’il vous plaît changer vos paramètres de recherche.</p>
                             </div>
                      </div>
-                     <?php } ?>
-                     <!-- Pagination -->
-                     <div class="clearfix"></div>
-                     <div class="row">
-                            <div class="col-md-12">
-                                   <div class="pagination-container margin-top-20 margin-bottom-40">
-                                          <nav class="pagination"><ul>
-                                          {!! $listings->links() !!}
-                                          <?php //echo $page_links; ?>
-                                          </ul></nav>
-                                   </div>
-                            </div>
-                     </div>
-                     <!-- Pagination -->
-                     <!--
-                     <div class="row">
-                            <div class="col-md-12">
-                                   <div class="pagination-container margin-top-20 margin-bottom-40">
-                                          <nav class="pagination">
-                                                 <ul>
-                                                        <li><a href="#" class="current-page">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
-                                                 </ul>
-                                          </nav>
-                                   </div>
-                            </div>
-                     </div>-->
-                     <!-- Pagination / End -->
-
-              </div>
-
-
-              <!-- Sidebar
-              ================================================== -->
-              <div class="col-lg-3 col-md-4">
+                     <?php } ?></div>
+                     <div class="col-lg-3 col-md-6">
                      <div class="sidebar">
 
                             <!-- Widget -->
@@ -335,6 +516,8 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                                     @csrf
                                    <!-- Row -->
                                    <div class="row with-forms">
+                                   <input type="text" hidden="true" id="test" style="display:none;" name="test">
+
                                           <!-- Cities -->
                                           <div class="col-md-12">
                                                  <input  id="prest_tag" name="prest_tag" type="text" placeholder="Que cherchez-vous ?" value="<?php if (!empty($filtertag)){ echo $filtertag; } ?>"/>
@@ -422,11 +605,43 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
                                    <button class="button fullwidth margin-top-5 btn-black" type="submit">Filtrer</button>
                                    </form>
                             </div>
-                            <!-- Widget / End -->
-
+                           </div></div> 
+                     <!-- Pagination -->
+                     <div class="clearfix"></div>
+                     <div class="row">
+                            <div class="col-md-12">
+                                   <div class="pagination-container margin-top-20 margin-bottom-40">
+                                          <nav class="pagination"><ul>
+                                          {!! $listings->links() !!}
+                                          <?php //echo $page_links; ?>
+                                          </ul></nav>
+                                   </div>
+                            </div>
                      </div>
+                     <!-- Pagination -->
+                     <!--
+                     <div class="row">
+                            <div class="col-md-12">
+                                   <div class="pagination-container margin-top-20 margin-bottom-40">
+                                          <nav class="pagination">
+                                                 <ul>
+                                                        <li><a href="#" class="current-page">1</a></li>
+                                                        <li><a href="#">2</a></li>
+                                                        <li><a href="#">3</a></li>
+                                                        <li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
+                                                 </ul>
+                                          </nav>
+                                   </div>
+                            </div>
+                     </div>-->
+                     <!-- Pagination / End -->
+
               </div>
-              <!-- Sidebar / End -->
+
+</div>
+              <!-- Sidebar
+              ================================================== -->
+
        </div>
 </div>
   <?php if (isset($User)){?> 
