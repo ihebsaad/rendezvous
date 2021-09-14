@@ -118,7 +118,7 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
     document.getElementById("grid").style.display = "block";
     var type = "grid";
     var _token = $('input[name="_token"]').val();
-    alert(type);
+    
 
     $.ajaxSetup({
                 headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content'),
@@ -144,7 +144,6 @@ function gridtolist(elm){if(document.getElementById("grid").style.display == "bl
     document.getElementById("list").style.display = "block";
     var type = "list";
     var _token = $('input[name="_token"]').val();
-    alert(type);
 
     $.ajaxSetup({
                 headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') ,
