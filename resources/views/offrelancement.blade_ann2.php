@@ -168,7 +168,7 @@
         <!-- plan 3 - start -->             
       <div class="plan featured col-md-8 col-sm-6 col-xs-12 centredplan">
         <div class="utf_price_plan">
-          <h3><?php echo $parametres->abonnement3;?></h3>
+          <h3>Abonnement {{mensuel_annuelC}}</h3>
           <span class="value" id="prixC"><?php echo $parametres->cout_offrelancement3_anne2;?>€<span id="uniteC">TTC / Par Mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
         </div>
         

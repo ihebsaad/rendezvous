@@ -714,25 +714,12 @@ class UsersController extends Controller
         $abonnementB =  Contenu_plan::where('abonnement',2)->get();
         $abonnementC =  Contenu_plan::where('abonnement',3)->get();
 
-        $detailsA=Abonnement::where('id','1')->first()->details;
-        if (strpos($detailsA, 'mensuel') !== false) {
-          $mensuel_annuelA='mensuel';}
-        elseif (strpos($detailsA, 'annuel') !== false) {
-          $mensuel_annuelA='nnuel';}
-          $detailsB=Abonnement::where('id','2')->first()->details;
-          if (strpos($detailsB, 'mensuel') !== false) {
-            $mensuel_annuelB='mensuel';}
-          elseif (strpos($detailsB, 'annuel') !== false) {
-            $mensuel_annuelB='annuel';}
+        $mensuel_annuelC="mensuel";
+        $mensuel_annuelB="annuel";
 
-            $detailsC=Abonnement::where('id','3')->first()->details;
-            if (strpos($detailsC, 'mensuel') !== false) {
-              $mensuel_annuelC='mensuel';}
-            elseif (strpos($detailsC, 'annuel') !== false) {
-              $mensuel_annuelC='annuel';}
   
          
-      return view('pricing2' , compact('abonnementA','abonnementB','abonnementC','mensuel_annuelA','mensuel_annuelB','mensuel_annuelC'));       
+      return view('pricing2' , compact('abonnementA','abonnementB','abonnementC','mensuel_annuelB','mensuel_annuelC'));       
 
     }
     
@@ -762,33 +749,43 @@ class UsersController extends Controller
       $abonnementA =  Contenu_plan::where('abonnement',1)->get();
       $abonnementB =  Contenu_plan::where('abonnement',2)->get();
       $abonnementC =  Contenu_plan::where('abonnement',3)->get();
+      $mensuel_annuelC="mensuel";
+      $mensuel_annuelB="annuel";
        
-     return view('offrelancement_mensuel' , compact('abonnementA','abonnementB','abonnementC'));
+
+       
+     return view('offrelancement_mensuel' , compact('abonnementA','abonnementB','abonnementC','mensuel_annuelB','mensuel_annuelC'));
     }
      
      public function offrelancement_annuel()
     {
-
+      $mensuel_annuelC="mensuel";
+        $mensuel_annuelB="annuel";
     	$abonnementA =  Contenu_plan::where('abonnement',1)->get();
         $abonnementB =  Contenu_plan::where('abonnement',2)->get();
         $abonnementC =  Contenu_plan::where('abonnement',3)->get();
        
-     return view('offrelancement_annuel' , compact('abonnementA','abonnementB','abonnementC'));
+     return view('offrelancement_annuel' , compact('abonnementA','abonnementB','abonnementC','mensuel_annuelB','mensuel_annuelC'));
 
     }
     
   public function offrelancement()
     {
+      $mensuel_annuelC="mensuel";
+      $mensuel_annuelB="annuel";
+    
     	$abonnementA =  Contenu_plan::where('abonnement',1)->get();
         $abonnementB =  Contenu_plan::where('abonnement',2)->get();
         $abonnementC =  Contenu_plan::where('abonnement',3)->get();
          
-      return view('offrelancement' , compact('abonnementA','abonnementB','abonnementC')); 
+      return view('offrelancement' , compact('abonnementA','abonnementB','abonnementC','mensuel_annuelB','mensuel_annuelC'));
       
     
     }
     public function OffreLancement_anne2()
     {
+      $mensuel_annuelC="mensuel";
+        $mensuel_annuelB="annuel";
     	$abonnementA =  Contenu_plan::where('abonnement',1)->get();
         $abonnementB =  Contenu_plan::where('abonnement',2)->get();
         $abonnementC =  Contenu_plan::where('abonnement',3)->get();

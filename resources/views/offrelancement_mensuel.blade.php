@@ -198,7 +198,7 @@
         <div class="dashboard-list-box with-icons margin-top-20">
           <div class="booking-requests-filter">
             <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_offrelancement3_mens;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> </div>
-          <h4>Offre de Lancement<?php //echo $parametres->abonnement3;?>
+             <h4>Offre de Lancement {{$mensuel_annuelC}}
           </h4>
           
         
