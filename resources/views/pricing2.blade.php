@@ -102,6 +102,7 @@
 
 .dashboard-list-box ul li {
     padding: 16px 0px;
+
 }
 
  </style>
@@ -186,20 +187,23 @@
         <span class="switch"></span>
       </p>
     </div> -->
-          <h3 class="headline_part centered margin-bottom-20">Choisissez votre Plan<span></span></h3>
+         <center> <h3  style="color:white;"class="headline_part centered margin-bottom-20">Choisissez votre Plan<span></span></h3></center>
         </div>
       </div>
       <div class="row">        
-      <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  "> 
+      <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  " style="  align-items: baseline!;
+"> 
 
         <!-- plan 3 - start -->             
-      <div class="plan featured plan featured col-md-6 col-md-offset-2">
+      <div class="plan featured plan featured col-md-6 col-md-offset-2" style="  align-items: baseline;
+">
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
 
             <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
           <h4>Abonnement {{$mensuel_annuelC}}<?php //echo $parametres->abonnement3;?>
           </h4>
+          <div>
           <center><input type="checkbox" class="read-more-state" id="post-3" />
                 <ul class="read-more-wrap">
                 <?php $x=0; foreach($abonnementC as $ab) { 
@@ -225,7 +229,7 @@
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button> 
         </form>        
         
-      </center>
+      </center></div>
       </div>
        </div>
       </div>
@@ -233,12 +237,14 @@
 
       
       <!-- plan 2 - start -->    
-      <div class="plan featured plan featured col-md-6 col-md-offset-2">
+      <div class="plan featured plan featured col-md-6 col-md-offset-2"style="  align-items: baseline;
+">
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
       <span class="value right" style="text-align:right!important" id="prixB"><?php echo $parametres->cout_offrelancement3_mens;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
              <h4>Abonnement {{$mensuel_annuelB}}<?php //echo $parametres->abonnement3;?>
             </h4> 
+            <div>
             <center><input type="checkbox" class="read-more-state" id="post-2" />
                 <ul class="read-more-wrap">
                 <?php $x=0; foreach($abonnementB as $ab) { 
@@ -264,7 +270,7 @@
 				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
         </form>        
         
-      </center>
+      </center></div>
       </div>
              
 			
