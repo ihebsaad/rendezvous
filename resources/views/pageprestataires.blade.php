@@ -611,7 +611,8 @@ function gridtolist(elm){if(document.getElementById("grid").style.display == "bl
                             <div class="col-md-12">
                                    <div class="pagination-container margin-top-20 margin-bottom-40">
                                           <nav class="pagination"><ul>
-                                          {!! $listings->links() !!}
+
+                                          {!! $listings->appends(request()->all())->links() !!}
                                           <?php //echo $page_links; ?>
                                           </ul></nav>
                                    </div>

@@ -291,19 +291,10 @@ class UsersController extends Controller
       if(!($request->input('me')) && !(Session::get('type'))){$type="list";};//pagination cva
       
       $today= new DateTime();
-        $prest_tag= trim($request->get('prest_tag'));//tagsearch
-        $prest_emplacement= trim($request->get('prest_emplacement'));//emplacementsearch
-        $Toutes_les_categories=trim($request->get('toutes_categories')); //catsearch
-        if ($request->has('emplacementsearch')) {
-        $prest_emplacement= trim($request->get('emplacementsearch'));
-      }
-      if ($request->has('tagsearch')) {
-        $prest_emplacement= trim($request->get('tagsearch'));
-      }
-      if ($request->has('catsearch')) {
-        $prest_emplacement= trim($request->get('catsearch'));
-      }
-
+        $prest_tag= $request->get('prest_tag');//tagsearch
+        $prest_emplacement= $request->get('prest_emplacement');//emplacementsearch
+        $Toutes_les_categories=$request->get('toutes_categories'); //catsearch
+        
 
         if ($Toutes_les_categories=="Toutes les catégories") {
             $Toutes_les_categories=false;
