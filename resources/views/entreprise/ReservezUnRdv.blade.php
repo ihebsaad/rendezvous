@@ -296,7 +296,7 @@ $User = auth()->user();
        {
           //avec modal
         // $("#datesfinales").val($id_pre_ins);
-        var t = '<h3>Insération des dates finales pour les séances</h3>'
+        var t = '<h3>Insertion des dates finales pour les séances</h3>'
         document.getElementById("titleDialog").innerHTML = t;
          nbr=$nbfois;
          var y='<input type="hidden" id="id_prop_date_id2" value="'+$id_pre_ins+'" name="id_prop_date">'; 
