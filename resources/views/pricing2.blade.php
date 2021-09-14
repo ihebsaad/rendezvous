@@ -249,7 +249,8 @@
                 <ul class="read-more-wrap">
                 <?php $x=0; foreach($abonnementB as $ab) { 
                     if ($x<5) {
-                      echo  '<li>'.$ab->contenu.'</li>' ;
+                      echo  '<li style=" margin-bottom: 1px;
+                      ">'.$ab->contenu.'</li>' ;
                     } else {
                       echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
                     }
