@@ -86,7 +86,7 @@
 }
 
 .dashboard-list-box h4 {
-    font-size: 26px;
+    font-size: 22px;
     background-color: #ffd700;}
 
     .booking-requests-filter {
@@ -198,7 +198,7 @@
       <div class="booking-requests-filter">
 
             <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-          <h4><?php echo $parametres->abonnement3;?><?php //echo $parametres->abonnement3;?>
+          <h4>Abonnement {{$mensuel_annuelC}}<?php //echo $parametres->abonnement3;?>
           </h4>
           <center><input type="checkbox" class="read-more-state" id="post-3" />
                 <ul class="read-more-wrap">
@@ -236,8 +236,8 @@
       <div class="plan featured plan featured col-md-6 col-md-offset-2">
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
-      <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_offrelancement3_mens;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
-             <h4><?php echo $parametres->abonnement2;?><?php //echo $parametres->abonnement3;?>
+      <span class="value right" style="text-align:right!important" id="prixB"><?php echo $parametres->cout_offrelancement3_mens;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
+             <h4>Abonnement {{$mensuel_annuelB}}<?php //echo $parametres->abonnement3;?>
             </h4> 
             <center><input type="checkbox" class="read-more-state" id="post-2" />
                 <ul class="read-more-wrap">

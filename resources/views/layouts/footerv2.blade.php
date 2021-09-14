@@ -30,10 +30,9 @@
                 <h4>Compte</h4>
                 <ul class="footer-links">
                     <!--<li><a href="{{-- route('pricing') --}}">Abonnements</a></li>  -->     
-                    @guest 
-             
-                    <li><a class="" href="{{route('inscriptionclient')}}" >Inscription</a></li>
-                    <li><a class="" href="{{route('inscription')}}" >Connexion</a></li> 
+                    @guest              
+                    <li><a class="" href="{{route('inscriptionclient')}}" >Vous êtes prestataire de service ?</a></li>
+                    <li><a class="" href="{{route('inscription')}}" >Je suis un client</a></li> 
                     @else
                     <li><a  href="{{route('logout')}}"  >Déconnexion</a></li> 
                     @endguest

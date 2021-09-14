@@ -31,6 +31,7 @@ use \App\Codepromo;
 use \App\Happyhour;
 use \App\Contenu_plan;    
 use \App\Emailslist;  
+use \App\Abonnement;
  use Swift_Mailer;
  use Mail;  
 
@@ -705,12 +706,33 @@ class UsersController extends Controller
 
     }
        public function pricing()
+
     {
+
+     
         $abonnementA =  Contenu_plan::where('abonnement',1)->get();
         $abonnementB =  Contenu_plan::where('abonnement',2)->get();
         $abonnementC =  Contenu_plan::where('abonnement',3)->get();
+
+        $detailsA=Abonnement::where('id','1')->first()->details;
+        if (strpos($detailsA, 'mensuel') !== false) {
+          $mensuel_annuelA='mensuel';}
+        elseif (strpos($detailsA, 'annuel') !== false) {
+          $mensuel_annuelA='nnuel';}
+          $detailsB=Abonnement::where('id','2')->first()->details;
+          if (strpos($detailsB, 'mensuel') !== false) {
+            $mensuel_annuelB='mensuel';}
+          elseif (strpos($detailsB, 'annuel') !== false) {
+            $mensuel_annuelB='annuel';}
+
+            $detailsC=Abonnement::where('id','3')->first()->details;
+            if (strpos($detailsC, 'mensuel') !== false) {
+              $mensuel_annuelC='mensuel';}
+            elseif (strpos($detailsC, 'annuel') !== false) {
+              $mensuel_annuelC='annuel';}
+  
          
-      return view('pricing2' , compact('abonnementA','abonnementB','abonnementC'));       
+      return view('pricing2' , compact('abonnementA','abonnementB','abonnementC','mensuel_annuelA','mensuel_annuelB','mensuel_annuelC'));       
 
     }
     
