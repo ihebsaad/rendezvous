@@ -28,12 +28,12 @@
           <ul data-submenu-title="Mon compte">
             <li class="<?php if ($view_name == 'parametres'){echo 'active';} ?>  "><a href="#"><i class="sl sl-icon-equalizer"></i> Paramètres </a>
                 <ul>
-                  <li><a href="{{ route('parametre.abonnements')}}">Abonnements <span class="nav-tag green">6</span></a></li>
-                  <li><a href="{{ route('parametre.LogoBanniere')}}">Logo et banniére <span class="nav-tag yellow">1</span></a></li>
-                  <li><a href="{{ route('parametre.Temoinages')}}">Témoinages <span class="nav-tag red">2</span></a></li>
-                  <li><a href="{{ route('parametre.Fonctionnalites')}}">Boxes des fonctionnalités <span class="nav-tag red">2</span></a></li>
-                  <li><a href="{{ route('parametre.Apropos')}}">Contenus de à propos <span class="nav-tag red">2</span></a></li>
-                  <li><a href="{{ route('parametre.QuestionsReponses')}}">Questions / réponses <span class="nav-tag red">2</span></a></li>
+                  <li><a href="{{ route('parametre.abonnements')}}">Abonnements</a></li>
+                  <li><a href="{{ route('parametre.LogoBanniere')}}">Logo et banniére </a></li>
+                  <li><a href="{{ route('parametre.Temoinages')}}">Témoinages </a></li>
+                  <li><a href="{{ route('parametre.Fonctionnalites')}}">Boxes des fonctionnalités </a></li>
+                  <li><a href="{{ route('parametre.Apropos')}}">Contenus de à propos </a></li>
+                  <li><a href="{{ route('parametre.QuestionsReponses')}}">Questions / réponses </a></li>
                 </ul> 
             </li>  
             <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon profil</a></li>
