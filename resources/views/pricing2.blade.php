@@ -1,5 +1,5 @@
-@extends('layouts.frontlayout')
- 
+@extends('layouts.frontv2layout')
+  
  @section('content')
   <?php   if (auth()->guest()) {
     //return redirect('/connexion');
@@ -16,7 +16,13 @@
 
  ?>
  <style type="text/css">
- /* highlight PLAN 2*/
+ 
+ @media only screen and (min-width: 600px) {
+ .centredplan{
+  margin-left: 200px;
+  }
+}
+/* highlight PLAN 2*/
 .brilliant::before {
   width: 0;
   height: 0;
@@ -57,7 +63,7 @@
   opacity: 1;
   font-size: inherit;
   max-height: 999em;
-  padding: 6px 0!important;
+  padding: 16px 0!important;
 }
 
 .read-more-state ~ .read-more-trigger:before {
@@ -73,9 +79,31 @@
   display: inline-block;
   text-transform: uppercase;
   font-weight: 700;
-  color: #006ed2;
+  color: #ffd700;
   line-height: 2;
+  margin-top: 15px;
+    margin-bottom: 20px;
 }
+
+.dashboard-list-box h4 {
+    font-size: 26px;
+    background-color: #ffd700;}
+
+    .booking-requests-filter {
+    top: 25px;
+    font-size: 18px;
+    font-weight: 400;
+    background: #ffd700;
+}
+
+.dashboard-list-box.with-icons ul li {
+    padding-left: 0px!important;
+}
+
+.dashboard-list-box ul li {
+    padding: 16px 0px;
+}
+
  </style>
  <style type="text/css">
    .pricing-container {
@@ -101,7 +129,7 @@
   position: relative;
   padding: 2px;
   border-radius: 50em;
-  border: 2px solid #fc346c;
+  border: 2px solid #ffd700;
 }
 
 .pricing-switcher input[type="radio"] {
@@ -128,7 +156,7 @@
   left: 2px;
   height: 40px;
   width: 90px;
-  background-color: #fc346c;
+  background-color: #ffd700;
   border-radius: 50em;
   -webkit-transition: -webkit-transform 0.5s;
   -moz-transition: -moz-transform 0.5s;
@@ -143,10 +171,7 @@
   -o-transform: translateX(90px);
   transform: translateX(90px);
 }
-
-
-
- </style>
+</style>
 <br>
   <section class="fullwidth_block margin-top-0 padding-top-0 padding-bottom-50" data-background-color="#fff"> 
     <div class="container">
@@ -168,16 +193,16 @@
       <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  "> 
 
         <!-- plan 3 - start -->             
-      <div class="plan featured col-md-4 col-sm-6 col-xs-12">
-        <div class="utf_price_plan">
-          <h3><?php echo $parametres->abonnement3;?></h3>
-          <span class="value" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement3;?></span> 
-        </div>
-        
-              <div class="utf_price_plan_features">
-              	<input type="checkbox" class="read-more-state" id="post-3" />
+      <div class="plan featured plan featured col-md-6 col-md-offset-2">
+      <div class="dashboard-list-box with-icons margin-top-20">
+      <div class="booking-requests-filter">
+
+            <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
+          <h4><?php echo $parametres->abonnement3;?><?php //echo $parametres->abonnement3;?>
+          </h4>
+          <center><input type="checkbox" class="read-more-state" id="post-3" />
                 <ul class="read-more-wrap">
-                  <?php $x=0; foreach($abonnementC as $ab) { 
+                <?php $x=0; foreach($abonnementC as $ab) { 
                     if ($x<5) {
                       echo  '<li>'.$ab->contenu.'</li>' ;
                     } else {
@@ -197,24 +222,26 @@
         <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abon_mens_pricing;?>">     
-        <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
+        <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button> 
         </form>        
-       
+        
+      </center>
+      </div>
        </div>
       </div>
  <!-- plan 3 - end -->  
 
       
-      <!-- plan 2 - start -->        
-      <div class="plan featured brilliant col-md-4 col-sm-6 col-xs-12 active">
-        <div class="utf_price_plan" style="background-color: #3d92e0;">
-          <h3><?php echo $parametres->abonnement2;?></h3>
-          <span class="value" id="prixB"><?php echo $parametres->cout_abon_annu_pricing;?>€<span id="uniteB">TTC / Par an</span></span> <span class="period">Abonnement <?php echo $parametres->abonnement2;?></span> 
-		</div>
-              <div class="utf_price_plan_features">
-              	<input type="checkbox" class="read-more-state" id="post-2" />
+      <!-- plan 2 - start -->    
+      <div class="plan featured plan featured col-md-6 col-md-offset-2">
+      <div class="dashboard-list-box with-icons margin-top-20">
+      <div class="booking-requests-filter">
+      <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_offrelancement3_mens;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
+             <h4><?php echo $parametres->abonnement2;?><?php //echo $parametres->abonnement3;?>
+            </h4> 
+            <center><input type="checkbox" class="read-more-state" id="post-2" />
                 <ul class="read-more-wrap">
-                  <?php $x=0; foreach($abonnementB as $ab) { 
+                <?php $x=0; foreach($abonnementB as $ab) { 
                     if ($x<5) {
                       echo  '<li>'.$ab->contenu.'</li>' ;
                     } else {
@@ -224,18 +251,22 @@
                      
                   
                    } ?>
-                 </ul>
+                </ul>
                  <label for="post-2" class="read-more-trigger"></label></br>
-                
-			 <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
-				{{ csrf_field() }}
- 				<input   name="description" type="hidden"  value="<?php echo $parametres->abonnement2;?>">     				
+           
+        <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
+        {{ csrf_field() }}
+        <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement2;?>">     				
  				<input   name="abonnement" type="hidden"  value="2">     				
  				<input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
  				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abon_annu_pricing;?>">     
 				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
-				</form>
+        </form>        
+        
+      </center>
+      </div>
+             
 			
 			 </div>
       </div>
