@@ -24,6 +24,11 @@ Route::post('/contactAdd', 'UsersController@contactv2')->name('contactAdd');
 Route::get('/contact', 'UsersController@contact')->name('contact');
 
 Auth::routes();
+Route::get('/login', 'UsersController@inscriptionpro')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+
+
+
 Route::post('/create','Auth\RegisterController@create')->name('create');
 
 Route::get('/testpaypal','PaymentController@createplan')->name('testrdsq');
