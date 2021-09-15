@@ -68,7 +68,7 @@ $plogo= $parametres->logo;
                      ?>
                     <!-- User Menu -->
                     <div class="user-menu">
-                        <div class="user-name"><span><img src="{{ URL::asset('public/images/avatar.png')}}" alt=""></span>Mon compte</div>
+                        <div class="user-name" style="color:black! important;" ><span><img src="{{ URL::asset('public/images/avatar.png')}}" alt=""></span>Mon compte</div>
                         <ul>
                             <li><a href="{{ route('monespace') }}"><i class="sl sl-icon-home"></i>Mon espace</a></li>
                             <?php if($user_type=='admin' || $user_type=='client'  ){ ?> 
