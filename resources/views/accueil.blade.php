@@ -159,7 +159,7 @@ section.fullwidth .icon-box-2 {
 
             </div>
         </div>-->
-        <div class="row icons-container">
+        <div class="row icons-container" style="margin-left:0px! important;margin-right:0px!important;">
             <!-- Stage -->
             <div class="col-md-3">
                 <div class="icon-box-2 with-line">
