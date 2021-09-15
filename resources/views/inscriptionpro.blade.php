@@ -30,9 +30,12 @@ h3.onelh3 {line-height: 50px!important;}
     font-weight: 700;
     letter-spacing: 2px;
 }
+.fullwidth-carousel-container {
+    overflow: hidden;
+    height: fit-content! important;
+    width: 100%;
+}
 
-.slick-slide { 
-    height: 38%!important;}
 
 .testimonial-box { 
     color: #000!important;}
@@ -628,9 +631,11 @@ if( $nbpres <= 100 ) {?>
 </section>
 <!-- demande demo lancement -->
 <!-- Témoinages partenaires / End -->
-<section class="fullwidth padding-top-40 padding-bottom-40 " data-background-color="#fed600">
+<section class="fullwidth padding-top-40 padding-bottom-40 " data-background-color="#fed600" style="    height: fit-content! important;
+">
     <!-- Info Section -->
-    <div class="container">
+    <div class="container" style="    height: fit-content! important;
+">
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -644,7 +649,8 @@ if( $nbpres <= 100 ) {?>
     <!-- Info Section / End -->
 
     <!-- Categories Carousel -->
-    <div class="fullwidth-carousel-container margin-top-20">
+    <div class="fullwidth-carousel-container margin-top-20" style="    height: fit-content! important;
+">
         <div class="testimonial-carousel testimonials">
             @foreach($temoinages as $tem)
             <!-- Item -->
