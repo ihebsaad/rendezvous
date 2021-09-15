@@ -199,7 +199,7 @@ $plogo= $parametres->logo;
             <div id="sign-in-dialog2" class="zoom-anim-dialog mfp-hide">
 
                 <div class="small-dialog-header">
-                    <h3  style="text-align:center;">Inscrivez-vous en 2 minutes seulement</h3>
+                    <h3  style="text-align:center;color:gray;">Inscrivez-vous en 2 minutes seulement</h3>
                 </div>
 
 
