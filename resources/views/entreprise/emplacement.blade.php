@@ -8,6 +8,14 @@
   ?>
 
   <!-- Dashboard -->
+  <style>  #header {
+    position: relative;
+    z-index: 999;
+    padding: 18px 0 8px 0;
+    box-shadow: 0 0 12px 0 rgb(0 0 0 / 12%);
+    font-size: 16px;
+    height: fit-content! important;
+}</style>
 <div id="dashboard"> 
 @include('layouts.back.bmenu')
 <!-- Content
