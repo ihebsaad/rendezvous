@@ -206,7 +206,7 @@
   ?>
  <div id="dashboard"> 
 @include('layouts.back.bmenu')
-<div class="dashboard-content"> 
+<div class="dashboard-content" style="    width: -webkit-fill-available;"> 
 
 <!-- Session errors -->
  @if ($errors->any())
@@ -234,7 +234,7 @@
                     <h3><i class="sl sl-icon-basket-loaded"></i>Comment connectez-vous à votre google Agenda ?</h3>
                 </div>              
                 <div class="row">
-                  <div class="col-md-12 col-sm-4 sizeA">
+                  <div class="col-md-12 col-sm-4 sizeA" style="width: auto;">
                     <div style="overflow-x: auto;">
                    <center> <h3><b>Vous devez suivre les étapes décrites dans le document suivant</b></h3> </center>
                      <br>
@@ -263,7 +263,7 @@
                 <div class="row">
                 <center> <h3><b>Vous devez sélectionner le fichier .json téléchargé depuis google</b></h3> </center>
                  
-                  <div class="col-md-12 col-sm-4 sizeA">
+                  <div class="col-md-12 col-sm-4 sizeA" style="    width: -webkit-fill-available;">
                    <div style="overflow-x: auto;">
                      <br>
                      <center> 
