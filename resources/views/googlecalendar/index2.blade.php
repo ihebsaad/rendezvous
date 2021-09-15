@@ -8,6 +8,11 @@
 @section('content')
 
 <style>
+  .row {
+    margin-left: -34px;
+    margin-right: -15px;
+}
+
   #header {
     position: relative;
     z-index: 999;
@@ -219,8 +224,7 @@
             <a class="close" href="#"></a> 
 		  </div>
  @endif
-      <div class="row" style="    margin-left: -35px! important;
-    margin-right: -15px! important;">
+      <div class="row" >
          <div class="col-lg-12">
 
                 <div id="add-listing">
