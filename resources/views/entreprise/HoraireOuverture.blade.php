@@ -49,7 +49,7 @@
                     <div class="add-listing-headline">
                       <h3><i class="sl sl-icon-clock"></i> Heures d'ouverture</h3>
                       <!-- Switcher -->
-                      <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                      <label class="switch" style="display:none;"><input type="checkbox" checked ><span class="slider round"></span></label>
                     </div>
                     
                     <!-- Switcher ON-OFF Content -->
