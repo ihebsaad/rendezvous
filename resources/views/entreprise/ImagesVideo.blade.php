@@ -51,7 +51,7 @@ right: -11px;
 right: -11px;
 }
 </style>
-<div class="dashboard-content">
+<div class="dashboard-content" style="width: -webkit-fill-available;">
 <!-- Titlebar -->
         <div id="titlebar">
             <div class="row">
