@@ -66,9 +66,17 @@ $plogo= $parametres->logo;
                         $user_type =$User->user_type;
 
                      ?>
+                     <style>
+                        
+                     @media (max-width: 1024px) {
+                        .user-menu .user-name {
+color:white;
+}
+
+}</style>
                     <!-- User Menu -->
                     <div class="user-menu">
-                        <div class="user-name" style="color:#333333! important;" ><span><img src="{{ URL::asset('public/images/avatar.png')}}" alt=""></span>Mon compte</div>
+                        <div class="user-name" ><span><img src="{{ URL::asset('public/images/avatar.png')}}" alt=""></span>Mon compte</div>
                         <ul>
                             <li><a href="{{ route('monespace') }}"><i class="sl sl-icon-home"></i>Mon espace</a></li>
                             <?php if($user_type=='admin' || $user_type=='client'  ){ ?> 
