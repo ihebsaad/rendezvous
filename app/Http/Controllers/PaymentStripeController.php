@@ -297,14 +297,8 @@ $customer = \Stripe\Customer::create();
     { 
       
       $abn=$request->get('abonnement');
-
-      $details=Abonnement::where('id',$abn)->first()->details;
-      if (strpos($details, 'mensuel') !== false) {
-        $mensuel_annuel='mensuel';}
-      elseif (strpos($details, 'annuel') !== false) {
-        $mensuel_annuel='annuel';
-
-      }
+      if($abn=="2"){
+        $mensuel_annuel="annuel";}else{$mensuel_annuel="mensuel";}
     $montant=$request->get('amount');
     $user=$request->get('user');
     $desc=$request->get('description');
@@ -373,6 +367,9 @@ $customer = \Stripe\Customer::create();
         ]);
  // dd($intent);
  $clientSecret = Arr::get($intent, 'client_secret');
+
+
+
 /*return view('payments.payAbn', [
             'clientSecret' => $clientSecret , 'usr' => $user , 'abn' => $abn, 'nature_abonn' => $nature_abonn
         ]);*/
