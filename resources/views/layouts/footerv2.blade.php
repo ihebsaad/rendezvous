@@ -14,24 +14,30 @@
                 <br><br>
                 <p style="    text-align: justify;"><?php echo $apropos;?></p>
             </div>
-            <div class="col-md-1 col-sm-1 "></div>
-            <div class="col-md-5 col-sm-5 ">
+            <div class="col-md-1" ></div>
+                       <div class="col-md-4 col-sm-6 " style="
+    width: fit-content;
+">
                 <h4>Liens</h4>
                 <ul class="footer-links">
                     <li><a href="{{route('home')}}">Accueil</a></li>
                     <li><a href="{{route('apropos')}}">A Propos</a></li>
-                    <li><a href="{{route('ConditionsUtilisation')}}">Conditions d'utilisation</a></li>
+                    <li><a href="{{route('ConditionsUtilisation')}}" style="    width: 216px;">Conditions d'utilisation</a></li>
                     <li><a href="{{route('contactv2')}}">Contact</a></li>
                 </ul>
                 
                 <div class="clearfix"></div>
             </div>      
-            <div class="col-md-2  col-sm-12">
+            <div class="col-md-1" ></div>
+
+			<div class="col-md-3  col-sm-12" style="
+    width: fit-content;">
                 <h4>Compte</h4>
                 <ul class="footer-links">
                     <!--<li><a href="{{-- route('pricing') --}}">Abonnements</a></li>  -->     
-                    @guest              
-                    <li><a class="" href="{{route('inscriptionclient')}}" >Vous êtes prestataire de service ?</a></li>
+                    @guest 
+             
+                    <li><a style=" width: 275px; "class="" href="{{route('inscriptionclient')}}" >Vous êtes prestataire de service ?</a></li>
                     <li><a class="" href="{{route('inscription')}}" >Je suis un client</a></li> 
                     @else
                     <li><a  href="{{route('logout')}}"  >Déconnexion</a></li> 
