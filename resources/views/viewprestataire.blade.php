@@ -10,7 +10,6 @@
     margin: 0;
     font-size: 1.75em;
     margin: 0;
-    margin-left: 48px;
 }
 .fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
     margin-left:0!important;
