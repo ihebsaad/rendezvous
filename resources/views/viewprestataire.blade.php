@@ -950,8 +950,8 @@ $( document ).ready(function() {
         
         <!-- Modal body -->
         <div class="modal-body" style="border:solid ; border-color:lightgrey;       height: 555px;
-    overflow-y: auto;
-    overflow-x: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
 " >
         	<style scoped>
 
@@ -963,7 +963,7 @@ $( document ).ready(function() {
                 .calpresk { 
                   font-size: 12px;
                   height: inherit;
-                  overflow-y: auto;
+                  overflow-y: hidden;
                
                 }
                 modal-body{border: solid;
