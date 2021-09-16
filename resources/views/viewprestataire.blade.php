@@ -960,7 +960,7 @@ $( document ).ready(function() {
                 .modal-content{    height: 100%;
     overflow-y: scroll;
     overflow-x: scroll;
-    width: 355px;}
+    width: auto;}
                 .calpresk { 
                   font-size: 12px;
                   height: inherit;
