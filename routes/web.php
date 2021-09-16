@@ -80,26 +80,26 @@ Route::get('/success/payAbn/{k}','PaymentStripeController@successpayAbnStripe')-
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/reservations/newDate/{id}','ReservationsController@newDate')->name('reservations.newDate');
-Route::get('/reservations/Addnewdate','ReservationsController@Addnewdate')->name('reservations.Addnewdate');
-Route::get('/reservations/sendnewdate','ReservationsController@sendnewdate')->name('reservations.sendnewdate');
-Route::get('/reservations/selectdate/{id}','ReservationsController@selectdate')->name('reservations.selectdate');
+Route::get('/reservations/newDate/{id}','ReservationsController@newDate')->name('reservations.newDate')->middleware('auth');
+Route::get('/reservations/Addnewdate','ReservationsController@Addnewdate')->name('reservations.Addnewdate')->middleware('auth');
+Route::get('/reservations/sendnewdate','ReservationsController@sendnewdate')->name('reservations.sendnewdate')->middleware('auth');
+Route::get('/reservations/selectdate/{id}','ReservationsController@selectdate')->name('reservations.selectdate')->middleware('auth');
 
-Route::get('/reservations/changeDate','ReservationsController@changeDate')->name('reservations.changeDate');
-Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name('reservations.AnnulerRes');
+Route::get('/reservations/changeDate','ReservationsController@changeDate')->name('reservations.changeDate')->middleware('auth');
+Route::get('/reservations/AnnulerRes','ReservationsController@AnnulerRes')->name('reservations.AnnulerRes')->middleware('auth');
 
-Route::get('/reservations/AnnulerReservation/{id}','ReservationsController@AnnulerReservation')->name('reservations.AnnulerReservation');
-Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif');
-Route::get('/reservations/facture/{id}','InvoiceController@Facture')->name('facture');
-Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter');
-Route::get('/reservations/deletenewdate','ReservationsController@deletenewdate')->name('reservations.deletenewdate');
-
-
-Route::get('/Statistiques','StatistiqueController@index')->name('Statistiques');
+Route::get('/reservations/AnnulerReservation/{id}','ReservationsController@AnnulerReservation')->name('reservations.AnnulerReservation')->middleware('auth');
+Route::get('/reservations/modifier/{id}','ReservationsController@modifier')->name('modif')->middleware('auth');
+Route::get('/reservations/facture/{id}','InvoiceController@Facture')->name('facture')->middleware('auth');
+Route::get('/reservations/reporter','ReservationsController@reporter')->name('reservations.reporter')->middleware('auth');
+Route::get('/reservations/deletenewdate','ReservationsController@deletenewdate')->name('reservations.deletenewdate')->middleware('auth');
 
 
-Route::get('/Statistiques','StatistiqueController@index2')->name('Statistiques');
-Route::get('/StatistiquesPro','StatistiqueController@index')->name('StatistiquesPro');
+Route::get('/Statistiques','StatistiqueController@index')->name('Statistiques')->middleware('auth');
+
+
+Route::get('/Statistiques','StatistiqueController@index2')->name('Statistiques')->middleware('auth');
+Route::get('/StatistiquesPro','StatistiqueController@index')->name('StatistiquesPro')->middleware('auth');
 
 Route::get('/ok', function () {
     return view('statistiques');
@@ -124,12 +124,12 @@ Route::post('/addService','ServicesController@addService')->name('addService');
 Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
 Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
 Route::get('/pro', array('as' => 'inscription','uses' => 'UsersController@inscriptionpro'));
-Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
-Route::get('/monespace', array('as' => 'monespace','uses' => 'UsersController@monespace'));
+Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'))->middleware('auth');
+Route::get('/monespace', array('as' => 'monespace','uses' => 'UsersController@monespace'))->middleware('auth');
 
-Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
-Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
-Route::get('/Clients', array('as' => 'Clients','uses' => 'UsersController@bindex'));
+Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'))->middleware('auth');
+Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'))->middleware('auth');
+Route::get('/Clients', array('as' => 'Clients','uses' => 'UsersController@bindex'))->middleware('auth');
 Route::get('/prestataires', 'UsersController@prestataires')->name('prestataires');
 Route::get('/Prestataire', 'UsersController@prestatairesPro')->name('Prestataire');
 Route::get('/pricing', 'UsersController@pricing')->name('pricing');
@@ -150,11 +150,11 @@ Route::get('/conditions-utilisation', 'UsersController@ConditionsUtilisation')->
 Route::get('/listings', array('as' => 'listings','uses' => 'UsersController@listings'));
 Route::get('/recherche', array('as' => 'recherche','uses' => 'UsersController@pageprestataires'));
 Route::post('/recherche', array('as' => 'recherche.prestataires','uses' => 'UsersController@pageprestataires'));
-Route::get('/googlecalendar', 'CalendrierController@saveEventGoogleCalendar')->name('googlecalendar');
+Route::get('/googlecalendar', 'CalendrierController@saveEventGoogleCalendar')->name('googlecalendar')->middleware('auth');
 Route::get('/cal.index', 'CalendrierController@index')->name('cal.index');
 Route::get('/oauthcallback', 'CalendrierController@oauth')->name('oauthCallback');
 //Route::get('/oauthRedirect', 'ReservationsController@oauth')->name('oauthCallback');
-Route::get('/enregistrergooglecalendar/{id}', 'CalendrierController@enregistrergooglecalendar')->name('enregistrergooglecalendar');
+Route::get('/enregistrergooglecalendar/{id}', 'CalendrierController@enregistrergooglecalendar')->name('enregistrergooglecalendar')->middleware('auth');
 
 // regle service supplementaires
 Route::get('/get_liste_regles_services_suppl/{id}', 'ServicesController@get_liste_regles_services_suppl')->name('liste_regles_services_suppl');
@@ -164,194 +164,194 @@ Route::group(['middleware' => 'auth'], function(){
 
 	//changer password page profile
 
-	Route::post('changepassword', 'UsersController@changepassword')->name('change.password');
-	Route::post('/changeinfoprofile','UsersController@changeinfoprofile')->name('changeinfoprofile');
+	Route::post('changepassword', 'UsersController@changepassword')->name('change.password')->middleware('auth');;
+	Route::post('/changeinfoprofile','UsersController@changeinfoprofile')->name('changeinfoprofile')->middleware('auth');;
 
 
 	//services  récurrent à abonnement
 
-    Route::get('/servicesrec/annulerPprestataire/{id}','ServicesController@annulerPprestataire')->name('annulerPprestataire');
-    Route::get('/servicesrec/annulerPclient/{id}','ServicesController@annulerPclient')->name('annulerPclient');
-    Route::get('/servicesrec/accepterPropDates/{id}','ServicesController@accepterPropDates')->name('accepterPropDates');
-    Route::get('/servicesrec/insererDatesfinales/','ServicesController@insererDatesfinales')->name('insererDatesfinales'); 
-    Route::get('/servicesrec/rendezvousTel/','ServicesController@rendezvousTel')->name('rendezvousTel');     
-    Route::get('/servicesrec/proposerDates/','ServicesController@proposerDates')->name('proposerDates'); 
+    Route::get('/servicesrec/annulerPprestataire/{id}','ServicesController@annulerPprestataire')->name('annulerPprestataire')->middleware('auth');;
+    Route::get('/servicesrec/annulerPclient/{id}','ServicesController@annulerPclient')->name('annulerPclient')->middleware('auth');;
+    Route::get('/servicesrec/accepterPropDates/{id}','ServicesController@accepterPropDates')->name('accepterPropDates')->middleware('auth');;
+    Route::get('/servicesrec/insererDatesfinales/','ServicesController@insererDatesfinales')->name('insererDatesfinales')->middleware('auth');; 
+    Route::get('/servicesrec/rendezvousTel/','ServicesController@rendezvousTel')->name('rendezvousTel')->middleware('auth');;     
+    Route::get('/servicesrec/proposerDates/','ServicesController@proposerDates')->name('proposerDates')->middleware('auth');; 
     
-    Route::get('/services/modifier/{id}','ServicesController@servicemodifier')->name('servicemodifier'); 
+    Route::get('/services/modifier/{id}','ServicesController@servicemodifier')->name('servicemodifier')->middleware('auth');; 
 
- Route::post('/editService','ServicesController@editService')->name('editService'); 
+ Route::post('/editService','ServicesController@editService')->name('editService')->middleware('auth');; 
 
 
-	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'));
-	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'));
-	Route::POST('/produit/clientProduits','UsersController@ClientProd')->name('ProductClient');
-	Route::get('/users/changehometext','UsersController@changetext')->name('users.changehometext');
-		Route::get('/users/ChangeBoxes','UsersController@ChangeBoxes')->name('users.ChangeBoxes');
-		Route::get('/users/ChangeApropos','UsersController@ChangeApropos')->name('users.ChangeApropos');
+	Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'))->middleware('auth');;
+	Route::get('/users', array('as' => 'users','uses' => 'UsersController@index'))->middleware('auth');;
+	Route::POST('/produit/clientProduits','UsersController@ClientProd')->name('ProductClient')->middleware('auth');;
+	Route::get('/users/changehometext','UsersController@changetext')->name('users.changehometext')->middleware('auth');;
+		Route::get('/users/ChangeBoxes','UsersController@ChangeBoxes')->name('users.ChangeBoxes')->middleware('auth');;
+		Route::get('/users/ChangeApropos','UsersController@ChangeApropos')->name('users.ChangeApropos')->middleware('auth');;
 
-Route::get('/users/editPlan','UsersController@editPlan')->name('users.editPlan');
-Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.deleteLine');
+Route::get('/users/editPlan','UsersController@editPlan')->name('users.editPlan')->middleware('auth');;
+Route::get('/users/deleteLine','UsersController@deleteLine')->name('users.deleteLine')->middleware('auth');;
 
-	Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
-	Route::get('/listing/{id}', 'UsersController@listing')->name('listing');
+	Route::get('/profile/{id}', 'UsersController@profile')->name('profile')->middleware('auth');;
+	Route::get('/listing/{id}', 'UsersController@listing')->name('listing')->middleware('auth');;
 	// les pages entreprise
-	Route::get('/titredescription/{id}', 'UsersController@titredescription')->name('titredescription');
-	Route::get('/portefeuilles/{id}', 'UsersController@portefeuilles')->name('portefeuilles');
+	Route::get('/titredescription/{id}', 'UsersController@titredescription')->name('titredescription')->middleware('auth');;
+	Route::get('/portefeuilles/{id}', 'UsersController@portefeuilles')->name('portefeuilles')->middleware('auth');;
 	
-	Route::post('/changetitredescription','UsersController@changetitredescription')->name('changetitredescription');
-	Route::post('/changeInfosContact','UsersController@changeInfosContact')->name('changeInfosContact');
-	Route::post('/changeHeuresOuverture','UsersController@changeHeuresOuverture')->name('changeHeuresOuverture');
-	Route::get('/emplacement/{id}', 'UsersController@emplacement')->name('emplacement');
-	Route::get('/InfosContact/{id}', 'UsersController@InfosContact')->name('InfosContact');
-	Route::get('/HoraireOuverture/{id}', 'UsersController@HoraireOuverture')->name('HoraireOuverture');
-	Route::get('/Categories/{id}', 'UsersController@Categories')->name('Categories');
-	Route::get('/ImagesVideo/{id}', 'UsersController@ImagesVideo')->name('ImagesVideo');
-Route::get('/downloadCSV', 'UsersController@downloadCSV')->name('downloadCSV');
-Route::get('/downloadCSVday', 'UsersController@downloadCSVday')->name('downloadCSVday');
-Route::get('/downloadCSVweek', 'UsersController@downloadCSVweek')->name('downloadCSVweek');
-Route::get('/downloadCSVmonth', 'UsersController@downloadCSVmonth')->name('downloadCSVmonth');
+	Route::post('/changetitredescription','UsersController@changetitredescription')->name('changetitredescription')->middleware('auth');;
+	Route::post('/changeInfosContact','UsersController@changeInfosContact')->name('changeInfosContact')->middleware('auth');;
+	Route::post('/changeHeuresOuverture','UsersController@changeHeuresOuverture')->name('changeHeuresOuverture')->middleware('auth');;
+	Route::get('/emplacement/{id}', 'UsersController@emplacement')->name('emplacement')->middleware('auth');;
+	Route::get('/InfosContact/{id}', 'UsersController@InfosContact')->name('InfosContact')->middleware('auth');;
+	Route::get('/HoraireOuverture/{id}', 'UsersController@HoraireOuverture')->name('HoraireOuverture')->middleware('auth');;
+	Route::get('/Categories/{id}', 'UsersController@Categories')->name('Categories')->middleware('auth');;
+	Route::get('/ImagesVideo/{id}', 'UsersController@ImagesVideo')->name('ImagesVideo')->middleware('auth');;
+Route::get('/downloadCSV', 'UsersController@downloadCSV')->name('downloadCSV')->middleware('auth');;
+Route::get('/downloadCSVday', 'UsersController@downloadCSVday')->name('downloadCSVday')->middleware('auth');;
+Route::get('/downloadCSVweek', 'UsersController@downloadCSVweek')->name('downloadCSVweek')->middleware('auth');;
+Route::get('/downloadCSVmonth', 'UsersController@downloadCSVmonth')->name('downloadCSVmonth')->middleware('auth');
 
-Route::get('/downloadCSVyear', 'UsersController@downloadCSVyear')->name('downloadCSVyear');
+Route::get('/downloadCSVyear', 'UsersController@downloadCSVyear')->name('downloadCSVyear')->middleware('auth');;
 
 
-	Route::post('/AjouterService','UsersController@AjouterService')->name('AjouterService');
+	Route::post('/AjouterService','UsersController@AjouterService')->name('AjouterService')->middleware('auth');;
 
-Route::get('/changeAcompte','UsersController@changeAcompte')->name('changeAcompte');
+Route::get('/changeAcompte','UsersController@changeAcompte')->name('changeAcompte')->middleware('auth');;
 	
-Route::get('/HeuresIndisponibilite/{id}', 'UsersController@HeuresIndisponibilite')->name('HeuresIndisponibilite');
-Route::get('/Services/{id}', 'UsersController@Services')->name('Services');
-Route::get('/ServicesSupplementaires/{id}', 'UsersController@ServicesSupplementaires')->name('ServicesSupplementaires');
-Route::get('/Produits/{id}', 'UsersController@Produits')->name('Produits');
-Route::get('/CodesPromo/{id}', 'UsersController@CodesPromo')->name('CodesPromo');
+Route::get('/HeuresIndisponibilite/{id}', 'UsersController@HeuresIndisponibilite')->name('HeuresIndisponibilite')->middleware('auth');;
+Route::get('/Services/{id}', 'UsersController@Services')->name('Services')->middleware('auth');;
+Route::get('/ServicesSupplementaires/{id}', 'UsersController@ServicesSupplementaires')->name('ServicesSupplementaires')->middleware('auth');;
+Route::get('/Produits/{id}', 'UsersController@Produits')->name('Produits')->middleware('auth');;
+Route::get('/CodesPromo/{id}', 'UsersController@CodesPromo')->name('CodesPromo')->middleware('auth');;
 
-Route::get('/CarteFidelite/{id}', 'UsersController@CarteFidelite')->name('CarteFidelite');
-Route::get('/HappyHours/{id}', 'UsersController@HappyHours')->name('HappyHours');
-Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ');
-	Route::post('/changeemplacement','UsersController@changeemplacement')->name('changeemplacement');
-	Route::post('/changeCategories', 'UsersController@changeCategories')->name('changeCategories');
+Route::get('/CarteFidelite/{id}', 'UsersController@CarteFidelite')->name('CarteFidelite')->middleware('auth');;
+Route::get('/HappyHours/{id}', 'UsersController@HappyHours')->name('HappyHours')->middleware('auth');;
+Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ')->middleware('auth');;
+	Route::post('/changeemplacement','UsersController@changeemplacement')->name('changeemplacement')->middleware('auth');;
+	Route::post('/changeCategories', 'UsersController@changeCategories')->name('changeCategories')->middleware('auth');;
 	//Route::get('/view/{id}', 'UsersController@viewlisting')->name('viewlisting');
-	Route::post('/users/updating','UsersController@updating')->name('users.updating');
-	Route::get('/users/updating','UsersController@updating')->name('users.updating');
-	Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage');
-	Route::post('/users/ajoutvideo','UsersController@ajoutvideo')->name('users.ajoutvideo');
-	Route::post('/users/ajoutimages','UsersController@ajoutimages')->name('users.ajoutimages');
-	Route::post('/users/ajoutcouv','UsersController@ajoutcouv')->name('users.ajoutcouv');
-	Route::get('/users/removeimage/{id}/{user}', 'UsersController@removeimage');
-	Route::get('/users/removevideo/{id}', 'UsersController@removevideo');
-	Route::get('/users/remove/{id}', 'UsersController@remove');
-	Route::get('/users/destroy/{id}', 'UsersController@destroy');
-	Route::post('/produit/modif','ServicesController@modifP')->name('produit.modif'); 
-    Route::post('/produit/store','ServicesController@storeP')->name('produit.store');
+	Route::post('/users/updating','UsersController@updating')->name('users.updating')->middleware('auth');
+	Route::get('/users/updating','UsersController@updating')->name('users.updating')->middleware('auth');
+	Route::post('/users/ajoutimage','UsersController@ajoutimage')->name('users.ajoutimage')->middleware('auth');
+	Route::post('/users/ajoutvideo','UsersController@ajoutvideo')->name('users.ajoutvideo')->middleware('auth');
+	Route::post('/users/ajoutimages','UsersController@ajoutimages')->name('users.ajoutimages')->middleware('auth');
+	Route::post('/users/ajoutcouv','UsersController@ajoutcouv')->name('users.ajoutcouv')->middleware('auth');
+	Route::get('/users/removeimage/{id}/{user}', 'UsersController@removeimage')->middleware('auth');
+	Route::get('/users/removevideo/{id}', 'UsersController@removevideo')->middleware('auth');
+	Route::get('/users/remove/{id}', 'UsersController@remove')->middleware('auth');
+	Route::get('/users/destroy/{id}', 'UsersController@destroy')->middleware('auth');
+	Route::post('/produit/modif','ServicesController@modifP')->name('produit.modif')->middleware('auth'); 
+    Route::post('/produit/store','ServicesController@storeP')->name('produit.store')->middleware('auth');
 
-    Route::get('/services/remove_product/{k}','ServicesController@ProductRemove');
+    Route::get('/services/remove_product/{k}','ServicesController@ProductRemove')->middleware('auth');
 
-	Route::get('/users/productSection','UsersController@SectionProd')->name('users.ProductSection');
+	Route::get('/users/productSection','UsersController@SectionProd')->name('users.ProductSection')->middleware('auth');
 
-	Route::get('/users/parametring','UsersController@parametring')->name('users.parametring');
-	Route::get('/parametres','UsersController@parametres')->name('parametres');
-	Route::post('/users/ajoutlogo','UsersController@ajoutlogo')->name('users.ajoutlogo');
-	Route::post('/users/ajoutvideoslider','UsersController@ajoutvideoslider')->name('users.ajoutvideoslider');
-	Route::post('/users/sendsms','UsersController@sendsms')->name('users.sendsms');
-	Route::post('/services/saving','ServicesController@store')->name('services.saving');
-	Route::post('/services/add','ServicesController@add')->name('services.add');
-	Route::post('/services/store','ServicesController@store')->name('services.store');
-	Route::get('/services/add','ServicesController@add')->name('services.add');
-	Route::post('/services/updating','ServicesController@updating')->name('services.updating');
-	Route::post('/services/modif','ServicesController@modif')->name('services.modif'); 
-	Route::get('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction');
-	Route::post('/services/AssociateProd','ServicesController@insertServiceProd')->name('services.AssociateProd');
+	Route::get('/users/parametring','UsersController@parametring')->name('users.parametring')->middleware('auth');
+	Route::get('/parametres','UsersController@parametres')->name('parametres')->middleware('auth');
+	Route::post('/users/ajoutlogo','UsersController@ajoutlogo')->name('users.ajoutlogo')->middleware('auth');
+	Route::post('/users/ajoutvideoslider','UsersController@ajoutvideoslider')->name('users.ajoutvideoslider')->middleware('auth');
+	Route::post('/users/sendsms','UsersController@sendsms')->name('users.sendsms')->middleware('auth');
+	Route::post('/services/saving','ServicesController@store')->name('services.saving')->middleware('auth');
+	Route::post('/services/add','ServicesController@add')->name('services.add')->middleware('auth');
+	Route::post('/services/store','ServicesController@store')->name('services.store')->middleware('auth');
+	Route::get('/services/add','ServicesController@add')->name('services.add')->middleware('auth');
+	Route::post('/services/updating','ServicesController@updating')->name('services.updating')->middleware('auth');
+	Route::post('/services/modif','ServicesController@modif')->name('services.modif')->middleware('auth'); 
+	Route::get('/services/reduction','ServicesController@reductionUpdate')->name('services.reduction')->middleware('auth');
+	Route::post('/services/AssociateProd','ServicesController@insertServiceProd')->name('services.AssociateProd')->middleware('auth');
 
-		Route::post('/services/CodePromo','ServicesController@codepromo')->name('services.CodePromo');
-	Route::post('/services/reduction_CodePromo','ServicesController@CodePromoUpdate')->name('services.reduction_CodePromo');
-	Route::get('/services/remove_CodePromo/{k}','ServicesController@CodePromoRemove');
-	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck');
-	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours');
-	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove');
+		Route::post('/services/CodePromo','ServicesController@codepromo')->name('services.CodePromo')->middleware('auth');
+	Route::post('/services/reduction_CodePromo','ServicesController@CodePromoUpdate')->name('services.reduction_CodePromo')->middleware('auth');
+	Route::get('/services/remove_CodePromo/{k}','ServicesController@CodePromoRemove')->middleware('auth');
+	Route::post('/services/CodePromoCheck','ServicesController@CodePromoCheck')->name('services.CodePromoCheck')->middleware('auth');
+	Route::post('/services/HappyHours','ServicesController@HappyHoursAdd')->name('services.HappyHours')->middleware('auth');
+	Route::get('/services/remove_happyhour/{k}','ServicesController@HappyHoursRemove')->middleware('auth');
  
 	 
 //add associated product
-	Route::post('/services/addProdtoService','ServicesController@insertServiceProd')->name('produit.Associate');
+	Route::post('/services/addProdtoService','ServicesController@insertServiceProd')->name('produit.Associate')->middleware('auth');
 //remove associated product
-	Route::post('/services/removeProduit', 'ServicesController@removeServiceProd')->name('service.removeProd');
+	Route::post('/services/removeProduit', 'ServicesController@removeServiceProd')->name('service.removeProd')->middleware('auth');
 	
-	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove');
-	Route::post('/enregistrer_regle_services_supp/', 'ServicesController@enregistrer_regle_services_supp')->name('regle_service_suppls');
-	Route::get('/supprimer_serv_suppl/{id}', 'ServicesController@supprimer_serv_suppl')->name('supprimer_serv_suppl');
-	
-
-Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store');
-Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove')->name('remove_indisp');
-Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')->name('ouv_ferm_hor');
-
-
-	Route::post('/faqs/saving','FaqsController@store')->name('faqs.saving');
-	Route::post('/faqs/add','FaqsController@add')->name('faqs.add');
-	Route::get('/faqs/add','FaqsController@add')->name('faqs.add');
-	Route::post('/faqs/updating','FaqsController@updating')->name('faqs.updating'); 
-	Route::get('/faqs/remove/{id}/{user}','FaqsController@remove');
-
-	Route::get('/pagefaqs/remove_question_response/{id}', 'FaqsController@remove_question_response');
-	Route::post('/pagefaqs/store_question_reponse','FaqsController@store_question_reponse')->name('pagefaqs.store_question_reponse');
-	Route::post('/pagefaqs/update_question_reponse','FaqsController@update_question_reponse')->name('pagefaqs.update_question_reponse');
-
-
-	Route::post('/temoinages/store_temoinage','TemoinagesController@store_temoinage')->name('temoinages.store_temoinage');
-	Route::get('/temoinages/remove_temoinage/{id}', 'TemoinagesController@remove_temoinage');
-	Route::post('/temoinages/update_temoinage','TemoinagesController@update_temoinage')->name('temoinages.update_temoinage');
-	
-	Route::post('/temoinagesprest/store_temoinage','TemoinagesPrestController@store_temoinage')->name('temoinagesprest.store_temoinage');
-	Route::get('/temoinagesprest/remove_temoinage/{id}', 'TemoinagesPrestController@remove_temoinage');
-	Route::post('/temoinagesprest/update_temoinage','TemoinagesPrestController@update_temoinage')->name('temoinagesprest.update_temoinage');
+	Route::get('/services/remove/{id}/{user}', 'ServicesController@remove')->middleware('auth');
+	Route::post('/enregistrer_regle_services_supp/', 'ServicesController@enregistrer_regle_services_supp')->name('regle_service_suppls')->middleware('auth');
+	Route::get('/supprimer_serv_suppl/{id}', 'ServicesController@supprimer_serv_suppl')->name('supprimer_serv_suppl')->middleware('auth');
 	
 
-	Route::get('/reviews', array('as' => 'reviews','uses' => 'ReviewsController@index'));
-	Route::get('/reviewsPro', array('as' => 'reviewsPro','uses' => 'ReviewsController@bindex'));
-	Route::post('/reviews/add','ReviewsController@add')->name('reviews.add');
-	Route::post('/reviews/remove/{id}','ReviewsController@remove')->name('reviews.remove');
-	Route::post('/reviews/addfavoris','ReviewsController@addfavoris')->name('reviews.addfavoris');
-	Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris');
-	Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris');
-	Route::get('/favoris','UsersController@favoris')->name('favoris');
-	Route::get('/favorisPro','UsersController@favorisPro')->name('favorisPro');
+Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store')->middleware('auth');
+Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove')->name('remove_indisp')->middleware('auth');
+Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')->name('ouv_ferm_hor')->middleware('auth');
 
 
-	Route::post('/reservations/add','ReservationsController@add')->name('reservations.add');
-		Route::post('/reservations/add2','ReservationsController@addServiceRecurrent')->name('reservations.add2');
+	Route::post('/faqs/saving','FaqsController@store')->name('faqs.saving')->middleware('auth');
+	Route::post('/faqs/add','FaqsController@add')->name('faqs.add')->middleware('auth');
+	Route::get('/faqs/add','FaqsController@add')->name('faqs.add')->middleware('auth');
+	Route::post('/faqs/updating','FaqsController@updating')->name('faqs.updating')->middleware('auth'); 
+	Route::get('/faqs/remove/{id}/{user}','FaqsController@remove')->middleware('auth');
 
-	Route::get('/reservations','ReservationsController@index')->name('reservations');
-	Route::get('/ReservezUnRdv/{id}','ReservationsController@ReservezUnRdv')->name('ReservezUnRdv');
-
-	Route::get('/reservations/remove/{id}','ReservationsController@remove');
-	Route::get('/reservations/valider/{id}','ReservationsController@valider')->name('validation');
-	Route::get('/reservations/annuler/{id}','ReservationsController@annuler')->name('annul');
-	Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage');
-	Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage');
+	Route::get('/pagefaqs/remove_question_response/{id}', 'FaqsController@remove_question_response')->middleware('auth');
+	Route::post('/pagefaqs/store_question_reponse','FaqsController@store_question_reponse')->name('pagefaqs.store_question_reponse')->middleware('auth');
+	Route::post('/pagefaqs/update_question_reponse','FaqsController@update_question_reponse')->name('pagefaqs.update_question_reponse')->middleware('auth');
 
 
-Route::get('/parametre/abonnements','parametreController@abonnements')->name('parametre.abonnements');
-Route::get('/parametre/ModifierAbonnements/{k}','parametreController@ModifAbonnements')->name('parametre.ModifierAbonnements');
-Route::get('/parametre/Apropos','parametreController@Apropos')->name('parametre.Apropos');
-Route::get('/parametre/Fonctionnalites','parametreController@Fonctionnalites')->name('parametre.Fonctionnalites');
-Route::get('/parametre/LogoBanniere','parametreController@LogoBanniere')->name('parametre.LogoBanniere');
-Route::get('/parametre/QuestionsReponses','parametreController@QuestionsReponses')->name('parametre.QuestionsReponses');
-
-Route::get('/parametre/Temoinages','parametreController@Temoinages')->name('parametre.Temoinages');
-
-Route::get('/parametre/TemoinagesClient','parametreController@TemoinagesClient')->name('parametre.TemoinagesClient');
-Route::get('/parametre/TemoinagesPrestataire','parametreController@TemoinagesPrestataire')->name('parametre.TemoinagesPrestataire');
-
-
-	Route::get('/categories', array('as' => 'categories','uses' => 'CategoriesController@index'));
-	Route::get('/categoriesPro', array('as' => 'categoriesPro','uses' => 'CategoriesController@bindex'));
-	Route::get('/AddCategory', array('as' => 'AddCategory','uses' => 'CategoriesController@AddCategory'));
-	Route::post('/categories/insert','CategoriesController@insert')->name('categories.insert');
-	Route::post('/categories/add','CategoriesController@add')->name('categories.add');
-	Route::get('/categories/add','CategoriesController@add')->name('categories.add');
-	Route::post('/categories/updating','CategoriesController@updating')->name('categories.updating'); 
-	Route::get('/categories/remove/{id}', 'CategoriesController@remove');
-	Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser'); 
+	Route::post('/temoinages/store_temoinage','TemoinagesController@store_temoinage')->name('temoinages.store_temoinage')->middleware('auth');
+	Route::get('/temoinages/remove_temoinage/{id}', 'TemoinagesController@remove_temoinage')->middleware('auth');
+	Route::post('/temoinages/update_temoinage','TemoinagesController@update_temoinage')->name('temoinages.update_temoinage')->middleware('auth');
 	
-	Route::post('/categories/Edit','CategoriesController@Edit')->name('categories.Edit');
+	Route::post('/temoinagesprest/store_temoinage','TemoinagesPrestController@store_temoinage')->name('temoinagesprest.store_temoinage')->middleware('auth');
+	Route::get('/temoinagesprest/remove_temoinage/{id}', 'TemoinagesPrestController@remove_temoinage')->middleware('auth');
+	Route::post('/temoinagesprest/update_temoinage','TemoinagesPrestController@update_temoinage')->name('temoinagesprest.update_temoinage')->middleware('auth');
+	
+
+	Route::get('/reviews', array('as' => 'reviews','uses' => 'ReviewsController@index'))->middleware('auth');
+	Route::get('/reviewsPro', array('as' => 'reviewsPro','uses' => 'ReviewsController@bindex'))->middleware('auth');
+	Route::post('/reviews/add','ReviewsController@add')->name('reviews.add')->middleware('auth');
+	Route::post('/reviews/remove/{id}','ReviewsController@remove')->name('reviews.remove')->middleware('auth');
+	Route::post('/reviews/addfavoris','ReviewsController@addfavoris')->name('reviews.addfavoris')->middleware('auth');
+	Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris')->middleware('auth');
+	Route::post('/reviews/removefavoris','ReviewsController@removefavoris')->name('reviews.removefavoris')->middleware('auth');
+	Route::get('/favoris','UsersController@favoris')->name('favoris')->middleware('auth');
+	Route::get('/favorisPro','UsersController@favorisPro')->name('favorisPro')->middleware('auth');
+
+
+	Route::post('/reservations/add','ReservationsController@add')->name('reservations.add')->middleware('auth');
+		Route::post('/reservations/add2','ReservationsController@addServiceRecurrent')->name('reservations.add2')->middleware('auth');
+
+	Route::get('/reservations','ReservationsController@index')->name('reservations')->middleware('auth');
+	Route::get('/ReservezUnRdv/{id}','ReservationsController@ReservezUnRdv')->name('ReservezUnRdv')->middleware('auth');
+
+	Route::get('/reservations/remove/{id}','ReservationsController@remove')->middleware('auth');
+	Route::get('/reservations/valider/{id}','ReservationsController@valider')->name('validation')->middleware('auth');
+	Route::get('/reservations/annuler/{id}','ReservationsController@annuler')->name('annul')->middleware('auth');
+	Route::post('/reservations/sendmessage','ReservationsController@sendmessage')->name('reservations.sendmessage')->middleware('auth');
+	Route::post('/reservations/contactmessage','ReservationsController@contactmessage')->name('reservations.contactmessage')->middleware('auth');
+
+
+Route::get('/parametre/abonnements','parametreController@abonnements')->name('parametre.abonnements')->middleware('auth');
+Route::get('/parametre/ModifierAbonnements/{k}','parametreController@ModifAbonnements')->name('parametre.ModifierAbonnements')->middleware('auth');
+Route::get('/parametre/Apropos','parametreController@Apropos')->name('parametre.Apropos')->middleware('auth');
+Route::get('/parametre/Fonctionnalites','parametreController@Fonctionnalites')->name('parametre.Fonctionnalites')->middleware('auth');
+Route::get('/parametre/LogoBanniere','parametreController@LogoBanniere')->name('parametre.LogoBanniere')->middleware('auth');
+Route::get('/parametre/QuestionsReponses','parametreController@QuestionsReponses')->name('parametre.QuestionsReponses')->middleware('auth');
+
+Route::get('/parametre/Temoinages','parametreController@Temoinages')->name('parametre.Temoinages')->middleware('auth');
+
+Route::get('/parametre/TemoinagesClient','parametreController@TemoinagesClient')->name('parametre.TemoinagesClient')->middleware('auth');
+Route::get('/parametre/TemoinagesPrestataire','parametreController@TemoinagesPrestataire')->name('parametre.TemoinagesPrestataire')->middleware('auth');
+
+
+	Route::get('/categories', array('as' => 'categories','uses' => 'CategoriesController@index'))->middleware('auth');
+	Route::get('/categoriesPro', array('as' => 'categoriesPro','uses' => 'CategoriesController@bindex'))->middleware('auth');
+	Route::get('/AddCategory', array('as' => 'AddCategory','uses' => 'CategoriesController@AddCategory'))->middleware('auth');
+	Route::post('/categories/insert','CategoriesController@insert')->name('categories.insert')->middleware('auth');
+	Route::post('/categories/add','CategoriesController@add')->name('categories.add')->middleware('auth');
+	Route::get('/categories/add','CategoriesController@add')->name('categories.add')->middleware('auth');
+	Route::post('/categories/updating','CategoriesController@updating')->name('categories.updating')->middleware('auth'); 
+	Route::get('/categories/remove/{id}', 'CategoriesController@remove')->middleware('auth');
+	Route::post('/categories/removecatuser', 'CategoriesController@removecatuser')->name('categories.removecatuser')->middleware('auth'); 
+	
+	Route::post('/categories/Edit','CategoriesController@Edit')->name('categories.Edit')->middleware('auth');
 	//
 	//Route::get('/payabn','PaymentController@payabn')->name('payabn');
 	Route::get('/statusabn','PaymentController@getPaymentStatusAbn')->name('statusabn');
@@ -389,22 +389,22 @@ Route::get('/parametre/TemoinagesPrestataire','parametreController@TemoinagesPre
 	
 
 	Route::get('/abonnements','AbonnementsController@index')->name('abonnements');
-	Route::get('/MesAbonnements','AbonnementsController@bindex')->name('MesAbonnements');
-	Route::get('/abonnements/remove/{id}', 'AbonnementsController@remove');
+	Route::get('/MesAbonnements','AbonnementsController@bindex')->name('MesAbonnements')->middleware('auth');
+	Route::get('/abonnements/remove/{id}', 'AbonnementsController@remove')->middleware('auth');
 	
 
-	Route::get('/carteFidelite','carteFideliteController@index')->name('carteFidelite');
-	Route::get('/MesCarteFidelite','carteFideliteController@bindex')->name('MesCarteFidelite');
+	Route::get('/carteFidelite','carteFideliteController@index')->name('carteFidelite')->middleware('auth');
+	Route::get('/MesCarteFidelite','carteFideliteController@bindex')->name('MesCarteFidelite')->middleware('auth');
 
-	Route::get('/alertes','AlertesController@index')->name('alertes');
-	Route::get('/alertes/remove/{id}', 'AlertesController@remove');
+	Route::get('/alertes','AlertesController@index')->name('alertes')->middleware('auth');
+	Route::get('/alertes/remove/{id}', 'AlertesController@remove')->middleware('auth');
 
 
 	Route::get('/payments','PaymentController@index')->name('payments');
-	Route::get('/Paiements','PaymentController@bindex')->name('Paiements');
+	Route::get('/Paiements','PaymentController@bindex')->name('Paiements')->middleware('auth');
 	Route::get('/payments/remove/{id}', 'PaymentController@remove');
 
-	Route::get('/googleagenda/{id}','CalendrierController@view')->name('googleagenda');
+	Route::get('/googleagenda/{id}','CalendrierController@view')->name('googleagenda')->middleware('auth');
     
 
 //Route::get('/payertranche/{reservation}/{email}/{montant}/{key}', 'MyPaypalController@payertranche')->name('payertranche');
@@ -412,7 +412,7 @@ Route::get('/parametre/TemoinagesPrestataire','parametreController@TemoinagesPre
 
 });
 
-Route::post('/savejsonfile','CalendrierController@savejsonfile')->name('savejsonfile');
+Route::post('/savejsonfile','CalendrierController@savejsonfile')->name('savejsonfile')->middleware('auth');
 Route::post('/search_prestataires','RechercheController@search_prestataires')->name('search.prestataires');
 Route::get('/{slug}/{id}', 'UsersController@viewlisting')->name('viewlisting');
  
