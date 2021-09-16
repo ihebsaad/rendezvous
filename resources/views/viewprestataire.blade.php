@@ -5,6 +5,20 @@
 
 <style type="text/css">
 /* Show more */
+.fc .fc-toolbar-title {
+    font-size: 1.75em;
+    margin: 0;
+    font-size: 1.75em;
+    margin: 0;
+    margin-left: 48px;
+}
+.fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
+    margin-left:0!important;
+    color: black;
+    border: yellow;
+    border-radius: 50px;
+    background-color: #f9d308;
+}
 .show-moreP {
 	height: 450px;
 	overflow: hidden;
@@ -76,7 +90,7 @@ a.button.border {
 }
 .fc .fc-scroller-harness-liquid {
     height: 100%;
-overflow-y:scroll;}
+}
 .fc .fc-non-business {
 background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermeture_couleur ; ?>;
 }
@@ -106,7 +120,7 @@ background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermetu
 .fc .fc-scrollgrid-liquid {
     background: lightgray;
     
-    overflow-y: scroll;
+    
     height: 496px;}
 
 
@@ -894,7 +908,21 @@ $( document ).ready(function() {
       <div class="modal-content" style="height:100%;    overflow-y: auto;">
       
         <!-- Modal Header -->
-        <div class="modal-header" style="    overflow-y: auto;" >
+        <center> <button onclick="myFunction()"  class="button book-now fullwidth margin-top-5" style="    width: 212px! important;"><i class="fa fa-angle-down" aria-hidden="true"></i>
+</button></center>
+
+        <div class="modal-header"   >
+
+
+<script>function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}</script>
+        <div id="myDIV" style="display:none;">
  <style>.legend { list-style: none; margin-left:10px;}
     .legend li { float: left; margin-right: 15px;}
     .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }</style>
@@ -918,8 +946,8 @@ $( document ).ready(function() {
            </ul>
 
            </div>
-          <button type="button" class="close" style="color:red;width:40px;font-size: 50px;    padding-right: 61px;" data-dismiss="modal">&times;</button>
-        </div>
+        </div>        <button type="button" class="close" style="color:red;width:40px;font-size: 50px;    padding-right: 61px;    margin-top: -64px;" data-dismiss="modal">&times;</button>
+</div>
         
         <!-- Modal body -->
         <div class="modal-body" style="border:solid ; border-color:lightgrey;       height: 555px;
@@ -927,14 +955,28 @@ $( document ).ready(function() {
     overflow-x: auto;
 " >
         	<style scoped>
-            @media (min-width: 768px) {
+
+            @media (max-width: 768px) {
+                .modal-content{    height: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    width: 355px;}
                 .calpresk { 
-                  font-size: 15px;
+                  font-size: 12px;
                   height: inherit;
                   overflow-y: auto;
                
                 }
+                modal-body{border: solid;
+    width: 673px;
+    border-color: lightgrey;
+    height: 555px;
+    overflow-y: auto;
+    overflow-x: auto;}
+            
+               
             }
+         
            </style>
            
          
