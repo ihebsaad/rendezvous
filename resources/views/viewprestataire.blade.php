@@ -5,6 +5,7 @@
 
 <style type="text/css">
 /* Show more */
+.fc-today-button{font-size:13px!important;}
 .fc .fc-toolbar-title {
     font-size: 1.75em;
     margin: 0;
