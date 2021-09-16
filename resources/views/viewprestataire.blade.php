@@ -961,7 +961,7 @@ $( document ).ready(function() {
     overflow-x: scroll;
     width: auto;}
                 .calpresk { 
-                  font-size: 12px;
+                  font-size: 10px;
                   height: inherit;
                   overflow-y: hidden;
                
