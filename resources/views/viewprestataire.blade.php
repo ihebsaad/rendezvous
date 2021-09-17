@@ -894,7 +894,7 @@ table.basic-table th {
             <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>-->
-            <button id="kbs" type="button" class="btn " style="    background:black;color:white;font-size: 15px;   width: -webkit-fill-available;;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
+            <button id="kbs" type="button" class="btn " style="    background:black;color:white;font-size: 15px;    width: 338px;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
                 <i class="fa  fa-calendar"></i> Consulter notre calendrier </button>
                 <script>  $("#kbs").click(function(){
     $("#calendrier_prestataire").show();
@@ -1074,8 +1074,7 @@ $( document ).ready(function() {
               <div class="tabs-container">
                 <div id="home" class="tab-content">';
                 } ?>
-                    
-                   
+
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; " >
         <option label="blank"></option>	
@@ -1092,7 +1091,6 @@ $( document ).ready(function() {
 
                             </select>
                         </div>
-                    </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
                         <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
@@ -1168,7 +1166,7 @@ $( document ).ready(function() {
                                         </label>
                                     </div>
                                     </div>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1263,7 +1261,6 @@ $( document ).ready(function() {
                                                 <span>1 slots available</span>
                                             </label>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -1280,8 +1277,7 @@ $( document ).ready(function() {
                 } ?>    
                 
                 </div>
-                
-            </div>
+            </div>                
             <!-- Book Now / End -->
 
              <?php if (($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
