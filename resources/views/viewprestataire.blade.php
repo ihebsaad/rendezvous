@@ -1046,7 +1046,7 @@ $( document ).ready(function() {
                     <!-- FIN // les scripts des offres de reduction -->
 
                     <!----------------------------------- Nav tabs --------------------------------------------->
-                    <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) { echo ' <style>.margin-top-35 {
+                    <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0)  { echo ' <style>.margin-top-35 {
     margin-top: 35px !important;    height: 205px!important;
 }</style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
 
@@ -1071,37 +1071,7 @@ $( document ).ready(function() {
               <div class="tabs-container">
                 <div id="home" class="tab-content">';
                 } ?>
-                    <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
-                        # code...
-            echo '
-            <center>   
-              <ul class="tabs-nav" style="    padding:0 65px;!important;">
-                <li class="active">
-                  <a href="#home">Service simple</a>
-                </li>
-              
-                
-              </ul></center>
-            <!-- Tab panes -->
-              <div class="tabs-container">
-                <div id="home" class="tab-content">';
-                } ?>
-                    <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
-                        # code...
-            echo '
-            <center>        
-              <ul class="tabs-nav" style="    padding:0 65px;!important;">
-                
-                <li class="active">
-                  <a  href="#menu1">Abonnement</a>
-                </li></center>
-                
-              </ul>
-            <!-- Tab panes -->
-              <div class="tabs-container">
-              <div id="home" class="tab-content" style="display:none">
-               ';
-                } ?>
+                    
                    
                     <div class="row with-forms margin-top-0">
                         <div class="col-lg-12 col-md-12">
@@ -1205,7 +1175,7 @@ $( document ).ready(function() {
                         <!-- Book Now -->
                         <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
                               
-                <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) {
+                <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0) {
                         # code...
                         echo '</div>
                         <div id="menu1" class="tab-content" style="display:none;">';
@@ -1215,20 +1185,9 @@ $( document ).ready(function() {
                         echo '</div>
                         <div id="menu1" class="tab-content">';
                 } ?> 
-                   <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
-                        # code...
-                        echo '</div>
-                        <div id="menu1" class="tab-content" style="display:none;">
-                        ';
-                } ?> 
+            
                
-                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
-                        # code...
-            echo '
-            </div>
-              <div id="menu1" class="tab-content">
-               ';
-                } ?>
+               
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
                             <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
@@ -1310,7 +1269,7 @@ $( document ).ready(function() {
                         </div>
                         <!-- Book Now -->
                         <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
-                        <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) {
+                        <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0) {
                         # code...
                         echo '</div></div>';
                 } ?> 
@@ -1318,15 +1277,7 @@ $( document ).ready(function() {
                         # code...
                         echo '</div></div>';
                 } ?>    
-                   <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
-                        # code...
-                        echo '</div></div>
-                      
-                        ';
-                } ?>  <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
-                    # code...
-                    echo '</div></div>';
-            } ?>   
+                
                 </div>
                 
             </div>
