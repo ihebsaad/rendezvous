@@ -90,6 +90,17 @@ $('#date-picker2').on('hide.daterangepicker', function(ev, picker) {
       'maxWidth': 950
     })
 </script>
+<script>
+$(".time-slot").each(function() {
+	var timeSlot = $(this);
+	$(this).find('input').on('change',function() {
+		var timeSlotVal = timeSlot.find('strong').text();
+
+		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+		$('.panel-dropdown').removeClass('active');
+	});
+});
+</script>
 <!-- Google Autocomplete -->
 <!--<script>
   function initAutocomplete() {
