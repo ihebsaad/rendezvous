@@ -25,15 +25,26 @@
 <script>
 // Calendar Init
 $(function() {
+  function now () { 
+    var d = new Date();
+  var n = d.getDate()-1;
+  
+  d.setDate(n);
+    return d; }
+
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
+    locale: {
+      format: 'YYYY-MM-DD'
+    },
+
 
 		// Disabling Date Ranges
 		isInvalidDate: function(date) {
 		// Disabling Date Range
-		var disabled_start = moment('09/02/2018', 'MM/DD/YYYY');
-		var disabled_end = moment('09/06/2018', 'MM/DD/YYYY');
+		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
 		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
 
 		// Disabling Single Day
@@ -49,8 +60,8 @@ $(function() {
 		// Disabling Date Ranges
 		isInvalidDate: function(date) {
 		// Disabling Date Range
-		var disabled_start = moment('09/02/2018', 'MM/DD/YYYY');
-		var disabled_end = moment('09/06/2018', 'MM/DD/YYYY');
+		var disabled_start = moment('09-02-2018', 'MM-DD-YYYY');
+		var disabled_end = moment('09-06-2018', 'MM-DD-YYYY');
 		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
 
 		// Disabling Single Day
