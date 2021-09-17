@@ -5,6 +5,28 @@
 
 <style type="text/css">
 /* Show more */
+@media (max-width: 768px) {.panel-dropdown .panel-dropdown-content, .fullwidth-filters .panel-dropdown.float-right .panel-dropdown-content {
+    left: 0;
+    right: auto;
+    max-width: 74vw!important;
+}}
+button.button.fullwidth, a.button.fullwidth {
+    top: -67px;
+    width: 100%;
+    text-align: center;
+}
+.panel-dropdown {
+    position: relative;
+    display: flow-root;
+    height: 200px;
+}
+.booking-widget .panel-dropdown: {
+    width: 100%;
+}
+.booking-widget .panel-dropdown .panel-dropdown-content.padding-reset {
+    width: -webkit-fill-available;
+    padding: 0;
+}
 .fc-today-button{font-size:13px!important;}
 .fc .fc-toolbar-title {
     font-size: 1.75em;
@@ -225,7 +247,10 @@ table.basic-table th {
 .panel-dropdown.active .panel-dropdown-content {
     z-index: 1000!important;
 }
-
+.panel-dropdown .time-slots-dropdown:active {
+    z-index: 1000!important;
+    height:200px;
+}
 @media (max-width: 1024px) {
     .pricing-list-container span {
         right: -40px!important;
@@ -1005,7 +1030,7 @@ $( document ).ready(function() {
   </div>
 
             <!-- Book Now -->
-            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
+            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="height: 517px;">
                 <a><h3><i class="fa fa-calendar-check-o "></i> Réserver un service</h3></a>
                 
                 <div class="row with-forms  margin-top-0">
@@ -1044,12 +1069,12 @@ $( document ).ready(function() {
                     </div>
 
                     <!-- Panel Dropdown -->
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" style="    height: fit-content;">
                         <div class="panel-dropdown time-slots-dropdown">
                             <a href="#">Heure</a>
                             <div class="panel-dropdown-content padding-reset">
                                 <div class="panel-dropdown-scrollable">
-                                    
+                                    <div  style="height:200px!important;">
                                     <!-- Time Slot -->
                                     <div class="time-slot">
                                         <input type="radio" name="time-slot" id="time-slot-1">
@@ -1111,6 +1136,7 @@ $( document ).ready(function() {
                                             <strong>14:00 pm - 14:30 pm</strong>
                                             <span>1 slots available</span>
                                         </label>
+                                    </div>
                                     </div>
 
                                 </div>
