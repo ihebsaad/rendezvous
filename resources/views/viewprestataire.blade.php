@@ -158,6 +158,10 @@ position:absolute;
     color: #ff0000!important;
 }
 
+.listing-desc-headline {
+    font-weight: 500;
+}
+
 table.basic-table th {
     background-color: #f2f2f2!important;
     color: #464646!important;    
@@ -214,6 +218,13 @@ table.basic-table th {
   height: 100%;
 }
 
+/* time slot selector */
+.tab-content {
+    padding: 20px 0px!important;
+}
+.panel-dropdown.active .panel-dropdown-content {
+    z-index: 1000!important;
+}
 
 @media (max-width: 1024px) {
     .pricing-list-container span {
@@ -537,7 +548,7 @@ table.basic-table th {
         
             <div class="col-md-12">
 
-                <h4 class="headline margin-top-70 margin-bottom-30">Promotions flash</h4>
+                <h4 class="listing-desc-headline margin-top-70 margin-bottom-30">Promotions flash</h4>
                 <table class="basic-table">
 
                     <tbody><tr>
@@ -996,27 +1007,37 @@ $( document ).ready(function() {
             <!-- Book Now -->
             <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
                 <a><h3><i class="fa fa-calendar-check-o "></i> Réserver un service</h3></a>
-                <div class="row with-forms margin-top-0">
-            <div class="col-lg-12 col-md-12">
-                <select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner" onchange="selectservice()"  multiple style="font-weight: 17px !important; " >
-                <option> </option>
-                    <?php 
-                    foreach($services as $service){
-                        echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
-            
-            $mab[$service->id]=$service->produits_id ;
-                    }
-                    
-                    ?>
-                    
-                    <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
-
-                </select>
-            </div>
-            <?php //echo json_encode($mab); ?>
-          </div>
+                
                 <div class="row with-forms  margin-top-0">
 
+                    <!-- les scripts des offres de reduction -->
+                    <input type="number" value="{{$reduction}}" name="" hidden id="catrefideliteVal" >
+                      <?php if($reduction != 0){  ?> 
+                      <p style="color: #c7a903;font-size: 14px; line-height: 16px;"><i class="sl sl-icon-present"></i> Félicitation! Vous bénéficierez pour la prochaine réservation d'<b>une réduction de {{$reduction}}%</b></p>
+                      <?php } ?>
+                      <?php if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'" id="myhappyhoursId" name="" hidden>' ;  }
+                             else {  echo '<input type="number" happyhourid="0" value="0" id="myhappyhoursId" name="" hidden>'; } ?>
+                    <!-- FIN // les scripts des offres de reduction -->
+
+                    <!----------------------------------- Nav tabs --------------------------------------------->
+          <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
+                        # code...
+            echo '<p style=" font-size: 14px; line-height: 16px;">Veuillez sélectionner "Abonnement", si vous désirez réserver un service récurrent</p>
+                      
+              <ul class="tabs-nav" >
+                <li class="active">
+                  <a href="#home">Service simple</a>
+                </li>
+                <li class="">
+                  <a  href="#menu1">Abonnement</a>
+                </li>
+                
+              </ul>
+            <!-- Tab panes -->
+              <div class="tabs-container">
+                <div id="home" class="tab-content">';
+                } ?>
+                    
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
                         <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
@@ -1025,7 +1046,7 @@ $( document ).ready(function() {
                     <!-- Panel Dropdown -->
                     <div class="col-lg-12">
                         <div class="panel-dropdown time-slots-dropdown">
-                            <a href="#">Time Slots</a>
+                            <a href="#">Heure</a>
                             <div class="panel-dropdown-content padding-reset">
                                 <div class="panel-dropdown-scrollable">
                                     
@@ -1097,33 +1118,100 @@ $( document ).ready(function() {
                         </div>
                     </div>
                     <!-- Panel Dropdown / End -->
+                        <!-- Book Now -->
+                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
+                <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div>
+                        <div id="menu1" class="tab-content">';
+                } ?> 
+                        <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+                        <div class="col-lg-12">
+                            <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+                        </div>
 
-                    <!-- Panel Dropdown -->
-                    <div class="col-lg-12">
-                        <div class="panel-dropdown">
-                            <a href="#">Guests <span class="qtyTotal" name="qtyTotal">1</span></a>
-                            <div class="panel-dropdown-content">
+                        <!-- Panel Dropdown -->
+                        <div class="col-lg-12">
+                            <div class="panel-dropdown time-slots-dropdown">
+                                <a href="#">Time Slots</a>
+                                <div class="panel-dropdown-content padding-reset">
+                                    <div class="panel-dropdown-scrollable">
+                                        
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <input type="radio" name="time-slot" id="time-slot-1">
+                                            <label for="time-slot-1">
+                                                <strong>8:30 am - 9:00 am</strong>
+                                                <span>1 slot available</span>
+                                            </label>
+                                        </div>
 
-                                <!-- Quantity Buttons -->
-                                <div class="qtyButtons">
-                                    <div class="qtyTitle">Adults</div>
-                                    <input type="text" name="qtyInput" value="1">
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <input type="radio" name="time-slot" id="time-slot-2">
+                                            <label for="time-slot-2">
+                                                <strong>9:00 am - 9:30 am</strong>
+                                                <span>2 slots available</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <input type="radio" name="time-slot" id="time-slot-3">
+                                            <label for="time-slot-3">
+                                                <strong>9:30 am - 10:00 am</strong>
+                                                <span>1 slots available</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <input type="radio" name="time-slot" id="time-slot-4">
+                                            <label for="time-slot-4">
+                                                <strong>10:00 am - 10:30 am</strong>
+                                                <span>3 slots available</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <input type="radio" name="time-slot" id="time-slot-5">
+                                            <label for="time-slot-5">
+                                                <strong>13:00 pm - 13:30 pm</strong>
+                                                <span>2 slots available</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <input type="radio" name="time-slot" id="time-slot-6">
+                                            <label for="time-slot-6">
+                                                <strong>13:30 pm - 14:00 pm</strong>
+                                                <span>1 slots available</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <input type="radio" name="time-slot" id="time-slot-7">
+                                            <label for="time-slot-7">
+                                                <strong>14:00 pm - 14:30 pm</strong>
+                                                <span>1 slots available</span>
+                                            </label>
+                                        </div>
+
+                                    </div>
                                 </div>
-
-                                <div class="qtyButtons">
-                                    <div class="qtyTitle">Childrens</div>
-                                    <input type="text" name="qtyInput" value="0">
-                                </div>
-
                             </div>
                         </div>
-                    </div>
-                    <!-- Panel Dropdown / End -->
-
+                        <!-- Book Now -->
+                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
+                <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div></div>';
+                } ?>    
                 </div>
                 
-                <!-- Book Now -->
-                <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
             </div>
             <!-- Book Now / End -->
 
