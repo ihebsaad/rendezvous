@@ -1103,7 +1103,24 @@ $( document ).ready(function() {
                ';
                 } ?>
                    
-                    
+                    <div class="row with-forms margin-top-0">
+                        <div class="col-lg-12 col-md-12">
+                            <select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner" onchange="selectservice()"  multiple style="font-weight: 17px !important; " >
+                            <option> </option>
+                                <?php 
+                                foreach($services as $service){
+                                    echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
+                        
+                        $mab[$service->id]=$service->produits_id ;
+                                }
+                                
+                                ?>
+                                
+                                <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
+                            </select>
+                        </div>
+                    </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
                         <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
