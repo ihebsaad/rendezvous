@@ -1093,7 +1093,8 @@ $( document ).ready(function() {
                         </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
-                        <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+                    <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+
                     </div>
 
                     <!-- Panel Dropdown -->
@@ -1189,7 +1190,7 @@ $( document ).ready(function() {
                
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
-                            <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+						<input type="text" id="date-picker" placeholder="Date" readonly="readonly">
                         </div>
 
                         <!-- Panel Dropdown -->
@@ -1456,6 +1457,7 @@ $( document ).ready(function() {
 
     </div>
 </div>
+
 
 
 <script>
