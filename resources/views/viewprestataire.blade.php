@@ -1050,7 +1050,7 @@ $( document ).ready(function() {
 
                     <!----------------------------------- Nav tabs --------------------------------------------->
                     <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0)  { echo ' 
-}</style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
+</style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
 
 <div class="tabs-container" style="display:none;">
                 <div id="home" class="tab-content" style="display:none;>'  ;                 
