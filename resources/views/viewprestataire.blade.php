@@ -1049,8 +1049,7 @@ $( document ).ready(function() {
                     <!-- FIN // les scripts des offres de reduction -->
 
                     <!----------------------------------- Nav tabs --------------------------------------------->
-                    <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0)  { echo ' <style>.margin-top-35 {
-    margin-top: 35px !important;    height: 205px!important;
+                    <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0)  { echo ' 
 }</style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
 
 <div class="tabs-container" style="display:none;">
@@ -1174,12 +1173,7 @@ $( document ).ready(function() {
                     <!-- Panel Dropdown / End -->
                         <!-- Book Now -->
                         <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
-                              
-                <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0) {
-                        # code...
-                        echo '</div>
-                        <div id="menu1" class="tab-content" style="display:none;">';
-                } ?>    
+                                
                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
                         # code...
                         echo '</div>
@@ -1278,7 +1272,7 @@ $( document ).ready(function() {
                 } ?>    
                 
                 </div>
-            </div>                
+                         
             <!-- Book Now / End -->
 
              <?php if (($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
