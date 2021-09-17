@@ -1031,7 +1031,7 @@ $( document ).ready(function() {
 
             <!-- Book Now -->
             
-            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="height: 517px;">
+            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="height: 569px;;">
                 <a><h3><i class="fa fa-calendar-check-o "></i> Réserver un service</h3></a>
                 
                 <div class="row with-forms  margin-top-0">
