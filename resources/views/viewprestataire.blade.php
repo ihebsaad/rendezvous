@@ -1,6 +1,9 @@
 @extends('layouts.frontv2layout')
+
 <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
+
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
  <?php  use \App\Http\Controllers\CalendrierController; ?>
 
 <style type="text/css">
@@ -891,7 +894,7 @@ table.basic-table th {
             <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>-->
-            <button id="kbs" type="button" class="btn " style="    background:black;color:white;font-size: 15px;    width: 338px;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
+            <button id="kbs" type="button" class="btn " style="    background:black;color:white;font-size: 15px;   width: -webkit-fill-available;;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
                 <i class="fa  fa-calendar"></i> Consulter notre calendrier </button>
                 <script>  $("#kbs").click(function(){
     $("#calendrier_prestataire").show();
@@ -1031,7 +1034,7 @@ $( document ).ready(function() {
 
             <!-- Book Now -->
             
-            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="height: 569px;;">
+            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="height: fit-content;;">
                 <a><h3><i class="fa fa-calendar-check-o "></i> Réserver un service</h3></a>
                 
                 <div class="row with-forms  margin-top-0">
@@ -1073,10 +1076,9 @@ $( document ).ready(function() {
                 } ?>
                     
                    
-                    <div class="row with-forms margin-top-0">
-                        <div class="col-lg-12 col-md-12">
-                            <select class="utf_chosen_select_single" id="service" name="service[]" placeholder="Sélectionner" onchange="selectservice()"  multiple style="font-weight: 17px !important; " >
-                            <option> </option>
+                        <div class="col-lg-12">
+                        <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; " >
+        <option label="blank"></option>	
                                 <?php 
                                 foreach($services as $service){
                                     echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
@@ -1170,7 +1172,6 @@ $( document ).ready(function() {
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <!-- Panel Dropdown / End -->
                         <!-- Book Now -->
                         <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
