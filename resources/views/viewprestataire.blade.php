@@ -1049,7 +1049,7 @@ $( document ).ready(function() {
                     <!-- FIN // les scripts des offres de reduction -->
 
                     <!----------------------------------- Nav tabs --------------------------------------------->
-                    <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0)  { echo ' 
+                    <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0)  { echo ' 
 </style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
 
 <div class="tabs-container" style="display:none;">
@@ -1073,6 +1073,26 @@ $( document ).ready(function() {
               <div class="tabs-container">
                 <div id="home" class="tab-content">';
                 } ?>
+                <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
+                               # code...
+                   echo '
+                             
+                     
+                       
+                   
+                   <!-- Tab panes -->
+                     <div class="tabs-container">
+                       <div id="home" class="tab-content">';
+                       } ?>
+                          <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
+                               # code...
+                   echo '
+                             
+                     
+                   <!-- Tab panes -->
+                     <div class="tabs-container">
+                       <div id="home" class="tab-content" style="display:none;">';
+                       } ?>
 
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; " >
@@ -1179,6 +1199,17 @@ $( document ).ready(function() {
                         echo '</div>
                         <div id="menu1" class="tab-content">';
                 } ?> 
+                   <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div>
+                        <div id="menu1" class="tab-content" style="display:none;">';
+                } ?> 
+                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
+                        # code...
+                        echo '</div>
+                        <div id="menu1" class="tab-content" >';
+                } ?> 
+            
             
                
                
@@ -1262,16 +1293,23 @@ $( document ).ready(function() {
                         </div>
                         <!-- Book Now -->
                         <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
-                        <?php  if (sizeof($servicesreccurent) == 0 || sizeof($services) == 0) {
+                        <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) {
                         # code...
-                        echo '</div></div>';
+                        echo '</div></div></div>';
                 } ?> 
+                 <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div></div></div></div>';
+                } ?> 
+                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
+                        # code...
+                        echo '</div></div></div>';
+                } ?>
                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
                         # code...
-                        echo '</div></div>';
+                        echo '</div></div></div></div>';
                 } ?>    
                 
-                </div>
                          
             <!-- Book Now / End -->
 
