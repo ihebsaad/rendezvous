@@ -35,8 +35,38 @@ $(function() {
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
-    locale: {
-      format: 'YYYY-MM-DD'
+      locale: {
+        "format": "YYYY-MM-DD",
+        "separator": " - ",
+        "applyLabel": "Appliquer",
+        "cancelLabel": "Annuler",
+        "fromLabel": "de",
+        "toLabel": "jusq'à",
+        "customRangeLabel": "Personnalisé",
+        "daysOfWeek": [
+            "Di",
+            "Lu",
+            "Ma",
+            "Me",
+            "Je",
+            "Ve",
+            "Sa"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Fevrier",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Aout",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Decembre"
+        ],
+        "firstDay": 1
     },
 
 
@@ -52,16 +82,57 @@ $(function() {
 		//     return true; 
 		// }
 		}
-	});
-  $('#date-picker2').daterangepicker({
+	});});
+	$(function() {
+		function now () { 
+    var d = new Date();
+  var n = d.getDate()-1;
+  
+  d.setDate(n);
+    return d; }
+	$('#date-picker2').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
+      locale: {
+        "format": "YYYY-MM-DD",
+        "separator": " - ",
+        "applyLabel": "Appliquer",
+        "cancelLabel": "Annuler",
+        "fromLabel": "de",
+        "toLabel": "jusq'à",
+        "customRangeLabel": "Personnalisé",
+        "daysOfWeek": [
+            "Di",
+            "Lu",
+            "Ma",
+            "Me",
+            "Je",
+            "Ve",
+            "Sa"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Fevrier",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Aout",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Decembre"
+        ],
+        "firstDay": 1
+    },
+
 
 		// Disabling Date Ranges
 		isInvalidDate: function(date) {
 		// Disabling Date Range
-		var disabled_start = moment('09-02-2018', 'MM-DD-YYYY');
-		var disabled_end = moment('09-06-2018', 'MM-DD-YYYY');
+		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
 		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
 
 		// Disabling Single Day
@@ -80,10 +151,8 @@ $('#date-picker').on('show.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-visible');
 	$('.daterangepicker').removeClass('calendar-hidden');
 });
-$('#date-picker').on('hide.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').removeClass('calendar-visible');
-	$('.daterangepicker').addClass('calendar-hidden');
-});
+
+
 $('#date-picker2').on('showCalendar.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-animated');
 });
@@ -91,10 +160,8 @@ $('#date-picker2').on('show.daterangepicker', function(ev, picker) {
 	$('.daterangepicker').addClass('calendar-visible');
 	$('.daterangepicker').removeClass('calendar-hidden');
 });
-$('#date-picker2').on('hide.daterangepicker', function(ev, picker) {
-	$('.daterangepicker').removeClass('calendar-visible');
-	$('.daterangepicker').addClass('calendar-hidden');
-});
+
+
 </script>
 <script>
     lightbox.option({

@@ -8,21 +8,22 @@
 
 <style type="text/css">
 /* Show more */
+
+
 @media (max-width: 768px) {.panel-dropdown .panel-dropdown-content, .fullwidth-filters .panel-dropdown.float-right .panel-dropdown-content {
     left: 0;
     right: auto;
     max-width: 74vw!important;
 }}
-button.button.fullwidth, a.button.fullwidth {
-    top: -67px;
-    width: 100%;
-    text-align: center;
+.comment-by-listing a:hover, .browse-all-user-listings a i, .hosted-by-title h4 a:hover, .style-2 .trigger.active a, .style-2 .ui-accordion .ui-accordion-header-active:hover, .style-2 .ui-accordion .ui-accordion-header-active, #posts-nav li a:hover, .plan.featured .listing-badge, .post-content h3 a:hover, .add-review-photos i, .show-more-button i, .listing-details-sidebar li a, .star-rating .rating-counter a:hover, .more-search-options-trigger:after, .header-widget .sign-in:hover, #footer a, #footer .footer-links li a:hover, #navigation.style-1 .current, #navigation.style-1 ul li:hover a, .user-menu.active .user-name:after, .user-menu:hover .user-name:after, .user-menu.active .user-name, .user-menu:hover .user-name, .main-search-input-item.location a:hover, .chosen-container .chosen-results li.highlighted, .input-with-icon.location a i:hover, .sort-by .chosen-container-single .chosen-single div:after, .sort-by .chosen-container-single .chosen-default, .panel-dropdown a:after, .post-content a.read-more, .post-meta li a:hover, .widget-text h5 a:hover, .about-author a, a.button.border.white:hover, .icon-box-2 i, a.button.border, .style-2 .ui-accordion .ui-accordion-header:hover, .style-2 .trigger a:hover, .plan.featured .listing-badges .featured, .list-4 li:before, .list-3 li:before, .list-2 li:before, .list-1 li:before, .info-box h4, .testimonial-carousel .slick-slide.slick-active .testimonial:before, .sign-in-form .tabs-nav li a:hover, .sign-in-form .tabs-nav li.active a, .lost_password:hover a, #top-bar .social-icons li a:hover i, .listing-share .social-icons li a:hover i, .agent .social-icons li a:hover i, #footer .social-icons li a:hover i, .headline span i {
+    color: #ffd700!important;
 }
-.panel-dropdown {
-    position: relative;
-    display: flow-root;
-    height: 200px;
+.daterangepicker td.active.end-date.in-range.available, .qtyTotal, .mm-menu em.mm-counter, .option-set li a.selected, .category-small-box:hover, .pricing-list-container h4:after, #backtotop a, .chosen-container-multi .chosen-choices li.search-choice, .select-options li:hover, button.panel-apply, .layout-switcher a:hover, .listing-features.checkboxes li:before, .comment-by a.reply:hover, .add-review-photos:hover, .office-address h3:after, .post-img:before, button.button, input[type="button"], input[type="submit"], a.button, a.button.border:hover, table.basic-table th, .plan.featured .plan-price, mark.color, .style-4 .tabs-nav li.active a, .style-5 .tabs-nav li.active a, .dashboard-list-box .button.gray:hover, .change-photo-btn:hover, .dashboard-list-box a.rate-review:hover, input:checked + .slider, .add-pricing-submenu.button:hover, .add-pricing-list-item.button:hover, .custom-zoom-in:hover, .custom-zoom-out:hover, #geoLocation:hover, #streetView:hover, #scrollEnabling:hover, #scrollEnabling.enabled, #mapnav-buttons a:hover, #sign-in-dialog .mfp-close:hover, #small-dialog .mfp-close:hover {
+    color: black! important;
+    background-color: #ffd700;
 }
+
+
 .booking-widget .panel-dropdown: {
     width: 100%;
 }
@@ -1096,7 +1097,6 @@ $( document ).ready(function() {
 
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; " >
-        <option label="blank"></option>	
                                 <?php 
                                 foreach($services as $service){
                                     echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
@@ -1191,8 +1191,23 @@ $( document ).ready(function() {
                             </div>
                         </div>
                     <!-- Panel Dropdown / End -->
+                    <div class="col-lg-12 ">
+                        <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
+                        <div  >
+                        <select class=" " id="rappel"  style="font-size: 94%!important;">
+                        <option label="blank" style="">Rappel de rendez vous par SMS</option>
+                        <center> <option value="60">1h avant le RDV </option></center>
+                <center>   <option value="120">2h avant le RDV</option></center>
+                        <center>	 <option value="180">3h avant le RDV</option></center>
+                <center><option value="1440">1 jour avant le RDV</option></center>
+                <center> <option value="2880">2 jours avant le RDV</option></center>
+                <center> <option value="7200">5 jours avant le RDV</option></center>
+                        </select>
+                        </div>
+                    </div>
+
                         <!-- Book Now -->
-                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
+                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Réserver</a>
                                 
                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
                         # code...
@@ -1215,13 +1230,30 @@ $( document ).ready(function() {
                
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
-						<input type="text" id="date-picker2" placeholder="Date" readonly="readonly">
+                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  >
+                        <option label="blank">choisir un service</option>	
+
+                             <?php 
+                                foreach($servicesreccurent as $service){
+                                    echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
+                        
+                        $mab[$service->id]=$service->produits_id ;
+                                }
+                                
+                                ?>
+                                
+                                <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
+                            </select>
+                        </div>
+                        <div class="col-lg-12">
+						<input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
                         </div>
 
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
                             <div class="panel-dropdown time-slots-dropdown">
-                                <a href="#">Time Slots</a>
+                                <a href="#">Heure</a>
                                 <div class="panel-dropdown-content padding-reset">
                                     <div class="panel-dropdown-scrollable">
                                         
@@ -1291,8 +1323,23 @@ $( document ).ready(function() {
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-12 ">
+                        <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
+                        <div  >
+                        <select class="panel-dropdown time-slots-dropdown" id="rappel"  style="font-size: 94%!important;">
+                        <option label="blank"><strong style="font-weight: 17px !important;"><b style="font-weight: 17px !important;">Rappel de rendez vous par SMS</b> </strong></option>
+                        <center> <option value="60">1h avant le RDV </option></center>
+                <center>   <option value="120">2h avant le RDV</option></center>
+                        <center>	 <option value="180">3h avant le RDV</option></center>
+                <center><option value="1440">1 jour avant le RDV</option></center>
+                <center> <option value="2880">2 jours avant le RDV</option></center>
+                <center> <option value="7200">5 jours avant le RDV</option></center>
+                        </select>
+                        </div>
+                    </div>
+
                         <!-- Book Now -->
-                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
+                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Réserver</a>
                         <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) {
                         # code...
                         echo '</div></div></div>';
@@ -1514,6 +1561,7 @@ $( document ).ready(function() {
 
 	/*----------------------------------------------------*/
 </script>
+
   @endsection
 @include('layouts.pageprestataire-scripts')
 
