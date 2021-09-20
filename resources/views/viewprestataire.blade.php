@@ -1431,7 +1431,7 @@ $( document ).ready(function() {
                             </div>
 
                             <div class="single-slot-right">
-                            <button class="remove-slot reject" style="    margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+                            <button class="remove-slot reject" style=" margin-top: 10px; background:red;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
                                     <button></button>
@@ -1497,53 +1497,53 @@ $( document ).ready(function() {
 
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
-                            <select class="chosen  time-slots-dropdown" data-placeholder="Heure" >
+                            <select class="chosen-select-no-single  time-slots-dropdown" data-placeholder="Heure" >
                            
-                           <option value="blank"></option>
+                           <option value="blank" style=>Heure</option>
                                    <!-- Time Slot -->
-                                   <option style=" position: relative!important;padding: 12px 10px!important; text-align: center!important;cursor: pointer!important;font-weight: 600!important;user-select: none;border-radius: 4px!important; color: rgb(119, 119, 119)!important;transition: all 0.3s ease 0s!important;overflow: hidden;font-size: 15px!important;background-color: #f2f2f2!important;"class="time-slot">
+                                   <option >
                                        <label for="time-slot-1">
                                            <strong>8:30 am - 9:00 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option style="  position: relative!important;padding: 12px 10px!important; text-align: center!important;cursor: pointer!important;font-weight: 600!important;user-select: none;border-radius: 4px!important; color: rgb(119, 119, 119)!important;transition: all 0.3s ease 0s!important;overflow: hidden;font-size: 15px!important;background-color: #f2f2f2!important;" class="time-slot">
+                                   <option >
                                        <label for="time-slot-2">
                                            <strong>9:00 am - 9:30 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                   <option>
                                        <label for="time-slot-3">
                                            <strong>9:30 am - 10:00 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option style="     margin-top: 5px;position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
+                                   <option >
                                        <label for="time-slot-4">
                                            <strong>10:00 am - 10:30 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option style="    margin-top: 5px; position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
+                                   <option >
                                        <label for="time-slot-5">
                                            <strong>13:00 pm - 13:30 pm</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option style="    margin-top: 5px; position: relative ;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                   <option>
                                        <label for="time-slot-6">
                                            <strong>13:30 pm - 14:00 pm</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option style="     margin-top: 5px;position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                   <option >
                                        <label for="time-slot-7">
                                            <strong>14:00 pm - 14:30 pm</strong>
                                        </label>
