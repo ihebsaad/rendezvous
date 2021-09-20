@@ -1360,9 +1360,9 @@ $( document ).ready(function() {
                     <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                       
-                        <select class="chosen-select" id="rappel" data-placeholder="Rappel de rendez vous par SMS">
+                        <select class="chosen" id="rappel">
 
-                        <option label="blank" ></option>
+                        <option label="blank" >Rappel de rendez vous par SMS</option>
                         <option value="60">1h avant le RDV </option>
                          <option value="120">2h avant le RDV</option>
                       	 <option value="180">3h avant le RDV</option>
@@ -1530,8 +1530,8 @@ $( document ).ready(function() {
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="chosen-select-no-single" id="rappel" data-placeholder="Rappel de rendez vous par SMS">
-                        <option  label="blank"></option>
+                        <select class="chosen" id="rappel" >
+                        <option  label="blank">Rappel de rendez vous par SMS</option>
                         <option value="60">1h avant le RDV </option>
                 <option value="120">2h avant le RDV</option>
                       	 <option value="180">3h avant le RDV</option>
