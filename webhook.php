@@ -55,7 +55,7 @@ switch ($event->type) {
     $paymentIntent = $event->data->object;
   // ... handle other event types
   default:
-    echo 'Received unknown event type ' . $event->type;
+    echo 'Received unknown event type ' . $event->lines->data->subscription;
 }
 
 http_response_code(200);
