@@ -21,12 +21,12 @@ $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 $event = null;
 
 try {
-  $event = \Stripe\Webhook::constructEvent(
+  $event = \vendor\Stripe\Webhook::constructEvent(
     $payload, $sig_header, $endpoint_secret
   );
 } catch(\UnexpectedValueException $e) {
   // Invalid payload
-  http_response_code(200);
+  http_response_code(400);
   exit();
 } catch(\Stripe\Exception\SignatureVerificationException $e) {
   // Invalid signature
