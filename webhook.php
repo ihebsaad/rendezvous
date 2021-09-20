@@ -18,6 +18,7 @@ $endpoint_secret = 'whsec_rwPn2MsYhTNgrGqNu6jnbVPFvQlzxnQY';
 
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
+dd($sig_header);
 $event = null;
 
 try {
@@ -31,7 +32,7 @@ try {
   exit();
 } catch(\Stripe\Exception\SignatureVerificationException $e) {
   // Invalid signature
-  dd($e);
+  //dd($e);
   http_response_code(400);
   exit();
 }
