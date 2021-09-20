@@ -66,7 +66,7 @@ switch ($event->type) {
                 die('Erreur : ' .$conn->connect_error);
             }
 
-            $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe=sub_KC84at";
+            $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe='sub_KC84at'";
             if ($conn->query($sql) === TRUE) {
               echo "Record updated successfully";
             } else {
