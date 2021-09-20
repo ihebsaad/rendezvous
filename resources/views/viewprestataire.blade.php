@@ -8,6 +8,29 @@
 
 <style type="text/css">
 /* Show more */
+@media (max-width: 768px){
+.day-slot-headline { 
+    width: auto!important;
+  
+    /* width: 403px; */
+}
+#sectionproduitsup{ width: auto!important;}
+}}
+.option_class{
+    margin-top: 30px!important;
+    position: relative!important;
+    padding: 20px 20px!important;
+    text-align: center!important;
+    cursor: pointer!important;
+    font-weight: 600!important;
+    user-select: none!important;
+    border-radius: 4px!important;
+    color: rgb(119, 119, 119)!important;
+    transition: all 0.3s ease 0s!important;
+    overflow: hidden!important;
+    font-size: 15px;
+    background-color: rgb(242, 242, 242)!important;
+}
 .single-slot-time {
     font-weight: 400!important;
     color: #666;
@@ -1421,7 +1444,8 @@ $( document ).ready(function() {
                     <div class="day-slots">
                     <div class="day-slot-headline" style="      background-color: #c7c7c7;
    color: #000000;    width: 267px;"> Produits:</div>
-                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: auto;overflow-x: hidden;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
+                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
+                    ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
                     <?php  foreach($produit as $prod){ ?>
                     <div class="single-slot">
@@ -1499,53 +1523,53 @@ $( document ).ready(function() {
 
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
-                            <select class="chosen-select-no-single  time-slots-dropdown" data-placeholder="Heure" >
+                            <select class="chosen" data-placeholder="Heure" >
                            
-                           <option value="blank" style="font-size:12.5px;font-weight:800;">Heure</option>
+                           <option class="option_class"value="blank" style="font-size:12.5px;font-weight:800;">Heure</option>
                                    <!-- Time Slot -->
-                                   <option >
+                                   <option class="option_class">
                                        <label for="time-slot-1">
                                            <strong>8:30 am - 9:00 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option >
+                                   <option class="option_class">
                                        <label for="time-slot-2">
                                            <strong>9:00 am - 9:30 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option>
+                                   <option class="option_class">
                                        <label for="time-slot-3">
                                            <strong>9:30 am - 10:00 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option >
+                                   <option class="option_class">
                                        <label for="time-slot-4">
                                            <strong>10:00 am - 10:30 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option >
+                                   <option class="option_class">
                                        <label for="time-slot-5">
                                            <strong>13:00 pm - 13:30 pm</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option>
+                                   <option class="option_class">
                                        <label for="time-slot-6">
                                            <strong>13:30 pm - 14:00 pm</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option >
+                                   <option  class="option_class">
                                        <label for="time-slot-7">
                                            <strong>14:00 pm - 14:30 pm</strong>
                                        </label>
