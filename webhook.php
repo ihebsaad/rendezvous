@@ -40,7 +40,7 @@ if ($event->type=='customer.subscription.created') {
   $customer = $event->data->object;
 }
 elseif ($event->type=='customer.subscription.deleted') {
-  echo "offfff" ;
+  echo "Record updated successfully";
 }
 elseif ($event->type=='customer.subscription.updated') {
   # code...
