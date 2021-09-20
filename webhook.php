@@ -42,9 +42,8 @@ switch ($event->type) {
   case 'customer.subscription.created':
     $customer = $event->data->object;
   case 'customer.subscription.deleted':
-
     echo "offfff" ;
-    $customer = $event->data->object;
+    //$customer = $event->data->object;
   case 'customer.subscription.updated':
     $customer = $event->data->object;
   case 'invoice.payment_failed':
