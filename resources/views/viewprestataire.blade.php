@@ -1523,7 +1523,7 @@ $( document ).ready(function() {
 
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
-                            <select class="chosen" data-placeholder="Heure" >
+                            <select class="select"  >
                            
                            <option value="blank" style="font-size:12.5px!important;font-weight:800!important;">Heure</option>
                                    <!-- Time Slot -->
