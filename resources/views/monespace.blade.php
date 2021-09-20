@@ -65,7 +65,7 @@
         <!-- Titlebar -->
         <div id="titlebar">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <h2>Bonjour {{$cuser->username}}, </h2>
                     <!-- Breadcrumbs 
                     <nav id="breadcrumbs">
@@ -74,6 +74,9 @@
                             <li>Dashboard</li>
                         </ul>
                     </nav>-->
+                </div>
+                <div class="col-md-3">
+                    <button onclick="envoi_mail_aux_prestataires()" class="button margin-top-15">Diffuser email aux prestataires qui sont inscrits à l'offre de Lancement  </button>
                 </div>
             </div>
         </div>
@@ -276,5 +279,22 @@
     <!-- Content / End -->
 
 </div>
+
+<script>
+   function envoi_mail_aux_prestataires()
+   {
+
+     var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('mail_prestataire.offre_lancement') }}",
+                        method:"get",
+                        data:{ _token:_token},
+                        success:function(data){
+                        alert("mail envoyé");
+                        }
+                    });
+    
+   }
+</script>
 
  @endsection('content')

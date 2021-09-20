@@ -127,7 +127,7 @@ $plogo= $parametres->logo;
                                                 <option value="martinique">Martinique (+596)</option>
                                                 <option value="france">France (+33)</option>
                                                 <option value="guadeloupe">Guadeloupe (+590)</option>
-                                                <option value="guyane">Guyane française (+594)</option> 
+                                                <option value="guyanef">Guyane française (+594)</option> 
                                                </select>
                                                 </div>
                                                   
@@ -228,7 +228,7 @@ $plogo= $parametres->logo;
                                             <div class="col-md-12">
                                                 <div>
                                                     <input name="email" type="email" id="email2" placeholder="Email *" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required"  onfocusout="cusername()">
-                                                    <p id="erro5" style="color: red;"></p>
+                                                    <p id="erro52" style="color: red;"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -499,7 +499,7 @@ $('#email2').keyup(function() {
         }
         else
         {
-           document.getElementById("erro5").innerHTML ="";
+           document.getElementById("erro52").innerHTML ="";
            $('#inscriptionform2').find(':input[type=submit]').prop('disabled', false);
 
         }

@@ -238,8 +238,8 @@ $temoinages=DB::table('temoinages')->get();
         </div>
         <div class="col-lg-8 col-md-12">
             <div class="dashboard-list-box margin-top-0">
-                <form method="post" action="{{ route('create') }}" name="inscriptionform" id="inscriptionform" autocomplete="on">
-                    <h4>Inscrivez-vous en 3 minutes seulement</h4>
+                <form method="post" action="{{ route('create') }}" name="inscriptionform" id="inscriptionform3" autocomplete="on">
+                    <h4>Inscrivez-vous en 4 minutes seulement</h4>
                             <div class="row padding-top-20">
                                 <div class="col-md-6">
                                     <div>
@@ -258,7 +258,8 @@ $temoinages=DB::table('temoinages')->get();
                             <div class="row">
                                 <div class="col-md-12">
                                     <div>
-                                        <input name="email" type="email" id="email" placeholder="Email *" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required">
+                                        <input name="email" type="email" id="email3" placeholder="Email *" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required">
+                                         <p id="erro53" style="color: red;"></p>
                                     </div>
                                 </div>
                             </div>
@@ -285,10 +286,30 @@ $temoinages=DB::table('temoinages')->get();
                             <div class="row">
                                 <div class="col-md-12">
                                     <div>
+                                      <div class="row">
+                                      <div class="col-md-2">
+                                        <label style="padding-top:10px; color:grey" for="pays">Téléphone:</label>
+                                      </div>
+                                     <div class="col-md-4">
+                                   <select style="color:grey" name="pays" id="pays" placeholder="Téléphone *"  required="required">
+                                    <option value="martinique">Martinique (+596)</option>
+                                    <option value="france">France (+33)</option>
+                                    <option value="guadeloupe">Guadeloupe (+590)</option>
+                                    <option value="guyanef">Guyane française (+594)</option> 
+                                   </select>
+                                    </div>
+                                      
+                                      <div class="col-md-6">
+                                        <input name="phone" type="phone" id="phone" placeholder="Numéro de téléphone *"  required="required" class="error">
+                                        <label>(pour les rappels SMS de vos réservations)</label>
+                                      </div>
+                                        </div>
+                                                </div>
+                                    <!-- <div>
 
                                         <input name="phone" type="number" id="phone" placeholder="Num mobile *" required="required" class="error">
                                         <label>(pour les rappels SMS de vos réservations)</label>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             
@@ -369,7 +390,42 @@ $temoinages=DB::table('temoinages')->get();
 
 </div>
 </div>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
+<script>
+
+$('#email3').keyup(function() {
+    //alert('ok');
+    var dInput = this.value;
+  // alert(dInput);
+   var _token = $('input[name="_token"]').val();
+   $.ajax({
+    url:"{{ route('existance.email') }}",
+    method:"post",
+    data:{ email:dInput, _token: _token },
+    success:function(data){
+        if(data=="existe")
+        {
+            document.getElementById("erro53").innerHTML =" Cet adresse email est déjà utilisée";
+            
+            $('#inscriptionform3').find(':input[type=submit]').prop('disabled', true);
+          
+        
+        }
+        else
+        {
+           document.getElementById("erro53").innerHTML ="";
+           $('#inscriptionform3').find(':input[type=submit]').prop('disabled', false);
+
+        }
+      
+    }
+});
+   
+});
+</script>
 @endsection('content')
+
+
 <script>
 function switchci() {
   var ins = document.getElementById("inscriptionsec");
@@ -410,5 +466,8 @@ function my_func() {
   }
 
 }
+
+
+
 
 </script>

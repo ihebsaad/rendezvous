@@ -141,6 +141,7 @@ Route::get('/offrelancement_annuel', 'UsersController@offrelancement_annuel')->n
 
 Route::get('/choixpayement', 'UsersController@choixpayement')->name('choixpayement');
 Route::get('/offrelancement_anne2', 'UsersController@OffreLancement_anne2')->name('OffreLancement_anne2');
+Route::get('/mail_prestataire_offre_lancement', 'UsersController@envoi_email_aux_prestataires_offre_lancement')->name('mail_prestataire.offre_lancement');
 
 
 Route::get('/apropos', 'UsersController@apropos')->name('apropos');
