@@ -24,15 +24,21 @@ try {
   $event = \Stripe\Webhook::constructEvent(
     $payload, $sig_header, $endpoint_secret
   );
+  $myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+$txt = "Mickey Mouse\n";
+fwrite($myfile, $txt);
+$txt = "Minnie Mouse\n";
+fwrite($myfile, $txt);
+fclose($myfile);
 } catch(\UnexpectedValueException $e) {
   // Invalid payload
   http_response_code(400);
   exit();
-} /*catch(\Stripe\Exception\SignatureVerificationException $e) {
+} catch(\Stripe\Exception\SignatureVerificationException $e) {
   // Invalid signature
   http_response_code(400);
   exit();
-}*/
+}
 
 // Handle the event
 switch ($event->type) {
@@ -52,12 +58,6 @@ switch ($event->type) {
     $paymentIntent = $event->data->object;
   // ... handle other event types
   default:
-  $myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
-$txt = "Mickey Mouse\n";
-fwrite($myfile, $txt);
-$txt = "Minnie Mouse\n";
-fwrite($myfile, $txt);
-fclose($myfile);
     echo 'Received unknown event type ' . $event->type;
 }
 
