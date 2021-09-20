@@ -1344,9 +1344,9 @@ $( document ).ready(function() {
 
                     <!-- Panel Dropdown -->
                     <div class="col-lg-12" >
-                        <select class="chosen-select panel-dropdown time-slots-dropdown" data-placeholder="Heure">
+                        <select class="chosen-select panel-dropdown time-slots-dropdown">
                            
-                            <option value="blank"></option>
+                            <option value="blank">Heure</option>
                                     <!-- Time Slot -->
                                     <option style=" position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
                                         <label for="time-slot-1">
@@ -1476,7 +1476,7 @@ $( document ).ready(function() {
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré">
-                        <option label="blank"></option>	
+                        <option label="blank">Sélectionner l'abonnement desiré</option>	
 
                              <?php 
                                 foreach($servicesreccurent as $service){
