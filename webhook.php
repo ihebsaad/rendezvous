@@ -26,11 +26,11 @@ try {
   );
 } catch(\UnexpectedValueException $e) {
   // Invalid payload
-  http_response_code(400);
+  http_response_code(200);
   exit();
 } catch(\Stripe\Exception\SignatureVerificationException $e) {
   // Invalid signature
-  http_response_code(400);
+  http_response_code(200);
   exit();
 }
 
