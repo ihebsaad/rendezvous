@@ -18,7 +18,7 @@ $endpoint_secret = 'whsec_rwPn2MsYhTNgrGqNu6jnbVPFvQlzxnQY';
 
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
-dd($sig_header);
+dd($payload);
 $event = null;
 
 try {
