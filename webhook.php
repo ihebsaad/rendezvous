@@ -43,12 +43,12 @@ switch ($event->type) {
     $customer = $event->data->object;
   case 'customer.subscription.deleted':
 
-
+    echo "offfff" ;
     $customer = $event->data->object;
   case 'customer.subscription.updated':
     $customer = $event->data->object;
   case 'invoice.payment_failed':
-  if ($event->lines->data->subscription!=null) {
+  if ($event->lines->data->subscription==null) {
 
     http_response_code(200);
   exit();
@@ -66,11 +66,11 @@ switch ($event->type) {
                 die('Erreur : ' .$conn->connect_error);
             }
 
-            $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe='sub_KC84at'";
+            $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe=".$event->lines->data->subscription."";
             if ($conn->query($sql) === TRUE) {
-              echo "Record updated successfully";
+              //echo "Record updated successfully";
             } else {
-              echo "Error updating record: " . $conn->error;
+              //echo "Error updating record: " . $conn->error;
             }
 
     //$invoice = $event->data->object;
