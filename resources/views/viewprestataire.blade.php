@@ -8,6 +8,13 @@
 
 <style type="text/css">
 /* Show more */
+.single-slot-time {
+    font-weight: 400!important;
+    color: #666;
+    line-height: 20px;
+    font-size: 12px!important;
+    margin-bottom: 4px;
+}
 .single-slot-left {
     background: white!important;
     flex: 1;
@@ -15,7 +22,7 @@
 }
 .single-slot-right {
     flex: 0 0 auto;
-    background-color: #c7c7c7!important;
+    background-color: #c7c7c770!important;;
     position: relative;
     display: flex;
     align-items: center;
@@ -761,7 +768,7 @@ table.basic-table th {
                                     <div  class="col-md-5 col-sm-6 ">
                                 <a href="" class="button border " style=" margin-top: 49px;
     color: #808080bd!important;
-    border-color: #808080bd!important;   margin-top: 49px;">Réserver</a>
+    border-color: #808080bd!important;       margin-top: -6px;">Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -1336,7 +1343,7 @@ $( document ).ready(function() {
                     </div>
 
                     <!-- Panel Dropdown -->
-                    <div class="col-lg-12" style="    height: fit-content;">
+                    <div class="col-lg-12" >
                         <select class="chosen-select panel-dropdown time-slots-dropdown" data-placeholder="Heure">
                            
                             <option value="blank"></option>
@@ -1393,7 +1400,7 @@ $( document ).ready(function() {
 
                             </div>
                     <!-- Panel Dropdown / End -->
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 " >
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                       
                         <select class="chosen-select-no-single" id="rappel">
@@ -1417,20 +1424,21 @@ $( document ).ready(function() {
                     <?php  foreach($produit as $prod){ ?>
                     <div class="single-slot">
                             <div class="single-slot-left">
-                            <button class="remove-slot" ><i class="fa fa-close"></i></button>
-                            <br><br>
-                                <div class="single-slot-time"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>{{$prod->prix_unité}} € </div>
+                                <div class="single-slot-time"><div class="row">
+                                    <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
+                                    </div><div  class="col-md-6" style=" font-weight: 800!important;">{{$prod->prix_unité}} €</div></div></div>
                                 <div class="single-slot-time">{{$prod->nom_produit}} </div>
                             </div>
 
                             <div class="single-slot-right">
-                            
+                            <button class="remove-slot reject" style="    margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+
                                 <div class="plusminus horiz">
                                     <button></button>
                                     <input type="number" name="slot-qty" value="0" min="0" max="10">
                                     <button></button> 
                                 </div>
-
+<br>
                             </div>
                         </div>
                     <!-- Slot For Cloning / Do NOT Remove-->
@@ -1489,18 +1497,18 @@ $( document ).ready(function() {
 
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
-                            <select class="chosen-select  time-slots-dropdown" data-placeholder="Heure" >
+                            <select class="chosen  time-slots-dropdown" data-placeholder="Heure" >
                            
                            <option value="blank"></option>
                                    <!-- Time Slot -->
-                                   <option style=" position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                   <option style=" position: relative!important;padding: 12px 10px!important; text-align: center!important;cursor: pointer!important;font-weight: 600!important;user-select: none;border-radius: 4px!important; color: rgb(119, 119, 119)!important;transition: all 0.3s ease 0s!important;overflow: hidden;font-size: 15px!important;background-color: #f2f2f2!important;"class="time-slot">
                                        <label for="time-slot-1">
                                            <strong>8:30 am - 9:00 am</strong>
                                        </label>
                                    </option>
 
                                    <!-- Time Slot -->
-                                   <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                   <option style="  position: relative!important;padding: 12px 10px!important; text-align: center!important;cursor: pointer!important;font-weight: 600!important;user-select: none;border-radius: 4px!important; color: rgb(119, 119, 119)!important;transition: all 0.3s ease 0s!important;overflow: hidden;font-size: 15px!important;background-color: #f2f2f2!important;" class="time-slot">
                                        <label for="time-slot-2">
                                            <strong>9:00 am - 9:30 am</strong>
                                        </label>
@@ -1546,7 +1554,7 @@ $( document ).ready(function() {
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="chosen-select-no-single" >
+                        <select class="select" style="display: block!important;">
 
                             <option  >Rappel de rendez vous par SMS</option>
                             <option value="60">1h avant le RDV </option>
