@@ -8,16 +8,173 @@
 
 <style type="text/css">
 /* Show more */
+a.button.border {
+    color: #ffd700!important;
+    border-color: #ffd700!important;
+}
+.booking-widget .panel-dropdown a:after {
+    font-size: 20px;
+    color: #ffd700!important;
+    margin-left: 0;
+    position: absolute;
+    right: 20px;
+}
 
+.booking-widget .panel-dropdown a {
+    border: none;
+    font-size: 12.5px!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 6px 0px rgb(0 0 0 / 10%);
+    font-weight: 800!important;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    display: block;
+    width: 100%;
+    transition: color 0.3s;
+}
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+    margin: 0;
+    padding: 0;
+    height: 49px;
+    outline: 0;
+    border: 0 !important;
+    background: transparent !important;
+    color: #888;
+    line-height: normal;
+    font-weight: 800!important;
+    box-shadow: none;
+    transition: none;
+    font-size: 12.5px;
+}
+.chosen-container-single .chosen-default {
+    font-size: 12.5px!important;
+    color: #999;
+    font-weight: 800!important;
+}
+.chosen-container-single .chosen-single div:after {
+    content: "\f107";
+    font-family: "FontAwesome";
+    font-size: 18px;
+    margin: 1px 0 0 0;
+    right: 20px;
+    position: relative;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    color: #ffd700!important;
+    float: right;
+    font-weight: normal;
+    transition: transform 0.3s;
+    transform: translate3d(0,0,0) rotate(
+0deg);
+}
+.booking-widget .panel-dropdown a {
+    border: 1px solid #dbdbdb!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%)!important;
+    font-size: 16px;
+    font-weight: 600;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    display: block;
+    width: 100%;
+    transition: color 0.3s;
+}input#date-picker2 {
+    border: 1px solid #dbdbdb!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%)!important;
+    font-size: 12.5px!important;
+    font-weight: 800!important;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    transition: color 0.3s !important;
+}
+input#date-picker {
+    border: 1px solid #dbdbdb!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%)!important;
+    font-size: 12.5px!important;
+    font-weight: 800!important;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    transition: color 0.3s !important;
+}
+.daterangepicker td.active.end-date.in-range.available, .qtyTotal, .mm-menu em.mm-counter, .option-set li a.selected, .category-small-box:hover, .pricing-list-container h4:after, #backtotop a, .chosen-container-multi .chosen-choices li.search-choice, .select-options li:hover, button.panel-apply, .layout-switcher a:hover, .listing-features.checkboxes li:before, .comment-by a.reply:hover, .add-review-photos:hover, .office-address h3:after, .post-img:before, button.button, input[type="button"], input[type="submit"], a.button, a.button.border:hover, table.basic-table th, .plan.featured .plan-price, mark.color, .style-4 .tabs-nav li.active a, .style-5 .tabs-nav li.active a, .dashboard-list-box .button.gray:hover, .change-photo-btn:hover, .dashboard-list-box a.rate-review:hover, input:checked + .slider, .add-pricing-submenu.button:hover, .add-pricing-list-item.button:hover, .custom-zoom-in:hover, .custom-zoom-out:hover, #geoLocation:hover, #streetView:hover, #scrollEnabling:hover, #scrollEnabling.enabled, #mapnav-buttons a:hover, #sign-in-dialog .mfp-close:hover, #small-dialog .mfp-close:hover {
+    background-color: #ffd700;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%);
+}
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close:before {
+    content: "\f00d";
+    font-family: "FontAwesome";
+    font-size: 13px;
+    top: 1px;
+    position: relative;
+    width: 11px;
+    height: 5px;
+    display: inline-block;
+    color: #42403f!important;
+    float: right;
+    font-weight: normal;
+}
+.buttons-to-right {
+    box-shadow: none;
+}
+.buttons-to-right, .button.to-right {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translate3d(0,-49%,0);
+    -moz-transform: translate3d(0,-50%,0);
+    opacity: 0;
+    transition: 0.4s;
+    box-shadow: 0px 0px 10px 15px #fbfbfb;
+}
+
+
+.listing-details-sidebar li {
+    display: block;
+    padding-left: 26px;
+    position: relative;
+    margin-bottom: 5px;
+    line-height: 24px;
+    width: 155px;
+}
 
 @media (max-width: 768px) {.panel-dropdown .panel-dropdown-content, .fullwidth-filters .panel-dropdown.float-right .panel-dropdown-content {
     left: 0;
     right: auto;
     max-width: 74vw!important;
 }}
-.comment-by-listing a:hover, .browse-all-user-listings a i, .hosted-by-title h4 a:hover, .style-2 .trigger.active a, .style-2 .ui-accordion .ui-accordion-header-active:hover, .style-2 .ui-accordion .ui-accordion-header-active, #posts-nav li a:hover, .plan.featured .listing-badge, .post-content h3 a:hover, .add-review-photos i, .show-more-button i, .listing-details-sidebar li a, .star-rating .rating-counter a:hover, .more-search-options-trigger:after, .header-widget .sign-in:hover, #footer a, #footer .footer-links li a:hover, #navigation.style-1 .current, #navigation.style-1 ul li:hover a, .user-menu.active .user-name:after, .user-menu:hover .user-name:after, .user-menu.active .user-name, .user-menu:hover .user-name, .main-search-input-item.location a:hover, .chosen-container .chosen-results li.highlighted, .input-with-icon.location a i:hover, .sort-by .chosen-container-single .chosen-single div:after, .sort-by .chosen-container-single .chosen-default, .panel-dropdown a:after, .post-content a.read-more, .post-meta li a:hover, .widget-text h5 a:hover, .about-author a, a.button.border.white:hover, .icon-box-2 i, a.button.border, .style-2 .ui-accordion .ui-accordion-header:hover, .style-2 .trigger a:hover, .plan.featured .listing-badges .featured, .list-4 li:before, .list-3 li:before, .list-2 li:before, .list-1 li:before, .info-box h4, .testimonial-carousel .slick-slide.slick-active .testimonial:before, .sign-in-form .tabs-nav li a:hover, .sign-in-form .tabs-nav li.active a, .lost_password:hover a, #top-bar .social-icons li a:hover i, .listing-share .social-icons li a:hover i, .agent .social-icons li a:hover i, #footer .social-icons li a:hover i, .headline span i {
-    color: #ffd700!important;
-}
+
 .daterangepicker td.active.end-date.in-range.available, .qtyTotal, .mm-menu em.mm-counter, .option-set li a.selected, .category-small-box:hover, .pricing-list-container h4:after, #backtotop a, .chosen-container-multi .chosen-choices li.search-choice, .select-options li:hover, button.panel-apply, .layout-switcher a:hover, .listing-features.checkboxes li:before, .comment-by a.reply:hover, .add-review-photos:hover, .office-address h3:after, .post-img:before, button.button, input[type="button"], input[type="submit"], a.button, a.button.border:hover, table.basic-table th, .plan.featured .plan-price, mark.color, .style-4 .tabs-nav li.active a, .style-5 .tabs-nav li.active a, .dashboard-list-box .button.gray:hover, .change-photo-btn:hover, .dashboard-list-box a.rate-review:hover, input:checked + .slider, .add-pricing-submenu.button:hover, .add-pricing-list-item.button:hover, .custom-zoom-in:hover, .custom-zoom-out:hover, #geoLocation:hover, #streetView:hover, #scrollEnabling:hover, #scrollEnabling.enabled, #mapnav-buttons a:hover, #sign-in-dialog .mfp-close:hover, #small-dialog .mfp-close:hover {
     color: black! important;
     background-color: #ffd700;
@@ -530,7 +687,7 @@ table.basic-table th {
                     $nbprods = count($produit);
                     if ( $nbprods>0){
             ?>
-            <div id="listing-pricing-list" class="listing-section">
+            <div id="listing-pricing-list" class="pending-booking">
                 <h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Boutique</h3>
 
                 <div class="show-moreP" id="one">
@@ -545,13 +702,22 @@ table.basic-table th {
                                     <div class="col-6 col-lg-6">
                                     <?php if($prod->image!=''){ echo '<a href="'.URL::asset('storage/images/'.$prod->image).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$prod->image).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
                                     </div>
-                                    <center><div class="col-6 col-lg-6">
+                               <center>  <div class="col-6 col-lg-6">
                                 <span style="width: 71px;margin-top: 9px;">{{$prod->prix_unité}} €</span>
                                     </div></center>
+                                    <div  class="col-md-5 col-sm-6 ">
+                                <a href="" class="button border " style=" margin-top: 49px;
+    color: #808080bd!important;
+    border-color: #808080bd!important;   margin-top: 49px;">Réserver</a>
+                           </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
                                 <h5>{{$prod->nom_produit}}</h5>
                                 <p style="text-align: justify;">{{ $prod->description }}</p>
+                            
+                           
+                                
+                                
                             </div>
 
     
@@ -1096,7 +1262,7 @@ $( document ).ready(function() {
                        } ?>
 
                         <div class="col-lg-12">
-                        <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; " >
+                        <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; "data-placeholder="Sélectionner le(s) service(s) desiré(s)" >
                                 <?php 
                                 foreach($services as $service){
                                     echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
@@ -1193,18 +1359,56 @@ $( document ).ready(function() {
                     <!-- Panel Dropdown / End -->
                     <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
-                        <div  >
-                        <select class=" " id="rappel"  style="font-size: 94%!important;">
-                        <option label="blank" style="">Rappel de rendez vous par SMS</option>
-                        <center> <option value="60">1h avant le RDV </option></center>
-                <center>   <option value="120">2h avant le RDV</option></center>
-                        <center>	 <option value="180">3h avant le RDV</option></center>
-                <center><option value="1440">1 jour avant le RDV</option></center>
-                <center> <option value="2880">2 jours avant le RDV</option></center>
-                <center> <option value="7200">5 jours avant le RDV</option></center>
+                      
+                        <select class="chosen-select" id="rappel" data-placeholder="Rappel de rendez vous par SMS">
+
+                        <option label="blank" ></option>
+                        <option value="60">1h avant le RDV </option>
+                         <option value="120">2h avant le RDV</option>
+                      	 <option value="180">3h avant le RDV</option>
+                          <option value="1440">1 jour avant le RDV</option>
+                        <option value="2880">2 jours avant le RDV</option>
+                         <option value="7200">5 jours avant le RDV</option>
                         </select>
-                        </div>
+                       
                     </div>
+                    <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
+                    <div class="day-slots">
+                    <div class="day-slot-headline" style="       color: black;width: 252px;"> Produits:</div>
+                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px;
+    width: 253px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    vertical-align: middle;
+    border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
+                    <!-- Slot For Cloning / Do NOT Remove-->
+                    <?php  foreach($produit as $prod){ ?>
+                    <div class="single-slot">
+                            <div class="single-slot-left">
+                                <div class="single-slot-time"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>{{$prod->nom_produit}} </div>
+                                <div class="single-slot-time"> {{$prod->prix_unité}} €</div>
+                            </div>
+
+                            <div class="single-slot-right">
+                            <button class="remove-slot" style="margin-left: 51px;"><i class="fa fa-close"></i></button>
+<br>
+                                <strong>Quantité:</strong>
+                                <div class="plusminus horiz">
+                                    <button></button>
+                                    <input type="number" name="slot-qty" value="0" min="0" max="10">
+                                    <button></button> 
+                                </div>
+                            </div>
+                        </div>
+                    <!-- Slot For Cloning / Do NOT Remove-->
+        
+                    <?php } ?>	</div>	
+       
+
+
+				
+				</div>
+         </div>	 
 
                         <!-- Book Now -->
                         <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Réserver</a>
@@ -1230,8 +1434,8 @@ $( document ).ready(function() {
                
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
-                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  >
-                        <option label="blank">choisir un service</option>	
+                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner le(s) service(s) desiré(s)">
+                        <option label="blank"></option>	
 
                              <?php 
                                 foreach($servicesreccurent as $service){
@@ -1325,17 +1529,17 @@ $( document ).ready(function() {
                         </div>
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
-                        <div  >
-                        <select class="panel-dropdown time-slots-dropdown" id="rappel"  style="font-size: 94%!important;">
-                        <option label="blank"><strong style="font-weight: 17px !important;"><b style="font-weight: 17px !important;">Rappel de rendez vous par SMS</b> </strong></option>
-                        <center> <option value="60">1h avant le RDV </option></center>
-                <center>   <option value="120">2h avant le RDV</option></center>
-                        <center>	 <option value="180">3h avant le RDV</option></center>
-                <center><option value="1440">1 jour avant le RDV</option></center>
-                <center> <option value="2880">2 jours avant le RDV</option></center>
-                <center> <option value="7200">5 jours avant le RDV</option></center>
+                     
+                        <select class="chosen-select-no-single" id="rappel" data-placeholder="Rappel de rendez vous par SMS">
+                        <option  label="blank"></option>
+                        <option value="60">1h avant le RDV </option>
+                <option value="120">2h avant le RDV</option>
+                      	 <option value="180">3h avant le RDV</option>
+                <option value="1440">1 jour avant le RDV</option>
+              <option value="2880">2 jours avant le RDV</option>
+                <option value="7200">5 jours avant le RDV</option>
                         </select>
-                        </div>
+                      
                     </div>
 
                         <!-- Book Now -->
@@ -1478,7 +1682,7 @@ $( document ).ready(function() {
                     <li><i class="sl sl-icon-phone"></i> {{$user->tel}}</li>
                     <?php } ?>
                     <?php if (!empty($user->email)) { ?>
-                    <li><i class="fa fa-envelope-o"></i> {{$user->email}}</li>
+                    <li style="width:100px!important;"><i class="fa fa-envelope-o"></i> <a href="#" style="width:100px!important;">{{$user->email}}</a></li>
                     <?php } ?>
                 </ul>
 
