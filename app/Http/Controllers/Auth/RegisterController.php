@@ -303,18 +303,52 @@ class RegisterController extends Controller
             $format = "Y-m-d H:i:s";
              $date_inscription = (new \DateTime())->format('Y-m-d H:i:s');
 
+             $ind_tel='';
+        $pays='';
+        $phone='';
+        if($req->get('pays'))
+         {
+            $pays=$req->get('pays');
+            if($pays=='martinique')
+            {
+              $pays='Martinique';
+              $ind_tel= 596; 
+            }
+            if($pays=='france')
+            {
+              $pays='France';
+              $ind_tel= 33; 
+            }
+
+            if($pays=='guadeloupe')
+            {
+              $pays='Guadeloupe';
+              $ind_tel= 590; 
+            }
+            if($pays=='guyanef')
+            {
+              $pays='Guyane française';
+              $ind_tel= 594; 
+            }
+           
+         }
+          if($req->get('phone'))
+            {
+              $phone= $ind_tel.''.$req->get('phone'); 
+            }
+
 
             $client= User::create([
             'username' => $req->get('username'),
             'name' => $req->get('name'),
             'lastname' => $req->get('lastname'),
-            'phone' => $req->get('phone'),
-            'email' => $req->get('email'),
-            
-            'date_inscription' => $date_inscription,
-           
+            'phone' => $phone,
+            'email' => $req->get('email'),            
+            'date_inscription' => $date_inscription,           
             'user_type' => $req->get('user_type'),
             'password' => Hash::make($req->get('password')),
+             'pays' => $pays,
+             'ind_tel' =>$ind_tel
            ]);
             Auth::login($client);
 
