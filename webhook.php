@@ -30,7 +30,7 @@ try {
   exit();
 } catch(\Stripe\Exception\SignatureVerificationException $e) {
   // Invalid signature
-  http_response_code(200);
+  http_response_code(400);
   exit();
 }
 
