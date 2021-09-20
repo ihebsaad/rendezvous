@@ -1345,9 +1345,10 @@ $( document ).ready(function() {
 
                     <!-- Panel Dropdown -->
                     <div class="col-lg-12" >
-                        <select class="chosen-select panel-dropdown time-slots-dropdown">
+                    <select class="chosen-select-no-single  time-slots-dropdown" data-placeholder="Heure" >
                            
-                            <option value="blank">Heure</option>
+                           <option value="blank" style="font-size:12.5px;font-weight:800;">Heure</option>
+                      
                                     <!-- Time Slot -->
                                     <option style=" position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
                                         <label for="time-slot-1">
