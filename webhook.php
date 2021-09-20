@@ -48,7 +48,7 @@ switch ($event->type) {
   case 'customer.subscription.updated':
     $customer = $event->data->object;
   case 'invoice.payment_failed':
-  if ($event->lines->data->subscription==null) {
+  if ($event->lines->data->subscription!=null) {
 
     http_response_code(200);
   exit();
