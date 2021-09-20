@@ -36,25 +36,16 @@ try {
   http_response_code(400);
   exit();
 }
-
-// Handle the event
-switch ($event->type) {
-  case 'customer.subscription.created':
-  {
-    $customer = $event->data->object;
-  };
-  case 'customer.subscription.deleted':
-  {
-    echo "offfff" ;
-   
-    //$customer = $event->data->object;
-  };
-  case 'customer.subscription.updated':
-  {
-    $customer = $event->data->object;
-  };
-  case 'invoice.payment_failed':
-  {
+if ($event->type=='customer.subscription.created') {
+  $customer = $event->data->object;
+}
+elseif ($event->type=='customer.subscription.deleted') {
+  echo "offfff" ;
+}
+elseif ($event->type=='customer.subscription.updated') {
+  # code...
+}
+elseif ($event->type=='invoice.payment_failed') {
   if ($event->lines->data->subscription==null) {
 
     http_response_code(200);
@@ -81,10 +72,7 @@ switch ($event->type) {
             }
 
     //$invoice = $event->data->object;
-  }};
-  // ... handle other event types
-  default:
-    echo 'Received unknown event type ' . $event->lines->data->subscription;
+  }
 }
 
 http_response_code(200);
