@@ -40,13 +40,21 @@ try {
 // Handle the event
 switch ($event->type) {
   case 'customer.subscription.created':
+  {
     $customer = $event->data->object;
+  };
   case 'customer.subscription.deleted':
+  {
     echo "offfff" ;
+   
     //$customer = $event->data->object;
+  };
   case 'customer.subscription.updated':
+  {
     $customer = $event->data->object;
+  };
   case 'invoice.payment_failed':
+  {
   if ($event->lines->data->subscription==null) {
 
     http_response_code(200);
@@ -73,7 +81,7 @@ switch ($event->type) {
             }
 
     //$invoice = $event->data->object;
-  };
+  }};
   // ... handle other event types
   default:
     echo 'Received unknown event type ' . $event->lines->data->subscription;
