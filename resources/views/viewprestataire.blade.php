@@ -1434,7 +1434,7 @@ $( document ).ready(function() {
                
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
-                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner le(s) service(s) desiré(s)">
+                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré">
                         <option label="blank"></option>	
 
                              <?php 
