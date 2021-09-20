@@ -1323,7 +1323,8 @@ $( document ).ready(function() {
 
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; "data-placeholder="Sélectionner le(s) service(s) desiré(s)" >
-                                <?php 
+                               <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner le(s) service(s) desiré(s)</option>
+                               <?php 
                                 foreach($services as $service){
                                     echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
                         
@@ -1431,7 +1432,7 @@ $( document ).ready(function() {
                             </div>
 
                             <div class="single-slot-right">
-                            <button class="remove-slot reject" style=" margin-top: 10px; background:red;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+                            <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
                                     <button></button>
