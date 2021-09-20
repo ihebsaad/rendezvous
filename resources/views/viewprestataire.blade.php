@@ -8,6 +8,42 @@
 
 <style type="text/css">
 /* Show more */
+.single-slot-left {
+    background: white!important;
+    flex: 1;
+    padding: 12px 17px;
+}
+.single-slot-right {
+    flex: 0 0 auto;
+    background-color: #c7c7c7!important;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 4px 4px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 17px;
+}
+.single-slot {
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 0;
+    display: flex;
+    width: -webkit-fill-available;
+    cursor: move;
+}
+.select {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-size: 12.5px!important;
+    color: #6b6464!important;
+    font-weight: 550;
+    width: 100%;
+    height: 51px;
+}
 a.button.border {
     color: #ffd700!important;
     border-color: #ffd700!important;
@@ -52,6 +88,23 @@ a.button.border {
     box-shadow: none;
     transition: none;
     font-size: 12.5px;
+}
+.chosen-container-single .chosen-single {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0 0 0 18px;
+    height: 51px;
+    font-size: 12.5px!important;
+    line-height: 50px;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 8%);
+    background-color: #fff;
+    color: #888;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: 800!important;
+    border-radius: 4px;
 }
 .chosen-container-single .chosen-default {
     font-size: 12.5px!important;
@@ -1284,83 +1337,66 @@ $( document ).ready(function() {
 
                     <!-- Panel Dropdown -->
                     <div class="col-lg-12" style="    height: fit-content;">
-                        <div class="panel-dropdown time-slots-dropdown">
-                            <a href="#">Heure</a>
-                            <div class="panel-dropdown-content padding-reset">
-                                <div class="panel-dropdown-scrollable">
-                                    <div  style="height:200px!important;">
+                        <select class="chosen-select panel-dropdown time-slots-dropdown" data-placeholder="Heure">
+                           
+                            <option value="blank"></option>
                                     <!-- Time Slot -->
-                                    <div class="time-slot">
-                                        <input type="radio" name="time-slot" id="time-slot-1">
+                                    <option style=" position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
                                         <label for="time-slot-1">
                                             <strong>8:30 am - 9:00 am</strong>
-                                            <span>1 slot available</span>
                                         </label>
-                                    </div>
+                                    </option>
 
                                     <!-- Time Slot -->
-                                    <div class="time-slot">
-                                        <input type="radio" name="time-slot" id="time-slot-2">
+                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
                                         <label for="time-slot-2">
                                             <strong>9:00 am - 9:30 am</strong>
-                                            <span>2 slots available</span>
                                         </label>
-                                    </div>
+                                    </option>
 
                                     <!-- Time Slot -->
-                                    <div class="time-slot">
-                                        <input type="radio" name="time-slot" id="time-slot-3">
+                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
                                         <label for="time-slot-3">
                                             <strong>9:30 am - 10:00 am</strong>
-                                            <span>1 slots available</span>
                                         </label>
-                                    </div>
+                                    </option>
 
                                     <!-- Time Slot -->
-                                    <div class="time-slot">
-                                        <input type="radio" name="time-slot" id="time-slot-4">
+                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
                                         <label for="time-slot-4">
                                             <strong>10:00 am - 10:30 am</strong>
-                                            <span>3 slots available</span>
                                         </label>
-                                    </div>
+                                    </option>
 
                                     <!-- Time Slot -->
-                                    <div class="time-slot">
-                                        <input type="radio" name="time-slot" id="time-slot-5">
+                                    <option style="    margin-top: 5px; position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
                                         <label for="time-slot-5">
                                             <strong>13:00 pm - 13:30 pm</strong>
-                                            <span>2 slots available</span>
                                         </label>
-                                    </div>
+                                    </option>
 
                                     <!-- Time Slot -->
-                                    <div class="time-slot">
-                                        <input type="radio" name="time-slot" id="time-slot-6">
+                                    <option style="    margin-top: 5px; position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
                                         <label for="time-slot-6">
                                             <strong>13:30 pm - 14:00 pm</strong>
-                                            <span>1 slots available</span>
                                         </label>
-                                    </div>
+                                    </option>
 
                                     <!-- Time Slot -->
-                                    <div class="time-slot">
-                                        <input type="radio" name="time-slot" id="time-slot-7">
+                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
                                         <label for="time-slot-7">
                                             <strong>14:00 pm - 14:30 pm</strong>
-                                            <span>1 slots available</span>
                                         </label>
-                                    </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                    </option>
+                                    
+                                </select>
+
                             </div>
-                        </div>
                     <!-- Panel Dropdown / End -->
                     <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                       
-                        <select class="chosen" id="rappel">
+                        <select class="chosen-select-no-single" id="rappel">
 
                         <option label="blank" >Rappel de rendez vous par SMS</option>
                         <option value="60">1h avant le RDV </option>
@@ -1374,30 +1410,27 @@ $( document ).ready(function() {
                     </div>
                     <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
                     <div class="day-slots">
-                    <div class="day-slot-headline" style="       color: black;width: 252px;"> Produits:</div>
-                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px;
-    width: 253px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    vertical-align: middle;
-    border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
+                    <div class="day-slot-headline" style="      background-color: #c7c7c7;
+   color: #000000;    width: 267px;"> Produits:</div>
+                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: auto;overflow-x: hidden;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
                     <?php  foreach($produit as $prod){ ?>
                     <div class="single-slot">
                             <div class="single-slot-left">
-                                <div class="single-slot-time"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>{{$prod->nom_produit}} </div>
-                                <div class="single-slot-time"> {{$prod->prix_unité}} €</div>
+                            <button class="remove-slot" ><i class="fa fa-close"></i></button>
+                            <br><br>
+                                <div class="single-slot-time"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>{{$prod->prix_unité}} € </div>
+                                <div class="single-slot-time">{{$prod->nom_produit}} </div>
                             </div>
 
                             <div class="single-slot-right">
-                            <button class="remove-slot" style="margin-left: 51px;"><i class="fa fa-close"></i></button>
-<br>
-                                <strong>Quantité:</strong>
+                            
                                 <div class="plusminus horiz">
                                     <button></button>
                                     <input type="number" name="slot-qty" value="0" min="0" max="10">
                                     <button></button> 
                                 </div>
+
                             </div>
                         </div>
                     <!-- Slot For Cloning / Do NOT Remove-->
@@ -1456,90 +1489,74 @@ $( document ).ready(function() {
 
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
-                            <div class="panel-dropdown time-slots-dropdown">
-                                <a href="#">Heure</a>
-                                <div class="panel-dropdown-content padding-reset">
-                                    <div class="panel-dropdown-scrollable">
-                                        
-                                        <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <input type="radio" name="time-slot" id="time-slot-1">
-                                            <label for="time-slot-1">
-                                                <strong>8:30 am - 9:00 am</strong>
-                                                <span>1 slot available</span>
-                                            </label>
-                                        </div>
+                            <select class="chosen-select  time-slots-dropdown" data-placeholder="Heure" >
+                           
+                           <option value="blank"></option>
+                                   <!-- Time Slot -->
+                                   <option style=" position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                       <label for="time-slot-1">
+                                           <strong>8:30 am - 9:00 am</strong>
+                                       </label>
+                                   </option>
 
-                                        <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <input type="radio" name="time-slot" id="time-slot-2">
-                                            <label for="time-slot-2">
-                                                <strong>9:00 am - 9:30 am</strong>
-                                                <span>2 slots available</span>
-                                            </label>
-                                        </div>
+                                   <!-- Time Slot -->
+                                   <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                       <label for="time-slot-2">
+                                           <strong>9:00 am - 9:30 am</strong>
+                                       </label>
+                                   </option>
 
-                                        <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <input type="radio" name="time-slot" id="time-slot-3">
-                                            <label for="time-slot-3">
-                                                <strong>9:30 am - 10:00 am</strong>
-                                                <span>1 slots available</span>
-                                            </label>
-                                        </div>
+                                   <!-- Time Slot -->
+                                   <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                       <label for="time-slot-3">
+                                           <strong>9:30 am - 10:00 am</strong>
+                                       </label>
+                                   </option>
 
-                                        <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <input type="radio" name="time-slot" id="time-slot-4">
-                                            <label for="time-slot-4">
-                                                <strong>10:00 am - 10:30 am</strong>
-                                                <span>3 slots available</span>
-                                            </label>
-                                        </div>
+                                   <!-- Time Slot -->
+                                   <option style="     margin-top: 5px;position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
+                                       <label for="time-slot-4">
+                                           <strong>10:00 am - 10:30 am</strong>
+                                       </label>
+                                   </option>
 
-                                        <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <input type="radio" name="time-slot" id="time-slot-5">
-                                            <label for="time-slot-5">
-                                                <strong>13:00 pm - 13:30 pm</strong>
-                                                <span>2 slots available</span>
-                                            </label>
-                                        </div>
+                                   <!-- Time Slot -->
+                                   <option style="    margin-top: 5px; position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
+                                       <label for="time-slot-5">
+                                           <strong>13:00 pm - 13:30 pm</strong>
+                                       </label>
+                                   </option>
 
-                                        <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <input type="radio" name="time-slot" id="time-slot-6">
-                                            <label for="time-slot-6">
-                                                <strong>13:30 pm - 14:00 pm</strong>
-                                                <span>1 slots available</span>
-                                            </label>
-                                        </div>
+                                   <!-- Time Slot -->
+                                   <option style="    margin-top: 5px; position: relative ;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                       <label for="time-slot-6">
+                                           <strong>13:30 pm - 14:00 pm</strong>
+                                       </label>
+                                   </option>
 
-                                        <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <input type="radio" name="time-slot" id="time-slot-7">
-                                            <label for="time-slot-7">
-                                                <strong>14:00 pm - 14:30 pm</strong>
-                                                <span>1 slots available</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                   <!-- Time Slot -->
+                                   <option style="     margin-top: 5px;position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
+                                       <label for="time-slot-7">
+                                           <strong>14:00 pm - 14:30 pm</strong>
+                                       </label>
+                                   </option>
+                                   
+                               </select>
+                               </div>
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="chosen" id="rappel" >
-                        <option  label="blank">Rappel de rendez vous par SMS</option>
-                        <option value="60">1h avant le RDV </option>
-                <option value="120">2h avant le RDV</option>
-                      	 <option value="180">3h avant le RDV</option>
-                <option value="1440">1 jour avant le RDV</option>
-              <option value="2880">2 jours avant le RDV</option>
-                <option value="7200">5 jours avant le RDV</option>
+                        <select class="chosen-select-no-single" >
+
+                            <option  >Rappel de rendez vous par SMS</option>
+                            <option value="60">1h avant le RDV </option>
+                            <option value="120">2h avant le RDV</option>
+                            <option value="180">3h avant le RDV</option>
+                            <option value="1440">1 jour avant le RDV</option>
+                            <option value="2880">2 jours avant le RDV</option>
+                            <option value="7200">5 jours avant le RDV</option>
                         </select>
-                      
+                                                
                     </div>
 
                         <!-- Book Now -->
@@ -1740,7 +1757,37 @@ $( document ).ready(function() {
 
     </div>
 </div>
-
+<script>
+$(".opening-day.js-demo-hours .chosen-select").each(function() {
+	$(this).append(''+
+        '<option></option>'+
+        '<option>Closed</option>'+
+        '<option>1 AM</option>'+
+        '<option>2 AM</option>'+
+        '<option>3 AM</option>'+
+        '<option>4 AM</option>'+
+        '<option>5 AM</option>'+
+        '<option>6 AM</option>'+
+        '<option>7 AM</option>'+
+        '<option>8 AM</option>'+
+        '<option>9 AM</option>'+
+        '<option>10 AM</option>'+
+        '<option>11 AM</option>'+
+        '<option>12 AM</option>'+
+        '<option>1 PM</option>'+
+        '<option>2 PM</option>'+
+        '<option>3 PM</option>'+
+        '<option>4 PM</option>'+
+        '<option>5 PM</option>'+
+        '<option>6 PM</option>'+
+        '<option>7 PM</option>'+
+        '<option>8 PM</option>'+
+        '<option>9 PM</option>'+
+        '<option>10 PM</option>'+
+        '<option>11 PM</option>'+
+        '<option>12 PM</option>');
+});
+</script>
 
 
 <script>
