@@ -1525,7 +1525,7 @@ $( document ).ready(function() {
                         <div class="col-lg-12">
                             <select class="chosen" data-placeholder="Heure" >
                            
-                           <option class="option_class"value="blank" style="font-size:12.5px!important;font-weight:800!important;">Heure</option>
+                           <option value="blank" style="font-size:12.5px!important;font-weight:800!important;">Heure</option>
                                    <!-- Time Slot -->
                                    <option class="option_class">
                                        <label for="time-slot-1">
