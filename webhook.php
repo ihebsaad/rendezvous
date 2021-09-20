@@ -12,18 +12,13 @@
 //   php -S localhost:4242
 
 require 'vendor/autoload.php';
-
+\Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 $endpoint_secret = 'whsec_rwPn2MsYhTNgrGqNu6jnbVPFvQlzxnQY';
 
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
-
 $event = null;
-$event = \Stripe\Webhook::constructEvent(
-    $payload, $sig_header, $endpoint_secret
-  );
-dd($event->type);
 
 try {
   $event = \Stripe\Webhook::constructEvent(
