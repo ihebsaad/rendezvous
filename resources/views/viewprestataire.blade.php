@@ -8,6 +8,10 @@
 
 <style type="text/css">
 /* Show more */
+
+.like-button .like-icon {
+    color: #ff0000!important;
+}
 @media (max-width: 768px){
 .day-slot-headline { 
     width: auto!important;
@@ -541,7 +545,8 @@ table.basic-table th {
 </div>
 
 <?php  } ?>  
-
+<script>  var produitslist =[];
+</script>
 
 <!-- Content
 ================================================== -->
@@ -795,7 +800,7 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{$prod->prix_unité}} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <a href="" class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;">Réserver</a>
+                                <a  class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick='visibilityFunction(<?php echo $prod->id;?>)'>Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -1348,7 +1353,7 @@ $( document ).ready(function() {
                        } ?>
 
                         <div class="col-lg-12">
-                        <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; "data-placeholder="Sélectionner le(s) service(s) desiré(s)" >
+                        <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; "data-placeholder="Sélectionner le(s) service(s) desiré(s)" onchange="selectservice()" >
                                <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner le(s) service(s) desiré(s)</option>
                                <?php 
                                 foreach($services as $service){
@@ -1428,6 +1433,27 @@ $( document ).ready(function() {
 
                             </div>
                     <!-- Panel Dropdown / End -->
+                    <!-- Panel Dropdown -->
+					<div class="col-lg-12">
+						<div class="panel-dropdown">
+							<a href="javascript:void(0)">Invité(e)s <span class="qtyTotal" name="qtyTotal">1</span></a>
+							<div class="panel-dropdown-content">
+
+								<!-- Quantity Buttons -->
+								<div class="qtyButtons">
+									<div class="qtyTitle">Adultes</div>
+									<input type="text" name="qtyInput" value="1">
+								</div>
+
+								<div class="qtyButtons">
+									<div class="qtyTitle">Enfants</div>
+									<input type="text" name="qtyInput" value="0">
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<!-- Panel Dropdown / End -->
                     <div class="col-lg-12 " >
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                       
@@ -1443,15 +1469,28 @@ $( document ).ready(function() {
                         </select>
                        
                     </div>
+                    <?php 
+                    if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+		  	    <div class="col-lg-12 col-md-12 ">
+		  		<label>Code promo :</label>
+		  		<div class="input-group input-group-lg" >
+				    <input class="form-control " type="text" id="mycodepromo">
+				    <span class="input-group-btn ">
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
+				    </span>
+				    </div>   
+                 </div>
+                <?php } ?>
+
+
                     <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
                     <div class="day-slots">
-                    <div class="day-slot-headline" style="      background-color: #c7c7c7;
-   color: #000000;    width: 267px;"> Produits:</div>
+                    <div class="day-slot-headline" style="      background-color: #c7c7c7;color: #000000;    width: 267px;"> Produits:</div>
                     <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
                     ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
                     <?php  foreach($produit as $prod){ ?>
-                    <div class="single-slot">
+                    <div class="single-slot" id="k<?php echo  $prod->id;?>"  hidden="true">
                             <div class="single-slot-left">
                                 <div class="single-slot-time"><div class="row">
                                     <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
@@ -1479,9 +1518,98 @@ $( document ).ready(function() {
 				
 				</div>
          </div>	 
+ <!-- Modal -->
+ <div class="col-lg-12 col-md-12 ">
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+                            </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 " >
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+  </div>
+    <div class="input-group-append">
+    	<button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+ 
+  </div>
+
+
+                            </div>
+                              <div id="divremise" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
+                              	  <table class="table" id="tabRemise">
+    <thead>
+      <tr>
+        <th>Remise</th>
+        <th>service</th>
+        <th>Reduction</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <?php if($reduction != 0){  ?>
+      <tr>
+
+        <td>carte fidelite ({{$reduction }} %)</td>
+        <td>total</td>
+        <td id="remiseCarte">0€</td>
+      </tr>
+  <?php } ?>
+<?php if($myhappyhours != null) { 
+    echo '<tr>
+        <td>happy hours ('.$myhappyhours->reduction .'%)</td>
+        <td>total</td>
+        <td id="remiseHappyhours" >0€</td>
+      </tr>' ; } ?>
+     
+    </tbody>
+  </table>
+                              </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 ">
+         	<br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                        <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                    </div>
+
+                                                                </div><br>
+                                                            </div>
+
+
+                                        <?php if (isset($User)){?> 
+                                            <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
+                                            <?php
+                                            $User=auth()->user();
+                                            
+                                                 if(isset($User->user_type) &&($User->user_type=='client')){  ?>  
+                                                <?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
+                                                    <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </button> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
+                                                <?php }else{?>
+                                                <button id="addfavoris" class="like-button " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
+                                                <?php } ?>
+                                                <?php } ?>
+                                            <?php }else{  ?>
+                                            
+                                            <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a>
+                                        
+                                                
+                                        <?php	 } ?>
+
+
+
 
                         <!-- Book Now -->
-                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Réserver</a>
                                 
                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
                         # code...
@@ -1816,7 +1944,83 @@ $( document ).ready(function() {
     </div>
 </div>
 
-<script>
+<script> 
+
+function fonctionvalide(){
+ 		var valCode = $('#mycodepromo').val();
+   		//alert(valchange);
+   		var service = $('#service').val();
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.CodePromoCheck') }}",
+                        method:"POST",
+						data:{valCode:valCode, _token:_token},
+                        success:function(data){
+                        	
+                        	if (data[0]==1) {
+                        		if (service.includes(data[1].toString())) {
+                        			Swal.fire(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemise");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								    listcodepromo.push(valCode);
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservation').value = parseFloat(document.getElementById('RemiseReservation').value) + data[4];
+								    document.getElementById('totalReservation').value = parseFloat(document.getElementById('MontantReservation').value)-parseFloat(document.getElementById('RemiseReservation').value);
+                        		}
+                        		else {
+									Swal.fire(
+									  'Code promo ne correspond pas au service selectionné !...',
+									  '',
+									  'question'
+									)
+                        		}
+                        		
+                        	}
+                        	else {
+                        		Swal.fire({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
+                        }
+                    });
+ 		
+ 	}
+
+function selectservice(){
+ 		//lert("ft sele");
+ 		var happyhours = $('#myhappyhoursId').val();
+ 		var remiseCarte  =0 ;
+		var montant = 0 ;
+		var service = $('#service').val();
+    var test = <?php echo json_encode($mab) ; ?> ;
+    //alert(test[8][0]);
+    if (service.length != 0) {
+      for (var i = 0; i < service.length; i++) {
+        $('#service option[value='+service[i]+']').each(function(){
+          id = this.getAttribute('value');
+          if (test[id] != null) {
+          test[id].forEach(element => visibilityFunction(element));
+          //document.getElementById("myP").style.visibility = "hidden";
+
+         }
+       
+     
+        });
+      }
+    }
 
 $(".time-slot").each(function() {
 
@@ -1851,6 +2055,20 @@ $(".time-slot").each(function() {
 
 
 	/*----------------------------------------------------*/
+    function visibilityFunction(element){
+      //alert("q"+element+"");
+      document.getElementById("sectionproduitsup").style.display = 'block';
+      var t = "k"+element+"" ;
+      //document.getElementById(t).style.visibility = "";
+      
+      if (!(produitslist.includes(element))) {
+      produitslist.push(element);
+      document.getElementById(t).hidden = false;
+      document.getElementById("qt"+element+"").hidden = false;
+      document.getElementById("qy"+element+"").hidden = false;
+    }
+
+    }
 </script>
 
   @endsection
