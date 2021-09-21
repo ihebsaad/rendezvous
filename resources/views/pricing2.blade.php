@@ -199,7 +199,10 @@
 ">
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
-
+<style>@media (max-width: 768px){
+.booking-requests-filter {
+    display: block!important;}
+}</style>
             <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
           <h4>Abonnement {{$mensuel_annuelC}}<?php //echo $parametres->abonnement3;?>
           </h4>

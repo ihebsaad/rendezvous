@@ -17,6 +17,10 @@
  $parametres=DB::table('parametres')->where('id', 1)->first();
 
  ?>
+ <style>@media (max-width: 768px){
+.booking-requests-filter {
+    display: block!important;}
+}</style>
  <style type="text/css">
  
  @media only screen and (min-width: 600px) {
