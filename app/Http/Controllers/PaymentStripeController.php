@@ -52,7 +52,7 @@ class PaymentStripeController extends Controller
     $payment_method = $request->get('res');
       $stripeSub = \Stripe\Subscription::update(
     $subscription_id,
-    ['default_payment_method' => "4000000000009995"],
+    ['default_payment_method' => $payment_method],
   );
 //dd($stripeSub);
    
@@ -267,7 +267,7 @@ $customer = \Stripe\Customer::create();
     'product' => $produit->id,
     'unit_amount' => $montant *100,
     'currency' => 'eur',
-    'recurring' => ['interval' => 'day'],
+    'recurring' => ['interval' => 'month'],
   ]);
              
   $Subscription = \Stripe\Subscription::create([
