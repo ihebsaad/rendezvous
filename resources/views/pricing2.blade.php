@@ -194,16 +194,18 @@
       <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  " style="  align-items: baseline!;
 "> 
 
-        <!-- plan 3 - start -->             
+        <!-- plan 3 - start -->     
+        <style>@media (max-width: 768px){
+.booking-requests-filter {
+    display: block!important;
+    left: -93px;
+    margin-top: -23px;}
+}</style>        
       <div class="plan featured plan featured col-md-6 col-md-offset-2" style="  align-items: baseline;
 ">
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
-<style>@media (max-width: 768px){
-.booking-requests-filter {
-    display: block!important;}
-}</style>
-            <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
+            <span class="value right" style="" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
           <h4 style="    height: 81px;">Abonnement {{$mensuel_annuelC}}<?php //echo $parametres->abonnement3;?>
           </h4>
           <div>
