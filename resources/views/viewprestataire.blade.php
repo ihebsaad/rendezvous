@@ -722,6 +722,9 @@ table.basic-table th {
                                     <center><div class="col-6 col-lg-6">
                                 <span style="width: 71px;margin-top: 9px;">{{ $service->prix }} €</span>
                                     </div></center>
+                                    <div  class="col-md-5 col-sm-6 ">
+                                <a href="" class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;">Réserver</a>
+                           </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
                                 <h5>{{ $service->nom }}</h5>
@@ -745,6 +748,9 @@ table.basic-table th {
                                     <center><div class="col-6 col-lg-6">
                                 <span style="width: 71px;margin-top: 9px;">{{ $servicerec->prix }} €</span>
                                     </div></center>
+                                    <div  class="col-md-5 col-sm-6 ">
+                                <a href="" class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;">Réserver</a>
+                           </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
                                 <h5>{{ $servicerec->nom }}</h5>
@@ -1592,17 +1598,7 @@ $( document ).ready(function() {
 							</div>
 						</div>
 					</div>
-                    <script>
-$(".time-slot").each(function() {
-	var timeSlot = $(this);
-	$(this).find('input').on('change',function() {
-		var timeSlotVal = timeSlot.find('strong').text();
-
-		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
-		$('.panel-dropdown').removeClass('active');
-	});
-});
-</script>
+     
 
 					<!-- Panel Dropdown / End -->
                         <div class="col-lg-12 ">
@@ -1820,7 +1816,20 @@ $(".time-slot").each(function() {
     </div>
 </div>
 
+<script>
 
+$(".time-slot").each(function() {
+
+	var timeSlot = $(this);
+	$(this).find('input').on('change',function() {
+        console.log("me me me");
+		var timeSlotVal = timeSlot.find('strong').text();
+
+		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+		$('.panel-dropdown').removeClass('active');
+	});
+});
+</script>
 <script>
         /*----------------------------------------------------*/
         $('.show-moreP-button').on('click', function(e){
@@ -1843,7 +1852,7 @@ $(".time-slot").each(function() {
 
 	/*----------------------------------------------------*/
 </script>
-<script></script>
+
   @endsection
 @include('layouts.pageprestataire-scripts')
 
