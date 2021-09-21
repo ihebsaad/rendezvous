@@ -1,4 +1,13 @@
 <?php
+use Illuminate\Http\Request;
+use DB;
+use Illuminate\Support\Facades\Auth;
+use Session;
+use \App\User;
+use \App\Abonnement;
+use Stripe\Stripe;
+use Stripe\Subscription;
+use DateTime;
 // webhook.php
 //
 // Use this sample code to handle webhook events in your integration.
@@ -41,6 +50,21 @@ if ($event->type=='customer.subscription.created') {
 }
 elseif ($event->type=='customer.subscription.deleted') {
   echo "Record updated successfully";
+  $todayy = date('Y-m-d H:i:s');
+      $dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
+      $dateAbn = new DateTime($dateAbn);
+      $date = $dateAbn->format('Y-m-d H:i:s');
+        $today= new DateTime();
+        $m = $dateAbn->format('n');
+        $x = $today->format('n');
+        $interval = date_diff($dateAbn, $today)->m;
+        $y = date('Y-m-d H:i:s', strtotime($date. ' + '.$interval.' month'));
+        if ($todayy > $y) {
+          //dd("ok");
+          $y = date('Y-m-d H:i:s', strtotime($y. ' + 1 month'));
+        }
+        Abonnement::where('id', $id)->update(array('expire' => $y ));
+        Abonnement::where('id', $id)->update(array('statut' => "annuler" ));
 }
 elseif ($event->type=='customer.subscription.updated') {
   # code...
