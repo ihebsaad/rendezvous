@@ -111,6 +111,7 @@
 
   <script type="text/javascript">
    function FunctionReporter(){
+    //alert("ok");
     var nbrReport = $('input[name="nbrReport"]').val();
     //alert(parseInt(nbrReport));
     if (parseInt(nbrReport)<=5) {
@@ -119,6 +120,7 @@
       //alert("ok");
       var idReservation = $('input[name="idReservation"]').val();
       var _token = $('input[name="_token"]').val();
+      alert("ok");
         $.ajax({
             url: "{{ route('reservations.reporter') }}",
             method: "get",

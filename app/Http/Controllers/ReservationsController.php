@@ -1199,11 +1199,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
 		$swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
 
-       $swiftTransport->setUsername('contact.prenezunrendezvous@gmail.com '); //adresse email
-       $swiftTransport->setPassword('davemarco97232'); // mot de passe email
+       //$swiftTransport->setUsername('contact.prenezunrendezvous@gmail.com '); //adresse email
+       //$swiftTransport->setPassword('davemarco97232'); // mot de passe email
 
-        //$swiftTransport->setUsername('prestataire222@gmail.com'); //adresse email
-        //$swiftTransport->setPassword('123prestataire'); // mot de passe email
+        $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
+        $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);

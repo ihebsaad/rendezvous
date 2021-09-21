@@ -134,7 +134,7 @@
                   window.location.replace("https://prenezunrendezvous.com/reservations");
                 })
             } else {
-              $('#submit').html('Procéder au paiement').attr('disabled', false);
+              
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
                   //alert("ok");
@@ -149,6 +149,7 @@
                    
                    success: function(data){ 
                     //alert(data);
+                    $('#submit').html('Procéder au paiement').attr('disabled', false);
                     location.href= "{{ route('reservations') }}";
 
                           
