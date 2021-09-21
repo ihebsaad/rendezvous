@@ -7,56 +7,7 @@ $(document).ready(function(){
 	/*--------------------------------------------------*/
 	/*  Mobile Menu - mmenu.js
 	/*--------------------------------------------------*/
-	$(function() {
-		function mmenuInit() {
-			var wi = $(window).width();
-			if(wi <= '1024') {
 
-				$(".mmenu-init" ).remove();
-				$("#navigation").clone().addClass("mmenu-init").insertBefore("#navigation").removeAttr('id').removeClass('style-1 style-2')
-								.find('ul, div').removeClass('style-1 style-2 mega-menu mega-menu-content mega-menu-section').removeAttr('id');
-				$(".mmenu-init").find("ul").addClass("mm-listview");
-				$(".mmenu-init").find(".mobile-styles .mm-listview").unwrap();
-
-
-				$(".mmenu-init").mmenu({
-				 	"counters": true
-				}, {
-				 // configuration
-				 offCanvas: {
-				    pageNodetype: "#wrapper"
-				 }
-				});
-				var api = $('#menu').data('mmenu');
-					api.bind('opened', function () {
-						console.log('opened');
-					});
-
-				var mmenuAPI = $(".mmenu-init").data( "mmenu" );
-				var $icon = $(".hamburger");
-
-				$(".mmenu-trigger").click(function() {
-					mmenuAPI.open();
-				});
-
-				mmenuAPI.bind( "open:finish", function() {
-				   setTimeout(function() {
-				      $icon.addClass( "is-active" );
-				   });
-				});
-				mmenuAPI.bind( "close:finish", function() {
-				   setTimeout(function() {
-				      $icon.removeClass( "is-active" );
-				   });
-				});
-
-
-			}
-			$(".mm-next").addClass("mm-fullsubopen");
-		}
-		mmenuInit();
-		$(window).resize(function() { mmenuInit(); });
-	});
 
     /*  User Menu */
     $('.user-menu').on('click', function(){
@@ -954,10 +905,12 @@ $(document).ready(function(){
 
     // Add validation parts
     $('.day-slots').each(function(){
+		console.log('im starting');
 
-    	var daySlots = $(this);
+    	var daySlots = $('.day-slots');
 
 		daySlots.find('.add-slot-btn').on('click', function() {
+			console.log('im here');
 
 			var slotTime_Start = daySlots.find('.add-slot-inputs input.time-slot-start').val();
 			var slotTimePM_AM_Start = daySlots.find('.add-slot-inputs select.time-slot-start').val();
@@ -1002,6 +955,7 @@ $(document).ready(function(){
 
 			// Validation Error
 			else {
+				console.log('else')
 				daySlots.find('.add-slot').addClass('add-slot-shake-error');
 				setTimeout(function(){
 					daySlots.find('.add-slot').removeClass('add-slot-shake-error');
