@@ -27,6 +27,10 @@ $(document).ready(function(){
 				    pageNodetype: "#wrapper"
 				 }
 				});
+				var api = $('#menu').data('mmenu');
+					api.bind('opened', function () {
+						console.log('opened');
+					});
 
 				var mmenuAPI = $(".mmenu-init").data( "mmenu" );
 				var $icon = $(".hamburger");
