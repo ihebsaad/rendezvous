@@ -6,6 +6,7 @@
 
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-migrate-3.3.2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/mmenu.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/chosen.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/slick.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/rangeslider.min.js') }}"></script>
@@ -14,13 +15,14 @@
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/counterup.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/tooltips.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/quantityButtons.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/moment.min.js') }}"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
 
 <script>
 // Calendar Init
