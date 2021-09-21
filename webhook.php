@@ -36,26 +36,43 @@ try {
   http_response_code(400);
   exit();
 }
+if ($event->type=='customer.subscription.created') {
+  $customer = $event->data->object;
+}
+elseif ($event->type=='customer.subscription.deleted') {
+  echo "Record updated successfully";
+}
+elseif ($event->type=='customer.subscription.updated') {
+  # code...
+}
+elseif ($event->type=='invoice.payment_failed') {
+  if ($event->lines->data->subscription==null) {
 
-// Handle the event
-switch ($event->type) {
-  case 'payment_intent.amount_capturable_updated':
-    $paymentIntent = $event->data->object;
-  case 'payment_intent.canceled':
-    $paymentIntent = $event->data->object;
-  case 'payment_intent.created':
-    $paymentIntent = $event->data->object;
-  case 'payment_intent.payment_failed':
-    $paymentIntent = $event->data->object;
-  case 'payment_intent.processing':
-    $paymentIntent = $event->data->object;
-  case 'payment_intent.requires_action':
-    $paymentIntent = $event->data->object;
-  case 'payment_intent.succeeded':
-    $paymentIntent = $event->data->object;
-  // ... handle other event types
-  default:
-    echo 'Received unknown event type ' . $event->lines->data->subscription;
+    http_response_code(200);
+  exit();
+  } else {
+    $servername = 'localhost:3306';
+            $username = 'rendezvoususer';
+            $password = '!h9gv2P1';
+            $dbname = "rendezvous";
+            
+            //On établit la connexion
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            
+            //On vérifie la connexion
+            if($conn->connect_error){
+                die('Erreur : ' .$conn->connect_error);
+            }
+
+            $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe=".$event->lines->data->subscription."";
+            if ($conn->query($sql) === TRUE) {
+              //echo "Record updated successfully";
+            } else {
+              //echo "Error updating record: " . $conn->error;
+            }
+
+    //$invoice = $event->data->object;
+  }
 }
 
 http_response_code(200);
