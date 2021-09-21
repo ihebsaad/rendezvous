@@ -1375,84 +1375,82 @@ $( document ).ready(function() {
                     </div>
 
                     <!-- Panel Dropdown -->
-                    <div class="col-lg-12" >
-                    <select class="chosen-select-no-single  time-slots-dropdown" data-placeholder="Heure" >
-                           
-                           <option value="blank" style="font-size:12.5px;font-weight:800;">Heure</option>
-                      
-                                    <!-- Time Slot -->
-                                    <option style=" position: relative;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
-                                        <label for="time-slot-1">
-                                            <strong>8:30 am - 9:00 am</strong>
-                                        </label>
-                                    </option>
+                    <div class="col-lg-12">
+						<div class="panel-dropdown time-slots-dropdown">
+							<a href="#">Heure</a>
+							<div class="panel-dropdown-content padding-reset">
+								<div class="panel-dropdown-scrollable">
+									
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-1">
+										<label for="time-slot-1">
+											<strong>8:30 am - 9:00 am</strong>
+											<span>1 slot available</span>
+										</label>
+									</div>
 
-                                    <!-- Time Slot -->
-                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
-                                        <label for="time-slot-2">
-                                            <strong>9:00 am - 9:30 am</strong>
-                                        </label>
-                                    </option>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-2">
+										<label for="time-slot-2">
+											<strong>9:00 am - 9:30 am</strong>
+											<span>2 slots available</span>
+										</label>
+									</div>
 
-                                    <!-- Time Slot -->
-                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
-                                        <label for="time-slot-3">
-                                            <strong>9:30 am - 10:00 am</strong>
-                                        </label>
-                                    </option>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-3">
+										<label for="time-slot-3">
+											<strong>9:30 am - 10:00 am</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
 
-                                    <!-- Time Slot -->
-                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
-                                        <label for="time-slot-4">
-                                            <strong>10:00 am - 10:30 am</strong>
-                                        </label>
-                                    </option>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-4">
+										<label for="time-slot-4">
+											<strong>10:00 am - 10:30 am</strong>
+											<span>3 slots available</span>
+										</label>
+									</div>
 
-                                    <!-- Time Slot -->
-                                    <option style="    margin-top: 5px; position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}" class="time-slot">
-                                        <label for="time-slot-5">
-                                            <strong>13:00 pm - 13:30 pm</strong>
-                                        </label>
-                                    </option>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-5">
+										<label for="time-slot-5">
+											<strong>13:00 pm - 13:30 pm</strong>
+											<span>2 slots available</span>
+										</label>
+									</div>
 
-                                    <!-- Time Slot -->
-                                    <option style="    margin-top: 5px; position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
-                                        <label for="time-slot-6">
-                                            <strong>13:30 pm - 14:00 pm</strong>
-                                        </label>
-                                    </option>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-6">
+										<label for="time-slot-6">
+											<strong>13:30 pm - 14:00 pm</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
 
-                                    <!-- Time Slot -->
-                                    <option style="     margin-top: 5px;position: relative;;padding: 12px 10px; text-align: center;cursor: pointer;font-weight: 600;user-select: none;border-radius: 4px; color: rgb(119, 119, 119);transition: all 0.3s ease 0s;overflow: hidden;font-size: 15px;background-color: #f2f2f2;}"class="time-slot">
-                                        <label for="time-slot-7">
-                                            <strong>14:00 pm - 14:30 pm</strong>
-                                        </label>
-                                    </option>
-                                    
-                                </select>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-7">
+										<label for="time-slot-7">
+											<strong>14:00 pm - 14:30 pm</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
 
-                            </div>
-                    <!-- Panel Dropdown / End -->
-                    <!-- Panel Dropdown -->
-					<div class="col-lg-12">
-						<div class="panel-dropdown">
-							<a href="javascript:void(0)">Invité(e)s <span class="qtyTotal" name="qtyTotal">1</span></a>
-							<div class="panel-dropdown-content">
-
-								<!-- Quantity Buttons -->
-								<div class="qtyButtons">
-									<div class="qtyTitle">Adultes</div>
-									<input type="text" name="qtyInput" value="1">
 								</div>
-
-								<div class="qtyButtons">
-									<div class="qtyTitle">Enfants</div>
-									<input type="text" name="qtyInput" value="0">
-								</div>
-
 							</div>
 						</div>
 					</div>
+                    <!-- Panel Dropdown / End -->
+                    <!-- Panel Dropdown -->
+				
 					<!-- Panel Dropdown / End -->
                     <div class="col-lg-12 " >
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
@@ -1476,7 +1474,7 @@ $( document ).ready(function() {
 		  		<div class="input-group input-group-lg" >
 				    <input class="form-control " type="text" id="mycodepromo">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "hidden='true'" ;}?> >valide</button>
 				    </span>
 				    </div>   
                  </div>
@@ -1502,80 +1500,76 @@ $( document ).ready(function() {
                             <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
-                                    <button></button>
-                                    <input type="number" name="slot-qty" value="0" min="0" max="10">
-                                    <button></button> 
+                                    <button onclick='decreaseCount(event, this)' ></button>
+                                    <input type="number" prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" name="slot-qty" value="0" min="0" max="10">
+                                    <button onclick='increaseCount(event, this)'></button> 
                                 </div>
-<br>
+                                <br>
                             </div>
                         </div>
                     <!-- Slot For Cloning / Do NOT Remove-->
         
                     <?php } ?>	</div>	
-       
-
-
-				
-				</div>
-         </div>	 
- <!-- Modal -->
- <div class="col-lg-12 col-md-12 ">
-         	<br>
+                                    </div>
+                            </div>	 
+                    <!-- Modal -->
+                    <div class="col-lg-12 col-md-12 ">
+                                <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
                                 <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
-  </div>
+                                    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                </div>
                             </div><br>
                         </div>
                           <div class="col-lg-12 col-md-12 " >
-         	<br>
+         	                    <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
                                 <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
-  </div>
-    <div class="input-group-append">
-    	<button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
- 
-  </div>
+                                <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                            </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                            
+                            </div>
 
 
                             </div>
                               <div id="divremise" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
                               	  <table class="table" id="tabRemise">
-    <thead>
-      <tr>
-        <th>Remise</th>
-        <th>service</th>
-        <th>Reduction</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <?php if($reduction != 0){  ?>
-      <tr>
+                                        <thead>
+                                        <tr>
+                                            <th>Remise</th>
+                                            <th>service</th>
+                                            <th>Reduction</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        <?php if($reduction != 0){  ?>
+                                        <tr>
 
-        <td>carte fidelite ({{$reduction }} %)</td>
-        <td>total</td>
-        <td id="remiseCarte">0€</td>
-      </tr>
-  <?php } ?>
-<?php if($myhappyhours != null) { 
-    echo '<tr>
-        <td>happy hours ('.$myhappyhours->reduction .'%)</td>
-        <td>total</td>
-        <td id="remiseHappyhours" >0€</td>
-      </tr>' ; } ?>
-     
-    </tbody>
-  </table>
+                                            <td>carte fidelite ({{$reduction }} %)</td>
+                                            <td>total</td>
+                                            <td id="remiseCarte">0€</td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php if($myhappyhours != null) { 
+                                        echo '<tr>
+                                            <td>happy hours ('.$myhappyhours->reduction .'%)</td>
+                                            <td>total</td>
+                                            <td id="remiseHappyhours" >0€</td>
+                                        </tr>' ; } ?>
+                                        
+                                        </tbody>
+                                    </table>
                               </div><br>
                         </div>
                           <div class="col-lg-12 col-md-12 ">
-         	<br>
+                                    <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
                                 <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
@@ -1588,20 +1582,24 @@ $( document ).ready(function() {
 
 
                                         <?php if (isset($User)){?> 
-                                            <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
                                             <?php
                                             $User=auth()->user();
                                             
                                                  if(isset($User->user_type) &&($User->user_type=='client')){  ?>  
+                                                    <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
+                                                        <input type="text" value="<?php echo $user->id;?>"  id='prestataire_id' hidden='true'>
+                                                        <input type="text" value="<?php echo $User->id;?>"  id='client_id' hidden='true'>
+
                                                 <?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
                                                     <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </button> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
-                                                <?php }else{?>
-                                                <button id="addfavoris" class="like-button " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
+                                                	<?php }elseif(!($countf==0)){?>
+	 <!-- a corriger  -->
+                                                <button id="addfavoris" class="like-button liked " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon liked" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
                                                 <?php } ?>
-                                                <?php } ?>
+                                                <?php } ?>               <a href="{{route('inscription')}}" class="button border"  >Connectez vous pour réserver</a>
+
                                             <?php }else{  ?>
                                             
-                                            <a href="#dialog_signin_part" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a>
                                         
                                                 
                                         <?php	 } ?>
@@ -1632,7 +1630,7 @@ $( document ).ready(function() {
                
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
-                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré">
+                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré" onchange="SelectServiceRec(this)">
                         <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
 
                              <?php 
@@ -1655,7 +1653,7 @@ $( document ).ready(function() {
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown">
-							<a href="#">Time Slots</a>
+							<a href="#">Heure</a>
 							<div class="panel-dropdown-content padding-reset">
 								<div class="panel-dropdown-scrollable">
 									
@@ -1732,7 +1730,7 @@ $( document ).ready(function() {
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="select" style="display: block!important;">
+                        <select class="select" style="display: block!important;" id="rappel2">
 
                             <option  >Rappel de rendez vous par SMS</option>
                             <option value="60">1h avant le RDV </option>
@@ -1744,6 +1742,140 @@ $( document ).ready(function() {
                         </select>
                                                 
                     </div>
+                    <?php 
+                    if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+		  	    <div class="col-lg-12 col-md-12 ">
+		  		<label>Code promo :</label>
+		  		<div class="input-group input-group-lg" >
+				    <input class="form-control " type="text" id="mycodepromo">
+				    <span class="input-group-btn ">
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "hidden='true'" ;}?> >valide</button>
+				    </span>
+				    </div>   
+                 </div>
+                <?php } ?>
+
+
+                    <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
+                    <div class="day-slots">
+                    <div class="day-slot-headline" style="      background-color: #c7c7c7;color: #000000;    width: 267px;"> Produits:</div>
+                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
+                    ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
+                    <!-- Slot For Cloning / Do NOT Remove-->
+                    <?php  foreach($produit as $prod){ ?>
+                    <div class="single-slot" id="k<?php echo  $prod->id;?>"  hidden="true">
+                            <div class="single-slot-left">
+                                <div class="single-slot-time"><div class="row">
+                                    <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
+                                    </div><div  class="col-md-6" style=" font-weight: 800!important;">{{$prod->prix_unité}} €</div></div></div>
+                                <div class="single-slot-time">{{$prod->nom_produit}} </div>
+                            </div>
+
+                            <div class="single-slot-right">
+                            <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+
+                                <div class="plusminus horiz">
+                                    <button onclick='decreaseCount(event, this)' ></button>
+                                    <input type="number" prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" name="slot-qty" value="0" min="0" max="10">
+                                    <button onclick='increaseCount(event, this)'></button> 
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    <!-- Slot For Cloning / Do NOT Remove-->
+        
+                    <?php } ?>	</div>	
+                                    </div>
+                            </div>	 
+                    <!-- Modal -->
+                    <div class="col-lg-12 col-md-12 ">
+                                <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                </div>
+                            </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 " >
+         	                    <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                            </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remiseRec()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                            
+                            </div>
+
+
+                            </div>
+                              <div id="divremiseRec" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
+                              	  <table class="table" id="tabRemise">
+                                        <thead>
+                                        <tr>
+                                            <th>Remise</th>
+                                            <th>service</th>
+                                            <th>Reduction</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        <?php if($reduction != 0){  ?>
+                                        <tr>
+
+                                            <td>carte fidelite ({{$reduction }} %)</td>
+                                            <td>total</td>
+                                            <td id="remiseCarteRec">0€</td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php if($myhappyhours != null) { 
+                                        echo '<tr>
+                                            <td>happy hours ('.$myhappyhours->reduction .'%)</td>
+                                            <td>total</td>
+                                            <td id="remiseHappyhoursRec" >0€</td>
+                                        </tr>' ; } ?>
+                                        
+                                        </tbody>
+                                    </table>
+                              </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 ">
+                                    <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                        <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                    </div>
+
+                                                                </div><br>
+                                                            </div>
+
+
+                                        <?php if (isset($User)){?> 
+                                            <?php
+                                            $User=auth()->user();
+                                            
+                                                 if(isset($User->user_type) &&($User->user_type=='client')){  ?>  
+                                                    <a class="button book-now fullwidth margin-top-5" id="reserver2">Réserver</a>
+
+                                                <?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
+                                                    <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </button> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
+                                                	<?php }elseif(!($countf==0)){?>
+	 <!-- a corriger  -->
+                                                <button id="addfavoris" class="like-button liked " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon liked" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
+                                                <?php } ?>
+                                                <?php } ?>               <a href="{{route('inscription')}}" class="button border"  >Connectez vous pour réserver</a>
+
+                                            <?php }else{  ?>
+                                            
+                                        
+                                                
+                                        <?php	 } ?>
 
                         <!-- Book Now -->
                         <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Réserver</a>
@@ -1944,7 +2076,60 @@ $( document ).ready(function() {
     </div>
 </div>
 
+
 <script> 
+
+ 
+function remise(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremise");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+function remiseRec(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremiseRec");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+ 	}
+           function increaseCount(e, el) {
+  var input = el.previousElementSibling;
+  var value = parseInt(input.value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  input.value = value;
+
+  calcul( parseFloat((input.getAttribute('prix')) ));
+}
+function decreaseCount(e, el) {
+  var input = el.nextElementSibling;
+  var value = parseInt(input.value, 10);
+ // alert(value);
+  if (value > 0) {
+    value = isNaN(value) ? 0 : value;
+    value--;
+    input.value = value;
+    //alert(( (input.getAttribute('prix') )));
+    calcul( -( parseFloat((input.getAttribute('prix')) )));
+  }
+}
+function calcul(val){
+    var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
+    var Remise = parseFloat(document.getElementById('RemiseReservation').value);
+    var Net = parseFloat(document.getElementById('totalReservation').value);
+    document.getElementById('MontantReservation').value = montant_tot+val;
+    document.getElementById('totalReservation').value = montant_tot+val-Remise;
+}
+
 
 function fonctionvalide(){
  		var valCode = $('#mycodepromo').val();
@@ -1999,12 +2184,13 @@ function fonctionvalide(){
  		
  	}
 
-function selectservice(){
+     function selectservice(){
  		//lert("ft sele");
  		var happyhours = $('#myhappyhoursId').val();
  		var remiseCarte  =0 ;
 		var montant = 0 ;
 		var service = $('#service').val();
+        console.log(service);
     var test = <?php echo json_encode($mab) ; ?> ;
     //alert(test[8][0]);
     if (service.length != 0) {
@@ -2021,7 +2207,57 @@ function selectservice(){
         });
       }
     }
+ //  alert(document.getElementById('k5.').value);
+ 
+		
+                
+	
+		if (service.length != 0) {
+		
 
+			for (var i = 0; i < service.length; i++) {
+				$('#service option[value='+service[i]+']').each(function(){
+					montant = montant + parseFloat(this.getAttribute('prix'));
+					document.getElementById('MontantReservation').value = montant;
+					document.getElementById('totalReservation').value = montant;
+	     
+	   
+				});
+			}
+		
+
+
+		}
+		else {			
+
+			document.getElementById('MontantReservation').value = montant;
+			document.getElementById('totalReservation').value = montant;
+		}
+
+    for (var i = 0; i < produitslist.length; i++) {
+      //ach
+      montant = parseFloat(document.getElementById('k'+produitslist[i]).value * document.getElementById('k'+produitslist[i]).getAttribute('prix')) + parseFloat(document.getElementById('MontantReservation').value) ;
+      document.getElementById('MontantReservation').value =montant;
+    }
+
+		var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservation').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservation').value = total;
+		document.getElementById("remiseCarte").innerHTML = (montant * reductioncarte)/100 +"€";
+		//alert(remiseCarte);
+		} 
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservation').value = remiseCarte;
+		 document.getElementById("remiseHappyhours").innerHTML = (montant * happyhours)/100 +"€";
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservation').value = total;
+		//alert(remiseCarte);
+		}
+ 	}}
 $(".time-slot").each(function() {
 
 	var timeSlot = $(this);
@@ -2032,6 +2268,28 @@ $(".time-slot").each(function() {
 		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
 		$('.panel-dropdown').removeClass('active');
 	});
+});
+$('#addfavoris').on('click',function(){
+    var  prestataire=$('#client_id').val();
+
+			  var  client=$('#prestataire_id').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:"{{ route('reviews.addfavoris') }}",
+                    method:"POST",
+                    data:{prestataire:prestataire,client:client  , _token:_token},
+                    success:function(data){
+
+                 if(parseInt(data)==0) { 
+                 $('#mesfavoris').html('Retirer de favoris');
+                 }
+                 else{
+                  $('#mesfavoris').html('Ajouter aux favoris');
+                 }
+
+                    }
+                });
+           
 });
 </script>
 <script>
@@ -2064,10 +2322,64 @@ $(".time-slot").each(function() {
       if (!(produitslist.includes(element))) {
       produitslist.push(element);
       document.getElementById(t).hidden = false;
-      document.getElementById("qt"+element+"").hidden = false;
-      document.getElementById("qy"+element+"").hidden = false;
+     
     }
 
+    }
+    function SelectServiceRec(a){
+ 		var happyhours = $('#myhappyhoursId').val();
+ 		remiseCarte = 0 ;
+ 		montant = a.options[a.selectedIndex].getAttribute('prixRec');
+ 		
+		document.getElementById('MontantReservationRec').value = montant;
+		document.getElementById('totalReservationRec').value = montant;
+ 		periode=a.options[a.selectedIndex].getAttribute('periode');
+ 		nbr=a.options[a.selectedIndex].getAttribute('ndate');
+ 		frq=a.options[a.selectedIndex].getAttribute('frq');
+
+ 		document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
+ 		/*if (frq=="Journalière") {
+   				//alert("oui");
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Journalière (sur "+periode+" jours) vous devez choisir "+nbr+" dates par jour.";
+    		//document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
+    	}
+    	else if (frq=="Hebdomadaire") {
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Hebdomadaire (sur "+periode+" semaines) vous devez choisir "+nbr+" dates par semaine.";
+    	
+    	}
+    	else if (frq=="Mensuelle") {
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Mensuelle (sur "+periode+" mois) vous devez choisir "+nbr+" dates par mois.";
+    	
+    	}*/
+ 		//alert(frq);
+    	
+    	/*document.getElementById("nbrServiceRec").value = nbr;
+    	var y = '<label>Date de rendez vous:</label>';
+    	
+    	for (var i = 0; i < nbr; i++) {
+    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
+    	}*/
+    	//document.getElementById("dateRec").innerHTML = y;
+    	var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
+		//alert(remiseCarte);
+		}
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		//alert(remiseCarte);
+		}
+        //document.getElementById("dateRec").innerHTML = y;
+    	//$("#dateRec").append(y);
+    	
     }
 </script>
 
