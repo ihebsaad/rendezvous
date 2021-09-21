@@ -267,7 +267,7 @@ $customer = \Stripe\Customer::create();
     'product' => $produit->id,
     'unit_amount' => $montant *100,
     'currency' => 'eur',
-    'recurring' => ['interval' => 'month'],
+    'recurring' => ['interval' => 'day'],
   ]);
              
   $Subscription = \Stripe\Subscription::create([
