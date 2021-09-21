@@ -204,7 +204,7 @@
     display: block!important;}
 }</style>
             <span class="value right" style="text-align:right!important" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-          <h4>Abonnement {{$mensuel_annuelC}}<?php //echo $parametres->abonnement3;?>
+          <h4 style="    height: 81px;">Abonnement {{$mensuel_annuelC}}<?php //echo $parametres->abonnement3;?>
           </h4>
           <div>
           <center><input type="checkbox" class="read-more-state" id="post-3" />
@@ -229,7 +229,7 @@
         <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abon_mens_pricing;?>">     
-        <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button> 
+        <button class="button border " ><i class="sl sl-icon-basket"></i> Je m'inscris</button> 
         </form>        
         
       </center></div>
@@ -271,7 +271,7 @@
  				<input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="normal">    
  				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abon_annu_pricing;?>">     
-				<button class="button border "   ><i class="sl sl-icon-basket"></i> Acheter</button>  
+				<button class="button border "   ><i class="sl sl-icon-basket"></i> Je m'inscris</button>  
         </form>        
         
       </center></div>
