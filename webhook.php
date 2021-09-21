@@ -1,24 +1,19 @@
 <?php
-use Illuminate\Http\Request;
-use DB;
-use Illuminate\Support\Facades\Auth;
-use Session;
-use \App\User;
-use \App\Abonnement;
-use Stripe\Stripe;
-use Stripe\Subscription;
+
 use DateTime;
-// webhook.php
-//
-// Use this sample code to handle webhook events in your integration.
-//
-// 1) Paste this code into a new file (webhook.php)
-//
-// 2) Install dependencies
-//   composer require stripe/stripe-php
-//
-// 3) Run the server on http://localhost:4242
-//   php -S localhost:4242
+$servername = 'localhost:3306';
+$username = 'rendezvoususer';
+$password = '!h9gv2P1';
+$dbname = "rendezvous";
+
+//On établit la connexion
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+//On vérifie la connexion
+if($conn->connect_error){
+    die('Erreur : ' .$conn->connect_error);
+}
+
 
 require 'vendor/autoload.php';
 \Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
@@ -50,9 +45,18 @@ if ($event->type=='customer.subscription.created') {
 }
 elseif ($event->type=='customer.subscription.deleted') {
   echo "Record updated successfully";
-$id=DB::table('abonnements')->where('IdStripe', $event->lines->data->subscription)->value('id');
+  $sql = "SELECT * FROM `abonnements` WHERE IdStripe=".$event->lines->data->subscription."";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    $row = $result -> fetch_assoc();
+    $id = $row["id"];
+    $dateAbn=$row["created_at"];
+
+}
+
+//$id=DB::table('abonnements')->where('IdStripe', $event->lines->data->subscription)->value('id');
   $todayy = date('Y-m-d H:i:s');
-      $dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
+      //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
       $dateAbn = new DateTime($dateAbn);
       $date = $dateAbn->format('Y-m-d H:i:s');
         $today= new DateTime();
@@ -64,8 +68,18 @@ $id=DB::table('abonnements')->where('IdStripe', $event->lines->data->subscriptio
           //dd("ok");
           $y = date('Y-m-d H:i:s', strtotime($y. ' + 1 month'));
         }
-        Abonnement::where('id', $id)->update(array('expire' => $y ));
-        Abonnement::where('id', $id)->update(array('statut' => "annuler" ));
+        $sql = "UPDATE abonnements SET expire=".$y." WHERE IdStripe=".$event->lines->data->subscription."";
+         if ($conn->query($sql) === TRUE) {
+              //echo "Record updated successfully";
+            } else {
+              //echo "Error updating record: " . $conn->error;
+            }
+        $sql = "UPDATE abonnements SET statut='annuler' WHERE IdStripe=".$event->lines->data->subscription."";
+         if ($conn->query($sql) === TRUE) {
+              //echo "Record updated successfully";
+            } else {
+              //echo "Error updating record: " . $conn->error;
+            }
 }
 elseif ($event->type=='customer.subscription.updated') {
   # code...
@@ -76,18 +90,7 @@ elseif ($event->type=='invoice.payment_failed') {
     http_response_code(200);
   exit();
   } else {
-    $servername = 'localhost:3306';
-            $username = 'rendezvoususer';
-            $password = '!h9gv2P1';
-            $dbname = "rendezvous";
-            
-            //On établit la connexion
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            
-            //On vérifie la connexion
-            if($conn->connect_error){
-                die('Erreur : ' .$conn->connect_error);
-            }
+    
 
             $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe=".$event->lines->data->subscription."";
             if ($conn->query($sql) === TRUE) {
