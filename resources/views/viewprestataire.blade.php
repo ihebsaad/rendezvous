@@ -525,6 +525,7 @@ table.basic-table th {
   if( $nbimages>0){
 
  ?>
+ 
 <div class="clearfix"></div>
 @if ($live_message = Session::get('ErrorMessage'))
            <div class="notification error closeable">
@@ -536,6 +537,7 @@ table.basic-table th {
     
 <!-- Slider
 ================================================== -->
+
 <div class="listing-slider mfp-gallery-container margin-bottom-0">
     <?php $i=0; foreach($images as $image){ $i++;?>
             
@@ -545,7 +547,10 @@ table.basic-table th {
 </div>
 
 <?php  } ?>  
-<script>  var produitslist =[];
+<script> 
+ 	var listcodepromo = [];
+  var produitslist =[];
+  var qtyproduits = [];
 </script>
 
 <!-- Content
@@ -1374,7 +1379,6 @@ $( document ).ready(function() {
 
                     </div>
 
-                    <!-- Panel Dropdown -->
                     <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown">
 							<a href="#">Heure</a>
@@ -1450,7 +1454,7 @@ $( document ).ready(function() {
 					</div>
                     <!-- Panel Dropdown / End -->
                     <!-- Panel Dropdown -->
-				
+					
 					<!-- Panel Dropdown / End -->
                     <div class="col-lg-12 " >
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
@@ -1481,14 +1485,14 @@ $( document ).ready(function() {
                 <?php } ?>
 
 
-                    <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
+                    <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;display:none;" >
                     <div class="day-slots">
                     <div class="day-slot-headline" style="      background-color: #c7c7c7;color: #000000;    width: 267px;"> Produits:</div>
                     <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
                     ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
                     <?php  foreach($produit as $prod){ ?>
-                    <div class="single-slot" id="k<?php echo  $prod->id;?>"  hidden="true">
+                    <div class="single-slot" id="q<?php echo  $prod->id;?>"  hidden="true">
                             <div class="single-slot-left">
                                 <div class="single-slot-time"><div class="row">
                                     <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
@@ -1580,29 +1584,33 @@ $( document ).ready(function() {
                                                                 </div><br>
                                                             </div>
 
+<!--test-->
 
-                                        <?php if (isset($User)){?> 
-                                            <?php
-                                            $User=auth()->user();
-                                            
-                                                 if(isset($User->user_type) &&($User->user_type=='client')){  ?>  
-                                                    <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
+<!--test-->
+
+                                
+                                           
+                                            <?php $User=auth()->user();?>    
+                                            @if (isset($User))    
+                                            <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
+
+                                    @if($User->user_type=='client')
                                                         <input type="text" value="<?php echo $user->id;?>"  id='prestataire_id' hidden='true'>
                                                         <input type="text" value="<?php echo $User->id;?>"  id='client_id' hidden='true'>
 
                                                 <?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
                                                     <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </button> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
-                                                	<?php }elseif(!($countf==0)){?>
+                                                	<?php }else{?>
 	 <!-- a corriger  -->
                                                 <button id="addfavoris" class="like-button liked " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon liked" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
                                                 <?php } ?>
-                                                <?php } ?>               <a href="{{route('inscription')}}" class="button border"  >Connectez vous pour réserver</a>
+                                    @endif              
 
-                                            <?php }else{  ?>
+                                @else
                                             
-                                        
+                                                <a href="{{route('inscription')}}" class="button border fullwidth margin-top-5"  >Connectez vous pour réserver</a>
                                                 
-                                        <?php	 } ?>
+                                 @endif
 
 
 
@@ -1634,10 +1642,10 @@ $( document ).ready(function() {
                         <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
 
                              <?php 
-                                foreach($servicesreccurent as $service){
-                                    echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
-                        
-                        $mab[$service->id]=$service->produits_id ;
+                                foreach($servicesreccurent as $SR){
+                                    echo '  <option value="'.$SR->id.'" ndate="'.$SR->Nfois.'" frq = "'.$SR->frequence.'" periode="'.$SR->periode.'" prixRec="'.$SR->prix.'"><strong>'.$SR->nom.'</strong></option>
+                                    '; 
+                        $mab[$SR->id]=$SR->produits_id ;
                                 }
                                 
                                 ?>
@@ -1649,7 +1657,24 @@ $( document ).ready(function() {
                         <div class="col-lg-12">
 						<input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
                         </div>
+                        <!-- here -->
+                        <div class="row with-forms margin-top-0 " style="font-size: 150%">
+		
 
+                            <input type="number" name="nbrServiceRec" id="nbrServiceRec" hidden>
+
+                                        </div>
+                                        <div class="row with-forms margin-top-0">
+                                    <div class="col-lg-12 col-md-12 select_date_box">
+                                        <h5 style="color: red" id="msgRec">
+                            </h5>  <span class="add-on"><i class="icon-th"></i></span>
+                                    </div></div>
+          
+      <!-- 	<label>Date de rendez vous:</label>
+        <input type="text" value=""  class="dtpks" name="datereservation" placeholder="date 1"  class="input-append date " style="font-size: 15px;" readonly> 
+                   -->    
+          
+                        
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown">
@@ -1730,7 +1755,7 @@ $( document ).ready(function() {
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="select" style="display: block!important;" id="rappel2">
+                        <select class="select" style="display: block!important;" id="Rappel2">
 
                             <option  >Rappel de rendez vous par SMS</option>
                             <option value="60">1h avant le RDV </option>
@@ -1742,57 +1767,25 @@ $( document ).ready(function() {
                         </select>
                                                 
                     </div>
-                    <?php 
-                    if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
-		  	    <div class="col-lg-12 col-md-12 ">
+                    <div class="col-lg-12 col-md-12 ">
 		  		<label>Code promo :</label>
 		  		<div class="input-group input-group-lg" >
-				    <input class="form-control " type="text" id="mycodepromo">
+				    <input class="form-control "  type="text" id="mycodepromoRec">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "hidden='true'" ;}?> >valide</button>
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
 				    </span>
-				    </div>   
-                 </div>
-                <?php } ?>
+				</div>
+
+                </div>
+                <!---test --->
 
 
-                    <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;" >
-                    <div class="day-slots">
-                    <div class="day-slot-headline" style="      background-color: #c7c7c7;color: #000000;    width: 267px;"> Produits:</div>
-                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
-                    ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
-                    <!-- Slot For Cloning / Do NOT Remove-->
-                    <?php  foreach($produit as $prod){ ?>
-                    <div class="single-slot" id="k<?php echo  $prod->id;?>"  hidden="true">
-                            <div class="single-slot-left">
-                                <div class="single-slot-time"><div class="row">
-                                    <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
-                                    </div><div  class="col-md-6" style=" font-weight: 800!important;">{{$prod->prix_unité}} €</div></div></div>
-                                <div class="single-slot-time">{{$prod->nom_produit}} </div>
-                            </div>
 
-                            <div class="single-slot-right">
-                            <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
-
-                                <div class="plusminus horiz">
-                                    <button onclick='decreaseCount(event, this)' ></button>
-                                    <input type="number" prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" name="slot-qty" value="0" min="0" max="10">
-                                    <button onclick='increaseCount(event, this)'></button> 
-                                </div>
-                                <br>
-                            </div>
-                        </div>
-                    <!-- Slot For Cloning / Do NOT Remove-->
-        
-                    <?php } ?>	</div>	
-                                    </div>
-                            </div>	 
-                    <!-- Modal -->
-                    <div class="col-lg-12 col-md-12 ">
+                <div class="col-lg-12 col-md-12 ">
                                 <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                     <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
                                 </div>
@@ -1814,7 +1807,7 @@ $( document ).ready(function() {
 
                             </div>
                               <div id="divremiseRec" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
-                              	  <table class="table" id="tabRemise">
+                              	  <table class="table" id="tabRemiseRec">
                                         <thead>
                                         <tr>
                                             <th>Remise</th>
@@ -1836,7 +1829,7 @@ $( document ).ready(function() {
                                         echo '<tr>
                                             <td>happy hours ('.$myhappyhours->reduction .'%)</td>
                                             <td>total</td>
-                                            <td id="remiseHappyhoursRec" >0€</td>
+                                            <td id="remiseHappyhours" >0€</td>
                                         </tr>' ; } ?>
                                         
                                         </tbody>
@@ -1856,29 +1849,40 @@ $( document ).ready(function() {
                                                             </div>
 
 
-                                        <?php if (isset($User)){?> 
-                                            <?php
-                                            $User=auth()->user();
-                                            
-                                                 if(isset($User->user_type) &&($User->user_type=='client')){  ?>  
-                                                    <a class="button book-now fullwidth margin-top-5" id="reserver2">Réserver</a>
 
-                                                <?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
-                                                    <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </button> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
-                                                	<?php }elseif(!($countf==0)){?>
-	 <!-- a corriger  -->
-                                                <button id="addfavoris" class="like-button liked " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon liked" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
-                                                <?php } ?>
-                                                <?php } ?>               <a href="{{route('inscription')}}" class="button border"  >Connectez vous pour réserver</a>
 
-                                            <?php }else{  ?>
-                                            
-                                        
-                                                
-                                        <?php	 } ?>
+
+
+
+
+
+
+
+
+
+
+                <!--test-->
+
+                   
+                     
+		  <?php if (isset($User)){?> 
+	   <a class="button book-now fullwidth margin-top-5" style="color:white" id="reserver2">Réserver</a>
+		
+			<?php if($User->user_type=="client"){  ?>  
+			<?php $countf= DB::table("favoris")->where("prestataire",$user->id)->where("client",$User->id)->count(); if($countf==0) {?>	
+			<button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;"class="like-button add_to_wishlist"><span  style="    margin-top: -7px;"class="like-icon"></span><div id="mesfavoris">Ajouter aux favoris</div></button>
+			<?php }else{?>
+			<button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button add_to_wishlist liked"><span  style="    margin-top: -7px;"class="like-icon liked"></span><div id="mesfavoris">Retirer de favoris</div></button>
+			<?php } ?>
+			 <?php } ?>
+		 <?php }else{  ?>
+		 <center>
+		 <a href="" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a></center>
+	 
+			 
+	<?php	 } ?>
 
                         <!-- Book Now -->
-                        <a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Réserver</a>
                         <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) {
                         # code...
                         echo '</div></div></div>';
@@ -2078,119 +2082,23 @@ $( document ).ready(function() {
 
 
 <script> 
-
- 
-function remise(){
- 		//alert("ok");
- 		var x = document.getElementById("divremise");
- 		if (x.style.display === "none") {
-    x.style.display = "block";
-   
-  } else {
-    x.style.display = "none";
-  
-  }
-function remiseRec(){
- 		//alert("ok");
- 		var x = document.getElementById("divremiseRec");
- 		if (x.style.display === "none") {
-    x.style.display = "block";
-   
-  } else {
-    x.style.display = "none";
-  
-  }
- 	}
-           function increaseCount(e, el) {
-  var input = el.previousElementSibling;
-  var value = parseInt(input.value, 10);
-  value = isNaN(value) ? 0 : value;
-  value++;
-  input.value = value;
-
-  calcul( parseFloat((input.getAttribute('prix')) ));
-}
-function decreaseCount(e, el) {
-  var input = el.nextElementSibling;
-  var value = parseInt(input.value, 10);
- // alert(value);
-  if (value > 0) {
-    value = isNaN(value) ? 0 : value;
-    value--;
-    input.value = value;
-    //alert(( (input.getAttribute('prix') )));
-    calcul( -( parseFloat((input.getAttribute('prix')) )));
-  }
-}
-function calcul(val){
-    var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
-    var Remise = parseFloat(document.getElementById('RemiseReservation').value);
-    var Net = parseFloat(document.getElementById('totalReservation').value);
-    document.getElementById('MontantReservation').value = montant_tot+val;
-    document.getElementById('totalReservation').value = montant_tot+val-Remise;
-}
-
-
-function fonctionvalide(){
- 		var valCode = $('#mycodepromo').val();
-   		//alert(valchange);
-   		var service = $('#service').val();
-   		var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url:"{{ route('services.CodePromoCheck') }}",
-                        method:"POST",
-						data:{valCode:valCode, _token:_token},
-                        success:function(data){
-                        	
-                        	if (data[0]==1) {
-                        		if (service.includes(data[1].toString())) {
-                        			Swal.fire(
-								  'Félicitation!...',
-								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
-								  'success'
-									)
-									var table = document.getElementById("tabRemise");
-								    var row = table.insertRow(-1);
-								    var cell1 = row.insertCell(0);
-								    var cell2 = row.insertCell(1);
-								    var cell3 = row.insertCell(2);
-								    cell1.innerHTML = "code promo ("+data[2]+"%)";
-								    cell2.innerHTML = data[3];
-								    cell3.innerHTML = data[4]+"€";
-								    listcodepromo.push(valCode);
-								   
-								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
-								    document.getElementById('RemiseReservation').value = parseFloat(document.getElementById('RemiseReservation').value) + data[4];
-								    document.getElementById('totalReservation').value = parseFloat(document.getElementById('MontantReservation').value)-parseFloat(document.getElementById('RemiseReservation').value);
-                        		}
-                        		else {
-									Swal.fire(
-									  'Code promo ne correspond pas au service selectionné !...',
-									  '',
-									  'question'
-									)
-                        		}
-                        		
-                        	}
-                        	else {
-                        		Swal.fire({
-								  icon: 'error',
-								  title: 'Oops...',
-								  text: 'Code promo incorrect!',
-								})
-                        	}
-                        }
-                    });
- 		
- 	}
-
-     function selectservice(){
+   function visibilityFunction(element){
+      //alert("q"+element+"");
+      document.getElementById("listProduits").style.display = 'block';
+      var t = "q"+element+"" ;
+      //document.getElementById(t).style.visibility = "";
+      
+      if (!(produitslist.includes(element))) {
+      produitslist.push(element);
+      document.getElementById(t).hidden = false;
+     
+    }}
+function selectservice(){
  		//lert("ft sele");
  		var happyhours = $('#myhappyhoursId').val();
  		var remiseCarte  =0 ;
 		var montant = 0 ;
 		var service = $('#service').val();
-        console.log(service);
     var test = <?php echo json_encode($mab) ; ?> ;
     //alert(test[8][0]);
     if (service.length != 0) {
@@ -2198,15 +2106,10 @@ function fonctionvalide(){
         $('#service option[value='+service[i]+']').each(function(){
           id = this.getAttribute('value');
           if (test[id] != null) {
-          test[id].forEach(element => visibilityFunction(element));
+          test[id].forEach(element => visibilityFunction(element));}
           //document.getElementById("myP").style.visibility = "hidden";
-
-         }
-       
-     
         });
-      }
-    }
+      }}
  //  alert(document.getElementById('k5.').value);
  
 		
@@ -2219,20 +2122,9 @@ function fonctionvalide(){
 				$('#service option[value='+service[i]+']').each(function(){
 					montant = montant + parseFloat(this.getAttribute('prix'));
 					document.getElementById('MontantReservation').value = montant;
-					document.getElementById('totalReservation').value = montant;
-	     
-	   
-				});
-			}
-		
-
-
-		}
-		else {			
-
-			document.getElementById('MontantReservation').value = montant;
-			document.getElementById('totalReservation').value = montant;
-		}
+					document.getElementById('totalReservation').value = montant;});}}
+		else {document.getElementById('MontantReservation').value = montant;
+			document.getElementById('totalReservation').value = montant;}
 
     for (var i = 0; i < produitslist.length; i++) {
       //ach
@@ -2257,76 +2149,64 @@ function fonctionvalide(){
 		document.getElementById('totalReservation').value = total;
 		//alert(remiseCarte);
 		}
- 	}}
-$(".time-slot").each(function() {
-
-	var timeSlot = $(this);
-	$(this).find('input').on('change',function() {
-        console.log("me me me");
-		var timeSlotVal = timeSlot.find('strong').text();
-
-		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
-		$('.panel-dropdown').removeClass('active');
-	});
-});
-$('#addfavoris').on('click',function(){
-    var  prestataire=$('#client_id').val();
-
-			  var  client=$('#prestataire_id').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url:"{{ route('reviews.addfavoris') }}",
-                    method:"POST",
-                    data:{prestataire:prestataire,client:client  , _token:_token},
-                    success:function(data){
-
-                 if(parseInt(data)==0) { 
-                 $('#mesfavoris').html('Retirer de favoris');
-                 }
-                 else{
-                  $('#mesfavoris').html('Ajouter aux favoris');
-                 }
-
-                    }
-                });
-           
-});
+ 	}
 </script>
+
 <script>
-        /*----------------------------------------------------*/
-        $('.show-moreP-button').on('click', function(e){
-    	e.preventDefault();
-    	$(this).toggleClass('active');
+	function fonctionvalideRec(){
+ 		var valCode = $('#mycodepromoRec').val();
+   		//alert(valchange);
+   		//var service = $('#service').val();
+   		var service = $('#servicereccurent').val();
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.CodePromoCheck') }}",
+                        method:"POST",
+						data:{valCode:valCode, _token:_token},
+                        success:function(data){
+                        	
+                        	if (data[0]==1) {
+                        		if (data[1].toString()==service) {
+                        			Swal.fire(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemiseRec");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
+								    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
+                        		}
+                        		else {
+									Swal.fire(
+									  'Code promo ne correspond pas au service selectionné !...',
+									  '',
+									  'question'
+									)
+                        		}
+                        		
+                        	}
+                        	else {
+                        		Swal.fire({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
+                        }
+                    });
+ 		
+ 	}
 
-		$('.show-moreP').toggleClass('visible');
-		if ( $('.show-moreP').is(".visible") ) {
-
-			var el = $('.show-moreP'),
-				curHeight = el.height(),
-				autoHeight = el.css('height', 'auto').height();
-				el.height(curHeight).animate({height: autoHeight}, 400);
-
-
-		} else { $('.show-moreP').animate({height: '450px'}, 400); }
-
-	});
-
-
-	/*----------------------------------------------------*/
-    function visibilityFunction(element){
-      //alert("q"+element+"");
-      document.getElementById("sectionproduitsup").style.display = 'block';
-      var t = "k"+element+"" ;
-      //document.getElementById(t).style.visibility = "";
-      
-      if (!(produitslist.includes(element))) {
-      produitslist.push(element);
-      document.getElementById(t).hidden = false;
-     
-    }
-
-    }
-    function SelectServiceRec(a){
+function SelectServiceRec(a){
  		var happyhours = $('#myhappyhoursId').val();
  		remiseCarte = 0 ;
  		montant = a.options[a.selectedIndex].getAttribute('prixRec');
@@ -2380,7 +2260,116 @@ $('#addfavoris').on('click',function(){
         //document.getElementById("dateRec").innerHTML = y;
     	//$("#dateRec").append(y);
     	
-    }
+    }</script>
+
+<script>
+    function calcul(val){
+    var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
+    var Remise = parseFloat(document.getElementById('RemiseReservation').value);
+    var Net = parseFloat(document.getElementById('totalReservation').value);
+    document.getElementById('MontantReservation').value = montant_tot+val;
+    document.getElementById('totalReservation').value = montant_tot+val-Remise;
+}
+    function increaseCount(e, el) {
+  var input = el.previousElementSibling;
+  var value = parseInt(input.value, 10);
+  value = isNaN(value) ? 0 : value;
+
+  input.value = value;
+
+  calcul( parseFloat((input.getAttribute('prix')) ));
+}
+function decreaseCount(e, el) {
+  var input = el.nextElementSibling;
+  var value = parseInt(input.value, 10);
+ // alert(value);
+  if (value > 0) {
+    value = isNaN(value) ? 0 : value;
+    input.value = value;
+    //alert(( (input.getAttribute('prix') )));
+    calcul( -( parseFloat((input.getAttribute('prix')) )));
+  }
+}
+    	function remise(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremise");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+ 	}
+ 	function remiseRec(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremiseRec");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+ 	}
+
+$(".time-slot").each(function() {
+
+var timeSlot = $(this);
+$(this).find('input').on('change',function() {
+    
+    var timeSlotVal = timeSlot.find('strong').text();
+
+    $('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+    $('.panel-dropdown').removeClass('active');
+});
+});
+ 
+
+
+     $('#addfavoris').on('click',function(){
+    var  prestataire=$('#client_id').val();
+
+			  var  client=$('#prestataire_id').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:"{{ route('reviews.addfavoris') }}",
+                    method:"POST",
+                    data:{prestataire:prestataire,client:client , _token:_token},
+                    success:function(data){
+
+                 if(parseInt(data)==0) { 
+                 $('#mesfavoris').html('Retirer de favoris');
+                 }
+                 else{
+                  $('#mesfavoris').html('Ajouter aux favoris');
+                 }
+
+                    }
+                });
+           
+}); 
+        /*----------------------------------------------------*/
+        $('.show-moreP-button').on('click', function(e){
+    	e.preventDefault();
+    	$(this).toggleClass('active');
+
+		$('.show-moreP').toggleClass('visible');
+		if ( $('.show-moreP').is(".visible") ) {
+
+			var el = $('.show-moreP'),
+				curHeight = el.height(),
+				autoHeight = el.css('height', 'auto').height();
+				el.height(curHeight).animate({height: autoHeight}, 400);
+
+
+		} else { $('.show-moreP').animate({height: '450px'}, 400); }
+
+	});
+
+
+	/*----------------------------------------------------*/
+    
 </script>
 
   @endsection
