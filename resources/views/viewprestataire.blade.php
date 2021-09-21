@@ -789,9 +789,7 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{$prod->prix_unité}} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <a href="" class="button border " style=" margin-top: 49px;
-    color: #808080bd!important;
-    border-color: #808080bd!important;       margin-top: -6px;">Réserver</a>
+                                <a href="" class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;">Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -1215,7 +1213,6 @@ $( document ).ready(function() {
  <style>.legend { list-style: none; margin-left:10px;}
     .legend li { float: left; margin-right: 15px;}
     .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }</style>
-<script src="//bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
           <h4 class="modal-title" style="font-size: 17px;" >Calendrier du prestataire</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <div id="legendcolor"  style="background-color:white; top:5px;"> 
             <ul class="legend">
@@ -1822,37 +1819,6 @@ $(".time-slot").each(function() {
 
     </div>
 </div>
-<script>
-$(".opening-day.js-demo-hours .chosen-select").each(function() {
-	$(this).append(''+
-        '<option></option>'+
-        '<option>Closed</option>'+
-        '<option>1 AM</option>'+
-        '<option>2 AM</option>'+
-        '<option>3 AM</option>'+
-        '<option>4 AM</option>'+
-        '<option>5 AM</option>'+
-        '<option>6 AM</option>'+
-        '<option>7 AM</option>'+
-        '<option>8 AM</option>'+
-        '<option>9 AM</option>'+
-        '<option>10 AM</option>'+
-        '<option>11 AM</option>'+
-        '<option>12 AM</option>'+
-        '<option>1 PM</option>'+
-        '<option>2 PM</option>'+
-        '<option>3 PM</option>'+
-        '<option>4 PM</option>'+
-        '<option>5 PM</option>'+
-        '<option>6 PM</option>'+
-        '<option>7 PM</option>'+
-        '<option>8 PM</option>'+
-        '<option>9 PM</option>'+
-        '<option>10 PM</option>'+
-        '<option>11 PM</option>'+
-        '<option>12 PM</option>');
-});
-</script>
 
 
 <script>
@@ -1877,7 +1843,7 @@ $(".opening-day.js-demo-hours .chosen-select").each(function() {
 
 	/*----------------------------------------------------*/
 </script>
-
+<script></script>
   @endsection
 @include('layouts.pageprestataire-scripts')
 
