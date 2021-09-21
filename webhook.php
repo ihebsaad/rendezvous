@@ -50,6 +50,7 @@ if ($event->type=='customer.subscription.created') {
 }
 elseif ($event->type=='customer.subscription.deleted') {
   echo "Record updated successfully";
+$id=DB::table('abonnements')->where('IdStripe', $event->lines->data->subscription)->value('id');
   $todayy = date('Y-m-d H:i:s');
       $dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
       $dateAbn = new DateTime($dateAbn);
