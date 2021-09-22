@@ -92,7 +92,7 @@ echo "null";
   } else {
     
 
-            $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe=".$event->lines->data->subscription."";
+            $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe='".$event->lines->data->subscription."'";
             if ($conn->query($sql) === TRUE) {
               echo "Record updated successfully";
             } else {
