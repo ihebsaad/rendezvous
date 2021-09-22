@@ -595,7 +595,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
                                         })->reverse();*/
         //dd( $reservations);
 		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
-        return view('reservations.index', compact('reservations'));
+        return view('entreprise.ReservezUnRdvAdmin', compact('reservations'));
 
 
     }

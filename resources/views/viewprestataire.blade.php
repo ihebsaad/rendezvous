@@ -545,8 +545,7 @@ table.basic-table th {
 <div class="listing-slider mfp-gallery-container margin-bottom-0">
     <?php $i=0; foreach($images as $image){ $i++;?>
             
- <a href="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  style="width:100%;"class="item mfp-gallery" title="{{$user->titre}}"><img src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  style="    width: -webkit-fill-available;
-    height: -webkit-fill-available;"/></a>
+ <a src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" data-background-image="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  class="item mfp-gallery" title="{{$user->titre}}"></a>
     <?php } ?>
 </div>
 
@@ -737,7 +736,10 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{ $service->prix }} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-
+                                <style> @media (max-width: 768px) {a.button.border{
+                                        margin-top: -74px!important;
+    margin-left: 96px!important;}}
+                                                        </style>
                                 <a class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;"  onclick='visibilityFunctionService(<?php echo $service->id;?>)'>Réserver</a>
                            </div>
                                 </div>
@@ -1385,7 +1387,7 @@ $( document ).ready(function() {
                     </div>
 
                     <div class="col-lg-12">
-						<div class="panel-dropdown time-slots-dropdown">
+						<div class="panel-dropdown time-slots-dropdown" id="time">
 							<a href="#">Heure</a>
 							<div class="panel-dropdown-content padding-reset">
 								<div class="panel-dropdown-scrollable">
@@ -1394,7 +1396,7 @@ $( document ).ready(function() {
 									<div class="time-slot">
 										<input type="radio" name="time-slot" id="time-slot-1">
 										<label for="time-slot-1">
-											<strong>8:30 am - 9:00 am</strong>
+											<strong>08:30 am - 09:00 am</strong>
 											<span>1 slot available</span>
 										</label>
 									</div>
@@ -1403,7 +1405,7 @@ $( document ).ready(function() {
 									<div class="time-slot">
 										<input type="radio" name="time-slot" id="time-slot-2">
 										<label for="time-slot-2">
-											<strong>9:00 am - 9:30 am</strong>
+											<strong>09:00 am - 09:30 am</strong>
 											<span>2 slots available</span>
 										</label>
 									</div>
@@ -1412,7 +1414,7 @@ $( document ).ready(function() {
 									<div class="time-slot">
 										<input type="radio" name="time-slot" id="time-slot-3">
 										<label for="time-slot-3">
-											<strong>9:30 am - 10:00 am</strong>
+											<strong>09:30 am - 10:00 am</strong>
 											<span>1 slots available</span>
 										</label>
 									</div>
@@ -1682,7 +1684,7 @@ $( document ).ready(function() {
                         
                         <!-- Panel Dropdown -->
                         <div class="col-lg-12">
-						<div class="panel-dropdown time-slots-dropdown">
+						<div class="panel-dropdown time-slots-dropdown" id="time1">
 							<a href="#">Heure</a>
 							<div class="panel-dropdown-content padding-reset">
 								<div class="panel-dropdown-scrollable">
@@ -1691,7 +1693,7 @@ $( document ).ready(function() {
 									<div class="time-slot">
 										<input type="radio" name="time-slot" id="time-slot-1">
 										<label for="time-slot-1">
-											<strong>8:30 am - 9:00 am</strong>
+											<strong>08:30 am - 09:00 am</strong>
 											<span>1 slot available</span>
 										</label>
 									</div>
@@ -1700,7 +1702,7 @@ $( document ).ready(function() {
 									<div class="time-slot">
 										<input type="radio" name="time-slot" id="time-slot-2">
 										<label for="time-slot-2">
-											<strong>9:00 am - 9:30 am</strong>
+											<strong>09:00 am - 09:30 am</strong>
 											<span>2 slots available</span>
 										</label>
 									</div>
@@ -1709,7 +1711,7 @@ $( document ).ready(function() {
 									<div class="time-slot">
 										<input type="radio" name="time-slot" id="time-slot-3">
 										<label for="time-slot-3">
-											<strong>9:30 am - 10:00 am</strong>
+											<strong>09:30 am - 10:00 am</strong>
 											<span>1 slots available</span>
 										</label>
 									</div>
@@ -2247,7 +2249,7 @@ function selectservice(){
  		var valCode = $('#mycodepromoRec').val();
    		//alert(valchange);
    		//var service = $('#service').val();
-   		var service = $('#servicereccurent').val();
+   		var service = $('#servicerec').val();
    		var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('services.CodePromoCheck') }}",
@@ -2418,50 +2420,6 @@ $(this).find('input').on('change',function() {
  
 
 
-     $('#addfavoris').on('click',function(){
-    var  prestataire=$('#client_id').val();
-
-			  var  client=$('#prestataire_id').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url:"{{ route('reviews.addfavoris') }}",
-                    method:"POST",
-                    data:{prestataire:prestataire,client:client , _token:_token},
-                    success:function(data){
-
-                 if(parseInt(data)==0) { 
-                 $('#mesfavoris').html('Retirer de favoris');
-                 }
-                 else{
-                  $('#mesfavoris').html('Ajouter aux favoris');
-                 }
-
-                    }
-                });
-           
-}); 
-$('#addfavoris1').on('click',function(){
-    var  prestataire=$('#client_id1').val();
-
-			  var  client=$('#prestataire_id1').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url:"{{ route('reviews.addfavoris') }}",
-                    method:"POST",
-                    data:{prestataire:prestataire,client:client , _token:_token},
-                    success:function(data){
-
-                 if(parseInt(data)==0) { 
-                 $('#mesfavoris1').html('Retirer de favoris');
-                 }
-                 else{
-                  $('#mesfavoris1').html('Ajouter aux favoris');
-                 }
-
-                    }
-                });
-           
-}); 
         /*----------------------------------------------------*/
         $('.show-moreP-button').on('click', function(e){
     	e.preventDefault();
@@ -2484,6 +2442,285 @@ $('#addfavoris1').on('click',function(){
 	/*----------------------------------------------------*/
     
 </script>
+<script> var suppl_res="";
+    	 <?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+     	$( document ).ready(function() {
+         var res='';
+         var equation="";
+         var member_equation="";
+       
+         var exist="";
+     		$('#service').on('change', function(evt, params) { 
+     		 //alert("sel "+params.selected);
+            // alert("des "+params.deselected);
+            var items = $("#service option:selected").map(function() {
+                 return $(this).text();
+             }).get();
+
+          // alert(items);
+          // alert(res);
+           suppl_res="";
+           for(var i=0; i<res.length ; i++) // parcourir les règles
+            {
+            	equation=res[i].split("=");
+            	for(var j=0 ; j<equation.length ; j++) // parcourir les membres equation d'une règle
+            	{
+            		//alert(equation[j]);
+
+            		if(j%2==0) // juste le membre d'une equation 
+            		{
+                       //alert(equation[j]);
+                       member_equation=equation[j].split("+");
+
+                       exist=true;
+                       for(var k=0; k<member_equation.length; k++)
+                       {
+                        //  alert(member_equation[k]);
+
+                             if(!items.includes(member_equation[k].trim()))
+                             {
+                             	exist=false; 
+                             	k=member_equation.length;
+                             }
+                       }
+                      if(exist==true) // tous les membre d'eaquation exwit
+                      {
+                        suppl_res+=equation[j+1]+','; 
+
+                      }
+
+            		}
+            	}
+            }
+
+           // alert(suppl_res);
+           //var selected_value = $(this).toArray().map(x => $(x).val());
+            // alert(selected_value)
+         });
+     		//alert ('raedy');
+		 $.ajax({
+        url:"{{url('/')}}/get_liste_regles_services_suppl/<?php echo $user->id; ?>",
+        method:"get",
+        success:function(data){			
+            //alert(data);
+           // alert(items);	
+            res = data.split(";");
+            res.splice(0,1);
+            
+            }
+          });
+
+          });
+
+     <?php } ?></script>
+<?php if (isset($User)){ ?> 
+
+<script>	
+	$('#addfavoris').click(function( ){
+                
+			 
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:"{{ route('reviews.addfavoris') }}",
+                    method:"POST",
+                    data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>  , _token:_token},
+                    success:function(data){
+
+                 if(parseInt(data)==0) { 
+                 $('#mesfavoris').html('Retirer de favoris');
+                 }
+                 else{
+                  $('#mesfavoris').html('Ajouter aux favoris');
+                 }
+
+                    }
+                });
+           
+        });
+        $('#addfavoris1').click(function( ){
+                
+			 
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:"{{ route('reviews.addfavoris') }}",
+                    method:"POST",
+                    data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>  , _token:_token},
+                    success:function(data){
+
+                 if(parseInt(data)==0) { 
+                 $('#mesfavoris1').html('Retirer de favoris');
+                 }
+                 else{
+                  $('#mesfavoris1').html('Ajouter aux favoris');
+                 }
+
+                    }
+                });
+           
+        });
+
+
+
+
+
+
+
+
+
+
+
+$('#reserver').click(function( ){
+
+if(suppl_res)
+{
+Swal.fire ("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
+}
+
+/*  var inputs = $(".dtpks");
+for(var i = 0; i < inputs.length; i++){
+alert($(inputs[i]).val());
+}*/
+//qtyproduits
+for (var i = 0; i < produitslist.length; i++) {
+ var qty = document.getElementById('k'+produitslist[i]+'').value;
+ qtyproduits[i]=qty ;
+ //alert(qtyproduits);
+}
+
+var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
+var happyhour = $('#myhappyhoursId').val();
+var serv_supp=suppl_res;
+
+var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
+var Remise = parseFloat(document.getElementById('RemiseReservation').value);
+var Net = parseFloat(document.getElementById('totalReservation').value);
+var _token = $('input[name="_token"]').val();
+
+// var date = $('#date-picker').val();
+// var heure = $('#heure').val();
+var timeSlot = $(".time-slot");
+    
+var timeSlotVal = timeSlot.find('strong').text();
+
+var str=$('#time a').text();
+alert(str);
+
+var myArr = str.split("am -");
+var reservationHeureStart=myArr[0];//start
+var reservationHeure2=myArr[1].split("-");
+var reservationHeure3=reservationHeure2[0].split("am");
+var reservationHeureEnd=reservationHeure3[0];//end
+
+
+var datereservation1 = $('#date-picker').val();
+var date = new Date(datereservation1 + ' ' + reservationHeureStart); 
+
+//alert(datereservation);
+var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+alert(dateStr);
+var service = $('#service').val();
+var rappel = $('#rappel').val();
+//alert(JSON.stringify(service));
+$.ajax({
+   url:"{{ route('reservations.add') }}",
+   method:"POST",
+   data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
+   success:function(data){
+   //alert(JSON.stringify(data));
+   location.href= "{{ route('reservations') }}";
+   }
+});
+
+});
+$('#reserver2').click(function( ){
+var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
+ var happyhour = $('#myhappyhoursId').val();
+var montant_tot = parseFloat(document.getElementById('MontantReservationRec').value);
+var Remise = parseFloat(document.getElementById('RemiseReservationRec').value);
+var Net = parseFloat(document.getElementById('totalReservationRec').value);
+var el = $('#servicerec').val();
+
+var e = $('#servicerec option[value="' + el + '"]');
+
+var periode = e.attr('periode');
+var frq=e.attr('frq');
+alert(periode);
+alert(frq);
+
+var _token = $('input[name="_token"]').val();	
+var nbrService = document.getElementById("nbrServiceRec").value ;
+var date_reservation = [] ;
+var str=$('#time1 a').text();
+
+var myArr = str.split("am -");
+var reservationHeureStart=myArr[0];//start
+var reservationHeure2=myArr[1].split("-");
+var reservationHeure3=reservationHeure2[0].split("am");
+var reservationHeureEnd=reservationHeure3[0];//end
+
+
+var datereservation1 = $('#date-picker2').val();
+var date = new Date(datereservation1 + ' ' + reservationHeureStart); 
+
+//alert(datereservation);
+var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+//alert(date_reservation);
+
+var remarques = $('#remarques2').val();
+
+var service = $('#servicerec').val();
+var rappel = $('#rappel2').val();
+//alert(JSON.stringify(service));
+alert(service);
+$.ajax({
+   url:"{{ route('reservations.add2') }}",
+   method:"POST",
+   data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
+   success:function(data){
+   //alert(JSON.stringify(data));
+   location.href= "{{ route('reservations') }}";
+   }
+});
+
+});
+
+
+$('#sendmail').click(function( ){
+ var _token = $('input[name="_token"]').val();
+
+var emetteur = $('#emetteur').val();
+var email =
+$('#email').val();
+var tel = $('#tel').val();
+var contenu = $('#contenu').val();
+var to = $('#to').val();
+/*  var tel = document.getElementById('tel').value;
+var email = document.getElementById('email').value;
+var emetteur = document.getElementById('emetteur').value;
+var contenu = document.getElementById('contenu').value;*/
+$.ajax({
+   url:"{{ route('reservations.sendmessage') }}",
+   method:"POST",
+   data:{prestataire:<?php echo $user->id;?>,emetteur:emetteur , email:email, contenu:contenu, tel:tel ,to:to, _token:_token},
+   success:function(data){
+
+$.notify({
+// options
+message: 'Envoyé avec succès' 
+},{
+// settings
+type: 'success',
+delay: 3000,
+timer: 1000,					
+});	
+
+document.getElementById("contactform").reset();
+   }
+});
+
+});</script>
+<?php }?> 
 
   @endsection
 @include('layouts.pageprestataire-scripts')
