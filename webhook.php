@@ -86,7 +86,7 @@ elseif ($event->type=='customer.subscription.updated') {
 }
 elseif ($event->type=='invoice.payment_failed') {
   if ($event->lines->data->subscription==null) {
-
+echo "null";
     http_response_code(200);
   exit();
   } else {
@@ -94,9 +94,9 @@ elseif ($event->type=='invoice.payment_failed') {
 
             $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe=".$event->lines->data->subscription."";
             if ($conn->query($sql) === TRUE) {
-              //echo "Record updated successfully";
+              echo "Record updated successfully";
             } else {
-              //echo "Error updating record: " . $conn->error;
+              echo "Error updating record: " . $conn->error;
             }
 
     //$invoice = $event->data->object;
