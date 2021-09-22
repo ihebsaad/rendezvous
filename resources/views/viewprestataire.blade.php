@@ -8,7 +8,11 @@
 
 <style type="text/css">
 /* Show more */
-
+.btn-primary {
+    color: #fff;
+    background-color: #ffd700!important;
+    border-color: #ffd700!important;
+}
 .like-button .like-icon {
     color: #ff0000!important;
 }
@@ -733,7 +737,8 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{ $service->prix }} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <a href="" class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;">Réserver</a>
+
+                                <a class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;"  onclick='visibilityFunctionService(<?php echo $service->id;?>)'>Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -759,7 +764,7 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{ $servicerec->prix }} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <a href="" class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;">Réserver</a>
+                                <a   class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick='visibilityFunctionRec(<?php echo $servicerec->id;?>)'>Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -1584,9 +1589,9 @@ $( document ).ready(function() {
                                                                 </div><br>
                                                             </div>
 
-<!--test-->
+                        <!--test-->
 
-<!--test-->
+                    <!--test-->
 
                                 
                                            
@@ -1601,7 +1606,7 @@ $( document ).ready(function() {
                                                 <?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
                                                     <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </button> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
                                                 	<?php }else{?>
-	 <!-- a corriger  -->
+	                                            <!-- a corriger  -->
                                                 <button id="addfavoris" class="like-button liked " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon liked" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
                                                 <?php } ?>
                                     @endif              
@@ -1869,15 +1874,18 @@ $( document ).ready(function() {
 	   <a class="button book-now fullwidth margin-top-5" style="color:white" id="reserver2">Réserver</a>
 		
 			<?php if($User->user_type=="client"){  ?>  
+                <input type="text" value="<?php echo $user->id;?>"  id='prestataire_id1' hidden='true'>
+                                                        <input type="text" value="<?php echo $User->id;?>"  id='client_id1' hidden='true'>
 			<?php $countf= DB::table("favoris")->where("prestataire",$user->id)->where("client",$User->id)->count(); if($countf==0) {?>	
-			<button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;"class="like-button add_to_wishlist"><span  style="    margin-top: -7px;"class="like-icon"></span><div id="mesfavoris">Ajouter aux favoris</div></button>
+			
+                <button id="addfavoris1" style="    width: -webkit-fill-available; margin-top: 21px;"class="like-button add_to_wishlist"><span  style="    margin-top: -7px;"class="like-icon"></span><div id="mesfavoris1">Ajouter aux favoris</div></button>
 			<?php }else{?>
-			<button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button add_to_wishlist liked"><span  style="    margin-top: -7px;"class="like-icon liked"></span><div id="mesfavoris">Retirer de favoris</div></button>
+			<button id="addfavoris1" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button add_to_wishlist liked"><span  style="    margin-top: -7px;"class="like-icon liked"></span><div id="mesfavoris1">Retirer de favoris</div></button>
 			<?php } ?>
 			 <?php } ?>
 		 <?php }else{  ?>
 		 <center>
-		 <a href="" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a></center>
+		 <a href="{{route('inscription')}}" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a></center>
 	 
 			 
 	<?php	 } ?>
@@ -2082,6 +2090,88 @@ $( document ).ready(function() {
 
 
 <script> 
+function visibilityFunctionRec(element){
+  
+    var el = $('#servicerec option[value="' + element + '"]');
+            console.log(el);
+            if( !el.size() ) {
+                // no? append it and update chosen-select field
+                $('#servicerec').append( el ).trigger("chosen:updated");
+            } else {
+                // it does? check if it's already selected
+                if(!el[0].selected) {
+                    // adding already existent element in selection
+                    el[0].selected = true;
+                    $('#servicerec').trigger("chosen:updated");
+                } else {
+                    alert("Already selected and added.");
+                }
+            }
+           
+        
+        //test
+        var happyhours = $('#myhappyhoursId').val();
+ 		remiseCarte = 0 ;
+ 		montant = el.attr('prixRec');
+ 		
+		document.getElementById('MontantReservationRec').value = montant;
+		document.getElementById('totalReservationRec').value = montant;
+ 		periode=el.attr('periode');
+ 		nbr=el.attr('ndate');
+ 		frq=el.attr('frq');
+
+ 		document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
+ 		
+    	var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
+		//alert(remiseCarte);
+		}
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		//alert(remiseCarte);
+		}
+        //document.getElementById("dateRec").innerHTML = y;
+    	//$("#dateRec").append(y);
+    	
+        //test
+
+
+
+
+}
+function visibilityFunctionService(element){
+  
+    
+            // check if the same value already exists
+            var el = $('#service option[value="' + element + '"]');
+            console.log(el);
+            if( !el.size() ) {
+                // no? append it and update chosen-select field
+                $('#service').append( el ).trigger("chosen:updated");
+            } else {
+                // it does? check if it's already selected
+                if(!el[0].selected) {
+                    // adding already existent element in selection
+                    el[0].selected = true;
+                    $('#service').trigger("chosen:updated");
+                } else {
+                    alert("Already selected and added.");
+                }
+            }
+            selectservice();
+
+
+
+}
    function visibilityFunction(element){
       //alert("q"+element+"");
       document.getElementById("listProduits").style.display = 'block';
@@ -2207,6 +2297,7 @@ function selectservice(){
  	}
 
 function SelectServiceRec(a){
+    console.log(a);
  		var happyhours = $('#myhappyhoursId').val();
  		remiseCarte = 0 ;
  		montant = a.options[a.selectedIndex].getAttribute('prixRec');
@@ -2343,6 +2434,28 @@ $(this).find('input').on('change',function() {
                  }
                  else{
                   $('#mesfavoris').html('Ajouter aux favoris');
+                 }
+
+                    }
+                });
+           
+}); 
+$('#addfavoris1').on('click',function(){
+    var  prestataire=$('#client_id1').val();
+
+			  var  client=$('#prestataire_id1').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:"{{ route('reviews.addfavoris') }}",
+                    method:"POST",
+                    data:{prestataire:prestataire,client:client , _token:_token},
+                    success:function(data){
+
+                 if(parseInt(data)==0) { 
+                 $('#mesfavoris1').html('Retirer de favoris');
+                 }
+                 else{
+                  $('#mesfavoris1').html('Ajouter aux favoris');
                  }
 
                     }
