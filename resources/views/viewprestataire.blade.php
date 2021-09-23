@@ -545,7 +545,9 @@ table.basic-table th {
 <div class="listing-slider mfp-gallery-container margin-bottom-0">
     <?php $i=0; foreach($images as $image){ $i++;?>
             
- <a src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>" data-background-image="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  class="item mfp-gallery" title="{{$user->titre}}"></a>
+ <a href="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  style="width:100%;"class="item mfp-gallery" title="{{$user->titre}}"><img src="<?php echo  URL::asset('storage/images/'.$image->thumb);?>"  style="   display: block;
+      position: absolute; width: -webkit-fill-available;
+    height: -webkit-fill-available;"/></a>
     <?php } ?>
 </div>
 
