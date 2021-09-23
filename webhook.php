@@ -85,6 +85,7 @@ elseif ($event->type=='customer.subscription.updated') {
   # code...
 }
 elseif ($event->type=='invoice.payment_failed') {
+  echo ($event->lines->data);
   if ($event->lines->data->subscription==null) {
 echo "null";
     http_response_code(200);
