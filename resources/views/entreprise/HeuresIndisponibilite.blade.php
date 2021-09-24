@@ -1,4 +1,4 @@
-@extends('layouts.votreespacelayout')
+@extends('layouts.calend3layout')
  
  @section('content')
 
@@ -6,6 +6,7 @@
    use \App\Http\Controllers\UsersController;
 
   ?>
+
 
   <!-- Dashboard -->
   <style>
@@ -1203,10 +1204,7 @@ input#date-picker {
 
             <div class="row">
           <div class="col-md-12" >  
-            <div class="sizeA" >
-              <div id='calendar' style=" overflow-x: auto;
-    overflow-y: auto;
-    "></div> 
+              <div id='events'  ></div> 
             </div>
           
                 </div>
@@ -1262,58 +1260,42 @@ input#date-picker {
 </div>
 </div>
     
-    <script src="{{  URL::asset('public/fullcalendar/main.min.js') }}"></script>
-    <script src="{{  URL::asset('public/fullcalendar/locales/fr.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
+     <script src="{{URL::asset('public/fullcalendar3/js/sweetalert.min.js')}}"></script>
+    <script src="{{URL::asset('public/fullcalendar3/js/bootstrap.min.js')}}"></script> -->
+    <!-- DataTables JavaScript-->
+    <script src="{{URL::asset('public/fullcalendar3/js/jquery.dataTables.js')}}"></script>
+    <script src="{{URL::asset('public/fullcalendar3/js/dataTables.bootstrap.js')}}"></script> 
+    <!-- Listings JavaScript delete options-->
+    <script src="{{URL::asset('public/fullcalendar3/js/listings.js')}}"></script>
+    <!-- Metis Menu Plugin JavaScript-->
+    <script src="{{URL::asset('public/fullcalendar3/js/metisMenu.min.js')}}"></script> 
+    <!-- Moment JavaScript -->
+    <script src="{{URL::asset('public/fullcalendar3/js/bootstrap.min.js')}}"></script>
+    <!-- Moment JavaScript -->
+    <script src="{{URL::asset('public/fullcalendar3/js/moment.min.js')}}"></script>
+    <!-- FullCalendar JavaScript -->
+    <script src="{{URL::asset('public/fullcalendar3/js/fullcalendar.js')}}"></script>
+    <!-- FullCalendar Language JavaScript Selector-->
+    <script src="{{URL::asset('public/fullcalendar3/lang/fr.js')}}"></script> 
+    <!-- DateTimePicker JavaScript-->
+    <script type="text/javascript" src="{{URL::asset('public/fullcalendar3/js/bootstrap-datetimepicker.js')}}" charset="UTF-8"></script> 
 
 
-    <script>
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var initialLocaleCode = 'fr';
-    var localeSelectorEl = document.getElementById('locale-selector');
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'timeGridWeek,dayGridMonth,timeGridDay,listMonth'
-      },
-      
-      locale: initialLocaleCode,
-      initialView:'timeGridWeek',
-      buttonIcons: false, // show the prev/next text
-      weekNumbers: true,
-      navLinks: true, // can click day/week names to navigate views
-      editable: false,
-      selectable:true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      dateClick: function (info) {
-        var mod = document.getElementById("calendardialog");
-        //alert(mod);
-         mod.style.display = "block";
-        
-      },
-        eventClick: function(info) {
-
-          if (info.event.start) {
-           //alert(info.event.start);
-            }
-       },
-       businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire($user->id); ?>,
-      
-      events:<?php echo \App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire($user->id); ?>
-    });
-
-    calendar.render();
-    
-    // build the locale selector's options
-   
-
-   
-
-  });
+    <script> 
+    $(document).ready(function() {
+        $.noConflict();
+        $('#events').fullCalendar({
+            defaultDate: '2014-09-12',            
+                editable: true,
+                eventLimit: true,
+                displayEventTime: false,    
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listMonth'
+                } 
+        });
+    }); 
 
 </script>
 <script>	function ClientVerif(){
