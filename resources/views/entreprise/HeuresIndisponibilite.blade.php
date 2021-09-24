@@ -9,6 +9,433 @@
 
   <!-- Dashboard -->
   <style>
+    .input-group-prepend {
+    margin-right: -1px;
+}.input-group-append, .input-group-prepend {
+    display: -ms-flexbox;
+    display: flex;
+}.input-group-text {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}.input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control, .input-group>.form-control-plaintext {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0;
+}.input-group-append {
+    margin-left: -1px;
+}.input-group-append, .input-group-prepend {
+    display: -ms-flexbox;
+    display: flex;
+}
+    .chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+    margin: 0;
+    padding: 0;
+    height: 49px;
+    outline: 0;
+    border: 0 !important;
+    background: transparent !important;
+    color: #888;
+    line-height: normal;
+    font-weight: 800!important;
+    box-shadow: none;
+    transition: none;
+    display:block!important;
+    font-size: 12.5px;
+}
+    .applyBtn .btn .btn-sm .btn-primary{display:none;}
+    .daterangepicker .drp-buttons button.applyBtn, .daterangepicker .drp-buttons button.cancelBtn {display:none;
+        }    .input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control, .input-group>.form-control-plaintext {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0;
+}.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+    .input-group {
+    position: relative!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    -ms-flex-wrap: wrap!important;
+    flex-wrap: wrap!important;
+    -ms-flex-align: stretch!important;
+    align-items: stretch!important;
+    width: 100%!important;
+}
+    .btn-primary {
+    color: #fff;
+    background-color: #ffd700!important;
+    border-color: #ffd700!important;
+}
+.like-button .like-icon {
+    color: #ff0000!important;
+}
+@media (max-width: 768px){
+.day-slot-headline { 
+    width: auto!important;
+  
+    /* width: 403px; */
+}
+#sectionproduitsup{ width: auto!important;}
+}}
+.option_class{
+    margin-top: 30px!important;
+    position: relative!important;
+    padding: 20px 20px!important;
+    text-align: center!important;
+    cursor: pointer!important;
+    font-weight: 600!important;
+    user-select: none!important;
+    border-radius: 4px!important;
+    color: rgb(119, 119, 119)!important;
+    transition: all 0.3s ease 0s!important;
+    overflow: hidden!important;
+    font-size: 15px;
+    background-color: rgb(242, 242, 242)!important;
+}
+.single-slot-time {
+    font-weight: 400!important;
+    color: #666;
+    line-height: 20px;
+    font-size: 12px!important;
+    margin-bottom: 4px;
+}
+.single-slot-left {
+    background: white!important;
+    flex: 1;
+    padding: 12px 17px;
+}
+.single-slot-right {
+    flex: 0 0 auto;
+    background-color: #c7c7c770!important;;
+    position: relative;
+    display: flex!important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 4px 4px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 17px;
+}
+.single-slot {
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 0;
+    display: flex;
+    width: -webkit-fill-available;
+    cursor: move;
+}
+.select {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-size: 12.5px!important;
+    color: #6b6464!important;
+    font-weight: 550;
+    width: 100%;
+    height: 51px;
+}
+a.button.border {
+    color: #ffd700!important;
+    border-color: #ffd700!important;
+}
+.booking-widget .panel-dropdown a:after {
+    font-size: 20px;
+    color: #ffd700!important;
+    margin-left: 0;
+    position: absolute;
+    right: 20px;
+}
+
+.booking-widget .panel-dropdown a {
+    border: none;
+    font-size: 12.5px!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 6px 0px rgb(0 0 0 / 10%);
+    font-weight: 800!important;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    display: block;
+    width: 100%;
+    transition: color 0.3s;
+}
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+    margin: 0;
+    padding: 0;
+    height: 49px;
+    outline: 0;
+    border: 0 !important;
+    background: transparent !important;
+    color: #888;
+    line-height: normal;
+    font-weight: 800!important;
+    box-shadow: none;
+    transition: none;
+    font-size: 12.5px;
+}
+.chosen-container-single .chosen-single {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0 0 0 18px;
+    height: 51px;
+    font-size: 12.5px!important;
+    line-height: 50px;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 8%);
+    background-color: #fff;
+    color: #888;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: 800!important;
+    border-radius: 4px;
+}
+.chosen-container-single .chosen-default {
+    font-size: 12.5px!important;
+    color: #999;
+    font-weight: 800!important;
+}
+.chosen-container-single .chosen-single div:after {
+    content: "\f107";
+    font-family: "FontAwesome";
+    font-size: 18px;
+    margin: 1px 0 0 0;
+    right: 20px;
+    position: relative;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    color: #ffd700!important;
+    float: right;
+    font-weight: normal;
+    transition: transform 0.3s;
+    transform: translate3d(0,0,0) rotate(
+0deg);
+}
+.booking-widget .panel-dropdown a {
+    border: 1px solid #dbdbdb!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%)!important;
+    font-size: 16px;
+    font-weight: 600;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    display: block;
+    width: 100%;
+    transition: color 0.3s;
+}input#date-picker2 {
+    border: 1px solid #dbdbdb!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%)!important;
+    font-size: 12.5px!important;
+    font-weight: 800!important;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    transition: color 0.3s !important;
+}
+input#date-picker {
+    border: 1px solid #dbdbdb!important;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%)!important;
+    font-size: 12.5px!important;
+    font-weight: 800!important;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    position: relative;
+    background-color: #fff;
+    text-align: left;
+    color: #888;
+    transition: color 0.3s !important;
+}
+.daterangepicker td.active.end-date.in-range.available, .qtyTotal, .mm-menu em.mm-counter, .option-set li a.selected, .category-small-box:hover, .pricing-list-container h4:after, #backtotop a, .chosen-container-multi .chosen-choices li.search-choice, .select-options li:hover, button.panel-apply, .layout-switcher a:hover, .listing-features.checkboxes li:before, .comment-by a.reply:hover, .add-review-photos:hover, .office-address h3:after, .post-img:before, button.button, input[type="button"], input[type="submit"], a.button, a.button.border:hover, table.basic-table th, .plan.featured .plan-price, mark.color, .style-4 .tabs-nav li.active a, .style-5 .tabs-nav li.active a, .dashboard-list-box .button.gray:hover, .change-photo-btn:hover, .dashboard-list-box a.rate-review:hover, input:checked + .slider, .add-pricing-submenu.button:hover, .add-pricing-list-item.button:hover, .custom-zoom-in:hover, .custom-zoom-out:hover, #geoLocation:hover, #streetView:hover, #scrollEnabling:hover, #scrollEnabling.enabled, #mapnav-buttons a:hover, #sign-in-dialog .mfp-close:hover, #small-dialog .mfp-close:hover {
+    background-color: #ffd700;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 1px 3px 0px rgb(0 0 0 / 6%);
+}
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close:before {
+    content: "\f00d";
+    font-family: "FontAwesome";
+    font-size: 13px;
+    top: 1px;
+    position: relative;
+    width: 11px;
+    height: 5px;
+    display: inline-block;
+    color: #42403f!important;
+    float: right;
+    font-weight: normal;
+}
+.buttons-to-right {
+    box-shadow: none;
+}
+.buttons-to-right, .button.to-right {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translate3d(0,-49%,0);
+    -moz-transform: translate3d(0,-50%,0);
+    opacity: 0;
+    transition: 0.4s;
+    box-shadow: 0px 0px 10px 15px #fbfbfb;
+}
+
+
+.listing-details-sidebar li {
+    display: block;
+    padding-left: 26px;
+    position: relative;
+    margin-bottom: 5px;
+    line-height: 24px;
+    width: 155px;
+}
+
+@media (max-width: 768px) {.panel-dropdown .panel-dropdown-content, .fullwidth-filters .panel-dropdown.float-right .panel-dropdown-content {
+    left: 0;
+    right: auto;
+    max-width: 74vw!important;
+}}
+
+.daterangepicker td.active.end-date.in-range.available, .qtyTotal, .mm-menu em.mm-counter, .option-set li a.selected, .category-small-box:hover, .pricing-list-container h4:after, #backtotop a, .chosen-container-multi .chosen-choices li.search-choice, .select-options li:hover, button.panel-apply, .layout-switcher a:hover, .listing-features.checkboxes li:before, .comment-by a.reply:hover, .add-review-photos:hover, .office-address h3:after, .post-img:before, button.button, input[type="button"], input[type="submit"], a.button, a.button.border:hover, table.basic-table th, .plan.featured .plan-price, mark.color, .style-4 .tabs-nav li.active a, .style-5 .tabs-nav li.active a, .dashboard-list-box .button.gray:hover, .change-photo-btn:hover, .dashboard-list-box a.rate-review:hover, input:checked + .slider, .add-pricing-submenu.button:hover, .add-pricing-list-item.button:hover, .custom-zoom-in:hover, .custom-zoom-out:hover, #geoLocation:hover, #streetView:hover, #scrollEnabling:hover, #scrollEnabling.enabled, #mapnav-buttons a:hover, #sign-in-dialog .mfp-close:hover, #small-dialog .mfp-close:hover {
+    color: black! important;
+    background-color: #ffd700;
+}
+
+
+.booking-widget .panel-dropdown: {
+    width: 100%;
+}
+.booking-widget .panel-dropdown .panel-dropdown-content.padding-reset {
+    width: -webkit-fill-available;
+    padding: 0;
+}
+.fc-today-button{font-size:13px!important;}
+.fc .fc-toolbar-title {
+    font-size: 1.75em;
+    margin: 0;
+    font-size: 1.75em;
+    margin: 0;
+}
+.fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
+    margin-left:0!important;
+    color: black;
+    border: yellow;
+    border-radius: 50px;
+    background-color: #f9d308;
+}
+.show-moreP {
+	height: 450px;
+	overflow: hidden;
+	position: relative;
+	transition: margin 0.4s;
+}
+
+.show-moreP:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 180px;
+	display: block;
+	background: linear-gradient(rgba(255,255,255,0), #fff 88%);
+	z-index: 9;
+	opacity: 1;
+	visibility: visible;
+	transition: 0.8s;
+}
+
+.show-moreP.visible { margin-bottom: 20px; }
+.show-moreP.visible:after { opacity: 0; visibility: hidden; }
+
+.show-moreP-button {
+	position: relative;
+	font-weight: 600;
+	font-size: 15px;
+	left: 0;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+	text-align: center;
+	display: inline-block;
+	opacity: 1;
+	visibility: visible;
+	transition: all 0.3s;
+	padding: 5px 20px;
+	color: #666;
+	background-color: #f2f2f2;
+	border-radius: 50px;
+	top: -10px;
+	min-width: 140px;
+}
+
+.show-moreP-button:before { content: attr(data-more-title); }
+.show-moreP-button.active:before { content: attr(data-less-title); }
+
+.show-moreP-button i {
+	margin-left: 6px;
+	color: #66676b;
+	font-weight: 500;
+	transition: 0.2s;
+}
+
+.show-moreP-button.active i {
+	transform: rotate(180deg);
+}
     body{    color: #707070;
     font-size: 15px;
     width: fit-content;
@@ -140,7 +567,8 @@
                         <div class="add-listing-headline">
                             <h3><i class="fa fa-calendar"></i> Heures d'indisponibilité - Rendez vous confirmés - Heures ouverture et fermeture</h3>
                             <a href="#Ajout-Res" style="margin-top: 12px;
-    margin-left: 15px;"class="button popup-with-zoom-anim">Ajouter</a>
+    margin-left: 15px;"class="button popup-with-zoom-anim">Ajouter une réservation
+</a>
                                 <!--  modal pour ajouter une indisponibilté -->
 
        <div id="Ajout-Res" class="small-dialog zoom-anim-dialog mfp-hide">
@@ -151,20 +579,20 @@
            <div class="utf_signin_form style_one" id="verification" >
            <input type="hidden" name="id_user" id="id_user" value="{{$user->id}}" >
 
-             <input type="text" name="number" id="number_client" placeholder="saisir le numéro de télephone du client" >
+             <input type="text" name="number" id="number_client" placeholder="veuillez saisir le numéro de télephone du client" >
             <center> <button type="submit" class="button" onclick="ClientVerif()"  >Verifier</button></center>
             </div>
            
            <div class="utf_signin_form style_one" style="display:none;" id="validation">
             <center> <h3><i class="sl sl-icon-user"></i> Le client est <output type="text"  id="test"></output></h3><br>
-            <form name="form" action="" method="POST">
+            <form name="form" method="post" action="{{ route('clientValid') }}">
             <meta name="csrf-token" content="{{ csrf_token() }}">
-            <input type="text"  id="id-client" name="id-client" >
+            <input type="text"  id="id-client" name="id-client" style="display:none;" >
             
             <ul style="    list-style: none;display: flex;align-items: center; justify-content: center;">
-            <li style="margin: auto"> <a type="submit" style="    width: 200px;" class="button"   onclick="ClientValidation()">Valider</a></li>
+            <li style="margin: auto"> <a type="submit" style="     width: 130px;;" class="button"   onclick="ClientValidation()">Valider</a></li>
             </form>
-             <li style="margin: auto"> <a href=""type="submit"  style="    width: 200px;"class="button" >Annuler</a></li>
+             <li style="margin: auto"> <a href=""type="submit"  style="       width: 130px;;"class="button" >Annuler</a></li>
            </ul></div>
 
 
@@ -172,25 +600,27 @@
   <?php $services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
                         $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get(); 
                         $nbserv =count($services );
+                        $reduction=0;
                         $nbservrec =count($servicesreccurent );
-                        if(isset($id_client)){
-                          
-                     
-                        echo $id_client;
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                          $id_client = $_POST['id-client'];};
+                          if(isset($id_client)){
+                            echo $id_client;
+                            echo'hehy';
 
                         $today= new DateTime();
-                        $happyhours = Happyhour::where('id_user',$user->id)->where('dateFin','>=',$today)->get();
-                        $myhappyhours = Happyhour::where('id_user' ,$user->id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
-
-                        $test=Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->exists();
+                        $happyhours = \App\Happyhour::where('id_user',$user->id)->where('dateFin','>=',$today)->get();
+                        $myhappyhours = \App\Happyhour::where('id_user' ,$user->id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
+                          echo $myhappyhours;
+                        $test=\App\Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->exists();
                         if ($test=='true') {
-                            $nbrRes=Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->value('nbr_reservation');
+                            $nbrRes=\App\Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->value('nbr_reservation');
                             if ($nbrRes==9) {
-                                $reduction=User::where('id',$user->id)->value('reduction');
+                                $reduction=\App\User::where('id',$user->id)->value('reduction');
                             }
-                            }}else{        $reduction=0;$myhappyhours=0;
+                            }}else{       $myhappyhours=0;
                             }?>
-              <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="height: fit-content;;display:none;" >
+              <div id="booking-widget-anchor" class="boxed-widget booking-widget " style="height: fit-content;;display:none;" >
                 <a><h3><i class="fa fa-calendar-check-o "></i></h3></a>
                 
                 <div class="row with-forms  margin-top-0">
@@ -206,7 +636,6 @@
 
                     <!----------------------------------- Nav tabs --------------------------------------------->
                     <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0)  { echo ' 
-                    </style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
 
                     <div class="tabs-container" style="display:none;">
                     <div id="home" class="tab-content" style="display:none;>'  ;                 
@@ -214,7 +643,7 @@
 
          <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
                         # code...
-            echo '<p style=" font-size: 14px; line-height: 16px;">Veuillez sélectionner "Abonnement", si vous désirez réserver un service récurrent</p>
+            echo '
                       
               <ul class="tabs-nav" >
                 <li class="active">
@@ -252,7 +681,7 @@
 
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; "data-placeholder="Sélectionner le(s) service(s) desiré(s)" onchange="selectservice()" >
-                               <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner le(s) service(s) desiré(s)</option>
+                               <option label="Sélectionner le(s) service(s) desiré(s)" style="font-size:12.5px;font-weight:800;">Sélectionner le(s) service(s) desiré(s)</option>
                                <?php 
                                 foreach($services as $service){
                                     echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
@@ -353,7 +782,7 @@
                       
                         <select class="chosen-select-no-single" id="rappel">
 
-                        <option label="blank" >Rappel de rendez vous par SMS</option>
+                        <option label="Rappel de rendez vous par SMS" >Rappel de rendez vous par SMS</option>
                         <option value="60">1h avant le RDV </option>
                          <option value="120">2h avant le RDV</option>
                       	 <option value="180">3h avant le RDV</option>
@@ -366,25 +795,29 @@
                     <?php 
                           if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
                   <div class="col-lg-12 col-md-12 ">
-                <label>Code promo :</label>
                 <div class="input-group input-group-lg" >
-                  <input class="form-control " type="text" id="mycodepromo">
+                  <input class="form-control " style="    height: 34px;"type="text" id="mycodepromo" placeholder="Code promo ">
                   <span class="input-group-btn ">
-                      <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "hidden='true'" ;}?> >valide</button>
+                      <button class="btn btn-primary btn-lg" onclick="fonctionvalide()">valide</button>
                   </span>
                   </div>   
                       </div>
                       <?php } ?>
 
+              
+
+
+
 
                     <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;display:none;" >
                     <div class="day-slots">
-                    <div class="day-slot-headline" style="      background-color: #c7c7c7;color: #000000;    width: 267px;"> Produits:</div>
-                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
+                    <div class="day-slot-headline" style="      background-color: #c7c7c7;color: #000000;    width: auto;"> Produits:</div>
+                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: auto;overflow-y: scroll;overflow-x: auto
                     ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
                     <?php  foreach($produit as $prod){ ?>
-                    <div class="single-slot" id="q<?php echo  $prod->id;?>"  hidden="true">
+                      <div style="display:none;width: -webkit-fill-available;" id="q<?php echo  $prod->id;?>">
+                    <div class="single-slot"   >
                             <div class="single-slot-left">
                                 <div class="single-slot-time"><div class="row">
                                     <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
@@ -401,7 +834,7 @@
                                     <button onclick='increaseCount(event, this)'></button> 
                                 </div>
                                 <br>
-                            </div>
+                            </div></div>
                         </div>
                     <!-- Slot For Cloning / Do NOT Remove-->
         
@@ -413,7 +846,7 @@
                                 <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                     <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
                                 </div>
@@ -423,7 +856,7 @@
          	                    <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                 <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
                             </div>
@@ -468,7 +901,7 @@
                                     <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                         <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
                                     </div>
@@ -495,8 +928,8 @@
             
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
-                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré" onchange="SelectServiceRec(this)">
-                        <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
+                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"   onchange="SelectServiceRec(this)">
+                        <option label="Sélectionner l'abonnement desiré" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
 
                              <?php 
                                 foreach($servicesreccurent as $SR){
@@ -516,7 +949,7 @@
                         </div>
                         <!-- here -->
                         <div class="row with-forms margin-top-0 " style="font-size: 150%">
-                            <input type="number" name="nbrServiceRec" id="nbrServiceRec" hidden>
+                            <input type="number" name="nbrServiceRec" id="nbrServiceRec" style="display:none;">
 
                                         </div>
                                         <div class="row with-forms margin-top-0">
@@ -619,11 +1052,10 @@
                                                 
                     </div>
                     <div class="col-lg-12 col-md-12 ">
-		  		<label>Code promo :</label>
 		  		<div class="input-group input-group-lg" >
-				    <input class="form-control "  type="text" id="mycodepromoRec">
+				    <input class="form-control "  type="text" id="mycodepromoRec" style="    height: 34px;" placeholder="Code promo">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  >valide</button>
 				    </span>
 				</div>
 
@@ -633,7 +1065,7 @@
                                 <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                     <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
                                 </div>
@@ -643,7 +1075,7 @@
          	                    <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                 <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
                             </div>
@@ -688,7 +1120,7 @@
                                     <br>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
+                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                         <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
                                     </div>
@@ -925,7 +1357,7 @@
                     $.ajax({
                         url:"{{ route('clientValid') }}",
                         method:"POST",
-						data:{id_client:id_client,id_user:id_user, _token:_token},
+						data:{id_client:id_client, _token:_token},
                         success:function(data){ 
                           alert(data);
                      
@@ -1024,30 +1456,7 @@ function visibilityFunctionRec(element){
 
 
 }
-function visibilityFunctionService(element){
-  
-    
-            // check if the same value already exists
-            var el = $('#service option[value="' + element + '"]');
-            console.log(el);
-            if( !el.size() ) {
-                // no? append it and update chosen-select field
-                $('#service').append( el ).trigger("chosen:updated");
-            } else {
-                // it does? check if it's already selected
-                if(!el[0].selected) {
-                    // adding already existent element in selection
-                    el[0].selected = true;
-                    $('#service').trigger("chosen:updated");
-                } else {
-                    alert("Already selected and added.");
-                }
-            }
-            selectservice();
 
-
-
-}
    function visibilityFunction(element){
       //alert("q"+element+"");
       document.getElementById("listProduits").style.display = 'block';
@@ -1056,7 +1465,7 @@ function visibilityFunctionService(element){
       
       if (!(produitslist.includes(element))) {
       produitslist.push(element);
-      document.getElementById(t).hidden = false;
+      document.getElementById(t).style.display = 'block';
      
     }}
 function selectservice(){
@@ -1427,11 +1836,10 @@ var timeSlotVal = timeSlot.find('strong').text();
 var str=$('#time a').text();
 alert(str);
 
-var myArr = str.split("am -");
+var myArr = str.split(" ");
 var reservationHeureStart=myArr[0];//start
 var reservationHeure2=myArr[1].split("-");
-var reservationHeure3=reservationHeure2[0].split("am");
-var reservationHeureEnd=reservationHeure3[0];//end
+alert(reservationHeureStart);
 
 
 var datereservation1 = $('#date-picker').val();
@@ -1544,5 +1952,15 @@ document.getElementById("contactform").reset();
 
 });</script>
 <?php }?> 
+<script>
+$(".time-slot").each(function() {
+	var timeSlot = $(this);
+	$(this).find('input').on('change',function() {
+		var timeSlotVal = timeSlot.find('strong').text();
 
+		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+		$('.panel-dropdown').removeClass('active');
+	});
+});
+</script>
 @endsection('content')
