@@ -1660,7 +1660,9 @@ fclose($fp);
         }
     }
     public function HeuresIndisponibilite($id)
-    {
+    { 
+      $produit= Produit::where('user',$id)->get();
+
         $cuser = auth()->user();
         $user_type=$cuser->user_type;
         $user_id=$cuser->id;
@@ -1670,7 +1672,7 @@ fclose($fp);
         $user = User::find($id);
 
 
-        return view('entreprise.HeuresIndisponibilite',  compact('user','id')); 
+        return view('entreprise.HeuresIndisponibilite',  compact('user','id','produit')); 
         
         }
     }
@@ -1984,9 +1986,23 @@ public function Services($id)
 
     public function grid(Request $request)
     {
-      echo $request->get('type')
-;   
+      echo $request->get('type');   
   
+    }
+    function clientcheck(Request $request){
+      
+      $num_client= $request->get('number_client');
+      $client = User::where('user_type','client')->where('phone',$num_client)->first();
+     
+
+      return $client;
+
+    }
+    function clientValid(Request $request){
+      $id_client= $request->get('id_client');
+     
+
+      return $id_client;
     }
 
  }

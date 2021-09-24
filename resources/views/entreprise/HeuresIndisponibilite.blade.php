@@ -40,10 +40,26 @@
     .legend .red{ background-color: #ec7878; }
     .legend .green{ background-color:#ead831; }
     .legend .pink{ background-color:#d3c07b; }
-   
+    #Ajout-Res {
+	background: #fff!important;
+	padding: 40px;
+	padding-top: 0;
+	text-align: left;
+	max-width: 610px!important;
+	margin: 40px auto;
+	position: relative!important;
+	box-sizing:border-box;
+	border-radius: 4px;
+}
+
 </style>
 <div id="dashboard" style="position:relative;  "> 
 @include('layouts.back.bmenu')
+<script> 
+ 	var listcodepromo = [];
+  var produitslist =[];
+  var qtyproduits = [];
+</script>
 <!-- Content
     ================================================== -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
@@ -123,7 +139,615 @@
                         <!-- Headline -->
                         <div class="add-listing-headline">
                             <h3><i class="fa fa-calendar"></i> Heures d'indisponibilité - Rendez vous confirmés - Heures ouverture et fermeture</h3>
+                            <a href="#Ajout-Res" style="margin-top: 12px;
+    margin-left: 15px;"class="button popup-with-zoom-anim">Ajouter</a>
+                                <!--  modal pour ajouter une indisponibilté -->
+
+       <div id="Ajout-Res" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small-dialog-header">
+           <center> <h3>Ajouter une nouvelle réservation</h3></center>
+          </div>
+           
+           <div class="utf_signin_form style_one" id="verification" >
+           <input type="hidden" name="id_user" id="id_user" value="{{$user->id}}" >
+
+             <input type="text" name="number" id="number_client" placeholder="saisir le numéro de télephone du client" >
+            <center> <button type="submit" class="button" onclick="ClientVerif()"  >Verifier</button></center>
+            </div>
+           
+           <div class="utf_signin_form style_one" style="display:none;" id="validation">
+            <center> <h3><i class="sl sl-icon-user"></i> Le client est <output type="text"  id="test"></output></h3><br>
+            <form name="form" action="" method="POST">
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+            <input type="text"  id="id-client" name="id-client" >
+            
+            <ul style="    list-style: none;display: flex;align-items: center; justify-content: center;">
+            <li style="margin: auto"> <a type="submit" style="    width: 200px;" class="button"   onclick="ClientValidation()">Valider</a></li>
+            </form>
+             <li style="margin: auto"> <a href=""type="submit"  style="    width: 200px;"class="button" >Annuler</a></li>
+           </ul></div>
+
+
+<!-- testing -->
+  <?php $services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
+                        $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get(); 
+                        $nbserv =count($services );
+                        $nbservrec =count($servicesreccurent );
+                        if(isset($id_client)){
+                          
+                     
+                        echo $id_client;
+
+                        $today= new DateTime();
+                        $happyhours = Happyhour::where('id_user',$user->id)->where('dateFin','>=',$today)->get();
+                        $myhappyhours = Happyhour::where('id_user' ,$user->id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
+
+                        $test=Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->exists();
+                        if ($test=='true') {
+                            $nbrRes=Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->value('nbr_reservation');
+                            if ($nbrRes==9) {
+                                $reduction=User::where('id',$user->id)->value('reduction');
+                            }
+                            }}else{        $reduction=0;$myhappyhours=0;
+                            }?>
+              <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="height: fit-content;;display:none;" >
+                <a><h3><i class="fa fa-calendar-check-o "></i></h3></a>
+                
+                <div class="row with-forms  margin-top-0">
+
+                    <!-- les scripts des offres de reduction -->
+                    <input type="number" value="{{$reduction}}" name="" hidden id="catrefideliteVal" style="display:none;" >
+                      <?php if($reduction != 0){  ?> 
+                      <p style="color: #c7a903;font-size: 14px; line-height: 16px;"><i class="sl sl-icon-present"></i> Félicitation! Vous bénéficierez pour la prochaine réservation d'<b>une réduction de {{$reduction}}%</b></p>
+                      <?php } ?>
+                      <?php if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'"  style="display:none;"id="myhappyhoursId" name="" hidden>' ;  }
+                             else {  echo '<input type="number" happyhourid="0" value="0" id="myhappyhoursId" name="" style="display:none;">'; } ?>
+                    <!-- FIN // les scripts des offres de reduction -->
+
+                    <!----------------------------------- Nav tabs --------------------------------------------->
+                    <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0)  { echo ' 
+                    </style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
+
+                    <div class="tabs-container" style="display:none;">
+                    <div id="home" class="tab-content" style="display:none;>'  ;                 
+                   }?>
+
+         <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
+                        # code...
+            echo '<p style=" font-size: 14px; line-height: 16px;">Veuillez sélectionner "Abonnement", si vous désirez réserver un service récurrent</p>
+                      
+              <ul class="tabs-nav" >
+                <li class="active">
+                  <a href="#home">Service simple</a>
+                </li>
+                <li class="">
+                  <a  href="#menu1">Abonnement</a>
+                </li>
+                
+              </ul>
+            <!-- Tab panes -->
+              <div class="tabs-container">
+                <div id="home" class="tab-content">';
+                } ?>
+                <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
+                               # code...
+                   echo '
+                             
+                     
+                       
+                   
+                   <!-- Tab panes -->
+                     <div class="tabs-container">
+                       <div id="home" class="tab-content">';
+                       } ?>
+                          <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
+                               # code...
+                   echo '
+                             
+                     
+                   <!-- Tab panes -->
+                     <div class="tabs-container">
+                       <div id="home" class="tab-content" style="display:none;">';
+                       } ?>
+
+                        <div class="col-lg-12">
+                        <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; "data-placeholder="Sélectionner le(s) service(s) desiré(s)" onchange="selectservice()" >
+                               <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner le(s) service(s) desiré(s)</option>
+                               <?php 
+                                foreach($services as $service){
+                                    echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
+                        
+                        $mab[$service->id]=$service->produits_id ;
+                                }
+                                
+                                ?>
+                                
+                                <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
+                            </select>
                         </div>
+                    <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+                    <div class="col-lg-12">
+                    <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+
+                    </div>
+
+                    <div class="col-lg-12">
+						<div class="panel-dropdown time-slots-dropdown" id="time">
+							<a href="#">Heure</a>
+							<div class="panel-dropdown-content padding-reset">
+								<div class="panel-dropdown-scrollable">
+									
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-1">
+										<label for="time-slot-1">
+											<strong>08:30 am - 09:00 am</strong>
+											<span>1 slot available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-2">
+										<label for="time-slot-2">
+											<strong>09:00 am - 09:30 am</strong>
+											<span>2 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-3">
+										<label for="time-slot-3">
+											<strong>09:30 am - 10:00 am</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-4">
+										<label for="time-slot-4">
+											<strong>10:00 am - 10:30 am</strong>
+											<span>3 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-5">
+										<label for="time-slot-5">
+											<strong>13:00 pm - 13:30 pm</strong>
+											<span>2 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-6">
+										<label for="time-slot-6">
+											<strong>13:30 pm - 14:00 pm</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-7">
+										<label for="time-slot-7">
+											<strong>14:00 pm - 14:30 pm</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                    <!-- Panel Dropdown / End -->
+                    <!-- Panel Dropdown -->
+					
+					<!-- Panel Dropdown / End -->
+                    <div class="col-lg-12 " >
+                        <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
+                      
+                        <select class="chosen-select-no-single" id="rappel">
+
+                        <option label="blank" >Rappel de rendez vous par SMS</option>
+                        <option value="60">1h avant le RDV </option>
+                         <option value="120">2h avant le RDV</option>
+                      	 <option value="180">3h avant le RDV</option>
+                          <option value="1440">1 jour avant le RDV</option>
+                        <option value="2880">2 jours avant le RDV</option>
+                         <option value="7200">5 jours avant le RDV</option>
+                        </select>
+                       
+                    </div>
+                    <?php 
+                          if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+                  <div class="col-lg-12 col-md-12 ">
+                <label>Code promo :</label>
+                <div class="input-group input-group-lg" >
+                  <input class="form-control " type="text" id="mycodepromo">
+                  <span class="input-group-btn ">
+                      <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "hidden='true'" ;}?> >valide</button>
+                  </span>
+                  </div>   
+                      </div>
+                      <?php } ?>
+
+
+                    <div class="col-lg-12 col-md-12 "  id="listProduits" style="margin-top: 15px;display:none;" >
+                    <div class="day-slots">
+                    <div class="day-slot-headline" style="      background-color: #c7c7c7;color: #000000;    width: 267px;"> Produits:</div>
+                    <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
+                    ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
+                    <!-- Slot For Cloning / Do NOT Remove-->
+                    <?php  foreach($produit as $prod){ ?>
+                    <div class="single-slot" id="q<?php echo  $prod->id;?>"  hidden="true">
+                            <div class="single-slot-left">
+                                <div class="single-slot-time"><div class="row">
+                                    <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
+                                    </div><div  class="col-md-6" style=" font-weight: 800!important;">{{$prod->prix_unité}} €</div></div></div>
+                                <div class="single-slot-time">{{$prod->nom_produit}} </div>
+                            </div>
+
+                            <div class="single-slot-right">
+                            <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+
+                                <div class="plusminus horiz">
+                                    <button onclick='decreaseCount(event, this)' ></button>
+                                    <input type="number" prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" name="slot-qty" value="0" min="0" max="10">
+                                    <button onclick='increaseCount(event, this)'></button> 
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    <!-- Slot For Cloning / Do NOT Remove-->
+        
+                    <?php } ?>	</div>	
+                                    </div>
+                            </div>	 
+                    <!-- Modal -->
+                    <div class="col-lg-12 col-md-12 ">
+                                <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                </div>
+                            </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 " >
+         	                    <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                            </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                            
+                            </div>
+
+
+                            </div>
+                              <div id="divremise" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
+                              	  <table class="table" id="tabRemise">
+                                        <thead>
+                                        <tr>
+                                            <th>Remise</th>
+                                            <th>service</th>
+                                            <th>Reduction</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        <?php if($reduction != 0){  ?>
+                                        <tr>
+
+                                            <td>carte fidelite ({{$reduction }} %)</td>
+                                            <td>total</td>
+                                            <td id="remiseCarte">0€</td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php if($myhappyhours != null) { 
+                                        echo '<tr>
+                                            <td>happy hours ('.$myhappyhours->reduction .'%)</td>
+                                            <td>total</td>
+                                            <td id="remiseHappyhours" >0€</td>
+                                        </tr>' ; } ?>
+                                        
+                                        </tbody>
+                                    </table>
+                              </div><br>
+                          </div>
+                          <div class="col-lg-12 col-md-12 ">
+                                    <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                        <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                    </div>
+                              </div><br>
+                          </div>                      
+                    <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
+                        <!-- Book Now -->
+                                
+                <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div>
+                        <div id="menu1" class="tab-content">';
+                } ?> 
+                   <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div>
+                        <div id="menu1" class="tab-content" style="display:none;">';
+                } ?> 
+                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
+                        # code...
+                        echo '</div>
+                        <div id="menu1" class="tab-content" >';
+                } ?> 
+            
+                        <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+                        <div class="col-lg-12">
+                        <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré" onchange="SelectServiceRec(this)">
+                        <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
+
+                             <?php 
+                                foreach($servicesreccurent as $SR){
+                                    echo '  <option value="'.$SR->id.'" ndate="'.$SR->Nfois.'" frq = "'.$SR->frequence.'" periode="'.$SR->periode.'" prixRec="'.$SR->prix.'"><strong>'.$SR->nom.'</strong></option>
+                                    '; 
+                        $mab[$SR->id]=$SR->produits_id ;
+                                }
+                                
+                                ?>
+                                
+                                <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
+                            </select>
+                        </div>
+                        <div class="col-lg-12">
+					              	<input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
+                        </div>
+                        <!-- here -->
+                        <div class="row with-forms margin-top-0 " style="font-size: 150%">
+                            <input type="number" name="nbrServiceRec" id="nbrServiceRec" hidden>
+
+                                        </div>
+                                        <div class="row with-forms margin-top-0">
+                                    <div class="col-lg-12 col-md-12 select_date_box">
+                                        <h5 style="color: red" id="msgRec">
+                                   </h5>  <span class="add-on"><i class="icon-th"></i></span>
+                                    </div></div>
+          
+      <!-- 	<label>Date de rendez vous:</label>
+        <input type="text" value=""  class="dtpks" name="datereservation" placeholder="date 1"  class="input-append date " style="font-size: 15px;" readonly> 
+                   -->    
+          
+                        
+                        <!-- Panel Dropdown -->
+               <div class="col-lg-12">
+						<div class="panel-dropdown time-slots-dropdown" id="time1">
+							<a href="#">Heure</a>
+							<div class="panel-dropdown-content padding-reset">
+								<div class="panel-dropdown-scrollable">
+									
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-1">
+										<label for="time-slot-1">
+											<strong>08:30 am - 09:00 am</strong>
+											<span>1 slot available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-2">
+										<label for="time-slot-2">
+											<strong>09:00 am - 09:30 am</strong>
+											<span>2 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-3">
+										<label for="time-slot-3">
+											<strong>09:30 am - 10:00 am</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-4">
+										<label for="time-slot-4">
+											<strong>10:00 am - 10:30 am</strong>
+											<span>3 slots available</span>
+										</label>
+									</div>
+
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-5">
+										<label for="time-slot-5">
+											<strong>13:00 pm - 13:30 pm</strong>
+											<span>2 slots available</span>
+										</label>
+									</div>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-6">
+										<label for="time-slot-6">
+											<strong>13:30 pm - 14:00 pm</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
+									<!-- Time Slot -->
+									<div class="time-slot">
+										<input type="radio" name="time-slot" id="time-slot-7">
+										<label for="time-slot-7">
+											<strong>14:00 pm - 14:30 pm</strong>
+											<span>1 slots available</span>
+										</label>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Panel Dropdown / End -->
+                        <div class="col-lg-12 ">
+                        <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
+                     
+                        <select class="select" style="display: block!important;" id="Rappel2">
+
+                            <option  >Rappel de rendez vous par SMS</option>
+                            <option value="60">1h avant le RDV </option>
+                            <option value="120">2h avant le RDV</option>
+                            <option value="180">3h avant le RDV</option>
+                            <option value="1440">1 jour avant le RDV</option>
+                            <option value="2880">2 jours avant le RDV</option>
+                            <option value="7200">5 jours avant le RDV</option>
+                        </select>
+                                                
+                    </div>
+                    <div class="col-lg-12 col-md-12 ">
+		  		<label>Code promo :</label>
+		  		<div class="input-group input-group-lg" >
+				    <input class="form-control "  type="text" id="mycodepromoRec">
+				    <span class="input-group-btn ">
+				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
+				    </span>
+				</div>
+
+                </div>
+                <!---test --->
+                <div class="col-lg-12 col-md-12 ">
+                                <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                </div>
+                            </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 " >
+         	                    <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                            </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remiseRec()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                            
+                            </div>
+
+
+                            </div>
+                              <div id="divremiseRec" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
+                              	  <table class="table" id="tabRemiseRec">
+                                        <thead>
+                                        <tr>
+                                            <th>Remise</th>
+                                            <th>service</th>
+                                            <th>Reduction</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        <?php if($reduction != 0){  ?>
+                                        <tr>
+
+                                            <td>carte fidelite ({{$reduction }} %)</td>
+                                            <td>total</td>
+                                            <td id="remiseCarteRec">0€</td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php if($myhappyhours != null) { 
+                                        echo '<tr>
+                                            <td>happy hours ('.$myhappyhours->reduction .'%)</td>
+                                            <td>total</td>
+                                            <td id="remiseHappyhours" >0€</td>
+                                        </tr>' ; } ?>
+                                        
+                                        </tbody>
+                                    </table>
+                              </div><br>
+                        </div>
+                          <div class="col-lg-12 col-md-12 ">
+                                    <br>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-append">
+                                        <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                    </div>
+                           </div><br>
+                        </div>
+                <!--test-->
+
+                   
+                     
+	        <a class="button book-now fullwidth margin-top-5" style="color:white" id="reserver2">Réserver</a>
+		
+
+                        <!-- Book Now -->
+                        <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) {
+                        # code...
+                        echo '</div></div></div>';
+                } ?> 
+                 <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div></div></div></div>';
+                } ?> 
+                 <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) == 0) {
+                        # code...
+                        echo '</div></div></div>';
+                } ?>
+                <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
+                        # code...
+                        echo '</div></div></div></div>';
+                } ?>    
+                
+                         
+            <!-- Book Now / End -->
+
+        
+
+<!-- end fo testing
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         </div>       
+                  
+             
+        <!-- fin modal pour ajouter une indisponibilté -->  
+
+                          </div>
 
                     <div class="row">
                   <div class="col-md-12 ">
@@ -208,6 +832,8 @@
     
     <script src="{{  URL::asset('public/fullcalendar/main.min.js') }}"></script>
     <script src="{{  URL::asset('public/fullcalendar/locales/fr.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
+
 
     <script>
 
@@ -258,7 +884,61 @@
   });
 
 </script>
+<script>	function ClientVerif(){
+ 		var number_client = $('#number_client').val();
+   		//var service = $('#service').val();
+   		var id_user = $('#id_user').val();
 
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('clientcheck') }}",
+                        method:"POST",
+						data:{number_client:number_client,id_user:id_user, _token:_token},
+                        success:function(data){ 
+                          alert(data["name"]);
+                          if (!(data)) {
+                            alert( 'le client n existe pas ou le numéro est incorrect !');
+							}else{
+                document.getElementById("verification").style.display = "none";
+                document.getElementById("validation").style.display = "block";
+                document.getElementById("test").value =data["name"] +' '+ data["lastname"] ;
+                document.getElementById("id-client").value =data["id"] ;
+
+                
+
+
+                        			alert('succes'); 		}
+                        },
+                        error:function(){
+    alert('error! re-entrer le numéro ');
+  }
+                    });
+ 		
+ 	}</script>
+   <script>
+     function ClientValidation(){
+      var id_client = $('#id-client').val();
+   		//var service = $('#service').val();
+   		var id_user = $('#id_user').val();
+
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('clientValid') }}",
+                        method:"POST",
+						data:{id_client:id_client,id_user:id_user, _token:_token},
+                        success:function(data){ 
+                          alert(data);
+                     
+                document.getElementById("verification").style.display = "none";
+                document.getElementById("validation").style.display = "none";
+                document.getElementById("booking-widget-anchor").style.display ="block" ;
+                document.getElementById("id-client").value =data; 	alert('succes'); 		 },
+                        error:function(){alert('error!');}
+ });
+
+
+     }
+   </script>
 <script>
 var modal = document.getElementById("calendardialog");
 // Get the <span> element that closes the modal
@@ -279,9 +959,590 @@ var obj={
          "startTime":'',
           "endTime": '',
           "daysOfWeek": ['1', '2', '3' ]
-       };
+
+        };
 
        //alert(JSON.stringify(obj));
    });
 </script>
+<script> 
+function visibilityFunctionRec(element){
+  
+    var el = $('#servicerec option[value="' + element + '"]');
+            console.log(el);
+            if( !el.size() ) {
+                // no? append it and update chosen-select field
+                $('#servicerec').append( el ).trigger("chosen:updated");
+            } else {
+                // it does? check if it's already selected
+                if(!el[0].selected) {
+                    // adding already existent element in selection
+                    el[0].selected = true;
+                    $('#servicerec').trigger("chosen:updated");
+                } else {
+                    alert("Already selected and added.");
+                }
+            }
+           
+        
+        //test
+        var happyhours = $('#myhappyhoursId').val();
+ 		remiseCarte = 0 ;
+ 		montant = el.attr('prixRec');
+ 		
+		document.getElementById('MontantReservationRec').value = montant;
+		document.getElementById('totalReservationRec').value = montant;
+ 		periode=el.attr('periode');
+ 		nbr=el.attr('ndate');
+ 		frq=el.attr('frq');
+
+ 		document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
+ 		
+    	var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
+		//alert(remiseCarte);
+		}
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		//alert(remiseCarte);
+		}
+        //document.getElementById("dateRec").innerHTML = y;
+    	//$("#dateRec").append(y);
+    	
+        //test
+
+
+
+
+}
+function visibilityFunctionService(element){
+  
+    
+            // check if the same value already exists
+            var el = $('#service option[value="' + element + '"]');
+            console.log(el);
+            if( !el.size() ) {
+                // no? append it and update chosen-select field
+                $('#service').append( el ).trigger("chosen:updated");
+            } else {
+                // it does? check if it's already selected
+                if(!el[0].selected) {
+                    // adding already existent element in selection
+                    el[0].selected = true;
+                    $('#service').trigger("chosen:updated");
+                } else {
+                    alert("Already selected and added.");
+                }
+            }
+            selectservice();
+
+
+
+}
+   function visibilityFunction(element){
+      //alert("q"+element+"");
+      document.getElementById("listProduits").style.display = 'block';
+      var t = "q"+element+"" ;
+      //document.getElementById(t).style.visibility = "";
+      
+      if (!(produitslist.includes(element))) {
+      produitslist.push(element);
+      document.getElementById(t).hidden = false;
+     
+    }}
+function selectservice(){
+ 		//lert("ft sele");
+ 		var happyhours = $('#myhappyhoursId').val();
+ 		var remiseCarte  =0 ;
+		var montant = 0 ;
+		var service = $('#service').val();
+    var test = <?php echo json_encode($mab) ; ?> ;
+    //alert(test[8][0]);
+    if (service.length != 0) {
+      for (var i = 0; i < service.length; i++) {
+        $('#service option[value='+service[i]+']').each(function(){
+          id = this.getAttribute('value');
+          if (test[id] != null) {
+          test[id].forEach(element => visibilityFunction(element));}
+          //document.getElementById("myP").style.visibility = "hidden";
+        });
+      }}
+ //  alert(document.getElementById('k5.').value);
+ 
+		
+                
+	
+		if (service.length != 0) {
+		
+
+			for (var i = 0; i < service.length; i++) {
+				$('#service option[value='+service[i]+']').each(function(){
+					montant = montant + parseFloat(this.getAttribute('prix'));
+					document.getElementById('MontantReservation').value = montant;
+					document.getElementById('totalReservation').value = montant;});}}
+		else {document.getElementById('MontantReservation').value = montant;
+			document.getElementById('totalReservation').value = montant;}
+
+    for (var i = 0; i < produitslist.length; i++) {
+      //ach
+      montant = parseFloat(document.getElementById('k'+produitslist[i]).value * document.getElementById('k'+produitslist[i]).getAttribute('prix')) + parseFloat(document.getElementById('MontantReservation').value) ;
+      document.getElementById('MontantReservation').value =montant;
+    }
+
+		var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservation').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservation').value = total;
+		document.getElementById("remiseCarte").innerHTML = (montant * reductioncarte)/100 +"€";
+		//alert(remiseCarte);
+		} 
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservation').value = remiseCarte;
+		 document.getElementById("remiseHappyhours").innerHTML = (montant * happyhours)/100 +"€";
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservation').value = total;
+		//alert(remiseCarte);
+		}
+ 	}
+</script>
+
+<script>
+	function fonctionvalideRec(){
+ 		var valCode = $('#mycodepromoRec').val();
+   		//alert(valchange);
+   		//var service = $('#service').val();
+   		var service = $('#servicerec').val();
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.CodePromoCheck') }}",
+                        method:"POST",
+						data:{valCode:valCode, _token:_token},
+                        success:function(data){
+                        	
+                        	if (data[0]==1) {
+                        		if (data[1].toString()==service) {
+                        			Swal.fire(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemiseRec");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
+								    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
+                        		}
+                        		else {
+									Swal.fire(
+									  'Code promo ne correspond pas au service selectionné !...',
+									  '',
+									  'question'
+									)
+                        		}
+                        		
+                        	}
+                        	else {
+                        		Swal.fire({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
+                        }
+                    });
+ 		
+ 	}
+
+function SelectServiceRec(a){
+    console.log(a);
+ 		var happyhours = $('#myhappyhoursId').val();
+ 		remiseCarte = 0 ;
+ 		montant = a.options[a.selectedIndex].getAttribute('prixRec');
+ 		
+		document.getElementById('MontantReservationRec').value = montant;
+		document.getElementById('totalReservationRec').value = montant;
+ 		periode=a.options[a.selectedIndex].getAttribute('periode');
+ 		nbr=a.options[a.selectedIndex].getAttribute('ndate');
+ 		frq=a.options[a.selectedIndex].getAttribute('frq');
+
+ 		document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
+ 		/*if (frq=="Journalière") {
+   				//alert("oui");
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Journalière (sur "+periode+" jours) vous devez choisir "+nbr+" dates par jour.";
+    		//document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
+    	}
+    	else if (frq=="Hebdomadaire") {
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Hebdomadaire (sur "+periode+" semaines) vous devez choisir "+nbr+" dates par semaine.";
+    	
+    	}
+    	else if (frq=="Mensuelle") {
+    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Mensuelle (sur "+periode+" mois) vous devez choisir "+nbr+" dates par mois.";
+    	
+    	}*/
+ 		//alert(frq);
+    	
+    	/*document.getElementById("nbrServiceRec").value = nbr;
+    	var y = '<label>Date de rendez vous:</label>';
+    	
+    	for (var i = 0; i < nbr; i++) {
+    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
+    	}*/
+    	//document.getElementById("dateRec").innerHTML = y;
+    	var reductioncarte = document.getElementById('catrefideliteVal').value ;
+		if (reductioncarte!=0) {
+		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
+		//alert(remiseCarte);
+		}
+		if (happyhours!=0) {
+		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+		document.getElementById('RemiseReservationRec').value = remiseCarte;
+		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
+		total =montant -remiseCarte ;
+		document.getElementById('totalReservationRec').value = total;
+		//alert(remiseCarte);
+		}
+        //document.getElementById("dateRec").innerHTML = y;
+    	//$("#dateRec").append(y);
+    	
+    }</script>
+
+<script>
+    function calcul(val){
+    var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
+    var Remise = parseFloat(document.getElementById('RemiseReservation').value);
+    var Net = parseFloat(document.getElementById('totalReservation').value);
+    document.getElementById('MontantReservation').value = montant_tot+val;
+    document.getElementById('totalReservation').value = montant_tot+val-Remise;
+}
+    function increaseCount(e, el) {
+  var input = el.previousElementSibling;
+  var value = parseInt(input.value, 10);
+  value = isNaN(value) ? 0 : value;
+
+  input.value = value;
+
+  calcul( parseFloat((input.getAttribute('prix')) ));
+}
+function decreaseCount(e, el) {
+  var input = el.nextElementSibling;
+  var value = parseInt(input.value, 10);
+ // alert(value);
+  if (value > 0) {
+    value = isNaN(value) ? 0 : value;
+    input.value = value;
+    //alert(( (input.getAttribute('prix') )));
+    calcul( -( parseFloat((input.getAttribute('prix')) )));
+  }
+}
+    	function remise(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremise");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+ 	}
+ 	function remiseRec(){
+ 		//alert("ok");
+ 		var x = document.getElementById("divremiseRec");
+ 		if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+  
+  }
+ 	}
+
+$(".time-slot").each(function() {
+
+var timeSlot = $(this);
+$(this).find('input').on('change',function() {
+    
+    var timeSlotVal = timeSlot.find('strong').text();
+
+    $('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+    $('.panel-dropdown').removeClass('active');
+});
+});
+ 
+
+
+        /*----------------------------------------------------*/
+        $('.show-moreP-button').on('click', function(e){
+    	e.preventDefault();
+    	$(this).toggleClass('active');
+
+		$('.show-moreP').toggleClass('visible');
+		if ( $('.show-moreP').is(".visible") ) {
+
+			var el = $('.show-moreP'),
+				curHeight = el.height(),
+				autoHeight = el.css('height', 'auto').height();
+				el.height(curHeight).animate({height: autoHeight}, 400);
+
+
+		} else { $('.show-moreP').animate({height: '450px'}, 400); }
+
+	});
+
+
+	/*----------------------------------------------------*/
+    
+</script>
+<script> var suppl_res="";
+    	 <?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+     	$( document ).ready(function() {
+         var res='';
+         var equation="";
+         var member_equation="";
+       
+         var exist="";
+     		$('#service').on('change', function(evt, params) { 
+     		 //alert("sel "+params.selected);
+            // alert("des "+params.deselected);
+            var items = $("#service option:selected").map(function() {
+                 return $(this).text();
+             }).get();
+
+          // alert(items);
+          // alert(res);
+           suppl_res="";
+           for(var i=0; i<res.length ; i++) // parcourir les règles
+            {
+            	equation=res[i].split("=");
+            	for(var j=0 ; j<equation.length ; j++) // parcourir les membres equation d'une règle
+            	{
+            		//alert(equation[j]);
+
+            		if(j%2==0) // juste le membre d'une equation 
+            		{
+                       //alert(equation[j]);
+                       member_equation=equation[j].split("+");
+
+                       exist=true;
+                       for(var k=0; k<member_equation.length; k++)
+                       {
+                        //  alert(member_equation[k]);
+
+                             if(!items.includes(member_equation[k].trim()))
+                             {
+                             	exist=false; 
+                             	k=member_equation.length;
+                             }
+                       }
+                      if(exist==true) // tous les membre d'eaquation exwit
+                      {
+                        suppl_res+=equation[j+1]+','; 
+
+                      }
+
+            		}
+            	}
+            }
+
+           // alert(suppl_res);
+           //var selected_value = $(this).toArray().map(x => $(x).val());
+            // alert(selected_value)
+         });
+     		//alert ('raedy');
+		 $.ajax({
+        url:"{{url('/')}}/get_liste_regles_services_suppl/<?php echo $user->id; ?>",
+        method:"get",
+        success:function(data){			
+            //alert(data);
+           // alert(items);	
+            res = data.split(";");
+            res.splice(0,1);
+            
+            }
+          });
+
+          });
+
+     <?php } ?></script>
+<?php if (isset($user)){ ?> 
+
+<script>	
+$('#reserver').click(function( ){
+
+if(suppl_res)
+{
+Swal.fire ("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
+}
+
+/*  var inputs = $(".dtpks");
+for(var i = 0; i < inputs.length; i++){
+alert($(inputs[i]).val());
+}*/
+//qtyproduits
+for (var i = 0; i < produitslist.length; i++) {
+ var qty = document.getElementById('k'+produitslist[i]+'').value;
+ qtyproduits[i]=qty ;
+ //alert(qtyproduits);
+}
+
+var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
+var happyhour = $('#myhappyhoursId').val();
+var serv_supp=suppl_res;
+
+var montant_tot = parseFloat(document.getElementById('MontantReservation').value);
+var Remise = parseFloat(document.getElementById('RemiseReservation').value);
+var Net = parseFloat(document.getElementById('totalReservation').value);
+var _token = $('input[name="_token"]').val();
+
+// var date = $('#date-picker').val();
+// var heure = $('#heure').val();
+var timeSlot = $(".time-slot");
+    
+var timeSlotVal = timeSlot.find('strong').text();
+
+var str=$('#time a').text();
+alert(str);
+
+var myArr = str.split("am -");
+var reservationHeureStart=myArr[0];//start
+var reservationHeure2=myArr[1].split("-");
+var reservationHeure3=reservationHeure2[0].split("am");
+var reservationHeureEnd=reservationHeure3[0];//end
+
+
+var datereservation1 = $('#date-picker').val();
+var date = new Date(datereservation1 + ' ' + reservationHeureStart); 
+
+//alert(datereservation);
+var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+alert(dateStr);
+var service = $('#service').val();
+var rappel = $('#rappel').val();
+var client=$('#id-client').val();
+//alert(JSON.stringify(service));
+$.ajax({
+   url:"{{ route('reservations.add') }}",
+   method:"POST",
+   data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:client,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
+   success:function(data){
+   //alert(JSON.stringify(data));
+   location.href= "{{ route('reservations') }}";
+   }
+});
+
+});
+$('#reserver2').click(function( ){
+var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
+ var happyhour = $('#myhappyhoursId').val();
+var montant_tot = parseFloat(document.getElementById('MontantReservationRec').value);
+var Remise = parseFloat(document.getElementById('RemiseReservationRec').value);
+var Net = parseFloat(document.getElementById('totalReservationRec').value);
+var el = $('#servicerec').val();
+
+var e = $('#servicerec option[value="' + el + '"]');
+
+var periode = e.attr('periode');
+var frq=e.attr('frq');
+alert(periode);
+alert(frq);
+
+var _token = $('input[name="_token"]').val();	
+var nbrService = document.getElementById("nbrServiceRec").value ;
+var date_reservation = [] ;
+var str=$('#time1 a').text();
+
+var myArr = str.split("am -");
+var reservationHeureStart=myArr[0];//start
+var reservationHeure2=myArr[1].split("-");
+var reservationHeure3=reservationHeure2[0].split("am");
+var reservationHeureEnd=reservationHeure3[0];//end
+
+
+var datereservation1 = $('#date-picker2').val();
+var date = new Date(datereservation1 + ' ' + reservationHeureStart); 
+
+//alert(datereservation);
+var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+//alert(date_reservation);
+
+var remarques = $('#remarques2').val();
+var client=$('#id-client').val();
+
+var service = $('#servicerec').val();
+var rappel = $('#rappel2').val();
+//alert(JSON.stringify(service));
+alert(service);
+$.ajax({
+   url:"{{ route('reservations.add2') }}",
+   method:"POST",
+   data:{prestataire:<?php echo $user->id;?>,client:client,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
+   success:function(data){
+   //alert(JSON.stringify(data));
+   location.href= "{{ route('reservations') }}";
+   }
+});
+
+});
+
+
+$('#sendmail').click(function( ){
+ var _token = $('input[name="_token"]').val();
+
+var emetteur = $('#emetteur').val();
+var email =
+$('#email').val();
+var tel = $('#tel').val();
+var contenu = $('#contenu').val();
+var to = $('#to').val();
+/*  var tel = document.getElementById('tel').value;
+var email = document.getElementById('email').value;
+var emetteur = document.getElementById('emetteur').value;
+var contenu = document.getElementById('contenu').value;*/
+$.ajax({
+   url:"{{ route('reservations.sendmessage') }}",
+   method:"POST",
+   data:{prestataire:<?php echo $user->id;?>,emetteur:emetteur , email:email, contenu:contenu, tel:tel ,to:to, _token:_token},
+   success:function(data){
+
+$.notify({
+// options
+message: 'Envoyé avec succès' 
+},{
+// settings
+type: 'success',
+delay: 3000,
+timer: 1000,					
+});	
+
+document.getElementById("contactform").reset();
+   }
+});
+
+});</script>
+<?php }?> 
+
 @endsection('content')

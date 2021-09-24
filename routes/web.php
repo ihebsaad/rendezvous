@@ -220,7 +220,12 @@ Route::get('/downloadCSVyear', 'UsersController@downloadCSVyear')->name('downloa
 Route::get('/changeAcompte','UsersController@changeAcompte')->name('changeAcompte')->middleware('auth');;
 	
 Route::get('/HeuresIndisponibilite/{id}', 'UsersController@HeuresIndisponibilite')->name('HeuresIndisponibilite')->middleware('auth');;
-Route::get('/Services/{id}', 'UsersController@Services')->name('Services')->middleware('auth');;
+Route::get('/Services/{id}', 'UsersController@Services')->name('Services')->middleware('auth');
+Route::post('/clientcheck','UsersController@clientcheck')->name('clientcheck')->middleware('auth');
+
+
+Route::post('/clientValid','UsersController@clientValid')->name('clientValid')->middleware('auth');
+
 Route::get('/ServicesSupplementaires/{id}', 'UsersController@ServicesSupplementaires')->name('ServicesSupplementaires')->middleware('auth');;
 Route::get('/Produits/{id}', 'UsersController@Produits')->name('Produits')->middleware('auth');;
 Route::get('/CodesPromo/{id}', 'UsersController@CodesPromo')->name('CodesPromo')->middleware('auth');;
