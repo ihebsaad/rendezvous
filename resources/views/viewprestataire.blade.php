@@ -1500,7 +1500,7 @@ $( document ).ready(function() {
 		  		<div class="input-group input-group-lg" >
 				    <input class="form-control " type="text" id="mycodepromo">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "hidden='true'" ;}?> >valide</button>
+				        <button class="btn btn-primary btn-lg" style="color:black;"onclick="fonctionvalide()" <?php if ( !isset($User) ){ echo "hidden='true'" ;}?> >valide</button>
 				    </span>
 				    </div>   
                  </div>
@@ -1794,7 +1794,7 @@ $( document ).ready(function() {
 		  		<div class="input-group input-group-lg" >
 				    <input class="form-control "  type="text" id="mycodepromoRec">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
+				        <button style="color:black;"class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  <?php if ( !isset($User) ){ echo "disabled" ;}?> >valide</button>
 				    </span>
 				</div>
 
