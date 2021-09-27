@@ -45,7 +45,7 @@ $plogo= $parametres->logo;
                      @guest
                     <a id="btnconn" href="#" class="button border with-icon prest-in "  onclick="switchci()">Connexion</a>
                     @endguest
-                    <a id="btnins" href="{{route('inscriptionclient')}}" class="button border with-icon prest-in " style="display:none" onclick="switchci()">Inscription</a>
+                    <a id="btnins" href="#sign-in-dialog" class="button border with-icon prest-in popup-with-zoom-anim " style="display:none" onclick="switchci()">Inscription</a>
                     
                 </div>
             </div>
@@ -111,7 +111,7 @@ $plogo= $parametres->logo;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div>
-                                                    <input name="siren" type="text" id="siren" placeholder="Numéro siret/siren de votre entreprise"  class="error">
+                                                    <input name="siren" type="text" id="siren" placeholder="Numéro siret/siren de votre entreprise *"  class="error" required="required">
                                                 </div>
                                             </div>
                                         </div>
