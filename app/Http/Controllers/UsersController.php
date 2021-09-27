@@ -2000,9 +2000,34 @@ public function Services($id)
     }
     function clientValid(Request $request){
       $id_client= $request->get('id_client');
-     
+      $id_user= $request->get('id_user'); 
+      $today= new DateTime();
+      $idhappy=0;
+      $reduction=0;
 
-      return $id_client;
+      $redhappy=0;
+      $reductiontest='false';
+      $happtest='false';
+
+       $myhappyhours = \App\Happyhour::where('id_user' ,$id_user)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
+      
+       if($myhappyhours != null){
+        $idhappy=$myhappyhours->id;
+        $redhappy=$myhappyhours->reduction;
+         $happtest='true';
+         $idhappy=$myhappyhours->id;
+         $redhappy=$myhappyhours->reduction;
+       }
+       $test=\App\Cartefidelite::where('id_client',$id_client)->where('id_prest',$id_user)->exists();
+        if ($test=='true') {
+            $nbrRes=\App\Cartefidelite::where('id_client',$id_client)->where('id_prest',$id_user)->value('nbr_reservation');
+            if ($nbrRes==9) {
+                $reduction=\App\User::where('id',$id_user)->value('reduction');
+                if($reduction != 0){ $reductiontest='true';}
+            }
+            }
+     
+      return  [$id_client,$idhappy,$redhappy,$reduction,$reductiontest,$happtest];
     }
 
  }

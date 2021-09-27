@@ -48,6 +48,7 @@
     margin: 0;
     padding: 0;
     height: 49px;
+    width: 219px!important;
     outline: 0;
     border: 0 !important;
     background: transparent !important;
@@ -574,6 +575,7 @@ input#date-picker {
 
        <div id="Ajout-Res" class="small-dialog zoom-anim-dialog mfp-hide">
           <div class="small-dialog-header">
+
            <center> <h3>Ajouter une nouvelle réservation</h3></center>
           </div>
            
@@ -585,7 +587,10 @@ input#date-picker {
             </div>
            
            <div class="utf_signin_form style_one" style="display:none;" id="validation">
-            <center> <h3><i class="sl sl-icon-user"></i> Le client est <output type="text"  id="test"></output></h3><br>
+            <center> <h3><i class="sl sl-icon-user"></i> Le client est <output style="font-family: 'Open Sans';
+    speak: none;
+    font-style: normal;
+    font-weight: 700;" type="text"  id="test"></output></h3><br>
             <form name="form" method="post" action="{{ route('clientValid') }}">
             <meta name="csrf-token" content="{{ csrf_token() }}">
             <input type="text"  id="id-client" name="id-client" style="display:none;" >
@@ -601,38 +606,21 @@ input#date-picker {
   <?php $services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
                         $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get(); 
                         $nbserv =count($services );
-                        $reduction=0;
                         $nbservrec =count($servicesreccurent );
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                          $id_client = $_POST['id-client'];};
-                          if(isset($id_client)){
-                            echo $id_client;
-                            echo'hehy';
-
                         $today= new DateTime();
+
                         $happyhours = \App\Happyhour::where('id_user',$user->id)->where('dateFin','>=',$today)->get();
-                        $myhappyhours = \App\Happyhour::where('id_user' ,$user->id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
-                          echo $myhappyhours;
-                        $test=\App\Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->exists();
-                        if ($test=='true') {
-                            $nbrRes=\App\Cartefidelite::where('id_client',$id_client)->where('id_prest',$user->id)->value('nbr_reservation');
-                            if ($nbrRes==9) {
-                                $reduction=\App\User::where('id',$user->id)->value('reduction');
-                            }
-                            }}else{       $myhappyhours=0;
-                            }?>
+
+                     ?>
               <div id="booking-widget-anchor" class="boxed-widget booking-widget " style="height: fit-content;;display:none;" >
                 <a><h3><i class="fa fa-calendar-check-o "></i></h3></a>
                 
                 <div class="row with-forms  margin-top-0">
 
                     <!-- les scripts des offres de reduction -->
-                    <input type="number" value="{{$reduction}}" name="" hidden id="catrefideliteVal" style="display:none;" >
-                      <?php if($reduction != 0){  ?> 
-                      <p style="color: #c7a903;font-size: 14px; line-height: 16px;"><i class="sl sl-icon-present"></i> Félicitation! Vous bénéficierez pour la prochaine réservation d'<b>une réduction de {{$reduction}}%</b></p>
-                      <?php } ?>
-                      <?php if($myhappyhours != null) { echo '<input type="number" happyhourid="'.$myhappyhours->id.'" value="'.$myhappyhours->reduction.'"  style="display:none;"id="myhappyhoursId" name="" hidden>' ;  }
-                             else {  echo '<input type="number" happyhourid="0" value="0" id="myhappyhoursId" name="" style="display:none;">'; } ?>
+                    <input type="number"  name="" hidden id="catrefideliteVal" style="display:none;" >
+                      <p  style="display:none;color: #c7a903;font-size: 14px; line-height: 16px;" ><i class="sl sl-icon-present"></i> Félicitation! Vous bénéficierez pour la prochaine réservation d'<b>une réduction de <output id="reduction" style="display:none"> </output></b></p>
+                      <input type="number" happyhourid="0"   style="display:none;"id="myhappyhoursId" name="" >
                     <!-- FIN // les scripts des offres de reduction -->
 
                     <!----------------------------------- Nav tabs --------------------------------------------->
@@ -799,7 +787,9 @@ input#date-picker {
                 <div class="input-group input-group-lg" >
                   <input class="form-control " style="    height: 34px;"type="text" id="mycodepromo" placeholder="Code promo ">
                   <span class="input-group-btn ">
-                      <button class="btn btn-primary btn-lg" onclick="fonctionvalide()">valide</button>
+                      <button style="margin-left: -69px;
+    height: 33px;
+    font-size: 14px;"class="btn btn-primary btn-lg" onclick="fonctionvalide()">valide</button>
                   </span>
                   </div>   
                       </div>
@@ -830,9 +820,9 @@ input#date-picker {
                             <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
-                                    <button onclick='decreaseCount(event, this)' ></button>
-                                    <input type="number" prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" name="slot-qty" value="0" min="0" max="10">
-                                    <button onclick='increaseCount(event, this)'></button> 
+                                    <button  class="qtyDec"onclick='decreaseCount(event, this)' ></button>
+                                    <input type="number" prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" name="slot-qty" value="0" min="0" max="10" class="qtyTotal">
+                                    <button class="qtyInc"onclick='increaseCount(event, this)'></button> 
                                 </div>
                                 <br>
                             </div></div>
@@ -878,21 +868,21 @@ input#date-picker {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        
-                                        <?php if($reduction != 0){  ?>
-                                        <tr>
 
-                                            <td>carte fidelite ({{$reduction }} %)</td>
+                                        <tr id="testreduction" style="display:none;">
+
+                                            <td>carte fidelite (<output id="reduction"></output>%)</td>
                                             <td>total</td>
                                             <td id="remiseCarte">0€</td>
                                         </tr>
-                                    <?php } ?>
-                                    <?php if($myhappyhours != null) { 
-                                        echo '<tr>
-                                            <td>happy hours ('.$myhappyhours->reduction .'%)</td>
+                                   
+                                  
+
+                                    <tr id="testhappy" style="display:none;">
+                                            <td>happy hours (<output id="happyred"></output>%)</td>
                                             <td>total</td>
                                             <td id="remiseHappyhours" >0€</td>
-                                        </tr>' ; } ?>
+                                        </tr>
                                         
                                         </tbody>
                                     </table>
@@ -1056,7 +1046,9 @@ input#date-picker {
 		  		<div class="input-group input-group-lg" >
 				    <input class="form-control "  type="text" id="mycodepromoRec" style="    height: 34px;" placeholder="Code promo">
 				    <span class="input-group-btn ">
-				        <button class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  >valide</button>
+				        <button style="margin-left: -69px;
+    height: 33px;
+    font-size: 14px;"class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  >valide</button>
 				    </span>
 				</div>
 
@@ -1096,22 +1088,17 @@ input#date-picker {
                                             <th>Reduction</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        
-                                        <?php if($reduction != 0){  ?>
-                                        <tr>
-
-                                            <td>carte fidelite ({{$reduction }} %)</td>
-                                            <td>total</td>
-                                            <td id="remiseCarteRec">0€</td>
+                                        <tbody> 
+                                        <tr id="testreduction" style="display:none;">
+                                          <td>carte fidelite (<output id="reduction"></output>%)</td>
+                                          <td>total</td>
+                                          <td id="remiseCarte">0€</td>
                                         </tr>
-                                    <?php } ?>
-                                    <?php if($myhappyhours != null) { 
-                                        echo '<tr>
-                                            <td>happy hours ('.$myhappyhours->reduction .'%)</td>
-                                            <td>total</td>
-                                            <td id="remiseHappyhours" >0€</td>
-                                        </tr>' ; } ?>
+                                        <tr id="testhappy" style="display:none;">
+                                          <td>happy hours (<output id="happyred"></output>%)</td>
+                                          <td>total</td>
+                                          <td id="remiseHappyhours" >0€</td>
+                                          </tr>
                                         
                                         </tbody>
                                     </table>
@@ -1159,22 +1146,6 @@ input#date-picker {
 
 <!-- end fo testing
  -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
          </div>       
                   
              
@@ -1201,24 +1172,15 @@ input#date-picker {
                     </div>
         </div>  
         <br>
-
-            <div class="row">
+          <div class="row">
           <div class="col-md-12" >  
               <div id='events'  ></div> 
             </div>
           
                 </div>
                 </div>  
-                  
- 
-
-
-
-
-             </div>
+            </div>
                     <!-- Section / End -->
-
-
 
                 </div>
             </div>
@@ -1309,7 +1271,6 @@ input#date-picker {
                         method:"POST",
 						data:{number_client:number_client,id_user:id_user, _token:_token},
                         success:function(data){ 
-                          alert(data["name"]);
                           if (!(data)) {
                             alert( 'le client n existe pas ou le numéro est incorrect !');
 							}else{
@@ -1321,7 +1282,7 @@ input#date-picker {
                 
 
 
-                        			alert('succes'); 		}
+                        				}
                         },
                         error:function(){
     alert('error! re-entrer le numéro ');
@@ -1333,20 +1294,37 @@ input#date-picker {
      function ClientValidation(){
       var id_client = $('#id-client').val();
    		//var service = $('#service').val();
-   		var id_user = $('#id_user').val();
+       var id_user = $('#id-user').val();
+
 
    		var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('clientValid') }}",
                         method:"POST",
-						data:{id_client:id_client, _token:_token},
+						data:{id_client:id_client,id_user:id_user, _token:_token},
                         success:function(data){ 
-                          alert(data);
                      
                 document.getElementById("verification").style.display = "none";
                 document.getElementById("validation").style.display = "none";
                 document.getElementById("booking-widget-anchor").style.display ="block" ;
-                document.getElementById("id-client").value =data; 	alert('succes'); 		 },
+                document.getElementById("id-client").value =data[0];
+                document.getElementById("myhappyhoursId").setAttribute('happyhourid','0') ;
+                document.getElementById("myhappyhoursId").value ='0';
+                document.getElementById("catrefideliteVal").value =data[3];
+              
+
+                if(data[6]=='true'){
+                  document.getElementById("myhappyhoursId").value =data[2];
+                  document.getElementById("myhappyhoursId").setAttribute('happyhourid',data[1]);
+                document.getElementById("happyred").value =data[2];
+
+
+                }
+                if(data[5]=='true'){
+                  document.getElementById("reduction").value =data[3];
+
+                }         
+                		 },
                         error:function(){alert('error!');}
  });
 
@@ -1943,6 +1921,388 @@ $(".time-slot").each(function() {
 		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
 		$('.panel-dropdown').removeClass('active');
 	});
+});
+</script>
+
+<script>
+
+// Calendar Init
+$(function() {
+  function now () { 
+    var d = new Date();
+  var n = d.getDate()-1;
+  
+  d.setDate(n);
+    return d; }
+
+	$('#date-picker').daterangepicker({
+		"opens": "left",
+		singleDatePicker: true,
+      locale: {
+        "format": "YYYY-MM-DD",
+        "separator": " - ",
+        "applyLabel": "Appliquer",
+        "cancelLabel": "Annuler",
+        "fromLabel": "de",
+        "toLabel": "jusq'à",
+        "customRangeLabel": "Personnalisé",
+        "daysOfWeek": [
+            "Di",
+            "Lu",
+            "Ma",
+            "Me",
+            "Je",
+            "Ve",
+            "Sa"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Fevrier",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Aout",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Decembre"
+        ],
+        "firstDay": 1
+    },
+
+
+		// Disabling Date Ranges
+		isInvalidDate: function(date) {
+		// Disabling Date Range
+		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
+		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+
+		// Disabling Single Day
+		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
+		//     return true; 
+		// }
+		}
+	});});
+	$(function() {
+		function now () { 
+    var d = new Date();
+  var n = d.getDate()-1;
+  
+  d.setDate(n);
+    return d; }
+	$('#date-picker2').daterangepicker({
+		"opens": "left",
+		singleDatePicker: true,
+      locale: {
+        "format": "YYYY-MM-DD",
+        "separator": " - ",
+        "applyLabel": "Appliquer",
+        "cancelLabel": "Annuler",
+        "fromLabel": "de",
+        "toLabel": "jusq'à",
+        "customRangeLabel": "Personnalisé",
+        "daysOfWeek": [
+            "Di",
+            "Lu",
+            "Ma",
+            "Me",
+            "Je",
+            "Ve",
+            "Sa"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Fevrier",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Aout",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Decembre"
+        ],
+        "firstDay": 1
+    },
+
+
+		// Disabling Date Ranges
+		isInvalidDate: function(date) {
+		// Disabling Date Range
+		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
+		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+
+		// Disabling Single Day
+		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
+		//     return true; 
+		// }
+		}
+	});
+});
+
+// Calendar animation
+$('#date-picker').on('showCalendar.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-animated');
+});
+$('#date-picker').on('show.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-visible');
+	$('.daterangepicker').removeClass('calendar-hidden');
+});
+
+
+$('#date-picker2').on('showCalendar.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-animated');
+});
+$('#date-picker2').on('show.daterangepicker', function(ev, picker) {
+	$('.daterangepicker').addClass('calendar-visible');
+	$('.daterangepicker').removeClass('calendar-hidden');
+});
+
+
+</script>
+<script>
+$(function() {
+  moment.lang('fr');
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#booking-date-range span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+    }
+    cb(start, end);
+
+    $('#booking-date-range').daterangepicker({
+       "locale": {
+
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Valider",
+        "cancelLabel": "Annuler",
+        "fromLabel": "De",
+        "toLabel": "à",
+        "customRangeLabel": "Custom",
+        "daysOfWeek": [
+            "Dim",
+            "Lun",
+            "Mar",
+            "Mer",
+            "Jeu",
+            "Ven",
+            "Sam"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
+        "firstDay": 1
+    },
+        "opens": "left",
+        "autoUpdateInput": false,
+        "alwaysShowCalendars": true,
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Aujourd\'hui': [moment(), moment()],
+           'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Les 7 derniers jours': [moment().subtract(6, 'days'), moment()],
+           'Les 30 derniers jours': [moment().subtract(29, 'days'), moment()],
+           'Ce mois': [moment().startOf('month'), moment().endOf('month')],
+           'Le mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+
+});
+
+// Calendar animation and visual settings
+$('#booking-date-range').on('show.daterangepicker', function(ev, picker) {
+    $('.daterangepicker').addClass('calendar-visible calendar-animated bordered-style');
+    $('.daterangepicker').removeClass('calendar-hidden');
+});
+$('#booking-date-range').on('hide.daterangepicker', function(ev, picker) {
+    $('.daterangepicker').removeClass('calendar-visible');
+    $('.daterangepicker').addClass('calendar-hidden');
+});
+//$("#booking-date-range").daterangepicker();
+$("#booking-date-range").on("cancel.daterangepicker", function(ev, picker) {
+  //alert("ok");
+  var lis = $('ul[class="one"] ');
+    //alert(lis[0].getAttribute("attr"));
+    for (var i = 0; i < lis.length; i++) {
+      //alert(i);
+      
+            lis[i].style.display = 'block';
+        
+           
+    
+  }
+  });
+
+
+
+
+ $("#booking-date-range").on("apply.daterangepicker", function(ev, picker) {
+  minDateFilter = Date.parse(picker.startDate);
+  //alert(moment(minDateFilter).format('DD/MM/YYYY'));
+  maxDateFilter = Date.parse(picker.endDate);
+  //alert(moment(maxDateFilter).format('DD/MM/YYYY'));
+  var min= moment((minDateFilter)).format('YYYY-MM-DD');
+  var max= moment((maxDateFilter)).format('YYYY-MM-DD');
+  //alert(max);
+  
+var lis = $('ul[class="one"] ');
+
+  
+
+
+
+    for (var i = 0; i < lis.length; i++) {
+      var b= moment(lis[i].getAttribute("attr"),"DD/MM/YYYY").format('YYYY-MM-DD');
+      if (moment(max).isAfter(b) && moment(min).isBefore(b)) {
+            lis[i].style.display = 'block';}
+        else
+            {lis[i].style.display = 'none';
+    }
+  }
+  
+
+});
+</script>
+<script>
+
+$(function() {
+  moment.lang('fr');
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#booking-date-range span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+    }
+    cb(start, end);
+
+    $('#booking-date-range').daterangepicker({
+       "locale": {
+
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Valider",
+        "cancelLabel": "Annuler",
+        "fromLabel": "De",
+        "toLabel": "à",
+        "customRangeLabel": "Custom",
+        "daysOfWeek": [
+            "Dim",
+            "Lun",
+            "Mar",
+            "Mer",
+            "Jeu",
+            "Ven",
+            "Sam"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
+        "firstDay": 1
+    },
+        "opens": "left",
+        "autoUpdateInput": false,
+        "alwaysShowCalendars": true,
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Aujourd\'hui': [moment(), moment()],
+           'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Les 7 derniers jours': [moment().subtract(6, 'days'), moment()],
+           'Les 30 derniers jours': [moment().subtract(29, 'days'), moment()],
+           'Ce mois': [moment().startOf('month'), moment().endOf('month')],
+           'Le mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+
+});
+
+// Calendar animation and visual settings
+$('#booking-date-range').on('show.daterangepicker', function(ev, picker) {
+    $('.daterangepicker').addClass('calendar-visible calendar-animated bordered-style');
+    $('.daterangepicker').removeClass('calendar-hidden');
+});
+$('#booking-date-range').on('hide.daterangepicker', function(ev, picker) {
+    $('.daterangepicker').removeClass('calendar-visible');
+    $('.daterangepicker').addClass('calendar-hidden');
+});
+//$("#booking-date-range").daterangepicker();
+$("#booking-date-range").on("cancel.daterangepicker", function(ev, picker) {
+  //alert("ok");
+  var lis = $('ul[class="one"] ');
+    //alert(lis[0].getAttribute("attr"));
+    for (var i = 0; i < lis.length; i++) {
+      //alert(i);
+      
+            lis[i].style.display = 'block';
+        
+           
+    
+  }
+  });
+
+
+
+
+ $("#booking-date-range").on("apply.daterangepicker", function(ev, picker) {
+  minDateFilter = Date.parse(picker.startDate);
+  //alert(moment(minDateFilter).format('DD/MM/YYYY'));
+  maxDateFilter = Date.parse(picker.endDate);
+  //alert(moment(maxDateFilter).format('DD/MM/YYYY'));
+  var min= moment((minDateFilter)).format('YYYY-MM-DD');
+  var max= moment((maxDateFilter)).format('YYYY-MM-DD');
+  //alert(max);
+  
+var lis = $('ul[class="one"] ');
+
+  
+
+
+
+    for (var i = 0; i < lis.length; i++) {
+      var b= moment(lis[i].getAttribute("attr"),"DD/MM/YYYY").format('YYYY-MM-DD');
+      if (moment(max).isAfter(b) && moment(min).isBefore(b)) {
+            lis[i].style.display = 'block';}
+        else
+            {lis[i].style.display = 'none';
+    }
+  }
+  
+
 });
 </script>
 @endsection('content')
