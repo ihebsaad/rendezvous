@@ -16,6 +16,20 @@
 .like-button .like-icon {
     color: #ff0000!important;
 }
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-width: 1024px) 
+  and (max-height: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {a.button.border.s {margin-top: 39px!important;}
+}
+
+@media (max-width: 1024){
+.aa{width: 185px;}
+a.button.border.s {
+    margin-top: -86px!important;
+    margin-left: 158px!important;
+}
 @media (max-width: 768px){
 .day-slot-headline { 
     width: auto!important;
@@ -739,7 +753,7 @@ table.basic-table th {
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
                                 <style> @media (max-width: 768px) {a.button.border.s{
-                                        margin-top: -74px!important;margin-left: 96px!important;}}
+                                        margin-top: -74px!important;margin-left:151px!important;;}}
 </style>
                                 <a class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;"  onclick='visibilityFunctionService(<?php echo $service->id;?>)'>Réserver</a>
                            </div>
