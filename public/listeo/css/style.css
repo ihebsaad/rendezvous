@@ -234,7 +234,7 @@ img { max-width: 100%; }
 ------------------------------------- */
 #logo { display: inline-block; margin-top: 3px; }
 
-#logo img { background:black!important;max-height: 38px; width: auto; transform: translate3d(0,0,0); }
+#logo img { max-height: 38px; width: auto; transform: translate3d(0,0,0); }
 img.footer-logo { max-height: 38px; width: auto; }
 
 #header {
@@ -321,8 +321,7 @@ header.fullwidth .container {
 #logo,
 #navigation { float: left; }
 
-#logo { margin-right: 50px; 	background-color: black!important;
-}
+#logo { margin-right: 50px; }
 
 .header-widget { text-align: right; }
 
@@ -340,7 +339,7 @@ header.fullwidth .container {
 #header.cloned { background-color: #000; }
 
 /* Sticky header styles */
-#header.cloned #logo img { background:black!important;transform: translate3d(0,0,0); /*max-width: 120px; */margin-top: 1px; }
+#header.cloned #logo img { transform: translate3d(0,0,0); /*max-width: 120px; */margin-top: 1px; }
 #header.cloned { padding: 18px 0 7px 0; }
 
 .sticky-logo { display: none; }
@@ -1765,7 +1764,6 @@ em.mm-counter+a.mm-fullsubopen+span {
 	.mmenu-trigger { display: inline-block !important; }
 
 	#logo {
-		background:black!important;
 	    position: absolute;
 	    width: 100%;
 	    margin: 0 auto;
@@ -11963,7 +11961,6 @@ span.like-icon {
 
 .dashboard-nav,
 .dashboard #logo {
-	background-color: black!important;
 	min-width: 260px;
 	max-width: 260px;
 }
@@ -12009,9 +12006,8 @@ header.fullwidth.dashboard .container { padding-left: 285px; }
 
 /* Dashboard Logo */
 .dashboard #logo {
-
 	display: block;
-	background-color: black!important;
+	background-color: #333;
 	position: absolute;
 	height: 100%;
 	left: 0;
@@ -12027,8 +12023,6 @@ header.fullwidth.dashboard .container { padding-left: 285px; }
 
 .dashboard #logo a img {
 	top: 50%;
-	background-color: black!important;
-
 	position: relative;
 	transform: translate3d(-6%,-50%,0);
 }
@@ -17900,7 +17894,7 @@ body .category-box-btn:hover {
 
 	/* Dashboard Logo */
 	.dashboard #logo {
-		background-color: black!important;
+		background-color: #616161;
 		position: relative;
 		height: 100%;
 		left: 0;
@@ -17919,8 +17913,6 @@ body .category-box-btn:hover {
 	.dashboard #logo a.dashboard-logo { display: none; }
 
 	.dashboard #logo a img {
-		background-color: black!important;
-
 		top: 0;
 		position: relative;
 		max-height: 40px;
@@ -17981,8 +17973,8 @@ body .category-box-btn:hover {
 	.header-widget { height: auto; }
 
 	.dashboard #logo a {
+		background: black;
 		margin-left: 0;
-		background: black!important;
 		display: inline-block;
 		height: 100%;
 	}
@@ -17990,9 +17982,8 @@ body .category-box-btn:hover {
 	.dashboard #logo a.dashboard-logo { display: none; }
 
 	.dashboard #logo a img {
+		background: black;
 		top: 0;
-		background: black!important;
-
 		position: relative;
 		max-height: 40px;
     	transform: translate3d(0,0,0);
