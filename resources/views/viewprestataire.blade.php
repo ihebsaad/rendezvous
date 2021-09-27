@@ -771,7 +771,7 @@ table.basic-table th {
                         <?php if ( $nbservrec>0) { ?>
                         <!-- abonnement List -->
                         <h4 style=" color: black;
-    border-color: black;">Services à abonnement</h4>
+    border-color: black;">Services à abonnement mensuel</h4>
                         <ul>
                             <?php foreach ($servicesreccurent as $servicerec)
                             { ?>
@@ -1345,14 +1345,14 @@ $( document ).ready(function() {
 
          <?php  if (sizeof($servicesreccurent) != 0 and sizeof($services) != 0) {
                         # code...
-            echo '<p style=" font-size: 14px; line-height: 16px;">Veuillez sélectionner "Abonnement", si vous désirez réserver un service récurrent</p>
+            echo '<p style=" font-size: 14px; line-height: 16px;">Veuillez sélectionner "Abonnement mensuel", si vous désirez réserver un service récurrent</p>
                       
               <ul class="tabs-nav" >
                 <li class="active">
                   <a href="#home">Service simple</a>
                 </li>
                 <li class="">
-                  <a  href="#menu1">Abonnement</a>
+                  <a  href="#menu1">Abonnement mensuel</a>
                 </li>
                 
               </ul>
