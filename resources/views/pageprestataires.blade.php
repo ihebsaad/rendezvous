@@ -25,6 +25,7 @@ if (isset($query['emplacementsearch']) && !empty($query['emplacementsearch']))
 
 @section('content')
 <div class="clearfix"></div>
+
 <!-- Titlebar
 ================================================== -->
 <div id="titlebar" class="gradient" style="padding-bottom: 40px!important; padding-top: 40px!important;">
@@ -307,7 +308,7 @@ function gridtolist(elm){if(document.getElementById("grid").style.display == "bl
                                                                <h3>{{$listing->titre}} <?php if ($listing->approved ==1) {;?> <i class="verified-icon"></i><?php }?></h3>
                                                                <span>{{$listing->adresse}}</span>
                                                                <?php if ($countrev >0){?> 
-                                                               <div class="star-rating" data-rating="<?php echo $moy;?>">
+                                                               <div class="star-rating"  style="    width: max-content!important;" style="    width: max-content!important;" data-rating="<?php echo $moy;?>">
                                                                       <div class="rating-counter">(<?php echo $countrev; ?> avis)</div>
                                                                </div>
                                                               <?php }else{ ?>
@@ -467,7 +468,7 @@ function gridtolist(elm){if(document.getElementById("grid").style.display == "bl
                                                                <h3>{{$listing->titre}} <?php if ($listing->approved ==1) {;?> <i class="verified-icon"></i><?php }?></h3>
                                                                <span>{{$listing->adresse}}</span>
                                                                <?php if ($countrev >0){?> 
-                                                               <div class="star-rating" data-rating="<?php echo $moy;?>">
+                                                               <div class="star-rating"  style="    width: max-content!important;"data-rating="<?php echo $moy;?>">
                                                                       <div class="rating-counter">(<?php echo $countrev; ?> avis)</div>
                                                                </div>
                                                               <?php }else{ ?>
