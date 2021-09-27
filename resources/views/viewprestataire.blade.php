@@ -738,11 +738,10 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{ $service->prix }} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <style> @media (max-width: 768px) {a.button.border{
-                                        margin-top: -74px!important;
-    margin-left: 96px!important;}}
-                                                        </style>
-                                <a class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;"  onclick='visibilityFunctionService(<?php echo $service->id;?>)'>Réserver</a>
+                                <style> @media (max-width: 768px) {a.button.border.s{
+                                        margin-top: -74px!important;margin-left: 96px!important;}}
+</style>
+                                <a class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;"  onclick='visibilityFunctionService(<?php echo $service->id;?>)'>Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -768,7 +767,7 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{ $servicerec->prix }} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <a   class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick='visibilityFunctionRec(<?php echo $servicerec->id;?>)'>Réserver</a>
+                                <a   class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick='visibilityFunctionRec(<?php echo $servicerec->id;?>)'>Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -814,7 +813,7 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{$prod->prix_unité}} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <a  class="button border " style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick='visibilityFunction(<?php echo $prod->id;?>)'>Réserver</a>
+                                <a  class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick='visibilityFunction(<?php echo $prod->id;?>)'>Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
