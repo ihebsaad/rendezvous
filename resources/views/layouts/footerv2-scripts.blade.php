@@ -38,7 +38,7 @@ $(function() {
 		"opens": "left",
 		singleDatePicker: true,
       locale: {
-        "format": "YYYY-MM-DD",
+        "format": "DD-MM-YYYY",
         "separator": " - ",
         "applyLabel": "Appliquer",
         "cancelLabel": "Annuler",
@@ -96,7 +96,7 @@ $(function() {
 		"opens": "left",
 		singleDatePicker: true,
       locale: {
-        "format": "YYYY-MM-DD",
+        "format": "DD-MM-YYYY",
         "separator": " - ",
         "applyLabel": "Appliquer",
         "cancelLabel": "Annuler",

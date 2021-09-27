@@ -1937,8 +1937,8 @@ $(function() {
 		"opens": "left",
 		singleDatePicker: true,
       locale: {
-        "format": "YYYY-MM-DD",
-        "separator": " - ",
+        "format": "DD-MM-YYYY",
+                "separator": " - ",
         "applyLabel": "Appliquer",
         "cancelLabel": "Annuler",
         "fromLabel": "de",
@@ -1995,7 +1995,7 @@ $(function() {
 		"opens": "left",
 		singleDatePicker: true,
       locale: {
-        "format": "YYYY-MM-DD",
+        "format": "DD-MM-YYYY",
         "separator": " - ",
         "applyLabel": "Appliquer",
         "cancelLabel": "Annuler",
