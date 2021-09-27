@@ -158,7 +158,7 @@
      } 
      .sizeB
      {
-      height: 100px;
+      height: 344px;
      }    
     }
     @media only screen
@@ -234,7 +234,7 @@
                     <h3><i class="sl sl-icon-basket-loaded"></i>Comment connectez-vous à votre google Agenda ?</h3>
                 </div>              
                 <div class="row">
-                  <div class="col-md-12 col-sm-4 sizeA" style="width: auto;">
+                  <div class="col-md-12 col-sm-4 sizeA" >
                     <div style="overflow-x: auto;">
                    <center> <h3><b>Vous devez suivre les étapes décrites dans le document suivant</b></h3> </center>
                      <br>
