@@ -789,7 +789,7 @@ input#date-picker {
                   <span class="input-group-btn ">
                       <button style="margin-left: -69px;
     height: 33px;
-    font-size: 14px;"class="btn btn-primary btn-lg" onclick="fonctionvalide()">valide</button>
+    font-size: 14px;color:black;"class="btn btn-primary btn-lg" onclick="fonctionvalide()">valide</button>
                   </span>
                   </div>   
                       </div>
@@ -1046,9 +1046,7 @@ input#date-picker {
 		  		<div class="input-group input-group-lg" >
 				    <input class="form-control "  type="text" id="mycodepromoRec" style="    height: 34px;" placeholder="Code promo">
 				    <span class="input-group-btn ">
-				        <button style="margin-left: -69px;
-    height: 33px;
-    font-size: 14px;"class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  >valide</button>
+				        <button style="margin-left: -69px;height: 33px;font-size: 14px;color:black;"class="btn btn-primary btn-lg" onclick="fonctionvalideRec()"  >valide</button>
 				    </span>
 				</div>
 
