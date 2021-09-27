@@ -11,6 +11,13 @@
 
   <!-- Dashboard -->
 <div id="dashboard"> 
+  <style>
+    @media (min-width: 992px){
+.qtybotn {
+ 
+    width: 23.666667%!important;
+}}
+  </style>
 @include('layouts.back.bmenu')
 <!-- Content
     ================================================== -->
@@ -74,8 +81,8 @@
                      $res=explode('=', $rss->regle);
                     ?>
                   <tr>
-                    <td>{{$res[0]}}</td>
-                    <td>{{$res[1]}}</td>
+                    <td><?php echo $res[0]; ?></td>
+                    <td><?php echo $res[1]; ?></td>
                     <td><input type="button" style="width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php echo $rss->id ?>)"></td>
                   </tr>                 
                 <?php } ?>
@@ -136,10 +143,10 @@
 
     </select></center><br>
      </div>
-      <div class="col-md-1" >
-        avec quatité 
+      <div class="col-md-1" style="          margin-top: -34px;" >
+       Quantité 
      </div>
-      <div class="col-md-2" >
+      <div class="col-md-2 qtybotn" >
       <input id="qteres1" type="number" value="1" min="1" max="10">
      </div>
     </div>
@@ -156,10 +163,10 @@
      <option value="{{$sp->nom_produit}}">{{$sp->nom_produit}}</option>
      @endforeach</select></center><br>
      </div>
-      <div class="col-md-1" >
-        avec quatité 
+     <div class="col-md-1" style="       margin-top: -34px;" >
+       Quantité 
      </div>
-      <div class="col-md-2" >
+      <div class="col-md-2 qtybotn" >
       <input id="qteres2" type="number" value="1" min="1" max="10">
      </div>
     </div>
@@ -176,10 +183,10 @@
      <option value="{{$sp->nom_produit}}">{{$sp->nom_produit}}</option>
      @endforeach</select></center><br>
      </div>
-      <div class="col-md-1" >
-        avec quatité 
+     <div class="col-md-1" style="        margin-top: -34px;" >
+       Quantité 
      </div>
-      <div class="col-md-2" >
+      <div class="col-md-2 qtybotn" >
       <input id="qteres3" type="number" value="1" min="1" max="10">
      </div>
     </div>
@@ -204,7 +211,7 @@
       </div>
       <div class="row">
        <br>
-      <center> <input type="submit" class="button" value="Enregistrer" style="color:white"> </center>
+      <center> <input type="submit" class="button" value="Enregistrer" style="color:black"> </center>
        <br>
       </div> 
       </form>
@@ -216,4 +223,99 @@
     ================================================== -->
 </div>
 </div></div></div></div></div></div></div>
+<script>
+
+  function ecrire_formule() {  
+  var inputs = $(".cars");
+  var formule='';
+       for(var i = 0; i < inputs.length; i++){
+          if($(inputs[i]).find(":selected").text())
+          {
+            if(i!=0)
+            {
+            formule+=' + '+$(inputs[i]).find(":selected").text();
+            }
+            else
+            {
+            formule+=$(inputs[i]).find(":selected").text();
+            }
+          }
+        } 
+
+        //alert(formule);  
+
+        var res1=$("#resser1").find(":selected").text();
+        var qteres1=$("#qteres1").val();
+        var res2=$("#resser2").find(":selected").text();
+        var qteres2=$("#qteres2").val();
+        var res3=$("#resser3").find(":selected").text();
+        var qteres3=$("#qteres3").val();
+
+        if(!res1 && !res2 && !res3 || !formule)
+        {
+          if(!res1 && !res2 && !res3)
+          {
+            swal("Vous devez saisir au moins un service ou un produit à offrir !");
+          }
+           else{
+            swal("Vous devez saisir au moins un service dans la section Addition des services !");
+          }
+        }
+        else
+        {
+          if(res1)
+          {
+            formule+=' = '+qteres1+' '+res1;
+          }
+          if(res2)
+          {
+             if(!res1)
+             {
+              formule+=' = '+qteres2+' '+res2;
+             }
+             else
+             {
+              formule+=' + '+qteres2+' '+res2;
+             }
+          }
+
+          if(res3)
+          {
+             if(!res2 && !res1)
+             {
+              formule+=' = '+qteres3+' '+res3;
+             }
+             else
+             {
+              formule+=' + '+qteres3+' '+res3;
+             }
+          }
+
+         $('#restotal').val(formule);
+
+        }
+
+                
+ //myWindow=window.open('lead_data.php?leadid=1','myWin','width=400,height=650')
+}
+
+function deleteRow(r,id) {
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("table_serv_supp").deleteRow(i);
+
+  //var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:"{{ url('/') }}"+"/supprimer_serv_suppl/"+id,
+            method:"get",
+            data:{id:id},
+            success:function(data){
+             // alert(data);
+              swal("Règle supprimée avec succès");
+            }
+        });
+
+
+}
+</script>
+
 @endsection('content')
