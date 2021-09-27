@@ -8,6 +8,7 @@
 
 <style type="text/css">
 /* Show more */
+
 .btn-primary {
     color: #fff;
     background-color: #ffd700!important;
@@ -769,7 +770,8 @@ table.basic-table th {
 
                         <?php if ( $nbservrec>0) { ?>
                         <!-- abonnement List -->
-                        <h4>Services à abonnement</h4>
+                        <h4 style=" color: black;
+    border-color: black;">Services à abonnement</h4>
                         <ul>
                             <?php foreach ($servicesreccurent as $servicerec)
                             { ?>
