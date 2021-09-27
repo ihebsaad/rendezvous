@@ -17894,7 +17894,7 @@ body .category-box-btn:hover {
 
 	/* Dashboard Logo */
 	.dashboard #logo {
-		background-color: #616161;
+		background-color: black;
 		position: relative;
 		height: 100%;
 		left: 0;
