@@ -1349,10 +1349,10 @@ $( document ).ready(function() {
                       
               <ul class="tabs-nav" >
                 <li class="active">
-                  <a href="#home">Service simple</a>
+                  <a href="#home" style="font-size: 12.8px;">Service simple</a>
                 </li>
                 <li class="">
-                  <a  href="#menu1">Abonnement mensuel</a>
+                  <a  href="#menu1" style="font-size: 12.8px;">Abonnement mensuel</a>
                 </li>
                 
               </ul>
