@@ -14,12 +14,28 @@ use \App\User;
 
   <!-- Dashboard -->
 <div id="dashboard"> 
+
 @include('layouts.back.bmenu')
 <!-- Content
     ================================================== -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <div class="dashboard-content">
-
+       
+<style>
+.dashboard-list-box .button {
+    padding: 6px 15px;
+    line-height: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    width: 171px!important;
+    margin: 0;
+}
+@media (max-width: 768px){
+.booking-requests-filter {
+    display: flex!important;
+    margin-left: 25px;
+    margin-top: -61px;
+    margin-right: -24px;}}</style>
         <!-- Titlebar -->
         <div id="titlebar">
             <div class="row">
