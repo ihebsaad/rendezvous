@@ -581,8 +581,8 @@ input#date-picker {
            
            <div class="utf_signin_form style_one" id="verification" >
            <input type="hidden" name="id_user" id="id_user" value="{{$user->id}}" >
-
-             <input type="text" name="number" id="number_client" placeholder="veuillez saisir le numéro de télephone du client" >
+            <label for="number">veuillez saisir le numéro de télephone du client :</label>
+             <input type="text" name="number" id="number_client" placeholder="num de téléphone du client" >
             <center> <button type="submit" class="button" onclick="ClientVerif()"  >Verifier</button></center>
             </div>
            
