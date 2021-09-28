@@ -664,7 +664,7 @@ table.basic-table th {
 
                     <ul class="listing-links contact-links">
                         <li><a href="tel:{{$user->tel}}" class="listing-links"><i class="fa fa-phone"></i> {{$user->tel}}</a></li>
-                        <li><a href="mailto:{{$user->email}}" class="listing-links"><i class="fa fa-envelope-o"></i> {{$user->email}}</a>
+                        <li><a style="display: inline-block!important;width:40px;"href="mailto:{{$user->email}}" class="listing-links"><i class="fa fa-envelope-o"></i> {{$user->email}}</a>
                         </li>
                         <!--<li><a href="#" target="_blank"  class="listing-links"><i class="fa fa-link"></i> www.example.com</a></li>-->
                     </ul>
