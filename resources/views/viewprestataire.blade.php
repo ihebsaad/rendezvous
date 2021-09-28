@@ -8,7 +8,60 @@
 
 <style type="text/css">
 /* Show more */
+@media only screen 
+  and (min-width: 768px) 
+  and (max-height: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    header#header-container {
+    width: 832px;
+    background-color: black;
+}
+.listing-slider, .listing-slider .item {
+    width: 829px;
+    height: 30vh;
+    min-height: 400px;
+    max-height: 400px;
+}
+.boxed-widget {
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    padding: 32px;
+    transform: translate3d(0,0,0);
+    z-index: 90;
+    width: 300px;
+    position: relative;
+}
 
+
+.listing-details-sidebar {
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+    margin-bottom: -5px;
+    position: relative;
+    display: block;
+    margin-left: -27px;
+}
+#footer {
+    width: 831px;
+    padding: 70px 0 0 0;
+    background-color: #ffd700;
+    border-top: 1px solid rgba(0,0,0,0.09);
+    font-size: 16px;
+}
+.coupon-widget {
+    width: 296px;
+    margin-top: 35px;
+    border-radius: 4px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    transition: 0.3s;
+    display: block;
+}
+  }
 .btn-primary {
     color: #fff;
     background-color: #ffd700!important;
