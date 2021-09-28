@@ -8,6 +8,10 @@
 
 <style type="text/css">
 /* Show more */
+.daterangepicker td.start-date.end-date {
+    color: black!important;
+    border-radius: 4px;
+}
 @media only screen 
   and (min-width: 768px) 
   and (max-height: 1024px) 
@@ -1685,7 +1689,7 @@ $( document ).ready(function() {
 
                                 @else
                                             
-                                                <a href="{{route('inscription')}}" class="button border fullwidth margin-top-5"  >Connectez vous pour réserver</a>
+                                                <a href="{{route('inscription')}}" class="button book-now fullwidth margin-top-5"  >Connectez vous pour réserver</a>
                                                 
                                  @endif
 
