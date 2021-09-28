@@ -10,7 +10,9 @@
    else
    {
        $User= auth()->user();
+       $lien = $User->invoiceLink;
        $User=$User->id;
+
 
    }
  
@@ -184,8 +186,8 @@
 
         <!-- plan 3 - start -->             
         <div class="dashboard-list-box with-icons margin-top-20">
-         <?php  dd($User); ?>
-          <h4>Vous avez une facture impayée ! merci de l'avoir réglé.<a href="{{$User->invoiceLink}}">Lien</a>
+         
+          <h4>Vous avez une facture impayée ! merci de l'avoir réglé.<a href="{{$lien}}">Lien</a>
           </h4>
           
           
