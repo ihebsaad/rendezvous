@@ -91,6 +91,28 @@ echo "null";
     http_response_code(200);
   exit();
   } else {
+    $sql = "SELECT * FROM `abonnements` WHERE IdStripe='".$event->data->object->subscription."'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+              $row = $result -> fetch_assoc();
+              $invoice = $row["invoiceId"];  
+
+          }
+          if ($invoice != null && $invoice !=$event->data->object->id) {
+
+            //\Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+
+            $stripe = new \Stripe\StripeClient(
+  'sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx'
+);
+$stripe->invoices->voidInvoice(
+  'in_1JdYaELYsTAPmLSFNrCTBLBK',
+  []
+);
+          }else{
+
+
+
     
 
             $sql = "UPDATE abonnements SET invoice=0 WHERE IdStripe='".$event->data->object->subscription."'";
@@ -128,6 +150,7 @@ echo "null";
               echo "Error updating record: " . $conn->error;
             }
 
+}
     //$invoice = $event->data->object;
   }
 }

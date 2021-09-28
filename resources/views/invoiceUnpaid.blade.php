@@ -187,7 +187,7 @@
         <!-- plan 3 - start -->             
         <div class="dashboard-list-box with-icons margin-top-20">
          
-          <h4>Vous avez une facture impayée ! merci de l'avoir réglé.<a href="{{$lien}}">Lien</a>
+          <h4>Vous avez une facture impayée ! merci de l'avoir réglé.<a href="{{$lien}}"> Lien</a>
           </h4>
           
           
