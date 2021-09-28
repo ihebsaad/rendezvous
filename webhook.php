@@ -106,6 +106,28 @@ echo "null";
               echo "Error updating record: " . $conn->error;
             }
 
+
+
+            $sql = "SELECT * FROM `abonnements` WHERE IdStripe='".$event->data->object->subscription."'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+              $row = $result -> fetch_assoc();
+              $iduser = $row["user"];  
+
+          }
+          $sql = "UPDATE users SET invoiceStripe=0 WHERE id='".$iduser."'";
+            if ($conn->query($sql) === TRUE) {
+              echo "Record updated successfully";
+            } else {
+              echo "Error updating record: " . $conn->error;
+            }
+          $sql = "UPDATE users SET invoiceLink='".$event->data->object->hosted_invoice_url."' WHERE id='".$iduser."'";
+            if ($conn->query($sql) === TRUE) {
+              echo "Record updated successfully";
+            } else {
+              echo "Error updating record: " . $conn->error;
+            }
+
     //$invoice = $event->data->object;
   }
 }

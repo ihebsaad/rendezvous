@@ -48,7 +48,13 @@ class UsersController extends Controller
      //   $this->middleware('auth');
     }
 
+     public function Facture_Impayee()
+    {
+
+      return view('invoiceUnpaid' );       
     
+        
+    }
     public function index()
     {
          $cuser = auth()->user();
