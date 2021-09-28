@@ -82,10 +82,17 @@ class LoginController extends Controller
             }
             else // abonné  offre_lance_ann1 ; offre_lance_ann2 ; normal    
             {
+              if ($user->invoiceStripe == 0 ) {
+                //dd("okfffffff");
+                return redirect ('/Facture_Impayee');
+                
+              }else{
                
               if($user->expire &&  $date_exp >= $date_15j )
               {
+                dd($user->expire);
                 return redirect ('/dashboard');
+
               }
               
 
@@ -118,11 +125,12 @@ class LoginController extends Controller
 
                  return redirect ('/pricing');
 
-            }
+            }}
 
              
         
         } else {// admin ou client
+          dd("client");
             return redirect('/dashboard');
         }
 		
