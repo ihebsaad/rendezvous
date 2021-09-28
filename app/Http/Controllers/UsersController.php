@@ -82,12 +82,13 @@ class UsersController extends Controller
         
     }
     public function editPlan(Request $request)
-    {
+    {             
+ $int = (int)$request->abonnement;
         //dd($request->idligne);
         if ($request->idligne==0) {
 
             $a= new Contenu_plan([
-                 'abonnement' => $request->abonnement,
+                 'abonnement' => $int,
                  'contenu'=> $request->contenuPlan
              ]);
             $a->save();  

@@ -64,7 +64,7 @@
      <div id="Modifa">
      <textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne "></textarea>
      </div><br>
-     <input type="" name="abonnement" hidden="hidden" value="1">
+     <input type="" name="abonnement" hidden="hidden" value="<?php echo $k; ?>">
      <input type="" name="idligne" id="idlignea" hidden="hidden" value="0">
      <div>
      <input type="submit" id="buttonSubmita" value="Ajouter" name=""> 

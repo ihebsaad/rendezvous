@@ -51,8 +51,7 @@ class parametreController extends Controller
         }
         
 
-
-        return view('parametre.ModifAbonnement', compact('abonnement'));
+        return view('parametre.ModifAbonnement', compact('abonnement','k'));
 
 
     }
