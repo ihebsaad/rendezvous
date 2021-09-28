@@ -90,7 +90,7 @@ class LoginController extends Controller
                
               if($user->expire &&  $date_exp >= $date_15j )
               {
-                dd($user->expire);
+                
                 return redirect ('/dashboard');
 
               }
