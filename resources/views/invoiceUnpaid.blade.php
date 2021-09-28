@@ -184,7 +184,7 @@
 
         <!-- plan 3 - start -->             
         <div class="dashboard-list-box with-icons margin-top-20">
-         
+         <?php  dd($User); ?>
           <h4>Vous avez une facture impayée ! merci de l'avoir réglé.<a href="{{$User->invoiceLink}}">Lien</a>
           </h4>
           
