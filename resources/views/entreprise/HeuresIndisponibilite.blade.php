@@ -689,6 +689,7 @@ input#date-picker {
                     <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
 
                     </div>
+                    <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
 
                     <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown" id="time">
@@ -758,10 +759,10 @@ input#date-picker {
 											<span>1 slots available</span>
 										</label>
 									</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div></div>
                     <!-- Panel Dropdown / End -->
                     <!-- Panel Dropdown -->
 					
@@ -955,6 +956,8 @@ input#date-picker {
           
                         
                         <!-- Panel Dropdown -->
+                        <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
+
                <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown" id="time1">
 							<a href="#">Heure</a>
@@ -1025,7 +1028,7 @@ input#date-picker {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div></div>
 					<!-- Panel Dropdown / End -->
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->

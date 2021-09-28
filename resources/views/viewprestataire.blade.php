@@ -1459,6 +1459,7 @@ $( document ).ready(function() {
                     <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
 
                     </div>
+                    <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
 
                     <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown" id="time">
@@ -1532,7 +1533,7 @@ $( document ).ready(function() {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div></div>
                     <!-- Panel Dropdown / End -->
                     <!-- Panel Dropdown -->
 					
@@ -1757,6 +1758,7 @@ $( document ).ready(function() {
           
                         
                         <!-- Panel Dropdown -->
+                        <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
                         <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown" id="time1">
 							<a href="#">Heure</a>
@@ -1830,6 +1832,7 @@ $( document ).ready(function() {
 							</div>
 						</div>
 					</div>
+                    </div>
      
 
 					<!-- Panel Dropdown / End -->
