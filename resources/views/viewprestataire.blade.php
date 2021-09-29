@@ -1970,7 +1970,7 @@ $( document ).ready(function() {
 			 <?php } ?>
 		 <?php }else{  ?>
 		 <center>
-		 <a href="{{route('inscription')}}" class="button border sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a></center>
+		 <a href="{{route('inscription')}}" class="button  sign-in popup-with-zoom-anim"  >Connectez vous pour réserver</a></center>
 	 
 			 
 	<?php	 } ?>
