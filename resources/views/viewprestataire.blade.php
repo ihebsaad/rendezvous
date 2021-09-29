@@ -1602,23 +1602,23 @@ $( document ).ready(function() {
                     <div class="col-lg-12 col-md-12 ">
                                 <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Montant </strong></span></div>
                                 <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                    <span class="input-group-text" style="font-size: 150%;background-color:white!important;"> <strong> € </strong></span>
+                                    <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
                                 </div>
                             </div><br>
                         </div>
                           <div class="col-lg-12 col-md-12 " >
          	                    <br>
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%;"><strong> Remise  &nbsp</strong></span></div>
+                            <div class="input-group" style="margin-top: -37px;">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;;"><strong> Remise  &nbsp</strong></span></div>
                                 <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                <span class="input-group-text" style="font-size: 150%;background-color:white!important;"> <strong> € </strong></span>
+                                <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
                             </div>
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="button" style="    font-size: 150%;background-color: #4c4e4ed6!important;color: white!important;border-color: #7b7777!important;" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                                    <button class="btn btn-outline-primary" type="button" style="    font-size: 124%;background-color: #494c4c!important;;color: white!important;border-color: #7b7777!important;" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
                             
                             </div>
 
@@ -1654,13 +1654,13 @@ $( document ).ready(function() {
                                     </table>
                               </div><br>
                         </div>
-                          <div class="col-lg-12 col-md-12 ">
+                          <div class="col-lg-12 col-md-12 " style="margin-top: -37px;">
                                     <br>
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text"  style="background-color: #686969!important;color: white!important;font-size: 150%;"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
+                            <div class="input-group" style="        border: 1px solid #494c4c;">
+                                <div class="input-group-prepend"><span class="input-group-text"  style="background-color: #494c4c!important;;color: white!important;font-size: 124%;    width: 90px;;"><strong> TOTAL &nbsp &nbsp &nbsp</strong></span></div>
                                 <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                        <span class="input-group-text" style="font-size: 150%;background-color: #686969!important;color: white!important;"> <strong> € </strong></span>
+                                        <span class="input-group-text" style="font-size: 124%;;background-color: #494c4c!important;;color: white!important;"> <strong> € </strong></span>
                                     </div>
 
                                                                 </div><br>
@@ -1868,23 +1868,23 @@ $( document ).ready(function() {
                 <div class="col-lg-12 col-md-12 ">
                                 <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Montant </strong></span></div>
                                 <input style="margin-bottom: 0px;background:white!important;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                    <span class="input-group-text" style="font-size: 150%;background-color:white!important;"> <strong> € </strong></span>
+                                    <span class="input-group-text" style="font-size: 124%;background-color:white!important;    color: #909294;!important;"> <strong> € </strong></span>
                                 </div>
                             </div><br>
                         </div>
-                          <div class="col-lg-12 col-md-12 " >
+                          <div class="col-lg-12 col-md-12 " style="margin-top: -37px;" >
          	                    <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Remise  &nbsp</strong></span></div>
                                 <input style="margin-bottom: 0px;background:white!important;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
                             </div>
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="button" style="    font-size: 150%;background-color: #4c4e4ed6!important;color: white!important;border-color: #7b7777!important;" onclick="remiseRec()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                                    <button class="btn btn-outline-primary" type="button" style="    font-size: 124%;background-color: #494c4c!important;color: white!important;border-color: #7b7777!important;" onclick="remiseRec()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
                             
                             </div>
 
@@ -1920,13 +1920,13 @@ $( document ).ready(function() {
                                     </table>
                               </div><br>
                         </div>
-                          <div class="col-lg-12 col-md-12 ">
+                          <div class="col-lg-12 col-md-12 " style="margin-top: -37px;">
                                     <br>
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="background-color: #686969!important;color: white!important;font-size: 150%;"><strong> TOTAL &nbsp &nbsp &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
+                            <div class="input-group" style="       border: 1px solid #494c4c;">
+                                <div class="input-group-prepend"><span class="input-group-text" style="background-color: #494c4c!important;color: white!important;font-size: 124%;    width: 90px;"><strong> TOTAL &nbsp &nbsp &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;background-color:white;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                        <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                        <span class="input-group-text" style="font-size: 124%;background-color: #494c4c!important;;color:white!important;"> <strong> € </strong></span>
                                     </div>
 
                                                                 </div><br>
@@ -2183,7 +2183,7 @@ function visibilityFunctionRec(element){
                     el[0].selected = true;
                     $('#servicerec').trigger("chosen:updated");
                 } else {
-                    alert("Already selected and added.");
+                    alert("Déjà sélectionné et ajouté.");
                 }
             }
            
@@ -2243,7 +2243,7 @@ function visibilityFunctionService(element){
                     el[0].selected = true;
                     $('#service').trigger("chosen:updated");
                 } else {
-                    alert("Already selected and added.");
+                    alert("Déjà sélectionné et ajouté.");
                 }
             }
             selectservice();
