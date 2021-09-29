@@ -1588,7 +1588,7 @@ $( document ).ready(function() {
                             </div>
 
                             <div class="single-slot-right">
-                            <button style="    background-color: #ff9292;color: #fff;margin-left: 52px;border: none;border-radius: 3px;height: 19px;width: 19px;line-height: 17px;font-size: 11px;transition: 0.3s;font-weight: 500;" onclick='deletProduct(<?php echo $prod->id;?>)' style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+                            <button style="    background-color: #e2b4b4;color: #fff;margin-left: 52px;border: none;border-radius: 3px;height: 19px;width: 19px;line-height: 17px;font-size: 11px;transition: 0.3s;font-weight: 500;" onclick='deletProduct(<?php echo $prod->id;?>)' style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
                                     <button onclick='decreaseCount(event, this)' ></button>
