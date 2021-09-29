@@ -2265,7 +2265,7 @@ function visibilityFunctionService(element){
       if (!(produitslist.includes(element))) {
       produitslist.push(element);
       document.getElementById(t).hidden = false;
-
+      alert("le produit est ajouté à votre panier");
 
      
     } else{                   alert("Déjà sélectionné et ajouté.");
