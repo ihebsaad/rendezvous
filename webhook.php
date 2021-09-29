@@ -81,8 +81,35 @@ elseif ($event->type=='customer.subscription.deleted') {
               //echo "Error updating record: " . $conn->error;
             }
 }
-elseif ($event->type=='customer.subscription.updated') {
-  # code...
+elseif ($event->type=='invoice.payment_succeeded') {
+  if ($event->data->object->subscription==null) {
+echo "null";
+    http_response_code(200);
+  exit();
+  } else {
+    $sql = "SELECT * FROM `abonnements` WHERE IdStripe='".$event->data->object->subscription."'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+              $row = $result -> fetch_assoc();
+              $invoice = $row["invoiceId"]; 
+              $invo = $row["invoice"]; 
+              $iduser =  $row["user"]; 
+
+          }
+          if ($invo==1) {
+            http_response_code(200);
+            exit();
+          } else {
+            if ($invoice==$event->data->object->subscription) {
+              echo "oiiiiiiiiiiiiii";
+            }else{
+              echo "null";
+    http_response_code(200);
+            }
+
+          }
+
+  }
 }
 elseif ($event->type=='invoice.payment_failed') {
   //echo ($event->data->object->subscription);
@@ -103,7 +130,7 @@ echo "null";
            
 \Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
-$invoice = \Stripe\Invoice::retrieve('in_1Jf08LLYsTAPmLSF1e9ZF7Vd');
+$invoice = \Stripe\Invoice::retrieve($invoice);
 $invoice->voidInvoice();
             
           }
