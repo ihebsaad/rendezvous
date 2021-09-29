@@ -101,6 +101,8 @@ echo "null";
             exit();
           } else {
             $AInvoice = "".$event->data->object->subscription."";
+            echo $AInvoice;
+            echo $invoice;
             if ($invoice==$AInvoice) {
               echo "oiiiiiiiiiiiiii";
             }else{
