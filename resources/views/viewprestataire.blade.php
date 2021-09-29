@@ -8,6 +8,11 @@
 
 <style type="text/css">
 /* Show more */
+.tabs-nav li a:hover, .tabs-nav li.active a {
+border-color: #ffd700;
+color: #000000;
+background-color: #fff3b0;
+}
 .daterangepicker td.start-date.end-date {
     color: black!important;
     border-radius: 4px;
@@ -1574,7 +1579,7 @@ $( document ).ready(function() {
                     ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
                     <?php  foreach($produit as $prod){ ?>
-                    <div class="single-slot" id="q<?php echo  $prod->id;?>"  hidden="true">
+                    <div class="single-slot" id="q<?php echo  $prod->id;?>"  name="q<?php echo  $prod->id;?>" hidden="true">
                             <div class="single-slot-left">
                                 <div class="single-slot-time"><div class="row">
                                     <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
@@ -1583,11 +1588,12 @@ $( document ).ready(function() {
                             </div>
 
                             <div class="single-slot-right">
-                            <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+                            <button class="remove-slot reject" onclick='deletProduct(<?php echo $prod->id;?>)' style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
                                     <button onclick='decreaseCount(event, this)' ></button>
                                     <input type="number" prix="{{$prod->prix_unité}}" id="k{{$prod->id}}" name="slot-qty" value="0" min="0" max="10">
+     
                                     <button onclick='increaseCount(event, this)'></button> 
                                 </div>
                                 <br>
@@ -2252,14 +2258,15 @@ function visibilityFunctionService(element){
 
 }
    function visibilityFunction(element){
-      //alert("q"+element+"");
+      alert("q"+element+"");
       document.getElementById("listProduits").style.display = 'block';
-      var t = "q"+element+"" ;
-      //document.getElementById(t).style.visibility = "";
-      
+      var t = 'q'+element+'' ;
+      document.getElementById(t).hidden = false;
+
       if (!(produitslist.includes(element))) {
       produitslist.push(element);
-      document.getElementById(t).hidden = false;
+     
+
      
     }}
 function selectservice(){
@@ -2449,9 +2456,33 @@ function SelectServiceRec(a){
 
   calcul( parseFloat((input.getAttribute('prix')) ));
 }
+function deletProduct(e){ alert(e);var test=document.getElementById('k'+e+'').value;
+   var prix = document.getElementById('k'+e+'').getAttribute('prix');
+   alert(produitslist.length);
+   for (var i = 0; i < produitslist.length; i++) {
+      //ach
+      alert(produitslist[i]);
+      var t = "q"+e+"" ;
+      //document.getElementById(t).style.visibility = "";
+      alert(document.getElementById(t).hidden);
+      document.getElementById(t).hidden = true;
+      if ( produitslist[i] === e) { 
+    
+    produitslist.splice(i, 1); }
+    }
+
+    alert(produitslist);
+
+    calcul( -(parseFloat(test * prix) ));
+
+
+    }
 function decreaseCount(e, el) {
   var input = el.nextElementSibling;
+  alert(input);
+
   var value = parseInt(input.value, 10);
+  alert(value);
  // alert(value);
   if (value > 0) {
     value = isNaN(value) ? 0 : value;
@@ -2659,11 +2690,13 @@ for(var i = 0; i < inputs.length; i++){
 alert($(inputs[i]).val());
 }*/
 //qtyproduits
+qtyproduits
+if(produitslist.length!=0){
 for (var i = 0; i < produitslist.length; i++) {
  var qty = document.getElementById('k'+produitslist[i]+'').value;
  qtyproduits[i]=qty ;
  //alert(qtyproduits);
-}
+}}
 
 var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
 var happyhour = $('#myhappyhoursId').val();
