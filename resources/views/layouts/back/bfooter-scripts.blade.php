@@ -26,7 +26,12 @@
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/counterup.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/tooltips.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/quantityButtons.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/moment.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
+
 
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
 <!-- Scripts
@@ -295,5 +300,39 @@ var lis = $('ul[class="one"] ');
 
 });
 </script>
+<?php 
+     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+<script type="text/javascript">
+     $(document).ready(function(){
+    var maxField = <?php echo (5-$nbcomm); ?>; //Input fields increment limitation
+    var comButton = $('.com_button'); //Add button selector
+    var comwrapper = $('.com_wrapper'); //Input field wrapper
+    var comfieldHTML = '<div class="row"><br><center><img width="26" height="26"  src="{{ asset('public/img/plus.png') }}"/></center><br><div class="col-md-10"> <select name="cars" class="cars"><option value=""></option><?php foreach ($services_pres as $sp) { ?>
+            <option value="{{$sp->nom}}">{{$sp->nom}}</option> <?php } ?> </select></div> <div class="col-md-2"> <a href="javascript:void(0);" class="comremove_button"> <img width="26" height="26" style="float:left " src="{{ asset('public/img/moin.png') }}"/></a><br></div>  </div>'; //New input field html
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(comButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(comwrapper).append(comfieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(comwrapper).on('click', '.comremove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+
+     $(comwrapper).on('change', '.cars', function(e){
+       //alert($(this).find(":selected").text()) ;//Decrement field counter       
+    });
+
+});
+</script>
+<?php } ?>
 </body>
 </html>
