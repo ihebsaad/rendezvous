@@ -100,10 +100,11 @@ echo "null";
             http_response_code(200);
             exit();
           } else {
-            if ($invoice==$event->data->object->subscription) {
+            $AInvoice = "".$event->data->object->subscription."";
+            if ($invoice==$AInvoice) {
               echo "oiiiiiiiiiiiiii";
             }else{
-              echo "null";
+              echo "null2";
     http_response_code(200);
             }
 
