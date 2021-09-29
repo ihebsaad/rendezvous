@@ -99,19 +99,14 @@ echo "null";
 
           }
           if ($invoice != null && $invoice !=$event->data->object->id) {
+            echo "okkkkkk ";
+           
+\Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
-            //\Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
-
-            $stripe = new \Stripe\StripeClient(
-  'sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx'
-);
-$stripe->invoices->voidInvoice(
-  'in_1JdYaELYsTAPmLSFNrCTBLBK',
-  []
-);
-          }else{
-
-
+$invoice = \Stripe\Invoice::retrieve('in_1Jf08LLYsTAPmLSF1e9ZF7Vd');
+$invoice->voidInvoice();
+            
+          }
 
     
 
@@ -150,7 +145,6 @@ $stripe->invoices->voidInvoice(
               echo "Error updating record: " . $conn->error;
             }
 
-}
     //$invoice = $event->data->object;
   }
 }
