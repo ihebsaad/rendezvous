@@ -130,7 +130,7 @@ class LoginController extends Controller
              
         
         } else {// admin ou client
-          dd("client");
+          //dd("client");
             return redirect('/dashboard');
         }
 		
