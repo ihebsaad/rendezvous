@@ -1578,8 +1578,8 @@ $( document ).ready(function() {
                     <div id="sectionproduitsup" class="input-group input-group-lg" style="height: 153px; width: 267px;overflow-y: scroll;overflow-x: auto
                     ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
-                    <?php  foreach($produit as $prod){ ?>
-                    <div class="single-slot" id="q<?php echo  $prod->id;?>"  name="q<?php echo  $prod->id;?>" hidden="true">
+                    <?php  foreach($produit as $prod){?>
+                    <div class="single-slot" id="q<?php echo  $prod->id;?>"  name="q<?php echo  $prod->id;?>" hidden>
                             <div class="single-slot-left">
                                 <div class="single-slot-time"><div class="row">
                                     <div class=" col-md-6"><img src="<?php echo  URL::asset('storage/images/'.$prod->image);?>"   style=" max-width:  44px  ;width: 44px;"/>
@@ -1588,7 +1588,7 @@ $( document ).ready(function() {
                             </div>
 
                             <div class="single-slot-right">
-                            <button class="remove-slot reject" onclick='deletProduct(<?php echo $prod->id;?>)' style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+                            <button style="    background-color: #ff9292;color: #fff;margin-left: 52px;border: none;border-radius: 3px;height: 19px;width: 19px;line-height: 17px;font-size: 11px;transition: 0.3s;font-weight: 500;" onclick='deletProduct(<?php echo $prod->id;?>)' style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
                                     <button onclick='decreaseCount(event, this)' ></button>
@@ -2258,17 +2258,19 @@ function visibilityFunctionService(element){
 
 }
    function visibilityFunction(element){
-      alert("q"+element+"");
+    
       document.getElementById("listProduits").style.display = 'block';
-      var t = 'q'+element+'' ;
-      document.getElementById(t).hidden = false;
-
+      var t = 'q'+element+'' ;  
+      
       if (!(produitslist.includes(element))) {
       produitslist.push(element);
-     
+      document.getElementById(t).hidden = false;
+
 
      
-    }}
+    } else{                   alert("Déjà sélectionné et ajouté.");
+}     
+}
 function selectservice(){
  		//lert("ft sele");
  		var happyhours = $('#myhappyhoursId').val();
@@ -2456,33 +2458,28 @@ function SelectServiceRec(a){
 
   calcul( parseFloat((input.getAttribute('prix')) ));
 }
-function deletProduct(e){ alert(e);var test=document.getElementById('k'+e+'').value;
+function deletProduct(e){ 
+    var test=document.getElementById('k'+e+'').value;
    var prix = document.getElementById('k'+e+'').getAttribute('prix');
-   alert(produitslist.length);
    for (var i = 0; i < produitslist.length; i++) {
       //ach
-      alert(produitslist[i]);
       var t = "q"+e+"" ;
       //document.getElementById(t).style.visibility = "";
-      alert(document.getElementById(t).hidden);
       document.getElementById(t).hidden = true;
       if ( produitslist[i] === e) { 
     
     produitslist.splice(i, 1); }
     }
 
-    alert(produitslist);
 
     calcul( -(parseFloat(test * prix) ));
-
+    document.getElementById('k'+e+'').value=0;
 
     }
 function decreaseCount(e, el) {
   var input = el.nextElementSibling;
-  alert(input);
 
   var value = parseInt(input.value, 10);
-  alert(value);
  // alert(value);
   if (value > 0) {
     value = isNaN(value) ? 0 : value;
