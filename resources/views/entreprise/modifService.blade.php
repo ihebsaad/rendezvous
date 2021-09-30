@@ -115,7 +115,7 @@
                          <br>
                           <div class="col-lg-6 " >
                          <label>Nombre de fois dans la période :</label>
-                            <input type="number"  min=1 value="<?php echo $service->nbrfois;?>" id="Nfois" name="Nfois"  > 
+                            <input type="number"  min=1 value="<?php echo $service->Nfois;?>" id="Nfois" name="Nfois"  > 
                           </div><br>
                       </div>
                             <div class="col-lg-12">
