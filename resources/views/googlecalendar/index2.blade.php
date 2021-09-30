@@ -24,7 +24,7 @@
 
 .file-upload {
   background-color: #ffffff;
-  width: 600px;
+  width: auto;
   margin: 0 auto;
   padding: 20px;
 }
