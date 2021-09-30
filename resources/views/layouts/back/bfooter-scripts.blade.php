@@ -1,7 +1,8 @@
 <!-- Scripts
 ================================================== -->
 <!-- Début de widget de badge Calendly -->
- <?php     $user = auth()->user();
+ <?php     
+ $user = auth()->user();
   $user_type =$user->user_type;
  ?>
  <?php if( $user_type=='prestataire'  ){ ?>     
@@ -26,12 +27,7 @@
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/counterup.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/tooltips.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/quantityButtons.js') }}"></script>
-
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/moment.min.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
-
 
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
 <!-- Scripts

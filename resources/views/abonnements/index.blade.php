@@ -5,7 +5,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/buttons.bootstrap.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/assets/datatables/css/scroller.bootstrap.css') }}" />
 <style type="text/css">
- 
+ @media (max-width: 768px){
+.booking-requests-filter {
+    display: block!important;
+}}
       @media only screen
     and (min-device-width : 0px)
     and (max-device-width : 480px) {
@@ -78,14 +81,14 @@
   <div class="add_utf_listing_section margin-top-45"> 
         <div class="utf_add_listing_part_headline_part">
           <h3><i class="sl sl-icon-present"></i>Abonnements</h3>
-                </div>       
-        <div class="row">
+        </div>       
+        <div class="row" style="display:block!important;">
            <div class="col-md-12 " >
         <a href="{{route('pricing')}}" class="pull-right button ">S'abonner / Prolonger</a>
         <br><br><br>
-          </div>
-          <div class="col-md-12 sizeA" >
-            <div style="overflow: auto;">
+        </div>
+        <div class="col-md-12 sizeA" >
+        <div style="overflow: auto;">
             <table class="table table-striped table-hover" id="mytable" >
         <thead>
         <tr id="headtable">
