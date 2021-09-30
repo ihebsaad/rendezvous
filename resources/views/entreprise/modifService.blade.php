@@ -106,16 +106,16 @@
                             <label for="mySelect">Période :</label>
 
                             <select id="mySelect"  name="mySelect"  onchange="myFunctionSelect()">
-                              <option <?php if($service->periode = "Jour"){ echo "selected" ;} ?>>Jour</option>
-                              <option <?php if($service->periode = "Semaine"){ echo "selected" ;} ?>>Semaine</option>
-                              <option <?php if($service->periode = "Mois"){ echo "selected" ;} ?>>Mois</option>
-                              <option <?php if($service->periode = "toute les 3 semaines"){ echo "selected" ;} ?>>toute les 3 semaines</option>
-                              <option <?php if($service->periode = "1 semaine sur 2"){ echo "selected" ;} ?>>1 semaine sur 2</option>
+                              <option <?php if($service->periode == "Jour"){ echo "selected" ;} ?>>Jour</option>
+                              <option <?php if($service->periode == "Semaine"){ echo "selected" ;} ?>>Semaine</option>
+                              <option <?php if($service->periode == "Mois"){ echo "selected" ;} ?>>Mois</option>
+                              <option <?php if($service->periode == "toute les 3 semaines"){ echo "selected" ;} ?>>toute les 3 semaines</option>
+                              <option <?php if($service->periode == "1 semaine sur 2"){ echo "selected" ;} ?>>1 semaine sur 2</option>
                             </select> </div>
                          <br>
                           <div class="col-lg-6 " >
                          <label>Nombre de fois dans la période :</label>
-                            <input type="number"  min=1 value="<?php echo $service->nbrService;?>" id="Nfois" name="Nfois"  > 
+                            <input type="number"  min=1 value="<?php echo $service->nbrfois;?>" id="Nfois" name="Nfois"  > 
                           </div><br>
                       </div>
                             <div class="col-lg-12">
