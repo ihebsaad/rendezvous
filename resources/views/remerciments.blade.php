@@ -60,7 +60,7 @@ background-color:#a0d468;
   <section class="fullwidth_block margin-top-0 padding-top-100 padding-bottom-100" data-background-color="#fff"> 
     <div class="container">
         <div class="row">        
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
            
               <div class="dashboard-list-box with-icons margin-top-20">
                   <h4 style=" text-align: center;">Bienvenue à prenezunrendezvous.com </h4>      
@@ -77,7 +77,9 @@ background-color:#a0d468;
                                     </div>
                                 <h5 style="  font-size: 22px;">Ça y est {{$cuser->name}},</h5>
                                 <h5 style="  font-size: 22px;">Vous êtes inscrit(e) !</h5></br>
-                                <p>Bienvenue dans notre communauté dédiée aux prestataires de service sur RDV !</p></br>
+                                <p>Bienvenue dans notre communauté dédiée aux prestataires de service sur RDV !</br>
+                                  Vous pouvez d’ores et déjà profiter de notre plateforme et de ses fonctionnalités.
+                                </p>
                                 <a href="{{ route('home') }}">retour au site</a>
                                </li>
 

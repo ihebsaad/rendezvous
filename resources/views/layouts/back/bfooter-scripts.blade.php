@@ -1,7 +1,9 @@
 <!-- Scripts
 ================================================== -->
 <!-- Début de widget de badge Calendly -->
- <?php     $user = auth()->user();
+ <?php     
+$nbcomm=0;
+ $user = auth()->user();
   $user_type =$user->user_type;
  ?>
  <?php if( $user_type=='prestataire'  ){ ?>     
