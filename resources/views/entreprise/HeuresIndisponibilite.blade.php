@@ -10,6 +10,11 @@
 
   <!-- Dashboard -->
   <style>
+      .tabs-nav li a:hover, .tabs-nav li.active a {
+border-color: #ffd700;
+color: #000000;
+background-color: #fff3b0;
+}
     .input-group-prepend {
     margin-right: -1px;
 }.input-group-append, .input-group-prepend {
@@ -639,7 +644,7 @@ input#date-picker {
                   <a href="#home">Service simple</a>
                 </li>
                 <li class="">
-                  <a  href="#menu1">Abonnement</a>
+                  <a  href="#menu1">Abonnement mensuel</a>
                 </li>
                 
               </ul>
@@ -808,7 +813,7 @@ input#date-picker {
                     ;vertical-align: middle; border: 1px solid #54524800;    box-shadow: 0 9px 2px 0px rgb(0 0 0 / 11%); "  >
                     <!-- Slot For Cloning / Do NOT Remove-->
                     <?php  foreach($produit as $prod){ ?>
-                      <div style="display:none;width: -webkit-fill-available;" id="q<?php echo  $prod->id;?>">
+                      <div style="width: -webkit-fill-available;" id="q<?php echo  $prod->id;?>" hidden>
                     <div class="single-slot"   >
                             <div class="single-slot-left">
                                 <div class="single-slot-time"><div class="row">
@@ -922,7 +927,7 @@ input#date-picker {
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="servicerec" name="servicerec"   onchange="SelectServiceRec(this)">
-                        <option label="Sélectionner l'abonnement desiré" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
+                        <option label="Sélectionner l'abonnement mansuel desiré" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
 
                              <?php 
                                 foreach($servicesreccurent as $SR){
@@ -1446,7 +1451,7 @@ function visibilityFunctionRec(element){
       
       if (!(produitslist.includes(element))) {
       produitslist.push(element);
-      document.getElementById(t).style.display = 'block';
+      document.getElementById(t).hidden = false;
      
     }}
 function selectservice(){
@@ -1457,7 +1462,7 @@ function selectservice(){
 		var service = $('#service').val();
     var test = <?php echo json_encode($mab) ; ?> ;
     //alert(test[8][0]);
-    if (service.length != 0) {
+    if (service) {
       for (var i = 0; i < service.length; i++) {
         $('#service option[value='+service[i]+']').each(function(){
           id = this.getAttribute('value');
@@ -1471,7 +1476,7 @@ function selectservice(){
 		
                 
 	
-		if (service.length != 0) {
+		if (service) {
 		
 
 			for (var i = 0; i < service.length; i++) {
@@ -2326,6 +2331,7 @@ var lis = $('ul[class="one"] ');
 
 });
 </script>
+
 <script>function deletProduct(e){ 
     var test=document.getElementById('k'+e+'').value;
    var prix = document.getElementById('k'+e+'').getAttribute('prix');
