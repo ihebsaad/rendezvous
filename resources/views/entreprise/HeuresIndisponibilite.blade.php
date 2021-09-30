@@ -818,7 +818,7 @@ input#date-picker {
                             </div>
 
                             <div class="single-slot-right">
-                            <button class="remove-slot reject" style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
+                            <button style="    background-color: #e2b4b4;color: #fff;margin-left: 52px;border: none;border-radius: 3px;height: 19px;width: 19px;line-height: 17px;font-size: 11px;transition: 0.3s;font-weight: 500;" onclick='deletProduct(<?php echo $prod->id;?>)' style=" margin-top: 10px; background:#e2b4b4;  margin-left: 57px;" ><i class="fa fa-close"></i></button><br>
 
                                 <div class="plusminus horiz">
                                     <button  class="qtyDec"onclick='decreaseCount(event, this)' ></button>
@@ -837,23 +837,23 @@ input#date-picker {
                     <div class="col-lg-12 col-md-12 ">
                                 <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
-                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Montant </strong></span></div>
+                                <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                    <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
                                 </div>
                             </div><br>
                         </div>
                           <div class="col-lg-12 col-md-12 " >
          	                    <br>
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
+                            <div class="input-group" style="margin-top: -37px;">
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;;"><strong> Remise  &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
                             </div>
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                                    <button class="btn btn-outline-primary" type="button" style="    font-size: 124%;background-color: #494c4c!important;;color: white!important;border-color: #7b7777!important;" onclick="remise()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
                             
                             </div>
 
@@ -888,17 +888,18 @@ input#date-picker {
                                         </tbody>
                                     </table>
                               </div><br>
-                          </div>
-                          <div class="col-lg-12 col-md-12 ">
+                        </div>
+                          <div class="col-lg-12 col-md-12 " style="margin-top: -37px;">
                                     <br>
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
+                            <div class="input-group" style="        border: 1px solid #494c4c;">
+                                <div class="input-group-prepend"><span class="input-group-text"  style="background-color: #494c4c!important;;color: white!important;font-size: 124%;    width: 90px;;"><strong> TOTAL &nbsp &nbsp &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="totalReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                        <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                        <span class="input-group-text" style="font-size: 124%;;background-color: #494c4c!important;;color: white!important;"> <strong> € </strong></span>
                                     </div>
-                              </div><br>
-                          </div>                      
+
+                                                                </div><br>
+                                                            </div>                     
                     <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
                         <!-- Book Now -->
                                 
@@ -1055,26 +1056,30 @@ input#date-picker {
 
                 </div>
                 <!---test --->
+              
+
+
+                        
                 <div class="col-lg-12 col-md-12 ">
                                 <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Montant </strong></span></div>
-                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Montant </strong></span></div>
+                                <input style="margin-bottom: 0px;background:white!important;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                    <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                    <span class="input-group-text" style="font-size: 124%;background-color:white!important;    color: #909294;!important;"> <strong> € </strong></span>
                                 </div>
                             </div><br>
                         </div>
-                          <div class="col-lg-12 col-md-12 " >
+                          <div class="col-lg-12 col-md-12 " style="margin-top: -37px;" >
          	                    <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Remise  &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
+                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Remise  &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;background:white!important;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
                             </div>
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="button" style="font-size: 150%" onclick="remiseRec()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
+                                    <button class="btn btn-outline-primary" type="button" style="    font-size: 124%;background-color: #494c4c!important;color: white!important;border-color: #7b7777!important;" onclick="remiseRec()"><strong><i class="fa fa-angle-double-down" ></i></strong></button>
                             
                             </div>
 
@@ -1087,7 +1092,7 @@ input#date-picker {
                                             <th>Remise</th>
                                             <th>service</th>
                                             <th>Reduction</th>
-                                        </tr>
+                                            </tr>
                                         </thead>
                                         <tbody> 
                                         <tr id="testreduction" style="display:none;">
@@ -1105,16 +1110,31 @@ input#date-picker {
                                     </table>
                               </div><br>
                         </div>
-                          <div class="col-lg-12 col-md-12 ">
+                          <div class="col-lg-12 col-md-12 " style="margin-top: -37px;">
                                     <br>
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 150%"><strong> Total &nbsp &nbsp &nbsp</strong></span></div>
-                                <input style="margin-bottom: 0px;    background: #e9ecef;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
+                            <div class="input-group" style="       border: 1px solid #494c4c;">
+                                <div class="input-group-prepend"><span class="input-group-text" style="background-color: #494c4c!important;color: white!important;font-size: 124%;    width: 90px;"><strong> TOTAL &nbsp &nbsp &nbsp</strong></span></div>
+                                <input style="margin-bottom: 0px;background-color:white;" type="number" class="form-control" id="totalReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
-                                        <span class="input-group-text" style="font-size: 150%"> <strong> € </strong></span>
+                                        <span class="input-group-text" style="font-size: 124%;background-color: #494c4c!important;;color:white!important;"> <strong> € </strong></span>
                                     </div>
-                           </div><br>
-                        </div>
+
+                                                                </div><br>
+                                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <!--test-->
 
                    
@@ -2306,4 +2326,22 @@ var lis = $('ul[class="one"] ');
 
 });
 </script>
+<script>function deletProduct(e){ 
+    var test=document.getElementById('k'+e+'').value;
+   var prix = document.getElementById('k'+e+'').getAttribute('prix');
+   for (var i = 0; i < produitslist.length; i++) {
+      //ach
+      var t = "q"+e+"" ;
+      //document.getElementById(t).style.visibility = "";
+      document.getElementById(t).hidden = true;
+      if ( produitslist[i] === e) { 
+    
+    produitslist.splice(i, 1); }
+    }
+
+
+    calcul( -(parseFloat(test * prix) ));
+    document.getElementById('k'+e+'').value=0;
+
+    }</script>
 @endsection('content')
