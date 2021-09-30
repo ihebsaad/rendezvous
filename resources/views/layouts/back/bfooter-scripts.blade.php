@@ -2,7 +2,6 @@
 ================================================== -->
 <!-- Début de widget de badge Calendly -->
  <?php     
-$nbcomm=0;
  $user = auth()->user();
   $user_type =$user->user_type;
  ?>
