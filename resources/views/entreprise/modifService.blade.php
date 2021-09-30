@@ -62,7 +62,7 @@
                           <?php } ?>
                             <div class="change-photo-btn">
                                 <div class="photoUpload">
-                                    <span><i class="fa fa-upload"></i> Upload Photo5</span>
+                                    <span><i class="fa fa-upload"></i> Télécharger Image</span>
                                     <input type="file" name="photo" id="photo" class="upload" data-index="0" onChange="swapImage(this)"/>
                                 </div>
                             </div>

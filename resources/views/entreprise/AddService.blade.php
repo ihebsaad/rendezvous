@@ -67,7 +67,7 @@
                             <img src="public/imgg.jpg"  data-index="0" alt="">
                             <div class="change-photo-btn">
                                 <div class="photoUpload">
-                                    <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                    <span><i class="fa fa-upload"></i> Télécharger Image</span>
                                     <input type="file" class="upload" name="photo" id="photo" data-index="0" onChange="swapImage(this)"/>
                                 </div>
                             </div>
