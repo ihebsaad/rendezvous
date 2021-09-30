@@ -100,11 +100,36 @@ echo "null";
             http_response_code(200);
             exit();
           } else {
-            $AInvoice = "".$event->data->object->subscription."";
-            echo $AInvoice;
-            echo $invoice;
+            $AInvoice = "".$event->data->object->id."";
+           
             if ($invoice==$AInvoice) {
               echo "oiiiiiiiiiiiiii";
+              $sql = "UPDATE abonnements SET invoice=1 WHERE IdStripe='".$event->data->object->subscription."'";
+            if ($conn->query($sql) === TRUE) {
+              echo "Record updated successfully";
+            } else {
+              echo "Error updating record: " . $conn->error;
+            }
+            $sql = "UPDATE abonnements SET invoiceId=null WHERE IdStripe='".$event->data->object->subscription."'";
+            if ($conn->query($sql) === TRUE) {
+              echo "Record updated successfully";
+            } else {
+              echo "Error updating record: " . $conn->error;
+            }
+            $sql = "UPDATE users SET invoiceStripe=1 WHERE id='".$iduser."'";
+            if ($conn->query($sql) === TRUE) {
+              echo "Record updated successfully";
+            } else {
+              echo "Error updating record: " . $conn->error;
+            }
+          $sql = "UPDATE users SET invoiceLink=null WHERE id='".$iduser."'";
+            if ($conn->query($sql) === TRUE) {
+              echo "Record updated successfully";
+            } else {
+              echo "Error updating record: " . $conn->error;
+            }
+
+
             }else{
               echo "null2";
     http_response_code(200);
