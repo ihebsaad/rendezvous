@@ -1566,58 +1566,110 @@ function selectservice(){
 </script>
 
 <script>
-  function fonctionvalideRec(){
-    var valCode = $('#mycodepromoRec').val();
-      //alert(valchange);
-      //var service = $('#service').val();
-      var service = $('#servicerec').val();
-      var _token = $('input[name="_token"]').val();
+function fonctionvalide(){
+ 		var valCode = $('#mycodepromo').val();
+   		//alert(valchange);
+   		var service = $('#service').val();
+   		var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('services.CodePromoCheck') }}",
                         method:"POST",
-            data:{valCode:valCode, _token:_token},
+						data:{valCode:valCode, _token:_token},
                         success:function(data){
-                          
-                          if (data[0]==1) {
-                            if (data[1].toString()==service) {
-                              Swal.fire(
-                  'Félicitation!...',
-                  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
-                  'success'
-                  )
-                  var table = document.getElementById("tabRemiseRec");
-                    var row = table.insertRow(-1);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    var cell3 = row.insertCell(2);
-                    cell1.innerHTML = "code promo ("+data[2]+"%)";
-                    cell2.innerHTML = data[3];
-                    cell3.innerHTML = data[4]+"€";
-                   
-                    //alert(document.getElementById('RemiseReservation').val() + data[4]);
-                    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
-                    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
-                            }
-                            else {
-                  Swal.fire(
-                    'Code promo ne correspond pas au service selectionné !...',
-                    '',
-                    'question'
-                  )
-                            }
-                            
-                          }
-                          else {
-                            Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Code promo incorrect!',
-                })
-                          }
+                        	
+                        	if (data[0]==1) {
+                        		if (service.includes(data[1].toString())) {
+                        			alert(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemise");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								    listcodepromo.push(valCode);
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservation').value = parseFloat(document.getElementById('RemiseReservation').value) + data[4];
+								    document.getElementById('totalReservation').value = parseFloat(document.getElementById('MontantReservation').value)-parseFloat(document.getElementById('RemiseReservation').value);
+                        		}
+                        		else {
+									alert(
+									  'Code promo ne correspond pas au service selectionné !...',
+									  '',
+									  'question'
+									)
+                        		}
+                        		
+                        	}
+                        	else {
+                        		alert({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
                         }
                     });
-    
-  }
+ 		
+ 	}
+	function fonctionvalideRec(){
+ 		var valCode = $('#mycodepromoRec').val();
+   		//alert(valchange);
+   		//var service = $('#service').val();
+   		var service = $('#servicerec').val();
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.CodePromoCheck') }}",
+                        method:"POST",
+						data:{valCode:valCode, _token:_token},
+                        success:function(data){
+                        	
+                        	if (data[0]==1) {
+                        		if (data[1].toString()==service) {
+                        			alert(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemiseRec");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
+								    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
+                        		}
+                        		else {
+									alert(
+									  'Code promo ne correspond pas au service selectionné !...',
+									  '',
+									  'question'
+									)
+                        		}
+                        		
+                        	}
+                        	else {
+                        		alert({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
+                        }
+                    });
+ 		
+ 	}
 
 function SelectServiceRec(a){
     console.log(a);
