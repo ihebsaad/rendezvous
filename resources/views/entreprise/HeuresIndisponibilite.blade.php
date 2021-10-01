@@ -2401,6 +2401,8 @@ var lis = $('ul[class="one"] ');
 
     calcul( -(parseFloat(test * prix) ));
     document.getElementById('k'+e+'').value=0;
+    if(produitslist.length==0){   document.getElementById("listProduits").style.display = 'none';
+}
 
     }</script>
 @endsection('content')
