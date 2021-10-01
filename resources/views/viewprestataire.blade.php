@@ -10,7 +10,7 @@
 /* Show more */
 .tabs-nav li a:hover, .tabs-nav li.active a {
 border-color: #ffd700;
-color: #000000;
+color: #2f2f2f;;
 background-color: #fff3b0;
 }
 .daterangepicker td.start-date.end-date {
@@ -818,7 +818,7 @@ table.basic-table th {
                                 <style> @media (max-width: 768px) {a.button.border.s{
                                         margin-top: -74px!important;margin-left:151px!important;;}}
 </style>
-                                <a class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;"  onclick='visibilityFunctionService(<?php echo $service->id;?>)'>Réserver</a>
+                                <a class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;"  onclick=' visibilityFunctionService(<?php echo $service->id;?>) '>Réserver</a>
                            </div>
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
@@ -891,8 +891,9 @@ table.basic-table th {
                                 <span style="width: 71px;margin-top: 9px;">{{$prod->prix_unité}} €</span>
                                     </div></center>
                                     <div  class="col-md-5 col-sm-6 ">
-                                <a  class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick='visibilityFunction(<?php echo $prod->id;?>)'>Réserver</a>
+                                <a  class="button border s" style=" color: #0a0909bd!important;border-color: #ffd700!important;margin-top: -6px;background-color: gold;" onclick=" visibilityFunction1(<?php echo $prod->id;?>)">Réserver</a>
                            </div>
+          
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
                                 <h5>{{$prod->nom_produit}}</h5>
@@ -1458,6 +1459,7 @@ $( document ).ready(function() {
                                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
                             </select>
+                            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='ErrorSer'>veuillez choisir un service au minimum</p>
                         </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
@@ -1538,7 +1540,10 @@ $( document ).ready(function() {
 								</div>
 							</div>
 						</div>
-					</div></div>
+					</div>
+                    <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeure">Veuillez choisir l'heure</p>
+                    </div>
+
                     <!-- Panel Dropdown / End -->
                     <!-- Panel Dropdown -->
 					
@@ -1556,7 +1561,7 @@ $( document ).ready(function() {
                         <option value="2880">2 jours avant le RDV</option>
                          <option value="7200">5 jours avant le RDV</option>
                         </select>
-                       
+                       <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='ErrorRap'>Veuillez choisir un option</p>
                     </div>
                     <?php 
                     if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
@@ -1608,7 +1613,11 @@ $( document ).ready(function() {
                     <div class="col-lg-12 col-md-12 ">
                                 <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Montant </strong></span></div>
+                                <div class="input-group-prepend"><span class="input-group-text" style="color: #848484;
+background-color: #d8d8d8;
+border: 1px solid #d8d8d8;
+font-size: 14px!important;
+"><strong> Montant </strong></span></div>
                                 <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="MontantReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                     <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
@@ -1618,7 +1627,11 @@ $( document ).ready(function() {
                           <div class="col-lg-12 col-md-12 " >
          	                    <br>
                             <div class="input-group" style="margin-top: -37px;">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;;"><strong> Remise  &nbsp</strong></span></div>
+                                <div class="input-group-prepend"><span class="input-group-text" style="color: #848484;
+background-color: #d8d8d8;
+border: 1px solid #d8d8d8;
+font-size: 14px!important;
+;"><strong> Remise  &nbsp</strong></span></div>
                                 <input style="margin-bottom: 0px;background-color:white!important;" type="number" class="form-control" id="RemiseReservation" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                 <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
@@ -1741,6 +1754,8 @@ $( document ).ready(function() {
                                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
                             </select>
+                            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorSerRec">Veuillez choisir une abonnement</p>
+
                         </div>
                         <div class="col-lg-12">
 						<input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
@@ -1838,6 +1853,8 @@ $( document ).ready(function() {
 							</div>
 						</div>
 					</div>
+                    <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeureRec">Veuillez choisir l'heure</p>
+
                     </div>
      
 
@@ -1845,7 +1862,7 @@ $( document ).ready(function() {
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="select" style="display: block!important;" id="Rappel2">
+                        <select class="select" style="display: block!important;" id="rappel2">
 
                             <option  >Rappel de rendez vous par SMS</option>
                             <option value="60">1h avant le RDV </option>
@@ -1855,7 +1872,8 @@ $( document ).ready(function() {
                             <option value="2880">2 jours avant le RDV</option>
                             <option value="7200">5 jours avant le RDV</option>
                         </select>
-                                                
+                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorRapRec">Veuillez choisir un option</p>
+              
                     </div>
                     <div class="col-lg-12 col-md-12 ">
 		  		<label>Code promo :</label>
@@ -1874,7 +1892,11 @@ $( document ).ready(function() {
                 <div class="col-lg-12 col-md-12 ">
                                 <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Montant </strong></span></div>
+                                <div class="input-group-prepend"><span class="input-group-text" style="color: #848484;
+background-color: #d8d8d8;
+border: 1px solid #d8d8d8;
+font-size: 14px!important;
+"><strong> Montant </strong></span></div>
                                 <input style="margin-bottom: 0px;background:white!important;" type="number" class="form-control" id="MontantReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                     <span class="input-group-text" style="font-size: 124%;background-color:white!important;    color: #909294;!important;"> <strong> € </strong></span>
@@ -1884,7 +1906,11 @@ $( document ).ready(function() {
                           <div class="col-lg-12 col-md-12 " style="margin-top: -37px;" >
          	                    <br>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text" style="font-size: 124%;"><strong> Remise  &nbsp</strong></span></div>
+                                <div class="input-group-prepend"><span class="input-group-text" style="color: #848484;
+background-color: #d8d8d8;
+border: 1px solid #d8d8d8;
+font-size: 14px!important;
+;"><strong> Remise  &nbsp</strong></span></div>
                                 <input style="margin-bottom: 0px;background:white!important;" type="number" class="form-control" id="RemiseReservationRec" value="00.00" placeholder="0" disabled>
                                 <div class="input-group-append">
                                 <span class="input-group-text" style="font-size: 124%;;background-color:white!important;color: #909294;!important;"> <strong> € </strong></span>
@@ -1896,7 +1922,9 @@ $( document ).ready(function() {
 
 
                             </div>
-                              <div id="divremiseRec" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
+                              <div id="divremiseRec" style="border-right: 1px solid rgb(140 140 140);
+    border-bottom: 1px solid rgb(140 140 140);border-left: 1px solid rgb(140 140 140);border-image: initial;border-top: none;
+    display: none;" >
                               	  <table class="table" id="tabRemiseRec">
                                         <thead>
                                         <tr>
@@ -2188,9 +2216,7 @@ function visibilityFunctionRec(element){
                     // adding already existent element in selection
                     el[0].selected = true;
                     $('#servicerec').trigger("chosen:updated");
-                } else {
-                    alert("Déjà sélectionné et ajouté.");
-                }
+                } 
             }
            
         
@@ -2257,6 +2283,17 @@ function visibilityFunctionService(element){
 
 
 }
+function visibilityFunction1(element){  document.getElementById("listProduits").style.display = 'block';
+      var t = 'q'+element+'' ;  
+      
+      if (!(produitslist.includes(element))) {
+      produitslist.push(element);
+      document.getElementById(t).hidden = false;
+      alert('Produit ajouté');
+    }else {alert('Produit déja ajouté');}
+    }
+
+
    function visibilityFunction(element){
     
       document.getElementById("listProduits").style.display = 'block';
@@ -2265,11 +2302,7 @@ function visibilityFunctionService(element){
       if (!(produitslist.includes(element))) {
       produitslist.push(element);
       document.getElementById(t).hidden = false;
-      alert("le produit est ajouté à votre panier");
-
-     
-    } else{                   alert("Déjà sélectionné et ajouté.");
-}     
+    }
 }
 function selectservice(){
  		//lert("ft sele");
@@ -2287,7 +2320,10 @@ function selectservice(){
           test[id].forEach(element => visibilityFunction(element));}
           //document.getElementById("myP").style.visibility = "hidden";
         });
-      }}
+      } 
+      }else{      document.getElementById("listProduits").style.display = 'none';
+}
+
  //  alert(document.getElementById('k5.').value);
  
 		
@@ -2331,6 +2367,58 @@ function selectservice(){
 </script>
 
 <script>
+    	function fonctionvalide(){
+ 		var valCode = $('#mycodepromo').val();
+   		//alert(valchange);
+   		var service = $('#service').val();
+   		var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('services.CodePromoCheck') }}",
+                        method:"POST",
+						data:{valCode:valCode, _token:_token},
+                        success:function(data){
+                        	
+                        	if (data[0]==1) {
+                        		if (service.includes(data[1].toString())) {
+                        			alert(
+								  'Félicitation!...',
+								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+								  'success'
+									)
+									var table = document.getElementById("tabRemise");
+								    var row = table.insertRow(-1);
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+								    var cell3 = row.insertCell(2);
+								    cell1.innerHTML = "code promo ("+data[2]+"%)";
+								    cell2.innerHTML = data[3];
+								    cell3.innerHTML = data[4]+"€";
+								    listcodepromo.push(valCode);
+								   
+								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+								    document.getElementById('RemiseReservation').value = parseFloat(document.getElementById('RemiseReservation').value) + data[4];
+								    document.getElementById('totalReservation').value = parseFloat(document.getElementById('MontantReservation').value)-parseFloat(document.getElementById('RemiseReservation').value);
+                        		}
+                        		else {
+									alert(
+									  'Code promo ne correspond pas au service selectionné !...',
+									  '',
+									  'question'
+									)
+                        		}
+                        		
+                        	}
+                        	else {
+                        		alert({
+								  icon: 'error',
+								  title: 'Oops...',
+								  text: 'Code promo incorrect!',
+								})
+                        	}
+                        }
+                    });
+ 		
+ 	}
 	function fonctionvalideRec(){
  		var valCode = $('#mycodepromoRec').val();
    		//alert(valchange);
@@ -2345,7 +2433,7 @@ function selectservice(){
                         	
                         	if (data[0]==1) {
                         		if (data[1].toString()==service) {
-                        			Swal.fire(
+                        			alert(
 								  'Félicitation!...',
 								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
 								  'success'
@@ -2364,7 +2452,7 @@ function selectservice(){
 								    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
                         		}
                         		else {
-									Swal.fire(
+									alert(
 									  'Code promo ne correspond pas au service selectionné !...',
 									  '',
 									  'question'
@@ -2373,7 +2461,7 @@ function selectservice(){
                         		
                         	}
                         	else {
-                        		Swal.fire({
+                        		alert({
 								  icon: 'error',
 								  title: 'Oops...',
 								  text: 'Code promo incorrect!',
@@ -2474,6 +2562,8 @@ function deletProduct(e){
 
     calcul( -(parseFloat(test * prix) ));
     document.getElementById('k'+e+'').value=0;
+    if(produitslist.length==0){   document.getElementById("listProduits").style.display = 'none';
+}
 
     }
 function decreaseCount(e, el) {
@@ -2679,7 +2769,7 @@ $('#reserver').click(function( ){
 
 if(suppl_res)
 {
-Swal.fire ("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
+alert("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
 }
 
 /*  var inputs = $(".dtpks");
@@ -2711,8 +2801,7 @@ var timeSlot = $(".time-slot");
 var timeSlotVal = timeSlot.find('strong').text();
 
 var str=$('#time a').text();
-alert(str);
-
+if(str=='Heure'){document.getElementById('ErrorHeure').style.display='block';;}
 var myArr = str.split("am -");
 var reservationHeureStart=myArr[0];//start
 var reservationHeure2=myArr[1].split("-");
@@ -2725,9 +2814,12 @@ var date = new Date(datereservation1 + ' ' + reservationHeureStart);
 
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
-alert(dateStr);
 var service = $('#service').val();
+if( service==''){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
+alert(rappel);
+if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRap').style.display='block';}
+
 //alert(JSON.stringify(service));
 $.ajax({
    url:"{{ route('reservations.add') }}",
@@ -2752,14 +2844,12 @@ var e = $('#servicerec option[value="' + el + '"]');
 
 var periode = e.attr('periode');
 var frq=e.attr('frq');
-alert(periode);
-alert(frq);
 
 var _token = $('input[name="_token"]').val();	
 var nbrService = document.getElementById("nbrServiceRec").value ;
 var date_reservation = [] ;
 var str=$('#time1 a').text();
-
+if(str=='Heure'){document.getElementById('ErrorHeureRec').style.display="block";}
 var myArr = str.split("am -");
 var reservationHeureStart=myArr[0];//start
 var reservationHeure2=myArr[1].split("-");
@@ -2777,9 +2867,12 @@ var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 var remarques = $('#remarques2').val();
 
 var service = $('#servicerec').val();
+if(service=="Sélectionner l'abonnement desiré"){document.getElementById('ErrorSerRec').style.display="block";}
+
 var rappel = $('#rappel2').val();
+if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRapRec').style.display='block';}
+
 //alert(JSON.stringify(service));
-alert(service);
 $.ajax({
    url:"{{ route('reservations.add2') }}",
    method:"POST",
