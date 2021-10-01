@@ -701,7 +701,7 @@ input#date-picker {
                     <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown" id="time">
 							<a href="#">Heure</a>
-							<div class="panel-dropdown-content padding-reset">
+							<div class="panel-dropdown-content padding-reset" style="width:auto!important;">
 								<div class="panel-dropdown-scrollable">
 									
 									<!-- Time Slot -->
@@ -964,13 +964,24 @@ input#date-picker {
           
                         
                         <!-- Panel Dropdown -->
-                        <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
+                        <div class="row" style="width: inherit!important;">
 
                <div class="col-lg-12">
+                 <script>$(".time-slot").each(function() {
 
-            <div class="panel-dropdown time-slots-dropdown" id="time1">
+var timeSlot = $(this);
+$(this).find('input').on('change',function() {
+    
+    var timeSlotVal = timeSlot.find('strong').text();
+
+    $('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+    $('.panel-dropdown').removeClass('active');
+});
+});</script>
+
+            <div class="panel-dropdown" id="time1">
               <a href="#">Heure</a>
-              <div class="panel-dropdown-content padding-reset">
+              <div class="panel-dropdown-content padding-reset" style="width:auto!important;">
                 <div class="panel-dropdown-scrollable">
                   
                   <!-- Time Slot -->
@@ -1990,6 +2001,7 @@ $(".time-slot").each(function() {
   });
 });
 </script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
 
 <script>
 

@@ -4,38 +4,9 @@
  <?php     $user = auth()->user();
   $user_type =$user->user_type;
  ?>
- <?php if( $user_type=='prestataire'  ){ ?>     
+ <?php if( $user_type=='prestataire'  ){ ?>    
+
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/prenezunrendezvous/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=020202&text_color=ffffff&primary_color=fff600', text: 'Nous sommes à votre écoute pour toute question du lundi au vendredi de 9h à 17h', color: '#000000', textColor: '#ffffff', branding: false }); }</script>
-<?php } ?>
-<!-- Fin de widget de badge Calendly -->   
-<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/dropzone.js') }}"></script>
-
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/mmenu.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/chosen.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/slick.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/rangeslider.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/magnific-popup.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/waypoints.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/counterup.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-ui.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/tooltips.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/quantityButtons.js') }}"></script>
-
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
-<!-- Scripts
-================================================== -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
-
 <script>
   $(".time-slot").each(function() {
 
@@ -167,6 +138,37 @@ var lis = $('ul[class="one"] ');
 
 });
 </script>
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/prenezunrendezvous/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=020202&text_color=ffffff&primary_color=fff600', text: 'Nous sommes à votre écoute pour toute question du lundi au vendredi de 9h à 17h', color: '#000000', textColor: '#ffffff', branding: false }); }</script>
+<?php } ?>
+<!-- Fin de widget de badge Calendly -->   
+<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/dropzone.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/mmenu.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/chosen.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/slick.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/rangeslider.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/magnific-popup.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/waypoints.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/counterup.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/tooltips.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/quantityButtons.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
+<!-- Scripts
+================================================== -->
+
+
+
+
 <script>
 
 $(function() {
