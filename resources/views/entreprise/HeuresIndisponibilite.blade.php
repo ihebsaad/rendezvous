@@ -701,7 +701,7 @@ input#date-picker {
                     <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown" id="time">
 							<a href="#">Heure</a>
-							<div class="panel-dropdown-content padding-reset" style="width:auto!important;">
+							<div class="panel-dropdown-content padding-reset" style="    width: inherit!important;">
 								<div class="panel-dropdown-scrollable">
 									
 									<!-- Time Slot -->
@@ -981,7 +981,7 @@ $(this).find('input').on('change',function() {
 
             <div class="panel-dropdown" id="time1">
               <a href="#">Heure</a>
-              <div class="panel-dropdown-content padding-reset" style="width:auto!important;">
+              <div class="panel-dropdown-content padding-reset" style="    width: inherit!important;">
                 <div class="panel-dropdown-scrollable">
                   
                   <!-- Time Slot -->
