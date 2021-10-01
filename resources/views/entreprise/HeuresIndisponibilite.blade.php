@@ -385,63 +385,63 @@ input#date-picker {
     background-color: #f9d308;
 }
 .show-moreP {
-	height: 450px;
-	overflow: hidden;
-	position: relative;
-	transition: margin 0.4s;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+  transition: margin 0.4s;
 }
 
 .show-moreP:after {
-	content:"";
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 180px;
-	display: block;
-	background: linear-gradient(rgba(255,255,255,0), #fff 88%);
-	z-index: 9;
-	opacity: 1;
-	visibility: visible;
-	transition: 0.8s;
+  content:"";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  display: block;
+  background: linear-gradient(rgba(255,255,255,0), #fff 88%);
+  z-index: 9;
+  opacity: 1;
+  visibility: visible;
+  transition: 0.8s;
 }
 
 .show-moreP.visible { margin-bottom: 20px; }
 .show-moreP.visible:after { opacity: 0; visibility: hidden; }
 
 .show-moreP-button {
-	position: relative;
-	font-weight: 600;
-	font-size: 15px;
-	left: 0;
-	margin-left: 50%;
-	transform: translateX(-50%);
-	z-index: 10;
-	text-align: center;
-	display: inline-block;
-	opacity: 1;
-	visibility: visible;
-	transition: all 0.3s;
-	padding: 5px 20px;
-	color: #666;
-	background-color: #f2f2f2;
-	border-radius: 50px;
-	top: -10px;
-	min-width: 140px;
+  position: relative;
+  font-weight: 600;
+  font-size: 15px;
+  left: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  display: inline-block;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s;
+  padding: 5px 20px;
+  color: #666;
+  background-color: #f2f2f2;
+  border-radius: 50px;
+  top: -10px;
+  min-width: 140px;
 }
 
 .show-moreP-button:before { content: attr(data-more-title); }
 .show-moreP-button.active:before { content: attr(data-less-title); }
 
 .show-moreP-button i {
-	margin-left: 6px;
-	color: #66676b;
-	font-weight: 500;
-	transition: 0.2s;
+  margin-left: 6px;
+  color: #66676b;
+  font-weight: 500;
+  transition: 0.2s;
 }
 
 .show-moreP-button.active i {
-	transform: rotate(180deg);
+  transform: rotate(180deg);
 }
     body{    color: #707070;
     font-size: 15px;
@@ -475,22 +475,22 @@ input#date-picker {
     .legend .green{ background-color:#ead831; }
     .legend .pink{ background-color:#d3c07b; }
     #Ajout-Res {
-	background: #fff!important;
-	padding: 40px;
-	padding-top: 0;
-	text-align: left;
-	max-width: 610px!important;
-	margin: 40px auto;
-	position: relative!important;
-	box-sizing:border-box;
-	border-radius: 4px;
+  background: #fff!important;
+  padding: 40px;
+  padding-top: 0;
+  text-align: left;
+  max-width: 610px!important;
+  margin: 40px auto;
+  position: relative!important;
+  box-sizing:border-box;
+  border-radius: 4px;
 }
 
 </style>
 <div id="dashboard" style="position:relative;  "> 
 @include('layouts.back.bmenu')
 <script> 
- 	var listcodepromo = [];
+  var listcodepromo = [];
   var produitslist =[];
   var qtyproduits = [];
 </script>
@@ -586,9 +586,11 @@ input#date-picker {
            
            <div class="utf_signin_form style_one" id="verification" >
            <input type="hidden" name="id_user" id="id_user" value="{{$user->id}}" >
+
             <label for="number">veuillez saisir le numéro de télephone du client :</label>
-             <input type="text" name="number" id="number_client" placeholder="num de téléphone du client" >
-            <center> <button type="submit" class="button" onclick="ClientVerif()"  >Verifier</button></center>
+        
+             <input type="text" name="number" id="number_client" placeholder="veuillez saisir le numéro de télephone du client" >
+            <center> <button type="submit" class="button" onclick="ClientVerif()">Verifier</button></center>
             </div>
            
            <div class="utf_signin_form style_one" style="display:none;" id="validation">
@@ -770,8 +772,8 @@ input#date-picker {
                         </div></div>
                     <!-- Panel Dropdown / End -->
                     <!-- Panel Dropdown -->
-					
-					<!-- Panel Dropdown / End -->
+          
+          <!-- Panel Dropdown / End -->
                     <div class="col-lg-12 " >
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                       
@@ -780,7 +782,7 @@ input#date-picker {
                         <option label="Rappel de rendez vous par SMS" >Rappel de rendez vous par SMS</option>
                         <option value="60">1h avant le RDV </option>
                          <option value="120">2h avant le RDV</option>
-                      	 <option value="180">3h avant le RDV</option>
+                         <option value="180">3h avant le RDV</option>
                           <option value="1440">1 jour avant le RDV</option>
                         <option value="2880">2 jours avant le RDV</option>
                          <option value="7200">5 jours avant le RDV</option>
@@ -835,9 +837,9 @@ input#date-picker {
                         </div>
                     <!-- Slot For Cloning / Do NOT Remove-->
         
-                    <?php } ?>	</div>	
+                    <?php } ?>  </div>  
                                     </div>
-                            </div>	 
+                            </div>   
                     <!-- Modal -->
                     <div class="col-lg-12 col-md-12 ">
                                 <br>
@@ -865,7 +867,7 @@ input#date-picker {
 
                             </div>
                               <div id="divremise" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
-                              	  <table class="table" id="tabRemise">
+                                  <table class="table" id="tabRemise">
                                         <thead>
                                         <tr>
                                             <th>Remise</th>
@@ -943,7 +945,7 @@ input#date-picker {
                             </select>
                         </div>
                         <div class="col-lg-12">
-					              	<input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
+                          <input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
                         </div>
                         <!-- here -->
                         <div class="row with-forms margin-top-0 " style="font-size: 150%">
@@ -956,7 +958,7 @@ input#date-picker {
                                    </h5>  <span class="add-on"><i class="icon-th"></i></span>
                                     </div></div>
           
-      <!-- 	<label>Date de rendez vous:</label>
+      <!--  <label>Date de rendez vous:</label>
         <input type="text" value=""  class="dtpks" name="datereservation" placeholder="date 1"  class="input-append date " style="font-size: 15px;" readonly> 
                    -->    
           
@@ -965,77 +967,78 @@ input#date-picker {
                         <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
 
                <div class="col-lg-12">
-						<div class="panel-dropdown time-slots-dropdown" id="time1">
-							<a href="#">Heure</a>
-							<div class="panel-dropdown-content padding-reset">
-								<div class="panel-dropdown-scrollable">
-									
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-1">
-										<label for="time-slot-1">
-											<strong>08:30 am - 09:00 am</strong>
-											<span>1 slot available</span>
-										</label>
-									</div>
 
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-2">
-										<label for="time-slot-2">
-											<strong>09:00 am - 09:30 am</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
+            <div class="panel-dropdown time-slots-dropdown" id="time1">
+              <a href="#">Heure</a>
+              <div class="panel-dropdown-content padding-reset">
+                <div class="panel-dropdown-scrollable">
+                  
+                  <!-- Time Slot -->
+                  <div class="time-slot">
+                    <input type="radio" name="time-slot" id="time-slot-1">
+                    <label for="time-slot-1">
+                      <strong>08:30 am - 09:00 am</strong>
+                      <span>1 slot available</span>
+                    </label>
+                  </div>
 
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-3">
-										<label for="time-slot-3">
-											<strong>09:30 am - 10:00 am</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
+                  <!-- Time Slot -->
+                  <div class="time-slot">
+                    <input type="radio" name="time-slot" id="time-slot-2">
+                    <label for="time-slot-2">
+                      <strong>09:00 am - 09:30 am</strong>
+                      <span>2 slots available</span>
+                    </label>
+                  </div>
 
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-4">
-										<label for="time-slot-4">
-											<strong>10:00 am - 10:30 am</strong>
-											<span>3 slots available</span>
-										</label>
-									</div>
+                  <!-- Time Slot -->
+                  <div class="time-slot">
+                    <input type="radio" name="time-slot" id="time-slot-3">
+                    <label for="time-slot-3">
+                      <strong>09:30 am - 10:00 am</strong>
+                      <span>1 slots available</span>
+                    </label>
+                  </div>
 
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-5">
-										<label for="time-slot-5">
-											<strong>13:00 pm - 13:30 pm</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-6">
-										<label for="time-slot-6">
-											<strong>13:30 pm - 14:00 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-7">
-										<label for="time-slot-7">
-											<strong>14:00 pm - 14:30 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
+                  <!-- Time Slot -->
+                  <div class="time-slot">
+                    <input type="radio" name="time-slot" id="time-slot-4">
+                    <label for="time-slot-4">
+                      <strong>10:00 am - 10:30 am</strong>
+                      <span>3 slots available</span>
+                    </label>
+                  </div>
 
-								</div>
-							</div>
-						</div>
-					</div></div>
-					<!-- Panel Dropdown / End -->
+                  <!-- Time Slot -->
+                  <div class="time-slot">
+                    <input type="radio" name="time-slot" id="time-slot-5">
+                    <label for="time-slot-5">
+                      <strong>13:00 pm - 13:30 pm</strong>
+                      <span>2 slots available</span>
+                    </label>
+                  </div>
+                  <!-- Time Slot -->
+                  <div class="time-slot">
+                    <input type="radio" name="time-slot" id="time-slot-6">
+                    <label for="time-slot-6">
+                      <strong>13:30 pm - 14:00 pm</strong>
+                      <span>1 slots available</span>
+                    </label>
+                  </div>
+                  <!-- Time Slot -->
+                  <div class="time-slot">
+                    <input type="radio" name="time-slot" id="time-slot-7">
+                    <label for="time-slot-7">
+                      <strong>14:00 pm - 14:30 pm</strong>
+                      <span>1 slots available</span>
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Panel Dropdown / End -->
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
@@ -1091,7 +1094,7 @@ input#date-picker {
 
                             </div>
                               <div id="divremiseRec" style=" border: 1px solid #006ed2;border-top: none;display: none;" >
-                              	  <table class="table" id="tabRemiseRec">
+                                  <table class="table" id="tabRemiseRec">
                                         <thead>
                                         <tr>
                                             <th>Remise</th>
@@ -1144,8 +1147,8 @@ input#date-picker {
 
                    
                      
-	        <a class="button book-now fullwidth margin-top-5" style="color:white" id="reserver2">Réserver</a>
-		
+          <a class="button book-now fullwidth margin-top-5" style="color:white" id="reserver2">Réserver</a>
+    
 
                         <!-- Book Now -->
                         <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0) {
@@ -1273,7 +1276,7 @@ input#date-picker {
     $(document).ready(function() {
         $.noConflict();
         $('#events').fullCalendar({
-            defaultDate: '2014-09-12',            
+            defaultDate: '2021-03-12',            
                 editable: true,
                 eventLimit: true,
                 displayEventTime: false,    
@@ -1281,25 +1284,63 @@ input#date-picker {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay,listMonth'
-                } 
+                },
+                // Dragable Event Update
+        eventDrop: function(event, delta, revertFunc) {
+           var start = $.fullCalendar.moment(event.start).format();
+           var end = $.fullCalendar.moment(event.end).format();
+             alert(start+" "+end+" "+event.description+" "+event.id);
+             console.log(start.indexOf("T"));
+
+             if (start.indexOf("T")== -1|| end.indexOf("T") == -1) {  // d.valueOf() could also work
+              alert("changement non possible à cause de chevauchement avec les horaires de fermeture");
+              revertFunc();
+               }else{
+                  if (!confirm("Vous êtes sûr d'effectuer ce changement?")) {
+                     revertFunc();
+                     }
+                     else
+                     {
+                      var _token = $('input[name="_token"]').val();
+                      $.ajax({
+                       url: "{{ route('dragDropCalendar') }}",
+                       data: {description: event.description ,title: event.title, start:start,end:end, color: event.color, id:event.id,_token:_token},
+                       type: 'POST',
+                       success: function(data) {
+
+                        alert("success:"+data);
+                      /*swal('Good job!', 'Event Updated!', 'success');
+                         setTimeout(function () {
+                          location.reload()
+                        }, 1000);*/
+                      }
+                    });
+
+                     }
+               }
+            },
+       
+        businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire_chaine($user->id); ?>,
+         events:<?php echo (\App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire_chaine($user->id)); ?>
+               
         });
     }); 
 
 </script>
-<script>	function ClientVerif(){
- 		var number_client = $('#number_client').val();
-   		//var service = $('#service').val();
-   		var id_user = $('#id_user').val();
+<script>  function ClientVerif(){
+    var number_client = $('#number_client').val();
+      //var service = $('#service').val();
+      var id_user = $('#id_user').val();
 
-   		var _token = $('input[name="_token"]').val();
+      var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('clientcheck') }}",
                         method:"POST",
-						data:{number_client:number_client,id_user:id_user, _token:_token},
+            data:{number_client:number_client,id_user:id_user, _token:_token},
                         success:function(data){ 
                           if (!(data)) {
                             alert( 'le client n existe pas ou le numéro est incorrect !');
-							}else{
+              }else{
                 document.getElementById("verification").style.display = "none";
                 document.getElementById("validation").style.display = "block";
                 document.getElementById("test").value =data["name"] +' '+ data["lastname"] ;
@@ -1314,8 +1355,8 @@ input#date-picker {
     alert('error! re-entrer le numéro ');
   }
                     });
- 		
- 	}</script>
+    
+  }</script>
    <script>
      function ClientValidation(){
       var id_client = $('#id-client').val();
@@ -1323,7 +1364,7 @@ input#date-picker {
        var id_user = $('#id-user').val();
 
 
-   		var _token = $('input[name="_token"]').val();
+      var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('clientValid') }}",
                         method:"POST",
@@ -1405,37 +1446,37 @@ function visibilityFunctionRec(element){
         
         //test
         var happyhours = $('#myhappyhoursId').val();
- 		remiseCarte = 0 ;
- 		montant = el.attr('prixRec');
- 		
-		document.getElementById('MontantReservationRec').value = montant;
-		document.getElementById('totalReservationRec').value = montant;
- 		periode=el.attr('periode');
- 		nbr=el.attr('ndate');
- 		frq=el.attr('frq');
+    remiseCarte = 0 ;
+    montant = el.attr('prixRec');
+    
+    document.getElementById('MontantReservationRec').value = montant;
+    document.getElementById('totalReservationRec').value = montant;
+    periode=el.attr('periode');
+    nbr=el.attr('ndate');
+    frq=el.attr('frq');
 
- 		document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
- 		
-    	var reductioncarte = document.getElementById('catrefideliteVal').value ;
-		if (reductioncarte!=0) {
-		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
-		document.getElementById('RemiseReservationRec').value = remiseCarte;
-		total =montant -remiseCarte ;
-		document.getElementById('totalReservationRec').value = total;
-		document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
-		//alert(remiseCarte);
-		}
-		if (happyhours!=0) {
-		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
-		document.getElementById('RemiseReservationRec').value = remiseCarte;
-		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
-		total =montant -remiseCarte ;
-		document.getElementById('totalReservationRec').value = total;
-		//alert(remiseCarte);
-		}
+    document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
+    
+      var reductioncarte = document.getElementById('catrefideliteVal').value ;
+    if (reductioncarte!=0) {
+    remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+    document.getElementById('RemiseReservationRec').value = remiseCarte;
+    total =montant -remiseCarte ;
+    document.getElementById('totalReservationRec').value = total;
+    document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
+    //alert(remiseCarte);
+    }
+    if (happyhours!=0) {
+    remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+    document.getElementById('RemiseReservationRec').value = remiseCarte;
+     document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
+    total =montant -remiseCarte ;
+    document.getElementById('totalReservationRec').value = total;
+    //alert(remiseCarte);
+    }
         //document.getElementById("dateRec").innerHTML = y;
-    	//$("#dateRec").append(y);
-    	
+      //$("#dateRec").append(y);
+      
         //test
 
 
@@ -1455,11 +1496,11 @@ function visibilityFunctionRec(element){
      
     }}
 function selectservice(){
- 		//lert("ft sele");
- 		var happyhours = $('#myhappyhoursId').val();
- 		var remiseCarte  =0 ;
-		var montant = 0 ;
-		var service = $('#service').val();
+    //lert("ft sele");
+    var happyhours = $('#myhappyhoursId').val();
+    var remiseCarte  =0 ;
+    var montant = 0 ;
+    var service = $('#service').val();
     var test = <?php echo json_encode($mab) ; ?> ;
     //alert(test[8][0]);
     if (service) {
@@ -1473,7 +1514,7 @@ function selectservice(){
       }}
  //  alert(document.getElementById('k5.').value);
  
-		
+    
                 
 	
 		if (service) {
@@ -1493,135 +1534,135 @@ function selectservice(){
       document.getElementById('MontantReservation').value =montant;
     }
 
-		var reductioncarte = document.getElementById('catrefideliteVal').value ;
-		if (reductioncarte!=0) {
-		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
-		document.getElementById('RemiseReservation').value = remiseCarte;
-		total =montant -remiseCarte ;
-		document.getElementById('totalReservation').value = total;
-		document.getElementById("remiseCarte").innerHTML = (montant * reductioncarte)/100 +"€";
-		//alert(remiseCarte);
-		} 
-		if (happyhours!=0) {
-		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
-		document.getElementById('RemiseReservation').value = remiseCarte;
-		 document.getElementById("remiseHappyhours").innerHTML = (montant * happyhours)/100 +"€";
-		total =montant -remiseCarte ;
-		document.getElementById('totalReservation').value = total;
-		//alert(remiseCarte);
-		}
- 	}
+    var reductioncarte = document.getElementById('catrefideliteVal').value ;
+    if (reductioncarte!=0) {
+    remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+    document.getElementById('RemiseReservation').value = remiseCarte;
+    total =montant -remiseCarte ;
+    document.getElementById('totalReservation').value = total;
+    document.getElementById("remiseCarte").innerHTML = (montant * reductioncarte)/100 +"€";
+    //alert(remiseCarte);
+    } 
+    if (happyhours!=0) {
+    remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+    document.getElementById('RemiseReservation').value = remiseCarte;
+     document.getElementById("remiseHappyhours").innerHTML = (montant * happyhours)/100 +"€";
+    total =montant -remiseCarte ;
+    document.getElementById('totalReservation').value = total;
+    //alert(remiseCarte);
+    }
+  }
 </script>
 
 <script>
-	function fonctionvalideRec(){
- 		var valCode = $('#mycodepromoRec').val();
-   		//alert(valchange);
-   		//var service = $('#service').val();
-   		var service = $('#servicerec').val();
-   		var _token = $('input[name="_token"]').val();
+  function fonctionvalideRec(){
+    var valCode = $('#mycodepromoRec').val();
+      //alert(valchange);
+      //var service = $('#service').val();
+      var service = $('#servicerec').val();
+      var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url:"{{ route('services.CodePromoCheck') }}",
                         method:"POST",
-						data:{valCode:valCode, _token:_token},
+            data:{valCode:valCode, _token:_token},
                         success:function(data){
-                        	
-                        	if (data[0]==1) {
-                        		if (data[1].toString()==service) {
-                        			Swal.fire(
-								  'Félicitation!...',
-								  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
-								  'success'
-									)
-									var table = document.getElementById("tabRemiseRec");
-								    var row = table.insertRow(-1);
-								    var cell1 = row.insertCell(0);
-								    var cell2 = row.insertCell(1);
-								    var cell3 = row.insertCell(2);
-								    cell1.innerHTML = "code promo ("+data[2]+"%)";
-								    cell2.innerHTML = data[3];
-								    cell3.innerHTML = data[4]+"€";
-								   
-								    //alert(document.getElementById('RemiseReservation').val() + data[4]);
-								    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
-								    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
-                        		}
-                        		else {
-									Swal.fire(
-									  'Code promo ne correspond pas au service selectionné !...',
-									  '',
-									  'question'
-									)
-                        		}
-                        		
-                        	}
-                        	else {
-                        		Swal.fire({
-								  icon: 'error',
-								  title: 'Oops...',
-								  text: 'Code promo incorrect!',
-								})
-                        	}
+                          
+                          if (data[0]==1) {
+                            if (data[1].toString()==service) {
+                              Swal.fire(
+                  'Félicitation!...',
+                  "Vous avez bénéficié pour le service ~ "+data[3]+" ~ d'une réduction de "+data[2]+"%",
+                  'success'
+                  )
+                  var table = document.getElementById("tabRemiseRec");
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    cell1.innerHTML = "code promo ("+data[2]+"%)";
+                    cell2.innerHTML = data[3];
+                    cell3.innerHTML = data[4]+"€";
+                   
+                    //alert(document.getElementById('RemiseReservation').val() + data[4]);
+                    document.getElementById('RemiseReservationRec').value = parseFloat(document.getElementById('RemiseReservationRec').value) + data[4];
+                    document.getElementById('totalReservationRec').value = parseFloat(document.getElementById('MontantReservationRec').value)-parseFloat(document.getElementById('RemiseReservationRec').value);
+                            }
+                            else {
+                  Swal.fire(
+                    'Code promo ne correspond pas au service selectionné !...',
+                    '',
+                    'question'
+                  )
+                            }
+                            
+                          }
+                          else {
+                            Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Code promo incorrect!',
+                })
+                          }
                         }
                     });
- 		
- 	}
+    
+  }
 
 function SelectServiceRec(a){
     console.log(a);
- 		var happyhours = $('#myhappyhoursId').val();
- 		remiseCarte = 0 ;
- 		montant = a.options[a.selectedIndex].getAttribute('prixRec');
- 		
-		document.getElementById('MontantReservationRec').value = montant;
-		document.getElementById('totalReservationRec').value = montant;
- 		periode=a.options[a.selectedIndex].getAttribute('periode');
- 		nbr=a.options[a.selectedIndex].getAttribute('ndate');
- 		frq=a.options[a.selectedIndex].getAttribute('frq');
+    var happyhours = $('#myhappyhoursId').val();
+    remiseCarte = 0 ;
+    montant = a.options[a.selectedIndex].getAttribute('prixRec');
+    
+    document.getElementById('MontantReservationRec').value = montant;
+    document.getElementById('totalReservationRec').value = montant;
+    periode=a.options[a.selectedIndex].getAttribute('periode');
+    nbr=a.options[a.selectedIndex].getAttribute('ndate');
+    frq=a.options[a.selectedIndex].getAttribute('frq');
 
- 		document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
- 		/*if (frq=="Journalière") {
-   				//alert("oui");
-    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Journalière (sur "+periode+" jours) vous devez choisir "+nbr+" dates par jour.";
-    		//document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
-    	}
-    	else if (frq=="Hebdomadaire") {
-    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Hebdomadaire (sur "+periode+" semaines) vous devez choisir "+nbr+" dates par semaine.";
-    	
-    	}
-    	else if (frq=="Mensuelle") {
-    		document.getElementById("msgRec").innerHTML = "NB: c'est un service Mensuelle (sur "+periode+" mois) vous devez choisir "+nbr+" dates par mois.";
-    	
-    	}*/
- 		//alert(frq);
-    	
-    	/*document.getElementById("nbrServiceRec").value = nbr;
-    	var y = '<label>Date de rendez vous:</label>';
-    	
-    	for (var i = 0; i < nbr; i++) {
-    		y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
-    	}*/
-    	//document.getElementById("dateRec").innerHTML = y;
-    	var reductioncarte = document.getElementById('catrefideliteVal').value ;
-		if (reductioncarte!=0) {
-		remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
-		document.getElementById('RemiseReservationRec').value = remiseCarte;
-		total =montant -remiseCarte ;
-		document.getElementById('totalReservationRec').value = total;
-		document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
-		//alert(remiseCarte);
-		}
-		if (happyhours!=0) {
-		remiseCarte = remiseCarte + (montant * happyhours)/100 ;
-		document.getElementById('RemiseReservationRec').value = remiseCarte;
-		 document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
-		total =montant -remiseCarte ;
-		document.getElementById('totalReservationRec').value = total;
-		//alert(remiseCarte);
-		}
+    document.getElementById("msgRec").innerHTML = "NB: les dates de séances seront fournies par le prestataire";
+    /*if (frq=="Journalière") {
+          //alert("oui");
+        document.getElementById("msgRec").innerHTML = "NB: c'est un service Journalière (sur "+periode+" jours) vous devez choisir "+nbr+" dates par jour.";
+        //document.getElementByName("mySelectinput")[0].placeholder=nombre de jours;
+      }
+      else if (frq=="Hebdomadaire") {
+        document.getElementById("msgRec").innerHTML = "NB: c'est un service Hebdomadaire (sur "+periode+" semaines) vous devez choisir "+nbr+" dates par semaine.";
+      
+      }
+      else if (frq=="Mensuelle") {
+        document.getElementById("msgRec").innerHTML = "NB: c'est un service Mensuelle (sur "+periode+" mois) vous devez choisir "+nbr+" dates par mois.";
+      
+      }*/
+    //alert(frq);
+      
+      /*document.getElementById("nbrServiceRec").value = nbr;
+      var y = '<label>Date de rendez vous:</label>';
+      
+      for (var i = 0; i < nbr; i++) {
+        y=y+' <input type="text" value="" name="datereservation'+i.toString()+'" placeholder="date '+(i+1).toString()+'" data-date-format="dd-mm-yyyy hh:ii" id="datetimepickerRec'+(i+1).toString()+'" class="dtpks" style="font-size: 15px;" readonly>'
+      }*/
+      //document.getElementById("dateRec").innerHTML = y;
+      var reductioncarte = document.getElementById('catrefideliteVal').value ;
+    if (reductioncarte!=0) {
+    remiseCarte = remiseCarte + (montant * reductioncarte)/100 ;
+    document.getElementById('RemiseReservationRec').value = remiseCarte;
+    total =montant -remiseCarte ;
+    document.getElementById('totalReservationRec').value = total;
+    document.getElementById("remiseCarteRec").innerHTML = (montant * reductioncarte)/100 +"€";
+    //alert(remiseCarte);
+    }
+    if (happyhours!=0) {
+    remiseCarte = remiseCarte + (montant * happyhours)/100 ;
+    document.getElementById('RemiseReservationRec').value = remiseCarte;
+     document.getElementById("remiseHappyhoursRec").innerHTML = (montant * happyhours)/100 +"€";
+    total =montant -remiseCarte ;
+    document.getElementById('totalReservationRec').value = total;
+    //alert(remiseCarte);
+    }
         //document.getElementById("dateRec").innerHTML = y;
-    	//$("#dateRec").append(y);
-    	
+      //$("#dateRec").append(y);
+      
     }</script>
 
 <script>
@@ -1652,28 +1693,28 @@ function decreaseCount(e, el) {
     calcul( -( parseFloat((input.getAttribute('prix')) )));
   }
 }
-    	function remise(){
- 		//alert("ok");
- 		var x = document.getElementById("divremise");
- 		if (x.style.display === "none") {
+      function remise(){
+    //alert("ok");
+    var x = document.getElementById("divremise");
+    if (x.style.display === "none") {
     x.style.display = "block";
    
   } else {
     x.style.display = "none";
   
   }
- 	}
- 	function remiseRec(){
- 		//alert("ok");
- 		var x = document.getElementById("divremiseRec");
- 		if (x.style.display === "none") {
+  }
+  function remiseRec(){
+    //alert("ok");
+    var x = document.getElementById("divremiseRec");
+    if (x.style.display === "none") {
     x.style.display = "block";
    
   } else {
     x.style.display = "none";
   
   }
- 	}
+  }
 
 $(".time-slot").each(function() {
 
@@ -1691,37 +1732,37 @@ $(this).find('input').on('change',function() {
 
         /*----------------------------------------------------*/
         $('.show-moreP-button').on('click', function(e){
-    	e.preventDefault();
-    	$(this).toggleClass('active');
+      e.preventDefault();
+      $(this).toggleClass('active');
 
-		$('.show-moreP').toggleClass('visible');
-		if ( $('.show-moreP').is(".visible") ) {
+    $('.show-moreP').toggleClass('visible');
+    if ( $('.show-moreP').is(".visible") ) {
 
-			var el = $('.show-moreP'),
-				curHeight = el.height(),
-				autoHeight = el.css('height', 'auto').height();
-				el.height(curHeight).animate({height: autoHeight}, 400);
-
-
-		} else { $('.show-moreP').animate({height: '450px'}, 400); }
-
-	});
+      var el = $('.show-moreP'),
+        curHeight = el.height(),
+        autoHeight = el.css('height', 'auto').height();
+        el.height(curHeight).animate({height: autoHeight}, 400);
 
 
-	/*----------------------------------------------------*/
+    } else { $('.show-moreP').animate({height: '450px'}, 400); }
+
+  });
+
+
+  /*----------------------------------------------------*/
     
 </script>
 <script> var suppl_res="";
-    	 <?php 
+       <?php 
      if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
-     	$( document ).ready(function() {
+      $( document ).ready(function() {
          var res='';
          var equation="";
          var member_equation="";
        
          var exist="";
-     		$('#service').on('change', function(evt, params) { 
-     		 //alert("sel "+params.selected);
+        $('#service').on('change', function(evt, params) { 
+         //alert("sel "+params.selected);
             // alert("des "+params.deselected);
             var items = $("#service option:selected").map(function() {
                  return $(this).text();
@@ -1732,13 +1773,13 @@ $(this).find('input').on('change',function() {
            suppl_res="";
            for(var i=0; i<res.length ; i++) // parcourir les règles
             {
-            	equation=res[i].split("=");
-            	for(var j=0 ; j<equation.length ; j++) // parcourir les membres equation d'une règle
-            	{
-            		//alert(equation[j]);
+              equation=res[i].split("=");
+              for(var j=0 ; j<equation.length ; j++) // parcourir les membres equation d'une règle
+              {
+                //alert(equation[j]);
 
-            		if(j%2==0) // juste le membre d'une equation 
-            		{
+                if(j%2==0) // juste le membre d'une equation 
+                {
                        //alert(equation[j]);
                        member_equation=equation[j].split("+");
 
@@ -1749,8 +1790,8 @@ $(this).find('input').on('change',function() {
 
                              if(!items.includes(member_equation[k].trim()))
                              {
-                             	exist=false; 
-                             	k=member_equation.length;
+                              exist=false; 
+                              k=member_equation.length;
                              }
                        }
                       if(exist==true) // tous les membre d'eaquation exwit
@@ -1759,21 +1800,21 @@ $(this).find('input').on('change',function() {
 
                       }
 
-            		}
-            	}
+                }
+              }
             }
 
            // alert(suppl_res);
            //var selected_value = $(this).toArray().map(x => $(x).val());
             // alert(selected_value)
          });
-     		//alert ('raedy');
-		 $.ajax({
+        //alert ('raedy');
+     $.ajax({
         url:"{{url('/')}}/get_liste_regles_services_suppl/<?php echo $user->id; ?>",
         method:"get",
-        success:function(data){			
+        success:function(data){     
             //alert(data);
-           // alert(items);	
+           // alert(items); 
             res = data.split(";");
             res.splice(0,1);
             
@@ -1785,7 +1826,7 @@ $(this).find('input').on('change',function() {
      <?php } ?></script>
 <?php if (isset($user)){ ?> 
 
-<script>	
+<script>  
 $('#reserver').click(function( ){
 
 if(suppl_res)
@@ -1864,7 +1905,7 @@ var frq=e.attr('frq');
 alert(periode);
 alert(frq);
 
-var _token = $('input[name="_token"]').val();	
+var _token = $('input[name="_token"]').val(); 
 var nbrService = document.getElementById("nbrServiceRec").value ;
 var date_reservation = [] ;
 var str=$('#time1 a').text();
@@ -1929,8 +1970,8 @@ message: 'Envoyé avec succès'
 // settings
 type: 'success',
 delay: 3000,
-timer: 1000,					
-});	
+timer: 1000,          
+}); 
 
 document.getElementById("contactform").reset();
    }
@@ -1940,13 +1981,13 @@ document.getElementById("contactform").reset();
 <?php }?> 
 <script>
 $(".time-slot").each(function() {
-	var timeSlot = $(this);
-	$(this).find('input').on('change',function() {
-		var timeSlotVal = timeSlot.find('strong').text();
+  var timeSlot = $(this);
+  $(this).find('input').on('change',function() {
+    var timeSlotVal = timeSlot.find('strong').text();
 
-		$('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
-		$('.panel-dropdown').removeClass('active');
-	});
+    $('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+    $('.panel-dropdown').removeClass('active');
+  });
 });
 </script>
 

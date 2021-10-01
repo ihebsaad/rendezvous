@@ -288,6 +288,8 @@ Route::get('/FAQ/{id}', 'UsersController@FAQ')->name('FAQ')->middleware('auth');
 Route::post('/periodes_indisp/store','CalendrierController@store')->name('periodes_indisp.store')->middleware('auth');
 Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove')->name('remove_indisp')->middleware('auth');
 Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')->name('ouv_ferm_hor')->middleware('auth');
+Route::post('/dragDropCalendar','CalendrierController@dragDropCalendar')->name('dragDropCalendar');
+
 
 
 	Route::post('/faqs/saving','FaqsController@store')->name('faqs.saving')->middleware('auth');
