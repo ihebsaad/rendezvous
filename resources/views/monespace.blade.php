@@ -76,7 +76,9 @@
                     </nav>-->
                 </div>
                 <div class="col-md-3">
+                   <?php if( $user_type=='admin' )  {?>                   
                     <button onclick="envoi_mail_aux_prestataires()" class="button margin-top-15">Diffuser email aux prestataires qui sont inscrits à l'offre de Lancement  </button>
+                 <?php } ?>
                 </div>
             </div>
         </div>
