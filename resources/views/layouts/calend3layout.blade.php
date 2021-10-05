@@ -25,6 +25,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
   <!-- ColorPicker CSS -->
   <link href="{{URL::asset('public/fullcalendar3/css/bootstrap-colorpicker.css')}}" rel="stylesheet">
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 </head>
 <body>
 <!-- Wrapper -->

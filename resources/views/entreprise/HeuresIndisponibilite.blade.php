@@ -10,6 +10,14 @@
 
   <!-- Dashboard -->
   <style>
+    .fc-toolbar .fc-right {
+    float: right;
+    width: 295px;
+}
+.fc-toolbar .fc-left {
+    float: left;
+    width: 274px;
+}
       .tabs-nav li a:hover, .tabs-nav li.active a {
 border-color: #ffd700;
 color: #000000;
@@ -1142,6 +1150,7 @@ $(this).find('input').on('change',function() {
         </div>  
         <br>
           <div class="row">
+            <div class="col-lg-12">
           <div class="panel panel-default dash">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -1152,7 +1161,7 @@ $(this).find('input').on('change',function() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></div>
           
                 </div>
                 </div>  
@@ -1209,7 +1218,6 @@ $(this).find('input').on('change',function() {
     <!-- Metis Menu Plugin JavaScript-->
     <script src="{{URL::asset('public/fullcalendar3/js/metisMenu.min.js')}}"></script> 
     <!-- Moment JavaScript -->
-    <script src="{{URL::asset('public/fullcalendar3/js/bootstrap.min.js')}}"></script>
     <!-- Moment JavaScript -->
     <script src="{{URL::asset('public/fullcalendar3/js/moment.min.js')}}"></script>
     <!-- FullCalendar JavaScript -->
