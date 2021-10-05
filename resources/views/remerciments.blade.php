@@ -35,6 +35,9 @@ background-color:#a0d468;
     .dashboard-list-box h4 {
         font-size: 23px;
     }
+    .calendly-inline-widget {
+      margin-left: -15px;
+    }
 }
 .chwrapper {
   width: 100px;
@@ -80,7 +83,41 @@ background-color:#a0d468;
                                 <p>Bienvenue dans notre communauté dédiée aux prestataires de service sur RDV !</br>
                                   Vous pouvez d’ores et déjà profiter de notre plateforme et de ses fonctionnalités.
                                 </p>
-                                <a href="{{ route('home') }}">retour au site</a>
+                                <center><img src="<?php echo  URL::asset('storage/images/bienvenue.png');?>" width="500"></center>
+                                <h5 style="  font-size: 20px;font-weight: 600;">Vous êtes déjà prêt(e) ?</h5>
+                                <p>Qu’attendez vous pour publier vos services et attirer de nouveaux clients ?</p>
+                                <div class="row sform">
+                                  <div class="col-md-12">
+                                    <div style="font-size: 12px; text-align: center;">
+                                      <form method="post" action="{{ route('AjouterService') }}" name="AjouterService">
+                                          @csrf
+                                          <input type="hidden" name="id" value="{{ $cuser->id }}">
+                                          <input  style="margin-top: 0px;padding: 10px 15px;" type="submit" class="button preview" value='Publier mon premier service' />
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                                <center><img src="<?php echo  URL::asset('storage/images/assistance.png');?>" width="350" style="margin-top: 50px;"></center>
+                                <h5 style="  font-size: 20px;font-weight: 600;">Vous êtes perdu(e) ?</h5>
+                                <p>Nous sommes là pour vous faire découvrir la plateforme pas à pas.</p>
+                                <p style=" font-weight: 500;">Prenez un rendez-vous avec notre service après vente et découvrons ensemble la plateforme pas à pas</p>
+                                <!-- Début de widget en ligne Calendly -->
+                                  <div class="calendly-inline-widget" data-url="https://calendly.com/prenezunrendezvous/prise-en-main-de-lespace-client?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fff600" style="min-width:300px;height:700px;"></div>
+                                  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                                  <!-- Fin de widget en ligne Calendly -->
+                                  <center><img src="<?php echo  URL::asset('storage/images/support.png');?>" width="450"  ></center>
+                                  <h5 style="  font-size: 20px;font-weight: 600;">Vous avez une question ?</h5>
+                                  <p style=" font-weight: 500;">Contacter notre équipe service client en prenant un rendez-vous</p>
+                                  <!-- Début de widget en ligne Calendly -->
+                                  <div class="calendly-inline-widget" data-url="https://calendly.com/prenezunrendezvous/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fff600" style="min-width:300px;height:700px;"></div>
+                                  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                                  <!-- Fin de widget en ligne Calendly -->
+                                  <p style=" font-weight: 500;margin-top: 15px;">Rejoignez notre communauté Facebook et soyez averti(e) des actualités de la plateforme
+                                  </p>
+                                    <a href="#" class="button medium" style="margin-top:0px"><i class="im im-icon-Facebook-2"></i> Rejoignez nous</a>
+                                  
+
+                                <!--<a href="{{-- route('home') --}}">retour au site</a>-->
                                </li>
 
                 </ul>

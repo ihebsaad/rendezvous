@@ -66,8 +66,8 @@ Route::get('/save/customerAbn','PaymentStripeController@addcustomerStripeAbn')->
 Route::get('/reservations.annule/{id}','PaymentStripeController@Remboursement')->name('reservations.annule');
 Route::post('/paiement_Abonnement_Mensuel','PaymentStripeController@payabnMensuel')->name('paiement_Abonnement_Mensuel');
 
-Route::post('/payabn','PaymentStripeController@payabn')->name('payabn');
-	Route::get('/payabn','PaymentStripeController@payabn')->name('payabn');
+Route::post('/payabn','PaymentStripeController@payabnMensuel')->name('payabn');
+	Route::get('/payabn','PaymentStripeController@payabnMensuel')->name('payabn');
 	
 Route::get('/success/payAbn/{k}','PaymentStripeController@successpayAbnStripe')->name('success.payAbn');
 
