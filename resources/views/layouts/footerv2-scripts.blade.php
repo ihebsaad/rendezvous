@@ -73,12 +73,15 @@ $(function() {
     },
     isInvalidDate: function(date) {
       var disabled_end = moment(now(), 'MM-DD-YYYY');
-
+     var indisp=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_indisp_rendezvous($user->id);}?>;
       var array=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);}?>; 
       var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
 		var disabled_end = moment(now(), 'MM-DD-YYYY');
       for(var i=0; i< array.length;i++)
-        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) )
+      for(var j=0; j< indisp.length;j++)
+
+        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
+ )
           return true;
         return false;
   },
