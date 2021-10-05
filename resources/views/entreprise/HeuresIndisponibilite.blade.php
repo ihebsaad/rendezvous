@@ -1263,7 +1263,7 @@ $(this).find('input').on('change',function() {
 </div>
     
      <script src="{{URL::asset('public/fullcalendar3/js/sweetalert.min.js')}}"></script>
-    <script src="{{URL::asset('public/fullcalendar3/js/bootstrap.min.js')}}"></script> -->
+    <script src="{{URL::asset('public/fullcalendar3/js/bootstrap.min.js')}}"></script> 
     <!-- DataTables JavaScript-->
     <script src="{{URL::asset('public/fullcalendar3/js/jquery.dataTables.js')}}"></script>
     <script src="{{URL::asset('public/fullcalendar3/js/dataTables.bootstrap.js')}}"></script> 
