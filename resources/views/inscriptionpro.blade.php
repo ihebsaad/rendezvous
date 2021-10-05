@@ -533,8 +533,8 @@ if( $nbpres <= 100 ) {?>
                 <div class="col-md-12">
                     <section id="offre-lancement" class="center margin-bottom-50">
                         <h2 id="h2offre">OFFRE DE BIENVENUE <!-- <i class="im im-icon-Gift-Box" style="font-size:90px;"></i>--></h2>
-                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€/AN</span> <?php echo $cout_abonnement_annuel_offrel;?>€ TTC/An</h2>
-                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >avec Engagement</h3>
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€/Mois</span> <?php echo $cout_abonnement_annuel_offrel;?>€ TTC/Mois</h2>
+                        <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
                                 <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>

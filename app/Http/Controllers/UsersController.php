@@ -767,7 +767,7 @@ class UsersController extends Controller
      public function offrelancement_annuel()
     {
       $mensuel_annuelC="mensuel";
-        $mensuel_annuelB="annuel";
+        $mensuel_annuelB="mensuel";
     	$abonnementA =  Contenu_plan::where('abonnement',1)->get();
         $abonnementB =  Contenu_plan::where('abonnement',2)->get();
         $abonnementC =  Contenu_plan::where('abonnement',3)->get();
