@@ -1894,7 +1894,7 @@ $('#reserver').click(function( ){
 
 if(suppl_res)
 {
-Swal.fire ("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
+alert ("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
 }
 
 /*  var inputs = $(".dtpks");
@@ -1924,12 +1924,10 @@ var timeSlot = $(".time-slot");
 var timeSlotVal = timeSlot.find('strong').text();
 
 var str=$('#time a').text();
-alert(str);
 
 var myArr = str.split(" ");
 var reservationHeureStart=myArr[0];//start
 var reservationHeure2=myArr[1].split("-");
-alert(reservationHeureStart);
 
 
 var datereservation1 = $('#date-picker').val();
@@ -1937,7 +1935,6 @@ var date = new Date(datereservation1 + ' ' + reservationHeureStart);
 
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
-alert(dateStr);
 var service = $('#service').val();
 var rappel = $('#rappel').val();
 var client=$('#id-client').val();
@@ -2105,17 +2102,17 @@ $(function() {
 
 
 		// Disabling Date Ranges
-		isInvalidDate: function(date) {
-		// Disabling Date Range
-		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
-		var disabled_end = moment(now(), 'MM-DD-YYYY');
-		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+    isInvalidDate: function(date) {
+      var disabled_end = moment(now(), 'MM-DD-YYYY');
 
-		// Disabling Single Day
-		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
-		//     return true; 
-		// }
-		}
+      var array=<?php echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);?>; 
+      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
+      for(var i=0; i< array.length;i++)
+        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) )
+          return true;
+        return false;
+  },
 	});});
 	$(function() {
 		function now () { 
@@ -2163,17 +2160,17 @@ $(function() {
 
 
 		// Disabling Date Ranges
-		isInvalidDate: function(date) {
-		// Disabling Date Range
-		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
-		var disabled_end = moment(now(), 'MM-DD-YYYY');
-		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+    isInvalidDate: function(date) {
+      var disabled_end = moment(now(), 'MM-DD-YYYY');
 
-		// Disabling Single Day
-		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
-		//     return true; 
-		// }
-		}
+      var array=<?php echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);?>; 
+      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
+      for(var i=0; i< array.length;i++)
+        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) )
+          return true;
+        return false;
+  },
 	});
 });
 

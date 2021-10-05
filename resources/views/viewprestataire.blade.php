@@ -1463,8 +1463,7 @@ $( document ).ready(function() {
                         </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
-                    <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
-
+                    <input type="text" id="date-picker" placeholder="Date"  readonly="readonly">
                     </div>
                     <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
 

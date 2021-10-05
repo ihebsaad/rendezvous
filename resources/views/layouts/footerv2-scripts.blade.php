@@ -24,6 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
 
+
 <script>
 // Calendar Init
 $(function() {
@@ -70,20 +71,20 @@ $(function() {
         ],
         "firstDay": 1
     },
+    isInvalidDate: function(date) {
+      var disabled_end = moment(now(), 'MM-DD-YYYY');
 
-
-		// Disabling Date Ranges
-		isInvalidDate: function(date) {
-		// Disabling Date Range
-		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+      var array=<?php echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);?>; 
+      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
 		var disabled_end = moment(now(), 'MM-DD-YYYY');
-		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+      for(var i=0; i< array.length;i++)
+        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) )
+          return true;
+        return false;
+  },
+   
+		// Disabling Date Ranges
 
-		// Disabling Single Day
-		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
-		//     return true; 
-		// }
-		}
 	});});
 	$(function() {
 		function now () { 
@@ -131,17 +132,17 @@ $(function() {
 
 
 		// Disabling Date Ranges
-		isInvalidDate: function(date) {
-		// Disabling Date Range
-		var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
-		var disabled_end = moment(now(), 'MM-DD-YYYY');
-		return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+    isInvalidDate: function(date) {
+      var disabled_end = moment(now(), 'MM-DD-YYYY');
 
-		// Disabling Single Day
-		// if (date.format('MM/DD/YYYY') == '08/08/2018') {
-		//     return true; 
-		// }
-		}
+      var array=<?php echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);?>; 
+      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
+      for(var i=0; i< array.length;i++)
+        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) )
+          return true;
+        return false;
+  },
 	});
 });
 
@@ -165,6 +166,7 @@ $('#date-picker2').on('show.daterangepicker', function(ev, picker) {
 
 
 </script>
+
 <script>
     lightbox.option({
       'maxWidth': 950
