@@ -124,7 +124,6 @@ background-color: #fff3b0;
     color: #ff0000!important;
 }
 @media (max-width: 768px){
-  body{ zoom: 34%!important;}
 .day-slot-headline { 
     width: auto!important;
   
@@ -389,15 +388,12 @@ input#date-picker {
 }
 
 
-body {
-  
-    color: #707070;
+
+    body{    color: #707070;
     font-size: 15px;
     width: fit-content;
     line-height: 27px;
-    zoom: 34%;
-    background-color: #fff;
-}
+    background-color: #fff;}
     #dashboard{    background-color: #f7f7f7;
     min-height: 100vh;
     flex-wrap: wrap;
