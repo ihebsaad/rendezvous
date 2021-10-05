@@ -227,7 +227,7 @@
         <input   name="abonnement" type="hidden"  value="2">     
         <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
         <input   name="nature_abonn" type="hidden"  value="offre_lanc">
-        <input   name="mensuel_annuel" type="hidden"  value="annuel">   
+        <input   name="mensuel_annuel" type="hidden"  value="mensuel">   
       
         <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_offrelancement3;?>">     
         <button class="button border " ><i class="sl sl-icon-basket"></i> Acheter</button>  
