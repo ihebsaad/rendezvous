@@ -442,6 +442,7 @@ input#date-picker {
 </script>
 <!-- Content
     ================================================== -->
+
 <div class="dashboard-content">
 <!-- Titlebar -->
         <div id="titlebar">
