@@ -35,6 +35,9 @@ background-color:#a0d468;
     .dashboard-list-box h4 {
         font-size: 23px;
     }
+    .calendly-inline-widget {
+      margin-left: -15px;
+    }
 }
 .chwrapper {
   width: 100px;
@@ -99,14 +102,14 @@ background-color:#a0d468;
                                 <p>Nous sommes là pour vous faire découvrir la plateforme pas à pas.</p>
                                 <p style=" font-weight: 500;">Prenez un rendez-vous avec notre service après vente et découvrons ensemble la plateforme pas à pas</p>
                                 <!-- Début de widget en ligne Calendly -->
-                                  <div class="calendly-inline-widget" data-url="https://calendly.com/prenezunrendezvous/prise-en-main-de-lespace-client?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fff600" style="min-width:320px;height:700px;"></div>
+                                  <div class="calendly-inline-widget" data-url="https://calendly.com/prenezunrendezvous/prise-en-main-de-lespace-client?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fff600" style="min-width:300px;height:700px;"></div>
                                   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                                   <!-- Fin de widget en ligne Calendly -->
                                   <center><img src="<?php echo  URL::asset('storage/images/support.png');?>" width="450"  ></center>
                                   <h5 style="  font-size: 20px;font-weight: 600;">Vous avez une question ?</h5>
                                   <p style=" font-weight: 500;">Contacter notre équipe service client en prenant un rendez-vous</p>
                                   <!-- Début de widget en ligne Calendly -->
-                                  <div class="calendly-inline-widget" data-url="https://calendly.com/prenezunrendezvous/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fff600" style="min-width:320px;height:700px;"></div>
+                                  <div class="calendly-inline-widget" data-url="https://calendly.com/prenezunrendezvous/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fff600" style="min-width:300px;height:700px;"></div>
                                   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                                   <!-- Fin de widget en ligne Calendly -->
                                   <p style=" font-weight: 500;margin-top: 15px;">Rejoignez notre communauté Facebook et soyez averti(e) des actualités de la plateforme
