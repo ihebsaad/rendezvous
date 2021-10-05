@@ -1270,7 +1270,7 @@ $(this).find('input').on('change',function() {
                       $.ajax({
                        url: "{{ route('dragDropCalendar') }}",
                        data: {description: event.description ,title: event.title, start:start,end:end, color: event.color, id:event.id,_token:_token},
-                       type: 'POST',
+                       type: 'get',
                        success: function(data) {
 
                         alert("success:"+data);
@@ -1286,7 +1286,7 @@ $(this).find('input').on('change',function() {
             },
        
         businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire_chaine($user->id); ?>,
-         events:<?php echo (\App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire_chaine($user->id)); ?>
+         events:<?php echo(\App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire_chaine($user->id)); ?>
                
         });
     }); 

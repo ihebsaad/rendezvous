@@ -175,28 +175,132 @@ class CalendrierController extends Controller
 
     public function dragDropCalendar(Request $req)
     {
-       $id=$req->get('id');
+       //$id=$req->get('description');
+       //return $id;
+
+       
        $description=$req->get('description');
-       $start==$req->get('start');
-       $end==$req->get('end');
+       $start=$req->get('start');
+       $end=$req->get('end');
        $title=$req->get('title');
 
-      if($req->get('description')=='indisp')
+      if(strrpos($req->get('description'),'indisp')!== FALSE)
       {
-         Indisponibilite::where('id', $id)->update(array('date_debut' =>$start,'date_fin' =>$end ));
+          return 'indisp';
+
+         //  Indisponibilite::where('id', $id)->update(array('date_debut' =>$start,'date_fin' =>$end ));
       }else{
-          if($req->get('description')=='sersimple')
+          if(strrpos($req->get('description'), 'sersimple')!== FALSE)
           {
-              Reservation::where('id', $id)->update(array('google_path_json' =>$name));
+            //&".$ss->id."_".$ser->id."'
+            $posAnd=strpos($req->get('description'),'&');
+            $posUnd=strpos($req->get('description'),'_');
+            $chaine=substr($req->get('description'),10);
+            $ident = explode("_", $chaine);
+            $services_res=Reservation::where('id',$ident[0])->first();
+           // $ident[1]="99";
+            if(in_array($ident[1],$services_res->services_reserves))
+            {
+              //return "existe";
+              $array=$services_res->services_reserves;
+              
+              // dans le cas ou la reseravtion contient seulement un service juste changer la date de réservation
+              if(count($array)==1) // update date
+              {
+
+                //$start=str_replace($start," ","T");
+
+                //$services_res->update(['date_reservation'=> $start]);
+                //$services_res->save();
+                Reservation::where('id',$ident[0])->update(['date_reservation'=> $start]);
+                 
+                return "ok";
+              }
+              else // cas ou il y a  plusieurs services deplaceer unquement le service en question comme une nouvelle reservation
+              {
+                 //suppr
+              $key=array_search($ident[1],$array);
+              unset($array[$key]);
+
+              $serviceJson=[$ident[1]];
+
+              // ajouter une nouvelle réservation
+              $nouvelleres=$services_res->replicate();
+              $nouvelleres->save();
+              $nouvelleres->update(['date_reservation'=> $start]);
+              $nouvelleres->update(['services_reserves'=> $serviceJson]);
+              // mettre a jour montant total + nom
+               $ser=$ident[1];
+               $service_name="";
+               $service_prix=0;
+              if(isset($ser))
+                {
+                    $service=\App\Service::find($ser);
+                    $service_name=$service->nom."(".$service->prix." €), ";
+                    $service_prix= floatval($service->prix);                        
+
+                }
+
+             $nouvelleres->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix,'services_reserves'=> $serviceJson,'date_reservation'=> $start));
+
+             // mettre a jour services_reserves + montant total + nom
+
+
+              $Njson= json_encode($array);
+
+              //$services_res->update(['services_reserves'=> $Njson]);
+              $ser=$array;
+              $service_name="";
+              $service_prix=0;            
+              if(isset($ser))
+                {
+                        foreach ($ser as $s ) {
+                          $service=\App\Service::find($s);
+                          $service_name.=$service->nom."(".$service->prix." €), ";
+                          $service_prix+= floatval($service->prix);
+                        }
+
+                }
+               $services_res->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix,'services_reserves'=> $array));
+
+                  return $Njson;
+              }
+              //return $key;
+             //$kk= json_encode($array) ;
+              //unset($services_res->services_reserves[array_search($ident[1],$services_res->services_reserves)]);
+              //return(count($services_res->services_reserves));
+          //Reservation::where('id',$ident[0])->update(['services_reserves'=>$kk]);
+              return "existe";
+
+            }
+            return $ident[0].' '.$ident[1]; 
+           
+           // $idreser
+            //$idserv
+            //return 'sersimple';
+            //  Reservation::where('id', $id)->update(array('google_path_json' =>$name));
           }else
           {
-          if($req->get('description')=='serrecc')
+          if(strrpos($req->get('description'), 'serrecc')!== FALSE)
           {
-               Reservation::where('id', $id)->update(array('google_path_json' =>$name));
+            //7 11 
+            $posAnd=strpos($req->get('description'),'&');
+            $posUnd=strpos($req->get('description'),'_');
+            $chaine=substr($req->get('description'),8);
+            $ident = explode("_", $chaine);
+
+
+
+            //return  $posAnd.' '.$posUnd;
+            return $ident[0].' '.$ident[1]; 
+           
+             //return 'serrecc';
+               //Reservation::where('id', $id)->update(array('google_path_json' =>$name));
           }else{
-              if($req->get('description')=='prom_flash')
+              if(strrpos($req->get('description'), 'prom_flash')!== FALSE)
               {
-               Happyhour::where('id', $id)->update(array('google_path_json' =>$name));
+                 return  'prom_flash';
+               //Happyhour::where('id', $id)->update(array('google_path_json' =>$name));
 
               }
 
@@ -205,7 +309,7 @@ class CalendrierController extends Controller
          }
         }
        
-       return $req->get('title');
+      // return $req->get('title');
     }
 
      public function view ($id)
@@ -2221,12 +2325,12 @@ class CalendrierController extends Controller
       if($nbResvalide<$NbrService)
       {
      // $res[]=array('title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_parall_couleur);
-      $res.="{id:".$ser->id.",title:'".$ser->nom." (+)',description:'sersimple',start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
+      $res.="{id:".$ss->id.'_'.$ser->id.",title:'".$ser->nom." (+)',description:'sersimple&".$ss->id."_".$ser->id."',start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
       }
       else
       {
        //$res[]=array('title'=>$ser->nom,'start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_couleur);
-       $res.="{id:".$ser->id.",title:'".$ser->nom."',description:'sersimple', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
+       $res.="{id:".$ss->id.'_'.$ser->id.",title:'".$ser->nom."',description:'sersimple&".$ss->id."_".$ser->id."', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
 
       }
 
@@ -2282,13 +2386,13 @@ class CalendrierController extends Controller
       if($nbResvalide<$NbrService)
       {
       //$res[]=array('title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' =>self::$rendezvous_parall_couleur);
-      $res.="{id:".$ser->id.",title:'".$ser->nom." (+)', description:'serrecc' ,start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
+      $res.="{id:".$srec->id.'_'.$ser->id.",title:'".$ser->nom." (+)', description:'serrecc&".$srec->id."_".$ser->id."',start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
 
       }
       else
       {
        //$res[]=array('title'=>$ser->nom,'start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_couleur);
-       $res.="{id:".$ser->id.",title:'".$ser->nom."', description:'serrecc', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
+       $res.="{id:".$srec->id.'_'.$ser->id.",title:'".$ser->nom."', description:'serrecc&".$srec->id."_".$ser->id."', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
 
       }
 
