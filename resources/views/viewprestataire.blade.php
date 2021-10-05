@@ -1699,7 +1699,7 @@ font-size: 14px!important;
                                                         <input type="text" value="<?php echo $User->id;?>"  id='client_id' hidden='true'>
 
                                                 <?php $countf= DB::table('favoris')->where('prestataire',$user->id)->where('client',$User->id)->count(); if($countf==0) {?>	
-                                                    <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </button> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
+                                                    <button id="addfavoris" style="    width: -webkit-fill-available; margin-top: 21px;" class="like-button"><span class="like-icon" style="    margin-top: -7px;"></span> </span><div id="mesfavoris">Ajouter aux favoris</div></button>
                                                 	<?php }else{?>
 	                                            <!-- a corriger  -->
                                                 <button id="addfavoris" class="like-button liked " style="    width: -webkit-fill-available;margin-top: 21px;"><span class="like-icon liked" style="    margin-top: -7px;"></span><div id="mesfavoris">Retirer de favoris</div></button>
