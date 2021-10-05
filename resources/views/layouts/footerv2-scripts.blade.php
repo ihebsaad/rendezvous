@@ -135,7 +135,7 @@ $(function() {
     isInvalidDate: function(date) {
       var disabled_end = moment(now(), 'MM-DD-YYYY');
 
-      var array=<?php echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);?>; 
+      var array=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);}?>; 
       var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
 		var disabled_end = moment(now(), 'MM-DD-YYYY');
       for(var i=0; i< array.length;i++)
