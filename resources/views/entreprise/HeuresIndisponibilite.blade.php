@@ -10,6 +10,12 @@
 
   <!-- Dashboard -->
   <style>
+    .fc-unthemed .fc-popover {
+    border-width: 1px;
+    top: -239.719px!important;
+    left: -34px;
+    border-style: solid;
+}
     .fc-toolbar .fc-right {
     float: right;
     width: 295px;
