@@ -283,7 +283,7 @@ class RegisterController extends Controller
             else
             {
 
-                if($req->get('mensuel_annuel')=='mensuel'){
+                if($req->get('typeAbn')=='3'){
 
                     return redirect('/offrelancement_mensuel');
                 }
