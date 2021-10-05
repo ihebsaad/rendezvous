@@ -84,6 +84,7 @@ class LoginController extends Controller
             {
               if ($user->invoiceStripe == 0 ) {
                 //dd("okfffffff");
+                Auth::logout();
                 return redirect ('/Facture_Impayee');
                 
               }else{
