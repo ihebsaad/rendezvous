@@ -2,7 +2,7 @@
  
  @section('content')
   <?php  //$User= auth()->user();
-
+use Illuminate\Support\Facades\Auth;
    if (auth()->guest()) {
     //return redirect('/connexion');
     $User=0;
@@ -17,6 +17,7 @@
    }
  
  $parametres=DB::table('parametres')->where('id', 1)->first();
+ Auth::logout();
 
  ?>
  <style type="text/css">

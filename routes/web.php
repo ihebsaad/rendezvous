@@ -137,7 +137,7 @@ Route::get('/abonnements', 'UsersController@abonnements')->name('abonnements');
 Route::get('/remerciements', 'UsersController@remerciments')->name('remerciments');
 Route::get('/offrelancement', 'UsersController@offrelancement')->name('offrelancement');
 Route::get('/offrelancement_mensuel', 'UsersController@offrelancement_mensuel')->name('offrelancement.mensuel');
-Route::get('/offrelancement_annuel', 'UsersController@offrelancement_annuel')->name('offrelancement.annuel');
+Route::get('/offre_lancement_mensuel', 'UsersController@offrelancement_annuel')->name('offre_lancement.mensuel');
 
 Route::get('/choixpayement', 'UsersController@choixpayement')->name('choixpayement');
 Route::get('/offrelancement_anne2', 'UsersController@OffreLancement_anne2')->name('OffreLancement_anne2');

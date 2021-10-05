@@ -68,8 +68,9 @@ $plogo= $parametres->logo;
                                                 <div>
                                                     @csrf
                                                     <input type="hidden" name="user_type" id="prestataire" value="prestataire" >
-                                                    <input   name="mensuel_annuel" type="hidden"  value="annuel">
+                                                    <input   name="mensuel_annuel" type="hidden"  value="mensuel">
                                                     <input type="hidden" name="username" id="username" value="jhondoe" >
+                                                    <input type="hidden" name="typeAbn" value="2" >
                                                     <input name="lastname" type="text" id="lastname" placeholder="Nom *" required="required" class="error">
                                                 </div>
                                             </div>
@@ -214,6 +215,7 @@ $plogo= $parametres->logo;
                                                     <input type="hidden" name="user_type" id="prestataire" value="prestataire" >
                                                     <input   name="mensuel_annuel" type="hidden"  value="mensuel">
                                                     <input type="hidden" name="username" id="username" value="jhondoe" >
+                                                    <input type="hidden" name="typeAbn" value="3" >
                                                     <input name="lastname" type="text" id="lastname" placeholder="Nom *" required="required" class="error">
                                                 </div>
                                             </div>
