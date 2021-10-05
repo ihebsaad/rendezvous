@@ -289,7 +289,7 @@ class RegisterController extends Controller
                 }
                 else
                 {
-                    return redirect('/offrelancement_annuel');
+                    return redirect('/offre_lancement_mensuel');
                 }
              // return redirect ('/offrelancement');
             }
