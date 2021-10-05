@@ -370,79 +370,9 @@ input#date-picker {
     width: -webkit-fill-available;
     padding: 0;
 }
-.fc-today-button{font-size:13px!important;}
-.fc .fc-toolbar-title {
-    font-size: 1.75em;
-    margin: 0;
-    font-size: 1.75em;
-    margin: 0;
-}
-.fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
-    margin-left:0!important;
-    color: black;
-    border: yellow;
-    border-radius: 50px;
-    background-color: #f9d308;
-}
-.show-moreP {
-  height: 450px;
-  overflow: hidden;
-  position: relative;
-  transition: margin 0.4s;
-}
 
-.show-moreP:after {
-  content:"";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 180px;
-  display: block;
-  background: linear-gradient(rgba(255,255,255,0), #fff 88%);
-  z-index: 9;
-  opacity: 1;
-  visibility: visible;
-  transition: 0.8s;
-}
 
-.show-moreP.visible { margin-bottom: 20px; }
-.show-moreP.visible:after { opacity: 0; visibility: hidden; }
 
-.show-moreP-button {
-  position: relative;
-  font-weight: 600;
-  font-size: 15px;
-  left: 0;
-  margin-left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  text-align: center;
-  display: inline-block;
-  opacity: 1;
-  visibility: visible;
-  transition: all 0.3s;
-  padding: 5px 20px;
-  color: #666;
-  background-color: #f2f2f2;
-  border-radius: 50px;
-  top: -10px;
-  min-width: 140px;
-}
-
-.show-moreP-button:before { content: attr(data-more-title); }
-.show-moreP-button.active:before { content: attr(data-less-title); }
-
-.show-moreP-button i {
-  margin-left: 6px;
-  color: #66676b;
-  font-weight: 500;
-  transition: 0.2s;
-}
-
-.show-moreP-button.active i {
-  transform: rotate(180deg);
-}
     body{    color: #707070;
     font-size: 15px;
     width: fit-content;
@@ -496,7 +426,6 @@ input#date-picker {
 </script>
 <!-- Content
     ================================================== -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/fullcalendar/main.min.css') }}" />
 <div class="dashboard-content">
 <!-- Titlebar -->
         <div id="titlebar">
@@ -1213,9 +1142,17 @@ $(this).find('input').on('change',function() {
         </div>  
         <br>
           <div class="row">
-          <div class="col-md-12" >  
-              <div id='events'  ></div> 
-            </div>
+          <div class="panel panel-default dash">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                            <div class="panel-body">
+                                <div class="col-lg-12">
+                                    <div id="events"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
           
                 </div>
                 </div>  
