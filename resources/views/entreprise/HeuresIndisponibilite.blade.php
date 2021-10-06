@@ -142,10 +142,9 @@ background-color: #fff3b0;
     border-style: solid;
 }
     .fc-toolbar .fc-right {
-    float: right;
+      float: left;
     margin-top: 2px;
-
-    width: 166px;
+    width: 186px;
 }
 .fc-toolbar .fc-left {
     float: left;
