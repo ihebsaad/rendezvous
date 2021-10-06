@@ -142,10 +142,9 @@ background-color: #fff3b0;
     border-style: solid;
 }
     .fc-toolbar .fc-right {
-    float: right;
+      float: left;
     margin-top: 2px;
-
-    width: 166px;
+    width: 186px;
 }
 .fc-toolbar .fc-left {
     float: left;
@@ -1222,6 +1221,7 @@ input#date-picker {
         <!-- fin modal pour ajouter une indisponibilté -->  
         </div>
 </div></div>
+<br><br><br><br><br>
 </div>
     
      <script src="{{URL::asset('public/fullcalendar3/js/sweetalert.min.js')}}"></script>
