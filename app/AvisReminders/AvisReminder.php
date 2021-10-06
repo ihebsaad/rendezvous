@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AvisReminder;
+namespace App\AvisReminders;
 
 use Illuminate\Log;
 use Carbon\Carbon;
@@ -35,7 +35,7 @@ class AvisReminder
         
         foreach ($this->resvdujour as $resv) {
           $message = "Bonjour";
-          $this->sendMail(trim('Mohamed.achraf.besbes@gmail.com'),'Reporter un rendez-vous',$message) ;
+          $this->sendMail(trim('mohamed.achraf.besbes@gmail.com'),'Reporter un rendez-vous',$message) ;
 
         }
         
