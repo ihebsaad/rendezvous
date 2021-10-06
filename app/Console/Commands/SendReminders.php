@@ -39,7 +39,7 @@ class SendReminders extends Command
     {
         $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder();
         $appointmentReminder->sendReminders();
-        //$AvisReminder = new \App\AvisReminders\AvisReminder();
-        //$AvisReminder->sendReminders();
+        $AvisReminder = new \App\AvisReminders\AvisReminder();
+        $AvisReminder->sendReminders();
     }
 }
