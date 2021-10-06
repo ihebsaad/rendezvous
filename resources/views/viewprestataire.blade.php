@@ -1692,9 +1692,10 @@ font-size: 14px!important;
                                            
                                             <?php $User=auth()->user();?>    
                                             @if (isset($User))    
-                                            <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
 
                                     @if($User->user_type=='client')
+                                    <a class="button book-now fullwidth margin-top-5" id="reserver">Réserver</a>
+
                                                         <input type="text" value="<?php echo $user->id;?>"  id='prestataire_id' hidden='true'>
                                                         <input type="text" value="<?php echo $User->id;?>"  id='client_id' hidden='true'>
 
@@ -1756,9 +1757,7 @@ font-size: 14px!important;
                             <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorSerRec">Veuillez choisir une abonnement</p>
 
                         </div>
-                        <div class="col-lg-12">
-						<input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
-                        </div>
+                        
                         <!-- here -->
                         <div class="row with-forms margin-top-0 " style="font-size: 150%">
 		
@@ -1776,85 +1775,8 @@ font-size: 14px!important;
         <input type="text" value=""  class="dtpks" name="datereservation" placeholder="date 1"  class="input-append date " style="font-size: 15px;" readonly> 
                    -->    
           
+               
                         
-                        <!-- Panel Dropdown -->
-                        <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
-                        <div class="col-lg-12">
-						<div class="panel-dropdown time-slots-dropdown" id="time1">
-							<a href="#">Heure</a>
-							<div class="panel-dropdown-content padding-reset">
-								<div class="panel-dropdown-scrollable">
-									
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-1">
-										<label for="time-slot-1">
-											<strong>08:30 am - 09:00 am</strong>
-											<span>1 slot available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-2">
-										<label for="time-slot-2">
-											<strong>09:00 am - 09:30 am</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-3">
-										<label for="time-slot-3">
-											<strong>09:30 am - 10:00 am</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-4">
-										<label for="time-slot-4">
-											<strong>10:00 am - 10:30 am</strong>
-											<span>3 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-5">
-										<label for="time-slot-5">
-											<strong>13:00 pm - 13:30 pm</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-6">
-										<label for="time-slot-6">
-											<strong>13:30 pm - 14:00 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-7">
-										<label for="time-slot-7">
-											<strong>14:00 pm - 14:30 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-                    <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeureRec">Veuillez choisir l'heure</p>
-
-                    </div>
      
 
 					<!-- Panel Dropdown / End -->
@@ -1983,9 +1905,10 @@ font-size: 14px!important;
                    
                      
 		  <?php if (isset($User)){?> 
-	   <a class="button book-now fullwidth margin-top-5" style="color:white" id="reserver2">Réserver</a>
 		
 			<?php if($User->user_type=="client"){  ?>  
+                <a class="button book-now fullwidth margin-top-5" style="color:white" id="reserver2">Réserver</a>
+
                 <input type="text" value="<?php echo $user->id;?>"  id='prestataire_id1' hidden='true'>
                                                         <input type="text" value="<?php echo $User->id;?>"  id='client_id1' hidden='true'>
 			<?php $countf= DB::table("favoris")->where("prestataire",$user->id)->where("client",$User->id)->count(); if($countf==0) {?>	
@@ -2847,20 +2770,9 @@ var frq=e.attr('frq');
 var _token = $('input[name="_token"]').val();	
 var nbrService = document.getElementById("nbrServiceRec").value ;
 var date_reservation = [] ;
-var str=$('#time1 a').text();
-if(str=='Heure'){document.getElementById('ErrorHeureRec').style.display="block";}
-var myArr = str.split("am -");
-var reservationHeureStart=myArr[0];//start
-var reservationHeure2=myArr[1].split("-");
-var reservationHeure3=reservationHeure2[0].split("am");
-var reservationHeureEnd=reservationHeure3[0];//end
 
-
-var datereservation1 = $('#date-picker2').val();
-var date =datereservation1 + ' ' + reservationHeureStart; 
 
 //alert(datereservation);
-var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 //alert(date_reservation);
 
 var remarques = $('#remarques2').val();
@@ -2875,7 +2787,7 @@ if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRapR
 $.ajax({
    url:"{{ route('reservations.add2') }}",
    method:"POST",
-   data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
+   data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
    location.href= "{{ route('reservations') }}";

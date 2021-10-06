@@ -982,9 +982,7 @@ input#date-picker {
                             <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorSerRec">Veuillez choisir une abonnement</p>
 
                         </div>
-                        <div class="col-lg-12">
-                          <input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
-                        </div>
+                       
                         <!-- here -->
                         <div class="row with-forms margin-top-0 " style="font-size: 150%">
                             <input type="number" name="nbrServiceRec" id="nbrServiceRec" style="display:none;">
@@ -1002,81 +1000,7 @@ input#date-picker {
           
                         
                         <!-- Panel Dropdown -->
-                        <div class="row" style="width: inherit!important;">
-
-               <div class="col-lg-12">
-               <div class="panel-dropdown time-slots-dropdown" id="time1">
-              <a href="#">Heure</a>
-              <div class="panel-dropdown-content padding-reset" >
-                <div class="panel-dropdown-scrollable">
-                  
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <input type="radio" name="time-slot" id="time-slot-1">
-                    <label for="time-slot-1">
-                      <strong>08:30 am - 09:00 am</strong>
-                      <span>1 slot available</span>
-                    </label>
-                  </div>
-
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <input type="radio" name="time-slot" id="time-slot-2">
-                    <label for="time-slot-2">
-                      <strong>09:00 am - 09:30 am</strong>
-                      <span>2 slots available</span>
-                    </label>
-                  </div>
-
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <input type="radio" name="time-slot" id="time-slot-3">
-                    <label for="time-slot-3">
-                      <strong>09:30 am - 10:00 am</strong>
-                      <span>1 slots available</span>
-                    </label>
-                  </div>
-
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <input type="radio" name="time-slot" id="time-slot-4">
-                    <label for="time-slot-4">
-                      <strong>10:00 am - 10:30 am</strong>
-                      <span>3 slots available</span>
-                    </label>
-                  </div>
-
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <input type="radio" name="time-slot" id="time-slot-5">
-                    <label for="time-slot-5">
-                      <strong>13:00 pm - 13:30 pm</strong>
-                      <span>2 slots available</span>
-                    </label>
-                  </div>
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <input type="radio" name="time-slot" id="time-slot-6">
-                    <label for="time-slot-6">
-                      <strong>13:30 pm - 14:00 pm</strong>
-                      <span>1 slots available</span>
-                    </label>
-                  </div>
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <input type="radio" name="time-slot" id="time-slot-7">
-                    <label for="time-slot-7">
-                      <strong>14:00 pm - 14:30 pm</strong>
-                      <span>1 slots available</span>
-                    </label>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeureRec">Veuillez choisir l'heure</p>
-
-          </div>
+              
           <!-- Panel Dropdown / End -->
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
@@ -1937,21 +1861,9 @@ var frq=e.attr('frq');
 var _token = $('input[name="_token"]').val();	
 var nbrService = document.getElementById("nbrServiceRec").value ;
 var date_reservation = [] ;
-var str=$('#time1 a').text();
 
-if(str=='Heure'){document.getElementById('ErrorHeureRec').style.display="block";}
-var myArr = str.split(" ");
-var reservationHeureStart=myArr[0];//start
-var reservationHeure2=myArr[1].split("-");
-var reservationHeure3=reservationHeure2[0].split("am");
-var reservationHeureEnd=reservationHeure3[0];//end
-
-
-var datereservation1 = $('#date-picker2').val();
-var date = datereservation1 + ' ' + reservationHeureStart; 
 
 //alert(datereservation);
-var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 //alert(date_reservation);
 
 var remarques = $('#remarques2').val();
@@ -1966,7 +1878,7 @@ if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRapR
 $.ajax({
    url:"{{ route('reservations.add2') }}",
    method:"POST",
-   data:{prestataire:<?php echo $user->id;?>,client:id_client,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
+   data:{prestataire:<?php echo $user->id;?>,client:id_client,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
    location.href= "{{ route('reservations') }}";
