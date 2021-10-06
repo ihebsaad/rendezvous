@@ -1909,15 +1909,14 @@ var reservationHeureEnd=reservationHeure3[0];//end
 
 var datereservation1 = $('#date-picker').val();
 var date = datereservation1 + ' ' + reservationHeureStart; 
-alert(datereservation1);
-alert(date);
+
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
-alert(dateStr);
+
 var service = $('#service').val();
 
 var id_client = $('#id-client').val();
-alert(service);
+
 if( service==null){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
 if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRap').style.display='block';}
@@ -1963,7 +1962,7 @@ var reservationHeureEnd=reservationHeure3[0];//end
 
 
 var datereservation1 = $('#date-picker2').val();
-var date = new Date(datereservation1 + ' ' + reservationHeureStart); 
+var date = datereservation1 + ' ' + reservationHeureStart; 
 
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
