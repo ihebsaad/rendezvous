@@ -34,7 +34,7 @@ class AvisReminder
     {
         
         
-        foreach ($this->resvdujour as $resv) {
+        foreach ($this->Avisdujour as $resv) {
           $message = "Bonjour";
           $this->sendMail(trim('mohamed.achraf.besbes@gmail.com'),'Reporter un rendez-vous',$message) ;
 
