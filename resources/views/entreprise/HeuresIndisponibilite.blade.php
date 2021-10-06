@@ -941,19 +941,7 @@ input#date-picker {
                         <div class="row" style="width: inherit!important;">
 
                <div class="col-lg-12">
-                 <script>$(".time-slot").each(function() {
-
-var timeSlot = $(this);
-$(this).find('input').on('change',function() {
-    
-    var timeSlotVal = timeSlot.find('strong').text();
-
-    $('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
-    $('.panel-dropdown').removeClass('active');
-});
-});</script>
-
-            <div class="panel-dropdown" id="time1">
+               <div class="panel-dropdown time-slots-dropdown" id="time1">
               <a href="#">Heure</a>
               <div class="panel-dropdown-content padding-reset" >
                 <div class="panel-dropdown-scrollable">
@@ -1963,6 +1951,7 @@ var _token = $('input[name="_token"]').val();
 var nbrService = document.getElementById("nbrServiceRec").value ;
 var date_reservation = [] ;
 var str=$('#time1 a').text();
+
 if(str=='Heure'){document.getElementById('ErrorHeureRec').style.display="block";}
 var myArr = str.split(" ");
 var reservationHeureStart=myArr[0];//start
