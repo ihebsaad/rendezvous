@@ -36,8 +36,10 @@ class AvisReminder
         
         
         foreach ($this->Avisdujour as $resv) {
-          $message = "Bonjour";
-          $this->sendMail(trim('mohamed.achraf.besbes@gmail.com'),'Reporter un rendez-vous',$message) ;
+            $client = \App\User::find($resv->client);
+            $prestataire = \App\User::find($resv->prestataire);
+          $message = 'Merci de laisser votre avis à propos le prestataire '.$prestataire->name.' '.$prestataire->lastname .'<a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > Lien </a>';
+          $this->sendMail(trim($client->email),'Avis',$message) ;
           Reservation::where('id', $resv->id)->update(array('avis' => 0 ));
 
         }
