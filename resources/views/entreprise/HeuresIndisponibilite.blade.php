@@ -551,20 +551,21 @@ input#date-picker {
                     <br>
                     </div>
         </div>  
-        <br>
+        <br></div>
           <div class="row">
             <div class="col-lg-12">
-          <div class="panel panel-default dash">
+                    <div class="panel panel-default dash">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                            <div class="panel-body">
-                                <div class="col-lg-12">
-                                    <div id="events"></div>
+                                <div class="panel-body">
+                                    <div class="col-lg-12">
+                                        <div id="events"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div></div>
+            </div>
           
                 </div>
                 </div>  
