@@ -1929,7 +1929,6 @@ var id_client = $('#id-client').val();
 
 if( service==''){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
-alert(rappel);
 if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRap').style.display='block';}
 
 //alert(JSON.stringify(service));
