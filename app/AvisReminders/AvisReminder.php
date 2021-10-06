@@ -38,13 +38,13 @@ class AvisReminder
         foreach ($this->Avisdujour as $resv) {
             $client = \App\User::find($resv->client);
             $prestataire = \App\User::find($resv->prestataire);
-          $message = 'Merci de laisser votre avis à propos de votre prestataire : '.$prestataire->name.' '.$prestataire->lastname .' on utilisant ce <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > lien </a>';
+          $message = 'Merci de laisser votre avis à propos de votre prestataire : '.$client->tel.' '.$prestataire->lastname .' on utilisant ce <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > lien </a>';
           $this->sendMail(trim($client->email),'Avis',$message) ;
-          $numtel = $client->tel ;
           Reservation::where('id', $resv->id)->update(array('avis' => 0 ));
+          $numtel = $client->tel ;
           $response = Message::send([
-          'to' => '21694405202',
-          'text' => 'ok'
+          'to' => $numtel,
+          'text' => $message
         ]);
 
           
