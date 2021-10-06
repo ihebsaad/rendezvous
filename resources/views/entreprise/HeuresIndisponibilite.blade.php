@@ -10,6 +10,14 @@
 
   <!-- Dashboard -->
   <style>
+    @media (max-width: 991px){
+.dashboard-content {
+    width: -webkit-fill-available;
+    padding: 40px 5%;
+    padding-bottom: 0;
+    height: auto;
+    margin-left: 0px;
+}}
     .booking-widget .panel-dropdown .panel-dropdown-content.padding-reset {
       width: 397px!important;
     padding: 0;
@@ -17,7 +25,6 @@
     .fc-unthemed .fc-popover {
     border-width: 1px;
     top: -239.719px!important;
-    left: -34px;
     border-style: solid;
 }
     .fc-toolbar .fc-right {
@@ -28,8 +35,7 @@
 }
 .fc-toolbar .fc-left {
     float: left;
-    width: 274px;
-}
+    width: 274px;}
       .tabs-nav li a:hover, .tabs-nav li.active a {
 border-color: #ffd700;
 color: #000000;
@@ -128,6 +134,7 @@ background-color: #fff3b0;
     color: #ff0000!important;
 }
 @media (max-width: 768px){
+  
   .fc-unthemed .fc-popover {
     border-width: 1px;
     top: -239.719px!important;
@@ -138,12 +145,11 @@ background-color: #fff3b0;
     float: right;
     margin-top: 2px;
 
-    width: 295px;
+    width: 166px;
 }
 .fc-toolbar .fc-left {
     float: left;
-    width: 274px;
-}
+    width: 186px;}
 .day-slot-headline { 
     width: auto!important;
   
@@ -409,26 +415,6 @@ input#date-picker {
 
 
 
-    body{    color: #707070;
-    font-size: 15px;
-    width: fit-content;
-    line-height: 27px;
-    background-color: #fff;}
-    #dashboard{    background-color: #f7f7f7;
-    min-height: 100vh;
-    flex-wrap: wrap;
-    padding-top: 80px;}
-
-    .dashboard-content{    padding: 40px 45px;
-    padding-bottom: 0;
-    position: relative;
-    z-index: 10;
-    height: 100%;
- }
-.row {
-    margin-left: 0px;
-    margin-right: 0px;
-}
     .legend { list-style: none; }
     .legend li { float: left; }
     .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 12px; margin: 2px; }
@@ -541,10 +527,88 @@ input#date-picker {
                             <h3><i class="fa fa-calendar"></i> Heures d'indisponibilité - Rendez vous confirmés - Heures ouverture et fermeture</h3>
                             <a href="#Ajout-Res" style="margin-top: 12px;
     margin-left: 15px;"class="button popup-with-zoom-anim">Ajouter une réservation
-</a>
+</a></div>
                                 <!--  modal pour ajouter une indisponibilté -->
 
-       <div id="Ajout-Res" class="small-dialog zoom-anim-dialog mfp-hide">
+     
+
+
+                    <div class="row">
+                  <div class="col-md-12 ">
+                    <h4>Calendrier :</h4>
+             <div id="legendcolor"  style="background-color:white; top:5px;"> 
+            <ul class="legend">
+              <li><span class="lightgrey" style=""></span>horaires de fermeture</li>
+             <li><span class="green"></span>Promotions flash</li>
+              <li><span class="red"></span>Indisponibilité de prestataire</li>
+             <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
+            
+             <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
+             <li><span class="pink"></span>date courante</li>
+           </ul>
+
+           </div>
+                    <br>
+                    </div>
+        </div>  
+        <br>
+          <div class="row">
+            <div class="col-lg-12">
+          <div class="panel panel-default dash">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                            <div class="panel-body">
+                                <div class="col-lg-12">
+                                    <div id="events"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div></div>
+          
+                </div>
+                </div>  
+            </div>
+                    <!-- Section / End -->
+
+                </div>
+            </div>
+        
+<!-- Content end
+    ================================================== -->
+      <!--  modal pour ajouter une indisponibilté -->
+
+       <div id="small-dialog" class="small-dialog zoom-anim-dialog mfp-hide">
+          <div class="small-dialog-header">
+            <h3>Ajouter une période d'indisponibilité</h3>
+          </div>
+          <form  method="post" enctype="multipart/form-data"   action="{{ route('periodes_indisp.store') }}"  >
+          {{ csrf_field() }}
+          
+           <div class="utf_signin_form style_one">
+             <input type="hidden" name="user" value="{{$user->id}}"  >
+              <label>Titre descriptif *: </label>
+              <div class="fm-input">
+              <input type="text" placeholder="Titre descriptif" id="tdesc"  name="tdesc" required >
+            </div>
+             <label>Date de début *: </label>
+            <div class="fm-input">
+              <input type="datetime-local" placeholder="Début période indisponibilité *"  id="dpindisp"  name="dpindisp" required>
+            </div>
+            <br>
+            <label>Date de fin *: </label>
+            <div class="fm-input"> 
+              <input type="datetime-local" placeholder="Fin période indisponibilité *" name="fpindisp" id="fpindisp" required> 
+            </div>
+            <br>
+             <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
+
+            </form>             
+         </div>       
+                  
+             
+        <!-- fin modal pour ajouter une indisponibilté -->  
+        <div id="Ajout-Res" class="small-dialog zoom-anim-dialog mfp-hide">
           <div class="small-dialog-header">
 
            <center> <h3>Ajouter une nouvelle réservation</h3></center>
@@ -1151,89 +1215,12 @@ input#date-picker {
 
 <!-- end fo testing
  -->
-         </div>       
+              </div>      
                   
              
         <!-- fin modal pour ajouter une indisponibilté -->  
-
-                          </div>
-
-                    <div class="row">
-                  <div class="col-md-12 ">
-                    <h4>Calendrier :</h4>
-             <div id="legendcolor"  style="background-color:white; top:5px;"> 
-            <ul class="legend">
-              <li><span class="lightgrey" style=""></span>horaires de fermeture</li>
-             <li><span class="green"></span>Promotions flash</li>
-              <li><span class="red"></span>Indisponibilité de prestataire</li>
-             <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
-            
-             <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
-             <li><span class="pink"></span>date courante</li>
-           </ul>
-
-           </div>
-                    <br>
-                    </div>
-        </div>  
-        <br>
-          <div class="row">
-            <div class="col-lg-12">
-          <div class="panel panel-default dash">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                            <div class="panel-body">
-                                <div class="col-lg-12">
-                                    <div id="events"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div></div>
-          
-                </div>
-                </div>  
-            </div>
-                    <!-- Section / End -->
-
-                </div>
-            </div>
         </div>
-<!-- Content end
-    ================================================== -->
-      <!--  modal pour ajouter une indisponibilté -->
-
-       <div id="small-dialog" class="small-dialog zoom-anim-dialog mfp-hide">
-          <div class="small-dialog-header">
-            <h3>Ajouter une période d'indisponibilité</h3>
-          </div>
-          <form  method="post" enctype="multipart/form-data"   action="{{ route('periodes_indisp.store') }}"  >
-          {{ csrf_field() }}
-          
-           <div class="utf_signin_form style_one">
-             <input type="hidden" name="user" value="{{$user->id}}"  >
-              <label>Titre descriptif *: </label>
-              <div class="fm-input">
-              <input type="text" placeholder="Titre descriptif" id="tdesc"  name="tdesc" required >
-            </div>
-             <label>Date de début *: </label>
-            <div class="fm-input">
-              <input type="datetime-local" placeholder="Début période indisponibilité *"  id="dpindisp"  name="dpindisp" required>
-            </div>
-            <br>
-            <label>Date de fin *: </label>
-            <div class="fm-input"> 
-              <input type="datetime-local" placeholder="Fin période indisponibilité *" name="fpindisp" id="fpindisp" required> 
-            </div>
-            <br>
-             <center><input type="submit" style="text-align:center;color:white;" value="Ajouter"></input></center>
-
-            </form>             
-         </div>       
-                  
-             
-        <!-- fin modal pour ajouter une indisponibilté -->  
-</div>
+</div></div>
 </div>
     
      <script src="{{URL::asset('public/fullcalendar3/js/sweetalert.min.js')}}"></script>
