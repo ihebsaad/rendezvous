@@ -1,5 +1,6 @@
 <!-- Scripts
 ================================================== -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
 
 
