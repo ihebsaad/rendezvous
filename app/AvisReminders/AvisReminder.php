@@ -41,12 +41,13 @@ class AvisReminder
           $message = 'Merci de laisser votre avis à propos de votre prestataire : '.$prestataire->name.' '.$prestataire->lastname .' on utilisant ce <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > lien </a>';
           $this->sendMail(trim($client->email),'Avis',$message) ;
           $numtel = $client->tel ;
+          Reservation::where('id', $resv->id)->update(array('avis' => 0 ));
           $response = Message::send([
           'to' => '21694405202',
-          'text' => $message
+          'text' => 'ok'
         ]);
 
-          Reservation::where('id', $resv->id)->update(array('avis' => 0 ));
+          
 
         }
         
