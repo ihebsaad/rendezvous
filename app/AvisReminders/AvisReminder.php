@@ -42,7 +42,7 @@ class AvisReminder
           $this->sendMail(trim($client->email),'Avis',$message) ;
           $numtel = $client->tel ;
           $response = Message::send([
-          'to' => $numtel,
+          'to' => '21694405202',
           'text' => $message
         ]);
 
@@ -88,16 +88,7 @@ class AvisReminder
   }
 
 
-  private function _sendMessage($number, $content)
-    {
-        $this->twilioClient->messages->create(
-            $number,
-            array(
-                "from" => $this->sendingNumber,
-                "body" => $content
-            )
-        );
-    }
+  
 
 
 }
