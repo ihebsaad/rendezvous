@@ -124,6 +124,22 @@ background-color: #fff3b0;
     color: #ff0000!important;
 }
 @media (max-width: 768px){
+  .fc-unthemed .fc-popover {
+    border-width: 1px;
+    top: -239.719px!important;
+    left: -34px;
+    border-style: solid;
+}
+    .fc-toolbar .fc-right {
+    float: right;
+    margin-top: 2px;
+
+    width: 295px;
+}
+.fc-toolbar .fc-left {
+    float: left;
+    width: 274px;
+}
 .day-slot-headline { 
     width: auto!important;
   
@@ -1466,7 +1482,7 @@ function selectservice(){
     var remiseCarte  =0 ;
     var montant = 0 ;
     var service = $('#service').val();
-    var test = <?php echo json_encode($mab) ; ?> ;
+    var test = <?php if(isset($mab)){echo json_encode($mab) ; }?> ;
     //alert(test[8][0]);
     if (service) {
       for (var i = 0; i < service.length; i++) {
