@@ -10,6 +10,10 @@
 
   <!-- Dashboard -->
   <style>
+    .booking-widget .panel-dropdown .panel-dropdown-content.padding-reset {
+      width: 397px!important;
+    padding: 0;
+}
     .fc-unthemed .fc-popover {
     border-width: 1px;
     top: -239.719px!important;
