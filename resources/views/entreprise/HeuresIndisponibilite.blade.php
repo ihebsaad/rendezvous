@@ -1925,9 +1925,10 @@ var date = new Date(datereservation1 + ' ' + reservationHeureStart);
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 var service = $('#service').val();
+
 var id_client = $('#id-client').val();
 
-if( service==''){ document.getElementById('ErrorSer').style.display='block';}
+if( service=='Sélectionner le(s) service(s) desiré(s)'){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
 if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRap').style.display='block';}
 
