@@ -10,6 +10,10 @@
 
   <!-- Dashboard -->
   <style>
+    .booking-widget .panel-dropdown .panel-dropdown-content.padding-reset {
+      width: 397px!important;
+    padding: 0;
+}
     .fc-unthemed .fc-popover {
     border-width: 1px;
     top: -239.719px!important;
@@ -399,7 +403,7 @@ input#date-picker {
     width: 100%;
 }
 .booking-widget .panel-dropdown .panel-dropdown-content.padding-reset {
-    width: -webkit-fill-available;
+    width: -webkit-fill-available!important;
     padding: 0;
 }
 
@@ -663,7 +667,7 @@ input#date-picker {
                     <div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown" id="time">
 							<a href="#">Heure</a>
-							<div class="panel-dropdown-content padding-reset" style="    width: 397px;">
+							<div class="panel-dropdown-content padding-reset" >
 								<div class="panel-dropdown-scrollable">
 									
 									<!-- Time Slot -->
@@ -943,7 +947,7 @@ $(this).find('input').on('change',function() {
 
             <div class="panel-dropdown" id="time1">
               <a href="#">Heure</a>
-              <div class="panel-dropdown-content padding-reset" style="       width: 397px;">
+              <div class="panel-dropdown-content padding-reset" >
                 <div class="panel-dropdown-scrollable">
                   
                   <!-- Time Slot -->
