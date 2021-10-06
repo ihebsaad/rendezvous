@@ -637,7 +637,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     }
     public static function Avisdujour()
     {
-      $x = DB::select( DB::raw("SELECT c.* FROM ( SELECT * FROM reservations  WHERE date_reservation > '2021-06-15 00:00:00' and date_reservation < '2021-06-15 23:59:00'  ) c LEFT JOIN reviews u on c.prestataire=u.prestataire and c.client=u.client WHERE (u.client IS Null) or u.prestataire is null" ) );
+      $x = DB::select( DB::raw("SELECT c.* FROM ( SELECT * FROM reservations  WHERE date_reservation > '2021-06-15 00:00:00' and date_reservation < '2021-06-15 23:59:00' and avis = 1 ) c LEFT JOIN reviews u on c.prestataire=u.prestataire and c.client=u.client WHERE (u.client IS Null) or u.prestataire is null" ) );
       return $x;
     }
     public static function changestatutrappel($id)

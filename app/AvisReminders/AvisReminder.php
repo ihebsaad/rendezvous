@@ -11,6 +11,7 @@ use \App\Http\Controllers\ServicesController;
 use Message;
  use Swift_Mailer;
  use Mail;
+ use \App\Reservation;
 class AvisReminder
 {
     /**
@@ -37,6 +38,7 @@ class AvisReminder
         foreach ($this->Avisdujour as $resv) {
           $message = "Bonjour";
           $this->sendMail(trim('mohamed.achraf.besbes@gmail.com'),'Reporter un rendez-vous',$message) ;
+          Reservation::where('id', $resv->id)->update(array('avis' => 0 ));
 
         }
         
