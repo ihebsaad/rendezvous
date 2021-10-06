@@ -337,6 +337,48 @@ class RegisterController extends Controller
               $phone= $ind_tel.''.$req->get('phone'); 
             }
 
+        // adresse client
+          $adresse = "";
+         if( $req->get('adresse'))
+         {
+            $adresse=$req->get('adresse');
+         } else
+           {
+            $adresse = "";
+           }
+         
+       
+     // codepostal client
+       $codep = "";
+         if( $req->get('codep'))
+         {
+            $codep=$req->get('codep');
+         } else
+           {
+            $codep = "";
+           }
+         
+      
+       // ville client
+        $ville = "";
+         if($req->get('ville'))
+         {
+            $ville=$req->get('ville');
+         } else
+           {
+            $ville = "";
+           }
+         
+        // fhoraire client
+         $fhoraire='';
+         if( $req->get('fhoraire'))
+         {
+            $fhoraire=$req->get('fhoraire');
+         } else
+           {
+            $fhoraire = "America/Martinique";
+           }
+         
 
             $client= User::create([
             'username' => $req->get('username'),
@@ -348,7 +390,11 @@ class RegisterController extends Controller
             'user_type' => $req->get('user_type'),
             'password' => Hash::make($req->get('password')),
              'pays' => $pays,
-             'ind_tel' =>$ind_tel
+             'ind_tel' =>$ind_tel,
+             'adresse' => $adresse,
+            'ville' => $ville,
+            'codep' => $codep,
+            'fhoraire' => $fhoraire,
            ]);
             Auth::login($client);
 

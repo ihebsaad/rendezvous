@@ -239,7 +239,7 @@ $temoinages=DB::table('temoinages')->get();
         <div class="col-lg-8 col-md-12">
             <div class="dashboard-list-box margin-top-0">
                 <form method="post" action="{{ route('create') }}" name="inscriptionform" id="inscriptionform3" autocomplete="on">
-                    <h4>Inscrivez-vous en 4 minutes seulement</h4>
+                    <h4>Inscrivez-vous en 2 minutes seulement</h4>
                             <div class="row padding-top-20">
                                 <div class="col-md-6">
                                     <div>
@@ -311,8 +311,41 @@ $temoinages=DB::table('temoinages')->get();
                                         <label>(pour les rappels SMS de vos réservations)</label>
                                     </div> -->
                                 </div>
+
                             </div>
-                            
+                            <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <input name="adresse" type="text" id="adresse" placeholder="Adresse *"  required="required" class="error">
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        <input name="codep" type="text" id="codep" placeholder="Code postal *" required="required" class="error">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div>
+                                        <input name="ville" type="text" id="ville" placeholder="Ville *"  required="required" class="error">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div>
+                                        <select style="color:grey" name="fhoraire" id="fhoraire" title="Selectionnez votre pays">
+                                            <option value="America/Martinique" default="" selected="selected">Martinique</option>
+                                            <option value="America/Guadeloupe">Guadeloupe</option>
+                                            <option value="Europe/Paris">France</option>
+                                            <option value="America/Cayenne">Guyane française</option> 
+                                        </select>
+                                    </div>
+                                </div>
+                           </div> 
+
 
                             
                             <div class="row ">
@@ -320,7 +353,7 @@ $temoinages=DB::table('temoinages')->get();
                                     <input type="submit" class="submit button"  value="Je m'inscris !" style="    width: -webkit-fill-available;" >
                                 </div>
                             </div>
-
+                           
                             <div class="row">
                                 <div class="col-md-12">
                                     <div style="font-size: 12px; text-align: center;">
