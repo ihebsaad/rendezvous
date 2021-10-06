@@ -656,6 +656,8 @@ input#date-picker {
                                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
                             </select>
+                            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='ErrorSer'>veuillez choisir un service au minimum</p>
+
                         </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
@@ -735,7 +737,10 @@ input#date-picker {
                                 </div>
                                 </div>
                             </div>
-                        </div></div>
+                        </div>
+                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeure">Veuillez choisir l'heure</p>
+
+                      </div>
                     <!-- Panel Dropdown / End -->
                     <!-- Panel Dropdown -->
           
@@ -753,7 +758,8 @@ input#date-picker {
                         <option value="2880">2 jours avant le RDV</option>
                          <option value="7200">5 jours avant le RDV</option>
                         </select>
-                       
+                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='ErrorRap'>Veuillez choisir un option</p>
+
                     </div>
                     <?php 
                           if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
@@ -909,6 +915,8 @@ input#date-picker {
                                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
                             </select>
+                            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorSerRec">Veuillez choisir une abonnement</p>
+
                         </div>
                         <div class="col-lg-12">
                           <input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
@@ -1014,12 +1022,14 @@ $(this).find('input').on('change',function() {
                 </div>
               </div>
             </div>
+            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeureRec">Veuillez choisir l'heure</p>
+
           </div>
           <!-- Panel Dropdown / End -->
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="select" style="display: block!important;" id="Rappel2">
+                        <select class="select" style="display: block!important;" id="rappel2">
 
                             <option  >Rappel de rendez vous par SMS</option>
                             <option value="60">1h avant le RDV </option>
@@ -1029,7 +1039,8 @@ $(this).find('input').on('change',function() {
                             <option value="2880">2 jours avant le RDV</option>
                             <option value="7200">5 jours avant le RDV</option>
                         </select>
-                                                
+                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorRapRec">Veuillez choisir un option</p>
+
                     </div>
                     <div class="col-lg-12 col-md-12 ">
 		  		<div class="input-group input-group-lg" >
