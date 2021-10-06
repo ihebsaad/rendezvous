@@ -9,7 +9,8 @@ use \App\Http\Controllers\ReservationsController;
 use \App\Http\Controllers\UsersController;
 use \App\Http\Controllers\ServicesController;
 use Message;
-
+ use Swift_Mailer;
+ use Mail;
 class AvisReminder
 {
     /**
