@@ -1928,7 +1928,7 @@ var service = $('#service').val();
 
 var id_client = $('#id-client').val();
 alert(service);
-if( service=='Sélectionner le(s) service(s) desiré(s)'){ document.getElementById('ErrorSer').style.display='block';}
+if( service==null){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
 if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRap').style.display='block';}
 
