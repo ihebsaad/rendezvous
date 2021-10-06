@@ -1222,6 +1222,7 @@ input#date-picker {
         <!-- fin modal pour ajouter une indisponibilté -->  
         </div>
 </div></div>
+<br><br><br><br><br>
 </div>
     
      <script src="{{URL::asset('public/fullcalendar3/js/sweetalert.min.js')}}"></script>
