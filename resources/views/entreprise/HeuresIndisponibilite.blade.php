@@ -1908,9 +1908,9 @@ var reservationHeureEnd=reservationHeure3[0];//end
 
 
 var datereservation1 = $('#date-picker').val();
-var date = new Date(datereservation1 + ' ' + reservationHeureStart); 
+var date = datereservation1 + ' ' + reservationHeureStart; 
 alert(datereservation1);
-
+alert(date);
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 alert(dateStr);
