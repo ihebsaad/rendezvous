@@ -1925,6 +1925,8 @@ var date = new Date(datereservation1 + ' ' + reservationHeureStart);
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 var service = $('#service').val();
+var id_client = $('#id-client').val();
+
 if( service==''){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
 alert(rappel);
@@ -1934,7 +1936,7 @@ if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRap'
 $.ajax({
    url:"{{ route('reservations.add') }}",
    method:"POST",
-   data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
+   data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:id_client,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
    location.href= "{{ route('reservations') }}";
@@ -1945,6 +1947,8 @@ $.ajax({
 $('#reserver2').click(function( ){
 var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
  var happyhour = $('#myhappyhoursId').val();
+ var id_client = $('#id-client').val();
+
 var montant_tot = parseFloat(document.getElementById('MontantReservationRec').value);
 var Remise = parseFloat(document.getElementById('RemiseReservationRec').value);
 var Net = parseFloat(document.getElementById('totalReservationRec').value);
@@ -1986,7 +1990,7 @@ if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRapR
 $.ajax({
    url:"{{ route('reservations.add2') }}",
    method:"POST",
-   data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
+   data:{prestataire:<?php echo $user->id;?>,client:id_client,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
    location.href= "{{ route('reservations') }}";
