@@ -656,6 +656,8 @@ input#date-picker {
                                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
                             </select>
+                            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='ErrorSer'>veuillez choisir un service au minimum</p>
+
                         </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
@@ -735,7 +737,10 @@ input#date-picker {
                                 </div>
                                 </div>
                             </div>
-                        </div></div>
+                        </div>
+                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeure">Veuillez choisir l'heure</p>
+
+                      </div>
                     <!-- Panel Dropdown / End -->
                     <!-- Panel Dropdown -->
           
@@ -753,7 +758,8 @@ input#date-picker {
                         <option value="2880">2 jours avant le RDV</option>
                          <option value="7200">5 jours avant le RDV</option>
                         </select>
-                       
+                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='ErrorRap'>Veuillez choisir un option</p>
+
                     </div>
                     <?php 
                           if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
@@ -909,6 +915,8 @@ input#date-picker {
                                 <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
 
                             </select>
+                            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorSerRec">Veuillez choisir une abonnement</p>
+
                         </div>
                         <div class="col-lg-12">
                           <input type="text"  id="date-picker2" placeholder="Date" readonly="readonly">
@@ -1014,12 +1022,14 @@ $(this).find('input').on('change',function() {
                 </div>
               </div>
             </div>
+            <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorHeureRec">Veuillez choisir l'heure</p>
+
           </div>
           <!-- Panel Dropdown / End -->
                         <div class="col-lg-12 ">
                         <!--  <div class="row" style="padding-left:40px">Rappel de mon rendez vous par SMS</div> -->
                      
-                        <select class="select" style="display: block!important;" id="Rappel2">
+                        <select class="select" style="display: block!important;" id="rappel2">
 
                             <option  >Rappel de rendez vous par SMS</option>
                             <option value="60">1h avant le RDV </option>
@@ -1029,7 +1039,8 @@ $(this).find('input').on('change',function() {
                             <option value="2880">2 jours avant le RDV</option>
                             <option value="7200">5 jours avant le RDV</option>
                         </select>
-                                                
+                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id="ErrorRapRec">Veuillez choisir un option</p>
+
                     </div>
                     <div class="col-lg-12 col-md-12 ">
 		  		<div class="input-group input-group-lg" >
@@ -1868,7 +1879,7 @@ $('#reserver').click(function( ){
 
 if(suppl_res)
 {
-alert ("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
+alert("des nouveaux services/ produits cadeaux sont ajoutés à votre réservaton: "+suppl_res);
 }
 
 /*  var inputs = $(".dtpks");
@@ -1876,11 +1887,13 @@ for(var i = 0; i < inputs.length; i++){
 alert($(inputs[i]).val());
 }*/
 //qtyproduits
+qtyproduits
+if(produitslist.length!=0){
 for (var i = 0; i < produitslist.length; i++) {
  var qty = document.getElementById('k'+produitslist[i]+'').value;
  qtyproduits[i]=qty ;
  //alert(qtyproduits);
-}
+}}
 
 var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
 var happyhour = $('#myhappyhoursId').val();
@@ -1898,10 +1911,12 @@ var timeSlot = $(".time-slot");
 var timeSlotVal = timeSlot.find('strong').text();
 
 var str=$('#time a').text();
-
+if(str=='Heure'){document.getElementById('ErrorHeure').style.display='block';;}
 var myArr = str.split(" ");
 var reservationHeureStart=myArr[0];//start
 var reservationHeure2=myArr[1].split("-");
+var reservationHeure3=reservationHeure2[0].split("am");
+var reservationHeureEnd=reservationHeure3[0];//end
 
 
 var datereservation1 = $('#date-picker').val();
@@ -1910,13 +1925,17 @@ var date = new Date(datereservation1 + ' ' + reservationHeureStart);
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 var service = $('#service').val();
+var id_client = $('#id-client').val();
+
+if( service==''){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
-var client=$('#id-client').val();
+if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRap').style.display='block';}
+
 //alert(JSON.stringify(service));
 $.ajax({
    url:"{{ route('reservations.add') }}",
    method:"POST",
-   data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:client,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
+   data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:id_client,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
    location.href= "{{ route('reservations') }}";
@@ -1927,6 +1946,8 @@ $.ajax({
 $('#reserver2').click(function( ){
 var happyhourid = document.getElementById('myhappyhoursId').getAttribute('happyhourid');
  var happyhour = $('#myhappyhoursId').val();
+ var id_client = $('#id-client').val();
+
 var montant_tot = parseFloat(document.getElementById('MontantReservationRec').value);
 var Remise = parseFloat(document.getElementById('RemiseReservationRec').value);
 var Net = parseFloat(document.getElementById('totalReservationRec').value);
@@ -1936,15 +1957,13 @@ var e = $('#servicerec option[value="' + el + '"]');
 
 var periode = e.attr('periode');
 var frq=e.attr('frq');
-alert(periode);
-alert(frq);
 
-var _token = $('input[name="_token"]').val(); 
+var _token = $('input[name="_token"]').val();	
 var nbrService = document.getElementById("nbrServiceRec").value ;
 var date_reservation = [] ;
 var str=$('#time1 a').text();
-
-var myArr = str.split("am -");
+if(str=='Heure'){document.getElementById('ErrorHeureRec').style.display="block";}
+var myArr = str.split(" ");
 var reservationHeureStart=myArr[0];//start
 var reservationHeure2=myArr[1].split("-");
 var reservationHeure3=reservationHeure2[0].split("am");
@@ -1959,16 +1978,18 @@ var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
 //alert(date_reservation);
 
 var remarques = $('#remarques2').val();
-var client=$('#id-client').val();
 
 var service = $('#servicerec').val();
+if(service=="Sélectionner l'abonnement desiré"){document.getElementById('ErrorSerRec').style.display="block";}
+
 var rappel = $('#rappel2').val();
+if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRapRec').style.display='block';}
+
 //alert(JSON.stringify(service));
-alert(service);
 $.ajax({
    url:"{{ route('reservations.add2') }}",
    method:"POST",
-   data:{prestataire:<?php echo $user->id;?>,client:client,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
+   data:{prestataire:<?php echo $user->id;?>,client:id_client,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,date_reservation:date_reservation ,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
    location.href= "{{ route('reservations') }}";
@@ -1976,6 +1997,8 @@ $.ajax({
 });
 
 });
+
+
 
 
 $('#sendmail').click(function( ){
