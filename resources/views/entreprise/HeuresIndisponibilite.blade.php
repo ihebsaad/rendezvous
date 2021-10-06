@@ -1260,11 +1260,11 @@ input#date-picker {
         eventDrop: function(event, delta, revertFunc) {
            var start = $.fullCalendar.moment(event.start).format();
            var end = $.fullCalendar.moment(event.end).format();
-             alert(start+" "+end+" "+event.description+" "+event.id);
+             //alert(start+" "+end+" "+event.description+" "+event.id);
              console.log(start.indexOf("T"));
 
              if (start.indexOf("T")== -1|| end.indexOf("T") == -1) {  // d.valueOf() could also work
-              alert("changement non possible à cause de chevauchement avec les horaires de fermeture");
+              alert("changement non possible : vérifiez si la durée de service en question est défini pour que le système puisse calculer la date de fin de déroulement de ce service");
               revertFunc();
                }else{
                   if (!confirm("Vous êtes sûr d'effectuer ce changement?")) {
@@ -1279,7 +1279,7 @@ input#date-picker {
                        type: 'get',
                        success: function(data) {
 
-                        alert("success:"+data);
+                        alert(data);
                       /*swal('Good job!', 'Event Updated!', 'success');
                          setTimeout(function () {
                           location.reload()
@@ -1316,9 +1316,7 @@ input#date-picker {
                 document.getElementById("validation").style.display = "block";
                 document.getElementById("test").value =data["name"] +' '+ data["lastname"] ;
                 document.getElementById("id-client").value =data["id"] ;
-
-                
-
+              
 
                         				}
                         },
