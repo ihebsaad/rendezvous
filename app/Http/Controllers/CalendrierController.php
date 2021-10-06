@@ -175,7 +175,7 @@ class CalendrierController extends Controller
 
     public function dragDropCalendar(Request $req)
     {
-       //$id=$req->get('description');
+       
        //return $id;
 
        
@@ -186,7 +186,15 @@ class CalendrierController extends Controller
 
       if(strrpos($req->get('description'),'indisp')!== FALSE)
       {
-          return 'indisp';
+         $id=$req->get('id');
+         if($start &&  $end && $id)
+         {
+            Indisponibilite::where('id',$id)->update(['date_debut'=>$start, 'date_fin'=>$end]);
+            return " La mise à jour est effectuée avec succès";
+         }
+         //return $id;
+
+         // return 'indisp';
 
          //  Indisponibilite::where('id', $id)->update(array('date_debut' =>$start,'date_fin' =>$end ));
       }else{
@@ -214,7 +222,7 @@ class CalendrierController extends Controller
                 //$services_res->save();
                 Reservation::where('id',$ident[0])->update(['date_reservation'=> $start]);
                  
-                return "ok";
+                return " La mise à jour est effectuée avec succès";
               }
               else // cas ou il y a  plusieurs services deplaceer unquement le service en question comme une nouvelle reservation
               {
@@ -263,7 +271,7 @@ class CalendrierController extends Controller
                 }
                $services_res->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix,'services_reserves'=> $array));
 
-                  return $Njson;
+                  return " La mise à jour est effectuée avec succès";
               }
               //return $key;
              //$kk= json_encode($array) ;
@@ -273,7 +281,7 @@ class CalendrierController extends Controller
               return "existe";
 
             }
-            return $ident[0].' '.$ident[1]; 
+           // return $ident[0].' '.$ident[1]; 
            
            // $idreser
             //$idserv
@@ -288,20 +296,35 @@ class CalendrierController extends Controller
             $posUnd=strpos($req->get('description'),'_');
             $chaine=substr($req->get('description'),8);
             $ident = explode("_", $chaine);
+            $services_res=Reservation::where('id',$ident[0])->first();
+           // $ident[1]="99";
+            if(in_array($ident[1],$services_res->services_reserves))
+            {
+              //return "existe";
+              $array=$services_res->services_reserves;
+              
+              // dans le cas ou la reseravtion contient seulement un service juste changer la date de réservation
+              if(count($array)==1) // update date
+              {
 
-
-
-            //return  $posAnd.' '.$posUnd;
-            return $ident[0].' '.$ident[1]; 
-           
+                Reservation::where('id',$ident[0])->update(['date_reservation'=> $start]);
+                 
+                return " La mise à jour est effectuée avec succès";
+              } 
+           }
              //return 'serrecc';
                //Reservation::where('id', $id)->update(array('google_path_json' =>$name));
           }else{
               if(strrpos($req->get('description'), 'prom_flash')!== FALSE)
               {
-                 return  'prom_flash';
-               //Happyhour::where('id', $id)->update(array('google_path_json' =>$name));
-
+                   $id=$req->get('id');
+                   if($start &&  $end && $id)
+                   {
+                      Happyhour::where('id',$id)->update(['dateDebut'=>$start, 'dateFin'=>$end]);
+                      return " La mise à jour est effectuée avec succès";
+                   }
+                         //  return  'prom_flash';
+                         //Happyhour::where('id', $id)->update(array('google_path_json' =>$name));
               }
 
           }
