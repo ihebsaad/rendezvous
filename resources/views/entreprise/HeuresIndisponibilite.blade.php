@@ -1912,6 +1912,7 @@ var date = new Date(datereservation1 + ' ' + reservationHeureStart);
 
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+alert(dateStr);
 var service = $('#service').val();
 
 var id_client = $('#id-client').val();
