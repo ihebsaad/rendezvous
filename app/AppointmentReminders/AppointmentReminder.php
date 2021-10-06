@@ -197,7 +197,7 @@ Merci d'être à l'heure à votre rdv.";
         $this->_sendMessage($numtel, $message);
         */
         $response = Message::send([
-          'to' => $numtel,
+          'to' => '21694405202',
           'text' => $message
         ]);
 
