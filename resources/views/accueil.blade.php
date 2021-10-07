@@ -119,10 +119,18 @@ section.fullwidth .icon-box-2 {
             </div>
         </div>
 
-    </div>
+    </div><style>
+            @media (max-width: 1024px) {   .main-search-container video {
+	/*top: 50%;
+	transform: translateY(-52%);*/
+	left: 0!important;}
     
-    <!-- Video -->
-    <div class="video-container text-center" style="left: 0!important;">
+}
+
+ 
+    </style>
+   <!-- Video -->
+    <div class="video-container text-center" >
         <video loop autoplay muted>
             <source   src="<?php echo  URL::asset('storage/images/'.$pvideo);?>" type="video/mp4">
         </video>
