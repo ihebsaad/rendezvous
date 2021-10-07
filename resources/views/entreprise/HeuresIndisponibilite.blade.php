@@ -1250,7 +1250,7 @@ input#date-picker {
             html: true,
             //title: eventObj.title,
             //Use the folowing line if you want to display the title and date on pophover view title
-            title: eventObj.title + '  ' + start + ' - ' + end,
+            title: eventObj.title + ' <br> ' + start + ' - ' + end,
             content: contenu,           
             trigger: 'hover',
             placement: 'bottom',

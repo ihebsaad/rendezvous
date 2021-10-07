@@ -208,7 +208,7 @@ class CalendrierController extends Controller
             //$chaine=substr($req->get('description'),10);
             //return ($posAnd+1);
             $chaine=substr($req->get('description'),($posAnd+1));
-            return $chaine;
+           // return $chaine;
             $ident = explode("_", $chaine);
             $services_res=Reservation::where('id',$ident[0])->first();
            // $ident[1]="99";
@@ -302,7 +302,7 @@ class CalendrierController extends Controller
            // $chaine=substr($req->get('description'),8);
             //return ($posAnd+1);
             $chaine=substr($req->get('description'),($posAnd+1));
-             return $chaine;
+             //return $chaine;
             $ident = explode("_", $chaine);
             $services_res=Reservation::where('id',$ident[0])->first();
            // $ident[1]="99";
@@ -2363,7 +2363,7 @@ class CalendrierController extends Controller
       $client=User::where('id',$ss->client)->first();
       if($client)
       {
-         $client=$client->name.' '.$client->lastname.' - Tel:'.$client->phone.' - Etat réservation (payée ou non): '.$confirme.';' ;
+         $client='Client: '.$client->name.' '.$client->lastname.' <br> Tel:'.$client->phone.' <br> Etat réservation (payée ou non): '.$confirme.';' ;
       }
 
       if($nbResvalide<$NbrService)
@@ -2437,7 +2437,7 @@ class CalendrierController extends Controller
       $client=User::where('id',$ss->client)->first();
       if($client)
       {
-         $client=$client->name.' '.$client->lastname.' - Tel:'.$client->phone.' - Etat réservation (payée ou non): '.$confirme.';' ;
+          $client='Client: '.$client->name.' '.$client->lastname.' <br> Tel:'.$client->phone.' <br> Etat réservation (payée ou non): '.$confirme.';' ;
       }
       
       if($nbResvalide<$NbrService)
