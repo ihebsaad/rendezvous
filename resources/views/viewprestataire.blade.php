@@ -8,6 +8,72 @@
 
 <style type="text/css">
 /* Show more */
+.fc .fc-toolbar-title {
+    font-size: 1.75em;
+    margin: 0;
+    margin-right: 38px!important;
+    font-size: 1.75em;
+    margin: 0;
+}
+.fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
+    color: #333333!important;
+    border-radius: 2px!important;
+    height: 2.1em!important;
+    padding: 0 .6em!important;
+    font-size: 1em!important;
+    font-weight: 600!important;
+    white-space: nowrap!important;
+    cursor: pointer!important;
+    background-color: #6be670!important;
+    margin-left:5px!important;
+}
+.fc .fc-button-group>.fc-button.fc-button-active, .fc .fc-button-group>.fc-button:active, .fc .fc-button-group>.fc-button:focus, .fc .fc-button-group>.fc-button:hover {
+    background-color: #6be670!important;
+    background-image: none;
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 15%), 0 1px 2px rgb(0 0 0 / 5%)!important;
+    z-index: 1;
+}
+.fc .fc-button-group {
+    position: relative;
+    display: initial;
+    font-size: small;
+    margin-right: 12px;
+}
+.fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
+    color: #333333;
+    border-radius: 2px;
+    background-color: #6be670;
+}
+.fc .fc-button-group>.fc-button {
+    border-radius: 0!important;
+    background-color: #4CAF50!important;
+    border: none!important;
+    font-weight: 600!important;
+    color: white!important;
+    padding: 15px 32px!important;
+    padding: 0 .6em!important;
+    font-size: 1em!important;
+    height: 2.1em!important;
+    white-space: nowrap!important;
+    cursor: pointer!important;
+    text-align: center!important;
+    text-decoration: none!important;
+    display: inline-block!important;
+    font-size: 16px!important;
+}
+.fc .fc-daygrid-week-number {
+    position: absolute;
+    display:none!important;
+    z-index: 5;
+    top: 0;
+    padding: 2px;
+    min-width: 1.5em;
+    text-align: center;
+    background-color: rgba(208,208,208,.3);
+    background-color: var(--fc-neutral-bg-color,rgba(208,208,208,.3));
+    color: grey;
+    color: var(--fc-neutral-text-color,grey);
+}
 .tabs-nav li a:hover, .tabs-nav li.active a {
 border-color: #ffd700;
 color: #2f2f2f;;
@@ -368,7 +434,7 @@ input#date-picker {
     color: black;
     border: yellow;
     border-radius: 50px;
-    background-color: #f9d308;
+    background-color: white;
 }
 .show-moreP {
 	height: 450px;
@@ -458,7 +524,7 @@ background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermetu
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: lightgray;
+    background-color: white;
 }
 .modal-fullscreen {
     width: 100vw;
@@ -469,7 +535,7 @@ background-color:<?php echo \App\Http\Controllers\CalendrierController::$fermetu
 
 
 .fc .fc-scrollgrid-liquid {
-    background: lightgray;
+    background: white;
     
     
     height: 496px;}
@@ -1261,14 +1327,12 @@ $( document ).ready(function() {
            left: 'prev,next today',
            center: 'title',
    
-           right: 'timeGridWeek,dayGridMonth,timeGridDay' //listMonth
+           right: 'dayGridMonth,timeGridWeek,timeGridDay' //listMonth
    
          },
          
          locale: initialLocaleCode,
-         initialView:'timeGridWeek',
          buttonIcons: false, // show the prev/next text
-         weekNumbers: true,
          navLinks: true, // can click day/week names to navigate views
          editable: false,
          dayMaxEvents: true, // allow "more" link when too many events
@@ -1373,7 +1437,7 @@ $( document ).ready(function() {
         </div>
         
         <!-- Modal footer -->
-        <div class="modal-footer"  style="background-color: lightgrey;">
+        <div class="modal-footer"  style="background-color: white;">
           <button type="button"  style="font-size: 14px;
     width: 156px;"  class="button book-now fullwidth margin-top-5" data-dismiss="modal">Fermer</button>
         </div>
@@ -1966,7 +2030,7 @@ font-size: 14px!important;
         <?php } ?>
         
             <!-- Opening Hours -->
-            <div class="boxed-widget opening-hours margin-top-35">
+            <div class="boxed-widget opening-hours margin-top-35" div="horraire">
                 
                 <?php 
                             $fhoraire = $user->fhoraire;
