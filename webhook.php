@@ -58,7 +58,7 @@ echo $dateAbn ;
   $todayy = date('Y-m-d H:i:s');
   //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
       //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
-      $dateAbn = new DateTime($dateAbn);
+      $dateAbn = new DateTime("2021-10-07 13:14:19");
       echo $dateAbn;
       $date = $dateAbn->format('Y-m-d H:i:s');
         $today= new DateTime();
