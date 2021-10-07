@@ -1767,7 +1767,7 @@ font-size: 14px!important;
                                         </div>
                                         <div class="row with-forms margin-top-0">
                                     <div class="col-lg-12 col-md-12 select_date_box">
-                                        <h5 style="color: red" id="msgRec">
+                                        <h5 style="    margin-left: 13px;font-size: 12.5px!important;color: red;" id="msgRec">
                             </h5>  <span class="add-on"><i class="icon-th"></i></span>
                                     </div></div>
           
