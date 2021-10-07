@@ -39,6 +39,10 @@ $temoinages=DB::table('temoinages')->get();
 <?php Session::forget('msgs'); ?>
  @endif 
 <style type="text/css">
+@media (max-width: 1024px){
+.main-search-container video {
+    width: min-content;
+}}
 section.fullwidth .icon-box-2 i {
     background-color: rgb(0 0 0 / 100%);
 }
