@@ -627,14 +627,14 @@ Session::put('ttmessage', 'Supprimé avec succès');
     {
 
       $proprendezvous=PropositionDatesServicesAbn::where('id',$id)->first();
-      $proprendezvous->delete();
-      $proprendezvous->save();
+     
+
 
       //  envoi un mail pour le client en lui informant que le prestataire a annulé la préservation.
 
        // envoi mail au client pour confirmer les dates finales de seances 
-
            $prestataire=User::where('id',$proprendezvous->prestataire)->first();
+           $reservation=Reservation::where('id',$proprendezvous->id_reservation)->update(['statut'=>2]);
            $client=User::where('id',$proprendezvous->client)->first();
            $service =Service::where('id',$proprendezvous->service_rec)->first();
            $mail_client="mail inexistant";
@@ -667,6 +667,7 @@ Session::put('ttmessage', 'Supprimé avec succès');
            {
            $dateres = $proprendezvous->datesConfirmees ;
            }
+           DB::table('proposition_dates_serv_abn')->where('id',$id)->delete();
 
          
             $message=''; 
@@ -686,13 +687,14 @@ Session::put('ttmessage', 'Supprimé avec succès');
     {
       
       $proprendezvous=PropositionDatesServicesAbn::where('id',$id)->first();
-      $proprendezvous->delete();
-      $proprendezvous->save();
+     
 
       //  envoi un mail pour le prestataire  en lui informant que le client a annulé la préservation.
 
        $prestataire=User::where('id',$proprendezvous->prestataire)->first();
            $client=User::where('id',$proprendezvous->client)->first();
+           $reservation=Reservation::where('id',$proprendezvous->id_reservation)->update(['statut'=>2]);
+
            $service =Service::where('id',$proprendezvous->service_rec)->first();
            $mail_prest="mail inexistant";
            $nom_client="client inexistant";
@@ -721,7 +723,8 @@ Session::put('ttmessage', 'Supprimé avec succès');
            }
            //return 'ok';
           
-           
+           DB::table('proposition_dates_serv_abn')->where('id',$id)->delete();
+
            $message='';
            $message.='<br>Bonjour <br>Le client a annulé la pré-réservation concernant le service récurrent '.$nom_service.'<br> Cordialement';
            // envoi mail au prestataire 
@@ -775,8 +778,8 @@ Session::put('ttmessage', 'Supprimé avec succès');
         }
 
       }
-      $proprendezvous->delete();
-      $proprendezvous->save();
+      
+     
 
       // envoi un mail au prestataire en lui informant que le client a accepté les dates proposé par le client
 
@@ -814,7 +817,8 @@ Session::put('ttmessage', 'Supprimé avec succès');
            {
            $dateresprop = $proprendezvous->datesProposees;
            }
-           
+           DB::table('proposition_dates_serv_abn')->where('id',$id)->delete();
+
            $message='';
            $message.='<br>Bonjour <br>Le client a accepté les dates de séances ('. $dateresprop.') pour le service récurrent '.$nom_service.'<br> Cordialement';
            // envoi mail au prestataire 
@@ -1030,7 +1034,6 @@ Session::put('ttmessage', 'Supprimé avec succès');
        public function proposerDates (Request $req)
       {
         //return "ok";
-        //dd($req->all());
          //$req->get('id_prop_date')
          $nbr=intval(trim( $req->get('nbr_dates')));
          $ch='';
@@ -1114,8 +1117,8 @@ Session::put('ttmessage', 'Supprimé avec succès');
     //$swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
-    $swiftTransport->setUsername('prestataire222@gmail.com'); //adresse email
-    $swiftTransport->setPassword('123prestataire'); // mot de passe email eSolutions2020*
+    $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
+    $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);

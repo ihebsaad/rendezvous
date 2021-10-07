@@ -316,12 +316,9 @@ $User = auth()->user();
             $.ajax({
             url:'{{ url('/') }}'+'/servicesrec/annulerPprestataire/'+ $id_prop_date,
             method:"get",
-            success:function(data){
-            //alert(data);
-            
-              location.reload();
-  
-                        }
+            cache: false,
+            success: function(response){
+                   location.reload(true);}
                     });
       }
 
@@ -335,10 +332,9 @@ $User = auth()->user();
             $.ajax({
             url:'{{ url('/') }}'+'/servicesrec/annulerPclient/'+$id_prop_date,
             method:"get",
-            success:function(data){
-              alert(data);
-  
-              }
+            cache: false,
+            success: function(response){
+                   location.reload(true);}
                });
 
       }
@@ -411,6 +407,7 @@ $User = auth()->user();
                     //alert("plpoooooo");
                 //alert(JSON.stringify(data));
                  swal("Un email est envoyé au client contenant les dates proposées");
+                 location.reload();
                  // location.href= "{{ route('reservations') }}";
                 }
             });
