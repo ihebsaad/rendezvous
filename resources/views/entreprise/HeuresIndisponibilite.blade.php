@@ -11,6 +11,13 @@
   <!-- Dashboard -->
   <style>
     @media (max-width: 991px){
+      .add-listing-section label.switch {
+    position: absolute;
+    margin-top: 34px!important;
+    margin-right: -15px!important;
+    z-index: 100;
+}
+  
 .dashboard-content {
     width: -webkit-fill-available;
     padding: 40px 5%;
@@ -134,7 +141,7 @@ background-color: #fff3b0;
     color: #ff0000!important;
 }
 @media (max-width: 768px){
-  
+
   .fc-unthemed .fc-popover {
     border-width: 1px;
     top: -239.719px!important;
@@ -142,13 +149,13 @@ background-color: #fff3b0;
     border-style: solid;
 }
     .fc-toolbar .fc-right {
-      float: left;
+      float: right;
     margin-top: 2px;
-    width: 186px;
+    width: 270px;
 }
 .fc-toolbar .fc-left {
     float: left;
-    width: 186px;}
+   }
 .day-slot-headline { 
     width: auto!important;
   
@@ -483,6 +490,7 @@ input#date-picker {
                         <div class="add-listing-headline">
                             <h3><i class="fa fa-calendar-times-o"></i> Heures d'indisponibilité</h3>
                             <!-- Switcher -->
+                            
                             <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
                         </div>
 
