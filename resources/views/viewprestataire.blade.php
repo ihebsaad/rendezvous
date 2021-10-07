@@ -20,8 +20,8 @@
     border-radius: 2px!important;
     height: 2.1em!important;
     padding: 0 .6em!important;
-    font-size: 1em!important;
-    font-weight: 600!important;
+    font-size: 16px!important;
+    font-weight: 657!important;
     white-space: nowrap!important;
     cursor: pointer!important;
     background-color: #6be670!important;
