@@ -122,7 +122,7 @@ section.fullwidth .icon-box-2 {
     </div>
     
     <!-- Video -->
-    <div class="video-container text-center">
+    <div class="video-container text-center" style="left: 0!important;">
         <video loop autoplay muted>
             <source   src="<?php echo  URL::asset('storage/images/'.$pvideo);?>" type="video/mp4">
         </video>
