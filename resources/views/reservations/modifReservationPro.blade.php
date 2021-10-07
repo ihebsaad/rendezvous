@@ -131,7 +131,7 @@
                 '',
                 'success'
               ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/ReservezUnRdv/{{(auth()->user())->id}}");
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
                 })
 
                }
@@ -143,7 +143,7 @@
                 'Vous avez atteint le maximum de nombre des reports.',
                 'error'
               ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/ReservezUnRdv/{{(auth()->user())->id}}");
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
     })
             }
 
@@ -166,7 +166,8 @@
                 '',
                 'success'
               ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/ReservezUnRdv/{{(auth()->user())->id}}");
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
+
                 })
               
                }
