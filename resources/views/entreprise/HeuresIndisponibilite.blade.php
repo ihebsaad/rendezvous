@@ -53,6 +53,7 @@
     width: 295px;
 }
 .fc-toolbar .fc-left {
+  margin-top: 9px;
     float: left;
    }
       .tabs-nav li a:hover, .tabs-nav li.active a {
