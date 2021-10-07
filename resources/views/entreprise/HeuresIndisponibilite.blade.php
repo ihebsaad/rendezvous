@@ -1191,7 +1191,7 @@ input#date-picker {
     $(document).ready(function() {
         $.noConflict();
         $('#events').fullCalendar({
-            defaultDate: '2021-03-12',            
+            defaultDate: $('#events').fullCalendar('today'),          
                 editable: true,
                 eventLimit: true,
                 displayEventTime: false,    
