@@ -53,9 +53,10 @@ elseif ($event->type=='customer.subscription.deleted') {
     $dateAbn=$row["created_at"];
 
 }
-
+echo $dateAbn ;
 //$id=DB::table('abonnements')->where('IdStripe', $event->lines->data->subscription)->value('id');
   $todayy = date('Y-m-d H:i:s');
+  //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
       //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
       $dateAbn = new DateTime($dateAbn);
       echo $dateAbn;
