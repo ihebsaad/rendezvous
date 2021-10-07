@@ -52,6 +52,10 @@
 
     width: 262px!important;
 }
+.fc-ltr .fc-axis {
+    text-align: right;
+    width: 35px!important;
+}
 .fc-toolbar .fc-left {
   margin-top: 9px;
     float: left;
