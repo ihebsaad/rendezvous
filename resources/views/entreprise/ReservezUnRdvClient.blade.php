@@ -301,10 +301,8 @@ $User = auth()->user();
             $.ajax({
             url:'{{ url('/') }}'+'/servicesrec/annulerPclient/'+$id_prop_date,
             method:"get",
-            success:function(data){
-              alert(data);
-  
-              }
+            success: function(response){
+                   location.reload(true);}
                });
 
       }
