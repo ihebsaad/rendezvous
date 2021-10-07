@@ -552,18 +552,14 @@ input#date-picker {
         </div>  
         <br></div>
           <div class="row">
-            <div class="col-lg-12">
                     <div class="panel panel-default dash">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
                                 <div class="panel-body">
-                                    <div class="col-lg-12">
+                                    
                                         <div id="events"></div>
-                                    </div>
+                                
                                 </div>
-                            </div>
                         </div>
-                    </div>
             </div>
           
                 </div>
@@ -1838,7 +1834,10 @@ $.ajax({
    data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:id_client,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
-   location.href= "{{ route('reservations') }}";
+   swal('Réservation ajouté avec succes' , 'success');
+setTimeout(function () {
+location.reload()
+}, 1000);
    }
 });
 
@@ -1881,8 +1880,13 @@ $.ajax({
    data:{prestataire:<?php echo $user->id;?>,client:id_client,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
-   location.href= "{{ route('reservations') }}";
+   swal('Réservation ajouté avec succes' , 'success');
+setTimeout(function () {
+location.reload()
+}, 1000);
+
    }
+   
 });
 
 });
