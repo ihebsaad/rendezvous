@@ -48,9 +48,9 @@
 }
     .fc-toolbar .fc-right {
     float: right;
-    margin-top: 2px;
+    margin-top: 9px!important;
 
-    width: 295px;
+    width: 262px!important;
 }
 .fc-toolbar .fc-left {
   margin-top: 9px;
