@@ -45,7 +45,7 @@ if ($event->type=='customer.subscription.created') {
 }
 elseif ($event->type=='customer.subscription.deleted') {
   echo "Record updated successfully";
-  $sql = "SELECT * FROM `abonnements` WHERE IdStripe=".$event->lines->data->subscription."";
+  $sql = "SELECT * FROM `abonnements` WHERE IdStripe='".$event->lines->data->subscription."'";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     $row = $result -> fetch_assoc();
@@ -70,13 +70,13 @@ echo $dateAbn ;
           //dd("ok");
           $y = date('Y-m-d H:i:s', strtotime($y. ' + 1 month'));
         }
-        $sql = "UPDATE abonnements SET expire=".$y." WHERE IdStripe=".$event->lines->data->subscription."";
+        $sql = "UPDATE abonnements SET expire=".$y." WHERE IdStripe='".$event->lines->data->subscription."'";
          if ($conn->query($sql) === TRUE) {
               //echo "Record updated successfully";
             } else {
               //echo "Error updating record: " . $conn->error;
             }
-        $sql = "UPDATE abonnements SET statut='annuler' WHERE IdStripe=".$event->lines->data->subscription."";
+        $sql = "UPDATE abonnements SET statut='annuler' WHERE IdStripe='".$event->lines->data->subscription."'";
          if ($conn->query($sql) === TRUE) {
               //echo "Record updated successfully";
             } else {
