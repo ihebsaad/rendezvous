@@ -58,6 +58,7 @@ elseif ($event->type=='customer.subscription.deleted') {
   $todayy = date('Y-m-d H:i:s');
       //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
       $dateAbn = new DateTime($dateAbn);
+      echo $dateAbn;
       $date = $dateAbn->format('Y-m-d H:i:s');
         $today= new DateTime();
         $m = $dateAbn->format('n');
