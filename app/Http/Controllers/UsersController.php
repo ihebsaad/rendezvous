@@ -1976,7 +1976,8 @@ public function Services($id)
                  'fb'=> $request->get('fb'),
                  'instagram'=> $request->get('instagram'),
                  'twitter'=> $request->get('twitter'),
-                 
+                 'pays' => $request->get('pays'),             
+                 'fhoraire' => $request->get('fhoraire'),                 
 
 		     	]);
 
