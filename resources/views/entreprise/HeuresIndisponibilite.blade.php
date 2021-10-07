@@ -1204,7 +1204,7 @@ input#date-picker {
         eventDrop: function(event, delta, revertFunc) {
            var start = $.fullCalendar.moment(event.start).format();
            var end = $.fullCalendar.moment(event.end).format();
-             //alert(start+" "+end+" "+event.description+" "+event.id);
+             alert(start+" "+end+" "+event.description+" "+event.id);
              console.log(start.indexOf("T"));
 
              if (start.indexOf("T")== -1|| end.indexOf("T") == -1) {  // d.valueOf() could also work
@@ -1234,6 +1234,29 @@ input#date-picker {
                      }
                }
             },
+            // Popover View       
+        eventRender: function(eventObj, element) {
+          element.on('click', e => e.preventDefault());
+          var imgName = eventObj.image;
+          var start = moment(eventObj.start).format('DD/MM/YYYY HH:mm');
+          var end = moment(eventObj.end).format('DD/MM/YYYY HH:mm');          
+          var contenu=""; 
+             if(eventObj.description.indexOf(";")!==-1)  
+             {
+              var myArr = eventObj.description.split(";");
+              contenu=myArr[0];
+             }  
+            element.popover({ 
+            html: true,
+            //title: eventObj.title,
+            //Use the folowing line if you want to display the title and date on pophover view title
+            title: eventObj.title + ' <br> ' + start + ' - ' + end,
+            content: contenu,           
+            trigger: 'hover',
+            placement: 'bottom',
+            container: 'body',          
+            });
+        },
        
         businessHours: <?php echo \App\Http\Controllers\CalendrierController::ouverture_fermeture_horaire_chaine($user->id); ?>,
          events:<?php echo(\App\Http\Controllers\CalendrierController::indisponibilte_rendezvous_horaire_chaine($user->id)); ?>

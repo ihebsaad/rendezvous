@@ -187,6 +187,8 @@ class CalendrierController extends Controller
       if(strrpos($req->get('description'),'indisp')!== FALSE)
       {
          $id=$req->get('id');
+         $id=substr($id,7);
+         //return $id;
          if($start &&  $end && $id)
          {
             Indisponibilite::where('id',$id)->update(['date_debut'=>$start, 'date_fin'=>$end]);
@@ -203,7 +205,10 @@ class CalendrierController extends Controller
             //&".$ss->id."_".$ser->id."'
             $posAnd=strpos($req->get('description'),'&');
             $posUnd=strpos($req->get('description'),'_');
-            $chaine=substr($req->get('description'),10);
+            //$chaine=substr($req->get('description'),10);
+            //return ($posAnd+1);
+            $chaine=substr($req->get('description'),($posAnd+1));
+           // return $chaine;
             $ident = explode("_", $chaine);
             $services_res=Reservation::where('id',$ident[0])->first();
            // $ident[1]="99";
@@ -294,7 +299,10 @@ class CalendrierController extends Controller
             //7 11 
             $posAnd=strpos($req->get('description'),'&');
             $posUnd=strpos($req->get('description'),'_');
-            $chaine=substr($req->get('description'),8);
+           // $chaine=substr($req->get('description'),8);
+            //return ($posAnd+1);
+            $chaine=substr($req->get('description'),($posAnd+1));
+             //return $chaine;
             $ident = explode("_", $chaine);
             $services_res=Reservation::where('id',$ident[0])->first();
            // $ident[1]="99";
@@ -318,6 +326,8 @@ class CalendrierController extends Controller
               if(strrpos($req->get('description'), 'prom_flash')!== FALSE)
               {
                    $id=$req->get('id');
+                   $id=substr($id,7);
+                   //return $id;
                    if($start &&  $end && $id)
                    {
                       Happyhour::where('id',$id)->update(['dateDebut'=>$start, 'dateFin'=>$end]);
@@ -1505,7 +1515,7 @@ class CalendrierController extends Controller
    str_replace(" ","T",$debut); 
    str_replace(" ","T",$fin);     
    //$res[]=array('title'=>$ui->titre,'start'=>$debut, 'end'=> $fin, 'color' => self::$indispo_couleur);
-   $res.="{id:".$ui->id.",title:'".$ui->titre."',description:'indisp', start:'".$debut."',end:'".$fin."',color:'".self::$indispo_couleur."'},";
+   $res.="{id:9999999".$ui->id.",title:'".$ui->titre."',description:'indisp', start:'".$debut."',end:'".$fin."',color:'".self::$indispo_couleur."'},";
    // calcul  heures et/ou jours indisponiblité pour datetimepicker
    
    $de=$ui->date_debut;
@@ -2344,16 +2354,28 @@ class CalendrierController extends Controller
       $hour=substr($ser->duree, 0, 2);
       $minutes=substr($ser->duree,3,2);
       $fin=date('Y-m-d H:i',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+      $confirme='impayée';
+      if($ss->statut==1)
+      {
+        $confirme="payée";
+      }
+
+      $client=User::where('id',$ss->client)->first();
+      if($client)
+      {
+         $client='Client: '.$client->name.' '.$client->lastname.' <br> Tel:'.$client->phone.' <br> Etat réservation (payée ou non): '.$confirme.';' ;
+      }
 
       if($nbResvalide<$NbrService)
       {
      // $res[]=array('title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_parall_couleur);
-      $res.="{id:".$ss->id.'_'.$ser->id.",title:'".$ser->nom." (+)',description:'sersimple&".$ss->id."_".$ser->id."',start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
+
+      $res.="{id:".$ss->id.'_'.$ser->id.",title:'".$ser->nom." (+)',description:'".$client."sersimple&".$ss->id."_".$ser->id."',start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
       }
       else
       {
        //$res[]=array('title'=>$ser->nom,'start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_couleur);
-       $res.="{id:".$ss->id.'_'.$ser->id.",title:'".$ser->nom."',description:'sersimple&".$ss->id."_".$ser->id."', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
+       $res.="{id:".$ss->id.'_'.$ser->id.",title:'".$ser->nom."',description:'".$client."sersimple&".$ss->id."_".$ser->id."', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
 
       }
 
@@ -2405,17 +2427,29 @@ class CalendrierController extends Controller
       $hour=substr($ser->duree, 0, 2);
       $minutes=substr($ser->duree,3,2);
       $fin=date('Y-m-d H:i',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+
+      $confirme='impayée';
+      if($ss->statut==1)
+      {
+        $confirme="payée";
+      }
+
+      $client=User::where('id',$ss->client)->first();
+      if($client)
+      {
+          $client='Client: '.$client->name.' '.$client->lastname.' <br> Tel:'.$client->phone.' <br> Etat réservation (payée ou non): '.$confirme.';' ;
+      }
       
       if($nbResvalide<$NbrService)
       {
       //$res[]=array('title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' =>self::$rendezvous_parall_couleur);
-      $res.="{id:".$srec->id.'_'.$ser->id.",title:'".$ser->nom." (+)', description:'serrecc&".$srec->id."_".$ser->id."',start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
+      $res.="{id:".$srec->id.'_'.$ser->id.",title:'".$ser->nom." (+)', description:'".$client."serrecc&".$srec->id."_".$ser->id."',start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_parall_couleur."'},";
 
       }
       else
       {
        //$res[]=array('title'=>$ser->nom,'start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_couleur);
-       $res.="{id:".$srec->id.'_'.$ser->id.",title:'".$ser->nom."', description:'serrecc&".$srec->id."_".$ser->id."', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
+       $res.="{id:".$srec->id.'_'.$ser->id.",title:'".$ser->nom."', description:'".$client."serrecc&".$srec->id."_".$ser->id."', start:'".$debut."',end:'".$fin."',color:'".self::$rendezvous_couleur."'},";
 
       }
 
@@ -2443,7 +2477,7 @@ class CalendrierController extends Controller
      $happyhours=Happyhour::where('id_user',$id)->get();
      foreach ($happyhours as $hh ) {      
   //$res[]=array('title'=>'Promotions flash','start'=>$hh->dateDebut, 'end'=> $hh->dateFin, 'color' => self::$happyhours_couleur);
-   $res.="{id:".$hh->id.",title: 'Promotions flash ', description:'prom_flash',start:'".$hh->dateDebut."',end:'".$hh->dateFin."',color:'".self::$happyhours_couleur."'},";
+   $res.="{id:8888888".$hh->id.",title: 'Promotions flash ', description:'prom_flash',start:'".$hh->dateDebut."',end:'".$hh->dateFin."',color:'".self::$happyhours_couleur."'},";
 
      }
 
