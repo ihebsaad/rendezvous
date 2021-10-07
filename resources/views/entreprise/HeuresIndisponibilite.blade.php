@@ -10,6 +10,16 @@
 
   <!-- Dashboard -->
   <style>
+    body .fc {
+    height: 561px!important;
+    font-size: 1em;
+}
+    .panel-body {
+
+      height: 571px;    padding: 15px!important;
+}.fc-scroller {
+  height: 330px!important;
+  -webkit-overflow-scrolling: touch; }
     @media (max-width: 991px){
       .add-listing-section label.switch {
     position: absolute;
