@@ -10,17 +10,19 @@
 
   <!-- Dashboard -->
   <style>
-    body .fc {
+ 
+    @media (max-width: 991px){
+      body .fc {
     height: 561px!important;
     font-size: 1em;
 }
     .panel-body {
 
-      height: 571px;    padding: 15px!important;
-}.fc-scroller {
-  height: 330px!important;
+      height: 600px;    padding: 15px!important;
+}
+      .fc-scroller {
+  height: 350px!important;
   -webkit-overflow-scrolling: touch; }
-    @media (max-width: 991px){
       .add-listing-section label.switch {
     position: absolute;
     margin-top: 34px!important;
@@ -52,7 +54,7 @@
 }
 .fc-toolbar .fc-left {
     float: left;
-    width: 274px;}
+   }
       .tabs-nav li a:hover, .tabs-nav li.active a {
 border-color: #ffd700;
 color: #000000;
@@ -569,7 +571,6 @@ input#date-picker {
                     </div>
         </div>  
         <br></div>
-          <div class="row">
                     <div class="panel panel-default dash">
                         <div class="panel panel-default">
                                 <div class="panel-body">
@@ -578,7 +579,6 @@ input#date-picker {
                                 
                                 </div>
                         </div>
-            </div>
           
                 </div>
                 </div>  
