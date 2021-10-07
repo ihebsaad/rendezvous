@@ -58,8 +58,8 @@ echo $dateAbn ;
   $todayy = date('Y-m-d H:i:s');
   //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
       //$dateAbn=DB::table('abonnements')->where('id', $id)->value('created_at');
-      $dateAbn = new DateTime("2021-10-07 13:14:19");
-      echo $dateAbn;
+      $dateAbn = new DateTime($dateAbn);
+      //echo $dateAbn;
       $date = $dateAbn->format('Y-m-d H:i:s');
         $today= new DateTime();
         $m = $dateAbn->format('n');
@@ -70,6 +70,7 @@ echo $dateAbn ;
           //dd("ok");
           $y = date('Y-m-d H:i:s', strtotime($y. ' + 1 month'));
         }
+        echo $y;
         $sql = "UPDATE abonnements SET expire=".$y." WHERE IdStripe='".$event->data->object->id."'";
          if ($conn->query($sql) === TRUE) {
               //echo "Record updated successfully";
