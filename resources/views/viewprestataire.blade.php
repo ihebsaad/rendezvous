@@ -1332,7 +1332,7 @@ $( document ).ready(function() {
          },
          
          locale: initialLocaleCode,
-         buttonIcons: false, // show the prev/next text
+         buttonIcons: true, // show the prev/next text
          navLinks: true, // can click day/week names to navigate views
          editable: false,
          dayMaxEvents: true, // allow "more" link when too many events
