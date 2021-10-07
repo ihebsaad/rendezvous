@@ -71,7 +71,7 @@ echo $dateAbn ;
           $y = date('Y-m-d H:i:s', strtotime($y. ' + 1 month'));
         }
         echo $y;
-        $sql = "UPDATE abonnements SET expire=".$y." WHERE IdStripe='".$event->data->object->id."'";
+        $sql = "UPDATE abonnements SET expire='".$y."' WHERE IdStripe='".$event->data->object->id."'";
          if ($conn->query($sql) === TRUE) {
               //echo "Record updated successfully";
             } else {
