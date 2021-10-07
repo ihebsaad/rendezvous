@@ -1068,7 +1068,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
  
    // --------------------fin sauvgarde au google calendar ----------------------------------------------------
 		 
-       return redirect('/reservations')->with('success', 'Réservation Validée  ');
+       return redirect('ReservezUnRdv',['id'=> auth()->user()->id] )->with('success', 'Réservation Validée  ');
 
     }
      public function oauth()
