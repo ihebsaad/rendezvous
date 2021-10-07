@@ -2229,7 +2229,8 @@ body .typed-cursor.typed-cursor--blink.typed-fade-out{
     .main-search-container video {
 	/*top: 50%;
 	transform: translateY(-52%);*/
-	left: -80%;}
+	left: 0!important;
+	}
     
 }
 
