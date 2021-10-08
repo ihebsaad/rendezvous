@@ -38,6 +38,9 @@ use \App\User;
     </div>
 
     <!-- Content -->
+
+    <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+             ?> 
     <div class="row">
 
       <!-- Item -->
@@ -67,6 +70,8 @@ number_format($Somme[0]->somme, 3, '.', ','));?></h4> <span>la somme gagnée <st
       </div>
 
     </div>
+   <?php } ?>
+
 
     <div class="row">
       

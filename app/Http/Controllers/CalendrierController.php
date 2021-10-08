@@ -2429,12 +2429,12 @@ class CalendrierController extends Controller
       $fin=date('Y-m-d H:i',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
 
       $confirme='impayée';
-      if($ss->statut==1)
+      if($srec->statut==1)
       {
         $confirme="payée";
       }
 
-      $client=User::where('id',$ss->client)->first();
+      $client=User::where('id',$srec->client)->first();
       if($client)
       {
           $client='Client: '.$client->name.' '.$client->lastname.' <br> Tel:'.$client->phone.' <br> Etat réservation (payée ou non): '.$confirme.';' ;
