@@ -157,7 +157,8 @@ class ReviewsController extends Controller
     {
   
 	 
-	DB::table('reviews')->where('id', $id)->delete();
+	$me=DB::table('reviews')->where('id', $id)->delete();
+  dd($me);
 	return redirect()->back();
 
 	}
