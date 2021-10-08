@@ -1062,13 +1062,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
              'details' => $message,
          ]);	
 		 $alerte->save();
-     $user=auth()->user();
+     
  // ------------------sauvgarder l'évenement dans google calendar------------------------------------
 
- 
+         $id=auth()->user()->id;
    // --------------------fin sauvgarde au google calendar ----------------------------------------------------
-		 
-       return redirect('ReservezUnRdv',['id'=> $user->id] )->with('success', 'Réservation Validée  ');
+		     return view('entreprise.ReservezUnRdv', compact('id'));
+
 
     }
      public function oauth()
