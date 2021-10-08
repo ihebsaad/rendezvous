@@ -1311,8 +1311,15 @@ table.basic-table th {
             <!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                 <i class="fa  fa-calendar"></i> Calendrier du prestataire
             </div>-->
+            <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+             ?>  
             <button id="kbs" type="button" class="btn " style="    background:black;color:white;font-size: 15px;       width: -webkit-fill-available;;height: 62px;" data-toggle="modal" data-target="#calendrier_prestataire">
                 <i class="fa  fa-calendar"></i> Consulter notre calendrier </button>
+
+             <?php } ?>
+
+
+
                 <script>  $("#kbs").click(function(){
     $("#calendrier_prestataire").show();
 });
