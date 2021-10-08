@@ -153,12 +153,12 @@ class ReviewsController extends Controller
 
 
 	
-     public function remove($id,$user)
+     public function remove($id)
     {
   
 	 
 	DB::table('reviews')->where('id', $id)->delete();
-	return back();
+	return redirect()->back();
 
 	}
 	
