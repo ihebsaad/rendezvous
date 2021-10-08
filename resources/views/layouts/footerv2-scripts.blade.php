@@ -28,131 +28,6 @@
 
 <script>
 // Calendar Init
-$(function() {
-  function now () { 
-    var d = new Date();
-  var n = d.getDate()-1;
-  
-  d.setDate(n);
-    return d; }
-
-	$('#date-picker').daterangepicker({
-		"opens": "left",
-		singleDatePicker: true,
-      locale: {
-        "format": "DD-MM-YYYY",
-        "separator": " - ",
-        "applyLabel": "Appliquer",
-        "cancelLabel": "Annuler",
-        "fromLabel": "de",
-        "toLabel": "jusq'à",
-        "customRangeLabel": "Personnalisé",
-        "daysOfWeek": [
-            "Di",
-            "Lu",
-            "Ma",
-            "Me",
-            "Je",
-            "Ve",
-            "Sa"
-        ],
-        "monthNames": [
-            "Janvier",
-            "Fevrier",
-            "Mars",
-            "Avril",
-            "Mai",
-            "Juin",
-            "Juillet",
-            "Aout",
-            "Septembre",
-            "Octobre",
-            "Novembre",
-            "Decembre"
-        ],
-        "firstDay": 1
-    },
-    isInvalidDate: function(date) {
-      var disabled_end = moment(now(), 'MM-DD-YYYY');
-     var indisp=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_indisp_rendezvous($user->id);}?>;
-      var array=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);}?>; 
-      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
-		var disabled_end = moment(now(), 'MM-DD-YYYY');
-      for(var i=0; i< array.length;i++)
-      for(var j=0; j< indisp.length;j++)
-
-        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
- )
-          return true;
-        return false;
-  },
-   
-		// Disabling Date Ranges
-
-	});});
-	$(function() {
-		function now () { 
-    var d = new Date();
-  var n = d.getDate()-1;
-  
-  d.setDate(n);
-    return d; }
-	$('#date-picker2').daterangepicker({
-		"opens": "left",
-		singleDatePicker: true,
-      locale: {
-        "format": "DD-MM-YYYY",
-        "separator": " - ",
-        "applyLabel": "Appliquer",
-        "cancelLabel": "Annuler",
-        "fromLabel": "de",
-        "toLabel": "jusq'à",
-        "customRangeLabel": "Personnalisé",
-        "daysOfWeek": [
-            "Di",
-            "Lu",
-            "Ma",
-            "Me",
-            "Je",
-            "Ve",
-            "Sa"
-        ],
-        "monthNames": [
-            "Janvier",
-            "Fevrier",
-            "Mars",
-            "Avril",
-            "Mai",
-            "Juin",
-            "Juillet",
-            "Aout",
-            "Septembre",
-            "Octobre",
-            "Novembre",
-            "Decembre"
-        ],
-        "firstDay": 1
-    },
-
-
-		// Disabling Date Ranges
-    isInvalidDate: function(date) {
-      var disabled_end = moment(now(), 'MM-DD-YYYY');
-     var indisp=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_indisp_rendezvous($user->id);}?>;
-      var array=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);}?>; 
-      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
-		var disabled_end = moment(now(), 'MM-DD-YYYY');
-      for(var i=0; i< array.length;i++)
-      for(var j=0; j< indisp.length;j++)
-
-        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
- )
-          return true;
-        return false;
-  },
-   
-	});
-});
 
 // Calendar animation
 $('#date-picker').on('showCalendar.daterangepicker', function(ev, picker) {
@@ -174,6 +49,7 @@ $('#date-picker2').on('show.daterangepicker', function(ev, picker) {
 
 
 </script>
+
 
 <script>
     lightbox.option({

@@ -1510,7 +1510,7 @@ $( document ).ready(function() {
 
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="service" name="service[]"  multiple style="font-weight: 17px !important; "data-placeholder="Sélectionner le(s) service(s) desiré(s)" onchange="selectservice()" >
-                               <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner le(s) service(s) desiré(s)</option>
+                               
                                <?php 
                                 foreach($services as $service){
                                     echo '<option  style="font-weight: 17px;" value="'.$service->id.'"  prix="'.$service->prix.'">'.$service->nom.'</option>'; 
@@ -2895,6 +2895,143 @@ document.getElementById("contactform").reset();
 
 });</script>
 <?php }?> 
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
+
+<script>
+ $(function() {
+  function now () { 
+    var d = new Date();
+  var n = d.getDate()-1;
+  
+  d.setDate(n);
+    return d; }
+
+	$('#date-picker').daterangepicker({
+		"opens": "left",
+		singleDatePicker: true,
+      locale: {
+        "format": "DD-MM-YYYY",
+        "separator": " - ",
+        "applyLabel": "Appliquer",
+        "cancelLabel": "Annuler",
+        "fromLabel": "de",
+        "toLabel": "jusq'à",
+        "customRangeLabel": "Personnalisé",
+        "daysOfWeek": [
+            "Di",
+            "Lu",
+            "Ma",
+            "Me",
+            "Je",
+            "Ve",
+            "Sa"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Fevrier",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Aout",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Decembre"
+        ],
+        "firstDay": 1
+    },
+    isInvalidDate: function(date) {
+      var disabled_end = moment(now(), 'MM-DD-YYYY');
+     var indisp=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_indisp_rendezvous($user->id);}?>;
+      var array=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);}?>; 
+      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
+      for(var i=-1; i< array.length;i++)
+      for(var j=-1; j< indisp.length;j++)
+
+        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
+ )
+          return true;
+        return false;
+  },
+   
+		// Disabling Date Ranges
+
+	});});
+	$(function() {
+		function now () { 
+    var d = new Date();
+  var n = d.getDate()-1;
+  
+  d.setDate(n);
+    return d; }
+	$('#date-picker2').daterangepicker({
+		"opens": "left",
+		singleDatePicker: true,
+      locale: {
+        "format": "DD-MM-YYYY",
+        "separator": " - ",
+        "applyLabel": "Appliquer",
+        "cancelLabel": "Annuler",
+        "fromLabel": "de",
+        "toLabel": "jusq'à",
+        "customRangeLabel": "Personnalisé",
+        "daysOfWeek": [
+            "Di",
+            "Lu",
+            "Ma",
+            "Me",
+            "Je",
+            "Ve",
+            "Sa"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Fevrier",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Aout",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Decembre"
+        ],
+        "firstDay": 1
+    },
+
+
+		// Disabling Date Ranges
+    isInvalidDate: function(date) {
+        
+      var disabled_end = moment(now(), 'MM-DD-YYYY');
+     var indisp=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_indisp_rendezvous($user->id);}?>;
+      var array=<?php if(isset($user)) {echo App\Http\Controllers\CalendrierController::get_tab_jours_fermeture_semaine($user->id);}?>; 
+      var disabled_start = moment('09-01-2012', 'MM-DD-YYYY');
+		var disabled_end = moment(now(), 'MM-DD-YYYY');
+      for(var i=-1; i< array.length;i++)
+      for(var j=-1; j< indisp.length;j++)
+
+        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
+ )
+          return true;
+        return false;
+  },
+   
+	});
+});
+
+    
+</script>
+
+
+
 
   @endsection
 @include('layouts.pageprestataire-scripts')
