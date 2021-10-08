@@ -38,12 +38,16 @@ use \App\User;
     </div>
 
     <!-- Content -->
+
+    <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+             ?> 
     <div class="row">
 
       <!-- Item -->
       <div class="col-lg-4 col-md-6"> 
         <div class="dashboard-stat color-1">
-          <div class="dashboard-stat-content wallet-totals"><h4>{{$Somme[0]->somme}}</h4> <span>la somme gagnée <strong class="wallet-currency">EURO</strong></span></div>
+          <div class="dashboard-stat-content wallet-totals"><h4><?php echo(
+number_format($Somme[0]->somme, 3, '.', ','));?></h4> <span>la somme gagnée <strong class="wallet-currency">EURO</strong></span></div>
           <div class="dashboard-stat-icon"><i class="im im-icon-Money-2"></i></div>
         </div>
       </div>
@@ -51,7 +55,7 @@ use \App\User;
       <div class="col-lg-4 col-md-6">
         <div class="dashboard-stat color-3">
 
-          <div class="dashboard-stat-content wallet-totals"><h4>{{$CA[0]->somme}}</h4> <span>Chiffre d’affaire (mensuelle) <strong class="wallet-currency">EURO</strong></span> </div>
+          <div class="dashboard-stat-content wallet-totals"><h4><?php echo(number_format($CA[0]->somme, 3, '.', ','));?> </h4> <span>Chiffre d’affaire (mensuelle) <strong class="wallet-currency">EURO</strong></span> </div>
           <div class="dashboard-stat-icon"><i class="im im-icon-Money-Bag"></i></div>
           <div class="" style="float: right;margin:0px 0px 0px 0px ;background-color: #ffae00"><b><span><a class="button"   onclick="downloadCSV()" style="background-color: #ffae00"><i class="fa fa-download" aria-hidden="true"></i> Export csv</a></span></b></div>
         </div>
@@ -66,6 +70,8 @@ use \App\User;
       </div>
 
     </div>
+   <?php } ?>
+
 
     <div class="row">
       

@@ -63,7 +63,9 @@
        <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?>
       <li class="<?php if ($view_name == 'googlecalendar-index'){echo 'active';} ?>  "><a href="{{ route('googleagenda',['id'=>$user->id]) }}"><i class="sl sl-icon-notebook"></i> Google Agenda </a></li> 
        <?php } ?>
-      <?php if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>  
+      <?php //if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) {
+       if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+       ?>  
         
        <li class="<?php if ($view_name == 'statistiques'){echo 'active';} ?>  "><a href="{{ route('StatistiquesPro') }}"><i class="sl sl-icon-chart"></i> Statistiques </a></li> 
            <?php } ?> 
@@ -79,13 +81,23 @@
               <li><a href="{{ route('Categories', ['id'=>$user->id]) }}">Catégories</a></li>
               <li><a href="{{ route('ImagesVideo', ['id'=>$user->id]) }}">Images & vidéo</a></li>
               <li><a href="{{ route('HoraireOuverture', ['id'=>$user->id]) }}">Horaire d'ouverture</a></li>
+        <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+             ?>  
               <li><a href="{{ route('HeuresIndisponibilite', ['id'=>$user->id]) }}">Calendrier & Heures d'indisponibilité</a></li>
+               <?php } ?>
+
               <li><a href="{{ route('Services', ['id'=>$user->id]) }}">Services</a></li>
+          <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+             ?>  
               <li><a href="{{ route('ServicesSupplementaires', ['id'=>$user->id]) }}">Services Supplémentaires</a></li>
+               <?php } ?>
               <li><a href="{{ route('Produits', ['id'=>$user->id]) }}">Produits</a></li>
+            <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
+             ?>
               <li><a href="{{ route('CodesPromo', ['id'=>$user->id]) }}">Codes promo</a></li>
               <li><a href="{{ route('CarteFidelite', ['id'=>$user->id]) }}">Carte de fidélité</a></li>
               <li><a href="{{ route('HappyHours', ['id'=>$user->id]) }}">Promotions flash</a></li>
+            <?php } ?>
               <li><a href="{{ route('FAQ', ['id'=>$user->id]) }}">FAQ</a></li>
             </ul> 
         </li> 
