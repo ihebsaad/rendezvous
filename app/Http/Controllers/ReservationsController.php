@@ -319,7 +319,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
     	$Newdates = Newdate::where('idres',$id)->get();
     	$reservation = Reservation::where('id',$id)->first();
-    	dd($reservation);
+    	//dd($reservation);
     	$prestataire=User::find($reservation->prestataire);
     	$date = new DateTime($reservation->date_reservation);
 		$date = $date->format('d-m-Y');
@@ -1062,13 +1062,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
              'details' => $message,
          ]);	
 		 $alerte->save();
-     
+
  // ------------------sauvgarder l'évenement dans google calendar------------------------------------
 
-         $id=auth()->user()->id;
+ 
    // --------------------fin sauvgarde au google calendar ----------------------------------------------------
-		     return view('entreprise.ReservezUnRdv', compact('id'));
-
+   return redirect('ReservezUnRdv/'.auth()->user()->id.'')->with('success', 'Réservation Validée  ');
+      //  return redirect('ReservezUnRdv',['id'=> auth()->user()->id] )->with('success', 'Réservation Validée  ');
 
     }
      public function oauth()
