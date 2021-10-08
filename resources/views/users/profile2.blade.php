@@ -29,7 +29,7 @@
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
-							<li><a href="#">Dashboard</a></li>
+							<li><a href="#"></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -81,6 +81,36 @@ else
 							<label>Email</label>
 							<input name='email' value="{{$client->email}}" type="text">
 
+							<div>
+						   <label>Pays</label>
+                           <select style="color:grey" name="pays" id="pays" placeholder="Téléphone *"  required="required">
+                           	<?php if($client->pays=="Martinique") {?>
+                            <option value="martinique">Martinique (+596)</option>
+                            <option value="france">France (+33)</option>
+                            <option value="guadeloupe">Guadeloupe (+590)</option>
+                            <option value="guyanef">Guyane française (+594)</option> 
+                            <?php } ?>
+                            	<?php if($client->pays=="France") {?>
+                            <option value="france">France (+33)</option>
+                            <option value="martinique">Martinique (+596)</option>                            
+                            <option value="guadeloupe">Guadeloupe (+590)</option>
+                            <option value="guyanef">Guyane française (+594)</option> 
+                            <?php } ?>
+                            	<?php if($client->pays=="Guadeloupe") {?>
+                            <option value="guadeloupe">Guadeloupe (+590)</option>
+                            <option value="martinique">Martinique (+596)</option>
+                            <option value="france">France (+33)</option>                            
+                            <option value="guyanef">Guyane française (+594)</option> 
+                            <?php } ?>
+                            	<?php if($client->pays=="Guyane française") {?>
+                            <option value="guyanef">Guyane française (+594)</option>
+                            <option value="martinique">Martinique (+596)</option>
+                            <option value="france">France (+33)</option>
+                            <option value="guadeloupe">Guadeloupe (+590)</option>                             
+                            <?php } ?>
+                           </select>
+                           </div>
+
 							<label>Adresse</label>
 							<input name='adresse' value="{{$client->adresse}}" type="text">
 
@@ -89,6 +119,38 @@ else
 
 							<label>Code postale</label>
 							<input name='codep' value="{{$client->codep}}" type="text">
+
+							
+                           <div>
+                           	<label>fuseau horaire</label>
+                            <select style="color:grey" name="fhoraire" id="fhoraire" title="Selectionnez votre pays">
+                            	<?php if($client->fhoraire=="America/Martinique") {?>
+                                <option value="America/Martinique" default="" >Martinique</option>
+                                <option value="America/Guadeloupe">Guadeloupe</option>
+                                <option value="Europe/Paris">France</option>
+                                <option value="America/Cayenne">Guyane française</option> 
+                                 <?php } ?>
+                                 <?php if($client->fhoraire=="America/Guadeloupe") {?>
+                                <option value="America/Guadeloupe">Guadeloupe</option>
+                                <option value="America/Martinique" default="" >Martinique</option>
+                                <option value="Europe/Paris">France</option>
+                                <option value="America/Cayenne">Guyane française</option> 
+                                 <?php } ?>
+                                 <?php if($client->fhoraire=="Europe/Paris") {?>
+                                 <option value="Europe/Paris">France</option>
+                                <option value="America/Martinique" default="" >Martinique</option>
+                                <option value="America/Guadeloupe">Guadeloupe</option>
+                                <option value="America/Cayenne">Guyane française</option> 
+                                 <?php } ?>
+                                 <?php if($client->fhoraire=="America/Cayenne") {?>
+                                <option value="America/Cayenne">Guyane française</option> 
+                                <option value="America/Martinique" default="" >Martinique</option>
+                                <option value="America/Guadeloupe">Guadeloupe</option>
+                                <option value="Europe/Paris">France</option>                               
+                                 <?php } ?>
+                            </select>
+                          </div>
+                                      
 
 							
 							<label><i class="fa fa-twitter"></i> Twitter</label>
