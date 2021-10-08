@@ -108,8 +108,9 @@ var _token = $('input[name="_token"]').val();
                 '',
                 'success'
               ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
                 })
+                
              
                }
              });

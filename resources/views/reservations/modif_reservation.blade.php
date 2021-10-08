@@ -101,7 +101,8 @@ background-color:#a0d468;
                 '',
                 'success'
               ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
+
                 })
 
                }
@@ -113,7 +114,8 @@ background-color:#a0d468;
                 'Vous avez atteint le maximum de nombre des reports.',
                 'error'
               ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
+
     })
             }
 
@@ -135,7 +137,7 @@ background-color:#a0d468;
                 '',
                 'success'
               ).then((result) => {
-                  window.location.replace("https://prenezunrendezvous.com/reservations");
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
                 })
               
                }
