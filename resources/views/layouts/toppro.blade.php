@@ -129,6 +129,7 @@ $plogo= $parametres->logo;
                                                 <option value="france">France (+33)</option>
                                                 <option value="guadeloupe">Guadeloupe (+590)</option>
                                                 <option value="guyanef">Guyane française (+594)</option> 
+                                                <option value="laReunion">La réunion (+974)</option>
                                                </select>
                                                 </div>
                                                   
@@ -167,6 +168,7 @@ $plogo= $parametres->logo;
                                                         <option value="America/Guadeloupe">Guadeloupe</option>
                                                         <option value="Europe/Paris">France</option>
                                                         <option value="America/Cayenne">Guyane française</option> 
+                                                        <option value="Asia/Yerevan">La réunion</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -274,6 +276,7 @@ $plogo= $parametres->logo;
                                                 <option value="france">France (+33)</option>
                                                 <option value="guadeloupe">Guadeloupe (+590)</option>
                                                 <option value="guyanef">Guyane française (+594)</option> 
+                                                <option value="laReunion">La réunion (+974)</option>
                                                </select>
                                                 </div>
                                                   
@@ -312,6 +315,7 @@ $plogo= $parametres->logo;
                                                         <option value="America/Guadeloupe">Guadeloupe</option>
                                                         <option value="Europe/Paris">France</option>
                                                         <option value="America/Cayenne">Guyane française</option> 
+                                                        <option value="Asia/Yerevan">La réunion</option> 
                                                     </select>
                                                 </div>
                                             </div>
