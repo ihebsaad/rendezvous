@@ -144,6 +144,11 @@ class RegisterController extends Controller
               $pays='Guyane française';
               $ind_tel= 594; 
             }
+            if($pays=='laReunion')
+            {
+              $pays='la Réunion';
+              $ind_tel= 974; 
+            }
            
          }
           if($req->get('phone'))
@@ -329,6 +334,11 @@ class RegisterController extends Controller
             {
               $pays='Guyane française';
               $ind_tel= 594; 
+            }
+            if($pays=='laReunion')
+            {
+              $pays='la Réunion';
+              $ind_tel= 974; 
             }
            
          }
