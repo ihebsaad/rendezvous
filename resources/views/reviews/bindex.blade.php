@@ -60,7 +60,7 @@ use \App\User;
                                             </div>
                                             <p>{{$review->commentaire}}</p>
                                             <p><b>Notes: </b>Qualité : {{$review->note_qualite}} | Service : {{$review->note_service  }} | Prix : {{$review->note_prix  }} | Emplacement : {{$review->note_emplacement  }}  </p>
-                                            <a onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('reviews.remove', $review->id)}}"class="button gray reject"><i class="sl sl-icon-close"></i> Supprimer</a>
+                                            <a onclick="return confirm('Êtes-vous sûrs ?')"  href="{{route('reviews.remove', $review->id)}}"class="button gray reject"><i class="sl sl-icon-close"></i> Supprimer</a>
                                             
                                         </div>
                                     </li>
