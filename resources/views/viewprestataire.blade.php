@@ -2296,7 +2296,7 @@ function selectservice(){
  		var remiseCarte  =0 ;
 		var montant = 0 ;
 		var service = $('#service').val();
-    var test = <?php echo json_encode($mab) ; ?> ;
+    var test = <?php if(isset($mab)) {echo json_encode($mab) ;} ?> ;
     //alert(test[8][0]);
     if (service.length != 0) {
       for (var i = 0; i < service.length; i++) {
