@@ -508,7 +508,7 @@ input#date-picker {
                             <h3><i class="fa fa-calendar-times-o"></i> Heures d'indisponibilité</h3>
                             <!-- Switcher -->
                             
-                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                            <label class="switch" style="display:none!important;"><input type="checkbox" checked><span class="slider round"></span></label>
                         </div>
 
                         <!-- Switcher ON-OFF Content -->
