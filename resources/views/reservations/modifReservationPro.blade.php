@@ -120,7 +120,6 @@
       //alert("ok");
       var idReservation = $('input[name="idReservation"]').val();
       var _token = $('input[name="_token"]').val();
-      alert("ok");
         $.ajax({
             url: "{{ route('reservations.reporter') }}",
             method: "get",
