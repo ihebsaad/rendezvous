@@ -253,6 +253,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     {
     	
     	$idReservation = $request->get('idres');
+      Reservation::where('id', $idReservation)->update(array('statut' => 0 ));
     	$Reservation = Reservation::where('id',$idReservation)->first();
     	//dd($Reservation);
     	$client=User::find($Reservation->client);

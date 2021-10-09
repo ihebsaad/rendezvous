@@ -759,7 +759,7 @@ return view('payments.payAbn2', [
     $service = \App\Service::find( $serviceid) ;
 
     if($type=='acompte'){
-        Reservation::where('id',$reservation)->update(array('paiement' => 1,'reste'=>$reste,'stripe_id'=>$request->paymentIntent));
+        Reservation::where('id',$reservation)->update(array('statut' => 1,'paiement' => 1,'reste'=>$reste,'stripe_id'=>$request->paymentIntent));
           
         $date = new DateTime($Reservation->date_reservation);
         $date = $date->format('d-m-Y');

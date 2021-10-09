@@ -221,11 +221,11 @@ $User = auth()->user();
         <?php } else { ?>
           <a  class="button gray reject"   onclick="return confirm('Êtes-vous sûrs de vouloir ANNULER cette réservation ?')"  href="{{action('ReservationsController@AnnulerReservation', $res->id)}}"><i class="sl sl-icon-close"></i> Annuler</a>
           <?php }} ?> 
-                                <?php if($res->statut==1){  ?>           
+                                <!-- <?php if($res->statut==1){  ?>           
                
        
       <a  class="button gray approve"  onclick="return confirm('Êtes-vous sûrs de vouloir VALIDER cette réservation ?')"  href="{{action('ReservationsController@valider', $res->id)}}"><i class="sl sl-icon-check"></i>  Valider</a>
-      <?php } ?> 
+      <?php } ?>  -->
                             </div>
                         </li>
                         
