@@ -101,7 +101,7 @@ class ReservationsController extends Controller
       
     if($cuser->id!=$reservation->client){
       Session::put('msgs', 'E2');
-      return redirect('/');
+      return redirect('ReservezUnRdv/'.$cuser->id.'');
 
     }
 
@@ -1111,7 +1111,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 	  // annuler par prestataire
       public function annuler($id)
     {
- 		
+      $cuser=auth()->user();
         Reservation::where('id', $id)->update(array('statut' => 2 ));
 		
 	  // envoi email annulation
@@ -1138,8 +1138,9 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		 $alerte->save();
 
 				 
-		 
-       return redirect('/reservations')->with('success', 'Réservation Anunulée  ');
+     return redirect('ReservezUnRdv/'.$cuser->id.'')->with('success', 'Réservation Anunulée  ');
+
+      //  return redirect('/reservations')->with('success', 'Réservation Anunulée  ');
 
     }
 	

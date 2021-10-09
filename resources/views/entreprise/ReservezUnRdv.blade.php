@@ -318,7 +318,8 @@ $User = auth()->user();
             method:"get",
             cache: false,
             success: function(response){
-                   location.reload(true);}
+                location.href= "{{ route('ReservezUnRdv',['id'=> auth()->user()->id] )}} }}";
+                }
                     });
       }
 
