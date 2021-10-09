@@ -101,7 +101,9 @@
               <li><a href="{{ route('FAQ', ['id'=>$user->id]) }}">FAQ</a></li>
             </ul> 
         </li> 
+        <?php if( $user_type=='client'  ){ ?> 
         <li><a  href="{{ route('profile' , ['id'=>$user->id] ) }}"><i class="sl sl-icon-user"></i> Mon profil</a></li>
+         <?php } ?>
         <li><a href="{{ route('logout') }}"><i class="sl sl-icon-power"></i> Déconnexion</a></li>
       </ul>
     <?php } ?>
