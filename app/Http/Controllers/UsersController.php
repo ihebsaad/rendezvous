@@ -1963,7 +1963,37 @@ public function Services($id)
 		     $photo=$date.'_pf_'.$photo ;
 		         $image->move($path, $photo );
 		    }
+        if($request->get('pays'))
+        {
+           $pays=$request->get('pays');
+           if($pays=='martinique')
+           {
+             $pays='Martinique';
+             $ind_tel= 596; 
+           }
+           if($pays=='france')
+           {
+             $pays='France';
+             $ind_tel= 33; 
+           }
 
+           if($pays=='guadeloupe')
+           {
+             $pays='Guadeloupe';
+             $ind_tel= 590; 
+           }
+           if($pays=='guyanef')
+           {
+             $pays='Guyane française';
+             $ind_tel= 594; 
+           }
+           if($pays=='laReunion')
+           {
+             $pays='la Réunion';
+             $ind_tel= 974; 
+           }
+          
+        }
 
 		     User::find($request->get('id'))->update([
                 'name'=> $request->get('name'),
@@ -1976,7 +2006,7 @@ public function Services($id)
                  'fb'=> $request->get('fb'),
                  'instagram'=> $request->get('instagram'),
                  'twitter'=> $request->get('twitter'),
-                 'pays' => $request->get('pays'),             
+                 'pays' => $pays,             
                  'fhoraire' => $request->get('fhoraire'),                 
 
 		     	]);

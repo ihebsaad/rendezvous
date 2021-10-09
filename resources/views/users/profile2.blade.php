@@ -108,6 +108,12 @@ else
                             <option value="france">France (+33)</option>
                             <option value="guadeloupe">Guadeloupe (+590)</option>                             
                             <?php } ?>
+							<?php if($client->pays=="") {?>
+                            <option value="guyanef">Guyane française (+594)</option>
+                            <option value="martinique">Martinique (+596)</option>
+                            <option value="france">France (+33)</option>
+                            <option value="guadeloupe">Guadeloupe (+590)</option>                             
+                            <?php } ?>
                            </select>
                            </div>
 
