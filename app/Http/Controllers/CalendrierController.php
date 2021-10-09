@@ -17,7 +17,7 @@ use \App\Happyhour;
 use \App\Parametre;
 use \App\Categorie;
 //use SweetAlert;
-
+use DateInterval;
 //use Spatie\GoogleCalendar\Event;
 use DateTime;
 use Carbon;
@@ -43,6 +43,11 @@ class CalendrierController extends Controller
   public static $tab_heures_indisp_rendezvous=array();
   public static $tab_jours_indisp_rendezvous=array();
   public static $tab_minutes_indisp_rendezvous=array();
+
+  // variables pour les slots de temps disponibles
+  public static $tab_heures_indisp_services=array();
+  public static $tab_jours_indisp_services=array();
+  public static $tab_minutes_indisp_services=array(); 
 
 
   protected $client;
@@ -3061,6 +3066,1162 @@ class CalendrierController extends Controller
         }else{return '';}
 
     }
+    public function slots_temps_disp(Request $request) 
+    {
+        
+        $dateresv = $request->get('date');
+        $idprest = $request->get('id');
+        $services = $request->get('services');
+
+        $resulths = self::indisponibilte_services_horaire($idprest, $dateresv, $services);
+        $hindispsprestt = self::$tab_heures_indisp_services;
+
+        self::calcul_jours_heures_fermeture_datetimepicker($idprest);
+        $tabheuresfermeture = self::$tab_heures_fermeture_semaine;
+
+        $datereserv = date("Y-m-d", strtotime($dateresv));
+        $datereservt = new DateTime($datereserv); 
+        
+
+        $indicejour = date('w', strtotime($datereserv)); 
+        $cindice = $indicejour.":";
+
+        $hfermeturejour = array();
+        // laisser seulement les heures de fermeture du jour selectionné
+        foreach ($tabheuresfermeture as $hfermeture ) {
+            if (strpos($hfermeture, $cindice) === 0) {
+                
+                $hfermeturejour[] = intval(substr($hfermeture, 2)); 
+            }
+        }
+        $hfermeturejour[] = 23; 
+
+        
+        // mettre tous les heures d'indisponibilite dans un mm array et trier
+        $ttindisph=array_unique(array_merge($hindispsprestt,$hfermeturejour), SORT_REGULAR);
+        sort($ttindisph);
+
+        // verifier l'indisponibilité du prestataire pour les services selectionnés
+        for ($i=0; $i < 23; $i++) { 
+            if (!in_array($i, $ttindisph)) {
+                date_time_set($datereservt, $i, 0 ,0);
+             foreach ($services as $serv ) {
+                $ser=Service::where('id',$serv)->first();
+                $nbresum = $ser->nbrService ;
+                $dureeserv = $ser->duree ;
+                $nbResvalide=Reservation::where('prestataire',$idprest)->whereNotNull('services_reserves')->whereNotNull('date_reservation')->where('date_reservation','=',$datereservt)->where('statut',1)->whereJsonContains('services_reserves',$serv)->count();
+                if ($nbResvalide >= $nbresum) {
+                    $ttindisph[]=$i;
+
+                    // verifier s'il faut ajouter autre heure selon la durée de service
+                    $dureedt = explode(':', $dureeserv);
+                    $dureemin = ($dureedt[0]*60) + ($dureedt[1]) + ($dureedt[2]/60);
+
+                    if (($dureemin > 60) && ($dureemin <=120)) {
+                        $ttindisph[]=$i+1;
+                    }
+                    if (($dureemin > 120) && ($dureemin <=180)) {
+                        $ttindisph[]=$i+1;
+                        $ttindisph[]=$i+2;
+                    }
+                    if (($dureemin > 180) && ($dureemin <=240)) {
+                        $ttindisph[]=$i+1;
+                        $ttindisph[]=$i+2;
+                        $ttindisph[]=$i+3;
+                    }
+                    if (($dureemin > 240) && ($dureemin <=300)) {
+                        $ttindisph[]=$i+1;
+                        $ttindisph[]=$i+2;
+                        $ttindisph[]=$i+3;
+                        $ttindisph[]=$i+4;
+                    }
+
+                }
+             }
+            }
+        }
+
+        // mettre tous les heures d'indisponibilite unique et trier
+        $ttindisph=array_unique($ttindisph, SORT_REGULAR);
+        sort($ttindisph);
+
+        // max duree des services selectionnés
+        $maxduree = Service::whereIn('id', $services)->max('duree');
+        $maxdureetab = explode(':', $maxduree);
+        $maxdureemin = ($maxdureetab[0]*60) + ($maxdureetab[1]) + ($maxdureetab[2]/60);
+
+        // remplissage des heures disponibles
+        $hdisp = array();
+
+        for ($i=0; $i < 23; $i++) { 
+            if (!in_array($i, $ttindisph)) {
+                //$hdisp[]=$i+$maxdureetab[0];
+
+                if ($maxdureetab[0] == 0)
+                {
+                        $hdisp[]=$i;
+                }
+
+                if (($maxdureetab[0] == 1) && ( ((!in_array($i+1, $ttindisph)) && ($maxdureetab[1] > 0)) || ($maxdureetab[1] == 0) ))
+                {
+                        $hdisp[]=$i;
+                }
+
+
+                if ($maxdureetab[0] == 2)
+                {    if (!in_array($i+1, $ttindisph))
+                       { 
+                           if (((!in_array($i+2, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
+                           {
+                                   $hdisp[]=$i;
+                           }
+                       }
+                }
+
+                if ($maxdureetab[0] == 3)
+                {    if ((!in_array($i+1, $ttindisph)) && (!in_array($i+2, $ttindisph)))
+                       { 
+                           if (((!in_array($i+3, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
+                           {
+                                   $hdisp[]=$i;
+                           }
+                       }
+                }
+            }
+        }
+        $slots = array();
+        // creation des slots de temps
+        if (!empty($hdisp))
+        {
+            $heuredeb=$hdisp[0];
+            end($hdisp);         
+            $dernierhdisp = $hdisp[key($hdisp)];
+            reset($hdisp);
+            $indx =0;
+            while ($heuredeb <= $dernierhdisp) {
+                if ($maxdureetab[0] == 0)
+                {$hfinslot = $heuredeb;}
+                else
+                {$hfinslot = $heuredeb+$maxdureetab[0];}
+
+                // les places disponibles
+                // verifier les places disp pour chaque service a heure dep // selectionner le min
+                $placedisp=array();
+
+                foreach ($services as $serv ) {
+                    $ser=Service::where('id',$serv)->first();
+                    $nbresum = $ser->nbrService ;
+
+                    $dateres = date("Y-m-d H:i:s", strtotime($dateresv." ".$heuredeb.":00:00"));
+                    $datereserdt = new DateTime($dateres); 
+
+                    $nbResvalide=Reservation::where('prestataire',$idprest)->whereNotNull('services_reserves')->whereNotNull('date_reservation')->where('date_reservation','=',$datereserdt)->where('statut',1)->whereJsonContains('services_reserves',$serv)->count();
+                    if ($nbResvalide <= $nbresum) {
+                        $placedisp[]=$nbresum-$nbResvalide;
+                    }
+                }
+
+                $nbreplace = min($placedisp);
+                
+                $slots[]=$heuredeb.":00 - ".$hfinslot.":".$maxdureetab[1]." ||".$nbreplace." place(s) disponible(s)";
+
+                
+                /*if ($maxdureetab[0] == 0)
+                {$heuredeb = $heuredeb+1;}
+                else
+                {$heuredeb = $heuredeb+$maxdureetab[0];}*/
+                if ($heuredeb <> $dernierhdisp)
+                {   
+                    $indx=$indx+1;
+                    $heuredeb = $hdisp[$indx];
+                } 
+                else {break;}
+                //return $hdisp[$indx]." | ".$dernierhdisp;
+            }
+        }
+
+        //array_values($tabheuresfermeture);
+      //return json_encode($resulths); tab_minutes_indisp_rendezvous // tab_heures_indisp_rendezvous //tab_heures_indisp_services
+      // return json_encode(self::$tab_heures_indisp_services);
+       
+        //return json_encode($hdisp);
+        return $slots;
+        //return $maxdureetab[0] ." | ".$maxdureetab[1]." | ".$maxdureetab[2];
+        /*if (($maxdureetab[0] === 1) && (!in_array(16, $ttindisph)))
+                {
+                    if ($maxdureetab[1] === 0)
+                    {
+                        return "13";
+                    }
+                    else
+                    {
+                        if (!in_array(18, $ttindisph))
+                        {
+                            return "13++";;
+                        }
+                    }
+                }
+            else {return json_encode($ttindisph);}*/
+
+    }
+
+
+  public static function indisponibilte_services_horaire($id, $date, array $services)
+  {
+
+    $datereserv = date("Y-m-d", strtotime($date));
+    $datereservt = new DateTime($datereserv); 
+    //$datereservtjourapres = $datereservt->add(new DateInterval('P1D'));
+    
+    $user_indisp=Indisponibilite::where('prest_id',$id)->get(['id','titre', 'date_debut','date_fin' ]);
+    $res=array();
+   foreach ($user_indisp as $ui) {
+    $debut=$ui->date_debut;
+    $fin=$ui->date_fin;
+    if( $debut &&  $fin )
+    {
+   str_replace(" ","T",$debut); 
+   str_replace(" ","T",$fin);     
+   $res[]=array('id'=>$ui->id,'title'=>$ui->titre,'start'=>$debut, 'end'=> $fin, 'color' => self::$indispo_couleur);
+
+   // calcul  heures et/ou jours indisponiblité pour datetimepicker
+   
+   $de=$ui->date_debut;
+   $fe=$ui->date_fin;
+
+   $datetime1 = new DateTime($debut); // Date dans le passé
+   $datetime2 = new DateTime($fin); 
+   //calcul de differnece en jours
+   $val1=intval($datetime1->format('d'));
+   $val2=intval($datetime2->format('d'));
+   $month1=intval($datetime1->format('n'));
+   $month2=intval($datetime2->format('n'));
+
+   $hdeb=intval($datetime1->format('G'));
+   $hfin=intval($datetime2->format('G'));
+   $mhdeb=intval($datetime1->format('i'));
+   $mhfin=intval($datetime2->format('i'));
+  
+   $jma1=$datetime1->format('Y-m-d');
+   $jma2=$datetime2->format('Y-m-d');
+   $intervaldays = $datetime1->diff($datetime2);
+   $intervaldays = intval($intervaldays->format('%R%a days'));
+
+   $minutestab=['5','10','15','20','25','30','35','40','45','50','55'];
+   if (($datereserv >= $jma1) && ($datereserv <= $jma2)) { //verification si dans la date de reservation
+   // dd($intervaldays);
+   if($datetime2>$datetime1)
+   {
+    // dans le meme mois 
+  if($month1==$month2)
+   {
+    //dd($month1.' '.$month2);
+    // val : les jours
+   if($val1 != $val2)
+   {
+      if(abs($val2-$val1)==1)
+      {
+         if($val2>$val1)
+         {
+          $hdeb=intval($datetime1->format('G'));
+          $hfin=intval($datetime2->format('G'));
+          $mhdeb=intval($datetime1->format('i'));
+          $mhfin=intval($datetime2->format('i'));
+         //  dd($mhdeb.' '. $mhfin);
+          $count1=$hdeb;
+
+       
+          while($count1<24)
+          {
+           /*  if(!in_array($jma1.":".$count1, self::$tab_heures_indisp_rendezvous))
+                {
+                 array_push(self::$tab_heures_indisp_rendezvous, $jma1.":".$count1);
+                }*/
+         
+            if($count1==$hdeb && $mhdeb>5 && $mhdeb < 50)
+            {
+              $min1=100;
+              $posmin1=0;
+              $min2=100;
+              $posmin2=0;
+             //dd($count1.' '.$hdeb.' '. $mhdeb);
+
+               //dd("ok");
+              
+              for($k=0;$k<count($minutestab); $k++)
+              {
+
+                if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                {
+                    $min1=abs($mhdeb-intval($minutestab[$k]));
+                    $posmin1=$k;
+
+
+                }
+
+
+               /* if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                {
+                    $min2=abs($mhfin-intval($minutestab[$k]));
+                    $posmin2=$k;
+
+                }*/
+              
+              }
+
+              $mhdeb=intval($minutestab[$posmin1]);
+              //$mhfin=$minutestab[$posmin2];
+              //dd($mhdeb);
+              $countmin= $mhdeb;
+              while($countmin<=50)
+              {
+
+               if(!in_array($jma1.":".$count1.":".$countmin, self::$tab_minutes_indisp_services))
+                {
+                 array_push(self::$tab_minutes_indisp_services, $jma1.":".$count1.":".$countmin);
+                }
+
+                $countmin+=5;
+
+              }
+
+              //dd(self::$tab_minutes_indisp_rendezvous);
+                  
+            }
+            else
+            {
+                //dd("ok");
+                if($count1==$hdeb && $mhdeb >=50 )
+                {
+                   $count1++;
+                }
+
+               if(!in_array($count1, self::$tab_heures_indisp_services))
+                {
+                 array_push(self::$tab_heures_indisp_services, $count1);
+                }
+            }
+
+
+              $count1++;
+
+          }
+          //dd(self::$tab_minutes_indisp_rendezvous);
+          $count2=0;
+
+          //dd($hfin);
+          while($count2<=$hfin)
+          {
+            //dd(count($minutestab));
+            if($count2==$hfin && $mhfin >5 && $mhfin < 55)
+            {
+              $min1=100;
+              $posmin1=0;
+              $min2=100;
+              $posmin2=0;
+              for($k=0;$k< count($minutestab); $k++)
+              {
+
+                /*if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                {
+                    $min1=abs($mhdeb-intval($minutestab[$k]));
+                    $posmin1=$k;
+
+                }*/
+
+
+                if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                {
+                    $min2=abs($mhfin-intval($minutestab[$k]));
+                    $posmin2=$k;
+
+                }
+              
+              }
+
+              //$mhdeb=$minutestab[$posmin1];
+              $mhfin=intval($minutestab[$posmin2]);
+              // dd($mhfin);
+              $countmin=0;
+              while($countmin<=$mhfin)
+              {
+
+
+               if(!in_array($jma2.":".$count2.":".$countmin, self::$tab_minutes_indisp_services))
+                {
+                 array_push(self::$tab_minutes_indisp_services, $jma2.":".$count2.":".$countmin);
+                }
+
+                $countmin+=5;
+
+              }
+
+          // dd(self::$tab_minutes_indisp_rendezvous);
+                  
+            }
+            else
+            {
+
+               if($count2==$hfin && $mhfin <=5 )
+                {
+                   $count2++;
+                }
+                else
+                {
+
+                  if(!in_array($count2, self::$tab_heures_indisp_services))
+                  {
+                  array_push(self::$tab_heures_indisp_services, $count2);
+                  }
+               }
+              
+             
+            }
+            $count2++;
+          }
+         //dd(self::$tab_minutes_indisp_rendezvous);
+
+         }//fin iif($val2>$val1)
+           // dd(self::$tab_heures_indisp_rendezvous);
+                  
+      }
+      else
+      {
+         if(abs($val2-$val1)>1)
+         {
+
+            if($val2>$val1)
+             {
+              //$countday=date('Y-m-d',strtotime('+1 day ',strtotime($jma1)));
+              $hdeb=intval($datetime1->format('G'));
+              $hfin=intval($datetime2->format('G'));
+              //dd($hdeb.' '.$hfin);
+              /*$count1=$hdeb;
+              while($count1<24)
+              {
+               if(!in_array($jma1.":".$count1, self::$tab_heures_indisp_rendezvous))
+                {
+                array_push(self::$tab_heures_indisp_rendezvous, $jma1.":".$count1);
+                }
+                $count1++;
+              }*/
+                $mhdeb=intval($datetime1->format('i'));
+          $mhfin=intval($datetime2->format('i'));
+         //  dd($mhdeb.' '. $mhfin);
+          $count1=$hdeb;
+
+       
+          while($count1<24)
+          {
+           /*  if(!in_array($jma1.":".$count1, self::$tab_heures_indisp_rendezvous))
+                {
+                 array_push(self::$tab_heures_indisp_rendezvous, $jma1.":".$count1);
+                }*/
+         
+            if($count1==$hdeb && $mhdeb>5 && $mhdeb < 50)
+            {
+              $min1=100;
+              $posmin1=0;
+              $min2=100;
+              $posmin2=0;
+             //dd($count1.' '.$hdeb.' '. $mhdeb);
+
+               //dd("ok");
+              
+              for($k=0;$k<count($minutestab); $k++)
+              {
+
+                if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                {
+                    $min1=abs($mhdeb-intval($minutestab[$k]));
+                    $posmin1=$k;
+
+
+                }
+
+
+               /* if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                {
+                    $min2=abs($mhfin-intval($minutestab[$k]));
+                    $posmin2=$k;
+
+                }*/
+              
+              }
+
+              $mhdeb=intval($minutestab[$posmin1]);
+              //$mhfin=$minutestab[$posmin2];
+              //dd($mhdeb);
+              $countmin=$mhdeb;
+              while($countmin<=55)
+              {
+
+               if(!in_array($jma1.":".$count1.":".$countmin, self::$tab_minutes_indisp_services))
+                {
+                 array_push(self::$tab_minutes_indisp_services, $jma1.":".$count1.":".$countmin);
+                }
+
+                $countmin+=5;
+
+              }
+
+              //dd(self::$tab_minutes_indisp_rendezvous);
+                  
+            }
+            else
+            {
+                //dd("ok");
+                if($count1==$hdeb && $mhdeb >=50 )
+                {
+                   $count1++;
+                }
+
+               if(!in_array($count1, self::$tab_heures_indisp_services))
+                {
+                 array_push(self::$tab_heures_indisp_services, $count1);
+                }
+            }
+
+
+              $count1++;
+
+          }
+
+
+
+              //les jours
+              $k=0;
+             $countday=$jma1;
+             while($k<($intervaldays-1) )
+             {
+              // dd("ok");
+               $countday=date('Y-m-d',strtotime('+1 day ',strtotime($countday)));  
+               if(!in_array($countday, self::$tab_jours_indisp_services))
+               {
+                array_push(self::$tab_jours_indisp_services,$countday);
+               }          
+                  
+               $k++;
+             }
+
+              // fin les jours
+
+
+              /* $count2=0;
+              while($count2<=$hfin)
+              {
+                if(!in_array($jma2.":".$count2, self::$tab_heures_indisp_rendezvous))
+                 {
+                array_push(self::$tab_heures_indisp_rendezvous, $jma2.":".$count2);
+                 }
+                $count2++;
+              }*/
+               $count2=0;
+
+          //dd($hfin);
+          while($count2<=$hfin)
+          {
+            //dd(count($minutestab));
+            if($count2==$hfin && $mhfin >5 && $mhfin < 50)
+            {
+              $min1=100;
+              $posmin1=0;
+              $min2=100;
+              $posmin2=0;
+              for($k=0;$k< count($minutestab); $k++)
+              {
+
+                /*if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                {
+                    $min1=abs($mhdeb-intval($minutestab[$k]));
+                    $posmin1=$k;
+
+                }*/
+
+
+                if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                {
+                    $min2=abs($mhfin-intval($minutestab[$k]));
+                    $posmin2=$k;
+
+                }
+              
+              }
+
+              //$mhdeb=$minutestab[$posmin1];
+              $mhfin=intval($minutestab[$posmin2]);
+              // dd($mhfin);
+              $countmin=0;
+              while($countmin<=$mhfin)
+              {
+
+
+               if(!in_array($jma2.":".$count2.":".$countmin, self::$tab_minutes_indisp_services))
+                {
+                 array_push(self::$tab_minutes_indisp_services, $jma2.":".$count2.":".$countmin);
+                }
+
+                $countmin+=5;
+
+              }
+
+          // dd(self::$tab_minutes_indisp_rendezvous);
+                  
+            }
+            else
+            {
+
+               if($count2==$hfin && $mhfin <=5 )
+                {
+                   $count2++;
+                }
+                else
+                {
+
+                  if(!in_array($count2, self::$tab_heures_indisp_services))
+                  {
+                  array_push(self::$tab_heures_indisp_services, $count2);
+                  }
+               }
+              
+             
+            }
+            $count2++;
+          }
+
+             }//fin if 
+
+
+         }
+
+      }
+
+   }
+   else// lorsque le meme jour same month
+   {
+      $hdeb=intval($datetime1->format('G'));
+      $hfin=intval($datetime2->format('G'));
+      $count1=$hdeb;
+              /*while($count1<= $hfin)
+              {
+               if(!in_array($jma1.":".$count1, self::$tab_heures_indisp_rendezvous))
+                {
+                array_push(self::$tab_heures_indisp_rendezvous, $jma1.":".$count1);
+                }
+                $count1++;
+              }*/
+
+              while($count1<= $hfin)
+              {
+
+                if($count1 != $hdeb && $count1 != $hfin )
+                {
+                   if(!in_array($count1, self::$tab_heures_indisp_services))
+                    {
+                    array_push(self::$tab_heures_indisp_services, $count1);
+                    }
+                    $count1++;
+                }
+                else
+                {
+                  if($count1 == $hdeb  )
+                  {
+
+                    if($count1==$hdeb && $mhdeb>5 && $mhdeb < 50)
+                    {
+                      $min1=100;
+                      $posmin1=0;
+                      $min2=100;
+                      $posmin2=0;
+                     //dd($count1.' '.$hdeb.' '. $mhdeb);
+
+                       //dd("ok");
+                      
+                      for($k=0;$k<count($minutestab); $k++)
+                      {
+
+                        if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                        {
+                            $min1=abs($mhdeb-intval($minutestab[$k]));
+                            $posmin1=$k;
+
+
+                        }
+
+
+                       /* if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                        {
+                            $min2=abs($mhfin-intval($minutestab[$k]));
+                            $posmin2=$k;
+
+                        }*/
+                      
+                      }
+
+                      $mhdeb=intval($minutestab[$posmin1]);
+                      //$mhfin=$minutestab[$posmin2];
+                      //dd($mhdeb);
+                      $countmin=$mhdeb;
+                      while($countmin<=55)
+                      {
+
+                       if(!in_array($jma1.":".$count1.":".$countmin, self::$tab_minutes_indisp_services))
+                        {
+                         array_push(self::$tab_minutes_indisp_services, $jma1.":".$count1.":".$countmin);
+                        }
+
+                        $countmin+=5;
+
+                      }
+
+                      //dd(self::$tab_minutes_indisp_rendezvous);
+                          
+                    }
+                    else
+                    {
+                        //dd("ok");
+                        if($count1==$hdeb && $mhdeb >=50 )
+                        {
+                           $count1++;
+                        }
+
+                       if(!in_array($count1, self::$tab_heures_indisp_services))
+                        {
+                         array_push(self::$tab_heures_indisp_services, $count1);
+                        }
+                    }
+
+
+                      $count1++;
+
+
+
+                  }// if($count1 == $hdeb  )
+
+                  if($count1 == $hfin )
+                  {
+                    if($count1==$hfin && $mhfin >5 && $mhfin < 50)
+                    {
+                      $min1=100;
+                      $posmin1=0;
+                      $min2=100;
+                      $posmin2=0;
+                      for($k=0;$k< count($minutestab); $k++)
+                      {
+
+                        /*if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                        {
+                            $min1=abs($mhdeb-intval($minutestab[$k]));
+                            $posmin1=$k;
+
+                        }*/
+
+
+                        if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                        {
+                            $min2=abs($mhfin-intval($minutestab[$k]));
+                            $posmin2=$k;
+
+                        }
+                      
+                      }
+
+                      //$mhdeb=$minutestab[$posmin1];
+                      $mhfin=intval($minutestab[$posmin2]);
+                      // dd($mhfin);
+                      $countmin=0;
+                      while($countmin<=$mhfin)
+                      {
+
+
+                       if(!in_array($jma2.":".$count1.":".$countmin, self::$tab_minutes_indisp_services))
+                        {
+                         array_push(self::$tab_minutes_indisp_services, $jma2.":".$count1.":".$countmin);
+                        }
+
+                        $countmin+=5;
+
+                      }
+
+                  // dd(self::$tab_minutes_indisp_rendezvous);
+                          
+                    }
+                    else
+                    {
+
+                       if($count1==$hfin && $mhfin <=5 )
+                        {
+                           $count1++;
+                        }
+                        else
+                        {
+
+                          if(!in_array($count1, self::$tab_heures_indisp_services))
+                          {
+                          array_push(self::$tab_heures_indisp_services, $count1);
+                          }
+                        }
+                      
+                     
+                    }
+
+                 $count1++;
+
+                  }// if($count1 == $hdeb  )
+
+
+
+                }
+
+
+            }
+
+
+
+
+   }
+  }
+  else // month1 <> month2
+  {
+    //dd($jma2);
+    //$countday=date('Y-m-d',strtotime('+1 day ',strtotime($jma1)));
+             //$countday=date('Y-m-d',strtotime('+1 day ',strtotime($jma1)));
+              $hdeb=intval($datetime1->format('G'));
+              $hfin=intval($datetime2->format('G'));
+              //dd($hdeb.' '.$hfin);
+             /* $count1=$hdeb;
+              while($count1<24)
+              {
+               if(!in_array($jma1.":".$count1, self::$tab_heures_indisp_rendezvous))
+                {
+                array_push(self::$tab_heures_indisp_rendezvous, $jma1.":".$count1);
+                }
+                $count1++;
+              }*/
+                  $mhdeb=intval($datetime1->format('i'));
+          $mhfin=intval($datetime2->format('i'));
+         //  dd($mhdeb.' '. $mhfin);
+          $count1=$hdeb;
+
+       
+          while($count1<24)
+          {
+           /*  if(!in_array($jma1.":".$count1, self::$tab_heures_indisp_rendezvous))
+                {
+                 array_push(self::$tab_heures_indisp_rendezvous, $jma1.":".$count1);
+                }*/
+         
+            if($count1==$hdeb && $mhdeb>5 && $mhdeb < 50)
+            {
+              $min1=100;
+              $posmin1=0;
+              $min2=100;
+              $posmin2=0;
+             //dd($count1.' '.$hdeb.' '. $mhdeb);
+
+               //dd("ok");
+              
+              for($k=0;$k<count($minutestab); $k++)
+              {
+
+                if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                {
+                    $min1=abs($mhdeb-intval($minutestab[$k]));
+                    $posmin1=$k;
+
+
+                }
+
+
+               /* if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                {
+                    $min2=abs($mhfin-intval($minutestab[$k]));
+                    $posmin2=$k;
+
+                }*/
+              
+              }
+
+              $mhdeb=intval($minutestab[$posmin1]);
+              //$mhfin=$minutestab[$posmin2];
+              //dd($mhdeb);
+              $countmin=$mhdeb;
+              while($countmin<=55)
+              {
+
+               if(!in_array($jma1.":".$count1.":".$countmin, self::$tab_minutes_indisp_services))
+                {
+                 array_push(self::$tab_minutes_indisp_services, $jma1.":".$count1.":".$countmin);
+                }
+
+                $countmin+=5;
+
+              }
+
+              //dd(self::$tab_minutes_indisp_rendezvous);
+                  
+            }
+            else
+            {
+                //dd("ok");
+                if($count1==$hdeb && $mhdeb >=50 )
+                {
+                   $count1++;
+                }
+
+               if(!in_array($count1, self::$tab_heures_indisp_services))
+                {
+                 array_push(self::$tab_heures_indisp_services, $count1);
+                }
+            }
+
+
+              $count1++;
+
+          }
+
+
+
+
+
+              //les jours
+              $k=0;
+             $countday=$jma1;
+             while($k<($intervaldays-1) )
+             {
+              // dd("ok");
+               $countday=date('Y-m-d',strtotime('+1 day ',strtotime($countday)));  
+               if(!in_array($countday, self::$tab_jours_indisp_services))
+               {
+                array_push(self::$tab_jours_indisp_services,$countday);
+               }          
+                  
+               $k++;
+             }
+
+              // fin les jours
+              /* $count2=0;
+              while($count2<=$hfin)
+              {
+                if(!in_array($jma2.":".$count2, self::$tab_heures_indisp_rendezvous))
+                 {
+                array_push(self::$tab_heures_indisp_rendezvous, $jma2.":".$count2);
+                 }
+                $count2++;
+              }*/
+
+              $count2=0;
+
+          //dd($hfin);
+          while($count2<=$hfin)
+          {
+            //dd(count($minutestab));
+            if($count2==$hfin && $mhfin >5 && $mhfin < 50)
+            {
+              $min1=100;
+              $posmin1=0;
+              $min2=100;
+              $posmin2=0;
+              for($k=0;$k< count($minutestab); $k++)
+              {
+
+                /*if(abs($mhdeb-intval($minutestab[$k]))<$min1)
+                {
+                    $min1=abs($mhdeb-intval($minutestab[$k]));
+                    $posmin1=$k;
+
+                }*/
+
+
+                if(abs($mhfin-intval($minutestab[$k]))<$min2)
+                {
+                    $min2=abs($mhfin-intval($minutestab[$k]));
+                    $posmin2=$k;
+
+                }
+              
+              }
+
+              //$mhdeb=$minutestab[$posmin1];
+              $mhfin=intval($minutestab[$posmin2]);
+              // dd($mhfin);
+              $countmin=0;
+              while($countmin<=$mhfin)
+              {
+
+
+               if(!in_array($jma2.":".$count2.":".$countmin, self::$tab_minutes_indisp_services))
+                {
+                 array_push(self::$tab_minutes_indisp_services, $jma2.":".$count2.":".$countmin);
+                }
+
+                $countmin+=5;
+
+              }
+
+          // dd(self::$tab_minutes_indisp_rendezvous);
+                  
+            }
+            else
+            {
+
+               if($count2==$hfin && $mhfin <=5 )
+                {
+                   $count2++;
+                }
+                else
+                {
+
+                  if(!in_array($count2, self::$tab_heures_indisp_services))
+                  {
+                  array_push(self::$tab_heures_indisp_services, $count2);
+                  }
+               }
+              
+             
+            }
+            $count2++;
+          }
+
+  }
+  }// if($datetime2>$datetime1)
+  } // fin if (($datereservt >= $datetime1) && ($datereservt <= $datetime2))
+   //calcul 
+     }// if( $debut &&  $fin )
+   }//foreach ($user_indisp as $ui)
+   //dd(self::$tab_minutes_indisp_rendezvous);
+   // calculate the start and the end of simple service réservation
+
+   /*$idservicessimples=Service::whereIn('id', $services)->where('recurrent','like','off')->where("NbrService",1)->pluck('id')->toArray();
+   for($i=0;$i<count($idservicessimples);$i++)
+     {
+       $idservicessimples[$i]=strval($idservicessimples[$i]);
+
+     }
+
+    $servicessimples=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->where('statut',1)->when($idservicessimples , function($query) use ($idservicessimples) {
+    $query->where(function ($query) use ($idservicessimples) {
+        foreach($idservicessimples as $position) {
+            $query->orWhereJsonContains('services_reserves',$position);
+        }
+    });
+     })->get();
+
+    $datecourante=new DateTime();
+   foreach ( $servicessimples as $ss ) {
+    $debut=$ss->date_reservation;
+     foreach ($ss->services_reserves as $sr) {
+       $ser=Service::where('id',$sr)->first(["id","nom","duree","NbrService"]);
+       if($ser) 
+       {
+
+      $nbResvalide=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->whereNotNull('date_reservation')->where('date_reservation','>',$datecourante)->where('statut',1)->WhereJsonContains('services_reserves',$sr)->where('recurrent',0)->whereNull('id_recc')->count();
+
+      $nbResvalide=intval($nbResvalide);
+      $NbrService=intval($ser->NbrService);
+      $hour=substr($ser->duree, 0, 2);
+      $minutes=substr($ser->duree,3,2);
+      $fin=date('Y-m-d H:i',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+
+      if($nbResvalide<$NbrService)
+      {
+      $res[]=array('id'=>$ser->id,'title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_parall_couleur);
+      }
+      else
+      {
+       $res[]=array('id'=>$ser->id,'title'=>$ser->nom,'start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_couleur);
+
+      }
+
+
+       $datetimek=new DateTime($debut);
+       $jma=$datetimek->format('Y-m-d');
+       $debh=intval($datetimek->format('G'));
+       $hour=intval($hour);
+       $i=0;
+      if($nbResvalide>=$NbrService)
+      {
+       while($i<$hour)
+       {
+         if ((!in_array($debh, self::$tab_heures_indisp_services)) && ($jma == $datereserv))
+          {
+          array_push(self::$tab_heures_indisp_services, $debh);
+          }
+          $debh++;
+          $i++;
+       }
+      }
+
+      }
+     }
+     }
+
+     $servicesreccurents=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->where('statut',1)->where('recurrent',1)->get();
+    
+     foreach ($servicesreccurents as $srec) {
+         $u= $srec->services_reserves;
+         $ser=Service::where('id',$u)->first(["id","nom","duree","NbrService"]);
+         if($ser)
+         {
+         $debut=$srec->date_reservation;
+
+      $nbResvalide=Reservation::where('prestataire',$id)->whereNotNull('services_reserves')->whereNotNull('date_reservation')->where('date_reservation','>',$datecourante)->where('statut',1)->WhereJsonContains('services_reserves',$u)->where('recurrent',1)->whereNull('id_recc')->count();
+
+      $nbResvalide=intval($nbResvalide);
+      $NbrService=intval($ser->NbrService);
+
+
+      $hour=substr($ser->duree, 0, 2);
+      $minutes=substr($ser->duree,3,2);
+      $fin=date('Y-m-d H:i',strtotime('+'.$hour.' hours +'.$minutes.' minutes',strtotime($debut)));
+      
+      if($nbResvalide<$NbrService)
+      {
+      $res[]=array('title'=>$ser->nom.' (+)','start'=>$debut, 'end'=> $fin, 'color' =>self::$rendezvous_parall_couleur);
+      }
+      else
+      {
+       $res[]=array('title'=>$ser->nom,'start'=>$debut, 'end'=> $fin, 'color' => self::$rendezvous_couleur);
+
+      }
+
+       $datetimek=new DateTime($debut);
+       $jma=$datetimek->format('Y-m-d');
+       $debh=intval($datetimek->format('G'));
+       $hour=intval($hour);
+       $i=0;
+      if($nbResvalide>=$NbrService)
+      {
+       while($i<$hour)
+       {
+         if ((!in_array($debh, self::$tab_heures_indisp_services)) && ($jma == $datereserv))
+          {
+          array_push(self::$tab_heures_indisp_services, $debh);
+          }
+          $debh++;
+          $i++;
+       }
+     }
+     }
+     }*/
+
+     // envoi happy hours au full calendar
+     $happyhours=Happyhour::where('id_user',$id)->get();
+     foreach ($happyhours as $hh ) {
+      
+  $res[]=array('title'=>'Promotions flash','start'=>$hh->dateDebut, 'end'=> $hh->dateFin, 'color' => self::$happyhours_couleur);
+
+     }
+
+
+
+   //dd(array_values($idservicesreccurent));
+  // dd($res);
+   
+
+   return json_encode($res);
+    
+  }
   
   
  }
