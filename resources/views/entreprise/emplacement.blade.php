@@ -81,6 +81,7 @@
                                         <option value="America/Guadeloupe"  <?php if($user->fhoraire=='America/Guadeloupe'){echo 'selected="selected"';}?> >Guadeloupe</option>
                                         <option value="Europe/Paris"  <?php if($user->fhoraire=='Europe/Paris'){echo 'selected="selected"';}?> >France</option>
                                         <option value="America/Cayenne"  <?php if($user->fhoraire=='America/Cayenne'){echo 'selected="selected"';}?> >Guyane française</option> 
+                                        <option value="Asia/Yerevan"  <?php if($user->fhoraire=='Asia/Yerevan'){echo 'selected="selected"';}?> >La réunion</option> 
                                     </select>
                             </div>
 
