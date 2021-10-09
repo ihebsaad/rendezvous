@@ -160,6 +160,8 @@ Route::get('/enregistrergooglecalendar/{id}', 'CalendrierController@enregistrerg
 // regle service supplementaires
 Route::get('/get_liste_regles_services_suppl/{id}', 'ServicesController@get_liste_regles_services_suppl')->name('liste_regles_services_suppl');
 
+// creation time slots de la calendrier
+Route::post('/slots_temps_disp','CalendrierController@slots_temps_disp')->name('slots_temps_disp');
 
 Route::group(['middleware' => 'auth'], function(){
 
@@ -289,6 +291,7 @@ Route::post('/periodes_indisp/store','CalendrierController@store')->name('period
 Route::get('/periodes_indisp/remove/{id}/{user}', 'CalendrierController@remove')->name('remove_indisp')->middleware('auth');
 Route::get('/ouv_fer/{id}', 'CalendrierController@ouverture_fermeture_horaire')->name('ouv_ferm_hor')->middleware('auth');
 Route::get('/dragDropCalendar','CalendrierController@dragDropCalendar')->name('dragDropCalendar');
+
 
 
 

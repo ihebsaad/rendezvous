@@ -7,6 +7,13 @@
  <?php  use \App\Http\Controllers\CalendrierController; ?>
 
 <style type="text/css">
+.time-slot label:hover  {
+    background-color: #000!important;
+    /*opacity: 0.6;*/
+}
+.time-slot label:hover span,.time-slot label:hover strong {
+    color: #ffd700!important;
+}
 /* Show more */
 .fc .fc-toolbar-title {
     font-size: 1.75em;
@@ -1325,7 +1332,51 @@ table.basic-table th {
 });
 
 $( document ).ready(function() {
-       
+// chargements des slots de temps
+$('#time > a').click(function(){ 
+  var dateresv = $('#date-picker').val();
+  var services = $('#service').val();
+  var _token = $('input[name="_token"]').val();
+  $('#time > div > div').html("");
+  // alert(dateresv + " | "+ $("#service ")[0].selectedIndex);
+  if (((dateresv !== null) || (dateresv !== "")) && ($("#service ")[0].selectedIndex > -1))
+  {
+    $.ajax({
+              url:"{{ route('slots_temps_disp') }}",
+              method:"POST",
+              data:{id:<?php echo $user->id; ?>, date:dateresv,services: services, _token:_token},
+              success:function(data){         
+                  //alert(data);
+                   if ( data.length !== 0 ) { 
+                      $.each(data, function(i, item) {
+                            //alert(data[i]);
+                            content=$('#time > div > div').html();
+                            $('#time > div > div').html("");
+                            words = data[i].split('||');
+                            slotcontent='<div class="time-slot"><input type="radio" name="time-slot" id="time-slot-'+i+'" onchange="changeslot(`htime-slot-'+i+'`);"><label for="time-slot-'+i+'"><strong id="htime-slot-'+i+'">'+words[0]+'</strong><span>'+words[1]+'</span></label></div>';
+                            $('#time > div > div').html(content+slotcontent);
+                        });
+
+                     }
+                     else
+                     {
+                        alert("il n'y a pas de temps disponible");
+                     }
+                  }
+                });
+  }
+  else
+  {
+    alert("Veuillez sélectionner le(s) service(s) et la date de la réservation");
+  }
+});
+
+
+
+// reservation form date changed
+/*$('#date-picker').on('apply.daterangepicker', function(ev, picker) {
+  
+    });*/
        var initialLocaleCode = 'fr';
        var localeSelectorEl = document.getElementById('locale-selector');
        var calendarEl = document.getElementById('calpres');
@@ -1360,6 +1411,13 @@ $( document ).ready(function() {
 
     function clickToday() {
       $('.fc-timeGridWeek-button').click();
+    }
+    function changeslot(hslot) {
+    idh="#"+hslot;
+    var timeSlotVal = $(idh).text();
+
+    $('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
+    $('.panel-dropdown').removeClass('active');
     }
 </script>
 
@@ -1539,73 +1597,19 @@ $( document ).ready(function() {
                     <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
 
                     <div class="col-lg-12">
-						<div class="panel-dropdown time-slots-dropdown" id="time">
+						<div class="panel-dropdown time-slots-dropdown" id="time"> 
 							<a href="#">Heure</a>
 							<div class="panel-dropdown-content padding-reset">
 								<div class="panel-dropdown-scrollable">
-									
-									<!-- Time Slot -->
+
+                                    <!-- Time Slot 
 									<div class="time-slot">
 										<input type="radio" name="time-slot" id="time-slot-1">
 										<label for="time-slot-1">
 											<strong>08:30 am - 09:00 am</strong>
 											<span>1 slot available</span>
 										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-2">
-										<label for="time-slot-2">
-											<strong>09:00 am - 09:30 am</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-3">
-										<label for="time-slot-3">
-											<strong>09:30 am - 10:00 am</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-4">
-										<label for="time-slot-4">
-											<strong>10:00 am - 10:30 am</strong>
-											<span>3 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-5">
-										<label for="time-slot-5">
-											<strong>13:00 pm - 13:30 pm</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-6">
-										<label for="time-slot-6">
-											<strong>13:30 pm - 14:00 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-7">
-										<label for="time-slot-7">
-											<strong>14:00 pm - 14:30 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
+									</div>-->
 
 								</div>
 							</div>
@@ -2705,6 +2709,7 @@ $(this).find('input').on('change',function() {
 <?php if (isset($User)){ ?> 
 
 <script>	
+
 	$('#addfavoris').click(function( ){
                 
 			 
@@ -2795,7 +2800,7 @@ var timeSlotVal = timeSlot.find('strong').text();
 
 var str=$('#time a').text();
 if(str=='Heure'){document.getElementById('ErrorHeure').style.display='block';;}
-var myArr = str.split("am -");
+var myArr = str.split(" -");
 var reservationHeureStart=myArr[0];//start
 var reservationHeure2=myArr[1].split("-");
 var reservationHeure3=reservationHeure2[0].split("am");

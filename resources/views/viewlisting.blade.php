@@ -2270,6 +2270,7 @@ $("body").mouseup(function() {
   var heures_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController::get_tab_heures_indisp_rendezvous($user->id); ?> ;
   var jours_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController:: get_tab_jours_indisp_rendezvous($user->id); ?> ;
   var minutes_indisp_rendezvous= <?php echo \App\Http\Controllers\CalendrierController::get_tab_minutes_indisp_rendezvous($user->id); ?> ;
+  alert(heures_indisp_rendezvous);
   function get_Num_day(datestr)
   {
   	var datek = new Date(datestr);
