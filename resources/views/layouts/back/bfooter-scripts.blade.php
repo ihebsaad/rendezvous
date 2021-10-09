@@ -135,7 +135,9 @@ $("#booking-date-range").on("cancel.daterangepicker", function(ev, picker) {
   maxDateFilter = Date.parse(picker.endDate);
   //alert(moment(maxDateFilter).format('DD/MM/YYYY'));
   var min= moment((minDateFilter)).format('YYYY-MM-DD');
+  var min = moment(min, "YYYY-MM-DD").add('days', -1);
   var max= moment((maxDateFilter)).format('YYYY-MM-DD');
+  var max = moment(max, "YYYY-MM-DD").add('days', 1);
   //alert(max);
   
 var lis = $('ul[class="one"] ');
