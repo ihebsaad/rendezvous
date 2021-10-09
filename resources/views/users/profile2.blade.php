@@ -129,24 +129,35 @@ else
                                 <option value="America/Guadeloupe">Guadeloupe</option>
                                 <option value="Europe/Paris">France</option>
                                 <option value="America/Cayenne">Guyane française</option> 
+                                <option value="Asia/Yerevan" >La réunion</option>
                                  <?php } ?>
                                  <?php if($client->fhoraire=="America/Guadeloupe") {?>
                                 <option value="America/Guadeloupe">Guadeloupe</option>
                                 <option value="America/Martinique" default="" >Martinique</option>
                                 <option value="Europe/Paris">France</option>
                                 <option value="America/Cayenne">Guyane française</option> 
+                                <option value="Asia/Yerevan" >La réunion</option>
                                  <?php } ?>
                                  <?php if($client->fhoraire=="Europe/Paris") {?>
                                  <option value="Europe/Paris">France</option>
                                 <option value="America/Martinique" default="" >Martinique</option>
                                 <option value="America/Guadeloupe">Guadeloupe</option>
-                                <option value="America/Cayenne">Guyane française</option> 
+                                <option value="America/Cayenne">Guyane française</option>
+                                <option value="Asia/Yerevan" >La réunion</option> 
                                  <?php } ?>
                                  <?php if($client->fhoraire=="America/Cayenne") {?>
                                 <option value="America/Cayenne">Guyane française</option> 
                                 <option value="America/Martinique" default="" >Martinique</option>
                                 <option value="America/Guadeloupe">Guadeloupe</option>
-                                <option value="Europe/Paris">France</option>                               
+                                <option value="Europe/Paris">France</option>
+                                <option value="Asia/Yerevan" >La réunion</option>                               
+                                 <?php } ?>
+                                  <?php if($client->fhoraire=="Asia/Yerevan") {?>
+                                <option value="America/Cayenne">Guyane française</option> 
+                                <option value="America/Martinique"  >Martinique</option>
+                                <option value="America/Guadeloupe">Guadeloupe</option>
+                                <option value="Europe/Paris">France</option>
+                                <option value="Asia/Yerevan" default="">La réunion</option>                               
                                  <?php } ?>
                             </select>
                           </div>
