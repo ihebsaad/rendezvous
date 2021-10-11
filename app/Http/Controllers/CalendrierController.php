@@ -21,6 +21,8 @@ use DateInterval;
 //use Spatie\GoogleCalendar\Event;
 use DateTime;
 use Carbon;
+use Swift_Mailer;
+use Mail;
 
 use Google_Client;
 use Google_Service_Calendar;
@@ -178,6 +180,8 @@ class CalendrierController extends Controller
 
     }
 
+    
+
     public function dragDropCalendar(Request $req)
     {
        
@@ -230,8 +234,37 @@ class CalendrierController extends Controller
 
                 //$services_res->update(['date_reservation'=> $start]);
                 //$services_res->save();
-                Reservation::where('id',$ident[0])->update(['date_reservation'=> $start]);
-                 
+               // Reservation::where('id',$ident[0])->update(['date_reservation'=> $start]);
+                $res=Reservation::where('id',$ident[0])->first();
+                $res->update(['date_reservation'=> $start]);
+                $res->save();
+                $prestataire=User::where('id',$res->prestataire)->first();
+                $client=User::where('id',$res->client)->first();
+                $entreprise="";
+                $nom_prestataire="";
+
+                if($prestataire)
+                {
+                  $nom_prestataire=$prestataire->name.' '.$prestataire->lastname;                  
+                }
+
+                $nom_client="";
+                
+                 if($client)
+                {
+                  $nom_client=$client->name.' '.$client->lastname;
+                }
+                $nom_service= $res->nom_serv_res;
+
+               // envoi mail au client
+               $message='Bonjour cher client '.$nom_client.',<br>';
+               $message.='Votre prestataire.'.$nom_prestataire.' a modifié le rendez-vous qui concerne la réservation de service : '.$nom_service.'<br>';
+               $message.='La nouvelle date de rendez-vous : '. date('d/m/Y H:i', strtotime($start)).'<br>';
+              
+                   
+                //mohamed.achraf.besbes@gmail.com
+                // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+              $this->sendMail('kbskhaled@gmail.com','Changement d\'un rendez-vous d\'une réservation',$message);                 
                 return " La mise à jour est effectuée avec succès";
               }
               else // cas ou il y a  plusieurs services deplaceer unquement le service en question comme une nouvelle reservation
@@ -262,7 +295,7 @@ class CalendrierController extends Controller
              $nouvelleres->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix,'services_reserves'=> $serviceJson,'date_reservation'=> $start));
 
              // mettre a jour services_reserves + montant total + nom
-
+   
 
               $Njson= json_encode($array);
 
@@ -280,8 +313,33 @@ class CalendrierController extends Controller
 
                 }
                $services_res->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix,'services_reserves'=> $array));
+                $prestataire=User::where('id',$services_res->prestataire)->first();
+                $client=User::where('id',$services_res->client)->first();
+                $entreprise="";
+                $nom_prestataire="";
 
-                  return " La mise à jour est effectuée avec succès";
+                if($prestataire)
+                {
+                  $nom_prestataire=$prestataire->name.' '.$prestataire->lastname;
+                  
+                }
+                $nom_client="";
+                
+                 if($client)
+                {
+                  $nom_client=$client->name.' '.$client->lastname;
+                }
+                $nom_service= $nouvelleres->nom_serv_res;
+
+               // envoi mail au client
+               $message='Bonjour cher client '.$nom_client.',<br>';
+               $message.='Votre prestataire.'.$nom_prestataire.' a modifié le rendez-vous qui concerne la réservation de service : '.$nom_service.'<br>';
+               $message.='La nouvelle date de rendez-vous : '. date('d/m/Y H:i', strtotime($start)).'<br>';
+              
+               //mohamed.achraf.besbes@gmail.com
+                // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+                 $this->sendMail('kbskhaled@gmail.com','Changement d\'un rendez-vous d\'une réservation',$message);
+               return " La mise à jour est effectuée avec succès";
               }
               //return $key;
              //$kk= json_encode($array) ;
@@ -320,7 +378,39 @@ class CalendrierController extends Controller
               if(count($array)==1) // update date
               {
 
-                Reservation::where('id',$ident[0])->update(['date_reservation'=> $start]);
+               // Reservation::where('id',$ident[0])->update(['date_reservation'=> $start]);
+                $res=Reservation::where('id',$ident[0])->first();
+                $res->update(['date_reservation'=> $start]);
+                $res->save();
+                $prestataire=User::where('id',$res->prestataire)->first();
+                $client=User::where('id',$res->client)->first();
+                $entreprise="";
+                $nom_prestataire="";
+
+                if($prestataire)
+                {
+                  $nom_prestataire=$prestataire->name.' '.$prestataire->lastname;                  
+                }
+
+                $nom_client="";
+                
+                 if($client)
+                {
+                  $nom_client=$client->name.' '.$client->lastname;
+                }
+                $nom_service= $res->nom_serv_res;
+
+               // envoi mail au client
+               $message='Bonjour cher client '.$nom_client.',<br>';
+               $message.='Votre prestataire.'.$nom_prestataire.' a modifié le rendez-vous qui concerne la réservation de service : '.$nom_service.'<br>';
+               $message.='La nouvelle date de rendez-vous : '. date('d/m/Y H:i', strtotime($start)).'<br>';
+              
+               //mohamed.achraf.besbes@gmail.com
+                // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+               $this->sendMail('kbskhaled@gmail.com','Changement d\'un rendez-vous d\'une réservation',$message);
+                 
+
+                // envoi mail au client
                  
                 return " La mise à jour est effectuée avec succès";
               } 
@@ -349,6 +439,33 @@ class CalendrierController extends Controller
        
       // return $req->get('title');
     }
+
+    public function sendMail($to,$sujet,$contenu){
+
+    $swiftTransport =  new \Swift_SmtpTransport( 'smtp.gmail.com', '587', 'tls');
+    //$swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
+    //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
+
+    $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
+    $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email eSolutions2020*
+
+        $swiftMailer = new Swift_Mailer($swiftTransport);
+    Mail::setSwiftMailer($swiftMailer);
+    $from=\Config::get('mail.from.address') ;
+    $fromname=\Config::get('mail.from.name') ;
+    
+    Mail::send([], [], function ($message) use ($to,$sujet, $contenu,$from,$fromname   ) {
+      //dd($contenu);
+
+         $message
+                 ->to($to)
+                    ->subject($sujet)
+                       ->setBody($contenu, 'text/html')
+                    ->setFrom([$from => $fromname]);         
+
+      });
+    
+  }
 
      public function view ($id)
      {
