@@ -11,6 +11,10 @@ $pvideo= $parametres->video;
 
 $temoinages=DB::table('temoinages_prest')->get();
 
+use \App\Contenu_plan;   
+$abonnementB =  Contenu_plan::where('abonnement',2)->get();
+$abonnementC =  Contenu_plan::where('abonnement',3)->get();
+
 ?>
 <style type="text/css">
     /* Chrome, Safari, Edge, Opera */
@@ -98,8 +102,160 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 }
 
 }
-
+    
 </style>
+ <style type="text/css">
+ .btn-black:hover {text-decoration:none;}
+ .booking-requests-filter {
+    background: #000000!important;
+    color: white!important;
+}
+ .dashboard-list-box h4 {
+    color: #fff!important;
+    background-color: #000000!important;
+}
+.plan { box-shadow: none!important;}
+.read-more-trigger {color: #000!important;}
+.dashboard-list-box {
+    box-shadow: none!important;
+}
+ /* highlight PLAN 2*/
+.brilliant::before {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 64px 64px 0 0;
+  border-color: #006ed2 transparent transparent transparent;
+  position: absolute;
+  left: 15px;
+  top: 0;
+  content: "";
+}
+.brilliant::after {
+  color: white;
+  position: absolute;
+  left: 24px;
+  top: 6px;
+  text-shadow: 0 0 2px #006ed2;
+  font-size: 2.2rem;
+}
+.brilliant::after{
+  font-family: "FontAwesome";
+  content: "";
+}
+/* show more plan 2 & 3*/
+.read-more-state {
+  display: none!important;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  padding: 0px 0!important;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+  padding: 6px 0!important;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Plus';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Moins';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #006ed2;
+  line-height: 2;
+}
+ </style>
+ <style type="text/css">
+   .pricing-container {
+  width: 90%;
+  max-width: 1170px;
+  margin: 4em auto;
+}
+
+.pricing-container {
+    margin: 6em auto;
+}
+.pricing-container.full-width {
+    width: 100%;
+    max-width: none;
+}
+
+.pricing-switcher {
+  text-align: center;
+}
+
+.pricing-switcher .fieldset {
+  display: inline-block;
+  position: relative;
+  padding: 2px;
+  border-radius: 50em;
+  border: 2px solid #fc346c;
+}
+
+.pricing-switcher input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.pricing-switcher label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  float: left;
+  width: 90px;
+  height: 32px;
+  line-height: 40px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  
+}
+
+.pricing-switcher .switch {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 40px;
+  width: 90px;
+  background-color: #fc346c;
+  border-radius: 50em;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  transition: transform 0.5s;
+}
+
+.pricing-switcher input[type="radio"]:checked + label + .switch,
+.pricing-switcher input[type="radio"]:checked + label:nth-of-type(n) + .switch {
+  -webkit-transform: translateX(90px);
+  -moz-transform: translateX(90px);
+  -ms-transform: translateX(90px);
+  -o-transform: translateX(90px);
+  transform: translateX(90px);
+}
+
+
+
+ </style>
+ <style>@media (max-width: 768px){
+.booking-requests-filter {
+    display: block!important;
+    left: -93px;
+    margin-top: -23px;}
+}</style>
 @section('content')
 <div id="inscriptionsec">
 <div class="container" id="inscriptionsection">
@@ -538,13 +694,13 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 <?php use App\User; $nbpres=User::where('user_type','prestataire')->whereNotNull('expire')->count(); 
 
 if( $nbpres <= 100 ) {?>
-<section class="fullwidth padding-top-40 " data-background-color="#fed600">
+<!--<section class="fullwidth padding-top-40 " data-background-color="#fed600">
     <div class="container">
         <div class="row">
                 <div class="col-md-12">
                     <section id="offre-lancement" class="center margin-bottom-50">
-                        <h2 id="h2offre">OFFRE DE BIENVENUE <!-- <i class="im im-icon-Gift-Box" style="font-size:90px;"></i>--></h2>
-                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€/Mois</span> <?php echo $cout_abonnement_annuel_offrel;?>€ TTC/Mois</h2>
+                        <h2 id="h2offre">OFFRES DE BIENVENUE</h2>
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">889€/Mois</span> <?php //echo $cout_abonnement_annuel_offrel;?>€ TTC/Mois</h2>
                         <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -556,24 +712,107 @@ if( $nbpres <= 100 ) {?>
                         <h2 style="font-size: 35px; color: #3e3d3d;margin-top: 30px;">OU</h2>
                         <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;" >Obtenez toutes les fonctionnalités</h3>
 
-                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">249€/Mois</span> <?php echo $cout_abonnement_mensuel_offrel; ?>€ TTC/Mois</h2>
+                        <h2 style="font-size: 50px; color: #3e3d3d;margin-top: 30px;"><span style="text-decoration: line-through;color: #fff;">249€/Mois</span> <?php //echo $cout_abonnement_mensuel_offrel; ?>€ TTC/Mois</h2>
                         <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>
-
-
-                        <!-- <p style="text-align: center;margin-top: 0px;color: #525252; ">(soit 37.41€/mois)</p> -->
-                        <!-- Search -->
                         <div class="row">
                             <div class="col-lg-8 col-lg-offset-2 text-center">
                                 <a href="#sign-in-dialog2" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
                                 <p style="text-align: center;margin-top: 0px;color: #525252; line-height: 37px;display: none;"><b>*</b>Puis 889€/an, soit 74€/mois</p>
                             </div>
                         </div>
-                        <!-- Search Section / End -->
+
                     </section>
                 </div>
             </div>
     </div>
-</section>
+</section>-->
+
+<!-- les plans -->
+                        <section class="fullwidth padding-top-40 " data-background-color="#fed600">
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <section id="offre-lancement" class="center margin-bottom-30">
+                                    <h2 id="h2offre">OFFRES DE BIENVENUE</h2>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="row">        
+                          <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  " style="  align-items: baseline!;"> 
+
+                            <!-- plan 3 - start -->            
+                          <div class="plan featured plan featured col-md-6 col-md-offset-2" style="  align-items: baseline; ">
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;color: black;" >Obtenez toutes les fonctionnalités</h3>
+                          <div class="dashboard-list-box with-icons margin-top-20">
+                          <div class="booking-requests-filter">
+                                 <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
+                              <h4 style="">Abonnement mensuel<?php //echo $parametres->abonnement3;?></br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
+                              </h4>
+                              <div>
+                              <center><input type="checkbox" class="read-more-state" id="post-3" />
+                                    <ul class="read-more-wrap">
+                                    <?php $x=0; foreach($abonnementC as $ab) { 
+                                        if ($x<5) {
+                                          echo  '<li>'.$ab->contenu.'</li>' ;
+                                        } else {
+                                          echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
+                                        }
+                                          $x=$x+1;  
+                                         
+                                      
+                                       } ?>
+                                    </ul>
+                                     <label for="post-3" class="read-more-trigger"></label></br>
+                               
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>     
+                            <a href="#sign-in-dialog2" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
+                          </center></div>
+                          </div>
+                           </div>
+                     <!-- plan 3 - end -->  
+
+                          
+                          <!-- plan 2 - start -->    
+                          <div class="plan featured plan featured col-md-6 col-md-offset-2"style="  align-items: baseline; ">
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;" > </h3>
+                          <div class="dashboard-list-box with-icons margin-top-20">
+                          <div class="booking-requests-filter">
+                           <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
+                                 <h4>Abonnement mensuel
+                                    </br><span class="value right" style="line-height: 28px; font-weight: 500;font-size: 15px" id="prixB"><?php echo $cout_abonnement_annuel_offrel; ?>€<span id="uniteC">TTC / Par mois</span></span>
+                                </h4> 
+                                <div>
+                                <center><input type="checkbox" class="read-more-state" id="post-2" />
+                                    <ul class="read-more-wrap">
+                                    <?php $x=0; foreach($abonnementB as $ab) { 
+                                        if ($x<5) {
+                                          echo  '<li style=" margin-bottom: 2px;
+                                          ">'.$ab->contenu.'</li>' ;
+                                        } else {
+                                          echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
+                                        }
+                                          $x=$x+1;  
+                                         
+                                      
+                                       } ?>
+                                    </ul>
+                                     <label for="post-2" class="read-more-trigger"></label></br>
+
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>   
+                            <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>      
+                            
+                          </center></div>
+                          </div>
+                                 
+                                
+                                 </div>
+                     <!-- plan 2 - end -->  
+                     
+                     
+                              </div>        
+                          </div> 
+                          </div> 
+                    </section>
 <?php }else {?>
  <section class="fullwidth padding-top-40 " data-background-color="#fed600">
     <div class="container">
@@ -863,3 +1102,43 @@ function cusername() {
 }
 
 </script>
+ <script type="text/javascript">
+     
+      var chkboxes = $('input[type=radio]');
+chkboxes.click(function() {
+  
+  var unite = "TTC / Par Mois";
+  var prix1= <?php echo $parametres->cout_abonnement1;?> ;
+  var prix2= <?php echo $parametres->cout_abonnement2;?> ;
+  var prix3= <?php echo $parametres->cout_abonnement3;?> ;
+  if (this.value=="Annuel") {
+
+    unite = "TTC / Par an";
+    prix1 = (prix1) * 12;
+    prix2 = (prix2) * 12;
+    prix3 = (prix3) * 12;
+    document.getElementById("yearlylabel").style.color = "#fff";
+    document.getElementById("monthlylabel").style.color = "#fc346c";
+  } else {
+    document.getElementById("yearlylabel").style.color = "#fc346c";
+    document.getElementById("monthlylabel").style.color = "#fff";
+  }
+    
+    //alert (this.value);
+    //document.getElementById("prixA").innerHTML = ;
+    $('#prixA').animate({'opacity': 0}, 400, function(){
+        $(this).html(' '+prix1+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
+    });
+    $('#prixB').animate({'opacity': 0}, 400, function(){
+        $(this).html(' '+prix2+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
+    });
+    $('#prixC').animate({'opacity': 0}, 400, function(){
+        $(this).html(' '+prix3+'€ <span>'+unite+'</span>').animate({'opacity': 1}, 400);    
+    });
+    
+    
+          
+});
+
+   
+  </script>
