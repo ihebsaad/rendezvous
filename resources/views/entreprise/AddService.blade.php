@@ -114,8 +114,8 @@
                               <option >Jour</option>
                               <option >Semaine</option>
                               <option >Mois</option>
-                              <option >toute les 3 semaines</option>
-                              <option >1 semaine sur 2</option>
+                              <!-- <option >toute les 3 semaines</option>
+                              <option >1 semaine sur 2</option> -->
                             </select> </div>
                          <br>
                           <div class="col-lg-6 " >

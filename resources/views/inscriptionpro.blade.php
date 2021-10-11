@@ -110,10 +110,10 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
     background: #000000!important;
     color: white!important;
 }
- .dashboard-list-box h4 {
+ /*.dashboard-list-box h4 {
     color: #fff!important;
     background-color: #000000!important;
-}
+}*/
 .plan { box-shadow: none!important;}
 .read-more-trigger {color: #000!important;}
 .dashboard-list-box {
@@ -247,7 +247,9 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
   transform: translateX(90px);
 }
 
-
+    .dashboard-list-box.with-icons ul li {
+        padding-left: 30px!important; 
+}
 
  </style>
  <style>@media (max-width: 768px){
@@ -255,6 +257,8 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
     display: block!important;
     left: -93px;
     margin-top: -23px;}
+
+
 }</style>
 @section('content')
 <div id="inscriptionsec">
@@ -734,51 +738,19 @@ if( $nbpres <= 100 ) {?>
                             <div class="col-md-12">
                                 <section id="offre-lancement" class="center margin-bottom-30">
                                     <h2 id="h2offre">OFFRES DE BIENVENUE</h2>
+                                    <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >*Pour la première année</h3>
                                 </section>
                             </div>
                         </div>
                         <div class="row">        
                           <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  " style="  align-items: baseline!;"> 
-
-                            <!-- plan 3 - start -->            
-                          <div class="plan featured plan featured col-md-6 col-md-offset-2" style="  align-items: baseline; ">
-                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;color: black;" >Obtenez toutes les fonctionnalités</h3>
-                          <div class="dashboard-list-box with-icons margin-top-20">
-                          <div class="booking-requests-filter">
-                                 <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-                              <h4 style="">Abonnement mensuel<?php //echo $parametres->abonnement3;?></br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
-                              </h4>
-                              <div>
-                              <center><input type="checkbox" class="read-more-state" id="post-3" />
-                                    <ul class="read-more-wrap">
-                                    <?php $x=0; foreach($abonnementC as $ab) { 
-                                        if ($x<5) {
-                                          echo  '<li>'.$ab->contenu.'</li>' ;
-                                        } else {
-                                          echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
-                                        }
-                                          $x=$x+1;  
-                                         
-                                      
-                                       } ?>
-                                    </ul>
-                                     <label for="post-3" class="read-more-trigger"></label></br>
-                               
-                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>     
-                            <a href="#sign-in-dialog2" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
-                          </center></div>
-                          </div>
-                           </div>
-                     <!-- plan 3 - end -->  
-
-                          
-                          <!-- plan 2 - start -->    
+                            <!-- plan 2 - start -->    
                           <div class="plan featured plan featured col-md-6 col-md-offset-2"style="  align-items: baseline; ">
-                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;" > </h3>
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:22px;font-weight: 600;" > </h3>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                            <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
-                                 <h4>Abonnement mensuel
+                                 <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel
                                     </br><span class="value right" style="line-height: 28px; font-weight: 500;font-size: 15px" id="prixB"><?php echo $cout_abonnement_annuel_offrel; ?>€<span id="uniteC">TTC / Par mois</span></span>
                                 </h4> 
                                 <div>
@@ -807,6 +779,36 @@ if( $nbpres <= 100 ) {?>
                                 
                                  </div>
                      <!-- plan 2 - end -->  
+                            <!-- plan 3 - start -->            
+                          <div class="plan featured plan featured col-md-6 col-md-offset-2" style="  align-items: baseline; ">
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:22px;font-weight: 600;color: black;" >Obtenez toutes les fonctionnalités</h3>
+                          <div class="dashboard-list-box with-icons margin-top-20">
+                          <div class="booking-requests-filter">
+                                 <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
+                              <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel<?php //echo $parametres->abonnement3;?></br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
+                              </h4>
+                              <div>
+                              <center><input type="checkbox" class="read-more-state" id="post-3" />
+                                    <ul class="read-more-wrap">
+                                    <?php $x=0; foreach($abonnementC as $ab) { 
+                                        if ($x<5) {
+                                          echo  '<li>'.$ab->contenu.'</li>' ;
+                                        } else {
+                                          echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
+                                        }
+                                          $x=$x+1;  
+                                         
+                                      
+                                       } ?>
+                                    </ul>
+                                     <label for="post-3" class="read-more-trigger"></label></br>
+                               
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>     
+                            <a href="#sign-in-dialog2" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
+                          </center></div>
+                          </div>
+                           </div>
+                     <!-- plan 3 - end -->  
                      
                      
                               </div>        
