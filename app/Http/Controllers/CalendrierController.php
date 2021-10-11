@@ -264,7 +264,13 @@ class CalendrierController extends Controller
                    
                 //mohamed.achraf.besbes@gmail.com
                 // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-              $this->sendMail('kbskhaled@gmail.com','Changement d\'un rendez-vous d\'une réservation',$message);                 
+              if($client)
+                {
+                   if(trim($client->email))
+                   {
+                     $this->sendMail(trim($client->email),'Changement d\'un rendez-vous d\'une réservation',$message);
+                   }
+                }              
                 return " La mise à jour est effectuée avec succès";
               }
               else // cas ou il y a  plusieurs services deplaceer unquement le service en question comme une nouvelle reservation
@@ -338,7 +344,13 @@ class CalendrierController extends Controller
               
                //mohamed.achraf.besbes@gmail.com
                 // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-                 $this->sendMail('kbskhaled@gmail.com','Changement d\'un rendez-vous d\'une réservation',$message);
+                if($client)
+                {
+                   if(trim($client->email))
+                   {
+                     $this->sendMail(trim($client->email),'Changement d\'un rendez-vous d\'une réservation',$message);
+                   }
+                }
                return " La mise à jour est effectuée avec succès";
               }
               //return $key;
@@ -407,7 +419,13 @@ class CalendrierController extends Controller
               
                //mohamed.achraf.besbes@gmail.com
                 // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-               $this->sendMail('kbskhaled@gmail.com','Changement d\'un rendez-vous d\'une réservation',$message);
+              if($client)
+                {
+                   if(trim($client->email))
+                   {
+                     $this->sendMail(trim($client->email),'Changement d\'un rendez-vous d\'une réservation',$message);
+                   }
+                }
                  
 
                 // envoi mail au client
