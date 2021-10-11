@@ -102,7 +102,11 @@ echo "null";
 
           }
     $sql = "INSERT INTO payments (user, details, beneficiaire, beneficiaire_id, montant) VALUES ('".$iduser."', 'paiement d'une tranche de l'abonnement mensuel : N°: ".$numAbn."', 'prenezunrendezvous.com', '1', '".($event->data->object->amount_paid)/100."')";
-
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
           if ($invo==1) {
             http_response_code(200);
             exit();
