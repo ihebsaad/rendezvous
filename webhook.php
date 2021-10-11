@@ -101,7 +101,7 @@ echo "null";
               $numAbn =  $row["abonnement"];
 
           }
-    $sql = "INSERT INTO payments (user, details, beneficiaire, beneficiaire_id, montant) VALUES ('".$iduser."', 'paiement d une tranche de l abonnement mensuel : N°: ".$numAbn."', 'prenezunrendezvous.com', '1', '".($event->data->object->amount_paid)/100."')";
+    $sql = "INSERT INTO payments (user, details, beneficiaire, beneficiaire_id, montant) VALUES ('".$iduser."', 'paiement d une tranche de l abonnement mensuel : N°: ".$numAbn."', 'prenezunrendezvous.com', '1', '".((float)$event->data->object->amount_paid)/100."')";
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
 } else {
