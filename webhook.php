@@ -90,6 +90,7 @@ echo "null";
     http_response_code(200);
   exit();
   } else {
+    
     $sql = "SELECT * FROM `abonnements` WHERE IdStripe='".$event->data->object->subscription."'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
@@ -97,8 +98,11 @@ echo "null";
               $invoice = $row["invoiceId"]; 
               $invo = $row["invoice"]; 
               $iduser =  $row["user"]; 
+              $numAbn =  $row["abonnement"];
 
           }
+    $sql = "INSERT INTO payments (user, details, beneficiaire, beneficiaire_id, montant) VALUES ('".$iduser."', 'paiement d'une tranche de l'abonnement mensuel : N°: ".$numAbn."', 'prenezunrendezvous.com', '1', '".($event->data->object->amount_paid)/100."')";
+
           if ($invo==1) {
             http_response_code(200);
             exit();
