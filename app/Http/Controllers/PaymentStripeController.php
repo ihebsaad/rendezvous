@@ -764,7 +764,7 @@ return view('payments.payAbn2', [
                  'user' => $client->id,
                  'beneficiaire_id'=> $prestataire->id,
                  'beneficiaire'=>$prestataire->titre,
-                 'details' => "Acompte payé de la réservation : ".$reservation,
+                 'details' => "Acompte payé pour la réservation : ".$reservation,
                  'montant' => $acompte
              ]);
             $a->save();  
@@ -843,6 +843,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
     } // fin if type == acompte
     if($type=='reste'){
+      $a= new Payment([
+                 'user' => $client->id,
+                 'beneficiaire_id'=> $prestataire->id,
+                 'beneficiaire'=>$prestataire->titre,
+                 'details' => "Total payé pour la réservation : ".$reservation,
+                 'montant' => $Reservation->Net
+             ]);
+            $a->save(); 
        Reservation::where('id',$reservation)->update(array('paiement' => 2,'reste'=>0));  
        
         $date = new DateTime($Reservation->date_reservation);
