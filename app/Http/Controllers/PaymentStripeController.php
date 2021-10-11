@@ -353,6 +353,7 @@ $customer = \Stripe\Customer::create();
        $password=Session::get('password');
        $pays=Session::get('pays');
        $ind_tel=Session::get('ind_tel');
+       $typeAbn=Session::get('typeAbn');
 
    // dd( $urlqrcode);
      }
@@ -576,7 +577,7 @@ return view('payments.payAbn2', [
         $abonnement='N°: 1 | ' .$parametres->abonnement1.' (annuel)';
       }
       if($abn==2){
-        $abonnement='N°: 2 | ' .$parametres->abonnement2.' (abonnement annuel)('.$parametres->cout_abon_annu_pricing.'/ an)';
+        $abonnement='N°: 2 | ' .$parametres->abonnement2.' (abonnement mensuel)('.$parametres->cout_abon_annu_pricing.'/ mois)';
       }
       if($abn==3){
         $abonnement='N°: 3 | ' .$parametres->abonnement3.' (abonnement mensuel)('.$parametres->cout_abon_mens_pricing.'/ mois)';
@@ -586,7 +587,7 @@ return view('payments.payAbn2', [
       else
       {
 
-        if($mensuel_annuel=='mensuel')
+        if($abn=='3')
         {
           
         $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3_mens.' euros pour chaque mois';
@@ -594,7 +595,7 @@ return view('payments.payAbn2', [
         else
         {
 
-        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3.' euros pour la première année';
+        $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3.' euros pour chaque mois';
 
         }
 

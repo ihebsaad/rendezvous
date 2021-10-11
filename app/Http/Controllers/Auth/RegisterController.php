@@ -276,6 +276,7 @@ class RegisterController extends Controller
         Session::put('user_type', $req->get('user_type'));
         Session::put('password' , Hash::make($req->get('password')));
         Session::put('mensuel_annuel' , $req->get('mensuel_annuel'));
+        Session::put('typeAbn' , $req->get('typeAbn'));
 
          if($req->get('user_type')=='prestataire')
          {

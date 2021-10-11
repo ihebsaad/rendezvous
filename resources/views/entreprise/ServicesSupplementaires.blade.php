@@ -61,39 +61,39 @@
 
                         <!-- Switcher ON-OFF Content -->
                         <div class="switcher-content">
-                          <div class="row">
-                            <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
            
-                              <center> <label><h3>Liste des règles pour les services supplémentaires</h3></label></center><br><br>
-                               <center> 
-                                  <table class="table table-striped" id="table_serv_supp" style="width: 80% !important;">
-                                      <thead>
-                                        <tr>
-                                          <th><h3>Services additionnées</h3></th>
-                                          <th><h3>Service(s) et/ou produit(s) offert(s)</h3></th>
-                                          <th></th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <?php  $regle_ser_supp=ServiceSupp::where('prestataire',$user->id)->get();?>
-                                        <?php foreach($regle_ser_supp as $rss) {
-                                        //dd($rss->re) 
-                                           $res=explode('=', $rss->regle);
-                                          ?>
-                                        <tr>
-                                          <td><?php echo $res[0]; ?></td>
-                                          <td><?php echo $res[1]; ?></td>
-                                          <td><input type="button" style="width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php echo $rss->id ?>)"></td>
-                                        </tr>                 
-                                      <?php } ?>
-                                      </tbody>
-                                    </table>
-                                                               </center> 
-                                      <br>
-                                       <hr>
-                                      <br>
+            <center> <label><h3>Liste des règles pour les services supplémentaires</h3></label></center><br><br>
+             <center> 
+            <table class="table table-striped" id="table_serv_supp" style="width: 80% !important;">
+                <thead>
+                  <tr>
+                    <th><h3>Services additionnées</h3></th>
+                    <th><h3>Service(s) et/ou produit(s) offert(s)</h3></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php  $regle_ser_supp=ServiceSupp::where('prestataire',$user->id)->get();?>
+                  <?php foreach($regle_ser_supp as $rss) {
+                  //dd($rss->re) 
+                     $res=explode('=', $rss->regle);
+                    ?>
+                  <tr>
+                    <td><?php echo $res[0]; ?></td>
+                    <td><?php echo $res[1]; ?></td>
+                    <td><input type="button" style="width: 50px !important; color: white !important;" value="X " onclick="deleteRow(this ,<?php echo $rss->id ?>)"></td>
+                  </tr>                 
+                <?php } ?>
+                </tbody>
+              </table>
+           </center> 
+          <br>
+           <hr>
+          <br>
 
-                                <div class="">
+   <div class="">
      
         <?php $nbcomm=0;?>
 
