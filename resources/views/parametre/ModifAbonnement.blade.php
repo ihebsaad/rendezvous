@@ -62,7 +62,7 @@
      </div> 
                                 <form action="{{ route('users.editPlan') }}" method="get" > 
      <div id="Modifa">
-     <textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne "></textarea>
+     <textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne " maxlength="700"></textarea>
      </div><br>
      <input type="" name="abonnement" hidden="hidden" value="<?php echo $k; ?>">
      <input type="" name="idligne" id="idlignea" hidden="hidden" value="0">
@@ -110,7 +110,7 @@
     document.getElementById("buttonSubmit"+x).value = "Enregistrer" ;
     document.getElementById("idligne"+x).value = a ;
     $("#buttonSubmit"+x).css("background-color","green");
-    document.getElementById("Modif"+x).innerHTML = '<textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne ">'+y+'</textarea>';
+    document.getElementById("Modif"+x).innerHTML = '<textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne " maxlength="700">'+y+'</textarea>';
 
     //alert(y);
   }
@@ -121,7 +121,7 @@
     document.getElementById("buttonSubmit"+x).value = "Ajouter" ;
     $("#buttonSubmit"+x).css("background-color","");
     document.getElementById("idligne"+x).value = 0 ;
-    document.getElementById("Modif"+x).innerHTML = '<textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne "></textarea>';
+    document.getElementById("Modif"+x).innerHTML = '<textarea type="text" name="contenuPlan" placeholder="Ajouter une ligne " maxlength="700"></textarea>';
   };
 </script>
 @endsection('content')
