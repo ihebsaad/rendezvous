@@ -640,7 +640,7 @@ return view('payments.payAbn2', [
     $message='Bonjour,<br>';
     $message.='Abonnement payé : '.$abonnement.'<br>';
     $message.='<b>Prestataire :</b> '.$nom_p.' '.$prenom_p.'<br>';
-    $message.='<b>Téléphone Prestataire :</b> (+'.$prestataire->ind_tel.') '.$prestataire->phone .'<br>';
+    $message.='<b>Téléphone Prestataire :</b>'.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
   //trouvezunprestataire@gmail.com
     //$this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
