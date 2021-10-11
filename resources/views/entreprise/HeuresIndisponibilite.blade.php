@@ -1254,6 +1254,7 @@ input#date-picker {
 
     function ClientVerif(){
     var number_client = $('#number_client').val();
+    var number_client=number_client.trim();
       //var service = $('#service').val();
       var id_user = $('#id_user').val();
 
@@ -1989,6 +1990,7 @@ $(function() {
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
+        autoUpdateInput: false,
       locale: {
         "format": "DD-MM-YYYY",
                 "separator": " - ",
@@ -2051,6 +2053,7 @@ $(function() {
 	$('#date-picker2').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
+        autoUpdateInput: false,
       locale: {
         "format": "DD-MM-YYYY",
         "separator": " - ",

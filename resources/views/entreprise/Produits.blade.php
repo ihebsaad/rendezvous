@@ -139,7 +139,7 @@
                 <input type="text" placeholder="Nom du produit*" id="nom"  name="nom_produit" required >
               </div>
               <div class="fm-input  ">
-                <input type="text"   placeholder="description du produit*"  id="description"  name="description">
+                <input type="text" maxlength="460"  placeholder="description du produit*"  id="description"  name="description">
               </div>
               
               

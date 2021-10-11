@@ -3,6 +3,7 @@
 $plogo= $parametres->logo;
 ?>
 <style>
+
 #sign-in-dialog2,
  {
     background: #fff;
@@ -112,8 +113,10 @@ $plogo= $parametres->logo;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div>
-                                                    <input name="siren" type="text" id="siren" placeholder="Numéro siret/siren de votre entreprise *"  class="error" required="required">
+                                                    <input name="siren" type="number" id="siren" 
+                                                    maxlength="14" placeholder="Numéro siret/siren de votre entreprise *"   pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==14) return false;" class="error" required="required">
                                                 </div>
+
                                             </div>
                                         </div>
                                         <div class="row">
@@ -129,7 +132,7 @@ $plogo= $parametres->logo;
                                                 <option value="france">France (+33)</option>
                                                 <option value="guadeloupe">Guadeloupe (+590)</option>
                                                 <option value="guyanef">Guyane française (+594)</option> 
-                                                <option value="laReunion">La réunion (+974)</option>
+                                                <option value="laReunion">La réunion (+262 )</option>
                                                </select>
                                                 </div>
                                                   

@@ -1245,7 +1245,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         //->get();
        $reservations = DB::table('reservations')->where('prestataire',$cuser->id)->whereNotNull('date_reservation')->whereNull('id_recc')->where(function($q){ $q->where('recurrent',0)
          ->orwhere('recurrent',1)->where('visible',true);
-          })->get();
+          })->orderBy('created_at', 'desc')->get();
        return view('entreprise.ReservezUnRdv', compact('reservations','user','id'));
     }
     if($cuser->user_type=='client' ){

@@ -97,7 +97,8 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(Request $req)
-    {
+ 
+    {  
         //dd($req->all());
 
         //\QrCode::size(200)->format('png')->generate('webnersolutions.com', public_path('qrcode1.png'));

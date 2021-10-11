@@ -780,7 +780,8 @@ table.basic-table th {
                     ?>
                     <li><a href="#listing-promotion-list">Promotions flash</a></li>
                     <?php }} ?>
-                    <li><a href="#listing-location">Emplacement</a></li>
+                    <?php $lat= $user->latitude;$lon=$user->longitude; if(isset($lat) && isset($lon)){ ?>
+                    <li><a href="#listing-location">Emplacement</a></li> <?php }?>
                     <li><a href="#listing-reviews">Avis</a></li>
                     <li><a href="#add-review">Ajoutez votre avis</a></li>
                 </ul>
@@ -1051,6 +1052,7 @@ table.basic-table th {
             </section>
                     <?php } ?>
             <!-- Location -->
+            <?php $lat= $user->latitude;$lon=$user->longitude; if(isset($lat) && isset($lon)){ ?>
             <div id="listing-location" class="listing-section">
                 <h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Emplacement</h3>
 
@@ -1061,7 +1063,7 @@ table.basic-table th {
                         </div>
                     </div>
             </div>
-                
+                <?php }?>
             <!-- Reviews -->
             <div id="listing-reviews" class="listing-section">
                 <h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Avis <span>(<?php echo $countrev;?>)</span></h3>
@@ -1069,7 +1071,7 @@ table.basic-table th {
                 <!-- Rating Overview -->
                 <div class="rating-overview">
                     <div class="rating-overview-box">
-                        <span class="rating-overview-box-total"><?php echo $moy;?></span>
+                        <span class="rating-overview-box-total"><?php echo(number_format($moy, 1, '.', ','));?></span>
                         <span class="rating-overview-box-percent">de 5.0</span>
                         <div class="star-rating" data-rating="<?php echo $moy;?>"></div>
                     </div>
@@ -1081,7 +1083,7 @@ table.basic-table th {
                                     <span class="rating-bars-rating" data-rating="<?php echo $moy_qualite ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong><?php echo $moy_qualite ; ?></strong>
+                                    <strong><?php echo(number_format($moy_qualite, 1, '.', ','));?></strong>
                                 </span>
                             </div>
                             <div class="rating-bars-item">
@@ -1090,7 +1092,7 @@ table.basic-table th {
                                     <span class="rating-bars-rating" data-rating="<?php echo $moy_service ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong><?php echo $moy_service ; ?></strong>
+                                    <strong><?php echo(number_format($moy_service , 1, '.', ','));?></strong>
                                 </span>
                             </div>
                             <div class="rating-bars-item">
@@ -1099,7 +1101,7 @@ table.basic-table th {
                                     <span class="rating-bars-rating" data-rating="<?php echo $moy_prix ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong><?php echo $moy_prix ; ?></strong>
+                                    <strong><?php echo(number_format($moy_prix , 1, '.', ','));?></strong>
                                 </span>
                             </div>
                             <div class="rating-bars-item">
@@ -1108,7 +1110,7 @@ table.basic-table th {
                                     <span class="rating-bars-rating" data-rating="<?php echo $moy_emplacement ; ?>">
                                         <span class="rating-bars-rating-inner"></span>
                                     </span>
-                                    <strong><?php echo $moy_emplacement ; ?></strong>
+                                    <strong><?php echo(number_format($moy_emplacement , 1, '.', ','));?></strong>
                                 </span>
                             </div>
                     </div>
@@ -1246,6 +1248,7 @@ table.basic-table th {
                     </div>
                     
                     <!-- Subrating #4 -->
+                    <?php $lat= $user->latitude;$lon=$user->longitude; if(isset($lat) && isset($lon)){ ?>
                     <div class="add-sub-rating">
                         <div class="sub-rating-title">Emplacement <i class="tip" data-tip-content="Noter l'emplacement du prestataire"></i></div>
                         <div class="sub-rating-stars">
@@ -1265,7 +1268,7 @@ table.basic-table th {
                             </form>
                         </div>
                     </div>  
-
+                    <?php }?>
 
                 </div>
                 <!-- Subratings Container / End -->
@@ -2922,6 +2925,8 @@ document.getElementById("contactform").reset();
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
+        autoUpdateInput: false,
+
       locale: {
         "format": "DD-MM-YYYY",
         "separator": " - ",
@@ -2983,6 +2988,7 @@ document.getElementById("contactform").reset();
 	$('#date-picker2').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
+        autoUpdateInput: false,
       locale: {
         "format": "DD-MM-YYYY",
         "separator": " - ",
