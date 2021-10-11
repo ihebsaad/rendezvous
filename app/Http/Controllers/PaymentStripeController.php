@@ -587,7 +587,7 @@ return view('payments.payAbn2', [
       else
       {
 
-        if($abn=='3')
+        if($abn==3)
         {
           
         $abonnement='offre de Lancement | ' .$parametres->cout_offrelancement3_mens.' euros pour chaque mois';
@@ -608,8 +608,16 @@ return view('payments.payAbn2', [
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
     //mohamed.achraf.besbes@gmail.com
+    if($prestataire)
+    {
+      if(trim($prestataire->email))
+      {
+         $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+      }
+
+    }
     // $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
-     $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
+    // $this->sendMail('kbskhaled@gmail.com','Abonnement payé',$message) ;
     //enregistrement alerte
       $alerte = new Alerte([
              'user' => $user,
@@ -635,6 +643,7 @@ return view('payments.payAbn2', [
     $message.='<b>Téléphone Prestataire :</b> (+'.$prestataire->ind_tel.') '.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
   //trouvezunprestataire@gmail.com
+    //$this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
   //kbskhaledfb@gmail.com  trouvezunprestataire@gmail.com
    $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
       //enregistrement alerte
