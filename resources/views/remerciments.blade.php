@@ -114,7 +114,7 @@ background-color:#a0d468;
                                   <!-- Fin de widget en ligne Calendly -->
                                   <p style=" font-weight: 500;margin-top: 15px;">Rejoignez notre communauté Facebook et soyez averti(e) des actualités de la plateforme
                                   </p>
-                                    <a href="#" class="button medium" style="margin-top:0px"><i class="im im-icon-Facebook-2"></i> Rejoignez nous</a>
+                                    <a href="https://www.facebook.com/Prenezunrendezvouscom-102437978811112" target="_blank" class="button medium" style="margin-top:0px"><i class="im im-icon-Facebook-2"></i> Rejoignez nous</a>
                                   
 
                                 <!--<a href="{{-- route('home') --}}">retour au site</a>-->
