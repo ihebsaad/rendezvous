@@ -750,7 +750,7 @@ if( $nbpres <= 100 ) {?>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                            <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
-                                 <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement Basique
+                                 <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (Basique)
                                     </br><span class="value right" style="line-height: 28px; font-weight: 500;font-size: 15px" id="prixB"><?php echo $cout_abonnement_annuel_offrel; ?>€<span id="uniteC">TTC / Par mois</span></span>
                                 </h4> 
                                 <div>
@@ -785,7 +785,7 @@ if( $nbpres <= 100 ) {?>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                                  <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-                              <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement Indispensable<?php //echo $parametres->abonnement3;?></br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
+                              <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (Indispensable)<?php //echo $parametres->abonnement3;?></br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
                               </h4>
                               <div>
                               <center><input type="checkbox" class="read-more-state" id="post-3" />
