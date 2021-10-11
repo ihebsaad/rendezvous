@@ -312,7 +312,7 @@ class CalendrierController extends Controller
                         }
 
                 }
-               $services_res->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix,'services_reserves'=> $array));
+               $services_res->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix,'services_reserves'=> array_values($array));
                 $prestataire=User::where('id',$services_res->prestataire)->first();
                 $client=User::where('id',$services_res->client)->first();
                 $entreprise="";
