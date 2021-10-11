@@ -13,6 +13,17 @@ $temoinages=DB::table('temoinages_prest')->get();
 
 ?>
 <style type="text/css">
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 section.fullwidth .icon-box-2 i {
     background-color: rgb(255 215 0)!important;
     color: #826d00!important;
