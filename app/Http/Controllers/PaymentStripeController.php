@@ -644,7 +644,7 @@ return view('payments.payAbn2', [
          ]);  
      $alerte->save();   
     
-    // enregistrement payment dans la base
+  /*  // enregistrement payment dans la base
     $paiement  =  new \App\Payment([
              'payer_id' => ' ',
        'payment_id'=>$request->get('paymentIntent'),            
@@ -654,7 +654,7 @@ return view('payments.payAbn2', [
              'details' => 'paiement  de l\'abonnement : '.$abonnement,
          ]);  
      
-     $paiement->save();
+     $paiement->save();*/
      
      // ajout abonnement
         $abonnement  =  new \App\Abonnement([
