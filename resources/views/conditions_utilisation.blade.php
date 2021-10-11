@@ -19,8 +19,8 @@
 
       <div id="primary" class="content-area col-lg-11 mx-auto">
         <div id="content" class="site-content" role="main">
-			    <div class="entry-content">
-			    
+			    <div class="entry-content" style="color:white; margin-bottom:200px">
+			    	<h3>le contenu sera disponible bientôt.</h3>
 			    </div><!-- .entry-content -->
 		    </div><!-- #content .site-content -->
 		</div><!-- #primary .content-area -->
