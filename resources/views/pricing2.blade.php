@@ -247,7 +247,7 @@
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
       <span class="value right" style="text-align:right!important" id="prixB"><?php echo $parametres->cout_abon_annu_pricing;?>€<span id="uniteC">TTC / Par ans</span></span> <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
-             <h4>Abonnement {{$mensuel_annuelB}}
+             <h4>Abonnement {{$mensuel_annuelC}}
             </h4> 
             <div>
             <center><input type="checkbox" class="read-more-state" id="post-2" />
