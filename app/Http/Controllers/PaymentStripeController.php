@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\User;
+use \App\Payment;
 use \App\Abonnement;
 use \App\Alerte;
 use \App\Reservation;
@@ -758,7 +759,15 @@ return view('payments.payAbn2', [
     
     $service = \App\Service::find( $serviceid) ;
 
-    if($type=='acompte'){
+    if($type=='acompte'){  
+      $a= new Payment([
+                 'user' => $client->id,
+                 'beneficiaire_id'=> $prestataire->id,
+                 'beneficiaire'=>$prestataire->titre,
+                 'details' => "Acompte payé de la réservation : ".$reservation,
+                 'montant' => $acompte
+             ]);
+            $a->save();  
         Reservation::where('id',$reservation)->update(array('statut' => 1,'paiement' => 1,'reste'=>$reste,'stripe_id'=>$request->paymentIntent));
           
         $date = new DateTime($Reservation->date_reservation);
