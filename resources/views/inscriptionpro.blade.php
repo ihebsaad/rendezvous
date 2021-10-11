@@ -746,7 +746,7 @@ if( $nbpres <= 100 ) {?>
                           <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  " style="  align-items: baseline!;"> 
                             <!-- plan 2 - start -->    
                           <div class="plan featured plan featured col-md-6 col-md-offset-2"style="  align-items: baseline; ">
-                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:30px;font-weight: 600;" > </h3>
+                            <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:22px;font-weight: 600;" > </h3>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                            <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
