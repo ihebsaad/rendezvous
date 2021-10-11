@@ -502,7 +502,7 @@ return view('payments.payAbn2', [
     else{
       //$abon 2 (mensuel)
 
-      $datee = (new \DateTime())->modify('+31 days')->format($format);
+      $datee = (new \DateTime())->modify('+366 days')->format($format);
 
       
     }
@@ -517,7 +517,7 @@ return view('payments.payAbn2', [
     if($abn!=3)
       {$datee = (new \DateTime())->modify('+366 days')->format($format);}
     else{
-      $datee = (new \DateTime())->modify('+31 days')->format($format);
+      $datee = (new \DateTime())->modify('+366 days')->format($format);
     }
      }
      
