@@ -1990,7 +1990,6 @@ $(function() {
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
-        autoUpdateInput: false,
       locale: {
         "format": "DD-MM-YYYY",
                 "separator": " - ",
@@ -2053,7 +2052,6 @@ $(function() {
 	$('#date-picker2').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
-        autoUpdateInput: false,
       locale: {
         "format": "DD-MM-YYYY",
         "separator": " - ",

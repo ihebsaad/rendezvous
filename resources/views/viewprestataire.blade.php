@@ -752,7 +752,7 @@ table.basic-table th {
                     </span>
                     <?php if(  $countrev  >0 ){?> 
                         <div class="star-rating" data-rating="<?php echo $moy; ?>">
-                            <div class="rating-counter"><a href="#listing-reviews"><b><?php echo $moy; ?></b> (<?php echo $countrev; ?> Avis)</a></div>
+                            <div class="rating-counter"><a href="#listing-reviews"><b><?php echo(number_format($moy, 1, '.', ','));?></b> ( <?php echo $countrev; ?> Avis)</a></div>
                         </div>
                     <?php } ?>
                 </div>
@@ -1544,10 +1544,10 @@ $('#time > a').click(function(){
                       
               <ul class="tabs-nav" >
                 <li class="active">
-                  <a href="#home" style="font-size: 12.8px;">Service simple</a>
+                  <a href="#home" style="color:black;font-size: 12.8px;">Service simple</a>
                 </li>
                 <li class="">
-                  <a  href="#menu1" style="font-size: 12.8px;">Abonnement mensuel</a>
+                  <a  href="#menu1" style="color:black;font-size: 12.8px;">Abonnement mensuel</a>
                 </li>
                 
               </ul>
@@ -1818,7 +1818,6 @@ font-size: 14px!important;
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré" onchange="SelectServiceRec(this)">
-                        <option label="blank" style="font-size:12.5px;font-weight:800;">Sélectionner l'abonnement desiré</option>	
 
                              <?php 
                                 foreach($servicesreccurent as $SR){
@@ -2925,7 +2924,6 @@ document.getElementById("contactform").reset();
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
-        autoUpdateInput: false,
 
       locale: {
         "format": "DD-MM-YYYY",
@@ -2988,7 +2986,6 @@ document.getElementById("contactform").reset();
 	$('#date-picker2').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
-        autoUpdateInput: false,
       locale: {
         "format": "DD-MM-YYYY",
         "separator": " - ",
