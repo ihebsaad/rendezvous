@@ -643,9 +643,9 @@ return view('payments.payAbn2', [
     $message.='<b>Téléphone Prestataire :</b>'.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
   //trouvezunprestataire@gmail.com
-    //$this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
+    $this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
   //kbskhaledfb@gmail.com  trouvezunprestataire@gmail.com
-   $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
+  // $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => 1,
