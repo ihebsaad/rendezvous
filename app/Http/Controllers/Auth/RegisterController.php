@@ -148,7 +148,7 @@ class RegisterController extends Controller
             if($pays=='laReunion')
             {
               $pays='la Réunion';
-              $ind_tel= 974; 
+              $ind_tel= 262; 
             }
            
          }
@@ -340,7 +340,7 @@ class RegisterController extends Controller
             if($pays=='laReunion')
             {
               $pays='la Réunion';
-              $ind_tel= 974; 
+              $ind_tel= 262; 
             }
            
          }

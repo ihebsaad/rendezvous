@@ -295,7 +295,9 @@ $temoinages=DB::table('temoinages')->get();
                                     <option value="martinique">Martinique (+596)</option>
                                     <option value="france">France (+33)</option>
                                     <option value="guadeloupe">Guadeloupe (+590)</option>
-                                    <option value="guyanef">Guyane française (+594)</option> 
+                                    <option value="guyanef">Guyane française (+594)</option>
+                                    <option value="laReunion">La réunion (+262 )</option>
+ 
                                    </select>
                                     </div>
                                       
@@ -341,6 +343,8 @@ $temoinages=DB::table('temoinages')->get();
                                             <option value="America/Guadeloupe">Guadeloupe</option>
                                             <option value="Europe/Paris">France</option>
                                             <option value="America/Cayenne">Guyane française</option> 
+                                            <option value="Asia/Yerevan">La réunion</option> 
+
                                         </select>
                                     </div>
                                 </div>

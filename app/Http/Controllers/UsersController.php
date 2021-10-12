@@ -1725,7 +1725,7 @@ fclose($fp);
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
     $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-    $swiftTransport->setPassword('prestataire1998'); // mot de passe email eSolutions2020*
+    $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);
