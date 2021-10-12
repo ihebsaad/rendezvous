@@ -248,7 +248,7 @@
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
             <span class="value right" style="" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-          <h4 style=" font-size: 1.1em;   height: 81px;">Abonnement {{$mensuel_annuelC}} (<?php echo $parametres->abonnement3;?>)
+          <h4 style=" font-size: 1.1em;   height: 81px;">Abonnement {{$mensuel_annuelC}}  (<?php echo $parametres->abonnement3;?>)
           </h4>
           <div>
           <center><input type="checkbox" class="read-more-state" id="post-3" />
