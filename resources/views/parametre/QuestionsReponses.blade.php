@@ -183,5 +183,42 @@
         //alert(x);
         document.getElementById("mytype").value = x ;
       }
+      function changing_question_reponse(elm) {
+                var champ = elm.name;
+               // alert(champ);
+                var id1= elm.id;
+                var id=id1.substr(2);
+                //alert(id);
+                var type=id1.substring(0,2);
+              // alert(type);
+                var val = document.getElementById(id1).value;
+                //alert(val);
+              
+                //if ( (val != '')) {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ route('pagefaqs.update_question_reponse') }}",
+                    method: "POST",
+                    data: { id:id, type:type, champ: champ, val: val, _token: _token},
+                    success: function (data) {
+                        $('#' + champ).animate({
+                            opacity: '0.3',
+                        });
+                        $('#' + champ).animate({
+                            opacity: '1',
+                        });
+             
+                    swal({
+                        type: 'success',
+                        title: 'Modifié ...',
+                        text: 'Contenu modifié avec succès'
+          //  icon: "success",
+                    }); 
+          
+                     }
+          
+                });
+
+            }
     </script>
 @endsection('content')
