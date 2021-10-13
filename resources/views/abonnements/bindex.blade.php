@@ -62,9 +62,9 @@ use \App\User;
                     <div class="booking-requests-filter">
 
                         <!-- Sort by -->
-                        <div class="sort-by">
+                       <!--  <div class="sort-by">
                             <a href="{{route('pricing')}}" class="pull-right button ">S'abonner / Prolonger</a>
-                        </div>
+                        </div> -->
 
                         <!-- Date Range -->
                         <div id="booking-date-range">

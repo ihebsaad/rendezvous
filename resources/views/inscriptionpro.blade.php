@@ -266,6 +266,13 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
     <div class="row margin-top-60 " style="position: relative;">
         <div class="col-lg-12 col-md-12 justify-center">
             <h2 style="color:white;margin-top: 0px;font-weight:900; text-align: center;line-height: 1.5;">SOLUTION TOUT-EN-UN</br>POUR PRESTATAIRE DE SERVICE SUR RDV</h2>
+            <div class="row " >
+                <div class="col-lg-3 col-sm-3  " ></div>
+                <div class="col-lg-6 col-sm-6 text-center" >
+                <a href="#fonctionnalites" class="button margin-top-15 btn-ybg" style="    width: 90%;text-transform:uppercase;">Découvrez notre solution</a>
+                </div>
+                <div class="col-lg-3 col-sm-3  " ></div>
+            </div>
             <!--<h4 style="color:white;margin-top: 0px;font-weight:500">La solution tout en un pour les prestataires de services sur RDV</h4>-->
             <!--<div class="row padding-top-30">
                 <div class="col-md-1">
@@ -534,7 +541,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
 </div>
 
 <!-- fonctionnalités Section -->
-<section class="fullwidth padding-top-50 padding-bottom-30" data-background-color="#000">
+<section class="fullwidth padding-top-50 padding-bottom-30" data-background-color="#000" id="fonctionnalites">
 <div class="container">
 
     <div class="row">
@@ -750,7 +757,7 @@ if( $nbpres <= 100 ) {?>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                            <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
-                                 <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (Basique)
+                                 <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (<?php echo $parametres->abonnement2;?>)
                                     </br><span class="value right" style="line-height: 28px; font-weight: 500;font-size: 15px" id="prixB"><?php echo $cout_abonnement_annuel_offrel; ?>€<span id="uniteC">TTC / Par mois</span></span>
                                 </h4> 
                                 <div>
@@ -785,7 +792,7 @@ if( $nbpres <= 100 ) {?>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                                  <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-                              <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (Indispensable)<?php //echo $parametres->abonnement3;?></br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
+                              <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (<?php echo $parametres->abonnement3;?>)</br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
                               </h4>
                               <div>
                               <center><input type="checkbox" class="read-more-state" id="post-3" />
@@ -939,9 +946,9 @@ if( $nbpres <= 100 ) {?>
                         <div class="col-lg-6 col-sm-6 text-center" >
                             <a href="#sign-in-dialog" class="button margin-top-15  sign-in popup-with-zoom-anim" style="    width: 90%;text-transform:uppercase;">Profiter de l'offre</a>
                         </div>
-                        <div class="col-lg-6 col-sm-6 text-center" >
+                        <!--<div class="col-lg-6 col-sm-6 text-center" >
                             <a href="https://calendly.com/prenezunrendezvous?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=070000&text_color=ffffff&primary_color=fff600" target="_blank" class="button margin-top-15 btn-ybg" style="    width: 90%;text-transform:uppercase;">Réserver une démo</a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
 

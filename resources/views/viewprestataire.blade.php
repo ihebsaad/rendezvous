@@ -1532,7 +1532,7 @@ $('#time > a').click(function(){
 
                     <!----------------------------------- Nav tabs --------------------------------------------->
                     <?php  if (sizeof($servicesreccurent) == 0 and sizeof($services) == 0)  { echo ' 
-</style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose encore des services </p>
+</style><p style=" font-size: 14px; line-height: 16px;">Le prestataire ne dispose pas encore des services </p>
 
 <div class="tabs-container" style="display:none;">
                 <div id="home" class="tab-content" style="display:none;>'  ;                 
@@ -2130,39 +2130,38 @@ font-size: 14px!important;
 
 
             <!-- Contact -->
-            <div class="boxed-widget margin-top-35">
-                <?php if (!empty($user->responsable)) { ?>
+            <!--<div class="boxed-widget margin-top-35">
+                <?php //if (!empty($user->responsable)) { ?>
                 <div class="hosted-by-title">
                     <h4><span>Responsable</span> <a href="pages-user-profile.html">{{$user->responsable}}</a></h4>
                 </div>
-                <?php } ?>
+                <?php //} ?>
                 <ul class="listing-details-sidebar">
-                    <?php if (!empty($user->tel)) { ?>
+                    <?php //if (!empty($user->tel)) { ?>
                     <li><i class="sl sl-icon-phone"></i> {{$user->tel}}</li>
-                    <?php } ?>
-                    <?php if (!empty($user->email)) { ?>
+                    <?php //} ?>
+                    <?php //if (!empty($user->email)) { ?>
                     <li style="width:100px!important;"><i class="fa fa-envelope-o"></i> <a href="#" style="width:100px!important;">{{$user->email}}</a></li>
-                    <?php } ?>
+                    <?php //} ?>
                 </ul>
 
                 <ul class="listing-details-sidebar social-profiles">
-                <?php if (!empty($user->fb)) { ?>
+                <?php //if (!empty($user->fb)) { ?>
                     <li>
                         <a href="{{$user->fb}}" target="_blank" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a>
                     </li>
-                <?php } ?>
-                <?php if (!empty($user->twitter)) { ?>
+                <?php //} ?>
+                <?php //if (!empty($user->twitter)) { ?>
                     <li>
                         <a href="{{$user->twitter}}" target="_blank" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a>
                     </li>
-                <?php } ?>
-                <?php if (!empty($user->instagram)) { ?>
+                <?php //} ?>
+                <?php //if (!empty($user->instagram)) { ?>
                     <li>
                         <a href="{{$user->instagram}}" target="_blank" class="instagram-profile"><i class="fa fa-instagram"></i> Instagram</a>
                     </li>
-                <?php } ?>
-                    <!-- <li><a href="#" class="gplus-profile"><i class="fa fa-google-plus"></i> Google Plus</a></li> -->
-                </ul>
+                <?php //} ?>
+                </ul>-->
 
                 <!-- Reply to review popup 
                 <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
@@ -2176,8 +2175,8 @@ font-size: 14px!important;
                 </div>
 
                 <a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>-->
-            </div>
-            <!-- Contact / End-->
+            <!--</div>
+             Contact / End-->
 
 
             <!-- Share / Like 

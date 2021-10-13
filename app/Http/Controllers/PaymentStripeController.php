@@ -48,7 +48,7 @@ class PaymentStripeController extends Controller
     return "ok";
   }
   public function addcustomerStripeAbn(Request $request){
-    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    Stripe::setApiKey('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');
     $subscription_id = $request->get('subscriptionId'); 
     $payment_method = $request->get('res');
       $stripeSub = \Stripe\Subscription::update(
@@ -111,7 +111,7 @@ class PaymentStripeController extends Controller
       $idprestataire=Reservation::where('id',$k)->value('prestataire');
       $idaccount = User::where('id',$idprestataire)->value('id_stripe');
       //Stripe::setApiKey('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');
-      Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+      Stripe::setApiKey('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');
 
         //dd($request);
     $montant=Reservation::where('id',$k)->value('Net');
@@ -247,7 +247,7 @@ public function payabnMensuel(Request $request)
     $fin = strtotime('+350 day', $today);
     
     //Stripe::setApiKey('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');
-    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    Stripe::setApiKey('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');
 
 $customer = \Stripe\Customer::create();
     \Stripe\Customer::update(
@@ -357,7 +357,7 @@ $customer = \Stripe\Customer::create();
 
    // dd( $urlqrcode);
      }
-    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');    
+    Stripe::setApiKey('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');    
 
 
      // Stripe::setApiKey('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');
@@ -643,9 +643,9 @@ return view('payments.payAbn2', [
     $message.='<b>Téléphone Prestataire :</b>'.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
   //trouvezunprestataire@gmail.com
-    //$this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
+    $this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
   //kbskhaledfb@gmail.com  trouvezunprestataire@gmail.com
-   $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
+  // $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => 1,
@@ -985,7 +985,7 @@ public function Remboursement($k)
         $idprestataire=Reservation::where('id',$k)->value('prestataire');
         $account = User::where('id',$idprestataire)->value('id_stripe');
 
-       Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+       Stripe::setApiKey('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');
 
      $refund = \Stripe\Refund::create([
   'payment_intent' => $stripe_id,
@@ -1042,7 +1042,7 @@ public function pay4($resId)
     $client = User::where('id',$Reservation->client)->first();
     $account = User::where('id',$Reservation->prestataire)->value('id_stripe');
     //Stripe::setApiKey('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');
-    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    Stripe::setApiKey('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');
 
 $customer = \Stripe\Customer::create();
     \Stripe\Customer::update(

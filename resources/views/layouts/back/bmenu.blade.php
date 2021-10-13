@@ -9,7 +9,7 @@
   <a href="#" class="dashboard-responsive-nav-trigger"><i class="fa fa-reorder"></i> Menu</a>
 
   <div class="dashboard-nav">
-    <div class="dashboard-nav-inner">
+    <div id="minner" class="dashboard-nav-inner">
 
       <ul data-submenu-title="Essentiel">
         <li  class="<?php if ($view_name == 'monespace'){echo 'active';} ?> "><a href="{{ route('monespace') }}"><i class="sl sl-icon-home"></i> Mon espace</a></li>
@@ -26,7 +26,7 @@
 
           </ul>
           <ul data-submenu-title="Mon compte">
-            <li class="<?php if ($view_name == 'parametres'){echo 'active';} ?>  "><a href="#"><i class="sl sl-icon-equalizer"></i> Paramètres </a>
+            <li class="<?php if ($view_name == 'parametres'){echo 'active';} ?>  "><a id="parametreslink" href="#"><i class="sl sl-icon-equalizer"></i> Paramètres </a>
                 <ul>
                   <li><a href="{{ route('parametre.abonnements')}}">Abonnements</a></li>
                   <li><a href="{{ route('parametre.LogoBanniere')}}">Logo et banniére </a></li>
@@ -73,7 +73,7 @@
 
       </ul>
       <ul data-submenu-title="Mon compte">
-        <li class="<?php if ($view_name == 'users-listing'){echo 'active';} ?>  "><a href="# {{-- route('titredescription', ['id'=>$user->id]) --}}"><i class="sl sl-icon-briefcase"></i> Mon Entreprise </a>
+        <li class="<?php if ($view_name == 'users-listing'){echo 'active';} ?>  " ><a id="monentrepriselink" href="# {{-- route('titredescription', ['id'=>$user->id]) --}}"><i class="sl sl-icon-briefcase"></i> Mon Entreprise </a>
             <ul>
               <li><a href="{{ route('titredescription', ['id'=>$user->id]) }}">Titre & Description</a></li>
               <li><a href="{{ route('emplacement', ['id'=>$user->id]) }}">Emplacement</a></li>

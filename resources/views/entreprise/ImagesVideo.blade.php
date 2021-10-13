@@ -88,21 +88,21 @@ right: -11px;
                         </div>
 
                         <!-- Dropzone -->
-                        <div class="submit-section col-md-4">
+                        <!-- <div class="submit-section col-md-4">
                             <h4>Logo</h4>
                             <form action="{{ route('users.ajoutimages') }}" class="dropzone" >
                             {{ csrf_field() }}
                             <input type="hidden" name="user"  value="<?php echo $user->id; ?>">
                             </form>
-                        </div>
-                        <div class="submit-section col-md-4">
+                        </div> -->
+                        <div class="submit-section col-md-6">
                             <h4>Couverture</h4>
-                            <form action="{{ route('users.ajoutimages') }}" class="dropzone" >
+                            <form action="{{ route('users.ajoutcouv') }}" class="dropzone" >
                             {{ csrf_field() }}
                             <input type="hidden" name="user"  value="<?php echo $user->id; ?>">
                             </form>
                         </div>
-                        <div class="submit-section col-md-4">
+                        <div class="submit-section col-md-6">
                             <h4>Gallery Images</h4>
                             <form action="{{ route('users.ajoutimages') }}" class="dropzone" >
                             {{ csrf_field() }}
@@ -110,16 +110,18 @@ right: -11px;
                             </form>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  style="margin-bottom: 20px;">
+                           <!--  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  style="margin-bottom: 20px;">
                             <div class="image-area">
                                   <img  src="<?php echo  URL::asset('storage/images/'.$user->logo);?>"   alt="Preview">
                                  <a class="remove-image" onclick="return confirm('Êtes-vous sûrs de vouloir supprimer cette image ?')"  href="{{action('UsersController@removeimage', [ 'id'=>$user->id,'user'=> $user->id  ])}}"title="supprimer"  style="display: inline;">&#215;</a>
                              </div>
                             
-                          </div>
-                          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-md-offset-1"  style="margin-bottom: 20px">
+                          </div> -->
+                          <h2 style="margin-bottom: 15px"> Couverture : </h2>
+                          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 "  style="margin-bottom: 20px">
+                            
                             <div class="image-area">
-                                  <img src="<?php echo  URL::asset('storage/images/'.$user->logo);?>"   alt="Preview">
+                                  <img src="<?php echo  URL::asset('storage/images/'.$user->couverture);?>"   alt="Preview">
                                  <a class="remove-image" onclick="return confirm('Êtes-vous sûrs de vouloir supprimer cette image ?')"  href="{{action('UsersController@removeimage', [ 'id'=>$user->id,'user'=> $user->id  ])}}"title="supprimer"  style="display: inline;">&#215;</a>
                              </div>
                             

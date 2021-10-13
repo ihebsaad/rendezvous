@@ -76,7 +76,7 @@ background-color:#a0d468;
 <script>
    // var stripe = Stripe('pk_live_51Hbt14Go3M3y9uW5wKqzuQN968NPlPtwzB5UZFzLqTtNAZxoU43qINNnPR7cAO8j1XKoZZ1QZyGkYLHvQjOc5U3c00K0ZoDEMa');
 
-   var stripe = Stripe('pk_test_51IyZEOLYsTAPmLSFNL9DwqmtcBONlT5sTZFcGE3NXBLvYOxVG0L8XicQaTq4KxFYmOJX42jAqCw7QJ1qOFFWjfwp00xPjV3V4L');
+   var stripe = Stripe('pk_live_51Hbt14Go3M3y9uW5wKqzuQN968NPlPtwzB5UZFzLqTtNAZxoU43qINNnPR7cAO8j1XKoZZ1QZyGkYLHvQjOc5U3c00K0ZoDEMa');
 
 
     var elements = stripe.elements();

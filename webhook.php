@@ -16,10 +16,10 @@ if($conn->connect_error){
 
 
 require 'vendor/autoload.php';
-\Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+\Stripe\Stripe::setApiKey('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');
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-$endpoint_secret = 'whsec_wJs1HzAXjKFqonTRUOojoAP4NzzMdkAL';
-
+//$endpoint_secret = 'whsec_wJs1HzAXjKFqonTRUOojoAP4NzzMdkAL';
+$endpoint_secret = 'whsec_AExWz7vvdm7TkUalDgX0vSKqJVhcaZfw';
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 //dd($sig_header);
@@ -167,7 +167,7 @@ echo "null";
           if ($invoice != null && $invoice !=$event->data->object->id) {
             echo "okkkkkk ";
            
-\Stripe\Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+\Stripe\Stripe::setApiKey('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');
 
 $invoice = \Stripe\Invoice::retrieve($invoice);
 $invoice->voidInvoice();

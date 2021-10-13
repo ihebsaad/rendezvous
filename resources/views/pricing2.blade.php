@@ -193,6 +193,48 @@
       <div class="row">        
       <div class="utf_pricing_container_block margin-top-30 margin-bottom-30  " style="  align-items: baseline!;
 "> 
+<!-- plan 2 - start -->    
+      <div class="plan featured plan featured col-md-6 col-md-offset-2"style="  align-items: baseline;
+">
+      <div class="dashboard-list-box with-icons margin-top-20">
+      <div class="booking-requests-filter">
+      <span class="value right" style="text-align:right!important" id="prixB"><?php echo $parametres->cout_abon_annu_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
+             <h4 style="font-size: 1.1em;">Abonnement {{$mensuel_annuelC}} (<?php echo $parametres->abonnement2;?>)
+            </h4> 
+            <div>
+            <center><input type="checkbox" class="read-more-state" id="post-2" />
+                <ul class="read-more-wrap">
+                <?php $x=0; foreach($abonnementB as $ab) { 
+                    if ($x<5) {
+                      echo  '<li style=" margin-bottom: 2px;
+                      ">'.$ab->contenu.'</li>' ;
+                    } else {
+                      echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
+                    }
+                      $x=$x+1;  
+                     
+                  
+                   } ?>
+                </ul>
+                 <label for="post-2" class="read-more-trigger"></label></br>
+           
+        <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
+        {{ csrf_field() }}
+        <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement2;?>">            
+        <input   name="abonnement" type="hidden"  value="2">            
+        <input   name="user" type="hidden"  value="<?php echo $User;?>"> 
+        <input   name="nature_abonn" type="hidden"  value="normal">    
+        <input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abon_annu_pricing;?>">     
+        <button class="button border "   ><i class="sl sl-icon-basket"></i> Je m'inscris</button>  
+        </form>        
+        
+      </center></div>
+      </div>
+             
+      
+       </div>
+      </div>
+ <!-- plan 2 - end -->  
 
         <!-- plan 3 - start -->     
         <style>@media (max-width: 768px){
@@ -206,7 +248,7 @@
       <div class="dashboard-list-box with-icons margin-top-20">
       <div class="booking-requests-filter">
             <span class="value right" style="" id="prixC"><?php echo $parametres->cout_abon_mens_pricing;?>€<span id="uniteC">TTC / Par mois</span></span> <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-          <h4 style="    height: 81px;">Abonnement {{$mensuel_annuelC}}<?php //echo $parametres->abonnement3;?>
+          <h4 style=" font-size: 1.1em;   height: 81px;">Abonnement {{$mensuel_annuelC}}  (<?php echo $parametres->abonnement3;?>)
           </h4>
           <div>
           <center><input type="checkbox" class="read-more-state" id="post-3" />
@@ -241,48 +283,7 @@
  <!-- plan 3 - end -->  
 
       
-      <!-- plan 2 - start -->    
-      <div class="plan featured plan featured col-md-6 col-md-offset-2"style="  align-items: baseline;
-">
-      <div class="dashboard-list-box with-icons margin-top-20">
-      <div class="booking-requests-filter">
-      <span class="value right" style="text-align:right!important" id="prixB"><?php echo $parametres->cout_abon_annu_pricing;?>€<span id="uniteC">TTC / Par ans</span></span> <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
-             <h4>Abonnement {{$mensuel_annuelC}}
-            </h4> 
-            <div>
-            <center><input type="checkbox" class="read-more-state" id="post-2" />
-                <ul class="read-more-wrap">
-                <?php $x=0; foreach($abonnementB as $ab) { 
-                    if ($x<5) {
-                      echo  '<li style=" margin-bottom: 2px;
-                      ">'.$ab->contenu.'</li>' ;
-                    } else {
-                      echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
-                    }
-                      $x=$x+1;  
-                     
-                  
-                   } ?>
-                </ul>
-                 <label for="post-2" class="read-more-trigger"></label></br>
-           
-        <form class="  " method="POST" id="payment-form"    action="{{ route('payabn') }}" >
-        {{ csrf_field() }}
-        <input   name="description" type="hidden"  value="<?php echo $parametres->abonnement2;?>">     				
- 				<input   name="abonnement" type="hidden"  value="2">     				
- 				<input   name="user" type="hidden"  value="<?php echo $User;?>"> 
-        <input   name="nature_abonn" type="hidden"  value="normal">    
- 				<input class="form-control " name="amount" type="hidden"  value="<?php echo $parametres->cout_abon_annu_pricing;?>">     
-				<button class="button border "   ><i class="sl sl-icon-basket"></i> Je m'inscris</button>  
-        </form>        
-        
-      </center></div>
-      </div>
-             
-			
-			 </div>
-      </div>
- <!-- plan 2 - end -->  
+      
  
  
           </div>        

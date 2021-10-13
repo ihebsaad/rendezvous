@@ -321,7 +321,7 @@ class UsersController extends Controller
 
          // emplacement
          $idprest_emplacement=DB::table('users')->where('user_type','prestataire')->where(function($q) use($prest_emplacement){
-               $q->where('adresse','like','%'.$prest_emplacement.'%')->orWhere('ville','like','%'.$prest_emplacement.'%');
+               $q->where('adresse','like','%'.$prest_emplacement.'%')->orWhere('ville','like','%'.$prest_emplacement.'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
          $idprest_emplacement=array_values($idprest_emplacement);
 
@@ -329,7 +329,7 @@ class UsersController extends Controller
          if(stripos($prest_tag, ' ') == false && stripos($prest_tag, ',') == false)
          {
          $idprest_tag=DB::table('users')->where(function($q) use($prest_tag){
-               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%');
+               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
          $idprest_tag=array_values($idprest_tag);
          
@@ -350,7 +350,7 @@ class UsersController extends Controller
              {
               
               $idprest_t=DB::table('users')->where(function($q) use($parcourir_tags,$i){
-               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%');
+               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
 
               $idprest_t=array_values($idprest_t);
@@ -374,7 +374,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
           //dd($listings);
           $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories,'type' =>$type]);
@@ -394,7 +394,7 @@ class UsersController extends Controller
                       ->where('expire','>=',$today)                
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
                      
          // dd($listings);
@@ -420,7 +420,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
           $listings->appends(['catsearch' => $Toutes_les_categories]);
         }
@@ -430,7 +430,7 @@ class UsersController extends Controller
         {
            // emplacement
          $idprest_emplacement=DB::table('users')->where('user_type','prestataire')->where(function($q) use($prest_emplacement){
-               $q->where('adresse','like','%'.$prest_emplacement.'%')->orWhere('ville','like','%'.$prest_emplacement.'%');
+               $q->where('adresse','like','%'.$prest_emplacement.'%')->orWhere('ville','like','%'.$prest_emplacement.'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
          $idprest_emplacement=array_values($idprest_emplacement);
 
@@ -445,7 +445,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
           $listings->appends(['emplacementsearch' => $prest_emplacement,'type' =>$type]);
           //dd($listings);
@@ -478,7 +478,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
           $listings->appends(['emplacementsearch' => $prest_emplacement, 'catsearch' => $Toutes_les_categories,'type' =>$type]);
       
@@ -492,7 +492,7 @@ class UsersController extends Controller
          if(stripos($prest_tag, ' ') == false && stripos($prest_tag, ',') == false)
          {
          $idprest_tag=DB::table('users')->where(function($q) use($prest_tag){
-               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%');
+               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
          $idprest_tag=array_values($idprest_tag);
          
@@ -513,7 +513,7 @@ class UsersController extends Controller
              {
               
               $idprest_t=DB::table('users')->where(function($q) use($parcourir_tags,$i){
-               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%');
+               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
 
               $idprest_t=array_values($idprest_t);
@@ -536,7 +536,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
           $listings->appends(['tagsearch' => $prest_tag,'type' =>$type]);
           //dd("ok");
@@ -556,7 +556,7 @@ class UsersController extends Controller
          if(stripos($prest_tag, ' ') == false && stripos($prest_tag, ',') == false)
          {
          $idprest_tag=DB::table('users')->where(function($q) use($prest_tag){
-               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%');
+               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
          $idprest_tag=array_values($idprest_tag);
          
@@ -577,7 +577,7 @@ class UsersController extends Controller
              {
               
               $idprest_t=DB::table('users')->where(function($q) use($parcourir_tags,$i){
-               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%');
+               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
 
               $idprest_t=array_values($idprest_t);
@@ -600,7 +600,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
           $listings->appends(['tagsearch' => $prest_tag, 'catsearch' => $Toutes_les_categories,'type' =>$type]);
 
@@ -611,7 +611,7 @@ class UsersController extends Controller
         {
           // emplacement
          $idprest_emplacement=DB::table('users')->where('user_type','prestataire')->where(function($q) use($prest_emplacement){
-               $q->where('adresse','like','%'.$prest_emplacement.'%')->orWhere('ville','like','%'.$prest_emplacement.'%');
+               $q->where('adresse','like','%'.$prest_emplacement.'%')->orWhere('ville','like','%'.$prest_emplacement.'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
          $idprest_emplacement=array_values($idprest_emplacement);
 
@@ -619,7 +619,7 @@ class UsersController extends Controller
          if(stripos($prest_tag, ' ') == false && stripos($prest_tag, ',') == false)
          {
          $idprest_tag=DB::table('users')->where(function($q) use($prest_tag){
-               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%');
+               $q->where('titre','like','%'.$prest_tag.'%')->orWhere('keywords','like','%'.$prest_tag.'%')->orWhere('description','like','%'.$prest_tag.'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
          $idprest_tag=array_values($idprest_tag);
          
@@ -640,7 +640,7 @@ class UsersController extends Controller
              {
               
               $idprest_t=DB::table('users')->where(function($q) use($parcourir_tags,$i){
-               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%');
+               $q->where('titre','like','%'. $parcourir_tags[$i].'%')->orWhere('keywords','like','%'.$parcourir_tags[$i].'%')->orWhere('description','like','%'.$parcourir_tags[$i].'%')->orderBy('abonnement', 'DESC');
              })->pluck('id')->toArray();
 
               $idprest_t=array_values($idprest_t);
@@ -663,7 +663,7 @@ class UsersController extends Controller
                       ->orwhere(DB::raw(' DATE_ADD(date_inscription, INTERVAL 10 DAY) '),'>=',$today)
                       ->where('user_type','=', "prestataire" ) 
                       ->whereIn('id',$result)
-                     ->orderBy('id', 'asc')
+                     ->orderBy('abonnement', 'DESC')
                      ->paginate(6);
           $listings->appends(['tagsearch' => $prest_tag, 'emplacementsearch' => $prest_emplacement,'type' =>$type]);
 
@@ -1799,7 +1799,7 @@ fclose($fp);
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
     $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-    $swiftTransport->setPassword('prestataire1998'); // mot de passe email eSolutions2020*
+    $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);

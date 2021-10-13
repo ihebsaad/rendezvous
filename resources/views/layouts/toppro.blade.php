@@ -279,7 +279,7 @@ $plogo= $parametres->logo;
                                                 <option value="france">France (+33)</option>
                                                 <option value="guadeloupe">Guadeloupe (+590)</option>
                                                 <option value="guyanef">Guyane française (+594)</option> 
-                                                <option value="laReunion">La réunion (+974)</option>
+                                                <option value="laReunion">La réunion (+262 )</option>
                                                </select>
                                                 </div>
                                                   
