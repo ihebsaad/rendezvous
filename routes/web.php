@@ -21,7 +21,6 @@ Route::get('/contactv2',function(){return view('contactv2');})->name('contactv2'
 Route::post('/contactAdd', 'UsersController@contactv2')->name('contactAdd');
 //end contact routes
 Route::get('/Facture_Impayee', 'UsersController@Facture_Impayee')->name('Facture_Impayee');
-Route::get('/contact', 'UsersController@contact')->name('contact');
 
 Auth::routes();
 Route::get('/login', 'UsersController@inscriptionpro')->name('login');
