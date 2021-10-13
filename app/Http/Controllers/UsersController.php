@@ -696,8 +696,82 @@ class UsersController extends Controller
 
           public function accueil()
     {
-         
-      return view('accueil' );       
+      $listingsM=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Martinique')->orWhere('adresse','like','%Martinique%');})->get();
+      $nbmar=count($listingsM);
+      $listingsM=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Martinique')->orWhere('adresse','like','%Martinique%');})->offset(0)->limit(3)->get();
+
+      $listingsGua=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guadeloupe')->orWhere('adresse','like','%Guadeloupe%');})->get();
+      $nbGua=count($listingsGua);
+      $listingsGua=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guadeloupe')->orWhere('adresse','like','%Guadeloupe%');})->offset(0)->limit(3)->get();
+
+      $listingsfrance=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','France')->orWhere('adresse','like','%France%')->orWhere('adresse','like','%Paris%');})->get();
+      $nbfrance=count($listingsfrance);
+      $listingsfrance=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','France')->orWhere('adresse','like','%France%')->orWhere('adresse','like','%Paris%');})->offset(0)->limit(3)->get();
+
+      $listingsGuy=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guyane française')->orWhere('adresse','like','%Guyane Française%')->orWhere('adresse','like','%Cayenne%');;})->get();
+      $nbGuy=count($listingsGuy);
+      $listingsGuy=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guyane française')->orWhere('adresse','like','%Guyane Française%')->orWhere('adresse','like','%Cayenne%');;})->offset(0)->limit(3)->get();
+
+      $listingsRe=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','La réunion')->orWhere('adresse','like','%La réunion%');})->get();
+      $nbRe=count($listingsRe);
+      $listingsRe=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','La réunion')->orWhere('adresse','like','%La réunion%');})->offset(0)->limit(3)->get();
+
+      $arryPrest=array();
+      if($nbmar>=3)
+      {
+        foreach($listingsM as $id)
+        {
+          $idl=$id->id;
+          array_push($arryPrest, $idl);
+        }
+        
+
+      }
+      if($nbGua>=3)
+      {
+
+        foreach($listingsGua as $id)
+        {
+          $idl=$id->id;
+          array_push($arryPrest, $idl);
+        }
+     
+
+      }
+      if($nbfrance>=3)
+      {
+        foreach($listingsfrance as $id)
+        {
+          $idl=$id->id;
+          array_push($arryPrest, $idl);
+        }
+      
+
+      }
+      if($nbGuy>=3)
+      {
+
+        foreach($listingsGuy as $id)
+        {
+          
+          $idl=$id->id;
+          array_push($arryPrest, $idl);
+        }
+
+      }
+      if($nbRe>=3)
+      {
+
+        foreach($listingsRe as $id)
+        {
+          $idl=$id->id;
+          array_push($arryPrest, $idl);
+        }
+
+
+      }
+
+      return view('accueil',compact('arryPrest') );       
 
     }
     
