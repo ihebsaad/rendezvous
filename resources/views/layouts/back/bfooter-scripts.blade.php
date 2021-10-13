@@ -157,6 +157,23 @@ var lis = $('ul[class="one"] ');
   
 
 });
+
+ $("#monentrepriselink").click(function() {
+
+    if ($("#monentrepriselink").parent().attr("class") != "active")
+        {$('#minner').scrollTop($('#minner')[0].scrollHeight);}
+    else
+        {$('#minner').scrollTop(0);}
+ });
+ 
+
+ $("#parametreslink").click(function() {
+
+    if ($("#parametreslink").parent().attr("class") != "active")
+        {$('#minner').scrollTop($('#minner')[0].scrollHeight);}
+    else
+        {$('#minner').scrollTop(0);}
+ });
 </script>
 
 </body>
