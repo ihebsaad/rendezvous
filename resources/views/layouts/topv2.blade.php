@@ -37,7 +37,6 @@ $plogo= $parametres->logo;
                         
                         <li><a class="<?php //if ($view_name == 'faqs'){echo 'active';} ?>" href="{{route('faqs')}}">FAQs </a></li>
                         
-                        <li><a class="<?php //if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contact')}}" >Contact</a>
                         
                     </ul>
                 </nav>-->
