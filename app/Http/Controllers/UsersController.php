@@ -904,6 +904,19 @@ class UsersController extends Controller
      ]);
 
   $contact->save();
+  $contenu=$request->input('contenu');
+  	// Email au prest
+		$message='Bonjour,<br>';
+		$message.='vous avez recevez un email de la part d un visiteur de votre site ';
+		//$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br>';
+    $message.='<b>contenu :</b>  ';
+    $message.=''.$contenu.  '';
+
+		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+
+		
+ 	    $this->sendMail('contact@prenezunrendezvous.com','contact',$message)	;
 
   Session::put('sucmessage', 'Envoyer avec succès');
 
@@ -1845,7 +1858,7 @@ fclose($fp);
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
     $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-    $swiftTransport->setPassword('prestataire1998'); // mot de passe email eSolutions2020*
+    $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);
