@@ -269,7 +269,7 @@ i.im-icon-Gift-Box {font-size: 55px!important; padding-top: 15px; display: block
             <div class="row " >
                 <div class="col-lg-3 col-sm-3  " ></div>
                 <div class="col-lg-6 col-sm-6 text-center" >
-                <a href="#fonctionnalites" class="button margin-top-15 btn-ybg" style="    width: 90%;text-transform:uppercase;">Découvrer notre solution</a>
+                <a href="#fonctionnalites" class="button margin-top-15 btn-ybg" style="    width: 90%;text-transform:uppercase;">Découvrez notre solution</a>
                 </div>
                 <div class="col-lg-3 col-sm-3  " ></div>
             </div>
