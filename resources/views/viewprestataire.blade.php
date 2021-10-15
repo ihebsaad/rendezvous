@@ -779,8 +779,8 @@ table.basic-table th {
                     <li><a href="#listing-overview" class="active">Présentation</a></li>
                     <?php 
 
-                        $services =\App\Service::where('user',$user->id)->where('recurrent','off')->get();
-                        $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->get(); 
+                        $services =\App\Service::where('user',$user->id)->where('recurrent','off')->orderBy('nom')->get();
+                        $servicesreccurent =\App\Service::where('user',$user->id)->where('recurrent','on')->orderBy('nom')->get(); 
                         $nbserv =count($services );
                         $nbservrec =count($servicesreccurent );
                         if (( $nbserv>0) || ( $nbservrec>0)){
