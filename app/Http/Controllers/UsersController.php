@@ -932,7 +932,7 @@ class UsersController extends Controller
         $today= new DateTime();
         $happyhours = Happyhour::where('id_user',$id)->where('dateFin','>=',$today)->get();
         
-        $produit= Produit::where('user',$id)->orderBy('nom')->get();
+        $produit= Produit::where('user',$id)->orderBy('nom_produit')->get();
          //dd($today);
         $myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
         //dd($myhappyhours);
@@ -1945,7 +1945,7 @@ public function Services($id)
         if(  $user_id == $id || $user_type=='admin' )
         {   
         $user = User::find($id);
-        $produit= Produit::where('user',$id)->orderBy('nom')->get();
+        $produit= Produit::where('user',$id)->orderBy('nom_produit')->get();
 
         return view('entreprise.Produits',  compact('user','id','produit')); 
         
