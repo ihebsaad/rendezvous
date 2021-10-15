@@ -3121,8 +3121,7 @@ input[type="range"]:focus + .rangeslider .rangeslider__handle {
 .chosen-container .chosen-results {
 	color: #888;
 	position: relative;
-	overflow-x: hidden;
-	overflow-y: auto;
+
 	margin: 0 4px 8px 0;
 	padding: 0 4px 0 8px;
 	max-height: 300px;
