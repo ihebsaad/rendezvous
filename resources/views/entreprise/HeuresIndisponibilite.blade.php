@@ -526,8 +526,8 @@ input#date-picker {
                                                 <div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>
 
                                                 <div class="fm-input pricing-name"><input style="pointer-events: none; opacity: 0.9;" disabled="" type="text" placeholder="Titre descriptif" value="<?php echo $pi->titre;?>"  /></div>
-                                                <div class="fm-input pricing-ingredients"><input style="pointer-events: none; opacity: 0.9;" disabled=""  type="text" placeholder="Date de début"  value="<?php $date=new DateTime($pi->date_debut) ;echo $date->format('d/m/yy H:i');?>"/></div>
-                                                <div class="fm-input pricing-ingredients"><input style="pointer-events: none; opacity: 0.9;" disabled=""  type="text" placeholder="Date de fin" value="<?php $date=new DateTime($pi->date_fin) ;echo $date->format('d/m/yy H:i');?> "/></div>
+                                                <div class="fm-input pricing-ingredients"><input style="pointer-events: none; opacity: 0.9;" disabled=""  type="text" placeholder="Date de début"  value="<?php $date=new DateTime($pi->date_debut) ;echo $date->format('d/m/yyyy H:i');?>"/></div>
+                                                <div class="fm-input pricing-ingredients"><input style="pointer-events: none; opacity: 0.9;" disabled=""  type="text" placeholder="Date de fin" value="<?php $date=new DateTime($pi->date_fin) ;echo $date->format('d/m/yyyy H:i');?> "/></div>
                                                 <div class="fm-close"><a class="" onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('CalendrierController@remove', [ 'id'=>$pi->id,'user'=> $user->id  ])}}"><i class="fa fa-remove"></i></a></div>
                                             </td>
                                         </tr>
