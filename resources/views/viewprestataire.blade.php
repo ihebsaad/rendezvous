@@ -7,6 +7,16 @@
  <?php  use \App\Http\Controllers\CalendrierController; ?>
 
 <style type="text/css">
+.chosen-container .chosen-results {
+    color: #888;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 400px;
+    margin: 0 4px 8px 0;
+    padding: 0 4px 0 8px;
+    max-height: 500px!important;
+}
 .time-slot label:hover  {
     background-color: #000!important;
     /*opacity: 0.6;*/
