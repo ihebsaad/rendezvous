@@ -6,9 +6,11 @@
   $user_type =$user->user_type;
  ?>
  <?php if( $user_type=='prestataire'  ){ ?>     
+<!-- Début de widget de badge Calendly -->
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/prenezunrendezvous/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=020202&text_color=ffffff&primary_color=fff600', text: 'Nous sommes à votre écoute pour toute question du lundi au vendredi de 9h à 17h', color: '#000000', textColor: '#ffffff', branding: false }); }</script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/prenezunrendezvous/prise-en-main-de-lespace-client?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=ffd700', text: 'Besoin d\'aide ? Prenez un rendez-vous avec notre équipe', color: '#000000', textColor: '#ffd700', branding: false }); }</script>
+<!-- Fin de widget de badge Calendly -->
 <?php } ?>
 <!-- Fin de widget de badge Calendly -->   
 <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
