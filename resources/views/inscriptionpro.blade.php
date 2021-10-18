@@ -1053,7 +1053,7 @@ if( $nbpres <= 100 ) {?>
 <!-- Début de widget de badge Calendly -->
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/prenezunrendezvous/60min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=fffe00', text: 'Besoin de plus d\'information ? Prenez un rendez-vous avec notre service commercial', color: '#000103', textColor: '#ffffff', branding: false, paddingBottom:'30px' }); }</script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/prenezunrendezvous/60min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=ffd700', text: 'Prenez un rendez-vous pour une démonstration', color: '#000000', textColor: '#ffffff', branding: false }); }</script>
 <!-- Fin de widget de badge Calendly -->
 @endsection('content')
 <script>
