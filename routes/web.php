@@ -120,7 +120,8 @@ Route::get('/comingsoon', array('as' => 'comingsoon','uses' => 'UsersController@
 Route::post('/users/addemail','UsersController@addemail')->name('users.addemail');
 Route::post('/addService','ServicesController@addService')->name('addService');
 
-Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
+//Route::get('/', array('as' => 'home','uses' => 'UsersController@home'));
+Route::get('/', array('as' => 'home','uses' => 'UsersController@accueil'));
 Route::get('/accueil', array('as' => 'accueil','uses' => 'UsersController@accueil'));
 Route::get('/pro', array('as' => 'inscription','uses' => 'UsersController@inscriptionpro'));
 Route::get('/dashboard', array('as' => 'dashboard','uses' => 'UsersController@dashboard'))->middleware('auth');

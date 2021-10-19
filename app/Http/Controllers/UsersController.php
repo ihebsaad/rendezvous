@@ -689,8 +689,8 @@ class UsersController extends Controller
       public function home()
     {
          
-      return view('home' );     
-      //return view('comingsoon' );     
+      //return view('home' );     
+      return view('comingsoon' );     
 
     }
 
