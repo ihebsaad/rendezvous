@@ -38,7 +38,7 @@ $plogo= $parametres->logo;
            <!--   <li><a class="<?php if ($view_name == 'apropos'){echo 'active';} ?> " href="{{route('apropos')}}">A propos</a></li>-->
               <li><a class="<?php if ($view_name == 'listings'){echo 'active';} ?>" href="{{route('listings')}}">Découvrez Nos Prestataires</a></li>
               <li><a class="<?php if ($view_name == 'faqs'){echo 'active';} ?>" href="{{route('faqs')}}">FAQs </a></li>
-              <li><a class="<?php if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contact')}}" >Contact</a>             
+              <li><a class="<?php if ($view_name == 'contact'){echo 'active';} ?>"    href="{{route('contactv2')}}" >Contact</a>             
             </ul>
           </nav>
           <div class="clearfix"></div>
