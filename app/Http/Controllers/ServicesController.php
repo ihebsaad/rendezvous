@@ -148,8 +148,8 @@ class ServicesController extends Controller
       //dd($produits);
       //dd( $request);
     //
-        $name='';
-        $rec='off';
+    $name="serviceimg.jpg";
+    $rec='off';
 
     if($request->file('photo')!=null)
     {$image=$request->file('photo');
@@ -158,8 +158,6 @@ class ServicesController extends Controller
       $date=date('d-m-Y-H-i-s');
     $name=$name.'-service-'.$date ;
          $image->move($path,  $name );
-    }else{
-      $name="serviceimg.jpg";
     }
                  $user =  $request->get('user');
            if ($request->get('toggleswitch')=='on') {
@@ -232,11 +230,11 @@ class ServicesController extends Controller
   {
    
        $id =$request->get('user');
+       $idService =$request->get('id');
+
         $produits =$request->get('produit');
         //$produits = serialize($produits);
       //dd($produits);
-      //dd( $request);
-    
         $name='';
         $rec='off';
     if($request->file('photo')!=null)
@@ -248,13 +246,16 @@ class ServicesController extends Controller
       $date=date('d-m-Y-H-i-s');
     $name=$name.'-service-'.$date ;
          $image->move($path,  $name );
-    }
+    }else{
+
+    $name=Service::where('id', $idService)->get('thumb');
+  }
                  $user =  $request->get('user');
            if ($request->get('toggleswitch')=='on') {
             $rec=$request->get('toggleswitch');
           }
        
-            DB::table('services')->where('id', $id)->update(array(
+            DB::table('services')->where('id', $idService)->update([
           'user' => $request->get('user'),
               'nom' => $request->get('nom'),
               'description' => $request->get('description'),
@@ -264,11 +265,9 @@ class ServicesController extends Controller
               
               'periode' => $request->get('mySelect'),
               'nbrService' => $request->get('nbrService'),
-              'recurrent' => $rec));
-            if ($name != "") {
-             Service::where('id', $id)->update(array('thumb' => $name));
-            }
-        
+              'thumb' => $name,
+              'recurrent' => $rec]);
+      
         Session::put('ttmessage', 'Enregistré avec succès');
             //dd($service);
             $id = $request->get('produit');

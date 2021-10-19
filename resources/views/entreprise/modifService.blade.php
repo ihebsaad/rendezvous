@@ -54,16 +54,16 @@
                     <h4 class="gray">Modifier un service</h4>
                     <div class="dashboard-list-box-static">
                         
+                    <input type="text" name="id" id="id" value="{{$service->id}}" style="display:none" />
 
                         <!-- Avatar -->
                         <div class="edit-profile-photo">
-                          <?php if($service->thumb!=''){?>  <img data-index="0" src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"    /><?php } else { ?>
+                        <?php if($service->thumb!=''){?>  <img data-index="0" src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"    /><?php } else { ?>
                             <img src="{{ asset('public/imgg.jpg') }}"  data-index="0" alt="">
-                          <?php } ?>
-                            <div class="change-photo-btn">
+                          <?php } ?>                            <div class="change-photo-btn">
                                 <div class="photoUpload">
                                     <span><i class="fa fa-upload"></i> Télécharger Image</span>
-                                    <input type="file" name="photo" id="photo" class="upload" data-index="0" onChange="swapImage(this)"/>
+                                    <input type="file" name="photo" id="photo" class="upload" data-index="0" onchange="swapImage(this)"/>
                                 </div>
                             </div>
                         </div>

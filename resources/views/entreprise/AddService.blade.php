@@ -68,7 +68,7 @@
                             <div class="change-photo-btn">
                                 <div class="photoUpload">
                                     <span><i class="fa fa-upload"></i> Télécharger Image</span>
-                                    <input type="file" class="upload" name="photo" id="photo" data-index="0" onChange="swapImage(this)" />
+                                    <input type="file" class="upload" name="photo" id="photo" data-index="0" onchange="swapImage(this)" />
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                             <h3> Associer un produit </h3>
 
                         </div>
-                        <div   id="K<?php echo $service->id;?>">
+                        <div   id="K<?php if(isset($service)){echo $service->id;}?>">
                       <select id="produit" name="produit[]" data-placeholder="Sélectionner un produit"   multiple style="font-weight: 17px !important; " class="chosen-select">
                         <option > </option>
                               <?php 
