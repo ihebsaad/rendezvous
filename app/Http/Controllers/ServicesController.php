@@ -158,6 +158,8 @@ class ServicesController extends Controller
       $date=date('d-m-Y-H-i-s');
     $name=$name.'-service-'.$date ;
          $image->move($path,  $name );
+    }else{
+      $name="serviceimg.jpg";
     }
                  $user =  $request->get('user');
            if ($request->get('toggleswitch')=='on') {
