@@ -255,7 +255,7 @@ class ServicesController extends Controller
             $rec=$request->get('toggleswitch');
           }
        
-            DB::table('services')->where('id', $idService)->update([
+            DB::table('services')->where('id', $idService)->update(array(
           'user' => $request->get('user'),
               'nom' => $request->get('nom'),
               'description' => $request->get('description'),
@@ -266,7 +266,7 @@ class ServicesController extends Controller
               'periode' => $request->get('mySelect'),
               'nbrService' => $request->get('nbrService'),
               'thumb' => $name,
-              'recurrent' => $rec]);
+              'recurrent' => $rec));
       
         Session::put('ttmessage', 'Enregistré avec succès');
             //dd($service);
