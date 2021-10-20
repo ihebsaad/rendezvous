@@ -246,10 +246,7 @@ class ServicesController extends Controller
       $date=date('d-m-Y-H-i-s');
     $name=$name.'-service-'.$date ;
          $image->move($path,  $name );
-    }else{
-
-    $name=Service::where('id', $idService)->get('thumb');
-  }
+    }
                  $user =  $request->get('user');
            if ($request->get('toggleswitch')=='on') {
             $rec=$request->get('toggleswitch');
@@ -262,7 +259,6 @@ class ServicesController extends Controller
               'prix' => $request->get('prix'),
               'duree' => $request->get('duree'),
               'Nfois' => $request->get('Nfois'),
-              
               'periode' => $request->get('mySelect'),
               'nbrService' => $request->get('nbrService'),
               'thumb' => $name,
