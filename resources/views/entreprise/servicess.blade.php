@@ -63,7 +63,8 @@
                       ?>
                         <li>
                             <div class="list-box-listing">
-                                <div class="list-box-listing-img"><img src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"    /></div>
+  
+                                <div class="list-box-listing-img"><img src="<?php if($service->thumb!=''){echo  URL::asset('storage/images/'.$service->thumb);}else{echo URL::asset('storage/images/serviceimg.jpg'); }?>"    /></div>
                                 <div class="list-box-listing-content">
                                     <div class="inner">
                                         <h3><a href="#"><?php echo $service->nom;?></a></h3>

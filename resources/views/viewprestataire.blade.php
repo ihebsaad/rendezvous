@@ -898,7 +898,9 @@ table.basic-table th {
                             <li>
                             <div class="row" >
                                     <div class="col-6 col-lg-6">
-                                <?php if($service->thumb!=''){ echo '<a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }?>
+                                <?php if($service->thumb!=''){ echo '<a href="'. URL::asset('storage/images/'.$service->thumb).'" data-lightbox="photos"><img src="'. URL::asset('storage/images/'.$service->thumb).'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>'; }else{
+                                    echo '<a href="'. URL::asset('storage/images/serviceimg.jpg').'" data-lightbox="photos"><img src="'. URL::asset('storage/images/serviceimg.jpg').'"  style="width:140px;height:100px; margin-bottom:15px;"  /> </a>';
+                                }?>
                                     </div>
                                     <center><div class="col-6 col-lg-6">
                                 <span style="width: 71px;margin-top: 9px;">{{ $service->prix }} €</span>
