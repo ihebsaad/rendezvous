@@ -38,6 +38,13 @@ use \App\User;
     </div>
 
     <!-- Content -->
+    @if ($live_message = Session::get('ttmessage'))
+           <div class="notification success closeable">
+                <p>{{ $live_message }}</p>
+                <a class="close" href="#"></a>
+            </div>
+            <?php Session::forget('ttmessage');  ?>
+        @endif
 
     <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {
              ?> 

@@ -105,7 +105,8 @@ class PaymentStripeController extends Controller
     {
     	//dd($request->get());
       User::where('id', $request->get('id_prestataire'))->update(array('id_stripe' => $request->get('id_account') ));
-      return redirect('/listing/'.$request->get('id_prestataire'));
+      \Session::put('StripeMessage', 'La connexion avec votre compte stripe est effectuée avec succès');
+      return redirect('/portefeuilles/'.$request->get('id_prestataire'));
     }
     public function pay($k)
     {
