@@ -60,7 +60,8 @@
                         <div class="edit-profile-photo">
                         <?php if($service->thumb!=''){?>  <img data-index="0" src="<?php echo  URL::asset('storage/images/'.$service->thumb);?>"    /><?php } else { ?>
                             <img src="{{ asset('public/imgg.jpg') }}"  data-index="0" alt="">
-                          <?php } ?>                            <div class="change-photo-btn">
+                          <?php } ?>                            
+                          <div class="change-photo-btn">
                                 <div class="photoUpload">
                                     <span><i class="fa fa-upload"></i> Télécharger Image</span>
                                     <input type="file" name="photo" id="photo" class="upload" data-index="0" onchange="swapImage(this)"/>

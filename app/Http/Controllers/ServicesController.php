@@ -231,7 +231,7 @@ class ServicesController extends Controller
    
        $id =$request->get('user');
        $idService =$request->get('id');
-
+     
         $produits =$request->get('produit');
         //$produits = serialize($produits);
       //dd($produits);
@@ -261,8 +261,9 @@ class ServicesController extends Controller
               'Nfois' => $request->get('Nfois'),
               'periode' => $request->get('mySelect'),
               'nbrService' => $request->get('nbrService'),
-              'thumb' => $name,
               'recurrent' => $rec));
+              if($name!=''){             Service::where('id', $idService)->update(array('thumb' => $name));
+              };
       
         Session::put('ttmessage', 'Enregistré avec succès');
             //dd($service);
