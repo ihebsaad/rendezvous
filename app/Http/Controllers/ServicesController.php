@@ -268,7 +268,6 @@ class ServicesController extends Controller
             //dd($service);
             $id = $request->get('produit');
 
-    $idService= $id;
     //dd($idService);
     Service::where('id', $idService)->update(array('produits_id' => json_encode($id)));
 
