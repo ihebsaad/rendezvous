@@ -86,23 +86,34 @@ else
                            <select style="color:grey" name="pays" id="pays" placeholder="Téléphone *"  required="required">
                            	<?php if($client->pays=="Martinique") {?>
                             <option value="martinique">Martinique (+596)</option>
+							<option value="laReunion">La réunion (+262)</option>
                             <option value="france">France (+33)</option>
                             <option value="guadeloupe">Guadeloupe (+590)</option>
                             <option value="guyanef">Guyane française (+594)</option> 
                             <?php } ?>
                             	<?php if($client->pays=="France") {?>
                             <option value="france">France (+33)</option>
+							<option value="laReunion">La réunion (+262)</option>
                             <option value="martinique">Martinique (+596)</option>                            
                             <option value="guadeloupe">Guadeloupe (+590)</option>
                             <option value="guyanef">Guyane française (+594)</option> 
                             <?php } ?>
                             	<?php if($client->pays=="Guadeloupe") {?>
                             <option value="guadeloupe">Guadeloupe (+590)</option>
+							<option value="laReunion">La réunion (+262)</option>
                             <option value="martinique">Martinique (+596)</option>
                             <option value="france">France (+33)</option>                            
                             <option value="guyanef">Guyane française (+594)</option> 
                             <?php } ?>
                             	<?php if($client->pays=="Guyane française") {?>
+                            <option value="guyanef">Guyane française (+594)</option>
+							<option value="laReunion">La réunion (+262)</option>
+                            <option value="martinique">Martinique (+596)</option>
+                            <option value="france">France (+33)</option>
+                            <option value="guadeloupe">Guadeloupe (+590)</option>                             
+                            <?php } ?>
+                            	<?php if($client->pays=="la Réunion") {?>
+							<option value="laReunion">La réunion (+262)</option>
                             <option value="guyanef">Guyane française (+594)</option>
                             <option value="martinique">Martinique (+596)</option>
                             <option value="france">France (+33)</option>
@@ -112,7 +123,8 @@ else
                             <option value="guyanef">Guyane française (+594)</option>
                             <option value="martinique">Martinique (+596)</option>
                             <option value="france">France (+33)</option>
-                            <option value="guadeloupe">Guadeloupe (+590)</option>                             
+                            <option value="guadeloupe">Guadeloupe (+590)</option> 
+							<option value="laReunion">La réunion (+262)</option>                            
                             <?php } ?>
                            </select>
                            </div>
@@ -159,11 +171,11 @@ else
                                 <option value="Asia/Yerevan" >La réunion</option>                               
                                  <?php } ?>
                                   <?php if($client->fhoraire=="Asia/Yerevan") {?>
+								<option value="Asia/Yerevan" default="">La réunion</option>                               
                                 <option value="America/Cayenne">Guyane française</option> 
                                 <option value="America/Martinique"  >Martinique</option>
                                 <option value="America/Guadeloupe">Guadeloupe</option>
                                 <option value="Europe/Paris">France</option>
-                                <option value="Asia/Yerevan" default="">La réunion</option>                               
                                  <?php } ?>
                             </select>
                           </div>

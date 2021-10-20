@@ -2038,7 +2038,6 @@ public function Services($id)
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);*/
-   
        
          $photo='';
         if($request->file('photo')!=null)
@@ -2077,7 +2076,7 @@ public function Services($id)
            if($pays=='laReunion')
            {
              $pays='la Réunion';
-             $ind_tel= 974; 
+             $ind_tel= 262; 
            }
           
         }
