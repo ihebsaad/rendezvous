@@ -66,7 +66,7 @@
 
       </ul>
       <style>
-        @media screen and (max-width: 991px) { #entrepriseul{ height: 50px!important;}}
+        @media (max-width: 991px) { #entrepriseul{ height: 50px!important;}}
 
       
       #entrepriseul{ height: 1000px;}</style>
