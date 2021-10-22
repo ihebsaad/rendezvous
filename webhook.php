@@ -19,7 +19,8 @@ require 'vendor/autoload.php';
 \Stripe\Stripe::setApiKey('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');
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 //$endpoint_secret = 'whsec_wJs1HzAXjKFqonTRUOojoAP4NzzMdkAL';
-$endpoint_secret = 'whsec_AExWz7vvdm7TkUalDgX0vSKqJVhcaZfw';
+$endpoint_secret = 'whsec_6FBzWUiWxtjyJ4NTI7wScknK0aJ0zXUL';
+//we_1JjQ0QGo3M3y9uW5MiXqtxmP
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 //dd($sig_header);
