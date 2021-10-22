@@ -16,7 +16,6 @@
 <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/dropzone.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-3.6.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-migrate-3.3.2.min.js') }}"></script>
@@ -30,6 +29,7 @@
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/tooltips.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
 
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/custom.js') }}"></script>
 <!-- Scripts
@@ -37,8 +37,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-
-
+	
 <script>
 $(function() {
   moment.lang('fr');

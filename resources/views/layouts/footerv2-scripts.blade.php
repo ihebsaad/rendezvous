@@ -19,6 +19,16 @@
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/quantityButtons.js') }}"></script>
 
+
+<!-- Leaflet // Docs: https://leafletjs.com/ -->
+<script src="{{ asset('public/listeo/scripts/leaflet.min.js')}}"></script>
+
+<!-- Leaflet Maps Scripts -->
+<script src="{{ asset('public/listeo/scripts/leaflet-markercluster.min.js')}}"></script>
+<script src="{{ asset('public/listeo/scripts/leaflet-gesture-handling.min.js')}}"></script>
+<script src="{{ asset('public/listeo/scripts/leaflet-listeo.js')}}"></script>	
+
+
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/moment.min.js') }}"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">

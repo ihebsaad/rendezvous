@@ -1069,18 +1069,36 @@ table.basic-table th {
             </section>
                     <?php } ?>
             <!-- Location -->
-            <?php $lat= $user->latitude;$lon=$user->longitude; if(isset($lat) && isset($lon)){ ?>
-            <div id="listing-location" class="listing-section">
+             <?php // $lat= $user->latitude;$lon=$user->longitude; if(isset($lat) && isset($lon)){ ?>
+            <!-- <div id="listing-location" class="listing-section">
                 <h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Emplacement</h3>
 
                     <div id="utf_listing_location" class="utf_listing_section">
                         <div id="utf_single_listing_map_block">
-                        <div id="utf_single_listingmap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}" data-map-icon="im im-icon-Marker"></div>
+                        <div id="utf_single_listingmap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}" data-map-icon="im im-icon-Marker"></div> -->
                         <!--<a href="#" id="utf_street_view_btn">Vue de rue</a> -->
-                        </div>
+                        <!-- </div>
                     </div>
             </div>
-                <?php }?>
+                <?php// }?> -->
+
+
+            <!-- Location -->
+            <?php  $lat= $user->latitude;$lon=$user->longitude; if(isset($lat) && isset($lon)){ ?>
+
+            <div id="listing-location" class="listing-section">
+                            <h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Emplacement</h3>
+
+				<div id="singleListingMap-container">
+					<div id="singleListingMap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}"  data-map-icon="im im-icon-Hamburger"></div>
+					<a href="#" id="streetView">vue de la rue</a>
+				</div>
+			</div>
+            <?php }?> 
+
+			<!-- Reviews -->
+
+
             <!-- Reviews -->
             <div id="listing-reviews" class="listing-section">
                 <h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Avis <span>(<?php echo $countrev;?>)</span></h3>

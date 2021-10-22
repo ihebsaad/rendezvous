@@ -8,7 +8,9 @@
   ?>
 
   <!-- Dashboard -->
-  <style>  #header {
+  <style> 
+  .gmnoprint,.gm-style{display:none!important;}
+  #header {
     position: relative;
     z-index: 999;
     padding: 18px 0 8px 0;
@@ -106,14 +108,13 @@
                         </div>
                         <div class="row with-forms">
                             <!-- Type -->
-                            <div class="col-md-12">
-                                <div id="utf_listing_location" class="col-md-12 utf_listing_section">
-                                    <div id="utf_single_listing_map_block">
-                                    <div id="utf_single_listingmap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}" data-map-icon="im im-icon-Marker"></div>
-                                    <!--<a href="#" id="utf_street_view_btn">Vue de rue</a> -->
-                                    </div>
-                                </div>
+                            <div id="listing-location" class="listing-section">
+                            <h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Emplacement</h3>
+                            <div id="singleListingMap-container">
+                              <div id="singleListingMap" data-latitude="{{ $user->latitude }}" data-longitude="{{ $user->longitude }}"  data-map-icon="im im-icon-Hamburger"></div>
+                              <a href="#" id="streetView">vue de la rue</a>
                             </div>
+                          </div>
                         </div>
                         <!-- Row -->
                         <div class="row with-forms">
@@ -210,7 +211,7 @@ body {
   font-family: "Roboto", "sans-serif";
   line-height: 30px;
   padding-left: 10px;
-}ht: 100%;
+}
 }
 </style>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -233,7 +234,7 @@ function initialize() {
 
             <script>
 function initMap() {
-  const map = new google.maps.Map(document.getElementById("utf_single_listingmap"), {
+  const map = new google.maps.Map(document.getElementById("singleListingMap"), {
     zoom: 15,
  <?php if ($user->latitude!='' && $user->longitude!='' ) {?>   center: { lat: <?php echo $user->latitude; ?>, lng: <?php echo $user->longitude; ?> },   <?php }else{?>
      center: { lat: 48.8566, lng: 2.35222 },
@@ -256,10 +257,16 @@ function geocodeAddress(geocoder, resultsMap) {
         map: resultsMap,
         position: results[0].geometry.location,
       });
+
+
     
+
  document.getElementById("latitude").value= results[0].geometry.location.lat();
+
  document.getElementById("longitude").value= results[0].geometry.location.lng();
- changing(document.getElementById('latitude'));
+ $('#singleListingMap').attr("data-latitude", results[0].geometry.location.lat());
+      $('#singleListingMap').attr("data-longitude", results[0].geometry.location.lng());
+      changing(document.getElementById('latitude'));
  changing(document.getElementById('longitude'));
 
    } else {
@@ -300,8 +307,7 @@ function geocodeAddress(geocoder, resultsMap) {
         // Get the place details from the autocomplete object.
         const place = autocomplete.getPlace();
 
-        for (const component in componentForm) {
-          document.getElementById(component).value = "";
+        for (const component in componentForm) { document.getElementById(component).value = "";
           document.getElementById(component).disabled = false;
         }
 
@@ -322,6 +328,7 @@ function geocodeAddress(geocoder, resultsMap) {
       // Bias the autocomplete object to the user's geographical location,
       // as supplied by the browser's 'navigator.geolocation' object.
       function geolocate() {
+
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((position) => {
             const geolocation = {
@@ -338,3 +345,10 @@ function geocodeAddress(geocoder, resultsMap) {
       }
 
  </script>
+ 
+ <script src="{{ asset('public/listeo/scripts/leaflet.min.js')}}"></script>
+
+<!-- Leaflet Maps Scripts -->
+<script src="{{ asset('public/listeo/scripts/leaflet-markercluster.min.js')}}"></script>
+<script src="{{ asset('public/listeo/scripts/leaflet-gesture-handling.min.js')}}"></script>
+<script src="{{ asset('public/listeo/scripts/leaflet-listeo.js')}}"></script>
