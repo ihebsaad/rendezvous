@@ -565,9 +565,9 @@ input#date-picker {
               <li><span class="lightgrey" style=""></span>horaires de fermeture</li>
              <li><span class="green"></span>Promotions flash</li>
               <li><span class="red"></span>Indisponibilité de prestataire</li>
-             <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation de le même service à la même date)</li>
+             <li><span class="brown"></span>Rendez-vous d'un service confirmé (Possibilité de réservation du même service à la même date)</li>
             
-             <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation de le même service à la même date)</li>
+             <li><span class="blue"></span>Rendez-vous d'un service confirmé (Pas de réservation du même service à la même date)</li>
              <li><span class="pink"></span>date courante</li>
            </ul>
 
