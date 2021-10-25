@@ -948,7 +948,8 @@ table.basic-table th {
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
                                 <h5>{{ $servicerec->nom }}</h5>
-                                <p style="text-align: justify;">{{ $servicerec->description }}</p>
+                                <div class="text">{{ $servicerec->description }}</div>
+
                                 </div>
 
                                
