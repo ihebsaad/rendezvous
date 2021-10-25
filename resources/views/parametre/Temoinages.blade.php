@@ -66,11 +66,27 @@
                                 <h5>Témoinage:</h5>
                                 <textarea  type="text"  idtem="<?php echo $tem->id; ?>" class="textarea tex-com" placeholder="Contenu " name="texte" id="rp{{$tem->texte}}" onchange="changing_tem(this)" required><?php echo $tem->texte; ?></textarea>
                             </div>
-                            
+                            <meta type="hidden" name="csrf-token" content="{{ csrf_token() }}" />
+
                         </div>
 <?php } ?>
                         <!-- Description -->
-                    
+                    <script> function changing_tem(elm){
+                        var val=elm.value;
+                         var id=elm.getAttribute('idtem');
+                          var champ=elm.getAttribute('name');
+                          var _token = $('input[name="_token"]').val();	
+
+                        $.ajax({
+   url:"{{ route('temoinages.update_temoinage') }}",
+   method:"POST",
+   data:{val:val,id:id, champ:champ, _token:_token},
+   success:function(data){ }
+   //alert(JSON.stringify(data));
+});
+// temoinages.update_temoinage
+                    }
+                </script>
 <div class="row with-forms">
                         <div class="col-md-12">
                                 <a href="{{ route('parametre.TemoinagesClient') }}" class="button" style=" ">Ajouter</a>
@@ -120,6 +136,22 @@
                         </div>
 <?php } ?>
                         <!-- Description -->
+                        <script> function changing_temprest(elm){
+                        var val=elm.value;
+                         var id=elm.getAttribute('idtem');
+                          var champ=elm.getAttribute('name');
+                          var _token = $('input[name="_token"]').val();	
+
+                        $.ajax({
+   url:"{{ route('temoinagesprest.update_temoinage') }}",
+   method:"POST",
+   data:{val:val,id:id, champ:champ, _token:_token},
+   success:function(data){ }
+   //alert(JSON.stringify(data));
+});
+// temoinages.update_temoinage
+                    }
+                </script>
                     
 <div class="row with-forms">
 
