@@ -394,7 +394,7 @@ section.fullwidth .icon-box-2 {
             <div class="row">
                 <div class="col-lg-6 col-sm-6" style="color:black;">
                     <h2 style="color:black;">Vous êtes prestataire de services sur rendez-vous ?</h2>
-                    <p>Profitez d'une solution simple, intuitive et rapide pour vous connecter à vos clients et optimiser votre temps. Découvrez notre plateforme innovante et notre nouvelle offre sans commissions, ni engagement, conçue spécialement pour les prestataires de services qui travaillent uniquement sur rendez-vous !</p>
+                    <p>Profitez d'une solution simple, intuitive et rapide pour vous connecter à vos clients et optimiser votre temps. Découvrez notre plateforme innovante et notre nouvelle offre sans commissions, conçue spécialement pour les prestataires de services qui travaillent uniquement sur rendez-vous !</p>
                     <a href="{{ route('inscription') }}" class="button margin-top-15 btn-ybg">Découvrir notre solution</a>
                 </div>
                 <div class="col-lg-6 col-sm-6">
