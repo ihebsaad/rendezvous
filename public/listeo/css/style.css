@@ -3124,7 +3124,7 @@ input[type="range"]:focus + .rangeslider .rangeslider__handle {
 
 	margin: 0 4px 8px 0;
 	padding: 0 4px 0 8px;
-	max-height: 300px;
+	max-height: 320px;
 }
 
 .chosen-container .chosen-results li {
@@ -8737,6 +8737,7 @@ section.fullwidth .icon-box-2 {
     padding: 40px;
     background: #fff;
     border-radius: 4px;
+	position: sticky;
     transition: 0.4s;
     cursor: default;
     margin: 20px 0;
