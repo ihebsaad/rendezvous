@@ -3124,7 +3124,7 @@ input[type="range"]:focus + .rangeslider .rangeslider__handle {
 
 	margin: 0 4px 8px 0;
 	padding: 0 4px 0 8px;
-	max-height: 320px;
+	max-height: 347px;
 }
 
 .chosen-container .chosen-results li {
