@@ -914,7 +914,14 @@ table.basic-table th {
                                 </div>
                                 <div class="row" style="    margin-left: 0px;">
                                 <h5>{{ $service->nom }}</h5>
-                                <p style="text-align: justify;">{{ $service->description }}</p>
+                                <style>.text {
+   display: block;/* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 17.6em;  line-height: 1.8em;
+}</style>
+                                <div class="text">{{ $service->description }}</div>
                                 </div>
                             </li>
                             <?php } ?>

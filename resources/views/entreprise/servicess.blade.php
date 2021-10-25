@@ -68,7 +68,10 @@
                                 <div class="list-box-listing-content">
                                     <div class="inner">
                                         <h3><a href="#"><?php echo $service->nom;?></a></h3>
-                                        <span><?php echo $service->description;?></span>
+                                        <span style="    text-overflow: ellipsis; 
+    width: 370px;
+    white-space: nowrap; 
+    overflow:hidden; "><?php echo $service->description;?></span>
                                         <div >
                                             <b><?php echo $service->prix;?> €</b>
                                             <div class="rating-counter">
