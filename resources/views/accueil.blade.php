@@ -39,6 +39,14 @@ $temoinages=DB::table('temoinages')->get();
 <?php Session::forget('msgs'); ?>
  @endif 
 <style type="text/css">
+.chosen-container .chosen-results {
+    color: #888;
+    position: relative;
+    margin: 0 4px 8px 0;
+    max-height: 300px;
+    overflow: auto;
+    padding: 0 4px 0 8px;
+}
 @media (max-width: 1024px){
 .main-search-container video {
     width: min-content;
