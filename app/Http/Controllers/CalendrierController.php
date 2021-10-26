@@ -1499,7 +1499,7 @@ class CalendrierController extends Controller
    //dd(self::$tab_minutes_indisp_rendezvous);
    // calculate the start and the end of simple service réservation
 
-   $idservicessimples=Service::where('recurrent','like','off')->where("NbrService",1)->pluck('id')->toArray();
+   $idservicessimples=Service::where('recurrent','like','off')->where("NbrService",'>=',1)->pluck('id')->toArray();
    for($i=0;$i<count($idservicessimples);$i++)
      {
        $idservicessimples[$i]=strval($idservicessimples[$i]);
@@ -2461,7 +2461,7 @@ class CalendrierController extends Controller
    //dd(self::$tab_minutes_indisp_rendezvous);
    // calculate the start and the end of simple service réservation
 
-   $idservicessimples=Service::where('recurrent','like','off')->where("NbrService",1)->pluck('id')->toArray();
+   $idservicessimples=Service::where('recurrent','like','off')->where("NbrService",'>=',1)->pluck('id')->toArray();
    for($i=0;$i<count($idservicessimples);$i++)
      {
        $idservicessimples[$i]=strval($idservicessimples[$i]);
