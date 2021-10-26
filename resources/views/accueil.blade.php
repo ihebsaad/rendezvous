@@ -39,6 +39,14 @@ $temoinages=DB::table('temoinages')->get();
 <?php Session::forget('msgs'); ?>
  @endif 
 <style type="text/css">
+@media (max-width: 991px){
+.main-search-input-item .chosen-container .chosen-drop {
+    border: 1px solid #e0e0e0;
+    border-top: 0;
+    z-index: 102;
+    border-radius: 0 0 4px 4px;
+    box-shadow: none;
+}}
 .chosen-container .chosen-results {
     color: #888;
     position: relative;
