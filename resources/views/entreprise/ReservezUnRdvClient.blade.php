@@ -52,16 +52,13 @@ $User = auth()->user();
                     @foreach($propclient as $pc)
                     <ul>
                         <?php $pres=User::where('id',$pc->prestataire)->first(); $serv=Service::where('id',$pc->service_rec)->first();  ?>
+                        @if(isset($serv))
                         <li class="pending-booking">
                             <div class="list-box-listing bookings">
                                 <div class="list-box-listing-img"> <img src=""   alt="Preview"> </div>
                                 <div class="list-box-listing-content">
                                     <div class="inner">
-                                        <h3>{{ $serv->nom}}
-                                           
-
-
-                                        </h3>
+                                        <h3>{{ $serv->nom}}</h3>
                                          
                                         <div class="inner-booking-list">
                                             <h5>Période:</h5>
@@ -109,7 +106,8 @@ $User = auth()->user();
                                 
                             </div>
                         </li>
-                        
+                        @endif 
+
                     </ul>
                     @endforeach 
                 </div>

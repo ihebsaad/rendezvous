@@ -1655,7 +1655,9 @@ $('#time > a').click(function(){
                         </div>
                     <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                     <div class="col-lg-12">
-                    <input type="text" id="date-picker" placeholder="Date"  readonly="readonly">
+                    <input type="text" id="date-picker" placeholder="Date"  readonly="readonly" >
+                    <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='Errordate'>veuillez choisir une date convenable</p>
+
                     </div>
                     <div class="row" style="margin-left: -2px!important;margin-top: -13px!important;width: inherit!important;">
 
@@ -1878,7 +1880,7 @@ font-size: 14px!important;
                         <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
                         <div class="col-lg-12">
                         <select class="chosen-select-no-single" id="servicerec" name="servicerec"  data-placeholder="Sélectionner l'abonnement desiré" onchange="SelectServiceRec(this)">
-
+                    <option value=""></option>
                              <?php 
                                 foreach($servicesreccurent as $SR){
                                     echo '  <option value="'.$SR->id.'" ndate="'.$SR->Nfois.'" frq = "'.$SR->frequence.'" periode="'.$SR->periode.'" prixRec="'.$SR->prix.'"><strong>'.$SR->nom.'</strong></option>
@@ -2870,9 +2872,13 @@ var reservationHeureEnd=reservationHeure3[0];//end
 
 var datereservation1 = $('#date-picker').val();
 var date = datereservation1 + ' ' + reservationHeureStart; 
+alert(datereservation1);
+if( datereservation1==''){ document.getElementById('Errordate').style.display='block';}
 
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
+alert(dateStr);
+
 var service = $('#service').val();
 if( service==''){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
@@ -2913,7 +2919,7 @@ var date_reservation = [] ;
 var remarques = $('#remarques2').val();
 
 var service = $('#servicerec').val();
-if(service=="Sélectionner l'abonnement desiré"){document.getElementById('ErrorSerRec').style.display="block";}
+if(service==""){document.getElementById('ErrorSerRec').style.display="block";}
 
 var rappel = $('#rappel2').val();
 if( rappel=='Rappel de rendez vous par SMS'){ document.getElementById('ErrorRapRec').style.display='block';}
@@ -2971,7 +2977,9 @@ document.getElementById("contactform").reset();
 
 <script type="text/javascript" src="{{ asset('public/listeo/scripts/daterangepicker.js') }}"></script>
 
-<script>
+<script>   
+
+
  $(function() {
   function now () { 
     var d = new Date();
@@ -2983,7 +2991,10 @@ document.getElementById("contactform").reset();
 	$('#date-picker').daterangepicker({
 		"opens": "left",
 		singleDatePicker: true,
-
+        autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      },
       locale: {
         "format": "DD-MM-YYYY",
         "separator": " - ",
@@ -3026,15 +3037,26 @@ document.getElementById("contactform").reset();
       for(var i=-1; i< array.length;i++)
       for(var j=-1; j< indisp.length;j++)
 
-        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
+        if (date.day() == array[i] ||now() == array[i] ||  moment(now(), 'MM-DD-YYYY') == indisp[j] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
  )
+
           return true;
         return false;
   },
    
 		// Disabling Date Ranges
 
-	});});
+	});
+
+
+    $('#date-picker').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('DD-MM-YYYY') );
+  });
+
+  $('#date-picker').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+});
 	$(function() {
 		function now () { 
     var d = new Date();
@@ -3091,13 +3113,13 @@ document.getElementById("contactform").reset();
       for(var i=-1; i< array.length;i++)
       for(var j=-1; j< indisp.length;j++)
 
-        if (date.day() == array[i] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
+      if (date.day() == array[i] ||now() == array[i] ||  moment(now(), 'MM-DD-YYYY') == indisp[j] || date.isAfter(disabled_start) && date.isBefore(disabled_end) || date.format('YYYY-MM-DD') == indisp[j]
  )
           return true;
         return false;
   },
    
-	});
+	}).val('');
 });
 
     
