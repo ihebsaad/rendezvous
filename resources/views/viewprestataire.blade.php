@@ -7,7 +7,16 @@
  <?php  use \App\Http\Controllers\CalendrierController; ?>
 
 <style type="text/css">
-
+@media (max-width: 1024px){
+    .chosen-container-multi .chosen-results {
+    margin: 0;
+    padding: 0;
+    max-height: fit-content!important;
+    z-index: 50000!important;
+    position: fixed!important;
+    background: white!important;
+}
+}}
  
 .chosen-container.chosen-container-multi .chosen-drop {
     overflow: auto!important;
