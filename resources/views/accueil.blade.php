@@ -47,13 +47,27 @@ $temoinages=DB::table('temoinages')->get();
     overflow: auto;
     padding: 0 4px 0 8px;
 }
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .chosen-container .chosen-results {
+    color: #888;
+    position: relative;
+    margin: 0 4px 8px 0;
+    max-height: fit-content!important;
+    overflow: hidden!important;
+    padding: 0 4px 0 8px;
+}
+
+}
 @media (max-width: 1024px){
     .chosen-container .chosen-results {
     color: #888;
     position: relative;
     margin: 0 4px 8px 0;
-    max-height: !important;
-    overflow: !important;
+    max-height: fit-content!important;
+    overflow: hidden!important;
     padding: 0 4px 0 8px;
 }
 .main-search-container video {
