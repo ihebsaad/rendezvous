@@ -48,6 +48,14 @@ $temoinages=DB::table('temoinages')->get();
     padding: 0 4px 0 8px;
 }
 @media (max-width: 1024px){
+    .chosen-container .chosen-results {
+    color: #888;
+    position: relative;
+    margin: 0 4px 8px 0;
+    max-height: !important;
+    overflow: !important;
+    padding: 0 4px 0 8px;
+}
 .main-search-container video {
     width: min-content;
 }}
