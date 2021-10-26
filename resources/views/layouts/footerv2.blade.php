@@ -36,7 +36,7 @@
                     <!--<li><a href="{{-- route('pricing') --}}">Abonnements</a></li>  -->     
                     @guest 
              
-                    <li><a style=" width: 275px; "class="aa" href="{{route('inscription')}}" >Vous êtes prestataire de service ?</a></li>
+                    <li><a style=" width: 209px; ; "class="aa" href="{{route('inscription')}}" >Vous êtes prestataire de service ?</a></li>
                     <li><a class="" href="{{route('inscriptionclient')}}" style="    width: 136px;">Je suis un client</a></li> 
                     @else
                     <li><a  href="{{route('logout')}}"  >Déconnexion</a></li> 
