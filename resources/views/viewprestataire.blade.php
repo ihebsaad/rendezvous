@@ -7,7 +7,11 @@
  <?php  use \App\Http\Controllers\CalendrierController; ?>
 
 <style type="text/css">
-@media (max-width: 1024px){
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
     .chosen-container-multi .chosen-results {
     margin: 0;
     padding: 0;
@@ -16,8 +20,10 @@
     position: fixed!important;
     background: white!important;
 }
-}}
+}
  
+
+
 .chosen-container.chosen-container-multi .chosen-drop {
     overflow: auto!important;
     opacity: 0;
@@ -31,7 +37,7 @@
     max-height: 400px;
     margin: 0 4px 8px 0;
     padding: 0 4px 0 8px;
-    max-height: 300px;
+    max-height: 300px!important;
 }
 .time-slot label:hover  {
     background-color: #000!important;
