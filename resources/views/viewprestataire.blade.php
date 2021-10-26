@@ -37,7 +37,7 @@
     max-height: 400px;
     margin: 0 4px 8px 0;
     padding: 0 4px 0 8px;
-    max-height: 300px!important;
+    max-height: 300px;
 }
 .time-slot label:hover  {
     background-color: #000!important;
