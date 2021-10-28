@@ -29,7 +29,7 @@ $abonnementC =  Contenu_plan::where('abonnement',3)->get();
     position: absolute;
     top: 45px;
     right: 5px;
-    color: gold;
+    color: red;
     background-color: white;
     z-index: 10;
     border-radius: 100%;
