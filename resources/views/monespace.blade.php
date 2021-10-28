@@ -74,6 +74,11 @@
                             <li>Dashboard</li>
                         </ul>
                     </nav>-->
+
+                </div>
+                <div class="col-md-12 margin-top-15">
+                    <center>
+                    <iframe width="860" height="515" src="https://www.youtube.com/embed/PiZyafPtzfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                 </div>
                 <div class="col-md-3">
                    <?php if( $user_type=='admin' )  {?>                   
