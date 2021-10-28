@@ -33,7 +33,7 @@ use Auth;
 class PaymentStripeController extends Controller
 {
   public function addcustomerStripe(Request $request){
-    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    Stripe::setApiKey('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');
     $subscription_id = $request->get('subscriptionId'); 
     $payment_method = $request->get('res');
       $stripeSub = \Stripe\Subscription::update(
