@@ -201,7 +201,7 @@ $User = auth()->user();
                                             <?php $id_stripe= UsersController::ChampById('id_stripe',$res->prestataire); if($id_stripe) {?>
                                                 @if($res->Net != 0 || $res->Net)
                                                 <!-- <button class="button ">Payer l'acompte </button>  -->
-                                                <a href="{{url('PayWithStripe/'.$res->id)}}"  class="button  gray"> Payer l'acompte (Stripe)</a>
+                                                <a href="{{url('PayWithStripe/'.$res->id)}}"  class="button  " style="background-color: red;color: white"> Payer l'acompte (Acompte obligatoire)</a>
                                                 @endif
                                                  <?php } else{ ?>
                                                 <button class="button " disabled>Prestataire Non connecté! <br> Contactez le pour payer l'acompte</button> 
