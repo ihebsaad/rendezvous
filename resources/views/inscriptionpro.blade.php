@@ -3,6 +3,10 @@
  $parametres=DB::table('parametres')->where('id', 1)->first();
 
 $cout_abonnement_annuel_offrel= $parametres->cout_offrelancement3;
+$cout_abonnement_annuel_classique2= $parametres->cout_abon_annu_pricing;
+$cout_abonnement_mensuel_classique2= $parametres->cout_abon_mens_pricing;
+
+
 
 $cout_abonnement_mensuel_offrel= $parametres->cout_offrelancement3_mens;
   
@@ -17,6 +21,22 @@ $abonnementC =  Contenu_plan::where('abonnement',3)->get();
 
 ?>
 <style type="text/css">
+.sale-text {
+    display: block;
+    content: 'LE PLUS VENDU';
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 45px;
+    right: 5px;
+    color: gold;
+    background-color: white;
+    z-index: 10;
+    border-radius: 100%;
+    font-weight: 900;
+    text-align: center;
+    font-size: 13px;
+}
     /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -757,8 +777,9 @@ if( $nbpres <= 100 ) {?>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                            <span class="period"> <?php //echo $parametres->abonnement2;?></span></span> </div>
-                                 <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (<?php echo $parametres->abonnement2;?>)
-                                    </br><span class="value right" style="line-height: 28px; font-weight: 500;font-size: 15px" id="prixB"><?php echo $cout_abonnement_annuel_offrel; ?>€<span id="uniteC">TTC / Par mois</span></span>
+                                 <h4 style="color: #fff!important; background-color: #000000!important;"><?php echo $parametres->abonnement2;?>
+                                    </br><span class="value right" style="line-height: 28px; font-weight: 500;font-size: 15px" id="prixB"><?php echo $cout_abonnement_annuel_offrel; ?> € <span id="uniteC">TTC/mois </span>au lieu de <span style="text-decoration: line-through;"><?php echo $cout_abonnement_annuel_classique2;?> € TTC/mois </span></span>
+                                
                                 </h4> 
                                 <div>
                                 <center><input type="checkbox" class="read-more-state" id="post-2" />
@@ -792,8 +813,10 @@ if( $nbpres <= 100 ) {?>
                           <div class="dashboard-list-box with-icons margin-top-20">
                           <div class="booking-requests-filter">
                                  <span class="period"> <?php //echo $parametres->abonnement3;?></span> <?php //echo $parametres->abonnement3;?></span> </div>
-                              <h4 style="color: #fff!important; background-color: #000000!important;">Abonnement mensuel (<?php echo $parametres->abonnement3;?>)</br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?>€<span id="uniteC">TTC / Par mois</span></span>
-                              </h4>
+                              <h4 style="color: #fff!important; background-color: #000000!important;"><?php echo $parametres->abonnement3;?></br><span class="value right" style=" line-height: 28px; font-weight: 500;font-size: 15px" id="prixC"><?php echo $cout_abonnement_mensuel_offrel;?> € <span id="uniteC">TTC/mois</span> au lieu de <span style="text-decoration: line-through;"><?php echo $cout_abonnement_mensuel_classique2;?> € TTC/mois </span>
+                              <div class="sale-text"><div style="margin-top: 8px;"><span>                                  LE PLUS VENDU</span></div>
+</div>
+                            </h4>
                               <div>
                               <center><input type="checkbox" class="read-more-state" id="post-3" />
                                     <ul class="read-more-wrap">
