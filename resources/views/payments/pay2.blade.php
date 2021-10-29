@@ -140,7 +140,7 @@
                 })
         } else {
           // Successful subscription payment
-          $('#submit2').html('Procéder au paiement').attr('disabled', false);
+          
           var res = result.paymentIntent.payment_method ;
           var subscriptionId = "{{$subscriptionId}}";
       var customerid = "{{$customerid}}";
@@ -151,7 +151,15 @@
                         method:"get",
             data:{resId:resId , customerid:customerid , res:res ,subscriptionId:subscriptionId , _token:_token},
                         success:function(data){
-                          window.location.replace("https://prenezunrendezvous.com/reservations");
+                          $('#submit2').html('Paiement effectué avec succès').attr('disabled', true);
+                          Swal.fire(
+                            'Paiement effectué avec succès',
+                            '',
+                            'success'
+                          ).then((result) => {
+                              window.location.replace("https://prenezunrendezvous.com/reservations");
+                            })
+                          //window.location.replace("https://prenezunrendezvous.com/reservations");
                         }
                     });
         }

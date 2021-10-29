@@ -198,10 +198,10 @@ $User = auth()->user();
                                             </ul>
                                         </div>
                                         <?php if( $res->paiement ==0 ) { ?>  
-                                            <?php $id_stripe= UsersController::ChampById('id_stripe',$res->prestataire); if($id_stripe) {?>
+                                            <?php $clt=User::where('id',$res->prestataire)->first();  $cof=User::where('id',$res->prestataire)->value('acompte');  $id_stripe= UsersController::ChampById('id_stripe',$res->prestataire);$acomptestripe =($res->Net * $cof) / 100 ; if($id_stripe) {?>
                                                 @if($res->Net != 0 || $res->Net)
                                                 <!-- <button class="button ">Payer l'acompte </button>  -->
-                                                <a href="{{url('PayWithStripe/'.$res->id)}}"  class="button  " style="background-color: red;color: white"> Payer l'acompte (Acompte obligatoire)</a>
+                                                <a href="{{url('PayWithStripe/'.$res->id)}}"  class="button  " style="background-color: red;color: white"> Payer l'acompte (Acompte obligatoire : {{$acomptestripe}} € )</a>
                                                 @endif
                                                  <?php } else{ ?>
                                                 <button class="button " disabled>Prestataire Non connecté! <br> Contactez le pour payer l'acompte</button> 

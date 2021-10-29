@@ -150,8 +150,16 @@
                    
                    success: function(data){ 
                     //alert(data);
-                    $('#submit').html('Procéder au paiement').attr('disabled', false);
-                    location.href= "{{ route('reservations') }}";
+                    $('#submit').html('Paiement effectué avec succès').attr('disabled', true);
+                    Swal.fire(
+                            'Paiement effectué avec succès',
+                            '',
+                            'success'
+                          ).then((result) => {
+                              window.location.replace("https://prenezunrendezvous.com/reservations");
+                            })
+                    
+                   // location.href= "{{ route('reservations') }}";
 
                           
                 }
