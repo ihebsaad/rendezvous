@@ -76,13 +76,18 @@
                     </nav>-->
 
                 </div>
-                <?php if( $user_type=='client' || $user_type=='prestataire' )  {?>  
+                <?php if( $user_type=='client' )  {?>  
                 <div class="col-md-12 margin-top-15">
                     <center>
                     <iframe width="860" height="515" src="https://www.youtube.com/embed/PiZyafPtzfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                 </div>
                 <?php } ?>
-
+                 <?php if( $user_type=='prestataire' )  {?>  
+                <div class="col-md-12 margin-top-15">
+                    <center>
+                    <iframe width="860" height="515" src="https://www.youtube.com/embed/4ynE_FvAbSY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                </div>
+                <?php } ?>
                 <div class="col-md-3">
                    <?php if( $user_type=='admin' )  {?>                   
                     <button onclick="envoi_mail_aux_prestataires()" class="button margin-top-15">Diffuser email aux prestataires qui sont inscrits à l'offre de Lancement  </button>
