@@ -1657,6 +1657,7 @@ fclose($fp);
         
         DB::table('users')->where('id', $id)->update(array(
           'tel'=> $request->get('Phone'),
+          'phone'=> $request->get('Phone'),
           'email'=> $request->get('email'),
           'linkedin'=> $request->get('linkedin'),
           'twitter'=> $request->get('twitter'),
@@ -2085,6 +2086,7 @@ public function Services($id)
                 'name'=> $request->get('name'),
                 'lastname'=> $request->get('lastname'), 
                 'phone'=> $request->get('phone'),
+                'tel'=> $request->get('phone'),
                 'email'=> $request->get('email'),
                 'adresse'=> $request->get('adresse'),
                  'ville'=> $request->get('ville'),

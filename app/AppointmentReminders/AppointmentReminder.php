@@ -142,7 +142,8 @@ echo $service->sid  ;
         
         // info client
         $infoclient = UsersController::infouser($CltId);
-        $numtel = $infoclient['tel'];
+        //$numtel = $infoclient['tel'];
+        $numtel = $infoclient['phone'];
         $cltname = $infoclient['name']." ".$infoclient['lastname'];
         // info prestataire
         $infoprest = UsersController::infouser($PrestId);
