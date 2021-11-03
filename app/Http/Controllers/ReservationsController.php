@@ -603,7 +603,10 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
     public static function reservationsdujour()
     {
-		
+		    // temporairement : mettre timezone martinique
+      date_default_timezone_set("America/Martinique");
+
+
         $today=date('Y-m-d');
         $TomorrowD = new DateTime('tomorrow');
 		$FTomorrowD = $TomorrowD->format('Y-m-d');
