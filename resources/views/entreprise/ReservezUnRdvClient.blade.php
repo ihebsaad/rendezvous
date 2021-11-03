@@ -155,6 +155,8 @@ $User = auth()->user();
                                              <span class="booking-status " style="background-color: #38b653" >Total Payée</span>
                                                 <?php } elseif($res->paiement==3) { $retraits=\App\Retrait::where('reservation',$res->id)->where('statut',1)->count(); ?> 
                                               <span class="booking-status unpaid" style="background-color: #ffd700"  >Paiement par tranches : acompte + ({{$retraits}}/4) tranches payées</span>
+                                          <?php } elseif($res->paiement==4) { ?> 
+                                              <span class="booking-status" style="background-color: #eb6d19"  >Remboursé</span>
                                           <?php } ?>
 
 

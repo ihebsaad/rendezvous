@@ -994,7 +994,7 @@ public function Remboursement($k)
 ], ['stripe_account' => $account]);
 
 
-    Reservation::where('id', $k)->update(array('statut' => 2 ));
+    Reservation::where('id', $k)->update(array('statut' => 2,'paiement'=> 4 ));
       $Reservation = Reservation::where('id',$k)->first();
       //dd($Reservation);
       $client=User::find($Reservation->client);
