@@ -76,6 +76,12 @@
                                             </ul>
                                         </div>  
                                         <div class="inner-booking-list">
+                                            <h5>Siren/siret de l'entreprise:</h5>
+                                            <ul class="booking-list">
+                                                <li class="highlighted">{{$user->siren}}</li>
+                                            </ul>
+                                        </div>  
+                                        <div class="inner-booking-list">
                                             <h5>Date d’inscription:</h5>
                                             <ul class="booking-list">
                                                 <li class="highlighted"><?php $createdat=  date('d/m/Y H:i', strtotime($user->created_at )); echo $createdat; ?></li>
