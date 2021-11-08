@@ -785,18 +785,13 @@ if( $nbpres <= 100 ) {?>
                                 <center><input type="checkbox" class="read-more-state" id="post-2" />
                                     <ul class="read-more-wrap">
                                     <?php $x=0; foreach($abonnementB as $ab) { 
-                                        if ($x<5) {
+                                        
                                           echo  '<li style=" margin-bottom: 2px;
                                           ">'.$ab->contenu.'</li>' ;
-                                        } else {
-                                          echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
-                                        }
-                                          $x=$x+1;  
-                                         
-                                      
+                                       
                                        } ?>
                                     </ul>
-                                     <label for="post-2" class="read-more-trigger"></label></br>
+                                     <!-- <label for="post-2" class="read-more-trigger"></label></br> -->
 
                             <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>   
                             <a href="#sign-in-dialog" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>      
@@ -821,17 +816,10 @@ if( $nbpres <= 100 ) {?>
                               <center><input type="checkbox" class="read-more-state" id="post-3" />
                                     <ul class="read-more-wrap">
                                     <?php $x=0; foreach($abonnementC as $ab) { 
-                                        if ($x<5) {
                                           echo  '<li>'.$ab->contenu.'</li>' ;
-                                        } else {
-                                          echo  '<li class="read-more-target">'.$ab->contenu.'</li>' ;
-                                        }
-                                          $x=$x+1;  
-                                         
-                                      
-                                       } ?>
+                                        } ?>
                                     </ul>
-                                     <label for="post-3" class="read-more-trigger"></label></br>
+                                     <!-- <label for="post-3" class="read-more-trigger"></label></br> -->
                                
                             <h3 style="text-align: center;margin-top: 20px;margin-bottom: 5px;font-size:20px;font-weight: 600;" >Engagement pour 12 mois</h3>     
                             <a href="#sign-in-dialog2" class="button margin-top-15 btn-black sign-in popup-with-zoom-anim" style=" text-align: center; font-size: 25px; letter-spacing: 2px; text-transform: uppercase;">Profiter de l'offre</a>
