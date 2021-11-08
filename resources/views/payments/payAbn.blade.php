@@ -134,7 +134,15 @@ background-color:#a0d468;
                    
                    success: function(data){ 
                     //alert(data);
-                    location.href= "{{ route('abonnements') }}";
+                    $('#submit').html('Paiement effectué avec succès').attr('disabled', true);
+                          Swal.fire(
+                            'Paiement effectué avec succès',
+                            '',
+                            'success'
+                          ).then((result) => {
+                              location.href= "{{ route('abonnements') }}";
+                            })
+                   // location.href= "{{ route('abonnements') }}";
 
 
                           //window.location.replace("https://prenezunrendezvous.com/reservations");

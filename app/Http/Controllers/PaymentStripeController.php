@@ -33,7 +33,7 @@ use Auth;
 class PaymentStripeController extends Controller
 {
   public function addcustomerStripe(Request $request){
-    Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    Stripe::setApiKey('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');
     $subscription_id = $request->get('subscriptionId'); 
     $payment_method = $request->get('res');
       $stripeSub = \Stripe\Subscription::update(
@@ -65,7 +65,7 @@ class PaymentStripeController extends Controller
     {
     	//dd("ok");
       $cuser = auth()->user();
-    	Stripe::setApiKey('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');
+    	Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
 
             /*$account = Account::create([
               'country' => 'CA',
@@ -994,7 +994,7 @@ public function Remboursement($k)
 ], ['stripe_account' => $account]);
 
 
-    Reservation::where('id', $k)->update(array('statut' => 2 ));
+    Reservation::where('id', $k)->update(array('statut' => 2,'paiement'=> 4 ));
       $Reservation = Reservation::where('id',$k)->first();
       //dd($Reservation);
       $client=User::find($Reservation->client);
@@ -1063,9 +1063,9 @@ $customer = \Stripe\Customer::create();
   ]);
     $price = \Stripe\Price::create([
     'product' => $produit->id,
-    'unit_amount' => ($Reservation->reste/4) *100,
+    'unit_amount' => intval(($Reservation->reste/4) *100),
     'currency' => 'eur',
-    'recurring' => ['interval' => 'day'],
+    'recurring' => ['interval' => 'month'],
   ]);
              
   $Subscription = \Stripe\Subscription::create([
@@ -1087,7 +1087,7 @@ $customer = \Stripe\Customer::create();
   //dd($Subscription);
   $clientSecret = Arr::get($Subscription->latest_invoice->payment_intent, 'client_secret');
   $subscriptionId = Arr::get($Subscription, 'id');
-  dd($clientSecret);
+  //dd($clientSecret);
   return view('payments.pay2', [
             'clientSecret' => $clientSecret ,'subscriptionId' => $subscriptionId , 'idaccount' => $account , 'customerid' => $customer->id , 'resId' => $resId
         ]);

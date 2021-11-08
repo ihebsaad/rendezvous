@@ -177,8 +177,15 @@ background-color:#a0d468;
                         method:"get",
             data:{ customerid:customerid , res:res ,subscriptionId:subscriptionId , _token:_token},
                         success:function(data){
-                          $('#submit2').html('Procéder au paiement').attr('disabled', false);
-                          location.href= "{{ route('remerciments') }}";
+                          $('#submit').html('Paiement effectué avec succès').attr('disabled', true);
+                          Swal.fire(
+                            'Paiement effectué avec succès',
+                            '',
+                            'success'
+                          ).then((result) => {
+                              location.href= "{{ route('remerciments') }}";
+                            })
+                          
                         }
                     });
                     

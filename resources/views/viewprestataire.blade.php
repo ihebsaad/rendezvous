@@ -841,17 +841,29 @@ table.basic-table th {
                     <ul class="listing-links">
                         <?php if (!empty($user->fb)) { ?>
                         <li>
+                            <?php if (strpos($user->fb, 'facebook.com') === false) { ?>
+                            <a href="<?php echo 'https://www.facebook.com/'.$user->fb; ?>" target="_blank" class="listing-links-fb"><i class="fa fa-facebook-square"></i> Facebook</a>
+                            <?php } else { ?>
                             <a href="{{$user->fb}}" target="_blank" class="listing-links-fb"><i class="fa fa-facebook-square"></i> Facebook</a>
+                            <?php } ?>
                         </li>
                         <?php } ?>
                         <?php if (!empty($user->instagram)) { ?>
                         <li>
+                            <?php if (strpos($user->instagram, 'instagram.com') == false) { ?>
+                            <a href="<?php echo 'https://www.instagram.com/'.$user->instagram; ?>" target="_blank" class="listing-links-ig"><i class="fa fa-instagram"></i> Instagram</a>
+                            <?php } else { ?>
                             <a href="{{$user->instagram}}" target="_blank" class="listing-links-ig"><i class="fa fa-instagram"></i> Instagram</a>
+                            <?php } ?>
                         </li>
                         <?php } ?>
                         <?php if (!empty($user->twitter)) { ?>
                         <li>
+                            <?php if (strpos($user->twitter, 'twitter.com') == false) { ?>
+                            <a href="<?php echo 'https://www.twitter.com/'.$user->twitter; ?>" target="_blank" class="listing-links-tt"><i class="fa fa-twitter"></i> Twitter</a>
+                            <?php } else { ?>
                             <a href="{{$user->twitter}}" target="_blank" class="listing-links-tt"><i class="fa fa-twitter"></i> Twitter</a>
+                            <?php } ?>
                         </li>
                         <?php } ?>
                         <!--<li><a href="#" target="_blank" class="listing-links-yt"><i class="fa fa-youtube-play"></i> YouTube</a></li>-->
