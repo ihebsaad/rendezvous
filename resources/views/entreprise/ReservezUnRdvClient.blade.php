@@ -199,7 +199,7 @@ $User = auth()->user();
                                                 <li><?php $clt=User::where('id',$res->prestataire)->first();if($clt) {if($clt->phone){ echo $clt->phone ; }else{echo 'jjj ';}}else{ echo 'jjj ';}?></li>
                                             </ul>
                                         </div>
-                                        <?php if( $res->paiement ==0 ) { ?>  
+                                        <?php if( $res->paiement ==0 && $res->statut!=2) { ?>  
                                             <?php $clt=User::where('id',$res->prestataire)->first();  $cof=User::where('id',$res->prestataire)->value('acompte');  $id_stripe= UsersController::ChampById('id_stripe',$res->prestataire);$acomptestripe =($res->Net * $cof) / 100 ; if($id_stripe) {?>
                                                 @if($res->Net != 0 || $res->Net)
                                                 <!-- <button class="button ">Payer l'acompte </button>  -->
@@ -226,7 +226,9 @@ $User = auth()->user();
                                 </div>
                             </div>
                             <div class="buttons-to-right">
+                               <?php if($res->statut!=2) { ?> 
                                 <a  class="button gray"  href="{{url('reservations/modifier/'.$res->id)}}" >Annuler/Reporter</a>
+                              <?php }  ?>
                             </div>
                         </li>
                         
