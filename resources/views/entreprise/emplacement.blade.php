@@ -57,6 +57,11 @@
                         <div class="add-listing-headline">
                             <h3><i class="fa fa-map-marker"></i> Emplacement</h3>
                         </div>
+                        <div class="row">
+                        <div class="col-lg-12">
+
+                        <iframe  style="width: 100%;height: 40vw;" src="https://www.youtube.com/embed/WWzQNU2tNcc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+
                         <form method="post" action="{{ route('changeemplacement') }}" name="changeemplacement" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $user->id }}">
