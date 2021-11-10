@@ -571,6 +571,20 @@ return view('payments.payAbn2', [
     User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type3'));
     }
     
+    // ajout abonnement
+        $abonnement  =  new \App\Abonnement([
+       'abonnement'=>$abn,             
+             'user' => $user,
+              'details' =>  $abonnement,
+              'expire' =>  $datee,
+         ]);  
+     
+     $abonnement->save();
+     if($mensuel_annuel=='mensuel')
+        {
+          Abonnement::where('id',$abonnement->id)->update(array('IdStripe' => $request->get('subscriptionId')));
+        }
+     
      // Email
      $typeabn='';
        $parametres=DB::table('parametres')->where('id', 1)->first();
@@ -668,19 +682,6 @@ return view('payments.payAbn2', [
      
      $paiement->save();*/
      
-     // ajout abonnement
-        $abonnement  =  new \App\Abonnement([
-       'abonnement'=>$abn,             
-             'user' => $user,
-              'details' =>  $abonnement,
-              'expire' =>  $datee,
-         ]);  
-     
-     $abonnement->save();
-     if($mensuel_annuel=='mensuel')
-        {
-          Abonnement::where('id',$abonnement->id)->update(array('IdStripe' => $request->get('subscriptionId')));
-        }
      
       return "ok";
 
