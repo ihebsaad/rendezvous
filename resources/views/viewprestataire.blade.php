@@ -2884,19 +2884,20 @@ var reservationHeureEnd=reservationHeure3[0];//end
 
 var datereservation1 = $('#date-picker').val();
 var date = datereservation1 + ' ' + reservationHeureStart; 
-alert(datereservation1);
 if( datereservation1==''){ document.getElementById('Errordate').style.display='block';}
 
 //alert(datereservation);
 var dateStr = moment(date, 'DD-MM-YYYY hh:mm').format('YYYY-MM-DD HH:mm');
-alert(dateStr);
 
 var service = $('#service').val();
-if( service==''){ document.getElementById('ErrorSer').style.display='block';}
 var rappel = $('#rappel').val();
-if( rappel==''){ document.getElementById('ErrorRap').style.display='block';}
+if( service==''){ document.getElementById('ErrorSer').style.display='block';}
 
+
+
+if( rappel==null){ document.getElementById('ErrorRap').style.display='block';}
 //alert(JSON.stringify(service));
+if( service!='' &&  rappel!=null &&  datereservation1!=''){
 $.ajax({
    url:"{{ route('reservations.add') }}",
    method:"POST",
@@ -2904,7 +2905,7 @@ $.ajax({
    success:function(data){
    //alert(JSON.stringify(data));
    location.href= "{{ route('ReservezUnRdv',['id'=> $User->id] )}} }}";   }
-});
+});}
 
 });
 $('#reserver2').click(function( ){
@@ -2934,9 +2935,10 @@ var service = $('#servicerec').val();
 if(service==""){document.getElementById('ErrorSerRec').style.display="block";}
 
 var rappel = $('#rappel2').val();
-if( rappel==''){ document.getElementById('ErrorRapRec').style.display='block';}
+if( rappel==null){ document.getElementById('ErrorRapRec').style.display='block';}
 
 //alert(JSON.stringify(service));
+if( service!='' &&  rappel!=null){
 $.ajax({
    url:"{{ route('reservations.add2') }}",
    method:"POST",
@@ -2945,7 +2947,7 @@ $.ajax({
    //alert(JSON.stringify(data));
    location.href= "{{ route('ReservezUnRdv',['id'=> $User->id] )}} }}";
    }
-});
+});}
 
 });
 
