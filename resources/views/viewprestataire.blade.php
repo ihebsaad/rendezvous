@@ -1704,7 +1704,7 @@ $('#time > a').click(function(){
                       
                         <select class="chosen-select-no-single" id="rappel">
 
-                        <option label="blank" disabled >Rappel de rendez vous par SMS</option>
+                        <option label="blank" disabled selected >Rappel de rendez vous par SMS</option>
                         <option value="60">1h avant le RDV </option>
                          <option value="120">2h avant le RDV</option>
                       	 <option value="180">3h avant le RDV</option>
@@ -1936,7 +1936,7 @@ font-size: 14px!important;
                      
                         <select class="select" style="display: block!important;" id="rappel2">
 
-                            <option disabled >Rappel de rendez vous par SMS</option>
+                            <option disabled selected>Rappel de rendez vous par SMS</option>
                             <option value="60">1h avant le RDV </option>
                             <option value="120">2h avant le RDV</option>
                             <option value="180">3h avant le RDV</option>
