@@ -65,7 +65,7 @@ class PaymentStripeController extends Controller
     {
     	//dd("ok");
       $cuser = auth()->user();
-    	Stripe::setApiKey('sk_test_51IyZEOLYsTAPmLSFOUPFtTTEusJc2G7LSMDZEYDxBsv0iJblsOpt1dfaYu8PrEE6iX6IX7rCbpifzhdPfW7S0lzA007Y8kjGAx');
+    	Stripe::setApiKey('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');
 
             /*$account = Account::create([
               'country' => 'CA',
@@ -571,6 +571,20 @@ return view('payments.payAbn2', [
     User::where('id',$user)->update(array('type_abonn_essai' => null,'type_abonn'=>'type3'));
     }
     
+    // ajout abonnement
+        $abonnement  =  new \App\Abonnement([
+       'abonnement'=>$abn,             
+             'user' => $user,
+              'details' =>  $abonnement,
+              'expire' =>  $datee,
+         ]);  
+     
+     $abonnement->save();
+     if($mensuel_annuel=='mensuel')
+        {
+          Abonnement::where('id',$abonnement->id)->update(array('IdStripe' => $request->get('subscriptionId')));
+        }
+     
      // Email
      $typeabn='';
        $parametres=DB::table('parametres')->where('id', 1)->first();
@@ -668,19 +682,6 @@ return view('payments.payAbn2', [
      
      $paiement->save();*/
      
-     // ajout abonnement
-        $abonnement  =  new \App\Abonnement([
-       'abonnement'=>$abn,             
-             'user' => $user,
-              'details' =>  $abonnement,
-              'expire' =>  $datee,
-         ]);  
-     
-     $abonnement->save();
-     if($mensuel_annuel=='mensuel')
-        {
-          Abonnement::where('id',$abonnement->id)->update(array('IdStripe' => $request->get('subscriptionId')));
-        }
      
       return "ok";
 
@@ -1107,7 +1108,7 @@ public function sendMail($to,$sujet,$contenu){
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
     $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-    $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email eSolutions2020*
+    $swiftTransport->setPassword('prestataireclient2022!'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);

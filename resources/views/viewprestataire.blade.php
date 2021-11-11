@@ -1715,7 +1715,7 @@ $('#time > a').click(function(){
                        <p style="color: red;display: none;font-size: 12px; margin-left: 9px;" id='ErrorRap'>Veuillez choisir un option</p>
                     </div>
                     <?php 
-                    if(($user->type_abonn_essai && ($user->type_abonn_essai=="type2" || $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ($user->type_abonn=="type2" || $user->type_abonn=="type3" ))) { ?>
+                    if(($user->type_abonn_essai && ( $user->type_abonn_essai=="type3" ))|| ($user->type_abonn && ( $user->type_abonn=="type3" ))) { ?>
 		  	    <div class="col-lg-12 col-md-12 ">
 		  		<label>Code promo :</label>
 		  		<div class="input-group input-group-lg" >

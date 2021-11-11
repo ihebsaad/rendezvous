@@ -79,13 +79,13 @@
                 <?php if( $user_type=='client' )  {?>  
                 <div class="col-md-12 margin-top-15">
                     <center>
-                    <iframe width="860" height="515" src="https://www.youtube.com/embed/PiZyafPtzfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                    <iframe style="width: 100%;height: 45vw;" src="https://www.youtube.com/embed/PiZyafPtzfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                 </div>
                 <?php } ?>
                  <?php if( $user_type=='prestataire' )  {?>  
                 <div class="col-md-12 margin-top-15">
                     <center>
-                    <iframe width="860" height="515" src="https://www.youtube.com/embed/4ynE_FvAbSY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                    <iframe  style="width: 100%;height: 45vw;" src="https://www.youtube.com/embed/4ynE_FvAbSY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
                 </div>
                 <?php } ?>
                 <div class="col-md-3">
