@@ -1108,7 +1108,7 @@ public function sendMail($to,$sujet,$contenu){
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
     $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-    $swiftTransport->setPassword('prestataireclient2022!'); // mot de passe email eSolutions2020*
+    $swiftTransport->setPassword('axlxttceuvdognbb'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);
