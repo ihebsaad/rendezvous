@@ -326,7 +326,7 @@ Route::get('/dragDropCalendar','CalendrierController@dragDropCalendar')->name('d
 	Route::get('/favorisPro','UsersController@favorisPro')->name('favorisPro')->middleware('auth');
 
 
-	Route::post('/reservations/add','ReservationsController@add')->name('reservations.add')->middleware('auth');
+	Route::get('/reservations/add','ReservationsController@add')->name('reservations.add')->middleware('auth');
 		Route::post('/reservations/add2','ReservationsController@addServiceRecurrent')->name('reservations.add2')->middleware('auth');
 
 	Route::get('/reservations','ReservationsController@index')->name('reservations')->middleware('auth');

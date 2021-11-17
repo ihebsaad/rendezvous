@@ -159,6 +159,8 @@ $User = auth()->user();
                                              <span class="booking-status " style="background-color: #38b653" >Validée</span>
                                                 <?php } elseif($res->statut==2) { ?> 
                                               <span class="booking-status unpaid"  >Annulée</span>
+                                              <?php } elseif($res->statut==6) { ?> 
+                                              <span class="booking-status " style="background-color: #fbb41e"  >Demande de report</span>
                                           <?php } ?>
 
                                           <?php  if($res->paiement==1){ ?><span class="booking-status pending">Acompte Payé</span>

@@ -128,6 +128,7 @@ class ReservationsController extends Controller
       $Reservation = Reservation::where('id',$idReservation)->first();
       $nbrReport = $Reservation ->nbrReport;
       Reservation::where('id', $idReservation)->update(array('nbrReport' => $nbrReport+1 ));
+      Reservation::where('id', $idReservation)->update(array('statut' => 6 ));
  
 
     	
@@ -183,7 +184,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
 
 		
- 	    $this->sendMail(trim($prestataire->email),'Reporter un rendez-vous',$message)	;
+ 	    
+      try {
+        $this->sendMail(trim($prestataire->email),'Reporter un rendez-vous',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
 
 
     	
@@ -253,7 +260,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     {
     	
     	$idReservation = $request->get('idres');
-      Reservation::where('id', $idReservation)->update(array('statut' => 0 ));
+      Reservation::where('id', $idReservation)->update(array('statut' => 6 ));
     	$Reservation = Reservation::where('id',$idReservation)->first();
     	//dd($Reservation);
     	$client=User::find($Reservation->client);
@@ -308,8 +315,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
          ]);	
 		 $alerte->save();
 		
- 	    $this->sendMail(trim($client->email),'report du rendez-vous',$message)	;
-
+ 	    
+      try {
+        $this->sendMail(trim($client->email),'report du rendez-vous',$message)  ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
  	     
 
  	    return "ok";
@@ -341,6 +353,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     	Reservation::where('id', $idReservation)->update(array('date_reservation' => $date ,'statut'=>1));
 
     	$Reservation = Reservation::where('id',$idReservation)->first();
+      $paiem = Reservation::where('id',$idReservation)->value('paiement');
+      if ($paiem == 0) {
+        Reservation::where('id', $idReservation)->update(array('statut' => 0 ));
+      } else {
+        Reservation::where('id', $idReservation)->update(array('statut' => 1 ));
+      }
+      
     	//dd($Reservation);
     	$client=User::find($Reservation->client);
     	$date = new DateTime($Reservation->date_reservation);
@@ -357,8 +376,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
 
-		
- 	    $this->sendMail(trim($prestataire->email),'Rendez-vous reporté',$message)	;
+		try {
+        $this->sendMail(trim($prestataire->email),'Rendez-vous reporté',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+ 	    
+
 
 $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
                         $servicesres = $Reservation->services_reserves;
@@ -410,8 +435,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
 
-		
- 	    $this->sendMail(trim($client->email),'Rendez-vous reporté',$message)	;
+		try {
+        $this->sendMail(trim($client->email),'Rendez-vous reporté',$message)  ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+      
+ 	    
 
  	    // ------------------Update l'évenement dans google calendar------------------------------------
 
@@ -541,8 +572,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
-		
- 	    $this->sendMail(trim($prestataire->email),'Réservation annulée',$message);
+		try {
+        $this->sendMail(trim($prestataire->email),'Réservation annulée',$message);
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+ 	    
 
      	
     	return "ko";
@@ -597,6 +633,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         //dd( $reservations);
 		//$this->sendMail('ihebsaad@gmail.com','Test','test Hello world')	;
         return view('entreprise.ReservezUnRdvAdmin', compact('reservations'));
+
 
 
     }
@@ -808,7 +845,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
-	    $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)	;
+	    
+      try {
+        $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)  ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
 		
 		$alerte = new Alerte([
              'user' => $prestataire->id,
@@ -873,19 +916,6 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     }
     
     $user=$request->get('user');
-     /*$reservation  = new Reservation([
-              'client' => $request->get('client'),
-              'prestataire' => $request->get('prestataire'),
-              'services_reserves' => $request->get('service'),
-              'date' => $request->get('date'),
-              'heure' => $request->get('heure'),
-              'adultes' => $request->get('adultes'),
-              'enfants' => $request->get('enfants'),
-              'remarques' => $request->get('remarques'),
-              'rappel' => $request->get('rappel'),
-            ]);*/
-         
-        
 
         $idres = $reservation->id ;
         if ($produitslist != null ) {
@@ -937,33 +967,30 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
             }
 
     }
-    /*partie analyse de résevation avec les services supplémentaires*/
-
-    /*$services_res=explode(', ',$service_name);
-    $services_supp=ServiceSupp::where('id',$prestataire->id)->get();
-    foreach ($services_supp as $ss) {
-
-      $ser_supp=explode('=',$ss->regle);
-      $ser_sup2=explode('+',$ser_supp[0]);
-      
-    }*/
-
+  
     /*fin partie analyse de résevation avec les services supplémentaires*/
 
          $reservation->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix));
-    return($service_prix); 
-    $service = \App\Service::find($request->get('service'));
     
     // Email prestataire
+   
     $message='';
-  $message.='Vous avez une nouvelle réservation.<br>Veuillez la confirmer dans votre tableau de bord.<br>';
-    $message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-    $message.='<b>Date :</b> '.$request->get('date').' - <b>Heure :</b> '.$request->get('heure').'<br>';
+    $message.='Vous avez une nouvelle réservation.<br>';
+    $message.='<b>Service :</b>  '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  <br>';
+    $message.='<b>Date :</b> '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'<br>';
     $message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
-    
-      $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)  ;
-    
+   
+    try {
+        $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)  ;
+
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+    //return($service_prix);
+
+ 
     $alerte = new Alerte([
              'user' => $prestataire->id,
        'titre'=>'Nouvelle Réservation',
@@ -973,24 +1000,26 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
      
     // Email Client
     $message='';
-    $message.='Votre réservation est enregsitrée avec succès.<br>Veillez attendre la confirmation du prestatire.<br>';
-    $message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-    $message.='<b>Date :</b> '.$request->get('date').'<b>Heure :</b> '.$request->get('heure').'<br>';
+    $message.='Votre réservation est enregsitrée avec succès.<br>';
+    $message.='<b>Service :</b>  '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  <br>';
+    $message.='<b>Date :</b> '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'<br>';
       $message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
-    
-      //$this->sendMail(trim($client->email),'Nouvelle Réservation',$message) ;
+    try {
+        $this->sendMail(trim($client->email),'Nouvelle Réservation',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+   
     $alerte = new Alerte([
              'user' => $client->id,
        'titre'=>'Nouvelle Réservation',            
              'details' => $message,
          ]);  
      $alerte->save();
+
      
-     
-   // return $reservation->id;
-    return redirect ('/reservations');
-   
 
   }
 
@@ -1057,7 +1086,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
-	   $this->sendMail(trim($client->email),'Réservation validée',$message)	;
+	   
+     try {
+        $this->sendMail(trim($client->email),'Réservation validée',$message)  ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
 
     /* $this->sendMail(trim('kbskhaled@gmail.com'),'Réservation validée',$message)	;*/
 		 $alerte = new Alerte([
@@ -1130,8 +1165,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='<b>Date :</b> '.$reservation->date.' - <b>Heure :</b> '.$reservation->heure .'<br><br>';
  		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
-		
-	    $this->sendMail(trim($client->email),'Réservation annulée',$message)	;
+		 try {
+        $this->sendMail(trim($client->email),'Réservation annulée',$message)  ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+	    
 		
 		$alerte = new Alerte([
              'user' => $client->id,
@@ -1216,8 +1256,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
        //$swiftTransport->setUsername('contact.prenezunrendezvous@gmail.com '); //adresse email
        //$swiftTransport->setPassword('davemarco97232'); // mot de passe email
 
+       // $swiftTransport->setUsername('clientdavid26@gmail.com'); //adresse email
+        //$swiftTransport->setPassword('david2022!'); // mot de passe email
+
         $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-        $swiftTransport->setPassword('axlxttceuvdognbb'); // mot de passe email
+        $swiftTransport->setPassword('axlxttceuvdognbb'); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);

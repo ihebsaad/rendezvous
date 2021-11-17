@@ -2900,7 +2900,7 @@ if( rappel==null){ document.getElementById('ErrorRap').style.display='block';}
 if( service!='' &&  rappel!=null &&  datereservation1!=''){
 $.ajax({
    url:"{{ route('reservations.add') }}",
-   method:"POST",
+   method:"get",
    data:{produitslist:produitslist,qtyproduits:qtyproduits, prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,date_reservation:dateStr ,services_reserves:service,  rappel:rappel ,happyhourid:happyhourid, montant_tot:montant_tot  ,Remise:Remise,Net:Net,happyhour:happyhour, listcodepromo :listcodepromo,serv_suppl:serv_supp , _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));

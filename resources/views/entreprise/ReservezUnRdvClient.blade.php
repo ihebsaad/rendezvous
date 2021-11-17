@@ -148,6 +148,8 @@ $User = auth()->user();
                                              <span class="booking-status " style="background-color: #38b653" >Validée</span>
                                                 <?php } elseif($res->statut==2) { ?> 
                                               <span class="booking-status unpaid"  >Annulée</span>
+                                            <?php } elseif($res->statut==6) { ?> 
+                                              <span class="booking-status " style="background-color: #fbb41e"  >Demande de report</span>
                                           <?php } ?>
 
                                           <?php  if($res->paiement==1){ ?><span class="booking-status pending">Acompte Payé</span>
@@ -201,7 +203,7 @@ $User = auth()->user();
                                         </div>
                                         <?php if( $res->paiement ==0 && $res->statut!=2) { ?>  
                                             <?php $clt=User::where('id',$res->prestataire)->first();  $cof=User::where('id',$res->prestataire)->value('acompte');  $id_stripe= UsersController::ChampById('id_stripe',$res->prestataire);$acomptestripe =($res->Net * $cof) / 100 ; if($id_stripe) {?>
-                                                @if($res->Net != 0 || $res->Net)
+                                                @if(($res->Net != 0 || $res->Net )&& $res->statut!=6)
                                                 <!-- <button class="button ">Payer l'acompte </button>  -->
                                                 <a href="{{url('PayWithStripe/'.$res->id)}}"  class="button  " style="background-color: red;color: white"> Payer l'acompte (Acompte obligatoire : {{$acomptestripe}} € )</a>
                                                 @endif
@@ -211,8 +213,10 @@ $User = auth()->user();
                                         <?php if( $res->paiement ==1 ) { 
                                             $allow_slices = UsersController::ChampById('allow_slices',$res->prestataire); if( $res->Net >= 200  &&  $allow_slices ){ ?>
 
-                                                
+                                                @if( $res->statut!=6)
                                                 <a href="{{url('Pay4WithStripe/'.$res->id)}}"  class="button  gray"> Payer le reste sur 4 mois : <?php echo $res->reste;?> € (Stripe)</a> 
+                                                @endif
+
                                                 <?php  }else{ ?>
 
                                                     <a href="{{url('PayWithStripe/'.$res->id)}}"  class="button  gray"> Payer le reste : <?php echo $res->reste;?> € (Stripe)</a>
@@ -226,8 +230,11 @@ $User = auth()->user();
                                 </div>
                             </div>
                             <div class="buttons-to-right">
-                               <?php if($res->statut!=2) { ?> 
+                               <?php if($res->statut!=2 && $res->statut!=6) { ?> 
                                 <a  class="button gray"  href="{{url('reservations/modifier/'.$res->id)}}" >Annuler/Reporter</a>
+                              <?php }  ?>
+                              <?php if( $res->statut==6) { ?>
+                                <a  class="button green"  href="{{url('reservations/selectdate/'.$res->id)}}" >Dates proposées</a>
                               <?php }  ?>
                             </div>
                         </li>

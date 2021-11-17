@@ -628,7 +628,13 @@ return view('payments.payAbn2', [
     {
       if(trim($prestataire->email))
       {
-         $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+        try {
+        $this->sendMail(trim($prestataire->email),'Abonnement payé',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+         
       }
 
     }
@@ -659,7 +665,13 @@ return view('payments.payAbn2', [
     $message.='<b>Téléphone Prestataire :</b>'.$prestataire->phone .'<br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
   //trouvezunprestataire@gmail.com
-    $this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
+    try {
+        $this->sendMail('trouvezunprestataire@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message);
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+    
   //kbskhaledfb@gmail.com  trouvezunprestataire@gmail.com
   // $this->sendMail('kbskhaledfb@gmail.com' ,'Abonnement payée - Prestataire : '.$nom_p.' '.$prenom_p,$message)  ;
       //enregistrement alerte
@@ -850,7 +862,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         $message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
         $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
     //dd(($client->email));
-          $this->sendMail(trim($client->email),'Réservation('.$titre.') payé',$message) ; 
+          
+          try {
+        $this->sendMail(trim($client->email),'Réservation('.$titre.') payé',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    } 
 
         
 
@@ -941,7 +959,13 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     $message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
     
-        $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)    ;
+        
+         try {
+       $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)    ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    } 
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => $prestataire->id,
@@ -1015,7 +1039,13 @@ public function Remboursement($k)
 
 
     
-      $this->sendMail(trim($client->email),'Réservation annulée _ Remboursement',$message) ;
+      
+      try {
+       $this->sendMail(trim($client->email),'Réservation annulée _ Remboursement',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    } 
       $alerte = new Alerte([
              'user' => $client->id,
        'titre'=>'Réservation annulée',       

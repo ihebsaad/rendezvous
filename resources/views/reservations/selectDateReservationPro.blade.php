@@ -70,9 +70,10 @@
         </div>
 
       </div>
-
+<h3>NB: S'il n'y a pas de dates, cela signifie que votre prestataire de services n'a pas encore proposé  des dates.</h3>
                     </div>
                     <!-- Section / End -->
+
 
                 </div>
             </div>
