@@ -191,11 +191,18 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
-          $numtel = $prestataire->tel ;
+    $numtel = $prestataire->tel ;
+    try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
         ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
+          
 
 
     	
@@ -328,10 +335,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     }
  	   $numtel = $client->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]);  
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
 
  	    return "ok";
 
@@ -393,10 +406,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     }
  	    
     $numtel = $prestataire->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]); 
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
 
 $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
                         $servicesres = $Reservation->services_reserves;
@@ -455,10 +474,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     }
     $numtel = $client->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]); 
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
       
  	    
 
@@ -597,10 +622,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     }
  	   $numtel = $prestataire->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]);  
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }  
 
      	
     	return "ko";
@@ -875,10 +906,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     }
     $numtel = $prestataire->tel ;
+         try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]); 
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    } 
 		
 		$alerte = new Alerte([
              'user' => $prestataire->id,
@@ -1016,10 +1053,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     }
     $numtel = $prestataire->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]); 
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
     //return($service_prix);
 
  
@@ -1044,10 +1087,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     }
    $numtel = $client->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]); 
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
     $alerte = new Alerte([
              'user' => $client->id,
        'titre'=>'Nouvelle Réservation',            
@@ -1131,10 +1180,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     }
     
 $numtel = $client->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]); 
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
     /* $this->sendMail(trim('kbskhaled@gmail.com'),'Réservation validée',$message)	;*/
 		 $alerte = new Alerte([
              'user' => $client->id,
@@ -1213,10 +1268,16 @@ $numtel = $client->tel ;
         
     }
 	    $numtel = $client->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
-        ]); 
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
 		
 		$alerte = new Alerte([
              'user' => $client->id,
