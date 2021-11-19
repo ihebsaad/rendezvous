@@ -39,7 +39,13 @@ class AvisReminder
             $client = \App\User::find($resv->client);
             $prestataire = \App\User::find($resv->prestataire);
           $message = 'Merci de laisser votre avis à propos de votre prestataire : '.$prestataire->name.' '.$prestataire->lastname .' on utilisant ce <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > lien </a>';
-          $this->sendMail(trim($client->email),'Avis',$message) ;
+            try {
+       $this->sendMail(trim($client->email),'Avis',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    }
+          
           Reservation::where('id', $resv->id)->update(array('avis' => 0 ));
           $numtel = $client->tel ;
           $response = Message::send([
@@ -70,8 +76,8 @@ class AvisReminder
        //$swiftTransport->setPassword('davemarco97232'); // mot de passe email
 
         $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-        $swiftTransport->setPassword('prestataireclient2021'); // mot de passe email
-
+        $swiftTransport->setPassword('axlxttceuvdognbb'); // mot de passe email
+ 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);
     $from=\Config::get('mail.from.address') ;

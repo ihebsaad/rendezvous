@@ -13,7 +13,7 @@ use Stripe\Stripe;
 use Stripe\Account;
 use Stripe\Product;
 use Stripe\Price;
-
+ use Message;
 use Stripe\AccountLink;
 use Stripe\PaymentIntent;
 use Illuminate\Support\Arr;
@@ -634,6 +634,11 @@ return view('payments.payAbn2', [
     } catch (\Swift_TransportException $e) {
         
     }
+    $numtel = $prestataire->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]);
          
       }
 
@@ -869,7 +874,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     } 
-
+$numtel = $client->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]);
         
 
     } // fin if type == acompte
@@ -966,6 +975,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     } 
+    $numtel = $prestataire->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]);
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => $prestataire->id,
@@ -1046,6 +1060,11 @@ public function Remboursement($k)
     } catch (\Swift_TransportException $e) {
         
     } 
+     $numtel = $client->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]);
       $alerte = new Alerte([
              'user' => $client->id,
        'titre'=>'Réservation annulée',       

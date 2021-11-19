@@ -26,7 +26,7 @@ use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 use Google_Service_Calendar_EventDateTime;
- 
+ use Message;
  use Swift_Mailer;
  use Mail;
  
@@ -191,6 +191,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
+          $numtel = $prestataire->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]);
 
 
     	
@@ -322,7 +327,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
- 	     
+ 	   $numtel = $client->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]);  
 
  	    return "ok";
 
@@ -383,7 +392,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     }
  	    
-
+    $numtel = $prestataire->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]); 
 
 $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty FROM client_products s WHERE s.id_reservation='+$Reservation->id+'" ) );               if (is_array($Reservation->services_reserves)) {
                         $servicesres = $Reservation->services_reserves;
@@ -441,6 +454,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
+    $numtel = $client->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]); 
       
  	    
 
@@ -578,7 +596,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
- 	    
+ 	   $numtel = $prestataire->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]);  
 
      	
     	return "ko";
@@ -852,6 +874,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
+    $numtel = $prestataire->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]); 
 		
 		$alerte = new Alerte([
              'user' => $prestataire->id,
@@ -988,6 +1015,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
+    $numtel = $prestataire->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]); 
     //return($service_prix);
 
  
@@ -1011,7 +1043,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
-   
+   $numtel = $client->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]); 
     $alerte = new Alerte([
              'user' => $client->id,
        'titre'=>'Nouvelle Réservation',            
@@ -1093,7 +1129,12 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
-
+    
+$numtel = $client->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]); 
     /* $this->sendMail(trim('kbskhaled@gmail.com'),'Réservation validée',$message)	;*/
 		 $alerte = new Alerte([
              'user' => $client->id,
@@ -1171,7 +1212,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
-	    
+	    $numtel = $client->tel ;
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $message
+        ]); 
 		
 		$alerte = new Alerte([
              'user' => $client->id,
