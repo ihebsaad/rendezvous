@@ -182,6 +182,43 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
+    // sms pres 
+    $messageTel='Bonjour,';
+    $messageTel.='Votre client '.$client->name.' '.$client->lastname.' veut reporter son rdv .';
+    //$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br>';
+    $messageTel.='Services :  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $messageTel.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $messageTel.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $messageTel.= " abonnement" ;
+      }
+      $messageTel.= ", ";
+      }
+
+
+        $messageTel.='Produits :  ';
+          foreach ($idproduits as $idp) {
+
+               $messageTel.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $messageTel.=  '( Quantité:'.$idp->qty.',';
+               $messageTel.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $messageTel.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $messageTel.='Cadeaux :  '.$Reservation->serv_suppl.'';
+              }
+
+
+
+    $messageTel.='Date : '.$date .' Heure : '.$heure .'';
+    $messageTel.='Merci de proposer maximum 15 dates avec des horaires qui vous conviennent. 
+    (https://prenezunrendezvous.com/reservations/newDate/'.$Reservation->id.' ). ';
+    
+    $messageTel.='https://prenezunrendezvous.com/"  ';
+
 
 		
  	    
@@ -196,7 +233,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -320,6 +357,40 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
+    // Sms
+    $messageTel='Bonjour,';
+    $messageTel.='Pour le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: ';
+    //$message.='<b>Services :</b>  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $messageTel.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $messageTel.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $messageTel.= " abonnement" ;
+      }
+      $messageTel.= ", ";
+      }
+
+
+        $messageTel.='et les Produits :  ';
+          foreach ($idproduits as $idp) {
+
+               $messageTel.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $messageTel.=  '( Quantité:'.$idp->qty.',';
+               $messageTel.= ' Prix'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $messageTel.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $messageTel.='( Cadeaux :  '.$Reservation->serv_suppl.'):';
+              }
+    $messageTel.=' Total : '.$Reservation->Net.'';
+    $messageTel.='votre prestataire '.$prestataire->name.' '.$prestataire->lastname .' a vous proposé des nouvelles dates. ';
+    $messageTel.='Merci de choisir une seule date :  
+    (https://prenezunrendezvous.com/reservations/selectdate/'.$Reservation->id.').';
+    
+    $messageTel.='https://prenezunrendezvous.com';
+
         $alerte = new Alerte([
              'user' => $client->id,
 			 'titre'=>'Nouvelle date de prestation',
@@ -339,7 +410,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -397,7 +468,12 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
-
+  // sms au prestataire
+    $messageTel='Bonjour, ';
+    $messageTel.='Votre client '.$client->name.' '.$client->lastname.' a choisi une nouvelle date :  '.$date .' à '.$heure .' .';
+    $messageTel.='Service : '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  ';
+    
+    $messageTel.='https://prenezunrendezvous.com/';
 		try {
         $this->sendMail(trim($prestataire->email),'Rendez-vous reporté',$message) ;
        // break;
@@ -410,7 +486,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -425,12 +501,10 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
  	    // Email au client
 		$message='Bonjour,<br>';
-		//$message.='Réservation('.$titre.') payée avec succès <br>';
 		$message.='Votre rendez-vous  est confirmé le <b>'.$date .'</b> à <b>'.$heure .'</b> avec le prestataire <a href="https://prenezunrendezvous.com/'.$prestataire->titre.'/'.$prestataire->id.'" > '.$prestataire->name.' '.$prestataire->lastname .' </a>. <br>';
-		//$message.='<b>Service :</b>  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €)  <br><br><br>';
+		
     $message.='<b>Services :</b>  ';
           foreach ($servicesres as $servicesre) {
-         // echo $servicesres;
         $message.=  DB::table('services')->where('id', $servicesre )->value('nom');
          $message.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
          
@@ -466,7 +540,35 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
+    // sms au client
+    $messageTel='Bonjour,';
+    $messageTel.='Votre rendez-vous  est confirmé le '.$date .'à '.$heure .' avec le prestataire'.$prestataire->name.' '.$prestataire->lastname .'. ';
+    
+    $messageTel.='Services :  ';
+          foreach ($servicesres as $servicesre) {
+        $messageTel.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $messageTel.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $messageTel.= " abonnement" ;
+      }
+      $messageTel.= ", ";
+      }
 
+
+        $messageTel.='Produits : ';
+          foreach ($idproduits as $idp) {
+
+               $messageTel.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $messageTel.=  '( Quantité:'.$idp->qty.',';
+               $messageTel.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $messageTel.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $messageTel.='Cadeaux :  '.$Reservation->serv_suppl.'';
+              }
+
+          $messageTel.='https://prenezunrendezvous.com/';
 		try {
         $this->sendMail(trim($client->email),'Rendez-vous reporté',$message)  ;
        // break;
@@ -478,7 +580,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -615,6 +717,39 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
 
+    // sms au client
+    $messageTel='Bonjour,';
+    $messageTel.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services:';
+      foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $messageTel.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $messageTel.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $messageTel.= " abonnement" ;
+      }
+      $messageTel.= ", ";
+      }
+
+
+        $messageTel.='et les Produits :  ';
+          foreach ($idproduits as $idp) {
+
+               $messageTel.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $messageTel.=  '( Quantité:'.$idp->qty.',';
+               $messageTel.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $messageTel.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $messageTel.='( Cadeaux :  '.$Reservation->serv_suppl.'):';
+              }
+    $messageTel.=' Total : '.$Reservation->Net.'';
+    $messageTel.='a été annulé par votre client '.$client->name.' '.$client->lastname.' .';
+      
+    $messageTel.='Merci de lui remettre l`acompte. (https://prenezunrendezvous.com/reservations/AnnulerReservation/'.$Reservation->id.') ';  
+    
+    $messageTel.='https://prenezunrendezvous.com/';
+
 		try {
         $this->sendMail(trim($prestataire->email),'Réservation annulée',$message);
        // break;
@@ -626,7 +761,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -898,7 +1033,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
 		
-	    
+	    // sms prestataire
+    $messageTel='';
+  $messageTel.='Vous avez une nouvelle réservation. Veuillez la confirmer dans votre tableau de bord.';
+    $messageTel.='Service :  '.$service->nom.'  - ('.$service->prix.' €)  ';
+    $messageTel.='Date : '.$request->get('date').' - Heure : '.$request->get('heure').'';
+    $messageTel.='Client : '.$client->name.' '.$client->lastname .'<br><br>';
+    $messageTel.='https://prenezunrendezvous.com/'; 
+    
       try {
         $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)  ;
        // break;
@@ -910,7 +1052,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -1044,7 +1186,15 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     $message.='<b>Date :</b> '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'<br>';
     $message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
+
+    // sms prestataire
    
+    $messageTel='';
+    $messageTel.='Vous avez une nouvelle réservation.';
+    $messageTel.='Service : '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  ';
+    $messageTel.='Date : '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'';
+    $messageTel.='Client :'.$client->name.' '.$client->lastname .'.';
+    $messageTel.='https://prenezunrendezvous.com/'; 
     try {
         $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)  ;
 
@@ -1057,7 +1207,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -1080,6 +1230,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     $message.='<b>Date :</b> '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'<br>';
       $message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
+
+    // sms Client
+    $messageTel='';
+    $messageTel.='Votre réservation est enregsitrée avec succès.';
+    $messageTel.='Service :  '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  ';
+    $messageTel.='Date : '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'.';
+      $messageTel.='Prestatire : '.$prestataire->name.' '.$prestataire->lastname .'.';
+    $messageTel.='https://prenezunrendezvous.com/';
     try {
         $this->sendMail(trim($client->email),'Nouvelle Réservation',$message) ;
        // break;
@@ -1091,7 +1249,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -1170,6 +1328,14 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$message.='<b>Date :</b> '.$reservation->date .' - <b>Heure :</b> '.$reservation->heure.'<br><br>';
 		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
  		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+
+    // sms prestataire
+    $messageTel='';
+    $messageTel.='Votre rendez vous est confirmé par le prestataire.';
+    $messageTel.='Service :  '.$service->nom.'  - ('.$service->prix.' €)  ';
+    $messageTel.='Date : '.$reservation->date .' - Heure : '.$reservation->heure.'.';
+    $messageTel.='Prestatire : '.$prestataire->name.' '.$prestataire->lastname .'.';
+    $messageTel.='https://prenezunrendezvous.com/'; 
 		
 	   
      try {
@@ -1184,7 +1350,7 @@ $numtel = $client->tel ;
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -1261,6 +1427,14 @@ $numtel = $client->tel ;
 		$message.='<b>Date :</b> '.$reservation->date.' - <b>Heure :</b> '.$reservation->heure .'<br><br>';
  		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';		
 		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
+
+    // sms prestataire
+    $messageTel='';
+    $messageTel.='Votre rendez vous est annulée par le prestataire.';
+    $messageTel.='Service :  '.$service->nom.'  - ('.$service->prix.' €)  ';
+    $messageTel.='Date : '.$reservation->date.' - Heure : '.$reservation->heure .'.';
+    $messageTel.='Prestatire : '.$prestataire->name.' '.$prestataire->lastname .'.';   
+    $messageTel.='https://prenezunrendezvous.com/'; 
 		 try {
         $this->sendMail(trim($client->email),'Réservation annulée',$message)  ;
        // break;
@@ -1272,7 +1446,7 @@ $numtel = $client->tel ;
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
