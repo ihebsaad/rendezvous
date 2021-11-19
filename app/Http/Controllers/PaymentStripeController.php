@@ -635,10 +635,16 @@ return view('payments.payAbn2', [
         
     }
     $numtel = $prestataire->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
         ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
          
       }
 
@@ -875,10 +881,16 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         
     } 
 $numtel = $client->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
         ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
         
 
     } // fin if type == acompte
@@ -976,10 +988,16 @@ $numtel = $client->tel ;
         
     } 
     $numtel = $prestataire->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
         ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
       //enregistrement alerte
     $alerte = new Alerte([
              'user' => $prestataire->id,
@@ -1061,10 +1079,16 @@ public function Remboursement($k)
         
     } 
      $numtel = $client->tel ;
+          try {
+      
           $response = Message::send([
           'to' => $numtel,
           'text' => $message
         ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
       $alerte = new Alerte([
              'user' => $client->id,
        'titre'=>'Réservation annulée',       
