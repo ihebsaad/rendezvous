@@ -46,7 +46,7 @@
                         <!-- Headline -->
                         <div class="add-listing-headline">
                           <?php if ($acompte) {  ?>
-                           <h3><i class="im im-icon-Credit-Card"></i>Paiement de l'acompte <span>{{$valAcompte}} €</span></h3>
+                           <h3><i class="im im-icon-Credit-Card"></i>Paiement de l'acompte <span style="float: right;margin: 5px">{{$valAcompte}} €</span></h3>
                            
                          <?php } else { ?>
                             <h3><i class="im im-icon-Credit-Card"></i>Paiement de la reservation </h3>
