@@ -150,7 +150,7 @@ $intent = PaymentIntent::create([
         $clientSecret = Arr::get($intent, 'client_secret');
 
 return view('payments.pay', [
-            'clientSecret' => $clientSecret , 'idaccount' => $idaccount , 'Res' => $k
+            'clientSecret' => $clientSecret , 'idaccount' => $idaccount , 'Res' => $k, 'acompte' => 1
         ]);
 
 
@@ -168,13 +168,13 @@ $intent = PaymentIntent::create([
         ], ['stripe_account' => $idaccount]);
  $clientSecret = Arr::get($intent, 'client_secret');
 return view('payments.pay', [
-            'clientSecret' => $clientSecret , 'idaccount' => $idaccount , 'Res' => $k
+            'clientSecret' => $clientSecret , 'idaccount' => $idaccount , 'Res' => $k , 'acompte' => 0
         ]);
 
     
     
 
-  }// end pay rest
+  }// end pay rest 
 
 
     }

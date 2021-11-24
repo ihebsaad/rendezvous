@@ -51,11 +51,14 @@
                     
 
         <div class="row">
+          <?php if ($acompte) {  ?>
           <div class="col-md-12">
          <h4>Veuillez payer l'acompte pour valider votre réservation.</h4>
+          <br>
           </div>
+          <?php } ?>
           <div class="col-md-12">
-      <br>
+     
         <div class="row">
             <div class="col-md-12">
                 <form action="#" class="my-4">
@@ -71,10 +74,13 @@
             </div>
         </div>
     </div>
+    <?php if ($acompte) {  ?>
     <div class="col-md-12">
     <br>
     <h5><b>NB:</b> Si vous ne payez pas, votre réservation ne sera pas prise en considération</h5>
-       </div> </div></div></div>
+       </div>
+       <?php } ?>
+        </div></div></div>
 
       </div>
  </div></div></div>
