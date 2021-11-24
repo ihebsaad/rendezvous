@@ -52,10 +52,10 @@
 
         <div class="row">
           <div class="col-md-12">
-         <h3>Veuillez payer l'acompte pour valider votre réservation.</h3>
+         <h4>Veuillez payer l'acompte pour valider votre réservation.</h4>
           </div>
           <div class="col-md-12">
-      
+      <br>
         <div class="row">
             <div class="col-md-12">
                 <form action="#" class="my-4">
@@ -71,6 +71,7 @@
             </div>
         </div>
     </div>
+    <h5><b>NB:</b> Si vous ne payez pas, votre réservation ne sera pas prise en considération</h5>
         </div></div></div>
 
       </div>
