@@ -64,7 +64,9 @@
           </div></div>
         <div class="col-md-12">
             <div >
+              <?php  if(count($Newdates)){ ?>
 <input type="submit" style="text-align:center;color:white;margin-top: 30px" value="Envoyer" onclick="functionEnvoyer()" ></input>
+<?php  } ?>
           </div>
 <br>
         </div>
