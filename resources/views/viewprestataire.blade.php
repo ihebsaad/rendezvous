@@ -2905,7 +2905,8 @@ $.ajax({
    success:function(data){
    //alert(JSON.stringify(data));
    alert(data);
-   location.href= "{{ route('PayWithStripe',['id'=> "+data+"] )}} }}";   
+   var x = data ;
+   location.href= "{{ route('PayWithStripe',['id'=> "+ x +"] )}} }}";   
 } 
 });}
 
