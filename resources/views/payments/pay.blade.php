@@ -51,8 +51,9 @@
                     
 
         <div class="row">
-         
-          
+          <div class="col-md-12">
+         <h3>Veuillez payer l'acompte pour valider votre réservation.</h3>
+          </div>
           <div class="col-md-12">
       
         <div class="row">
