@@ -443,9 +443,9 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     {
     	$idReservation = $request->get('idres');
     	$date = $request->get('date');
-      dd($date);
+     
     	Reservation::where('id', $idReservation)->update(array('date_reservation' => $date ,'statut'=>1));
-
+ dd($date);
     	$Reservation = Reservation::where('id',$idReservation)->first();
       $paiem = Reservation::where('id',$idReservation)->value('paiement');
       if ($paiem == 0) {
