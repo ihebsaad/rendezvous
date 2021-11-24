@@ -2905,8 +2905,8 @@ $.ajax({
    success:function(data){
    //alert(JSON.stringify(data));
    alert(data);
-   var x = data ;
-   location.href= "{{ route('PayWithStripe',['id'=> "+ x +"] )}} }}";   
+   //location.href= "{{ route('PayWithStripe',['id'=> $User->id] )}} }}";   
+   location.href= "https://prenezunrendezvous.com/PayWithStripe"+"/"+data;  
 } 
 });}
 
