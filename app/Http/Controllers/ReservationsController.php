@@ -443,9 +443,9 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     {
     	$idReservation = $request->get('idres');
     	$date = $request->get('date');
-     
+
     	Reservation::where('id', $idReservation)->update(array('date_reservation' => $date ,'statut'=>1));
- dd($date);
+ //dd($date);
     	$Reservation = Reservation::where('id',$idReservation)->first();
       $paiem = Reservation::where('id',$idReservation)->value('paiement');
       if ($paiem == 0) {
@@ -1203,7 +1203,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
-    $numtel = $prestataire->tel ;
+    /*$numtel = $prestataire->tel ;
           try {
       
           $response = Message::send([
@@ -1213,7 +1213,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
     } catch (\SMSFactor\Error\Api $e) {
 
-    }
+    }*/
     //return($service_prix);
 
  
@@ -1245,7 +1245,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     }
-   $numtel = $client->tel ;
+  /* $numtel = $client->tel ;
           try {
       
           $response = Message::send([
@@ -1255,7 +1255,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 
     } catch (\SMSFactor\Error\Api $e) {
 
-    }
+    }*/
     $alerte = new Alerte([
              'user' => $client->id,
        'titre'=>'Nouvelle Réservation',            
@@ -1264,7 +1264,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
      $alerte->save();
 
      
-
+  return($idres);
   }
 
 	
