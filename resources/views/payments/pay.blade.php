@@ -71,6 +71,7 @@
             </div>
         </div>
     </div>
+    <br><br>
     <h5><b>NB:</b> Si vous ne payez pas, votre réservation ne sera pas prise en considération</h5>
         </div></div></div>
 
