@@ -634,12 +634,18 @@ return view('payments.payAbn2', [
     } catch (\Swift_TransportException $e) {
         
     }
+    // sms au prestataire
+    $messageTel='Bonjour,';
+    $messageTel.='Votre abonnement est payé avec succès ';
+    $messageTel.='Abonnement : '.$abonnement.'';
+    $messageTel.="La date d'expiration de votre abonnement est : ". date('d/m/Y H:i', strtotime($datee))." ";
+    $messageTel.='https://prenezunrendezvous.com/'; 
     $numtel = $prestataire->tel ;
           try {
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -880,12 +886,58 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     } catch (\Swift_TransportException $e) {
         
     } 
+    // sms au client
+        $messageTel='Bonjour, ';
+        $messageTel.='Réservation ('.$titre.') payée avec succès ';
+        $messageTel.='Votre rendez-vous  est confirmé le '.$date .' à '.$heure .' avec le prestataire : '.$prestataire->name.' '.$prestataire->lastname .' . ';
+        $messageTel.='Services :  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $messageTel.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $messageTel.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $messageTel.= "  abonnement " ;
+      }
+      $messageTel.= ", ";
+      }
+
+
+        $messageTel.=' Produits :  ';
+          foreach ($idproduits as $idp) {
+
+               $messageTel.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $messageTel.=  '( Quantité:'.$idp->qty.',';
+               $messageTel.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ ";
+              
+               if (DB::table('produits')->where('id', $idp->ids )->value('type')=='Numérique') {
+                if (DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement')==Null) {
+                  $messageTel.=', https://prenezunrendezvous.com/public/Fichiers/'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'" download="'.DB::table('produits')->where('id', $idp->ids )->value('Fichier').'';
+                } else {
+                  $messageTel.=', '.DB::table('produits')->where('id', $idp->ids )->value('URL_telechargement').'';
+                }
+                 
+               }
+                $messageTel.= "), ";
+                
+              } 
+
+
+              if ($Reservation->serv_suppl != null) {
+               $messageTel.=' Cadeaux :  '.$Reservation->serv_suppl.'';
+              }
+              
+
+              
+   
+        $messageTel.=' https://prenezunrendezvous.com/';
+    //dd(($client->email));
 $numtel = $client->tel ;
           try {
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -923,7 +975,31 @@ $numtel = $client->tel ;
         $message.='-Au delà des 5 jours, Il vous sera impossible d`annuler ou de reporter le rendez-vous.  <br>';
         $message.='-Vous n`êtes pas venu au rendez-vous  pour x raison, votre accompte ne sera pas remboursé <br>car malheureusement beaucoup trop de clients prennent des rendez-vous et ne vienne pas sans prévenir et cela chamboule toute notre journée. <br> Merci d`avance d`être présent à votre rendez-vous et merci de votre compréhension. <br>';
         $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
-   
+        try {
+        $this->sendMail(trim($client->email),'Réservation payé ('.$titre.')',$message) ;
+       // break;
+    } catch (\Swift_TransportException $e) {
+        
+    } 
+    // Email au client
+        $messageTel='Bonjour, ';
+        $messageTel.='Réservation ('.$titre.') payée avec succès <br>';
+        $messageTel.='Votre rendez-vous  est confirmé le '.$date .' à '.$heure .' avec le prestataire '.$prestataire->name.' '.$prestataire->lastname .'. ';
+        $messageTel.=' Service :  '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) ';
+          
+        
+        $messageTel.=' https://prenezunrendezvous.com/';
+   $numtel = $client->tel ;
+          try {
+      
+          $response = Message::send([
+          'to' => $numtel,
+          'text' => $messageTel
+        ]);
+
+    } catch (\SMSFactor\Error\Api $e) {
+
+    }
        
     }
       
@@ -994,12 +1070,48 @@ $numtel = $client->tel ;
     } catch (\Swift_TransportException $e) {
         
     } 
+    // sms au prestataire
+    $messageTel='Bonjour, ';
+    $messageTel.='Réservation payée ('.$titre.') ';
+
+    $messageTel.=' Services :  ';
+          foreach ($servicesres as $servicesre) {
+         // echo $servicesres;
+        $messageTel.=  DB::table('services')->where('id', $servicesre )->value('nom');
+         $messageTel.=" ( ".DB::table('services')->where('id', $servicesre )->value('prix')."€ )";
+         
+         if ($Reservation->recurrent==1) {
+        $messageTel.= " abonnement " ;
+      }
+      $messageTel.= ", ";
+      }
+
+
+        $messageTel.=' Produits :   ';
+          foreach ($idproduits as $idp) {
+
+               $messageTel.=  ' '.DB::table('produits')->where('id', $idp->ids )->value('nom_produit').'';
+               $messageTel.=  '( Quantité:'.$idp->qty.',';
+               $messageTel.= ' Prix:'.DB::table('produits')->where('id', $idp->ids )->value('prix_unité')."€ )";
+               $messageTel.= ", ";
+              } 
+              if ($Reservation->serv_suppl != null) {
+               $messageTel.=' Cadeaux :   '.$Reservation->serv_suppl.'';
+              }
+              
+
+       
+
+
+    $messageTel.=' Date :  '.$date .' Heure : '.$heure .' ';
+    $messageTel.=' Client :  '.$client->name.' '.$client->lastname .' ';
+    $messageTel.=' https://prenezunrendezvous.com/ '; 
     $numtel = $prestataire->tel ;
           try {
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -1013,17 +1125,7 @@ $numtel = $client->tel ;
          ]);  
      $alerte->save();   
     
-    // enregistrement payment dans la base
-    /*$paiement  =  new \App\Payment([
-             'payer_id' => Input::get('PayerID'),
-       'payment_id'=>Input::get('payment_id') ,            
-             'user' => $client->id,
-             'beneficiaire' => $prestataire->name. ' '.$prestataire->lastname,
-             'beneficiaire_id' => $prestataire->id ,
-             'details' => 'paiement de réservation('.$titre.') pour : '.$prestataire->name. ' '.$prestataire->lastname,
-         ]);  
-     
-     $paiement->save();*/
+   
 
      // avant la redirection on va sauvgarder l'évenement dans google Agenda si le type est acompte
 
@@ -1085,12 +1187,19 @@ public function Remboursement($k)
     } catch (\Swift_TransportException $e) {
         
     } 
+    // sms au prest
+    $messageTel='Bonjour, ';
+    $messageTel.='le rendez-vous prévue du  '.$date .' à '.$heure .'  avec les services: '.$Reservation->nom_serv_res.'  - ('.$Reservation->Net.' €) a été annulé. ';
+    $messageTel.='Votre Prestataire '.$prestataire->name.' '.$prestataire->lastname.'a remboursé votre montant payé. ';
+   
+    
+    $messageTel.=' https://prenezunrendezvous.com/ ';
      $numtel = $client->tel ;
           try {
       
           $response = Message::send([
           'to' => $numtel,
-          'text' => $message
+          'text' => $messageTel
         ]);
 
     } catch (\SMSFactor\Error\Api $e) {
@@ -1206,72 +1315,6 @@ public function sendMail($to,$sujet,$contenu){
       });
     
   }
-
-
-public function stripeWebhook(Request $request)
-    {
-      return response()->json([
-                'message' => 'Invalid signature',
-            ], 200);
-        // You can find your endpoint's secret in your webhook settings
-        $endpoint_secret = "whsec_kJ1wYb3HxPXQ5SmCvdmGsoEngJCxJ0bg";
-
-        $payload = @file_get_contents('php://input');
-        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
-        $event = null;
-
-        try
-        {
-            $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
-        } 
-        catch(\UnexpectedValueException $e)
-        {
-                // Invalid payload
-                return response()->json([
-                    'message' => 'Invalid payload',
-                ], 200);
-        }
-        catch(\Stripe\Exception\SignatureVerificationException $e)
-        {
-            // Invalid signature
-            return response()->json([
-                'message' => 'Invalid signature',
-            ], 200);
-        }
-
-        if ($event->type == "payment_intent.succeeded")
-        {
-            //As I understand here is where I should do things like send order info by mail and deplete stock accordingly
-
-            $intent = $event->data->object;
-
-            //$this->completeOrderInDatabase()
-            //$this->sendMail();
-
-            return response()->json([
-                'intentId' => $intent->id,
-                'message' => 'Payment succeded'
-            ], 200); 
-        } 
-        elseif ($event->type == "payment_intent.payment_failed")
-        {
-            //Payment failed to be completed
-            
-            $intent = $event->data->object;
-            $error_message = $intent->last_payment_error ? $intent->last_payment_error->message : "";
-
-            return response()->json([
-                'intentId' => $intent->id,
-                'message' => 'Payment failed: '.$error_message
-            ], 400); 
-        }
-
-        
-    }
-
-
-
-
 
 
 }
