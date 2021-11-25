@@ -19,7 +19,7 @@
         $user_type=$cuser->user_type;
         if($user_type=='client')
         {
-            $reservations= \App\Reservation::where('client',$cuser->id)->orderBy('id','desc')->limit(8)->get();
+            $reservations= \App\Reservation::where('client',$cuser->id)->where('statut','!=',0)->orderBy('id','desc')->limit(8)->get();
             $payments= \App\Payment::where('user',$cuser->id)->orderBy('id','desc')->limit(8)->get(); 
             $alertes= \App\Alerte::where('user',$cuser->id)->limit(9)->get();
             $countpay=count($payments);
@@ -30,13 +30,8 @@
         }
         if($user_type=='prestataire')
         {
-            $reservations= \App\Reservation::where('prestataire',$cuser->id)->orderBy('id','desc')->limit(8)->get(); 
-            $payments = DB::table('payments')
-           ->where(function ($query) use($cuser) {
-               $query->where('user', $cuser->id)
-                     ->orWhere('beneficiaire_id', $cuser->id);
-           })
-           ->orderBy('id','desc')->get();
+            $reservations= \App\Reservation::where('prestataire',$cuser->id)->where('statut','!=',0)->orderBy('id','desc')->limit(8)->get(); 
+            $payments = DB::table('payments')->where('user', $cuser->id)->orWhere('beneficiaire_id', $cuser->id)->orderBy('id','desc')->get() ;
            
             $alertes= \App\Alerte::where('user',$cuser->id)->limit(9)->get();
             $countpay=count($payments);
@@ -50,7 +45,7 @@
         if( $user_type=='admin' )
         {
             
-            $reservations= \App\Reservation::orderBy('id','desc')->limit(8)->get();
+            $reservations= \App\Reservation::where('statut','!=',0)->orderBy('id','desc')->limit(8)->get();
             $payments= \App\Payment::orderBy('id','desc')->limit(8)->get();
             $alertes= \App\Alerte::where('user',$cuser->id)->limit(9)->get();
             
