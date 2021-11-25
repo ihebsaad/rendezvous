@@ -2948,7 +2948,9 @@ $.ajax({
    data:{prestataire:<?php echo $user->id;?>,client:<?php echo $User->id;?>,nbrService:nbrService,remarques:remarques ,periode:periode,frq:frq,services_reserves:service,happyhourid:happyhourid , rappel:rappel ,happyhour:happyhour ,montant_tot:montant_tot ,Remise:Remise,Net:Net,listcodepromo:listcodepromo, _token:_token},
    success:function(data){
    //alert(JSON.stringify(data));
-   location.href= "{{ route('ReservezUnRdv',['id'=> $User->id] )}} }}";
+   //location.href= "{{ route('ReservezUnRdv',['id'=> $User->id] )}} }}";
+   //alert("ok");
+   location.href= "https://prenezunrendezvous.com/PayWithStripe"+"/"+data;  
    }
 });}
 

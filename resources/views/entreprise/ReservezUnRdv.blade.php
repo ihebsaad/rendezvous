@@ -8,6 +8,7 @@ use \App\User;
 $User = auth()->user();
  use \App\Http\Controllers\ReservationsController;
   use \App\Service;
+  use \App\Reservation;
   use \App\PropositionDatesServicesAbn;
   use \App\Http\Controllers\ServicesController;
   use \App\Http\Controllers\MyPaypalController;
@@ -53,6 +54,8 @@ $User = auth()->user();
              </li></ul>
                     <?php   $proppres=PropositionDatesServicesAbn::where('prestataire',$User->id)->get();?> 
                      @foreach($proppres as $pp)
+                     <?php $StatutServR=Reservation::where('id',$pp->id_reservation)->value('statut'); if ( $StatutServR != 0) {?>
+
                     <ul>
                         <?php $client=User::where('id',$pp->client)->first(); $serv=Service::where('id',$pp->service_rec)->first();  ?>
                         <li class="pending-booking">
@@ -118,6 +121,7 @@ $User = auth()->user();
                         </li>
                         
                     </ul>
+                    <?php } ?>
                     @endforeach 
                 </div>
             

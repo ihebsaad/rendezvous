@@ -941,49 +941,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 		$reservation->save();
 		}
 
-		/*for ($i=1; $i < $request->get('nbrService') ; $i++) { 
-			
-			$reservation  = new Reservation([
-              'client' => $request->get('client'),
-              'prestataire' => $request->get('prestataire'),
-              'services_reserves' => [$request->get('services_reserves')],
-              'date_reservation' =>$request->date_reservation[$i],
-              'remarques' => $request->get('remarques'),
-              'rappel' => $request->get('rappel'),
-              'id_recc' => $id_recc ,
-              'recurrent' => 1,
-            ]);
-		$reservation->save();
-		}*/
-		/*if ($request->get('frq')=="Journalière") {
-			$frq = 1 ;
-
-		}
-		else if ($request->get('frq')=="Hebdomadaire") {
-			$frq = 7 ;
-		}
-		else if ($request->get('frq')=="Mensuelle") {
-			$frq = 28 ;
-		}
-		*/
-		/*for ($t=1; $t < $request->get('periode') ; $t++) { 
-			$days = ' + '.$frq*$t.' days' ;
-			for ($i=0; $i < $request->get('nbrService') ; $i++) { 
-			
-			$reservation  = new Reservation([
-              'client' => $request->get('client'),
-              'prestataire' => $request->get('prestataire'),
-              'services_reserves' => [$request->get('services_reserves')],
-              'date_reservation' =>date('Y-m-d h:i', strtotime($request->date_reservation[$i]. $days)),
-              'remarques' => $request->get('remarques'),
-              'rappel' => $request->get('rappel'),
-              'id_recc' => $id_recc ,
-              'recurrent' => 1,
-            ]);
-			$reservation->save();
-			
-		}
-		}*/
+		
 		$test=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->exists();
 		if ($test=='true') {
 			$nbrRes=Cartefidelite::where('id_client',$request->get('client'))->where('id_prest',$request->get('prestataire'))->value('nbr_reservation');
@@ -1026,66 +984,11 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
         //dd('test');
 		$service = \App\Service::find($request->get('services_reserves'));
 		
-		// Email prestataire
-		$message='';
-	$message.='Vous avez une nouvelle réservation.<br>Veuillez la confirmer dans votre tableau de bord.<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-		$message.='<b>Date :</b> '.$request->get('date').' - <b>Heure :</b> '.$request->get('heure').'<br>';
-		$message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
-		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';	
-		
-	    // sms prestataire
-    $messageTel='';
-  $messageTel.='Vous avez une nouvelle réservation. Veuillez la confirmer dans votre tableau de bord.';
-    $messageTel.='Service :  '.$service->nom.'  - ('.$service->prix.' €)  ';
-    $messageTel.='Date : '.$request->get('date').' - Heure : '.$request->get('heure').'';
-    $messageTel.='Client : '.$client->name.' '.$client->lastname .'<br><br>';
-    $messageTel.='https://prenezunrendezvous.com/'; 
-    
-      try {
-        $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)  ;
-       // break;
-    } catch (\Swift_TransportException $e) {
-        
-    }
-    $numtel = $prestataire->tel ;
-         try {
-      
-          $response = Message::send([
-          'to' => $numtel,
-          'text' => $messageTel
-        ]);
-
-    } catch (\SMSFactor\Error\Api $e) {
-
-    } 
-		
-		$alerte = new Alerte([
-             'user' => $prestataire->id,
-			 'titre'=>'Nouvelle Réservation',
-             'details' => $message,
-         ]);	
-		 $alerte->save();
-		 
-		// Email Client
-		$message='';
-		$message.='Votre réservation est enregsitrée avec succès.<br>Veillez attendre la confirmation du prestatire.<br>';
-		$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
-		$message.='<b>Date :</b> '.$request->get('date').'<b>Heure :</b> '.$request->get('heure').'<br>';
-  		$message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
-		$message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
-		
-	    //$this->sendMail(trim($client->email),'Nouvelle Réservation',$message)	;
-		$alerte = new Alerte([
-             'user' => $client->id,
-			 'titre'=>'Nouvelle Réservation',						 
-             'details' => $message,
-         ]);	
-		 $alerte->save();
+	
 		 
 		 
-   // return $reservation->id;
-		return redirect ('/reservations');
+    return $reservation->id;
+		//return redirect ('/reservations');
 	 
 	}
 		
