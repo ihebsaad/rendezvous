@@ -1361,8 +1361,8 @@ $numtel = $client->tel ;
        // $swiftTransport->setUsername('clientdavid26@gmail.com'); //adresse email
         //$swiftTransport->setPassword('david2022!'); // mot de passe email
 
-        $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-        $swiftTransport->setPassword('axlxttceuvdognbb'); // mot de passe email eSolutions2020*
+        $swiftTransport->setUsername(env('MAIL_USERNAME')); //adresse email
+        $swiftTransport->setPassword(env('MAIL_PASSWORD')); // mot de passe email eSolutions2020*
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
 		Mail::setSwiftMailer($swiftMailer);
