@@ -170,7 +170,7 @@ number_format($Somme[0]->somme, 3, '.', ','));?></h4> <span>la somme gagnée <st
        
       <div class="col-md-10" >
         <label>Pourcentage d'acompte:</label>
-        <input type="number" min="10" max="60" value="20" onchange="changeAcompte(this)" name="">
+        <input type="number" min="10" max="90" value="{{$user->acompte}}" onchange="changeAcompte(this)" name="">
       </div>
         <div class="col-md-12" >
         <?php if(($user->type_abonn_essai && $user->type_abonn_essai=="type3" ) || ($user->type_abonn &&  $user->type_abonn=="type3" )) {  ?> 
