@@ -1177,91 +1177,9 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
   
     /*fin partie analyse de résevation avec les services supplémentaires*/
 
-         $reservation->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix));
+    $reservation->update(array('nom_serv_res'=>$service_name, 'montant_tot'=>$service_prix));
     
-    // Email prestataire
-   
-    $message='';
-    $message.='Vous avez une nouvelle réservation.<br>';
-    $message.='<b>Service :</b>  '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  <br>';
-    $message.='<b>Date :</b> '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'<br>';
-    $message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
-    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
-
-    // sms prestataire
-   
-    $messageTel='';
-    $messageTel.='Vous avez une nouvelle réservation.';
-    $messageTel.='Service : '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  ';
-    $messageTel.='Date : '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'';
-    $messageTel.='Client :'.$client->name.' '.$client->lastname .'.';
-    $messageTel.='https://prenezunrendezvous.com/'; 
-    try {
-        $this->sendMail(trim($prestataire->email),'Nouvelle Réservation',$message)  ;
-
-       // break;
-    } catch (\Swift_TransportException $e) {
-        
-    }
-    /*$numtel = $prestataire->tel ;
-          try {
-      
-          $response = Message::send([
-          'to' => $numtel,
-          'text' => $messageTel
-        ]);
-
-    } catch (\SMSFactor\Error\Api $e) {
-
-    }*/
-    //return($service_prix);
-
- 
-    $alerte = new Alerte([
-             'user' => $prestataire->id,
-       'titre'=>'Nouvelle Réservation',
-             'details' => $message,
-         ]);  
-     $alerte->save();
-     
-    // Email Client
-    $message='';
-    $message.='Votre réservation est enregsitrée avec succès.<br>';
-    $message.='<b>Service :</b>  '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  <br>';
-    $message.='<b>Date :</b> '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'<br>';
-      $message.='<b>Prestatire :</b> '.$prestataire->name.' '.$prestataire->lastname .'<br><br>';
-    $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>';
-
-    // sms Client
-    $messageTel='';
-    $messageTel.='Votre réservation est enregsitrée avec succès.';
-    $messageTel.='Service :  '.$reservation->nom_serv_res.'  - Total à payer (après réduction) ('.$reservation->Net.' €)  ';
-    $messageTel.='Date : '.date('d/m/Y H:i', strtotime($reservation->date_reservation)).'.';
-      $messageTel.='Prestatire : '.$prestataire->name.' '.$prestataire->lastname .'.';
-    $messageTel.='https://prenezunrendezvous.com/';
-    try {
-        $this->sendMail(trim($client->email),'Nouvelle Réservation',$message) ;
-       // break;
-    } catch (\Swift_TransportException $e) {
-        
-    }
-  /* $numtel = $client->tel ;
-          try {
-      
-          $response = Message::send([
-          'to' => $numtel,
-          'text' => $messageTel
-        ]);
-
-    } catch (\SMSFactor\Error\Api $e) {
-
-    }*/
-    $alerte = new Alerte([
-             'user' => $client->id,
-       'titre'=>'Nouvelle Réservation',            
-             'details' => $message,
-         ]);  
-     $alerte->save();
+    
 
      
   return($idres);

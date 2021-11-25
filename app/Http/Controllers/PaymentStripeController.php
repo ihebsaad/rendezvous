@@ -875,7 +875,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
     //dd(($client->email));
           
           try {
-        $this->sendMail(trim($client->email),'Réservation('.$titre.') payé',$message) ;
+        $this->sendMail(trim($client->email),'Réservation payé ('.$titre.')',$message) ;
        // break;
     } catch (\Swift_TransportException $e) {
         
@@ -944,7 +944,7 @@ $numtel = $client->tel ;
                       }  
     // Email au prestataire
     $message='Bonjour,<br>';
-    $message.='Réservation payée('.$titre.')<br>';
+    $message.='Réservation payée ('.$titre.')<br>';
 
     //$message.='<b>Service :</b>  '.$service->nom.'  - ('.$service->prix.' €)  <br>';
     $message.='<b>Services :</b>  ';
@@ -979,11 +979,18 @@ $numtel = $client->tel ;
     $message.='<br><b>Date :</b> '.$date .' Heure : '.$heure .'<br>';
     $message.='<b>Client :</b> '.$client->name.' '.$client->lastname .'<br><br>';
     $message.='<b><a href="https://prenezunrendezvous.com/" > prenezunrendezvous.com </a></b>'; 
+
     
         
          try {
-       $this->sendMail(trim($prestataire->email),'Réservation payée('.$titre.')',$message)    ;
+          if($type=='acompte')
+     {
+       $this->sendMail(trim($prestataire->email),'Nouvelle Réservation (Acompte payé)',$message)    ;
        // break;
+
+     } else {
+      $this->sendMail(trim($prestataire->email),'Réservation payée ('.$titre.')',$message)    ;
+     }
     } catch (\Swift_TransportException $e) {
         
     } 
