@@ -75,8 +75,8 @@ class AvisReminder
        //$swiftTransport->setUsername('contact.prenezunrendezvous@gmail.com '); //adresse email
        //$swiftTransport->setPassword('davemarco97232'); // mot de passe email
 
-        $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-        $swiftTransport->setPassword('axlxttceuvdognbb'); // mot de passe email
+        $swiftTransport->setUsername(env('MAIL_USERNAME')); //adresse email
+        $swiftTransport->setPassword(env('MAIL_PASSWORD'));  // mot de passe email
  
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);

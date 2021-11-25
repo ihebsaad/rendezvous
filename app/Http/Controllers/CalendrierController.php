@@ -464,8 +464,8 @@ class CalendrierController extends Controller
     //$swiftTransport->setUsername(\Config::get('mail.username')); //adresse email
     //$swiftTransport->setPassword(\Config::get('mail.password')); // mot de passe email
 
-    $swiftTransport->setUsername('prestataire.client@gmail.com'); //adresse email
-    $swiftTransport->setPassword('axlxttceuvdognbb'); // mot de passe email eSolutions2020*
+        $swiftTransport->setUsername(env('MAIL_USERNAME')); //adresse email
+        $swiftTransport->setPassword(env('MAIL_PASSWORD')); 
 
         $swiftMailer = new Swift_Mailer($swiftTransport);
     Mail::setSwiftMailer($swiftMailer);
