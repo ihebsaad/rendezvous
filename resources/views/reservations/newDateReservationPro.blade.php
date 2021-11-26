@@ -113,7 +113,7 @@ var _token = $('input[name="_token"]').val();
  var date = $('input[name="dateReservation"]').val();
  var idres = $('input[name="idres"]').val();
  var date2 = moment(date).format('YYYY-MM-DD HH:mm');
-var dateStr = moment(date).format('DD-MM-YYYY hh:mm');
+var dateStr = moment(date).format('DD-MM-YYYY HH:mm');
 //alert(dateStr);
  $.ajax({
             url: "{{ route('reservations.Addnewdate') }}",
