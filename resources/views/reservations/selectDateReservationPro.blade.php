@@ -55,7 +55,8 @@
             <div >
           <select name="mydate" id="mydate">
             <?php  foreach($Newdates as $Newdate){ ?>
-            <option value="{{$Newdate->date}}">{{$Newdate->date}}</option>
+            <option value="{{$Newdate->date}}"><?php  
+                    $dateres = new DateTime($Newdate->date); echo $dateres->format('d/m/Y H:i') ; ?></option>
             <?php  } ?>
             
           </select>
