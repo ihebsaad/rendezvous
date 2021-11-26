@@ -930,11 +930,12 @@ class UsersController extends Controller
         $reduction=0;
         $user = User::find($id);
         $today= new DateTime();
-        $happyhours = Happyhour::where('id_user',$id)->where('dateFin','>=',$today)->get();
+        $todayy=date('Y-m-d H:i');
+        $happyhours = Happyhour::where('id_user',$id)->where('dateFin','>=',$todayy)->get();
         
         $produit= Produit::where('user',$id)->orderBy('nom_produit')->get();
          //dd($today);
-        $myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$today)->where('dateFin','>=',$today)->where('places','>','Beneficiaries')->first();
+        $myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$todayy)->where('dateFin','>=',$todayy)->where('places','>','Beneficiaries')->first();
         //dd($myhappyhours);
 
          if (Auth::guest())
@@ -949,7 +950,7 @@ class UsersController extends Controller
             $nbrRes=Cartefidelite::where('id_client',$cuser->id)->where('id_prest',$id)->value('nbr_reservation');
             if ($nbrRes==9) {
                 $reduction=User::where('id',$id)->value('reduction');
-            }
+            } 
             }
        // return view('viewlisting' ,  compact('user','id','reduction','happyhours','myhappyhours','produit'));
         
