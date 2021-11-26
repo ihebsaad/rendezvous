@@ -996,7 +996,7 @@ $idproduits = DB::select( DB::raw("SELECT id_products as ids , quantity as qty F
 	public function add(Request $request)
   {
     //client_products
-    //dd($request);
+   // dd($request->get('happyhour') != 0);
     $reservation  = new Reservation($request->all());
          
         $reservation->save();
