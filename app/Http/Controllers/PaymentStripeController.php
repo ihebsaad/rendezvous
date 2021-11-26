@@ -7,6 +7,7 @@ use \App\User;
 use \App\Payment;
 use \App\Abonnement;
 use \App\Alerte;
+use \App\Happyhour;
 use \App\Reservation;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Stripe\Stripe;
@@ -801,7 +802,12 @@ return view('payments.payAbn2', [
     
     $service = \App\Service::find( $serviceid) ;
 
-    if($type=='acompte'){  
+    if($type=='acompte'){ 
+     $Happyhourval = Reservation::where('id',$reservation)->value('happyhourval');
+      if ($Happyhourval != 0) { 
+      $B=Happyhour::where('id',$Happyhourval)->value('Beneficiaries');
+      Happyhour::where('id', $Happyhourval)->update(array("Beneficiaries"=> $B + 1));
+    }
       $a= new Payment([
                  'user' => $client->id,
                  'beneficiaire_id'=> $prestataire->id,
