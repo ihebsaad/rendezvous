@@ -803,7 +803,7 @@ return view('payments.payAbn2', [
     $service = \App\Service::find( $serviceid) ;
 
     if($type=='acompte'){ 
-     $Happyhourval = Reservation::where('id',$reservation)->value('happyhourval');
+     $Happyhourval = DB::table('reservations')->where('id', $reservation )->value('happyhourval');
       if ($Happyhourval != 0) { 
       $B=Happyhour::where('id',$Happyhourval)->value('Beneficiaries');
       Happyhour::where('id', $Happyhourval)->update(array("Beneficiaries"=> $B + 1));
