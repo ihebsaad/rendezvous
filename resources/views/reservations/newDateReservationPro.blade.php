@@ -84,7 +84,8 @@
    <?php  foreach($Newdates as $Newdate){ ?>
 <tr>
       
-      <td >{{$Newdate->date}}</td>
+      <td ><?php  
+                    $dateres = new DateTime($Newdate->date); echo $dateres->format('d/m/Y H:i') ; ?></td>
       <td ><a  class="delete fm-close" data-id="{{$Newdate->id}}" onclick="RemoveFunction(this)" href="#"><i class="fa fa-remove"></i></a></td>
     </tr>
  <?php  } ?>
@@ -113,7 +114,7 @@ var _token = $('input[name="_token"]').val();
  var date = $('input[name="dateReservation"]').val();
  var idres = $('input[name="idres"]').val();
  var date2 = moment(date).format('YYYY-MM-DD HH:mm');
-var dateStr = moment(date).format('DD-MM-YYYY HH:mm');
+var dateStr = moment(date).format('DD/MM/Y HH:mm');
 //alert(dateStr);
  $.ajax({
             url: "{{ route('reservations.Addnewdate') }}",
