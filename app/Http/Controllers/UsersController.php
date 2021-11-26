@@ -935,7 +935,8 @@ class UsersController extends Controller
         
         $produit= Produit::where('user',$id)->orderBy('nom_produit')->get();
          //dd($today);
-        $myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$todayy)->where('dateFin','>=',$todayy)->where('places','>','Beneficiaries')->first();
+        $Benef = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$todayy)->where('dateFin','>=',$todayy)->value('Beneficiaries');
+        $myhappyhours = Happyhour::where('id_user' ,$id)->where('dateDebut','<=',$todayy)->where('dateFin','>=',$todayy)->where('places','>',$Benef)->first();
         //dd($myhappyhours);
 
          if (Auth::guest())
