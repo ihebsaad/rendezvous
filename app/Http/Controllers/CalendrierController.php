@@ -2764,6 +2764,360 @@ class CalendrierController extends Controller
      return $res ;
 
   }
+   public static function calcul_jours_heures_fermeture_datetimepicker_haythem($id)
+  {
+     //public $tab_jours_fermeture_semaine=array();
+  //public $tab_heures_indisp=array();
+  //public $tab_jours_indisp=array();
+    self::$tab_heures_fermeture_semaine=array();
+
+    $usr_fer_ouv=User::where('id',$id)->first(['lundi_o',  'lundi_f',  'mardi_o',  'mardi_f',  'mercredi_o', 'mercredi_f', 'jeudi_o' , 'jeudi_f' , 'vendredi_o' ,  'vendredi_f' ,  'samedi_o' ,  'samedi_f' ,'dimanche_o' ,  'dimanche_f']);
+    // $i=0;
+       
+     //$res=array();
+     if($usr_fer_ouv->lundi_o && $usr_fer_ouv->lundi_f )
+     {
+
+      $datedeb = DateTime::createFromFormat('H:i', $usr_fer_ouv->lundi_o);
+      $datefin = DateTime::createFromFormat('H:i', $usr_fer_ouv->lundi_f);
+
+     //echo $date->format('Y-m-d');
+      $hours1 = intval($datedeb->format('H')); 
+      $hours2 = intval($datefin->format('H'));
+      $minutes1 = intval($datedeb->format('i'));
+      $minutes2 = intval($datefin->format('i'));
+     
+     // dd($minutes1);
+
+     if($hours1>=23 && $hours1<1 && $hours2>11 && $hours2<12 ) 
+      {
+        if(!in_array(1, self::$tab_jours_fermeture_semaine))
+          array_push(self::$tab_jours_fermeture_semaine, 1);
+      }
+      else
+      {
+
+        if( $hours1>=1 && $hours2<=23 )
+        {
+          $i=0;
+           while($i<$hours1)
+           {
+            array_push(self::$tab_heures_fermeture_semaine, "1:".$i."");
+             $i++;
+           }
+           $i=$hours2;
+           while($i<=23)
+           {
+             array_push(self::$tab_heures_fermeture_semaine, "1:".$i."");
+             $i++;
+           }
+        }
+
+      }
+
+      //dd(self::$tab_heures_fermeture_semaine);
+      //dd($hours1);
+       
+     }
+     else
+     {
+      if(!in_array(1, self::$tab_jours_fermeture_semaine))
+      array_push(self::$tab_jours_fermeture_semaine, 1);
+     }
+
+
+    if($usr_fer_ouv->mardi_o && $usr_fer_ouv->mardi_f )
+     {
+          $datedeb = DateTime::createFromFormat('H:i', $usr_fer_ouv->mardi_o);
+      $datefin = DateTime::createFromFormat('H:i', $usr_fer_ouv->mardi_f);
+
+     //echo $date->format('Y-m-d');
+      $hours1 = intval($datedeb->format('H')); 
+      $hours2 = intval($datefin->format('H'));
+      $minutes1 = intval($datedeb->format('i'));
+      $minutes2 = intval($datefin->format('i'));
+     
+     // dd($minutes1);
+
+     if($hours1>=23 && $hours1<1 && $hours2>11 && $hours2<12 ) 
+      {
+        if(!in_array(2, self::$tab_jours_fermeture_semaine))
+          array_push(self::$tab_jours_fermeture_semaine, 2);
+      }
+      else
+      {
+
+        if( $hours1>=1 && $hours2<=23 )
+        {
+          $i=0;
+           while($i<$hours1)
+           {
+            array_push(self::$tab_heures_fermeture_semaine, "2:".$i."");
+             $i++;
+           }
+           $i=$hours2;
+           while($i<=23)
+           {
+             array_push(self::$tab_heures_fermeture_semaine, "2:".$i."");
+             $i++;
+           }
+        }
+
+      }
+
+      //dd(self::$tab_heures_fermeture_semaine);
+      //dd($hours1);
+     }
+     else
+     {
+      if(!in_array(2, self::$tab_jours_fermeture_semaine))
+      array_push(self::$tab_jours_fermeture_semaine, 2);
+     }
+
+
+     if($usr_fer_ouv->mercredi_o && $usr_fer_ouv->mercredi_f )
+     {
+      $datedeb = DateTime::createFromFormat('H:i', $usr_fer_ouv->mercredi_o);
+      $datefin = DateTime::createFromFormat('H:i', $usr_fer_ouv->mercredi_f);
+
+     //echo $date->format('Y-m-d');
+      $hours1 = intval($datedeb->format('H')); 
+      $hours2 = intval($datefin->format('H'));
+      $minutes1 = intval($datedeb->format('i'));
+      $minutes2 = intval($datefin->format('i'));
+     
+     // dd($minutes1);
+
+     if($hours1>=23 && $hours1<1 && $hours2>11 && $hours2<12 ) 
+      {
+        if(!in_array(3, self::$tab_jours_fermeture_semaine))
+          array_push(self::$tab_jours_fermeture_semaine, 3);
+      }
+      else
+      {
+
+        if( $hours1>=1 && $hours2<=23 )
+        {
+          $i=0;
+           while($i<$hours1)
+           {
+            array_push(self::$tab_heures_fermeture_semaine, "3:".$i."");
+             $i++;
+           }
+           $i=$hours2;
+           while($i<=23)
+           {
+             array_push(self::$tab_heures_fermeture_semaine, "3:".$i."");
+             $i++;
+           }
+        }
+
+      }
+
+      //dd(self::$tab_heures_fermeture_semaine);
+      //dd($hours1);
+      }
+      else
+     {
+      if(!in_array(3, self::$tab_jours_fermeture_semaine))
+      array_push(self::$tab_jours_fermeture_semaine, 3);
+     }
+
+    if($usr_fer_ouv->jeudi_o && $usr_fer_ouv->jeudi_f )
+     {
+        $datedeb = DateTime::createFromFormat('H:i', $usr_fer_ouv->jeudi_o);
+      $datefin = DateTime::createFromFormat('H:i', $usr_fer_ouv->jeudi_f);
+
+     //echo $date->format('Y-m-d');
+      $hours1 = intval($datedeb->format('H')); 
+      $hours2 = intval($datefin->format('H'));
+      $minutes1 = intval($datedeb->format('i'));
+      $minutes2 = intval($datefin->format('i'));
+     
+     // dd($minutes1);
+
+     if($hours1>=23 && $hours1<1 && $hours2>11 && $hours2<12 ) 
+      {
+        if(!in_array(4, self::$tab_jours_fermeture_semaine))
+          array_push(self::$tab_jours_fermeture_semaine, 4);
+      }
+      else
+      {
+
+        if( $hours1>=1 && $hours2<=23 )
+        {
+          $i=0;
+           while($i<$hours1)
+           {
+            array_push(self::$tab_heures_fermeture_semaine, "4:".$i."");
+             $i++;
+           }
+           $i=$hours2;
+           while($i<=23)
+           {
+             array_push(self::$tab_heures_fermeture_semaine, "4:".$i."");
+             $i++;
+           }
+        }
+
+      }
+
+      //dd(self::$tab_heures_fermeture_semaine);
+      //dd($hours1);
+     }
+     else
+     {
+      if(!in_array(4, self::$tab_jours_fermeture_semaine))
+      array_push(self::$tab_jours_fermeture_semaine, 4);
+     }
+
+     if($usr_fer_ouv->vendredi_o && $usr_fer_ouv->vendredi_f )
+     {
+        $datedeb = DateTime::createFromFormat('H:i', $usr_fer_ouv->vendredi_o);
+      $datefin = DateTime::createFromFormat('H:i', $usr_fer_ouv->vendredi_f);
+
+     //echo $date->format('Y-m-d');
+      $hours1 = intval($datedeb->format('H')); 
+      $hours2 = intval($datefin->format('H'));
+      $minutes1 = intval($datedeb->format('i'));
+      $minutes2 = intval($datefin->format('i'));
+     
+     // dd($minutes1);
+
+     if($hours1>=23 && $hours1<1 && $hours2>11 && $hours2<12 ) 
+      {
+        if(!in_array(5, self::$tab_jours_fermeture_semaine))
+          array_push(self::$tab_jours_fermeture_semaine, 5);
+      }
+      else
+      {
+
+        if( $hours1>=1 && $hours2<=23 )
+        {
+          $i=0;
+           while($i<$hours1)
+           {
+            array_push(self::$tab_heures_fermeture_semaine, "5:".$i."");
+             $i++;
+           }
+           $i=$hours2;
+           while($i<=23)
+           {
+             array_push(self::$tab_heures_fermeture_semaine, "5:".$i."");
+             $i++;
+           }
+        }
+
+      }
+
+      //dd(self::$tab_heures_fermeture_semaine);
+      //dd($hours1);
+     }
+     else
+     {
+      if(!in_array(5, self::$tab_jours_fermeture_semaine))
+      array_push(self::$tab_jours_fermeture_semaine, 5);
+     }
+
+     if($usr_fer_ouv->samedi_o && $usr_fer_ouv->samedi_f )
+     {
+     $datedeb = DateTime::createFromFormat('H:i', $usr_fer_ouv->samedi_o);
+      $datefin = DateTime::createFromFormat('H:i', $usr_fer_ouv->samedi_f);
+
+     //echo $date->format('Y-m-d');
+      $hours1 = intval($datedeb->format('H')); 
+      $hours2 = intval($datefin->format('H'));
+      $minutes1 = intval($datedeb->format('i'));
+      $minutes2 = intval($datefin->format('i'));
+     
+     // dd($minutes1);
+
+     if($hours1>=23 && $hours1<1 && $hours2>11 && $hours2<12 ) 
+      {
+        if(!in_array(6, self::$tab_jours_fermeture_semaine))
+          array_push(self::$tab_jours_fermeture_semaine, 6);
+      }
+      else
+      {
+
+        if( $hours1>=1 && $hours2<=23 )
+        {
+          $i=0;
+           while($i<$hours1)
+           {
+            array_push(self::$tab_heures_fermeture_semaine, "6:".$i."");
+             $i++;
+           }
+           $i=$hours2;
+           while($i<=23)
+           {
+             array_push(self::$tab_heures_fermeture_semaine, "6:".$i."");
+             $i++;
+           }
+        }
+
+      }
+
+      //dd(self::$tab_heures_fermeture_semaine);
+      //dd($hours1);   
+      }
+     else
+     {
+      if(!in_array(6, self::$tab_jours_fermeture_semaine))
+      array_push(self::$tab_jours_fermeture_semaine, 6);
+     }
+
+     if($usr_fer_ouv->dimanche_o && $usr_fer_ouv->dimanche_f )
+     {
+       $datedeb = DateTime::createFromFormat('H:i', $usr_fer_ouv->dimanche_o);
+      $datefin = DateTime::createFromFormat('H:i', $usr_fer_ouv->dimanche_f);
+
+     //echo $date->format('Y-m-d');
+      $hours1 = intval($datedeb->format('H')); 
+      $hours2 = intval($datefin->format('H'));
+      $minutes1 = intval($datedeb->format('i'));
+      $minutes2 = intval($datefin->format('i'));
+     
+     // dd($minutes1);
+
+     if($hours1>=23 && $hours1<1 && $hours2>11 && $hours2<12 ) 
+      {
+        if(!in_array(0, self::$tab_jours_fermeture_semaine))
+          array_push(self::$tab_jours_fermeture_semaine, 0);
+      }
+      else
+      {
+
+        if( $hours1>=1 && $hours2<=23 )
+        {
+          $i=0;
+           while($i<$hours1)
+           {
+            array_push(self::$tab_heures_fermeture_semaine, "0:".$i."");
+             $i++;
+           }
+           $i=$hours2;
+           while($i<=23)
+           {
+             array_push(self::$tab_heures_fermeture_semaine, "0:".$i."");
+             $i++;
+           }
+        }
+
+      }
+
+      //dd(self::$tab_heures_fermeture_semaine);
+      //dd($hours1);
+      }
+     else
+     {
+      if(!in_array(0, self::$tab_jours_fermeture_semaine))
+      array_push(self::$tab_jours_fermeture_semaine, 0);
+     }
+
+     // return json_encode(self::$tab_jours_fermeture_semaine);
+
+  }
 
   public static function calcul_jours_heures_fermeture_datetimepicker($id)
   {
@@ -3211,7 +3565,7 @@ class CalendrierController extends Controller
         $resulths = self::indisponibilte_services_horaire($idprest, $dateresv, $services);
         $hindispsprestt = self::$tab_heures_indisp_services;
 
-        self::calcul_jours_heures_fermeture_datetimepicker($idprest);
+        self::calcul_jours_heures_fermeture_datetimepicker_haythem($idprest);
         $tabheuresfermeture = self::$tab_heures_fermeture_semaine;
 
         $datereserv = date("Y-m-d", strtotime($dateresv));
@@ -3280,9 +3634,11 @@ class CalendrierController extends Controller
         $ttindisph=array_unique($ttindisph, SORT_REGULAR);
         sort($ttindisph);
 
-        // max duree des services selectionnés
-        $maxduree = Service::whereIn('id', $services)->max('duree');
-        $maxdureetab = explode(':', $maxduree);
+        // max duree des services selectionnés (fait la somme des durees)
+        //$maxduree = Service::whereIn('id', $services)->max('duree');
+        $maxduree = Service::whereIn('id', $services)->sum(DB::raw("TIME_TO_SEC(duree)"));
+        $tmaxduree = gmdate("H:i:s", $maxduree);
+        $maxdureetab = explode(':', $tmaxduree);
         $maxdureemin = ($maxdureetab[0]*60) + ($maxdureetab[1]) + ($maxdureetab[2]/60);
 
         // remplissage des heures disponibles
@@ -3295,11 +3651,19 @@ class CalendrierController extends Controller
                 if ($maxdureetab[0] == 0)
                 {
                         $hdisp[]=$i;
+                        if($maxdureetab[1] > 0)
+                        {
+                          $i++;
+                        }
                 }
 
                 if (($maxdureetab[0] == 1) && ( ((!in_array($i+1, $ttindisph)) && ($maxdureetab[1] > 0)) || ($maxdureetab[1] == 0) ))
                 {
                         $hdisp[]=$i;
+                        if($maxdureetab[1] > 0)
+                        {
+                          $i=$i+1;
+                        }
                 }
 
 
@@ -3309,6 +3673,10 @@ class CalendrierController extends Controller
                            if (((!in_array($i+2, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
                            {
                                    $hdisp[]=$i;
+                                    if($maxdureetab[1] > 0)
+                                    {
+                                      $i=$i+2;
+                                    }
                            }
                        }
                 }
@@ -3318,7 +3686,53 @@ class CalendrierController extends Controller
                        { 
                            if (((!in_array($i+3, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
                            {
-                                   $hdisp[]=$i;
+                                    $hdisp[]=$i;
+                                    if($maxdureetab[1] > 0)
+                                    {
+                                      $i=$i+3;
+                                    }
+                           }
+                       }
+                }
+
+                if ($maxdureetab[0] == 4)
+                {    if ((!in_array($i+1, $ttindisph)) && (!in_array($i+2, $ttindisph)) && (!in_array($i+3, $ttindisph)))
+                       { 
+                           if (((!in_array($i+4, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
+                           {
+                                    $hdisp[]=$i;
+                                    if($maxdureetab[1] > 0)
+                                    {
+                                      $i=$i+4;
+                                    }
+                           }
+                       }
+                }
+
+               if ($maxdureetab[0] == 5)
+                {    if ((!in_array($i+1, $ttindisph)) && (!in_array($i+2, $ttindisph)) && (!in_array($i+3, $ttindisph))&& (!in_array($i+4, $ttindisph)))
+                       { 
+                           if (((!in_array($i+5, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
+                           {
+                                    $hdisp[]=$i;
+                                    if($maxdureetab[1] > 0)
+                                    {
+                                      $i=$i+5;
+                                    }
+                           }
+                       }
+                }
+
+                 if ($maxdureetab[0] == 6)
+                {    if ((!in_array($i+1, $ttindisph)) && (!in_array($i+2, $ttindisph)) && (!in_array($i+3, $ttindisph)) && (!in_array($i+4, $ttindisph)) && (!in_array($i+5, $ttindisph)))
+                       { 
+                           if (((!in_array($i+6, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
+                           {
+                                    $hdisp[]=$i;
+                                    if($maxdureetab[1] > 0)
+                                    {
+                                      $i=$i+6;
+                                    }
                            }
                        }
                 }
@@ -3379,8 +3793,11 @@ class CalendrierController extends Controller
       //return json_encode($resulths); tab_minutes_indisp_rendezvous // tab_heures_indisp_rendezvous //tab_heures_indisp_services
       // return json_encode(self::$tab_heures_indisp_services);
        
-        //return json_encode($hdisp);
-        return $slots;
+        //return json_encode($ttindisph);
+       return $slots;
+        //return $ttindisph;
+       // return $hindispsprestt;
+      // return $tabheuresfermeture;
         //return $maxdureetab[0] ." | ".$maxdureetab[1]." | ".$maxdureetab[2];
         /*if (($maxdureetab[0] === 1) && (!in_array(16, $ttindisph)))
                 {
@@ -3401,7 +3818,7 @@ class CalendrierController extends Controller
     }
 
 
-  public static function indisponibilte_services_horaire($id, $date, array $services)
+ public static function indisponibilte_services_horaire($id, $date, array $services)
   {
 
     $datereserv = date("Y-m-d", strtotime($date));
@@ -3521,6 +3938,11 @@ class CalendrierController extends Controller
               }
 
               //dd(self::$tab_minutes_indisp_rendezvous);
+              //nouveau
+               if(!in_array($count1, self::$tab_heures_indisp_services))
+                {
+                 array_push(self::$tab_heures_indisp_services, $count1);
+                }
                   
             }
             else
@@ -3528,7 +3950,7 @@ class CalendrierController extends Controller
                 //dd("ok");
                 if($count1==$hdeb && $mhdeb >=50 )
                 {
-                   $count1++;
+                   ////$count1++;
                 }
 
                if(!in_array($count1, self::$tab_heures_indisp_services))
@@ -3592,6 +4014,13 @@ class CalendrierController extends Controller
               }
 
           // dd(self::$tab_minutes_indisp_rendezvous);
+              //nouveau
+               if(!in_array($count2, self::$tab_heures_indisp_services))
+                  {
+                  array_push(self::$tab_heures_indisp_services, $count2);
+                  }
+
+
                   
             }
             else
@@ -3599,7 +4028,7 @@ class CalendrierController extends Controller
 
                if($count2==$hfin && $mhfin <=5 )
                 {
-                   $count2++;
+                  //// $count2++;
                 }
                 else
                 {
@@ -3701,6 +4130,12 @@ class CalendrierController extends Controller
               }
 
               //dd(self::$tab_minutes_indisp_rendezvous);
+              //nouveau
+
+               if(!in_array($count1, self::$tab_heures_indisp_services))
+                {
+                 array_push(self::$tab_heures_indisp_services, $count1);
+                }
                   
             }
             else
@@ -3708,7 +4143,7 @@ class CalendrierController extends Controller
                 //dd("ok");
                 if($count1==$hdeb && $mhdeb >=50 )
                 {
-                   $count1++;
+                   ////$count1++;
                 }
 
                if(!in_array($count1, self::$tab_heures_indisp_services))
@@ -3801,6 +4236,11 @@ class CalendrierController extends Controller
               }
 
           // dd(self::$tab_minutes_indisp_rendezvous);
+              //nouveau
+               if(!in_array($count2, self::$tab_heures_indisp_services))
+                  {
+                  array_push(self::$tab_heures_indisp_services, $count2);
+                  }
                   
             }
             else
@@ -3808,7 +4248,7 @@ class CalendrierController extends Controller
 
                if($count2==$hfin && $mhfin <=5 )
                 {
-                   $count2++;
+                  // $count2++;
                 }
                 else
                 {
@@ -3910,6 +4350,11 @@ class CalendrierController extends Controller
                       }
 
                       //dd(self::$tab_minutes_indisp_rendezvous);
+                      //nouveau
+                       if(!in_array($count1, self::$tab_heures_indisp_services))
+                        {
+                         array_push(self::$tab_heures_indisp_services, $count1);
+                        }
                           
                     }
                     else
@@ -3917,7 +4362,7 @@ class CalendrierController extends Controller
                         //dd("ok");
                         if($count1==$hdeb && $mhdeb >=50 )
                         {
-                           $count1++;
+                           ////$count1++;
                         }
 
                        if(!in_array($count1, self::$tab_heures_indisp_services))
@@ -3979,6 +4424,11 @@ class CalendrierController extends Controller
                       }
 
                   // dd(self::$tab_minutes_indisp_rendezvous);
+                      //nouveau
+                       if(!in_array($count1, self::$tab_heures_indisp_services))
+                          {
+                          array_push(self::$tab_heures_indisp_services, $count1);
+                          }
                           
                     }
                     else
@@ -3986,7 +4436,7 @@ class CalendrierController extends Controller
 
                        if($count1==$hfin && $mhfin <=5 )
                         {
-                           $count1++;
+                          // $count1++;
                         }
                         else
                         {
@@ -4094,6 +4544,11 @@ class CalendrierController extends Controller
               }
 
               //dd(self::$tab_minutes_indisp_rendezvous);
+              //nouveau
+              if(!in_array($count1, self::$tab_heures_indisp_services))
+                {
+                 array_push(self::$tab_heures_indisp_services, $count1);
+                }
                   
             }
             else
@@ -4101,7 +4556,7 @@ class CalendrierController extends Controller
                 //dd("ok");
                 if($count1==$hdeb && $mhdeb >=50 )
                 {
-                   $count1++;
+                  // $count1++;
                 }
 
                if(!in_array($count1, self::$tab_heures_indisp_services))
@@ -4195,6 +4650,12 @@ class CalendrierController extends Controller
               }
 
           // dd(self::$tab_minutes_indisp_rendezvous);
+              //nouveau
+
+                  if(!in_array($count2, self::$tab_heures_indisp_services))
+                  {
+                  array_push(self::$tab_heures_indisp_services, $count2);
+                  }
                   
             }
             else
@@ -4202,7 +4663,7 @@ class CalendrierController extends Controller
 
                if($count2==$hfin && $mhfin <=5 )
                 {
-                   $count2++;
+                   //$count2++;
                 }
                 else
                 {
@@ -4341,13 +4802,13 @@ class CalendrierController extends Controller
      }*/
 
      // envoi happy hours au full calendar
-     $happyhours=Happyhour::where('id_user',$id)->get();
+    /* $happyhours=Happyhour::where('id_user',$id)->get();
      foreach ($happyhours as $hh ) {
       
   $res[]=array('title'=>'Promotions flash','start'=>$hh->dateDebut, 'end'=> $hh->dateFin, 'color' => self::$happyhours_couleur);
 
      }
-
+*/
 
 
    //dd(array_values($idservicesreccurent));
@@ -4357,6 +4818,7 @@ class CalendrierController extends Controller
    return json_encode($res);
     
   }
+  
   
   
  }
