@@ -16,8 +16,8 @@ $plogo= $parametres->logo;
                 
                 <!-- Logo -->
                 <div id="logo">
-                    <a href="{{route('home')}}"><img src="<?php //echo  URL::asset('storage/images/'.$plogo);?><?php echo  URL::asset('storage/images/logoprv.png');?>" alt=""></a>
-                    <a href="{{route('home')}}" class="dashboard-logo"><img src="<?php //echo  URL::asset('storage/images/'.$plogo);?><?php echo  URL::asset('storage/images/logoprv.png');?>" alt=""></a>
+                    <a href="{{route('home')}}"><img src="<?php echo  URL::asset('storage/images/'.$plogo);?><?php //echo  URL::asset('storage/images/logoprv.png');?>" alt=""></a>
+                    <a href="{{route('home')}}" class="dashboard-logo"><img src="<?php echo  URL::asset('storage/images/'.$plogo);?><?php //echo  URL::asset('storage/images/logoprv.png');?>" alt=""></a>
                 </div>
 
                 <!-- Mobile Navigation -->
