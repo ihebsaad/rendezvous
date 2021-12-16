@@ -359,7 +359,7 @@ class UsersController extends Controller
              }
 
               $idprest_tag=array_values($idprest_tag);
-         }
+         } 
 
           $result=array_intersect($idprest_categories,$idprest_emplacement,$idprest_tag);
           $result=array_unique($result);
@@ -696,25 +696,26 @@ class UsersController extends Controller
 
           public function accueil()
     {
-      $listingsM=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Martinique')->orWhere('adresse','like','%Martinique%');})->get();
+      $today= new DateTime();
+      $listingsM=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Martinique')->orWhere('adresse','like','%Martinique%');})->get();
       $nbmar=count($listingsM);
-      $listingsM=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Martinique')->orWhere('adresse','like','%Martinique%');})->offset(0)->limit(3)->get();
+      $listingsM=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Martinique')->orWhere('adresse','like','%Martinique%');})->offset(0)->limit(3)->get();
 
-      $listingsGua=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guadeloupe')->orWhere('adresse','like','%Guadeloupe%');})->get();
+      $listingsGua=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guadeloupe')->orWhere('adresse','like','%Guadeloupe%');})->get();
       $nbGua=count($listingsGua);
-      $listingsGua=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guadeloupe')->orWhere('adresse','like','%Guadeloupe%');})->offset(0)->limit(3)->get();
+      $listingsGua=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guadeloupe')->orWhere('adresse','like','%Guadeloupe%');})->offset(0)->limit(3)->get();
 
-      $listingsfrance=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','France')->orWhere('adresse','like','%France%')->orWhere('adresse','like','%Paris%');})->get();
+      $listingsfrance=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','France')->orWhere('adresse','like','%France%')->orWhere('adresse','like','%Paris%');})->get();
       $nbfrance=count($listingsfrance);
-      $listingsfrance=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','France')->orWhere('adresse','like','%France%')->orWhere('adresse','like','%Paris%');})->offset(0)->limit(3)->get();
+      $listingsfrance=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','France')->orWhere('adresse','like','%France%')->orWhere('adresse','like','%Paris%');})->offset(0)->limit(3)->get();
 
-      $listingsGuy=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guyane française')->orWhere('adresse','like','%Guyane Française%')->orWhere('adresse','like','%Cayenne%');;})->get();
+      $listingsGuy=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guyane française')->orWhere('adresse','like','%Guyane Française%')->orWhere('adresse','like','%Cayenne%');;})->get();
       $nbGuy=count($listingsGuy);
-      $listingsGuy=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guyane française')->orWhere('adresse','like','%Guyane Française%')->orWhere('adresse','like','%Cayenne%');;})->offset(0)->limit(3)->get();
+      $listingsGuy=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','Guyane française')->orWhere('adresse','like','%Guyane Française%')->orWhere('adresse','like','%Cayenne%');;})->offset(0)->limit(3)->get();
 
-      $listingsRe=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','La réunion')->orWhere('adresse','like','%La réunion%');})->get();
+      $listingsRe=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','La réunion')->orWhere('adresse','like','%La réunion%');})->get();
       $nbRe=count($listingsRe);
-      $listingsRe=\App\User::where('user_type','prestataire')->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','La réunion')->orWhere('adresse','like','%La réunion%');})->offset(0)->limit(3)->get();
+      $listingsRe=\App\User::where('user_type','prestataire')->where('expire','>=',$today)->where('type_abonn' ,'type3')->where(function($q){$q->where('pays','La réunion')->orWhere('adresse','like','%La réunion%');})->offset(0)->limit(3)->get();
 
       $arryPrest=array();
       if($nbmar>=3)
