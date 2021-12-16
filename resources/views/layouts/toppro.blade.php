@@ -110,7 +110,7 @@ $plogo= $parametres->logo;
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <!--<div class="row">
                                             <div class="col-md-12">
                                                 <div>
                                                     <input name="siren" type="number" id="siren" 
@@ -118,7 +118,7 @@ $plogo= $parametres->logo;
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div>
@@ -259,13 +259,13 @@ $plogo= $parametres->logo;
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <!--<div class="row">
                                             <div class="col-md-12">
                                                 <div>
                                                     <input name="siren" type="text" id="siren" placeholder="Numéro siret/siren de votre entreprise"  class="error">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div>
