@@ -3756,6 +3756,40 @@ class CalendrierController extends Controller
                            }
                        }
                 }
+                 if ($maxdureetab[0] == 7)
+                {    if ((!in_array($i+1, $ttindisph)) && (!in_array($i+2, $ttindisph)) && (!in_array($i+3, $ttindisph)) && (!in_array($i+4, $ttindisph)) && (!in_array($i+5, $ttindisph)) && (!in_array($i+6, $ttindisph)))
+                       { 
+                           if (((!in_array($i+7, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
+                           {
+                                    $hdisp[]=$i;
+                                    if($maxdureetab[1] > 0)
+                                    {
+                                      $i=$i+7;
+                                    }
+                                    else
+                                    {
+                                      $i=$i+6;
+                                    }
+                           }
+                       }
+                }
+                if ($maxdureetab[0] == 8)
+                {    if ((!in_array($i+1, $ttindisph)) && (!in_array($i+2, $ttindisph)) && (!in_array($i+3, $ttindisph)) && (!in_array($i+4, $ttindisph)) && (!in_array($i+5, $ttindisph)) && (!in_array($i+6, $ttindisph)) && (!in_array($i+7, $ttindisph)))
+                       { 
+                           if (((!in_array($i+8, $ttindisph)) && ($maxdureetab[1] > 0))  || ($maxdureetab[1] == 0) )
+                           {
+                                    $hdisp[]=$i;
+                                    if($maxdureetab[1] > 0)
+                                    {
+                                      $i=$i+8;
+                                    }
+                                    else
+                                    {
+                                      $i=$i+7;
+                                    }
+                           }
+                       }
+                }
             }
         }
         $slots = array();
