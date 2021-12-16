@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="buttons-to-right">
-                                <a onclick="return confirm('Êtes-vous sûrs ?')"  href="{{action('UsersController@destroy', $user['id'])}}" class="button gray reject"><i class="sl sl-icon-close"></i> Supprimer</a>
+                                <!--<a onclick="return confirm('Êtes-vous sûrs ?')"  href="{{--action('UsersController@destroy', $user['id'])--}}" class="button gray reject"><i class="sl sl-icon-close"></i> Supprimer</a>-->
                                 <a href="{{action('UsersController@profile', $user['id'])}}" class="button gray approve"><i class="sl sl-icon-eye"></i> Profil</a>
                             </div>
                         </li>
