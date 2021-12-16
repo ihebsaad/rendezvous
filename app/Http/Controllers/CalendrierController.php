@@ -3677,6 +3677,10 @@ class CalendrierController extends Controller
                                     {
                                       $i=$i+2;
                                     }
+                                    else
+                                    {
+                                      $i=$i+1;
+                                    }
                            }
                        }
                 }
@@ -3690,6 +3694,10 @@ class CalendrierController extends Controller
                                     if($maxdureetab[1] > 0)
                                     {
                                       $i=$i+3;
+                                    }
+                                    else
+                                    {
+                                      $i=$i+2;
                                     }
                            }
                        }
@@ -3705,6 +3713,10 @@ class CalendrierController extends Controller
                                     {
                                       $i=$i+4;
                                     }
+                                    else
+                                    {
+                                      $i=$i+3;
+                                    }
                            }
                        }
                 }
@@ -3719,6 +3731,10 @@ class CalendrierController extends Controller
                                     {
                                       $i=$i+5;
                                     }
+                                    else
+                                    {
+                                      $i=$i+4;
+                                    }
                            }
                        }
                 }
@@ -3732,6 +3748,10 @@ class CalendrierController extends Controller
                                     if($maxdureetab[1] > 0)
                                     {
                                       $i=$i+6;
+                                    }
+                                    else
+                                    {
+                                      $i=$i+5;
                                     }
                            }
                        }
