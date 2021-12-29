@@ -50,6 +50,7 @@ $User = auth()->user();
              </li></ul>
                     <?php   $propclient=PropositionDatesServicesAbn::where('client',$User->id)->get();?> 
                     @foreach($propclient as $pc)
+                    <?php $StatutServR=Reservation::where('id',$pc->id_reservation)->value('statut');$acompteval = Reservation::where('id',$pc->id_reservation)->value('paiement'); if ( $StatutServR != 0 && $acompteval != 0) {?>
                     <ul>
                         <?php $pres=User::where('id',$pc->prestataire)->first(); $serv=Service::where('id',$pc->service_rec)->first();  ?>
                         @if(isset($serv))
@@ -109,6 +110,7 @@ $User = auth()->user();
                         @endif 
 
                     </ul>
+                    <?php } ?>
                     @endforeach 
                 </div>
             

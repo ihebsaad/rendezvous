@@ -54,7 +54,7 @@ $User = auth()->user();
              </li></ul>
                     <?php   $proppres=PropositionDatesServicesAbn::where('prestataire',$User->id)->get();?> 
                      @foreach($proppres as $pp)
-                     <?php $StatutServR=Reservation::where('id',$pp->id_reservation)->value('statut'); if ( $StatutServR != 0) {?>
+                     <?php $StatutServR=Reservation::where('id',$pp->id_reservation)->value('statut');$acompteval = Reservation::where('id',$pp->id_reservation)->value('paiement'); if ( $StatutServR != 0 && $acompteval != 0) {?>
 
                     <ul>
                         <?php $client=User::where('id',$pp->client)->first(); $serv=Service::where('id',$pp->service_rec)->first();  ?>
@@ -167,9 +167,9 @@ $User = auth()->user();
                                               <span class="booking-status " style="background-color: #fbb41e"  >Demande de report du rdv à une autre date</span>
                                           <?php } ?>
 
-                                          <?php  if($res->paiement==1){ ?><span class="booking-status pending">Acompte Payé</span>
+                                          <?php  if($res->paiement==1){ ?><span class="booking-status pending">Acompte Payé</span>
                                              <?php } elseif($res->paiement==2){ ?>   
-                                             <span class="booking-status " style="background-color: #38b653" >Total Payée</span>
+                                             <span class="booking-status " style="background-color: #38b653" >Total Payée</span>
                                                 <?php } elseif($res->paiement==3) { $retraits=\App\Retrait::where('reservation',$res->id)->where('statut',1)->count(); ?> 
                                               <span class="booking-status unpaid" style="background-color: #ffd700"  >Paiement par tranches : acompte + ({{$retraits}}/4) tranches payées</span>
                                           <?php } elseif($res->paiement==4) { ?> 
