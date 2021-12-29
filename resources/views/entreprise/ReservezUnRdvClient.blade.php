@@ -11,6 +11,7 @@ $User = auth()->user();
   use \App\PropositionDatesServicesAbn;
   use \App\Http\Controllers\ServicesController;
   use \App\Http\Controllers\MyPaypalController;
+  use \App\Reservation;
   ?>
 
   <!-- Dashboard -->
