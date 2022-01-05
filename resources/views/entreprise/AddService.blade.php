@@ -86,7 +86,7 @@
                         <div class="col-lg-6">
 
                             <label>Nbr Services simultanés</label>
-                            <input placeholder="2" type="number" id="nbrService"  name="nbrService" required>
+                            <input type="number" id="nbrService"  name="nbrService" min="1" default="1" required>
                         </div>
                         <div class="col-lg-6">
 
